@@ -48,14 +48,14 @@
   "screenshots": [
     {
       "src": "./screenshotestwide.png",
-      "sizes": "1917x938",
+      "sizes": "1024x788",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Carte des cliniques en recrutement de la Montérégie-Est"
     },
     {
       "src": "./screenshotestmobile.png",
-      "sizes": "990x2048",
+      "sizes": "528x1024",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Carte des cliniques en recrutement de la Montérégie-Est, sur mobile"
