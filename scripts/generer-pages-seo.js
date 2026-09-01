@@ -24,7 +24,9 @@
  *      faut l'ajouter ici volontairement. C'est l'inverse d'une liste noire, qui laisserait fuir
  *      tout champ oublié.
  *   2. "notes" NE SORT JAMAIS. C'est le champ réservé aux notes personnelles des usagers.
- *   3. Les fiches "visible: false" sont ignorées partout (page, répertoire, sitemap).
+ *   3. Une CLINIQUE "visible: false" est ignorée dans les pages et le sitemap. Une fiche dont
+ *      `categorie` vaut "etablissement" suit une règle distincte : elle n'a pas de page SEO,
+ *      mais peut apparaître dans la couche informative Établissements des cartes.
  *   4. Les courriels de recrutement ne sont PAS publiés (voir PUBLIER_COURRIELS).
  *   5. On ne copie jamais le HTML de la fiche de l'application (#dp-body / exportFiche) : cette
  *      fiche contient des éléments propres à l'app (notes, boutons). Les pages ci-dessous sont
@@ -49,6 +51,34 @@ const SITE = 'https://trouvetaclinique.ca';
 const CLOUDFLARE_ANALYTICS = `<!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->`;
+
+/* Rebond du logo au clic dans le header, identique à celui de index.html (--app-logo).
+   Ajouté le 30 août 2026 avec le thème Santé Québec — présent sur toutes les pages générées. */
+const BRAND_TAP_SCRIPT = `<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>`;
+
+/* Migration v52 : l'ancienne application générale enregistrait un service worker de portée
+   « / ». La PWA étant désormais réservée à Montérégie-Est, toutes les pages de contenu retirent
+   cette ancienne inscription si elle existe. La PWA Est, de portée /monteregie-est/, est
+   conservée. */
+const SERVICE_WORKER_CLEANUP = `<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>`;
 
 /*
  * Badge « Vérifié » — bascule l'infobulle au toucher/clic. Le survol et le focus clavier sont
@@ -356,9 +386,8 @@ const UNIVERS_GENERAL = {
   region: null,
   nom: 'Montérégie',
   prefixe: '',
-  accueil: '/',
+  accueil: '/monteregie/',
   dossier: '',
-  marque: 'Trouve ta clinique',
   canonique: true,
   banniere: null
 };
@@ -366,16 +395,15 @@ const UNIVERS_GENERAL = {
 /*
  * CANONIQUE — laquelle des deux adresses d'un même contenu est l'officielle pour Google.
  *
- * Montérégie-Est : c'est la page RÉGIONALE (décision du 21 août 2026, voir plus bas
- * dans pageClinique). La page générale reste en ligne mais s'efface au profit d'elle.
+ * Les trois territoires sont désormais basculés (Est le 21 août, Ouest et Centre le
+ * 30 août 2026, à la demande d'Olivier) : pour chacun, c'est la page RÉGIONALE qui est
+ * l'officielle (voir pageClinique plus bas). La page générale reste en ligne pour ne casser
+ * aucun lien externe déjà indexé, mais devient une redirection physique vers la version
+ * régionale plutôt qu'un doublon complet.
  *
- * Centre et Ouest : c'est la page GÉNÉRALE qui reste l'officielle. Leurs pages régionales,
- * ouvertes le 26 août 2026, existent pour la navigation et l'étanchéité du territoire — pas
- * pour prendre la place des pages générales dans l'index. Basculer les trois territoires d'un
- * coup aurait mis EN NOINDEX la totalité de /cliniques/ et de /rls/, c'est-à-dire tout ce que
- * le site a déjà acquis en référencement ; ce n'est pas ce qui a été demandé, et ça se décide
- * séparément. Pour l'inverser un jour, il suffit de passer `canonique` à true ci-dessous :
- * l'indexation, les canoniques et le sitemap suivent tout seuls.
+ * Pour revenir en arrière sur un territoire, passer `canonique` à false ci-dessous :
+ * l'indexation, les canoniques, le sitemap et le choix page-complète/redirection suivent tous
+ * seuls, aucune autre modification n'est nécessaire.
  */
 /* ordreRls — l'ordre dans lequel les RLS d'un territoire sont présentés sur son hub /rls/.
    C'est EXACTEMENT celui de RLS_COLORS_PAR_REGION dans index.html, donc celui de la légende de
@@ -386,28 +414,28 @@ const UNIVERS_REGIONS = [
   { region: 'Est',    nom: 'Montérégie-Est',    dossier: 'monteregie-est',    canonique: true,
     ordreRls: ['Pierre-Boucher', 'Richelieu-Yamaska', 'Pierre-De Saurel'],
     banniere: { fichier: 'banniere_monteregie-est.png', largeur: '1600', hauteur: '400' } },
-  { region: 'Centre', nom: 'Montérégie-Centre', dossier: 'monteregie-centre', canonique: false,
+  { region: 'Centre', nom: 'Montérégie-Centre', dossier: 'monteregie-centre', canonique: true,
     ordreRls: ['Champlain', 'Haut-Richelieu–Rouville'],
     banniere: null },
-  { region: 'Ouest',  nom: 'Montérégie-Ouest',  dossier: 'monteregie-ouest',  canonique: false,
+  { region: 'Ouest',  nom: 'Montérégie-Ouest',  dossier: 'monteregie-ouest',  canonique: true,
     ordreRls: ['Jardins-Roussillon', 'Vaudreuil-Soulanges', 'du Suroît', 'du Haut-Saint-Laurent'],
     banniere: null }
 ].map(u => Object.assign({
   regional: true,
   prefixe: '/' + u.dossier,
-  accueil: '/' + u.dossier + '/',
-  marque: 'Trouve ta clinique — ' + u.nom
+  accueil: '/' + u.dossier + '/'
 }, u));
 
 /* Accès par territoire : UNIVERS_PAR_REGION['Est'] → l'univers de la Montérégie-Est. */
 const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region, u]));
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
-                filDAriane, corps, actif, univers = UNIVERS_GENERAL }) {
+                filDAriane, corps, actif, univers = UNIVERS_GENERAL, ogImageOverride = null }) {
   const u = univers;
   /* Feuille de style : chemin relatif dans l'univers général (comme avant), absolu dans
      l'univers Est, dont les pages ne vivent pas toutes à la même profondeur. */
   const cssHref = u.regional ? '/assets/seo-pages.css'
+                        : profondeur === 0 ? '/assets/seo-pages.css'
                         : (profondeur === 1 ? '../' : '../../') + 'assets/seo-pages.css';
   const robots = indexable
     ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
@@ -416,12 +444,15 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
   // lien partagé (courriel, réseaux sociaux…) affiche la bonne image — pas celle de la
   // carte générale des 3 territoires (22 août : bannière officielle appliquée de façon
   // cohérente partout).
-  const ogImage = u.banniere ? `${SITE}/assets/${u.banniere.fichier}` : `${SITE}/og-image.png?v=2`;
-  const ogImageW = u.banniere ? u.banniere.largeur : '1200';
-  const ogImageH = u.banniere ? u.banniere.hauteur : '630';
-  const ogImageAlt = u.regional
-    ? `Carte interactive ${u.nom} — Trouve ta clinique.`
-    : 'Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique.';
+  const ogImage = ogImageOverride
+    ? `${SITE}/assets/${ogImageOverride.fichier}`
+    : (u.banniere ? `${SITE}/assets/${u.banniere.fichier}` : `${SITE}/og-image.png?v=2`);
+  const ogImageW = ogImageOverride ? ogImageOverride.largeur : (u.banniere ? u.banniere.largeur : '1200');
+  const ogImageH = ogImageOverride ? ogImageOverride.hauteur : (u.banniere ? u.banniere.hauteur : '630');
+  const ogImageAlt = ogImageOverride ? ogImageOverride.alt
+    : (u.regional
+      ? `Carte interactive ${u.nom} — Trouve ta clinique.`
+      : 'Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique.');
   /* Pas d'entrée « Cliniques » dans un univers régional : ce répertoire regroupe les cliniques
      des TROIS territoires. Les cliniques d'un territoire se rejoignent par leur page de RLS. */
   const liens = u.regional
@@ -429,10 +460,11 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
        [u.prefixe + '/cliniques/', 'Cliniques', 'cliniques'],
        [u.prefixe + '/ptem/', 'PTEM', 'ptem'],
        [u.prefixe + '/amp/', 'AMP', 'amp']]
-    : [['/', 'Carte des cliniques', 'carte'],
+    : [['/', 'Accueil', 'accueil'],
+       [u.accueil, 'Carte complète', 'carte'],
+       ['/cliniques/', 'Répertoire', 'cliniques'],
        ['/ptem/', 'PTEM', 'ptem'],
-       ['/amp/', 'AMP', 'amp'],
-       ['/cliniques/', 'Cliniques', 'cliniques']];
+       ['/amp/', 'AMP', 'amp']];
   const nav = liens.map(([href, txt, cle]) =>
     `      <a href="${href}"${actif === cle ? ' aria-current="page"' : ''}>${txt}</a>`).join('\n');
 
@@ -472,7 +504,10 @@ ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="${u.accueil}">${esc(u.marque)}</a>
+    <a class="brand" href="${u.regional ? u.accueil : '/'}">
+      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+      <span class="brand-name">Trouve ta clinique</span>
+    </a>
     <nav class="nav" aria-label="Navigation principale">
 ${nav}
     </nav>
@@ -483,7 +518,9 @@ ${nav}
 ${corps}
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante — Trouve ta clinique</div></div></footer>
-${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${CLOUDFLARE_ANALYTICS}
+${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
+${SERVICE_WORKER_CLEANUP}
+${CLOUDFLARE_ANALYTICS}
 </body>
 </html>
 `;
@@ -957,7 +994,211 @@ ${sections}`;
    la main, jamais généré — donc Centre et Ouest répondaient 404 alors que leurs fiches
    individuelles existaient. Passer `u` (un UNIVERS_REGIONS) restreint la page au territoire et
    garde tous les liens à l'intérieur de l'univers. */
+/* ------------------------------------------------------------------------------------------- */
+/* STATUT PTEM — donnée centrale, mise à jour à un seul endroit                                 */
+/* ------------------------------------------------------------------------------------------- */
+
+/*
+ * Mandat du 30 août 2026, §5 : ne jamais rendre l'information annuelle du PTEM permanente dans
+ * le HTML. Toute page qui a besoin de dire où en est le cycle (l'accueil, notamment) lit cet
+ * objet plutôt que d'écrire une phrase en dur. Pour changer d'année : modifier ces quatre
+ * champs, rien d'autre. /ptem/ reste la source de vérité détaillée (avec ses liens sources) ;
+ * ceci n'en est qu'un résumé pour les pages qui n'ont pas besoin de plus.
+ */
+const PTEM_STATUT = {
+  enVigueur: 'PTEM 2026',
+  finVigueur: '30 novembre 2026',
+  prochain: 'PTEM 2027',
+  periodeProchain: '1er décembre 2026 au 30 novembre 2027',
+  cadreProchainOfficiel: true,   // l'Accord régissant le prochain cycle est déjà publié
+  placesProchainPublies: false   // le tableau des places, lui, ne l'est pas encore
+};
+
+function phrasePtemCourte() {
+  const { enVigueur, finVigueur, prochain, cadreProchainOfficiel, placesProchainPublies } = PTEM_STATUT;
+  if (placesProchainPublies) {
+    return `Le ${prochain} est maintenant en vigueur.`;
+  }
+  return `Le ${enVigueur} est actuellement en vigueur jusqu'au ${finVigueur}. Le cadre du `
+    + `${prochain}${cadreProchainOfficiel ? ' est déjà officiel' : " n'est pas encore officiel"}`
+    + ` ; les places par territoire seront ajoutées dès leur publication.`;
+}
+
+/* ------------------------------------------------------------------------------------------- */
+/* PAGE D'ACCUEIL                                                                               */
+/* ------------------------------------------------------------------------------------------- */
+
+/*
+ * Mandat du 30 août 2026, §4 : Montérégie-Est en action principale, chiffres 100% dynamiques
+ * (aucun nombre ni date en dur nulle part, y compris JSON-LD/OG), pas de chiffre pour Centre et
+ * Ouest sur cette page, pas de compte des fiches « Vérifié ». « toutes » ici doit être la liste
+ * BRUTE de data.json (cliniques ET établissements confondus). Les établissements sont publiés
+ * dans leur couche cartographique dédiée même si leur ancien drapeau visible vaut false — pas le
+ * tableau `cliniques` déjà filtré hors établissements qui sert aux fiches individuelles.
+ *
+ * Depuis la bascule atomique du 31 août 2026, cette fonction écrit la vraie racine index.html;
+ * l'application carte complète est générée séparément dans /monteregie/.
+ */
+function pageAccueil(toutesEntrees, majDonnees) {
+  const publiees = toutesEntrees.filter(c =>
+    rempli(c.nom) && (c.visible !== false || c.categorie === 'etablissement')
+  );
+  const totalGeneral = publiees.length;
+  const totalEst = publiees.filter(c => c.region === 'Est').length;
+
+  const RLS_EST = ['Pierre-Boucher', 'Richelieu-Yamaska', 'Pierre-De Saurel'];
+  const RLS_AUTRES = [
+    ['Champlain', '/rls/champlain/'],
+    ['Haut-Richelieu–Rouville', '/rls/haut-richelieu-rouville/'],
+    ['Jardins-Roussillon', '/rls/jardins-roussillon/'],
+    ['Vaudreuil-Soulanges', '/rls/vaudreuil-soulanges/'],
+    ['du Suroît', '/rls/du-suroit/'],
+    ['du Haut-Saint-Laurent', '/rls/du-haut-saint-laurent/']
+  ];
+  const rlsEstHtml = RLS_EST.map(nom =>
+    `      <a href="/monteregie-est/rls/${slugifier(nom)}/">${esc(nom)}</a>`).join('\n');
+  const rlsAutresHtml = RLS_AUTRES.map(([nom, href]) =>
+    `      <a href="${href}">${esc(nom)}</a>`).join('\n');
+
+  const url = `${SITE}/`;
+  const titre = 'Trouve ta clinique — Cliniques qui recrutent en médecine familiale | Montérégie';
+  const description = `Carte interactive des cliniques et établissements de la Montérégie. `
+    + `Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM en médecine `
+    + `familiale.`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite', '@id': `${url}#website`, name: 'Trouve ta clinique', url,
+        inLanguage: 'fr-CA', description,
+        publisher: { '@id': `${url}#auteur` }
+      },
+      { '@type': 'Person', '@id': `${url}#auteur`, name: 'Olivier Laplante',
+        jobTitle: 'Résident en médecine familiale', url },
+      { '@type': 'WebPage', '@id': `${url}#accueil`, url, name: titre,
+        isPartOf: { '@id': `${url}#website` },
+        about: { '@type': 'Place', name: 'Montérégie, Québec' },
+        dateModified: majDonnees }
+    ]
+  };
+
+  const corps = `
+<section class="hero">
+  <p class="eyebrow">Médecine familiale · Montérégie</p>
+  <h1>Trouvez une clinique qui recrute en médecine familiale</h1>
+  <p class="lead">${totalGeneral} milieux de pratique répertoriés en Montérégie — cliniques et
+     établissements confondus, qu'ils recrutent actuellement ou non. Coordonnées, horaires,
+     équipe et personne-ressource pour préparer votre ${esc(PTEM_STATUT.prochain)}, ou pour
+     comparer les milieux avant de choisir.</p>
+  <div class="cta-row">
+    <a class="button primary" href="/monteregie-est/">Explorer Montérégie-Est</a>
+    <a class="button secondary" href="/monteregie/">Voir toute la Montérégie</a>
+  </div>
+</section>
+
+<div class="fact-grid fact-grid-2">
+  <div class="fact-card">
+    <span class="fact-kicker">Au total</span>
+    <strong>${totalGeneral}</strong>
+    <span>milieux de pratique répertoriés en Montérégie</span>
+  </div>
+  <div class="fact-card">
+    <span class="fact-kicker">Montérégie-Est</span>
+    <strong>${totalEst}</strong>
+    <span>milieux de pratique répertoriés</span>
+  </div>
+</div>
+
+<h2>Explorer par territoire</h2>
+<a class="terr-priorite" href="/monteregie-est/">
+  <span class="fact-kicker">Territoire prioritaire</span>
+  <strong>Montérégie-Est</strong>
+  <span>Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel</span>
+  <span class="text-cta">Ouvrir la carte →</span>
+</a>
+<h3 class="soustitre">Autres territoires de la Montérégie</h3>
+<div class="terr-autres">
+  <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
+  <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
+</div>
+
+<h2>Comment l'utiliser</h2>
+<p class="lead" style="font-size:1rem">Que vous soyez résident en fin de formation ou déjà en
+   pratique et à la recherche d'un nouveau milieu.</p>
+<div class="card-grid">
+  <div class="card accent-blue"><h3>1. Explorer</h3>
+    <p>Filtrez par territoire, réseau local ou type de pratique. Chaque épingle mène à une fiche
+       complète du milieu.</p></div>
+  <div class="card accent-teal"><h3>2. Comparer</h3>
+    <p>Mettez des milieux en favoris, ajoutez vos notes, exportez un tableau comparatif — tout
+       reste sur votre appareil.</p></div>
+  <div class="card accent-mint"><h3>3. Contacter</h3>
+    <p>Quand une clinique a transmis une personne-ressource au recrutement, elle figure sur sa
+       fiche.</p></div>
+</div>
+
+<h2>${esc(PTEM_STATUT.prochain)} et AMP</h2>
+<p class="lead" style="font-size:1rem">${phrasePtemCourte()}</p>
+<div class="card-grid two">
+  <div class="card accent-blue">
+    <h3>Le ${esc(PTEM_STATUT.prochain)}</h3>
+    <p>Le plan territorial d'effectifs médicaux — souvent encore appelé PREM — détermine où un
+       médecin de famille peut s'installer et à quelles conditions.</p>
+    <a class="text-cta" href="/ptem/">Tout savoir sur le ${esc(PTEM_STATUT.prochain)} →</a>
+  </div>
+  <div class="card accent-teal">
+    <h3>Les AMP</h3>
+    <p>Les activités médicales particulières sont les obligations de pratique rattachées à votre
+       territoire durant vos premières années.</p>
+    <a class="text-cta" href="/amp/">Comprendre les AMP →</a>
+  </div>
+</div>
+
+<h2>Parcourir par réseau local de services</h2>
+<div class="rls-liste">
+${rlsEstHtml}
+</div>
+<h3 class="soustitre">Autres RLS de la Montérégie</h3>
+<div class="rls-liste rls-liste-autres">
+${rlsAutresHtml}
+</div>
+
+<div class="fact-card encart-gp">
+  <h2 style="margin-top:0">Vous cherchez une clinique comme patient ?</h2>
+  <p>Ce site s'adresse aux médecins et aux résidents qui cherchent un milieu où pratiquer. Il ne
+     permet pas de prendre rendez-vous ni de s'inscrire auprès d'un médecin de famille.</p>
+  <p>Pour trouver une consultation, passez par
+     <a href="https://www.quebec.ca/sante/trouver-une-ressource/medecin-de-famille-prendre-rendez-vous-en-ligne" rel="noopener">Rendez-vous santé Québec</a>,
+     ou composez le <strong>811, option 1</strong> (Info-Santé) pour un avis infirmier. Pour vous
+     inscrire auprès d'un médecin de famille, utilisez le
+     <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d'accès à un médecin de famille</a>.</p>
+</div>
+
+<div class="apropos-discret">
+  <h2>D'où viennent ces informations</h2>
+  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale. Les fiches
+     sont constituées à partir des renseignements transmis par les cliniques elles-mêmes,
+     complétés par des sources publiques et vérifiés manuellement.</p>
+  <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche
+     officielle. Une erreur ou une information à corriger ? Les signalements sont bienvenus.</p>
+  <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
+</div>
+`;
+
+  const html = page({
+    titre, description, url, profondeur: 0, indexable: true, canonical: url, jsonLd,
+    filDAriane: '', corps, actif: 'accueil', univers: UNIVERS_GENERAL,
+    // L'image proposée le 30 août a été écartée. En attendant une nouvelle direction visuelle,
+    // on conserve l'image de partage générique existante plutôt que de publier un visuel refusé.
+    ogImageOverride: null
+  });
+  return { html, indexable: true };
+}
+
 function pageRepertoire(cliniques, slugs, parRls, majDonnees, u = null) {
+
+
   const prefixe = u ? u.prefixe : '';
   const nomTerritoire = u ? u.nom : 'Montérégie';
   const url = `${SITE}${prefixe}/cliniques/`;
@@ -1006,10 +1247,10 @@ ${items}
   const corps = `  <section class="hero">
     <p class="eyebrow">Médecine familiale · Montérégie</p>
     <h1>Cliniques en recrutement en ${esc(nomTerritoire)}</h1>
-    <p class="lead"><strong>${enRecrutementTotal} milieu${enRecrutementTotal > 1 ? 'x' : ''} en recrutement actif</strong> de médecins de famille, sur ${cliniques.length} milieux publiés au total dans le répertoire, répartis dans <strong>${parRls.size} RLS</strong> et ${villes.size} municipalités${enRecrutementTotal < cliniques.length ? ` — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement` : ''}. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="${u ? u.accueil : '/'}">carte interactive</a> ajoute les filtres et la vue géographique.</p>
+    <p class="lead"><strong>${enRecrutementTotal} milieu${enRecrutementTotal > 1 ? 'x' : ''} en recrutement actif</strong> de médecins de famille, sur ${cliniques.length} milieux publiés au total dans le répertoire, répartis dans <strong>${parRls.size} RLS</strong> et ${villes.size} municipalités${enRecrutementTotal < cliniques.length ? ` — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement` : ''}. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="${u ? u.accueil : UNIVERS_GENERAL.accueil}">carte interactive</a> ajoute les filtres et la vue géographique.</p>
     <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
     <div class="cta-row">
-      <a class="button primary" href="${u ? u.accueil : '/'}">Explorer sur la carte interactive</a>
+      <a class="button primary" href="${u ? u.accueil : UNIVERS_GENERAL.accueil}">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${prefixe}/ptem/">Guide PTEM</a>
     </div>
   </section>
@@ -1022,7 +1263,7 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
     </ul>
   </section>`}
 
-  <figure class="sqb-wrap compact directory-banner"><a class="sqb" href="${u ? u.accueil : '/'}" aria-label="Ouvrir la carte interactive des cliniques en recrutement en ${esc(nomTerritoire)}"><span class="sqb-pattern" aria-hidden="true"></span><span class="sqb-inner"><img class="sqb-logo" src="${u ? '../../assets' : '../assets'}/logo-banniere.png" alt="" width="210" height="252" loading="lazy"><span class="sqb-vline" aria-hidden="true"></span><span class="sqb-eyebrow">Carte interactive</span><span class="sqb-title">Trouve ta clinique</span><span class="sqb-region">${esc(nomTerritoire)}</span><span class="sqb-rule" aria-hidden="true"></span></span></a></figure>
+  <figure class="sqb-wrap compact directory-banner"><a class="sqb" href="${u ? u.accueil : UNIVERS_GENERAL.accueil}" aria-label="Ouvrir la carte interactive des cliniques en recrutement en ${esc(nomTerritoire)}"><span class="sqb-pattern" aria-hidden="true"></span><span class="sqb-inner"><img class="sqb-logo" src="${u ? '../../assets' : '../assets'}/logo-banniere.png" alt="" width="210" height="252" loading="lazy"><span class="sqb-vline" aria-hidden="true"></span><span class="sqb-eyebrow">Carte interactive</span><span class="sqb-title">Trouve ta clinique</span><span class="sqb-region">${esc(nomTerritoire)}</span><span class="sqb-rule" aria-hidden="true"></span></span></a></figure>
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
@@ -1044,14 +1285,11 @@ ${sections}`;
 /* Pages de contenu écrites à la main (pas générées). Ajouter ici toute nouvelle page-guide. */
 const PAGES_FIXES = [
   { loc: '/', lastmod: null, changefreq: 'weekly', priority: '1.0' },
-  { loc: '/ptem/', lastmod: '2026-08-19', changefreq: 'weekly', priority: '0.9' },
-  { loc: '/amp/', lastmod: '2026-08-19', changefreq: 'monthly', priority: '0.9' },
-  // Copie dédiée de la carte, filtrée à la Montérégie-Est — voir MODE_EST dans index.html et
-  // scripts/publier-monteregie-est.js. Priorité un peu sous « / » : c'est une vue du même
-  // contenu, pas une page distincte à privilégier dans les résultats de recherche.
-  // lastmod: null (29 août 2026) — cette page est régénérée depuis data.json à chaque
-  // publication (voir publier-regions.js), donc sa date doit suivre majPagesSeo comme « / »,
-  // pas rester figée sur une date codée en dur qui devient fausse au fil des mises à jour.
+  { loc: '/monteregie/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
+  { loc: '/ptem/', lastmod: '2026-08-31', changefreq: 'weekly', priority: '0.9' },
+  { loc: '/amp/', lastmod: '2026-08-31', changefreq: 'monthly', priority: '0.9' },
+  // Carte dédiée à la Montérégie-Est, générée avec les trois autres cartes par
+  // scripts/publier-regions.js. Sa date suit les données et le gabarit commun.
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.8' }
 ];
 
@@ -1109,92 +1347,6 @@ function pageRedirectionStatique(destination, libelle) {
 `;
 }
 
-/* ------------------------------------------------------------------------------------------- */
-/* COPIES ÉTANCHES DE /ptem/ ET /amp/ POUR L'UNIVERS MONTÉRÉGIE-EST                             */
-/* ------------------------------------------------------------------------------------------- */
-
-/*
- * /ptem/ et /amp/ sont deux pages écrites à la main (elles ne sortent pas de data.json). Pour
- * l'univers Est, on n'en réécrit pas le contenu — il est neutre, il vaut pour toute la
- * Montérégie — on en fabrique une copie dont la NAVIGATION reste dans l'univers Est :
- *   - la marque, le fil d'Ariane et « Carte des cliniques » renvoient vers /monteregie-est/;
- *   - les liens /ptem/ ↔ /amp/ pointent vers leurs copies Est;
- *   - tout lien vers /cliniques/ (le répertoire des trois territoires) est SUPPRIMÉ.
- *
- * Contrairement aux fiches de cliniques et aux pages de RLS, ces deux copies ne prennent PAS la
- * main côté référencement : leur contenu n'a rien de propre à l'Est, donc la page officielle
- * pour Google reste /ptem/ et /amp/. Les copies sont en noindex et la désignent comme telle.
- * Elles n'existent que pour ne pas faire sortir de l'univers Est quelqu'un qui vient d'y entrer.
- */
-function copieRegionPageStatique(source, urlCanonique, u) {
-  let html = fs.readFileSync(path.join(RACINE, source), 'utf8');
-  const avant = html;
-
-  /* 1. Aucun lien vers le répertoire des trois territoires — on retire l'ancre en entier
-        (nav et boutons d'appel à l'action), plutôt que de la faire pointer ailleurs. */
-  html = html.replace(/<a\b[^>]*href="\/cliniques\/"[^>]*>.*?<\/a>/gs, '');
-
-  /* 2. Les liens restants sont ramenés dans l'univers du territoire. L'ordre compte : /ptem/ et
-        /amp/ d'abord, sinon la règle sur href="/" ne les toucherait pas mais celle-ci les
-        préfixerait deux fois. */
-  html = html.replace(/href="\/(ptem|amp)\/"/g, `href="${u.prefixe}/$1/"`);
-  html = html.replace(/href="\/"/g, `href="${u.accueil}"`);
-
-  /* 3. Ressources (CSS, images) : la page d'origine vit à /ptem/, la copie à /monteregie-est/ptem/
-        — un cran plus profond. Les chemins en « ../assets/… » y résoudraient vers
-        /monteregie-est/assets/, qui n'existe pas : la page s'afficherait sans aucune mise en
-        forme. On les passe en absolu, seule forme juste quelle que soit la profondeur. */
-  html = html.replace(/(href|src)="\.\.\/assets\//g, '$1="/assets/');
-
-  /* 3bis. Bannière : PTEM et AMP illustrent leur en-tête avec la bannière générale de la carte
-     (carte-interactive-monteregie.png). Sur les copies Est, choix du 21 août : la
-     bannière déjà préparée pour la Montérégie-Est (banniere_monteregie-est.png, 20 août) doit
-     apparaître à la place — cohérent avec le reste de l'univers Est. Les territoires qui n'ont
-     pas encore de bannière propre gardent l'image générale : mieux vaut une illustration
-     générique correcte qu'un lien mort vers un fichier inexistant. */
-  if (u.banniere) {
-    html = html.replace(/carte-interactive-monteregie\.png/g, u.banniere.fichier);
-  }
-  html = html.replace(
-    /Bannière Trouve ta clinique — carte interactive des cliniques en recrutement en Montérégie/g,
-    `Bannière Trouve ta clinique — carte interactive des cliniques en recrutement en ${u.nom}`
-  );
-
-  /* 4. Identité du territoire dans l'en-tête et le fil d'Ariane. */
-  const acc = u.accueil.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  html = html.replace(new RegExp(`(<a class="brand" href="${acc}">)Trouve ta clinique(</a>)`),
-                      `$1${u.marque}$2`);
-  html = html.replace(new RegExp(`(href="${acc}">)Carte des cliniques(</a>)`),
-                      `$1Carte ${u.nom}$2`);
-  html = html.replace(new RegExp(`(class="breadcrumbs"><a href="${acc}">)Accueil(</a>)`),
-                      `$1${u.nom}$2`);
-
-  /* 5. Indexation : la page officielle reste la page générale (voir le commentaire ci-dessus). */
-  html = html.replace(/<link href="[^"]*" rel="canonical"\/>/,
-                      `<link href="${urlCanonique}" rel="canonical"/>`);
-  html = html.replace(/<meta content="index,follow[^"]*" name="robots"\/>/,
-                      '<meta content="noindex,follow" name="robots"/>');
-
-  /* 5bis. Aperçu de partage (og:image / twitter:image) : la bannière du territoire plutôt que
-     celle de la carte générale, pour les mêmes raisons qu'au point 3bis (22 août). */
-  if (u.banniere) {
-    html = html.replace(/<meta content="[^"]*og-image\.png\?v=2" (property="og:image"|name="twitter:image")\/>/g,
-                        `<meta content="${SITE}/assets/${u.banniere.fichier}" $1/>`);
-    html = html.replace(/<meta content="1200" property="og:image:width"\/>/,
-                        `<meta content="${u.banniere.largeur}" property="og:image:width"/>`);
-    html = html.replace(/<meta content="630" property="og:image:height"\/>/,
-                        `<meta content="${u.banniere.hauteur}" property="og:image:height"/>`);
-  }
-  html = html.replace(/<meta content="Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique\." property="og:image:alt"\/>/,
-                      `<meta content="Carte interactive ${u.nom} — Trouve ta clinique." property="og:image:alt"/>`);
-
-  if (html === avant) {
-    throw new Error(`copieRegionPageStatique : aucune transformation appliquée à ${source} — ` +
-                    'le gabarit de la page a probablement changé, la copie régionale ne serait plus étanche.');
-  }
-  return html;
-}
-
 function main() {
   const donnees = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
   const majDonnees = donnees.miseAJour || new Date().toISOString().slice(0, 10);
@@ -1203,14 +1355,15 @@ function main() {
      Une refonte du gabarit modifie aussi le contenu HTML, même si data.json n'a pas changé — le
      sitemap doit donc en tenir compte pour son lastmod. Mettre à jour cette date à la main lors
      d'une prochaine modification des templates ci-dessous. */
-  const majGabaritsSeo = '2026-08-29';
+  const majGabaritsSeo = '2026-08-31';
   const majPagesSeo = [majDonnees, majGabaritsSeo].sort().at(-1);
 
   const toutes = donnees.cliniques || [];
   const cliniques = toutes.filter(c =>
     c.visible !== false && c.categorie !== 'etablissement' && rempli(c.nom)
   );
-  const ignorees = toutes.length - cliniques.length;
+  const etablissements = toutes.filter(c => c.categorie === 'etablissement' && rempli(c.nom));
+  const horsPublication = toutes.length - cliniques.length - etablissements.length;
 
   /* Slugs stables */
   const fichierSlugs = path.join(__dirname, 'slugs.json');
@@ -1283,9 +1436,14 @@ function main() {
   }
 
   /* Conserver les anciennes adresses contenant « c-ur » sans laisser en ligne une seconde fiche
-     périmée. Les deux variantes historiques (générale et Est) pointent vers l'unique canonique. */
+     périmée. Si la fiche corrigée est toujours publiée, les deux variantes historiques pointent
+     vers son URL canonique. Si elle est maintenant masquée, elles reviennent plutôt au répertoire
+     régional afin de ne jamais rediriger vers une page inexistante. */
+  const slugsPublies = new Set(cliniques.map(c => slugs[String(c.id)]).filter(Boolean));
   for (const r of REDIRECTIONS_SLUGS_HISTORIQUES) {
-    const destination = `${SITE}/monteregie-est/cliniques/${r.nouveau}/`;
+    const destination = slugsPublies.has(r.nouveau)
+      ? `${SITE}/monteregie-est/cliniques/${r.nouveau}/`
+      : `${SITE}/monteregie-est/cliniques/`;
     const redirection = pageRedirectionStatique(destination, r.libelle);
     ecrire(path.join('cliniques', r.ancien, 'index.html'), redirection);
     ecrire(path.join('monteregie-est', 'cliniques', r.ancien, 'index.html'), redirection);
@@ -1393,11 +1551,17 @@ function main() {
     if (purges) console.log(`Dossiers orphelins supprimés : ${purges}`);
   }
 
+  /* Page d'accueil à la racine. La carte complète est fabriquée par publier-regions.js dans
+     /monteregie/ au cours de la même génération : la bascule reste atomique. `toutes` (pas
+     `cliniques`) parce que le compte inclut aussi la couche Établissements. */
+  const accueil = pageAccueil(toutes, majDonnees);
+  ecrire('index.html', accueil.html);
+
   ecrire('sitemap.xml', sitemap(entrees));
 
   /* Rapport */
   console.log('=== GÉNÉRATION DES PAGES SEO ===');
-  console.log(`data.json du ${majDonnees} — ${toutes.length} fiches, ${cliniques.length} publiées${ignorees ? `, ${ignorees} ignorée(s) (masquée(s) ou établissement(s))` : ''} (dont ${cliniques.filter(recrute).length} en recrutement, ${cliniques.filter(c => !recrute(c)).length} hors recrutement)`);
+  console.log(`data.json du ${majDonnees} — ${toutes.length} fiches source : ${cliniques.length} cliniques publiées (${cliniques.filter(recrute).length} en recrutement, ${cliniques.filter(c => !recrute(c)).length} hors recrutement), ${etablissements.length} établissements dans la couche cartographique${horsPublication ? `, ${horsPublication} fiche(s) hors publication` : ''}`);
   console.log(`Pages de cliniques : ${cliniques.length} générées, ${indexables} indexables, ${minces.length} en noindex (moins de ${SEUIL_INDEXATION} champs remplis)`);
   console.log(`Pages de RLS       : ${parRls.size}`);
   console.log(`Répertoire         : cliniques/index.html`);

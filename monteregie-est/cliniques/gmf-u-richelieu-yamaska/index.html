@@ -133,7 +133,10 @@
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="/monteregie-est/">Trouve ta clinique — Montérégie-Est</a>
+    <a class="brand" href="/monteregie-est/">
+      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+      <span class="brand-name">Trouve ta clinique</span>
+    </a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="/monteregie-est/">Carte Montérégie-Est</a>
       <a href="/monteregie-est/cliniques/">Cliniques</a>
@@ -197,6 +200,26 @@
   </section>
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->

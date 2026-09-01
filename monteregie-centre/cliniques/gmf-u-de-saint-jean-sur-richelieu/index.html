@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GMF-U de Saint-Jean-sur-Richelieu — Saint-Jean-sur-Richelieu | Trouve ta clinique</title>
   <meta name="description" content="GMF-U de Saint-Jean-sur-Richelieu, GMF-U de Saint-Jean-sur-Richelieu (RLS Haut-Richelieu–Rouville) en recrutement de médecins de famille en Montérégie : type de milieu, pratiques offertes, heures d’ouverture.">
-  <link rel="canonical" href="https://trouvetaclinique.ca/cliniques/gmf-u-de-saint-jean-sur-richelieu/">
-  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://trouvetaclinique.ca/monteregie-centre/cliniques/gmf-u-de-saint-jean-sur-richelieu/">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta property="og:locale" content="fr_CA">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trouve ta clinique">
@@ -141,7 +141,10 @@
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="/monteregie-centre/">Trouve ta clinique — Montérégie-Centre</a>
+    <a class="brand" href="/monteregie-centre/">
+      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+      <span class="brand-name">Trouve ta clinique</span>
+    </a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="/monteregie-centre/">Carte Montérégie-Centre</a>
       <a href="/monteregie-centre/cliniques/">Cliniques</a>
@@ -217,6 +220,26 @@
   </section>
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->

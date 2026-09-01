@@ -66,12 +66,16 @@
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="/">Trouve ta clinique</a>
+    <a class="brand" href="/">
+      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+      <span class="brand-name">Trouve ta clinique</span>
+    </a>
     <nav class="nav" aria-label="Navigation principale">
-      <a href="/">Carte des cliniques</a>
+      <a href="/">Accueil</a>
+      <a href="/monteregie/">Carte complète</a>
+      <a href="/cliniques/" aria-current="page">Répertoire</a>
       <a href="/ptem/">PTEM</a>
       <a href="/amp/">AMP</a>
-      <a href="/cliniques/" aria-current="page">Cliniques</a>
     </nav>
   </div>
 </header>
@@ -80,10 +84,10 @@
   <section class="hero">
     <p class="eyebrow">Médecine familiale · Montérégie</p>
     <h1>Cliniques en recrutement en Montérégie</h1>
-    <p class="lead"><strong>79 milieux en recrutement actif</strong> de médecins de famille, sur 89 milieux publiés au total dans le répertoire, répartis dans <strong>9 RLS</strong> et 46 municipalités — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="/">carte interactive</a> ajoute les filtres et la vue géographique.</p>
+    <p class="lead"><strong>79 milieux en recrutement actif</strong> de médecins de famille, sur 89 milieux publiés au total dans le répertoire, répartis dans <strong>9 RLS</strong> et 46 municipalités — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="/monteregie/">carte interactive</a> ajoute les filtres et la vue géographique.</p>
     <p class="updated"><strong>Données mises à jour le :</strong> 2026-08-29.</p>
     <div class="cta-row">
-      <a class="button primary" href="/">Explorer sur la carte interactive</a>
+      <a class="button primary" href="/monteregie/">Explorer sur la carte interactive</a>
       <a class="button secondary" href="/ptem/">Guide PTEM</a>
     </div>
   </section>
@@ -100,7 +104,7 @@
     </ul>
   </section>
 
-  <figure class="sqb-wrap compact directory-banner"><a class="sqb" href="/" aria-label="Ouvrir la carte interactive des cliniques en recrutement en Montérégie"><span class="sqb-pattern" aria-hidden="true"></span><span class="sqb-inner"><img class="sqb-logo" src="../assets/logo-banniere.png" alt="" width="210" height="252" loading="lazy"><span class="sqb-vline" aria-hidden="true"></span><span class="sqb-eyebrow">Carte interactive</span><span class="sqb-title">Trouve ta clinique</span><span class="sqb-region">Montérégie</span><span class="sqb-rule" aria-hidden="true"></span></span></a></figure>
+  <figure class="sqb-wrap compact directory-banner"><a class="sqb" href="/monteregie/" aria-label="Ouvrir la carte interactive des cliniques en recrutement en Montérégie"><span class="sqb-pattern" aria-hidden="true"></span><span class="sqb-inner"><img class="sqb-logo" src="../assets/logo-banniere.png" alt="" width="210" height="252" loading="lazy"><span class="sqb-vline" aria-hidden="true"></span><span class="sqb-eyebrow">Carte interactive</span><span class="sqb-title">Trouve ta clinique</span><span class="sqb-region">Montérégie</span><span class="sqb-rule" aria-hidden="true"></span></span></a></figure>
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
@@ -524,6 +528,26 @@
   </section>
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->

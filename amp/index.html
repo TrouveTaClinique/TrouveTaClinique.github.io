@@ -36,7 +36,7 @@
       "name": "AMP en médecine familiale — règles et Montérégie | Trouve ta clinique",
       "description": "Activités médicales particulières en médecine familiale : obligations, équivalences et règles actuelles en Montérégie.",
       "inLanguage": "fr-CA",
-      "dateModified": "2026-08-19",
+      "dateModified": "2026-08-31",
       "isPartOf": {
         "@id": "https://trouvetaclinique.ca/#website"
       }
@@ -66,12 +66,16 @@
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
 <div class="site-header__inner">
-<a class="brand" href="/">Trouve ta clinique</a>
+<a class="brand" href="/">
+<span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+<span class="brand-name">Trouve ta clinique</span>
+</a>
 <nav aria-label="Navigation principale" class="nav">
-<a href="/">Carte des cliniques</a>
+<a href="/">Accueil</a>
+<a href="/monteregie/">Carte complète</a>
+<a href="/cliniques/">Répertoire</a>
 <a href="/ptem/">PTEM</a>
 <a aria-current="page" href="/amp/">AMP</a>
-<a href="/cliniques/">Cliniques</a>
 </nav>
 </div>
 </header>
@@ -82,7 +86,7 @@
 <p class="eyebrow">Médecine familiale · Activités médicales particulières</p>
 <h1>AMP : activités médicales particulières</h1>
 <p class="lead">Ce que doit savoir un médecin de famille avant son entrée en pratique : qui est visé, combien d’heures sont exigées et comment les AMP se déclinent actuellement en Montérégie.</p>
-<div class="cta-row"><a class="button primary" href="/">Explorer les milieux</a><a class="button secondary" href="/ptem/">Guide PTEM</a></div>
+<div class="cta-row"><a class="button primary" href="/monteregie/">Explorer les milieux</a><a class="button secondary" href="/ptem/">Guide PTEM</a></div>
 </section>
 <div aria-label="Repères AMP" class="fact-grid">
 <article class="fact-card"><span class="fact-kicker">Régime public</span><strong>Tous visés</strong><span>Les médecins de famille du régime public sont visés par l’Entente AMP.</span><a class="source-chip" href="https://www.fmoq.org/guide-pratique-fmoq/installation/amp/" rel="noopener">Source</a></article>
@@ -91,7 +95,7 @@
 <article class="fact-card"><span class="fact-kicker">Non-respect</span><strong>−30 % possible</strong><span>Réduction applicable à la rémunération/facturation selon l’Entente en cas de non-respect.</span><a class="source-chip" href="https://www.ramq.gouv.qc.ca/fr/professionnels/medecin-omnipraticien-omnipraticienne/je-commence-pratique" rel="noopener">Source</a></article>
 </div>
 <figure class="sqb-wrap compact">
-<a class="sqb" aria-label="Ouvrir la carte interactive des cliniques en recrutement en Montérégie" href="/">
+<a class="sqb" aria-label="Ouvrir la carte interactive des cliniques en recrutement en Montérégie" href="/monteregie/">
 <span class="sqb-pattern" aria-hidden="true"></span>
 <span class="sqb-inner">
 <img class="sqb-logo" src="../assets/logo-banniere.png" alt="" width="210" height="252" loading="lazy">
@@ -171,6 +175,26 @@
 </section>
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les règles et disponibilités d’AMP peuvent évoluer; validez toujours l’information auprès du DTMF ou des sources officielles compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
