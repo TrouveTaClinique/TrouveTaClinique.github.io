@@ -385,6 +385,9 @@ const EST_PREFIXE = '/monteregie-est';
 const EST_ACCUEIL = EST_PREFIXE + '/';
 const CARTE_COMPLETE = '/monteregie/';
 
+const BANNIERE_EST_LARGEUR = '1024';
+const BANNIERE_EST_HAUTEUR = '341';
+
 const UNIVERS_GENERAL = {
   regional: false,
   region: null,
@@ -393,7 +396,7 @@ const UNIVERS_GENERAL = {
   accueil: EST_ACCUEIL,
   dossier: '',
   canonique: true,
-  banniere: { fichier: 'banniere_monteregie-est.png', largeur: '1024', hauteur: '341' }
+  banniere: { fichier: 'banniere_monteregie-est.png', largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR }
 };
 
 /*
@@ -417,7 +420,7 @@ const UNIVERS_GENERAL = {
 const UNIVERS_REGIONS = [
   { region: 'Est',    nom: 'Montérégie-Est',    dossier: 'monteregie-est',    canonique: true,
     ordreRls: ['Pierre-Boucher', 'Richelieu-Yamaska', 'Pierre-De Saurel'],
-    banniere: { fichier: 'banniere_monteregie-est.png', largeur: '1024', hauteur: '341' } },
+    banniere: { fichier: 'banniere_monteregie-est.png', largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR } },
   { region: 'Centre', nom: 'Montérégie-Centre', dossier: 'monteregie-centre', canonique: true,
     ordreRls: ['Champlain', 'Haut-Richelieu–Rouville'],
     banniere: null },
@@ -435,9 +438,19 @@ const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region
 
 const FOOTER_CARTE_COMPLETE = `<p class="lien-carte-complete"><a href="${CARTE_COMPLETE}">Carte des trois territoires</a> <span class="note-construction">(en construction)</span></p>`;
 
+/* Navigation identique sur toutes les pages SEO : la marque renvoie toujours à l'accueil. */
+const LIENS_NAV = [
+  ['/', 'Accueil', 'accueil'],
+  [EST_ACCUEIL, 'Carte interactive', 'carte'],
+  [EST_PREFIXE + '/cliniques/', 'Cliniques', 'cliniques'],
+  [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
+  [EST_PREFIXE + '/amp/', 'AMP', 'amp']
+];
+
 function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
   const wrap = compact ? 'sqb-wrap compact directory-banner' : 'sqb-wrap';
-  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${assetsChemin}/banniere_monteregie-est.png" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" loading="lazy"></a></figure>`;
+  const img = `${assetsChemin}/banniere_monteregie-est.png`;
+  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" srcset="${img} ${BANNIERE_EST_LARGEUR}w" sizes="(max-width: 1024px) 100vw, 1024px" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="async" loading="lazy"></a></figure>`;
 }
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
@@ -464,18 +477,8 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
     : (u.regional
       ? `Carte interactive ${u.nom} — Trouve ta clinique.`
       : 'Carte interactive Montérégie-Est — Trouve ta clinique.');
-  /* Pas d'entrée « Cliniques » dans un univers régional : ce répertoire regroupe les cliniques
-     des TROIS territoires. Les cliniques d'un territoire se rejoignent par leur page de RLS. */
-  const liens = u.regional
-    ? [[u.accueil, 'Carte ' + u.nom, 'carte'],
-       [u.prefixe + '/cliniques/', 'Cliniques', 'cliniques'],
-       [u.prefixe + '/ptem/', 'PTEM', 'ptem'],
-       [u.prefixe + '/amp/', 'AMP', 'amp']]
-    : [['/', 'Accueil', 'accueil'],
-       [EST_ACCUEIL, 'Carte interactive', 'carte'],
-       [EST_PREFIXE + '/cliniques/', 'Répertoire', 'cliniques'],
-       [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
-       [EST_PREFIXE + '/amp/', 'AMP', 'amp']];
+  /* Navigation unifiée : même libellés et mêmes cibles sur toutes les pages SEO. */
+  const liens = LIENS_NAV;
   const nav = liens.map(([href, txt, cle]) =>
     `      <a href="${href}"${actif === cle ? ' aria-current="page"' : ''}>${txt}</a>`).join('\n');
 
@@ -515,7 +518,7 @@ ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="${u.regional ? u.accueil : '/'}">
+    <a class="brand" href="/">
       <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
       <span class="brand-name">Trouve ta clinique</span>
     </a>
@@ -1097,7 +1100,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
 
   const corps = `
 <section class="hero">
-  <p class="eyebrow">Médecine familiale · Montérégie-Est</p>
+  <p class="eyebrow">Médecine familiale</p>
   <h1>Trouvez une clinique qui recrute en médecine familiale</h1>
   <p class="lead">${totalGeneral} milieux de pratique répertoriés en Montérégie — cliniques et
      établissements confondus, qu'ils recrutent actuellement ou non. Coordonnées, horaires,
@@ -1123,12 +1126,13 @@ function pageAccueil(toutesEntrees, majDonnees) {
 </div>
 
 <h2>Explorer par territoire</h2>
-<a class="terr-priorite" href="/monteregie-est/">
+<a class="terr-priorite terr-priorite-est" href="/monteregie-est/">
   <strong>Montérégie-Est</strong>
   <span>Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel</span>
   <span class="text-cta">Ouvrir la carte →</span>
 </a>
-<h3 class="soustitre">Autres territoires de la Montérégie</h3>
+<h3 class="soustitre">Autres territoires de la Montérégie <span class="note-construction">(en construction)</span></h3>
+<p class="terr-autres-note">Les cartes Centre et Ouest sont en préparation ; seule la Montérégie-Est est pleinement disponible pour l'instant.</p>
 <div class="terr-autres">
   <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
   <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
@@ -1168,7 +1172,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
 
 <h2>Parcourir par réseau local de services (RLS)</h2>
 <h3 class="soustitre">Montérégie-Est</h3>
-<div class="rls-liste">
+<div class="rls-liste rls-liste-est">
 ${rlsEstHtml}
 </div>
 <h3 class="soustitre">Autres RLS de la Montérégie</h3>

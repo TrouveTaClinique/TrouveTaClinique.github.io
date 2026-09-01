@@ -16,10 +16,10 @@
 body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff 0,#fbfdff 52%,#f6fbfc 100%);line-height:1.68}
 a{color:#076b91;text-underline-offset:3px}a:hover{text-decoration-thickness:2px;color:#004d70}
 .skip-link{position:absolute;left:-9999px}.skip-link:focus{left:1rem;top:1rem;z-index:999;background:#fff;padding:.75rem 1rem;border-radius:10px;box-shadow:var(--shadow)}
-.site-header{background:rgba(7,31,61,.97);color:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
+.site-header{background:var(--sq-bleu);color:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.08)}
 .site-header__inner,main,.site-footer__inner{width:min(1080px,calc(100% - 36px));margin:0 auto}.site-header__inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .brand{color:#fff;text-decoration:none;font-weight:900;letter-spacing:-.025em;font-size:1.08rem}.brand::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--mint));margin-left:7px;vertical-align:middle}
-.nav{display:flex;flex-wrap:wrap;gap:.35rem}.nav a{color:#ddebfa;text-decoration:none;font-weight:700;padding:.48rem .68rem;border-radius:10px;font-size:.92rem}.nav a:hover,.nav a[aria-current="page"]{background:rgba(91,210,197,.13);color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:.35rem}.nav a{color:#fff;text-decoration:none;font-weight:700;padding:.5rem .82rem;border-radius:999px;font-size:.92rem}.nav a:hover,.nav a:focus-visible{background:rgba(144,241,233,.14);color:#fff}.nav a[aria-current="page"]{background:var(--sq-menthe);color:var(--sq-bleu)}.nav a[aria-current="page"]:hover,.nav a[aria-current="page"]:focus-visible{background:var(--sq-menthe);color:var(--sq-bleu)}
 .breadcrumbs{padding:1.05rem 0 .25rem;font-size:.88rem;color:var(--muted)}.breadcrumbs a{color:inherit}
 .breadcrumbs:empty{display:none}
 .hero{position:relative;overflow:hidden;margin-top:1rem;padding:3.4rem clamp(1.35rem,4vw,3.2rem) 2.8rem;border:1px solid #d8e8f2;border-radius:26px;background:linear-gradient(135deg,#f7fbff 0%,#effcfb 58%,#f8fbff 100%);box-shadow:0 14px 45px rgba(7,31,61,.055)}
@@ -96,13 +96,11 @@ body{
 a{color:#006fae}
 a:hover{color:#170a72}
 
-/* Header des pages web (31 août 2026) : retour au style sobre de la version précédente,
-   avec le logo officiel ajouté à gauche du nom. Le header V4 demeure réservé aux cartes. */
+/* Header des pages web : palette SQ (bleu #170A72, menthe #90F1E9 sur la page active). */
 .site-header{
-  background:rgba(7,31,61,.98);
-  border-bottom:1px solid rgba(255,255,255,.1);
-  box-shadow:0 5px 18px rgba(7,31,61,.15);
-  backdrop-filter:blur(10px);
+  background:var(--sq-bleu);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 5px 18px rgba(23,10,114,.18);
 }
 .site-header::after{content:none;display:none}
 .site-header{position:sticky;}
@@ -131,17 +129,28 @@ a:hover{color:#170a72}
 .nav{gap:.35rem}
 
 .nav a{
-  color:#ddebfa;
+  color:#fff;
   border:0;
-  border-radius:10px;
+  border-radius:999px;
   font-weight:700;
-  padding:.48rem .68rem;
+  padding:.5rem .82rem;
 }
 
 .nav a:hover,
-.nav a[aria-current="page"]{
+.nav a:focus-visible{
   color:#fff;
-  background:rgba(91,210,197,.13);
+  background:rgba(144,241,233,.14);
+}
+
+.nav a[aria-current="page"]{
+  color:var(--sq-bleu);
+  background:var(--sq-menthe);
+}
+
+.nav a[aria-current="page"]:hover,
+.nav a[aria-current="page"]:focus-visible{
+  color:var(--sq-bleu);
+  background:var(--sq-menthe);
 }
 
 .breadcrumbs{color:#666078}
@@ -365,10 +374,11 @@ p, li { text-wrap: pretty; }
 /* Bannière officielle Montérégie-Est : image approuvée, lien vers la carte. */
 .sqb-photo {
   display:block; border-radius:18px; overflow:hidden; text-decoration:none; line-height:0;
+  max-width:1024px; margin-left:auto; margin-right:auto;
   transition:transform .15s ease, box-shadow .15s ease;
 }
 .sqb-photo img {
-  display:block; width:100%; height:auto; aspect-ratio:3 / 1; object-fit:cover;
+  display:block; width:100%; height:auto;
 }
 .sqb-photo:hover, .sqb-photo:focus-visible {
   transform:translateY(-1px);
@@ -456,7 +466,9 @@ p, li { text-wrap: pretty; }
    texte y devenait bleu foncé sur bleu foncé, donc invisible (contraste 1,00:1).
    On leur redonne une couleur lisible au survol ET au focus clavier. */
 .brand:hover, .brand:focus-visible { color:#90f1e9; }
-.site-header .nav a:hover, .site-header .nav a:focus-visible { color:#170a72; }
+.site-header .nav a:hover, .site-header .nav a:focus-visible { color:#fff; background:rgba(144,241,233,.14); }
+.site-header .nav a[aria-current="page"]:hover,
+.site-header .nav a[aria-current="page"]:focus-visible { color:var(--sq-bleu); background:var(--sq-menthe); }
 .site-footer a:hover, .site-footer a:focus-visible { color:#90f1e9; }
 .skip-link:hover, .skip-link:focus, .skip-link:focus-visible { color:#170a72; }
 
@@ -470,14 +482,27 @@ p, li { text-wrap: pretty; }
 .terr-priorite:hover{box-shadow:0 12px 30px rgba(23,10,114,.13)}
 .terr-priorite strong{display:block;font-size:1.2rem;color:var(--sq-bleu);margin:.25rem 0}
 .terr-priorite .text-cta{display:inline-block;margin-top:.5rem}
+.terr-priorite-est{
+  background:linear-gradient(135deg, rgba(144,241,233,.28) 0%, #fff 58%);
+  border-color:rgba(144,241,233,.55);border-left-color:#90f1e9;
+  box-shadow:0 10px 28px rgba(8,124,118,.14);
+}
+.terr-priorite-est strong{color:#087c76}
+.terr-priorite-est .text-cta{color:#087c76;font-weight:700}
 
 .soustitre{font-size:1rem;color:var(--muted);font-weight:700;margin:1.3rem 0 .6rem}
+.terr-autres-note{font-size:.9rem;color:var(--muted);margin:-.2rem 0 .85rem;max-width:62ch}
 .terr-autres{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.4rem}
+.terr-autres .button.ghost{opacity:.7}
 
 .rls-liste{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.3rem}
 .rls-liste a{background:#fff;border:1px solid var(--line);border-radius:999px;
   padding:.42rem .9rem;text-decoration:none;color:var(--ink);font-size:.92rem;font-weight:600;}
 .rls-liste a:hover{border-color:var(--teal);background:var(--surface-2)}
+.rls-liste-est a{
+  background:rgba(144,241,233,.2);border-color:#90f1e9;color:#065f5a;
+}
+.rls-liste-est a:hover{background:rgba(144,241,233,.34);border-color:#08a0a0}
 .rls-liste-autres a{opacity:.85}
 
 .encart-gp{border-left:5px solid var(--mint);margin:1.6rem 0}

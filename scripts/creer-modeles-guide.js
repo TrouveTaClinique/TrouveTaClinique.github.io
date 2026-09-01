@@ -39,7 +39,7 @@ const banner = `<figure class="sqb-wrap">
 const navPtem = `<nav aria-label="Navigation principale" class="nav">
 <a href="/">Accueil</a>
 <a href="/monteregie-est/">Carte interactive</a>
-<a href="/monteregie-est/cliniques/">Répertoire</a>
+<a href="/monteregie-est/cliniques/">Cliniques</a>
 <a aria-current="page" href="/monteregie-est/ptem/">PTEM</a>
 <a href="/monteregie-est/amp/">AMP</a>
 </nav>`;
@@ -47,7 +47,7 @@ const navPtem = `<nav aria-label="Navigation principale" class="nav">
 const navAmp = `<nav aria-label="Navigation principale" class="nav">
 <a href="/">Accueil</a>
 <a href="/monteregie-est/">Carte interactive</a>
-<a href="/monteregie-est/cliniques/">Répertoire</a>
+<a href="/monteregie-est/cliniques/">Cliniques</a>
 <a href="/monteregie-est/ptem/">PTEM</a>
 <a aria-current="page" href="/monteregie-est/amp/">AMP</a>
 </nav>`;
