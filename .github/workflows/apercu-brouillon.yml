@@ -1,0 +1,76 @@
+# Aperçu public de brouillon seulement. Ne publie jamais main ni le domaine officiel.
+name: Aperçu du brouillon
+
+on:
+  push:
+    branches: [brouillon]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-brouillon
+  cancel-in-progress: false
+
+jobs:
+  preparer:
+    if: github.repository == 'TrouveTaClinique/TrouveTaClinique.github.io' && github.ref == 'refs/heads/brouillon'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Lire la révision du brouillon sans droit de push
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Vérifier la destination et l'absence de domaine personnalisé
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/preparer-apercu.js --verifier-pages
+      - name: Reconstruire les pages dans le runner, sans commit ni changement de date
+        run: |
+          sha256sum data.json > "$RUNNER_TEMP/donnees-avant-apercu.sha256"
+          node scripts/generer-pages-seo.js
+          node scripts/publier-regions.js
+          sha256sum -c "$RUNNER_TEMP/donnees-avant-apercu.sha256"
+      - name: Tester l'isolation du brouillon et la conservation des fonctions
+        run: node --test scripts/test-apercu.cjs
+      - name: Préparer le site sans CNAME, scripts internes ou documents de travail
+        env:
+          NOM_PROTEGE: ${{ secrets.NOM_PROTEGE_SANTE_QUEBEC }}
+        run: node scripts/preparer-apercu.js "$RUNNER_TEMP/site-brouillon" --nom-obligatoire
+      - name: Transmettre uniquement le site de prévisualisation
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/site-brouillon
+
+  deployer:
+    if: github.repository == 'TrouveTaClinique/TrouveTaClinique.github.io' && github.ref == 'refs/heads/brouillon'
+    needs: preparer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - name: Relire les garde-fous de la même révision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Revérifier la destination juste avant publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/preparer-apercu.js --verifier-pages
+      - name: Publier l'aperçu sur le domaine github.io uniquement
+        id: deploiement
+        uses: actions/deploy-pages@v4
