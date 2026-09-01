@@ -122,7 +122,7 @@ if ('serviceWorker' in navigator) {
 }
 
 function appliquerIdentiteRegionale(source, t) {
-  const etat = { html: source.replace(BLOC_HORS_REGION, ''), manques: [] };
+  const etat = { html: source.replace(/\r\n/g, '\n').replace(BLOC_HORS_REGION, ''), manques: [] };
   const r = (ancien, nouveau, libelle) => remplacer(etat, ancien, nouveau, libelle);
 
   r('<title>Carte complète de la Montérégie — Cliniques en recrutement | Trouve ta clinique</title>',
@@ -223,7 +223,7 @@ function appliquerIdentiteRegionale(source, t) {
     if (debutStyle < 0) throw new Error('Head de Montérégie-Est introuvable.');
     const head = etat.html.slice(0, debutStyle)
       .replace('<html lang="fr">', '<html lang="fr" data-region="Est">');
-    const carteSq = fs.readFileSync(SOURCE_EST_SQ, 'utf8');
+    const carteSq = fs.readFileSync(SOURCE_EST_SQ, 'utf8').replace(/\r\n/g, '\n');
     if (!carteSq.includes('<!-- PWA_SERVICE_WORKER -->')) {
       throw new Error('Point d’injection PWA absent du gabarit SQ.');
     }

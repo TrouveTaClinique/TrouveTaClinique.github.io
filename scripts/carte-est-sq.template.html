@@ -84,10 +84,13 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
 .logo-text .brand-mot {
   font-family: var(--sq-font);
   font-weight: 700;
+  /* Dégradé Menthe → Azur conservé, désactivé pour le moment.
   background: linear-gradient(92deg, var(--sq-menthe) 0%, var(--sq-azur) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  */
+  color: var(--sq-menthe);
 }
 /* Trait d'union entre « Montérégie » et « Est ». */
 .logo-text .brand-tiret { color: var(--sq-menthe); }
@@ -1194,6 +1197,12 @@ body.cmp-open { overflow:hidden; }
   border-radius: 10px; box-shadow: 0 5px 18px rgba(23,10,114,.18);
   font: 400 13px/1.5 var(--sq-font); text-align: left;
 }
+/* Demandes visuelles temporaires : le prototype SQ ci-dessus n'est pas modifié.
+   Pour réactiver : retirer ce bloc et remettre AFFICHER_ECRAN_CHARGEMENT à true. */
+:root[data-region="Est"] header { background: var(--sq-bleu); }
+:root[data-region="Est"] .etab-marker::after,
+:root[data-region="Est"] .etab-marker.active::after { content: none; display: none; }
+#app-loader { display: none !important; }
 </style>
 <script>
 // Thème appliqué avant le premier rendu, pour éviter un éclair de blanc.
@@ -1242,6 +1251,7 @@ body.cmp-open { overflow:hidden; }
      chargement, donc toujours lisible par Google sans exécuter le JS. -->
 
 <div id="app-loader" aria-hidden="true">
+  <!-- Conservé. Masqué pour le moment (CSS + AFFICHER_ECRAN_CHARGEMENT). -->
   <div class="ldr-grid"></div>
   <div class="ldr-glow"></div>
   <div class="ldr-top">
@@ -3382,11 +3392,16 @@ fetch('../data.json', { cache: 'no-cache' })
 <!-- PWA_SERVICE_WORKER -->
 <script>
 (function () {
+  var AFFICHER_ECRAN_CHARGEMENT = false; // remettre à true pour réafficher l'écran de chargement
   var start = Date.now(), done = false;
   function hideLoader() {
     if (done) return; done = true;
     var el = document.getElementById('app-loader');
     if (!el) return;
+    if (!AFFICHER_ECRAN_CHARGEMENT) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      return;
+    }
     // Remis à 2,75 s le 19 août — l'essai à 600 ms
     // (18 août, audit) a été annulé : le temps précédent a été conservé.
     var wait = Math.max(0, 2750 - (Date.now() - start));
@@ -3395,6 +3410,7 @@ fetch('../data.json', { cache: 'no-cache' })
       setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 700);
     }, wait);
   }
+  if (!AFFICHER_ECRAN_CHARGEMENT) { hideLoader(); return; }
   if (document.readyState === 'complete') hideLoader();
   else window.addEventListener('load', hideLoader);
   setTimeout(hideLoader, 7000); // filet de sécurité

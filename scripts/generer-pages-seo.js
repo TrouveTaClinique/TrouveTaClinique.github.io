@@ -461,7 +461,8 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
        [u.prefixe + '/ptem/', 'PTEM', 'ptem'],
        [u.prefixe + '/amp/', 'AMP', 'amp']]
     : [['/', 'Accueil', 'accueil'],
-       [u.accueil, 'Carte complète', 'carte'],
+       [actif === 'accueil' ? '/monteregie-est/' : u.accueil,
+        actif === 'accueil' ? 'Carte interactive' : 'Carte complète', 'carte'],
        ['/cliniques/', 'Répertoire', 'cliniques'],
        ['/ptem/', 'PTEM', 'ptem'],
        ['/amp/', 'AMP', 'amp']];
@@ -1112,7 +1113,6 @@ function pageAccueil(toutesEntrees, majDonnees) {
 
 <h2>Explorer par territoire</h2>
 <a class="terr-priorite" href="/monteregie-est/">
-  <span class="fact-kicker">Territoire prioritaire</span>
   <strong>Montérégie-Est</strong>
   <span>Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel</span>
   <span class="text-cta">Ouvrir la carte →</span>
@@ -1155,7 +1155,8 @@ function pageAccueil(toutesEntrees, majDonnees) {
   </div>
 </div>
 
-<h2>Parcourir par réseau local de services</h2>
+<h2>Parcourir par réseau local de services (RLS)</h2>
+<h3 class="soustitre">Montérégie-Est</h3>
 <div class="rls-liste">
 ${rlsEstHtml}
 </div>
@@ -1177,7 +1178,8 @@ ${rlsAutresHtml}
 
 <div class="apropos-discret">
   <h2>D'où viennent ces informations</h2>
-  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale. Les fiches
+  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la
+     collaboration du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches
      sont constituées à partir des renseignements transmis par les cliniques elles-mêmes,
      complétés par des sources publiques et vérifiés manuellement.</p>
   <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche
