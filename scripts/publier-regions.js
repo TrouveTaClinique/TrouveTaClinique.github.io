@@ -39,7 +39,8 @@ const TERRITOIRES = [
     }
   },
   {
-    dossier: 'monteregie-centre', nom: 'Montérégie-Centre', mot: 'Centre', region: 'Centre',
+    dossier: 'monteregie-centre', nom: 'Montérégie-Centre', mot: 'centre', region: 'Centre',
+    couleur: '#5fd968', halo: 'rgba(67,160,71,.85)',
     accent: '#43a047', app: false, recrutement: null,
     rls: [
       ['Champlain', '#0080d7', 'champlain'],
@@ -48,7 +49,8 @@ const TERRITOIRES = [
     banniere: null
   },
   {
-    dossier: 'monteregie-ouest', nom: 'Montérégie-Ouest', mot: 'Ouest', region: 'Ouest',
+    dossier: 'monteregie-ouest', nom: 'Montérégie-Ouest', mot: 'ouest', region: 'Ouest',
+    couleur: '#3db4ff', halo: 'rgba(0,128,215,.85)',
     accent: '#0080d7', app: false, recrutement: null,
     rls: [
       ['Jardins-Roussillon', '#0080d7', 'jardins-roussillon'],
@@ -179,6 +181,10 @@ function appliquerIdentiteRegionale(source, t) {
 
   r(':root { --sb-accent: linear-gradient(90deg, var(--logo-blue), var(--logo-teal), var(--logo-mint)); }',
     `:root { --sb-accent: ${t.accent}; }`, 'accent du panneau');
+  if (t.couleur && t.halo) {
+    r(':root { --mot-region: #ff3d96; --mot-halo: rgba(230,0,126,.8); }',
+      `:root { --mot-region: ${t.couleur}; --mot-halo: ${t.halo}; }`, 'couleurs du lettrage régional');
+  }
   r('      <span class="ldr-region">MONTÉRÉGIE</span>',
     `      <span class="ldr-region">MONTÉRÉGIE</span>\n      <span class="ldr-mot">${t.mot}</span>`, 'identité du chargement');
   r('    <strong>Montérégie</strong>',
@@ -219,6 +225,8 @@ function appliquerIdentiteRegionale(source, t) {
       etat.manques.join('\n  - '));
   }
   if (t.region === 'Est') {
+    r('<meta name="theme-color" content="#0f2240">',
+      '<meta name="theme-color" content="#170A72">', 'theme-color Est SQ');
     const debutStyle = etat.html.indexOf('<style>');
     if (debutStyle < 0) throw new Error('Head de Montérégie-Est introuvable.');
     const head = etat.html.slice(0, debutStyle)
