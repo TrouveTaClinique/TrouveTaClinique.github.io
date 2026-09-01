@@ -44,6 +44,7 @@ on:
       - 'scripts/publier-regions.js'
       - '.github/workflows/generer-pages-seo.yml'
       - 'scripts/carte.template.html'
+      - 'scripts/carte-est-sq.template.html'
       # /ptem/ et /amp/ sont écrites à la main, mais leurs copies étanches de l'univers
       # Montérégie-Est en sont dérivées : si on les modifie, les copies doivent suivre.
       - 'ptem/index.html'
@@ -109,7 +110,7 @@ jobs:
         # signifierait qu'une régénération a écrasé le thème en place.
         run: |
           set -e
-          if grep -riIl "kaushan" index.html scripts/carte.template.html monteregie/index.html monteregie-est/index.html monteregie-centre/index.html monteregie-ouest/index.html scripts/publier-regions.js 2>/dev/null; then
+          if grep -riIl "kaushan" index.html scripts/carte.template.html scripts/carte-est-sq.template.html monteregie/index.html monteregie-est/index.html monteregie-centre/index.html monteregie-ouest/index.html scripts/publier-regions.js 2>/dev/null; then
             echo "::error::Police à lettres attachées détectée dans un fichier actif. Publication annulée."
             exit 1
           fi

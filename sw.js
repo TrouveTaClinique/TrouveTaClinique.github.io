@@ -1,10 +1,11 @@
 // PWA Montérégie-Est seulement. La portée est fixée à /monteregie-est/ lors de l'enregistrement.
 // v52 (31 août 2026) : retrait du mode hors ligne des cartes générale, Centre et Ouest;
 // ajout de la couche Établissements et migration de la carte complète vers /monteregie/.
+// v53-sq-restaure (1 septembre 2026) : reprise du prototype SQ et du bouton d'information.
 'use strict';
 
 const CACHE_PREFIX = 'trouve-clinique-est-';
-const CACHE = CACHE_PREFIX + 'v52';
+const CACHE = CACHE_PREFIX + 'v53-sq-restaure';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [

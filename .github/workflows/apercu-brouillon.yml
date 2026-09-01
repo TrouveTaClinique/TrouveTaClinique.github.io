@@ -40,7 +40,7 @@ jobs:
           node scripts/publier-regions.js
           sha256sum -c "$RUNNER_TEMP/donnees-avant-apercu.sha256"
       - name: Tester l'isolation du brouillon et la conservation des fonctions
-        run: node --test scripts/test-apercu.cjs
+        run: node --test scripts/test-apercu.cjs scripts/test-restauration-sq.cjs
       - name: Préparer le site sans CNAME, scripts internes ou documents de travail
         env:
           NOM_PROTEGE: ${{ secrets.NOM_PROTEGE_SANTE_QUEBEC }}

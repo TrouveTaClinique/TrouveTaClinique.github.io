@@ -8,8 +8,9 @@
  *
  * La racine / est réservée à la page d'accueil générée par generer-pages-seo.js. Le gabarit
  * n'est jamais servi directement. Les quatre sorties gardent exactement la même application,
- * le même CSS et les mêmes données; seuls l'identité du territoire, les métadonnées, le menu et
- * la PWA changent. La PWA et le service worker appartiennent uniquement à Montérégie-Est.
+ * les mêmes données. L'Est reprend désormais le gabarit SQ historique carte-est-sq.template.html
+ * pour conserver le prototype validé; les autres cartes gardent le gabarit partagé.
+ * La PWA et le service worker appartiennent uniquement à Montérégie-Est.
  */
 'use strict';
 
@@ -18,6 +19,7 @@ const path = require('path');
 
 const RACINE = path.join(__dirname, '..');
 const SOURCE = path.join(__dirname, 'carte.template.html');
+const SOURCE_EST_SQ = path.join(__dirname, 'carte-est-sq.template.html');
 const SORTIE_GENERALE = path.join(RACINE, 'monteregie', 'index.html');
 
 const TERRITOIRES = [
@@ -216,6 +218,17 @@ function appliquerIdentiteRegionale(source, t) {
     throw new Error(`${t.nom} : ${etat.manques.length} transformation(s) introuvable(s) :\n  - ` +
       etat.manques.join('\n  - '));
   }
+  if (t.region === 'Est') {
+    const debutStyle = etat.html.indexOf('<style>');
+    if (debutStyle < 0) throw new Error('Head de Montérégie-Est introuvable.');
+    const head = etat.html.slice(0, debutStyle)
+      .replace('<html lang="fr">', '<html lang="fr" data-region="Est">');
+    const carteSq = fs.readFileSync(SOURCE_EST_SQ, 'utf8');
+    if (!carteSq.includes('<!-- PWA_SERVICE_WORKER -->')) {
+      throw new Error('Point d’injection PWA absent du gabarit SQ.');
+    }
+    return head + carteSq.replace('<!-- PWA_SERVICE_WORKER -->', pwaServiceWorker());
+  }
   return etat.html;
 }
 
@@ -268,7 +281,7 @@ function main() {
     ecrire(path.join(RACINE, t.dossier, 'index.html'), sortie);
     console.log(`  ${t.dossier}/index.html régénéré (${t.rls.length} RLS, ${t.app ? 'PWA' : 'carte seule'}).`);
   }
-  console.log('4 cartes régénérées depuis scripts/carte.template.html.');
+  console.log('4 cartes régénérées : gabarit partagé et prototype SQ conservé pour l’Est.');
 }
 
 main();

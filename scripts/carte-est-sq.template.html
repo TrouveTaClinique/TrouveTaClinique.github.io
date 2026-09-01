@@ -1,78 +1,3 @@
-<!DOCTYPE html>
-<!-- build: 2026-08-31 -->
-<html lang="fr" data-region="Est"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- « Trouve ta clinique » est la marque permanente. Lors d'un changement de cycle PTEM,
-     mettre à jour l'étiquette de l'écran de chargement et le lien « Guide PTEM » dans ce
-     gabarit, puis `short_name` dans manifest-est.webmanifest et le titre iOS injecté par
-     scripts/publier-regions.js. Ne jamais renommer les clés localStorage `dtmf-mtg-*`,
-     l'identifiant du manifeste ou le domaine trouvetaclinique.ca. -->
-<!-- Titre/description/og : réalignés le 19 août sur les termes de recherche PTEM 2027 / AMP
-     (patch SEO validé), au prix d'un léger retour en arrière assumé sur la
-     décision de renommage — voir claude/audit-18aout-4axes.md pour la discussion. -->
-<title>Cliniques en recrutement — Montérégie-Est | Trouve ta clinique</title>
-<meta name="description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie-Est, pour préparer votre PTEM en médecine familiale.">
-<meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />
-<link rel="canonical" href="https://trouvetaclinique.ca/monteregie-est/">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Trouve ta clinique">
-<meta property="og:locale" content="fr_CA">
-<meta property="og:url" content="https://trouvetaclinique.ca/monteregie-est/">
-<meta property="og:title" content="Cliniques en recrutement — Montérégie-Est | Trouve ta clinique">
-<meta property="og:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie-Est.">
-<meta property="og:image" content="https://trouvetaclinique.ca/assets/banniere_monteregie-est.png">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="400">
-<meta property="og:image:alt" content="Carte interactive Montérégie-Est — Trouve ta clinique.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cliniques en recrutement — Montérégie-Est | Trouve ta clinique">
-<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie-Est.">
-<meta name="twitter:image" content="https://trouvetaclinique.ca/assets/banniere_monteregie-est.png">
-<!-- Données structurées : aident Google à comprendre de quoi parle le site et à quel
-     territoire il s'applique. Volontairement minimal — on ne déclare aucun éditeur
-     institutionnel, le projet n'étant pas hébergé par un établissement.
-     @id ajouté le 19 août pour que /ptem/ et /amp/ puissent s'y référencer (isPartOf). -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://trouvetaclinique.ca/monteregie-est/#webpage",
-  "name": "Trouve ta clinique — Montérégie-Est",
-  "url": "https://trouvetaclinique.ca/monteregie-est/",
-  "inLanguage": "fr-CA",
-  "description": "Carte interactive des cliniques en recrutement médical et des établissements de la Montérégie-Est.",
-  "isPartOf": {
-    "@id": "https://trouvetaclinique.ca/#website"
-  },
-  "about": {
-    "@type": "Place",
-    "name": "Montérégie-Est",
-    "address": {
-      "@type": "PostalAddress",
-      "addressRegion": "QC",
-      "addressCountry": "CA"
-    }
-  }
-}
-</script>
-<!-- Segoe UI est une police système (Windows) : aucun chargement externe requis. La pile
-     --sq-font définie plus bas fournit un repli propre sur macOS/iOS/Android. L'appel à
-     Google Fonts (Raleway, Lato) a été retiré le 30 août 2026 avec le passage au thème
-     Santé Québec — une dépendance externe et un aller-retour réseau en moins. -->
-<meta name="theme-color" content="#170A72">
-<link rel="manifest" href="../manifest-est.webmanifest">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="PTEM 2027">
-<link rel="apple-touch-icon" href="../apple-touch-icon-est.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
-<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
-<link rel="stylesheet" href="../leaflet.css">
-<link rel="stylesheet" href="../vendor/maplibre-gl.css">
 <!-- Carte SQ de référence : OLaplante/Monteregie-Est, index.html, commit
      5e2a2f1fcdee2f385f73730a644906885ecd39c6 (prototype v53, header V4).
      Le bloc visuel SQ est conservé intact. Le CSS original reste au-dessus.
@@ -3454,31 +3379,7 @@ fetch('../data.json', { cache: 'no-cache' })
 })();
 </script>
 
-<script>
-// Enregistrement strictement limité à la portée /monteregie-est/.
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    let controleurConnu = navigator.serviceWorker.controller;
-    let rechargementDeMiseAJour = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!controleurConnu) { controleurConnu = navigator.serviceWorker.controller; return; }
-      if (rechargementDeMiseAJour) return;
-      rechargementDeMiseAJour = true;
-      window.location.reload();
-    });
-    navigator.serviceWorker.register('../sw.js', {
-      scope: '/monteregie-est/', updateViaCache: 'none'
-    }).then(registration => {
-      const verifierMiseAJour = () => registration.update().catch(() => {});
-      verifierMiseAJour();
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) verifierMiseAJour();
-      });
-    }).catch(() => {});
-    console.log('Trouve ta clinique — Montérégie-Est — build 2026-08-31');
-  });
-}
-</script>
+<!-- PWA_SERVICE_WORKER -->
 <script>
 (function () {
   var start = Date.now(), done = false;

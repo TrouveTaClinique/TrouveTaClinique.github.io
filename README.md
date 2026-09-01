@@ -1,5 +1,10 @@
 # Trouve ta clinique
 
+[Voir le brouillon Montérégie-Est](https://trouvetaclinique.github.io/monteregie-est/) · [Accueil du brouillon](https://trouvetaclinique.github.io/)
+
+Ces liens ouvrent l’aperçu de la branche `brouillon`, sans domaine officiel. Attendre la réussite
+du workflow « Aperçu du brouillon » après une mise à jour pour voir la nouvelle version.
+
 Site statique consacré aux cliniques en recrutement médical et aux points de repère du réseau
 de la santé en Montérégie. Le projet utilise Leaflet, MapLibre et des pages HTML générées depuis
 une seule source de données, `data.json`.
@@ -27,10 +32,10 @@ redirections et entrées du sitemap sont fabriqués automatiquement.
 - Par défaut, seules les cliniques en recrutement actif sont affichées.
 - L'option « Toutes les cliniques » ajoute les cliniques publiées qui ne recrutent pas
   actuellement.
-- L'option « Établissements » ajoute une couche informative indépendante. Son bouton `(i)`
-  explique la différence avec une clinique.
-- Les établissements ont une épingle et une infobulle propres. Ils sont exclus de la recherche,
-  des favoris, des notes, du classement, du comparatif et de l'export PDF.
+- Sur les cartes complète, Centre et Ouest, l'option « Établissements » ajoute une couche
+  informative indépendante, exclue de la recherche, des favoris, des notes et du comparatif.
+- Sur Montérégie-Est, les deux onglets du prototype SQ sont restaurés avec leur fonctionnement
+  historique. Le bouton `(i)` remplace le compteur « 7 » et donne la définition d'un établissement.
 - Les hôpitaux sont également des repères séparés des cliniques.
 - Les favoris, les notes et l'ordre personnalisé restent dans le navigateur avec `localStorage`.
 
@@ -39,7 +44,8 @@ redirections et entrées du sitemap sont fabriqués automatiquement.
 | Fichier | Rôle |
 |---|---|
 | `data.json` | Données des cliniques, établissements, hôpitaux et annonce |
-| `scripts/carte.template.html` | Gabarit unique du code des quatre cartes |
+| `scripts/carte.template.html` | Carte complète, Centre et Ouest; métadonnées communes |
+| `scripts/carte-est-sq.template.html` | Prototype SQ Montérégie-Est restauré, CSS original également conservé |
 | `scripts/publier-regions.js` | Génération de `/monteregie/` et des trois cartes régionales |
 | `scripts/generer-pages-seo.js` | Accueil, répertoires, fiches, pages RLS et sitemap |
 | `scripts/slugs.json` | Mémoire permanente des adresses des pages de cliniques |
@@ -67,7 +73,8 @@ Le champ `recrutementActif: false` ne supprime pas la clinique. Il la réserve �
 
 Une fiche dont `categorie` vaut `etablissement` peut être affichée dans la couche informative
 des cartes même si elle porte encore historiquement `visible: false`. Elle ne reçoit jamais de
-page de clinique et n'entre pas dans les outils de comparaison.
+page SEO de clinique. Dans le prototype Est restauré, elle apparaît dans l'onglet distinct
+« Établissements », avec les outils historiques de cet onglet.
 
 ### Données sensibles
 
