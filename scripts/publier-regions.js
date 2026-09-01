@@ -34,7 +34,7 @@ const TERRITOIRES = [
     ],
     banniere: {
       url: 'https://trouvetaclinique.ca/assets/banniere_monteregie-est.png',
-      largeur: '1600', hauteur: '400',
+      largeur: '1024', hauteur: '341',
       alt: 'Carte interactive Montérégie-Est — Trouve ta clinique.'
     }
   },

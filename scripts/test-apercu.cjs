@@ -73,7 +73,8 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   const manifeste = JSON.parse(lire('manifest-est.webmanifest'));
   assert.equal(manifeste.scope, '/monteregie-est/');
   assert.equal(manifeste.short_name, 'TTC brouillon');
-  assert.match(lire('monteregie-est/ptem/index.html'), /location\.replace\("https:\/\/trouvetaclinique\.github\.io\/ptem\/"\)/);
+  assert.match(lire('monteregie-est/ptem/index.html'), /PTEM 2027 en médecine familiale/);
+  assert.match(lire('ptem/index.html'), /location\.replace\("https:\/\/trouvetaclinique\.github\.io\/monteregie-est\/ptem\/"\)/);
   assert.throws(() => preparerApercu(RACINE, destination), /vide/);
 });
 

@@ -361,6 +361,28 @@ p, li { text-wrap: pretty; }
 
 .sqb-wrap { margin:1.7rem 0 2.2rem; }
 .sqb-wrap.compact { margin-top:1.25rem; }
+
+/* Bannière officielle Montérégie-Est : image approuvée, lien vers la carte. */
+.sqb-photo {
+  display:block; border-radius:18px; overflow:hidden; text-decoration:none; line-height:0;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.sqb-photo img {
+  display:block; width:100%; height:auto; aspect-ratio:3 / 1; object-fit:cover;
+}
+.sqb-photo:hover, .sqb-photo:focus-visible {
+  transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(23,10,114,.18);
+}
+@media (max-width:700px) {
+  .sqb-photo { border-radius:14px; }
+}
+
+.lien-carte-complete { margin-top:.85rem; font-size:.82rem; color:var(--muted); }
+.lien-carte-complete a { color:var(--muted); text-decoration:none; }
+.lien-carte-complete a:hover { text-decoration:underline; color:var(--ink); }
+.note-construction { opacity:.75; }
+
 .sqb-wrap figcaption { background:#fff; padding:.72rem 1rem; color:var(--muted);
   font-size:.84rem; border:1px solid var(--line); border-top:0;
   border-radius:0 0 14px 14px; }
@@ -427,28 +449,6 @@ p, li { text-wrap: pretty; }
   top:22.414cqw; height:0.408cqw; min-height:2px;
   border-radius:999px;
   background:linear-gradient(90deg,#90f1e9 0%,#08a0a0 55%,#0080d7 100%); }
-
-/* ─── Version mobile ──────────────────────────────────────────────────────────
-   Sous 700px, le ratio 3,19:1 donnerait une bannière de ~110px de haut : le texte
-   deviendrait illisible. La bannière passe en disposition empilée, hauteur libre,
-   tailles en rem. Aucun texte coupé, aucun débordement. */
-@media (max-width:700px) {
-  .sqb { aspect-ratio:auto; padding:1.3rem 1.15rem 1.45rem; border-radius:14px;
-    background:linear-gradient(122deg,#0e056a 0%,#101179 26%,#0747b1 56%,
-      #0a8fa4 82%,#6fe0da 100%); }
-  .sqb-pattern { -webkit-mask-image:linear-gradient(122deg,transparent 34%,#000 90%);
-                          mask-image:linear-gradient(122deg,transparent 34%,#000 90%);
-    background-size:118px auto, 74px auto; }
-  .sqb-inner { position:static; display:flex; flex-direction:column; align-items:flex-start; }
-  .sqb-logo { position:static; height:54px; margin-bottom:.95rem; }
-  .sqb-vline { display:none; }
-  .sqb-eyebrow, .sqb-title, .sqb-region { position:static; left:auto; white-space:normal;
-    border-left:3px solid #90f1e9; padding-left:.8rem; width:100%; box-sizing:border-box; }
-  .sqb-eyebrow { font-size:.72rem; letter-spacing:.24em; padding-bottom:.45rem; }
-  .sqb-title { font-size:1.14rem; padding-bottom:.3rem; }
-  .sqb-region { font-size:1.62rem; padding-bottom:.15rem; }
-  .sqb-rule { position:static; width:100%; height:3px; margin-top:.85rem; }
-}
 
 /* ─── Correctif du survol — 29 août 2026 ──────────────────────────────────────
    La règle globale « a:hover{color:#170a72} » du thème s'applique aussi aux liens
