@@ -811,64 +811,75 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 :root[data-theme="sombre"] .dp-ic-pdf { background:#122a42; border-color:#28527d; color:#8ec8f0; }
 :root[data-theme="sombre"] .dp-ic-pdf:hover { background:#183753; }
 /* ===== Fiche imprimable (PDF) ===== */
-#cmp-print .fp-doc { color:#1a3558; font-family:'Lato',Helvetica,Arial,sans-serif; }
-#cmp-print .fp-head { border-bottom:3px solid var(--orange); padding-bottom:10px; margin-bottom:14px; }
-#cmp-print .fp-eyebrow { color:var(--orange); font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; font-family:'Raleway',sans-serif; }
-#cmp-print .fp-title { color:var(--navy); font-size:28px; font-weight:800; line-height:1.05; margin:3px 0 2px; font-family:'Raleway',sans-serif; }
-#cmp-print .fp-sub { color:var(--muted); font-size:13px; }
+#cmp-print .fp-doc { color:#1a3558; font-family:var(--sq-font); }
+#cmp-print .fp-head { border-bottom:3px solid var(--sq-sarcelle); padding-bottom:10px; margin-bottom:14px; }
+#cmp-print .fp-eyebrow { color:var(--sq-sarcelle); font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-family:var(--sq-font); }
+#cmp-print .fp-title { color:var(--sq-bleu); font-size:28px; font-weight:700; line-height:1.05; margin:3px 0 2px; font-family:var(--sq-font); }
+#cmp-print .fp-sub { color:#5A6B7A; font-size:13px; }
 #cmp-print .fp-body .dp-actions, #cmp-print .fp-body .dp-report-wrap, #cmp-print .fp-body .notes-sec, #cmp-print .fp-body .info-dot { display:none !important; }
-/* ===== Comparatif des favoris (PDF) ===== */
-#cmp-print { position:fixed; left:-10000px; top:0; width:1000px; background:#fff; color:#1a3558; font-family:'Lato',Helvetica,Arial,sans-serif; }
-#cmp-print.cmp-show { position:fixed; left:0; top:0; width:100%; height:100%; z-index:5000; overflow:auto; }
+/* ===== Comparatif des favoris (thème SQ Montérégie-Est) ===== */
+#cmp-print { position:fixed; left:-10000px; top:0; width:1000px; background:#fff; color:#1a3558; font-family:var(--sq-font); }
+#cmp-print.cmp-show { position:fixed; left:0; top:0; width:100%; height:100%; z-index:5000; overflow:auto; background:#F7FCFD; }
 body.cmp-open { overflow:hidden; }
 #cmp-print .cmp-bar { display:none; }
-#cmp-print.cmp-show .cmp-bar { display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:5; background:var(--navy); padding:11px 14px; box-shadow:0 2px 10px rgba(15,34,64,.18); }
-#cmp-print.cmp-show .cmp-bar-t { margin-right:auto; color:#fff; font-family:'Raleway',sans-serif; font-weight:700; font-size:14.5px; }
-#cmp-print.cmp-show .cmp-bar button { font-family:'Raleway',sans-serif; font-weight:700; font-size:14px; border:none; border-radius:9px; padding:9px 15px; cursor:pointer; }
-#cmp-print.cmp-show .cmp-bar .b-print { background:var(--orange); color:#fff; }
-#cmp-print.cmp-show .cmp-bar .b-close { background:rgba(255,255,255,.16); color:#fff; }
-#cmp-print.cmp-show .cmp-inner { max-width:1040px; margin:0 auto; padding:24px 22px 44px; }
-#cmp-print .cmp-header { border-bottom:3px solid var(--orange); padding-bottom:10px; margin-bottom:13px; }
-#cmp-print .cmp-eyebrow { color:var(--orange); font-size:16px; font-weight:800; letter-spacing:.20em; font-family:'Raleway',sans-serif; }
-#cmp-print .cmp-title { color:var(--navy); font-size:32px; font-weight:800; line-height:1.04; margin:4px 0 3px; letter-spacing:.02em; font-family:'Raleway',sans-serif; }
-#cmp-print .cmp-subtitle { color:var(--muted); font-size:13px; }
-#cmp-print .cmp-exp { color:#8a8270; font-size:10.5px; margin-top:5px; }
+#cmp-print.cmp-show .cmp-bar {
+  display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:5;
+  background:linear-gradient(100deg, var(--sq-bleu) 0%, var(--sq-bleu) 42%, var(--sq-sarcelle) 100%);
+  padding:11px 14px; box-shadow:0 2px 12px rgba(23,10,114,.22);
+}
+#cmp-print.cmp-show .cmp-bar-t { margin-right:auto; color:#fff; font-family:var(--sq-font); font-weight:700; font-size:14.5px; }
+#cmp-print.cmp-show .cmp-bar button { font-family:var(--sq-font); font-weight:700; font-size:14px; border:none; border-radius:999px; padding:9px 16px; cursor:pointer; }
+#cmp-print.cmp-show .cmp-bar .b-print { background:var(--sq-bleu); color:#fff; border:1.5px solid rgba(255,255,255,.35); }
+#cmp-print.cmp-show .cmp-bar .b-close { background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.45); }
+#cmp-print.cmp-show .cmp-inner { position:relative; max-width:1040px; margin:0 auto; padding:24px 22px 44px; }
+#cmp-print.cmp-show .cmp-inner::before {
+  content:''; position:absolute; inset:0; background:var(--app-logo) center 42%/min(240px, 42vw) no-repeat;
+  opacity:.04; pointer-events:none;
+}
+#cmp-print .cmp-header { border-bottom:3px solid var(--sq-sarcelle); padding-bottom:10px; margin-bottom:13px; }
+#cmp-print .cmp-eyebrow { color:var(--sq-sarcelle); font-size:16px; font-weight:700; letter-spacing:.20em; font-family:var(--sq-font); }
+#cmp-print .cmp-title { color:var(--sq-bleu); font-size:32px; font-weight:700; line-height:1.04; margin:4px 0 3px; letter-spacing:.01em; font-family:var(--sq-font); }
+#cmp-print .cmp-subtitle { color:#5A6B7A; font-size:13px; }
+#cmp-print .cmp-exp { color:#6B7C8A; font-size:10.5px; margin-top:5px; }
+#cmp-print .cmp-notice {
+  margin:0 0 12px; padding:10px 12px; border-radius:11px; border:1px solid #A9D8DB;
+  background:#EBFBFA; color:#0B5F5F; font-size:12px; line-height:1.45;
+}
 #cmp-print .cmp-headrow { width:100%; border-collapse:collapse; }
 #cmp-print .cmp-headrow td { border:none; vertical-align:bottom; padding:0; }
-#cmp-print .cmp-headqr { display:none; width:130px; text-align:right; vertical-align:top; }
-#cmp-print .cmp-headqr img { width:84px; height:84px; }
-#cmp-print .cmp-headqr-cap { color:var(--muted); font-size:8px; line-height:1.3; margin-top:3px; }
 #cmp-print .cmp-table { width:100%; border-collapse:collapse; table-layout:fixed; }
-#cmp-print .cmp-table th, #cmp-print .cmp-table td { border:1px solid #e7e1d3; padding:5.5px 10px; text-align:left; vertical-align:top; word-break:break-word; }
-#cmp-print .cmp-clhead { background:#fff; padding-top:7px; padding-bottom:7px; }
-#cmp-print .cmp-clname { font-size:12px; font-weight:800; color:var(--navy); line-height:1.15; font-family:'Raleway',sans-serif; }
-#cmp-print .cmp-cltype { font-size:9px; font-weight:700; color:var(--orange); letter-spacing:.07em; text-transform:uppercase; margin-top:2px; }
-#cmp-print .cmp-rl { background:#f3efe6; color:var(--navy); font-size:10.5px; font-weight:700; width:140px; }
+#cmp-print .cmp-table th, #cmp-print .cmp-table td { border:1px solid #D7E8ED; padding:5.5px 10px; text-align:left; vertical-align:top; word-break:break-word; }
+#cmp-print .cmp-clhead { background:#fff; padding-top:8px; padding-bottom:8px; }
+#cmp-print .cmp-clname { font-size:12px; font-weight:700; color:var(--sq-bleu); line-height:1.2; font-family:var(--sq-font); }
+#cmp-print .cmp-clcity { font-size:10px; color:#5A6B7A; margin-top:3px; line-height:1.25; }
+#cmp-print .cmp-cltype { font-size:9px; font-weight:700; color:var(--sq-sarcelle); letter-spacing:.05em; text-transform:uppercase; margin-top:4px; display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
+#cmp-print .cmp-rl { background:#EFF8FA; color:var(--sq-bleu); font-size:10.5px; font-weight:700; width:140px; }
 #cmp-print .cmp-table td { font-size:10.5px; color:#1a3558; }
-#cmp-print .cmp-alt { background:#faf8f3; }
-#cmp-print th.cmp-rl.cmp-alt { background:#efeadd; }
-#cmp-print .cmp-corner { background:#2F4A7A; border-color:#2F4A7A; width:140px; padding:0 !important; }
-/* Épingle PTEM dans le coin du comparatif. Le logo est ajouré : le marine du
-   fond passe au travers, comme sur l'écran de chargement. */
-#cmp-print .cmp-cornerlogo { display:flex; align-items:center; justify-content:flex-start; padding:5px 10px; }
-#cmp-print .cmp-cornerlogo i { flex:0 0 auto; width:26px; height:26px; display:block;
-  background:var(--app-logo) center/contain no-repeat; }
-#cmp-print .cmp-table td.cmp-sect { background:#2F4A7A; color:#fff; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:5px 10px; border-color:#2F4A7A; }
-#cmp-print .cmp-dot { display:inline-block; width:8px; height:8px; border-radius:50%; vertical-align:middle; margin-right:5px; }
+#cmp-print .cmp-alt { background:#F7FCFD; }
+#cmp-print th.cmp-rl.cmp-alt { background:#E3F4F6; }
+#cmp-print .cmp-corner { background:var(--sq-bleu); border-color:var(--sq-bleu); width:140px; padding:0 !important; }
+#cmp-print .cmp-cornerlogo { display:flex; align-items:center; justify-content:flex-start; padding:6px 10px; }
+#cmp-print .cmp-cornerlogo i { flex:0 0 auto; width:26px; height:26px; display:block; background:var(--app-logo) center/contain no-repeat; }
+#cmp-print .cmp-table td.cmp-sect { background:var(--sq-bleu); color:#fff; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:5px 10px; border-color:var(--sq-bleu); }
+#cmp-print .cmp-dot { display:inline-block; width:8px; height:8px; border-radius:50%; vertical-align:middle; margin-right:5px; flex:0 0 auto; }
+#cmp-print .cmp-stat { display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:10px; line-height:1.3; }
+#cmp-print .cmp-stat-dot { width:8px; height:8px; border-radius:50%; flex:0 0 auto; }
+#cmp-print .cmp-stat-on { color:#087C7C; }
+#cmp-print .cmp-stat-on .cmp-stat-dot { background:var(--sq-sarcelle); }
+#cmp-print .cmp-stat-off { color:#6B7280; }
+#cmp-print .cmp-stat-off .cmp-stat-dot { background:#CBD5E1; }
 #cmp-print .cmp-chip { display:inline-block; color:#fff; font-size:8.5px; font-weight:700; padding:2px 6px; border-radius:18px; margin:0 3px 3px 0; }
-#cmp-print .cmp-tbd { color:#a79f8c; font-style:italic; }
-#cmp-print .cmp-ferme { color:#b0a892; }
-#cmp-print .cmp-dash { color:#c9c1ad; }
-#cmp-print .cmp-botbar { width:100%; border-collapse:collapse; margin-top:16px; border-top:1px solid var(--border); }
+#cmp-print .cmp-tbd { color:#8A9AAA; font-style:italic; }
+#cmp-print .cmp-ferme { color:#94A3B8; }
+#cmp-print .cmp-dash { color:#B6C2CE; }
+#cmp-print .cmp-botbar { width:100%; border-collapse:collapse; margin-top:16px; border-top:1px solid #D7E8ED; }
 #cmp-print .cmp-botbar td { vertical-align:middle; padding-top:14px; }
 #cmp-print .cmp-qrcell { width:114px; }
 #cmp-print .cmp-qrcell img { width:106px; height:106px; }
-#cmp-print .cmp-qrtitle { color:var(--navy); font-size:14px; font-weight:800; font-family:'Raleway',sans-serif; }
-#cmp-print .cmp-qrsub { color:var(--muted); font-size:11.5px; margin-top:3px; }
-#cmp-print .cmp-qrurl { color:var(--orange); font-size:11.5px; font-weight:700; margin-top:4px; }
-#cmp-print .cmp-note { color:#8a8270; font-size:8.5px; margin-top:9px; line-height:1.5; }
-#cmp-print.cmp-dense .cmp-headqr { display:table-cell; }
-#cmp-print.cmp-dense .cmp-botbar { display:none; }
+#cmp-print .cmp-qrtitle { color:var(--sq-bleu); font-size:14px; font-weight:700; font-family:var(--sq-font); }
+#cmp-print .cmp-qrsub { color:#5A6B7A; font-size:11.5px; margin-top:3px; line-height:1.4; }
+#cmp-print .cmp-qrurl { color:var(--sq-sarcelle); font-size:11.5px; font-weight:700; margin-top:4px; }
+#cmp-print .cmp-note { color:#6B7C8A; font-size:8.5px; margin-top:9px; line-height:1.5; }
 #cmp-print.cmp-dense .cmp-header { padding-bottom:7px; margin-bottom:9px; }
 #cmp-print.cmp-dense .cmp-eyebrow { font-size:13px; }
 #cmp-print.cmp-dense .cmp-title { font-size:23px; }
@@ -877,7 +888,6 @@ body.cmp-open { overflow:hidden; }
 #cmp-print.cmp-dense .cmp-clname { font-size:11px; }
 #cmp-print.cmp-dense .cmp-cornerlogo { padding:3px 8px; }
 #cmp-print.cmp-dense .cmp-cornerlogo i { width:21px; height:21px; }
-#cmp-print.cmp-dense .cmp-headqr img { width:76px; height:76px; }
 #cmp-print.cmp-dense .cmp-table th, #cmp-print.cmp-dense .cmp-table td { padding:2.5px 8px; }
 #cmp-print.cmp-dense .cmp-rl, #cmp-print.cmp-dense .cmp-table td { font-size:9.5px; }
 #cmp-print.cmp-dense td.cmp-sect { padding:3px 8px; font-size:9px; }
@@ -912,6 +922,8 @@ body.cmp-open { overflow:hidden; }
   body.print-cmp #cmp-print .cmp-bar { display:none !important; }
   body.print-cmp #cmp-print .cmp-inner { max-width:none !important; margin:0 !important; padding:0 !important; }
   body.print-cmp #cmp-print, body.print-cmp #cmp-print * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+  body.print-cmp #cmp-print .cmp-table tr { break-inside:avoid; page-break-inside:avoid; }
+  body.print-cmp #cmp-print .cmp-inner::before { opacity:.025; }
 }
 
 /* ─── Mode sombre ───────────────────────────────────────────────────────────
@@ -2499,16 +2511,41 @@ function cmpChips(codes) {
   if (!codes || !codes.length) return '<span class="cmp-tbd">À venir</span>';
   return codes.map(c => { const p = PRATIQUES.find(x => x.code === c); return p ? `<span class="cmp-chip" style="background:${p.color}">${p.abbr}</span>` : ''; }).join('');
 }
+function cmpStatutHtml(g) {
+  if (recruteActuellement(g)) return '<span class="cmp-stat cmp-stat-on"><span class="cmp-stat-dot"></span>En recrutement</span>';
+  return '<span class="cmp-stat cmp-stat-off"><span class="cmp-stat-dot"></span>Ne recrute pas actuellement</span>';
+}
+function cmpMetaDateLine() {
+  if (!dataMeta || !dataMeta.miseAJour) return '';
+  const d = new Date(dataMeta.miseAJour + 'T00:00:00');
+  const fmt = isNaN(d.getTime()) ? dataMeta.miseAJour
+    : d.toLocaleDateString('fr-CA', { year:'numeric', month:'long', day:'numeric' });
+  return 'Données mises à jour le ' + fmt + '.';
+}
+function cmpBarHtml(titre, printFn) {
+  const imprimer = printFn || 'cmpPrint';
+  return '<div class="cmp-bar">' +
+    '<span class="cmp-bar-t">' + titre + '</span>' +
+    '<button type="button" class="b-print" onclick="' + imprimer + '()">\u2913 Imprimer / Enregistrer en PDF</button>' +
+    '<button type="button" class="b-close" onclick="cmpClose()">\u2715 Fermer</button>' +
+    '</div>';
+}
 
-function buildComparatif(favs) {
+function buildComparatif(favs, totalFavs) {
   const gs = favs.map(id => byId(id)).filter(Boolean);
-  const titreMilieux = modeCarte === 'etablissements' ? 'ÉTABLISSEMENTS' : 'CLINIQUES';
-  const libelleMilieux = modeCarte === 'etablissements' ? 'établissements' : 'cliniques';
+  const etab = modeCarte === 'etablissements';
+  const titreMilieux = etab ? 'ÉTABLISSEMENTS' : 'CLINIQUES';
+  const libelleMilieux = etab ? 'établissements' : 'cliniques';
   const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
   const date = new Date().toLocaleDateString('fr-CA', { day:'numeric', month:'long', year:'numeric' });
+  const metaDate = cmpMetaDateLine();
   let head = '<th class="cmp-corner"><div class="cmp-cornerlogo"><i></i></div></th>';
   gs.forEach(g => {
-    head += `<th class="cmp-clhead" style="border-top:6px solid ${couleurMilieu(g)}"><div class="cmp-clname">${esc(g.nom.trim())}</div><div class="cmp-cltype">${esc(typeLabel(g.type))}</div></th>`;
+    head += `<th class="cmp-clhead" style="border-top:6px solid ${couleurMilieu(g)}">
+      <div class="cmp-clname">${esc(g.nom.trim())}</div>
+      <div class="cmp-clcity">\uD83D\uDCCD ${esc(g.ville)}</div>
+      <div class="cmp-cltype"><span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${esc(typeLabel(g.type))}</div>
+    </th>`;
   });
   let shade = 0;
   const row = (label, render) => {
@@ -2519,39 +2556,40 @@ function buildComparatif(favs) {
   const sect = (label) => { shade = 0; return `<tr><td class="cmp-sect" colspan="${gs.length + 1}">${label}</td></tr>`; };
   let rows = '';
   rows += row('Région', g => `<span class="cmp-dot" style="background:#170A72"></span>${REGION_LABELS[g.region] || ''}`);
-  rows += row('Réseau (RLS)', g => cmpVal(g.rls));
-  rows += row('Statut', g => recruteActuellement(g) ? 'En recrutement' : 'Ne recrute pas actuellement');
-  rows += row('Niveaux', g => cmpVal(g.niveau));
+  rows += row('Réseau (RLS)', g => `<span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${cmpVal(g.rls)}`);
+  rows += row('Statut', g => cmpStatutHtml(g));
   rows += row('Ville', g => cmpVal(g.ville));
-  rows += row('Pratique', g => cmpChips(g.pratiques));
-  rows += row('Bureau', g => cmpVal(g.bureau));
-  rows += row('Frais de bureau', g => cmpVal(g.frais));
-  rows += row('DMÉ', g => cmpVal(g.dme));
-  rows += row('Portes ouvertes', g => cmpVal(g.porteOuverte));
-  rows += sect("Horaire d'ouverture");
-  JOURS.forEach(j => { rows += row(j, g => cmpHor((g.horaire || {})[j] || '')); });
-  rows += sect('Personnel clinique');
-  staffDefs.forEach(sd => {
-    const present = gs.some(g => { const v=(g.personnel||{})[sd.key]; return v && String(v).trim()!==''; });
-    if (present) rows += row(sd.lbl, g => cmpPers((g.personnel || {})[sd.key] || ''));
-  });
-  rows += sect('Notes personnelles');
-  rows += row('', g => cmpNote(g.notes));
+  if (etab) {
+    rows += sect('Notes personnelles');
+    rows += row('', g => cmpNote(g.notes));
+  } else {
+    rows += row('Niveaux', g => cmpVal(g.niveau));
+    rows += row('Pratique', g => cmpChips(g.pratiques));
+    rows += row('Bureau', g => cmpVal(g.bureau));
+    rows += row('Frais de bureau', g => cmpVal(g.frais));
+    rows += row('DMÉ', g => cmpVal(g.dme));
+    rows += row('Portes ouvertes', g => cmpVal(g.porteOuverte));
+    rows += sect("Horaire d'ouverture");
+    JOURS.forEach(j => { rows += row(j, g => cmpHor((g.horaire || {})[j] || '')); });
+    rows += sect('Personnel clinique');
+    staffDefs.forEach(sd => {
+      const present = gs.some(g => { const v=(g.personnel||{})[sd.key]; return v && String(v).trim()!==''; });
+      if (present) rows += row(sd.lbl, g => cmpPers((g.personnel || {})[sd.key] || ''));
+    });
+    rows += sect('Notes personnelles');
+    rows += row('', g => cmpNote(g.notes));
+  }
+  const notice = (totalFavs > 4)
+    ? `<div class="cmp-notice" role="status">Seules les 4 premières fiches favorites sont comparées ici (sur ${totalFavs}). Réorganisez vos favoris dans la liste pour changer l'ordre.</div>`
+    : '';
   const html = `
     <div class="cmp-header">
-      <table class="cmp-headrow"><tr>
-        <td class="cmp-headmain">
-          <div class="cmp-eyebrow">COMPARATIF</div>
-          <div class="cmp-title">${titreMilieux} FAVORIS</div>
-          <div class="cmp-subtitle">Trouve ta clinique · Recrutement médical — Montérégie-Est</div>
-          <div class="cmp-exp">Exporté le ${date}</div>
-        </td>
-        <td class="cmp-headqr">
-          <img src="${QR_DATA}" alt="Code QR vers l'application">
-          <div class="cmp-headqr-cap">Carte interactive<br>Montérégie-Est Brouillon</div>
-        </td>
-      </tr></table>
+      <div class="cmp-eyebrow">COMPARATIF</div>
+      <div class="cmp-title">${titreMilieux} FAVORIS</div>
+      <div class="cmp-subtitle">Trouve ta clinique · Recrutement médical — Montérégie-Est</div>
+      <div class="cmp-exp">Exporté le ${date}${metaDate ? ' · ' + metaDate : ''}</div>
     </div>
+    ${notice}
     <table class="cmp-table"><tr>${head}</tr>${rows}</table>
     <table class="cmp-botbar"><tr>
       <td class="cmp-qrcell"><img src="${QR_DATA}" alt="Code QR vers l'application"></td>
@@ -2561,13 +2599,8 @@ function buildComparatif(favs) {
         <div class="cmp-qrurl">trouvetaclinique.ca/monteregie-est/</div>
       </td>
     </tr></table>
-    <div class="cmp-note">Trouve ta clinique — ${modeCarte === 'etablissements' ? 'Établissements' : 'Cliniques'} en recrutement · Montérégie-Est</div>`;
-  document.getElementById('cmp-print').innerHTML =
-    '<div class="cmp-bar">' +
-      '<span class="cmp-bar-t">Comparatif des favoris</span>' +
-      '<button type="button" class="b-print" onclick="cmpPrint()">\u2913 Imprimer / Enregistrer en PDF</button>' +
-      '<button type="button" class="b-close" onclick="cmpClose()">\u2715 Fermer</button>' +
-    '</div><div class="cmp-inner">' + html + '</div>';
+    <div class="cmp-note">Trouve ta clinique — ${etab ? 'Établissements' : 'Cliniques'} en recrutement · Montérégie-Est${metaDate ? ' · ' + metaDate : ''}</div>`;
+  document.getElementById('cmp-print').innerHTML = cmpBarHtml('Comparatif des favoris') + '<div class="cmp-inner">' + html + '</div>';
   return gs.length;
 }
 
@@ -2575,12 +2608,12 @@ function exportComparatif() {
   const all = favListOrder();
   if (all.length < 2) return;
   const favs = all.slice(0, 4);
-  const n = buildComparatif(favs);
+  const n = buildComparatif(favs, all.length);
   const cp = document.getElementById('cmp-print');
   const landscape = n >= 4;
   if (cp) cp.classList.toggle('cmp-dense', landscape);
   const os = document.getElementById('cmp-orient');
-  if (os) os.textContent = '@page { size: Letter ' + (landscape ? 'landscape' : 'portrait') + '; margin: 1.1cm; }';
+  if (os) os.textContent = '@page { size: Letter ' + (landscape ? 'landscape' : 'portrait') + '; margin: ' + (landscape ? '1.1cm' : '1.4cm') + '; }';
   if (all.length > 4 && cp) {
     const t = cp.querySelector('.cmp-bar-t');
     if (t) t.textContent = 'Comparatif \u2014 4 premiers favoris (sur ' + all.length + ')';
@@ -2597,20 +2630,17 @@ function exportFiche() {
   const body = document.getElementById('dp-body');
   const inner = body ? body.innerHTML : '';
   const sousTitre = [g.type, g.ville, 'RLS ' + g.rls].filter(Boolean).join('  \u2022  ');
+  const metaDate = cmpMetaDateLine();
   cp.classList.remove('cmp-dense');
   const os = document.getElementById('cmp-orient');
-  if (os) os.textContent = '@page { size: Letter portrait; margin: 1.3cm; }';
+  if (os) os.textContent = '@page { size: Letter portrait; margin: 1.4cm; }';
   cp.innerHTML =
-    '<div class="cmp-bar">' +
-      '<span class="cmp-bar-t">Fiche \u2014 ' + esc(g.nom.trim()) + '</span>' +
-      '<button type="button" class="b-print" onclick="fichePrint()">\u2913 Imprimer / Enregistrer en PDF</button>' +
-      '<button type="button" class="b-close" onclick="cmpClose()">\u2715 Fermer</button>' +
-    '</div>' +
+    cmpBarHtml('Fiche \u2014 ' + esc(g.nom.trim()), 'fichePrint') +
     '<div class="cmp-inner">' +
       '<div class="fp-doc">' +
         '<div class="fp-head"><div class="fp-eyebrow">' + esc(g.type || 'Clinique') + '</div>' +
         '<div class="fp-title">' + esc(g.nom.trim()) + '</div>' +
-        '<div class="fp-sub">' + esc(sousTitre) + '</div></div>' +
+        '<div class="fp-sub">' + esc(sousTitre) + (metaDate ? ' · ' + metaDate : '') + '</div></div>' +
         '<div class="fp-body">' + inner + '</div>' +
       '</div>' +
     '</div>';
