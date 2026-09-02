@@ -364,14 +364,10 @@ p, li { text-wrap: pretty; }
 .resident-note strong{ display:block; color:var(--navy); margin-bottom:.3rem; }
 .resident-note p{ margin:0; color:#4a5568; font-size:.92rem; }
 
-/* ─── Bannière « Carte interactive » — reconstruction HTML/CSS ────────────────
-   Reproduit fidèlement la bannière de référence retenue : proportions,
-   couleurs, tailles et position de chaque élément relevées au pixel sur l'original
-   (ratio 3,19:1), puis vérifiées par comparaison automatique du rendu à la référence.
-   Le logo est le vrai logo du projet, détouré (centre transparent, point bleu).
-   Les textes sont du vrai texte HTML — ils ne sont pas gravés dans une image, ce qui permet de
-   réutiliser le même gabarit pour chaque territoire (le nom affiché change, pas l'image).
-   Toute la bannière est un lien vers la carte du territoire (ou la carte générale). */
+/* ─── Bannière « Carte interactive » ─────────────────────────────────────────
+   Bannière officielle SEO : photo claire vers la carte interactive Montérégie-Est
+   (assets/banniere_monteregie-est.png). Le gabarit CSS .sqb ci-dessous est conservé
+   pour référence historique ; les pages utilisent .sqb-photo. */
 
 .sqb-wrap { margin:1.7rem 0 2.2rem; }
 .sqb-wrap.compact { margin-top:1.25rem; }
