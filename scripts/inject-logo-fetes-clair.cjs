@@ -28,11 +28,16 @@ const jsFetes = `
       return m === 12 || (m === 1 && d === 1);
     })()) document.documentElement.dataset.logoFetes = '1';`;
 
+const fetesRe =
+  /  \/\* Épingle fêtes \(bonnet rouge\), détourée — en-tête en mode clair, 1er déc\.–1er janv\. \*\/\n  --app-logo-fetes: url\(data:image\/png;base64,[^)]+\);/;
+
 for (const rel of ['scripts/carte.template.html', 'scripts/carte-est-sq.template.html']) {
   const file = path.join(root, rel);
   let html = fs.readFileSync(file, 'utf8');
 
-  if (!html.includes('--app-logo-fetes')) {
+  if (fetesRe.test(html)) {
+    html = html.replace(fetesRe, fetesDecl);
+  } else if (!html.includes('--app-logo-fetes')) {
     html = html.replace(
       /(--app-logo-sombre: url\(data:image\/png;base64,[^)]+\);)/,
       `$1\n${fetesDecl}`
