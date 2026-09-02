@@ -16,7 +16,7 @@ test('Le bloc SQ historique est conservé intégralement, avec V4 et Segoe UI', 
   const debut = est.indexOf('/* ═══════════════════════════════════════════════════════════════════════════\n   PROTOTYPE SANTÉ QUÉBEC');
   const fin = est.indexOf('/* Seul ajustement visuel au prototype SQ');
   assert.ok(debut > 0 && fin > debut);
-  assert.equal(h(est.slice(debut, fin).trim()), 'ab4d74f497e5933c918bdfc281687ecd9672ca290dbb8cff1186600cedc6669a');
+  assert.equal(h(est.slice(debut, fin).trim()), 'cc946ebb572c23d49858e5486515e56ee9fee1e981632c87d90c92fbcc831718');
   assert.match(est, /<html lang="fr" data-region="Est">/);
   assert.match(est, /linear-gradient\(100deg, var\(--sq-bleu\) 0%, var\(--sq-bleu\) 42%, var\(--sq-sarcelle\) 100%\)/);
   assert.match(est, /\.brand-mot[\s\S]*?font-family: var\(--sq-font\)/);
@@ -75,7 +75,7 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
   }
   assert.match(est, /fetch\('\.\.\/data\.json', \{ cache: 'no-cache' \}\)/);
   assert.match(est, /scope: '\/monteregie-est\/'/);
-  assert.match(lire('sw.js'), /v53-sq-restaure/);
+  assert.match(lire('sw.js'), /v54-secteurs-etablissements/);
   assert.doesNotMatch(est, /olaplante\.github\.io\/Monteregie-Est/);
 });
 

@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { GEO_ETABLISSEMENTS_EST } = require('./geo-etablissements-est.js');
+const { categorieActiviteDepuisSecteur } = require('./categories-activite-etablissements.js');
 
 const RACINE = path.resolve(__dirname, '..');
 const SOURCE = path.join(__dirname, 'donnees-etablissements-source.json');
@@ -86,11 +87,16 @@ function construire() {
     });
 
     for (const besoin of etab.besoins || []) {
+      const cat = categorieActiviteDepuisSecteur(besoin.secteur);
       secteurs.push({
         id: besoin.id,
         installationId: etab.id,
         libelle: besoin.libelleAffichage || besoin.secteur,
         secteur: besoin.secteur,
+        categorieActivite: cat.id,
+        activites: cat.activites.slice(),
+        termesRecherche: cat.termesRecherche.slice(),
+        ancre: cat.ancre,
         recrutement: {
           statutDeclare: /^actif$/i.test(besoin.statut || '') ? 'actif' : 'inactif',
           dateInformation: (source.meta && source.meta.dateDonnees) || '2026-08-28'
@@ -111,7 +117,12 @@ function construire() {
       politiqueAffichage: source.meta && source.meta.politiqueAffichage,
       statutValidation: (source.meta && source.meta.statutValidation) || 'brouillon',
       nbInstallations: installations.length,
-      nbSecteurs: secteurs.length
+      nbSecteurs: secteurs.length,
+      categoriesActivite: require('./categories-activite-etablissements.js').CATEGORIES_ACTIVITE_ETABLISSEMENTS.map(c => ({
+        id: c.id,
+        libelle: c.libelle,
+        libelleComplet: c.libelleComplet
+      }))
     },
     installations,
     secteurs

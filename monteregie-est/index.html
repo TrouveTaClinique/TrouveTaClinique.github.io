@@ -786,6 +786,16 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .rls-btn.dim { background:var(--champ); color:var(--c); }
 .rls-btn.dim:hover { background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none; }
 .rls-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
+.sb-compteur { font-size:12px; color:var(--muted, #64748b); margin:4px 0 0; line-height:1.35; }
+.activite-btns { margin-top:8px; width:100%; display:flex; flex-wrap:wrap; gap:6px; }
+.activite-btn { flex:0 1 auto; padding:6px 10px; box-sizing:border-box; border-radius:999px;
+  border:1.5px solid var(--orange); background:var(--orange); color:#fff; cursor:pointer;
+  font-family:'Raleway',sans-serif; font-weight:700; font-size:11px; line-height:1.2;
+  text-align:center; transition:background .15s ease,color .15s ease,opacity .15s ease; }
+.activite-btn:hover { filter:brightness(1.08); }
+.activite-btn.dim { background:var(--champ); color:var(--orange); }
+.activite-btn.dim:hover { background:color-mix(in srgb, var(--orange) 12%, var(--champ)); filter:none; }
+.activite-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
 /* PTEM / AMP — accès rapide aux 3 pages du site (icônes rondes), repliées
    derrière un bouton « 📄 PTEM / AMP » comme avant (pour ne pas tout étaler
    d'emblée dès l'arrivée sur la page). Les 2 PDF externes (moins
@@ -1563,12 +1573,14 @@ body.cmp-open { overflow:hidden; }
         </div>
       </div>
       <h2 id="sb-title">Cliniques en recrutement</h2>
+      <p class="sb-compteur" id="sb-compteur" hidden></p>
       <p class="maj" id="maj-date"></p>
       <div class="sb-search" id="sb-search">
         <span class="sb-search-ic" aria-hidden="true">🔍</span>
         <input type="search" id="sb-search-input" placeholder="Rechercher une clinique ou une ville…" autocomplete="off" aria-label="Rechercher une clinique ou une ville">
         <button type="button" class="sb-search-clear" id="sb-search-clear" aria-label="Effacer la recherche" title="Effacer">✕</button>
       </div>
+      <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité" hidden></div>
       <div class="sb-view-row">
         <button class="fav-toggle" id="fav-toggle">★ Voir mes favoris</button>
         <div class="all-clinics-wrap">
@@ -1641,6 +1653,8 @@ let favOnly = false;
 // où ils apparaissent, sans jamais changer leur clas­sement une fois affichés.
 let showAllClinics = false;
 let rlsFilter = '';
+let activiteFilter = '';
+const TERRITOIRE_MISSIONS = 'Missions régionales';
 let searchQuery = '';
 let annonceFermee = false; // fermeture de la bannière pour la session courante seulement
 let notesDirty = false; // vrai si le champ notes a été modifié sans sauvegarde
@@ -1735,6 +1749,11 @@ function preparerCoucheEtablissements(donneesEtab) {
       mentionPublique: inst.mentionPublique,
       regroupe: !!sec.regroupe,
       lienWeb: inst.lienWeb,
+      categorieActivite: sec.categorieActivite || '',
+      activites: Array.isArray(sec.activites) ? sec.activites.slice() : [],
+      termesRecherche: Array.isArray(sec.termesRecherche) ? sec.termesRecherche.slice() : [],
+      ancre: sec.ancre || '',
+      territoireSource: inst.missionRegionale ? null : (inst.rls || ''),
       _secteurEtab: true
     };
   }).filter(Boolean);
@@ -1783,14 +1802,27 @@ function matchesFilters(id) {
   if (searchQuery) {
     const g = byId(id);
     const champs = g && g._secteurEtab
-      ? [g.nom, g.nomInstallation, g.ville, g.secteur, g.type, g.rls]
+      ? [g.nom, g.nomInstallation, g.ville, g.secteur, g.type, g.rls, ...(g.termesRecherche || []), ...(g.activites || [])]
       : [g && g.nom, g && g.alias, g && g.ville, g && g.type, g && g.rls];
     const hay = normTxt(champs.filter(Boolean).join(' '));
     if (!hay.includes(searchQuery)) return false;
   }
+  if (activiteFilter && modeCarte === 'etablissements') {
+    const g = byId(id);
+    if (!g || g.categorieActivite !== activiteFilter) return false;
+  }
   if (rlsFilter) {
     const g = byId(id);
-    if (!g || (g.rls || '') !== rlsFilter) return false;
+    if (!g) return false;
+    if (modeCarte === 'etablissements' && g._secteurEtab) {
+      if (rlsFilter === TERRITOIRE_MISSIONS) {
+        if (!g.missionRegionale) return false;
+      } else if (g.missionRegionale || (g.rls || '') !== rlsFilter) {
+        return false;
+      }
+    } else if ((g.rls || '') !== rlsFilter) {
+      return false;
+    }
   }
   return true;
 }
@@ -1813,7 +1845,9 @@ const couchesRlsEstOfficielle = new Map();
 function synchroniserOverlaysRlsEstOfficielle() {
   if (!couchesRlsEstOfficielle.size) return;
   couchesRlsEstOfficielle.forEach(function (couche, nomRls) {
-    const doitEtreVisible = !rlsFilter || rlsFilter === nomRls;
+    const doitEtreVisible = rlsFilter === TERRITOIRE_MISSIONS
+      ? false
+      : (!rlsFilter || rlsFilter === nomRls);
     if (doitEtreVisible && !map.hasLayer(couche)) couche.addTo(map);
     if (!doitEtreVisible && map.hasLayer(couche)) map.removeLayer(couche);
   });
@@ -2336,11 +2370,17 @@ function fitToVisible() {
   if (n > 0) {
     const pts = visibles.filter(g => g.lat && g.lng).map(g => [g.lat, g.lng]);
     if (pts.length) { try { map.fitBounds(pts, { padding:[40,40], maxZoom: pts.length === 1 ? 15 : 13 }); } catch(e){} }
-    const trouve = modeCarte === 'etablissements' ? (n > 1 ? ' trouvés.' : ' trouvé.') : (n > 1 ? ' trouvées.' : ' trouvée.');
-    annoncerA11y(n + ' ' + (n > 1 ? libelleMode(true) : libelleMode(false)) + trouve);
+    if (modeCarte === 'etablissements') {
+      const insts = new Set(visibles.map(s => s.installationId));
+      annoncerA11y(n + ' secteur' + (n > 1 ? 's' : '') + ' dans ' + insts.size + ' installation' + (insts.size > 1 ? 's' : '') + '.');
+    } else {
+      const trouve = n > 1 ? ' trouvées.' : ' trouvée.';
+      annoncerA11y(n + ' ' + (n > 1 ? libelleMode(true) : libelleMode(false)) + trouve);
+    }
   } else {
     annoncerA11y(aucunMode() + ' ne correspond à cette recherche.');
   }
+  updateCompteurEtab();
 }
 
 // Clic sur la carte (fond) → fermer la fiche et revenir à la carte
@@ -2414,13 +2454,22 @@ function syncModeCarteUI() {
   });
   const recherche = document.getElementById('sb-search-input');
   if (recherche) {
-    const mot = modeCarte === 'etablissements' ? 'un établissement' : 'une clinique';
-    recherche.placeholder = 'Rechercher ' + mot + ' ou une ville…';
-    recherche.setAttribute('aria-label', 'Rechercher ' + mot + ' ou une ville');
+    if (modeCarte === 'etablissements') {
+      recherche.placeholder = 'Rechercher un secteur, un lieu ou une ville…';
+      recherche.setAttribute('aria-label', 'Rechercher un secteur, un lieu ou une ville');
+    } else {
+      recherche.placeholder = 'Rechercher une clinique ou une ville…';
+      recherche.setAttribute('aria-label', 'Rechercher une clinique ou une ville');
+    }
   }
+  const activiteWrap = document.getElementById('activite-btns');
+  if (activiteWrap) activiteWrap.hidden = modeCarte !== 'etablissements';
+  const rlsWrap = document.getElementById('rls-btns');
+  if (rlsWrap) rlsWrap.setAttribute('aria-label', modeCarte === 'etablissements' ? 'Filtrer par territoire' : 'Filtrer par RLS');
   const fav = document.getElementById('fav-toggle');
   if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
   syncAllClinicsToggle();
+  updateCompteurEtab();
 }
 
 function activerModeCarte(prochainMode) {
@@ -2441,6 +2490,7 @@ function activerModeCarte(prochainMode) {
   showAllClinics = false;
   favOnly = false;
   rlsFilter = '';
+  activiteFilter = '';
   searchQuery = '';
   const recherche = document.getElementById('sb-search-input');
   if (recherche) recherche.value = '';
@@ -2549,7 +2599,7 @@ function renderSidebar() {
 
     sbList.appendChild(el);
   });
-  if (shown === 0 && (favOnly || rlsFilter || searchQuery)) {
+  if (shown === 0 && (favOnly || rlsFilter || activiteFilter || searchQuery)) {
     sbList.innerHTML = '<div class="sb-empty">' + (searchQuery
       ? aucunMode() + ' ne correspond à votre recherche.'
       : favOnly
@@ -2557,6 +2607,7 @@ function renderSidebar() {
       : aucunMode() + ' ne correspond aux filtres sélectionnés.') + '</div>';
   }
   updateCmpButton();
+  updateCompteurEtab();
 }
 
 // ═══════════════════════════════════════════
@@ -3064,29 +3115,106 @@ if (_cmpBtn) _cmpBtn.addEventListener('click', exportComparatif);
 function rlsForRegions() {
   const set = new Set();
   gmfs.forEach(g => {
-    if (g.rls && String(g.rls).trim())
+    if (modeCarte === 'etablissements' && g._secteurEtab) {
+      if (g.missionRegionale) return;
+      if (g.rls && String(g.rls).trim()) set.add(String(g.rls).trim());
+    } else if (g.rls && String(g.rls).trim()) {
       set.add(String(g.rls).trim());
+    }
   });
   return Array.from(set).sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+}
+function hasMissionsRegionales() {
+  return modeCarte === 'etablissements' && gmfs.some(g => g._secteurEtab && g.missionRegionale);
+}
+const CATEGORIES_ACTIVITE_DEFAUT = [
+  { id: 'urgence', libelle: 'Urgence', libelleComplet: 'Urgence' },
+  { id: 'hospitalisation', libelle: 'Hospitalisation', libelleComplet: 'Hospitalisation' },
+  { id: 'ucdg', libelle: 'UCDG', libelleComplet: 'UCDG' },
+  { id: 'soins-intensifs', libelle: 'Soins intensifs', libelleComplet: 'Soins intensifs' },
+  { id: 'gmf-u', libelle: 'GMF-U', libelleComplet: 'GMF-U' },
+  { id: 'longue-duree', libelle: 'Longue durée', libelleComplet: 'Longue durée' },
+  { id: 'sad-siad-sp', libelle: 'Soins à domicile', libelleComplet: 'Soins à domicile, soins palliatifs et prise en charge' },
+  { id: 'obstetrique', libelle: 'Obstétrique', libelleComplet: 'Obstétrique' },
+  { id: 'detention', libelle: 'Centre de détention', libelleComplet: 'Centre de détention' },
+  { id: 'crd', libelle: 'Réadaptation', libelleComplet: 'Réadaptation en dépendance' }
+];
+function categoriesActiviteDisponibles() {
+  if (dataEtabMeta && Array.isArray(dataEtabMeta.categoriesActivite) && dataEtabMeta.categoriesActivite.length) {
+    return dataEtabMeta.categoriesActivite;
+  }
+  return CATEGORIES_ACTIVITE_DEFAUT;
+}
+function updateCompteurEtab() {
+  const el = document.getElementById('sb-compteur');
+  if (!el) return;
+  if (modeCarte !== 'etablissements') {
+    el.hidden = true;
+    el.textContent = '';
+    return;
+  }
+  el.hidden = false;
+  const secteurs = gmfs.filter(s => matchesFilters(s.id));
+  const insts = new Set(secteurs.map(s => s.installationId));
+  const xs = secteurs.length;
+  const ys = insts.size;
+  el.textContent = xs + ' secteur' + (xs > 1 ? 's' : '') + ' dans ' + ys + ' installation' + (ys > 1 ? 's' : '');
+}
+function appliquerFiltresEtab() {
+  populateActiviteButtons();
+  populateRlsButtons();
+  renderSidebar();
+  updateMarkerVisibility();
+  fitToVisible();
+}
+function setActiviteFilter(id) {
+  activiteFilter = (activiteFilter === id) ? '' : id;
+  appliquerFiltresEtab();
+}
+function populateActiviteButtons() {
+  const wrap = document.getElementById('activite-btns');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  if (modeCarte !== 'etablissements') { wrap.hidden = true; return; }
+  wrap.hidden = false;
+  const tous = document.createElement('button');
+  tous.type = 'button';
+  tous.className = 'activite-btn';
+  tous.textContent = 'Tous';
+  tous.setAttribute('aria-label', 'Filtrer : tous les secteurs d\'activité');
+  tous.setAttribute('aria-pressed', activiteFilter === '' ? 'true' : 'false');
+  tous.classList.toggle('dim', activiteFilter !== '');
+  tous.addEventListener('click', () => { activiteFilter = ''; appliquerFiltresEtab(); });
+  wrap.appendChild(tous);
+  categoriesActiviteDisponibles().forEach(cat => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'activite-btn';
+    b.textContent = cat.libelle;
+    if (cat.libelleComplet && cat.libelleComplet !== cat.libelle) b.title = cat.libelleComplet;
+    b.setAttribute('aria-label', 'Filtrer : ' + (cat.libelleComplet || cat.libelle));
+    const pale = activiteFilter !== '' && activiteFilter !== cat.id;
+    b.classList.toggle('dim', pale);
+    b.setAttribute('aria-pressed', activiteFilter === cat.id ? 'true' : 'false');
+    b.addEventListener('click', () => setActiviteFilter(cat.id));
+    wrap.appendChild(b);
+  });
 }
 /* Un bouton par RLS. Un second clic sur le bouton actif retire le filtre. */
 function populateRlsButtons() {
   const wrap = document.getElementById('rls-btns');
   if (!wrap) return;
-  const opts = Object.keys(RLS_COLORS_REGION).filter(r => rlsForRegions().includes(r));
+  const opts = Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional' && rlsForRegions().includes(r));
   wrap.innerHTML = '';
   opts.forEach(r => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'rls-btn';
-    // Nom complet, sur 2 lignes : coupé au tiret quand il y en a un, sinon à la 1re espace.
     const coupure = r.includes('-') ? r.indexOf('-') + 1 : r.indexOf(' ');
     const ligne1 = coupure > 0 ? r.slice(0, coupure) : r;
     const ligne2 = coupure > 0 ? r.slice(coupure) : '';
     b.innerHTML = ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1);
     b.style.setProperty('--c', RLS_COLORS_REGION[r]);
     b.setAttribute('aria-label', 'Filtrer : ' + r);
-    // Pâle seulement si UN AUTRE bouton est le filtre actif ; foncé sinon (par défaut, ou si
-    // c'est lui le filtre actif).
     const pale = rlsFilter !== '' && rlsFilter !== r;
     b.classList.toggle('dim', pale);
     b.setAttribute('aria-pressed', rlsFilter === r ? 'true' : 'false');
@@ -3103,8 +3231,32 @@ function populateRlsButtons() {
     });
     wrap.appendChild(b);
   });
+  if (hasMissionsRegionales()) {
+    const m = TERRITOIRE_MISSIONS;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'rls-btn';
+    b.innerHTML = 'Missions<br>régionales';
+    b.style.setProperty('--c', RLS_COLORS_REGION['Régional']);
+    b.setAttribute('aria-label', 'Filtrer : ' + m);
+    const pale = rlsFilter !== '' && rlsFilter !== m;
+    b.classList.toggle('dim', pale);
+    b.setAttribute('aria-pressed', rlsFilter === m ? 'true' : 'false');
+    b.addEventListener('click', () => {
+      rlsFilter = (rlsFilter === m) ? '' : m;
+      wrap.querySelectorAll('.rls-btn').forEach(btn => {
+        const nomBtn = btn.getAttribute('aria-label').slice('Filtrer : '.length);
+        const paleBtn = rlsFilter !== '' && rlsFilter !== nomBtn;
+        btn.classList.toggle('dim', paleBtn);
+        btn.setAttribute('aria-pressed', rlsFilter === nomBtn ? 'true' : 'false');
+      });
+      synchroniserOverlaysRlsEstOfficielle();
+      renderSidebar(); updateMarkerVisibility(); fitToVisible();
+    });
+    wrap.appendChild(b);
+  }
 }
 function buildFilters() {
+  populateActiviteButtons();
   const btnWrap = document.getElementById('rls-btns');
   if (btnWrap) populateRlsButtons();
 }

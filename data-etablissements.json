@@ -22,7 +22,59 @@
     },
     "statutValidation": "brouillon - non valide pour publication",
     "nbInstallations": 22,
-    "nbSecteurs": 31
+    "nbSecteurs": 31,
+    "categoriesActivite": [
+      {
+        "id": "urgence",
+        "libelle": "Urgence",
+        "libelleComplet": "Urgence"
+      },
+      {
+        "id": "hospitalisation",
+        "libelle": "Hospitalisation",
+        "libelleComplet": "Hospitalisation"
+      },
+      {
+        "id": "ucdg",
+        "libelle": "UCDG",
+        "libelleComplet": "UCDG"
+      },
+      {
+        "id": "soins-intensifs",
+        "libelle": "Soins intensifs",
+        "libelleComplet": "Soins intensifs"
+      },
+      {
+        "id": "gmf-u",
+        "libelle": "GMF-U",
+        "libelleComplet": "GMF-U"
+      },
+      {
+        "id": "longue-duree",
+        "libelle": "Longue durée",
+        "libelleComplet": "Longue durée"
+      },
+      {
+        "id": "sad-siad-sp",
+        "libelle": "Soins à domicile",
+        "libelleComplet": "Soins à domicile, soins palliatifs et prise en charge"
+      },
+      {
+        "id": "obstetrique",
+        "libelle": "Obstétrique",
+        "libelleComplet": "Obstétrique"
+      },
+      {
+        "id": "detention",
+        "libelle": "Centre de détention",
+        "libelleComplet": "Centre de détention"
+      },
+      {
+        "id": "crd",
+        "libelle": "Réadaptation",
+        "libelleComplet": "Réadaptation en dépendance"
+      }
+    ]
   },
   "installations": [
     {
@@ -486,6 +538,18 @@
       "installationId": "INS-003",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -502,6 +566,18 @@
       "installationId": "INS-002",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -518,6 +594,22 @@
       "installationId": "INS-004",
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "categorieActivite": "sad-siad-sp",
+      "activites": [
+        "sad-siad-sp",
+        "soins-domicile"
+      ],
+      "termesRecherche": [
+        "sad",
+        "siad",
+        "sp",
+        "pec",
+        "domicile",
+        "palliatif",
+        "palliatifs",
+        "prise en charge"
+      ],
+      "ancre": "sad-siad-sp-prise-en-charge",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -534,6 +626,22 @@
       "installationId": "INS-005",
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "categorieActivite": "sad-siad-sp",
+      "activites": [
+        "sad-siad-sp",
+        "soins-domicile"
+      ],
+      "termesRecherche": [
+        "sad",
+        "siad",
+        "sp",
+        "pec",
+        "domicile",
+        "palliatif",
+        "palliatifs",
+        "prise en charge"
+      ],
+      "ancre": "sad-siad-sp-prise-en-charge",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -550,6 +658,22 @@
       "installationId": "INS-020",
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "categorieActivite": "sad-siad-sp",
+      "activites": [
+        "sad-siad-sp",
+        "soins-domicile"
+      ],
+      "termesRecherche": [
+        "sad",
+        "siad",
+        "sp",
+        "pec",
+        "domicile",
+        "palliatif",
+        "palliatifs",
+        "prise en charge"
+      ],
+      "ancre": "sad-siad-sp-prise-en-charge",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -566,6 +690,18 @@
       "installationId": "INS-022",
       "libelle": "GMF-U",
       "secteur": "GMF-U",
+      "categorieActivite": "gmf-u",
+      "activites": [
+        "gmf-u",
+        "enseignement"
+      ],
+      "termesRecherche": [
+        "gmf-u",
+        "gmfu",
+        "universitaire",
+        "enseignement"
+      ],
+      "ancre": "recrutement-gmf-u",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -582,6 +718,15 @@
       "installationId": "INS-001",
       "libelle": "Urgence",
       "secteur": "Urgence",
+      "categorieActivite": "urgence",
+      "activites": [
+        "urgence"
+      ],
+      "termesRecherche": [
+        "urgence",
+        "urgences"
+      ],
+      "ancre": "urgence",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -598,6 +743,15 @@
       "installationId": "INS-001",
       "libelle": "Hospitalisation",
       "secteur": "Hospitalisation",
+      "categorieActivite": "hospitalisation",
+      "activites": [
+        "hospitalisation"
+      ],
+      "termesRecherche": [
+        "hospitalisation",
+        "hospit"
+      ],
+      "ancre": "hospitalisation",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -614,6 +768,14 @@
       "installationId": "INS-001",
       "libelle": "UCDG",
       "secteur": "UCDG",
+      "categorieActivite": "ucdg",
+      "activites": [
+        "ucdg"
+      ],
+      "termesRecherche": [
+        "ucdg"
+      ],
+      "ancre": "ucdg",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -630,6 +792,17 @@
       "installationId": "INS-001",
       "libelle": "Soins intensifs",
       "secteur": "Soins intensifs (unité ≤ 6 lits)",
+      "categorieActivite": "soins-intensifs",
+      "activites": [
+        "soins-intensifs"
+      ],
+      "termesRecherche": [
+        "soins intensifs",
+        "si",
+        "reanimation",
+        "réanimation"
+      ],
+      "ancre": "soins-intensifs",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -646,6 +819,18 @@
       "installationId": "INS-014",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -662,6 +847,18 @@
       "installationId": "INS-013",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -678,6 +875,22 @@
       "installationId": "INS-015",
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "categorieActivite": "sad-siad-sp",
+      "activites": [
+        "sad-siad-sp",
+        "soins-domicile"
+      ],
+      "termesRecherche": [
+        "sad",
+        "siad",
+        "sp",
+        "pec",
+        "domicile",
+        "palliatif",
+        "palliatifs",
+        "prise en charge"
+      ],
+      "ancre": "sad-siad-sp-prise-en-charge",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -694,6 +907,15 @@
       "installationId": "INS-012",
       "libelle": "Urgence",
       "secteur": "Urgence",
+      "categorieActivite": "urgence",
+      "activites": [
+        "urgence"
+      ],
+      "termesRecherche": [
+        "urgence",
+        "urgences"
+      ],
+      "ancre": "urgence",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -710,6 +932,15 @@
       "installationId": "INS-012",
       "libelle": "Hospitalisation",
       "secteur": "Hospitalisation",
+      "categorieActivite": "hospitalisation",
+      "activites": [
+        "hospitalisation"
+      ],
+      "termesRecherche": [
+        "hospitalisation",
+        "hospit"
+      ],
+      "ancre": "hospitalisation",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -726,6 +957,14 @@
       "installationId": "INS-012",
       "libelle": "UCDG",
       "secteur": "UCDG",
+      "categorieActivite": "ucdg",
+      "activites": [
+        "ucdg"
+      ],
+      "termesRecherche": [
+        "ucdg"
+      ],
+      "ancre": "ucdg",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -742,6 +981,16 @@
       "installationId": "INS-012",
       "libelle": "Obstétrique",
       "secteur": "Obstétrique",
+      "categorieActivite": "obstetrique",
+      "activites": [
+        "obstetrique"
+      ],
+      "termesRecherche": [
+        "obstetrique",
+        "obstétrique",
+        "accouchement"
+      ],
+      "ancre": "obstetrique",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -758,6 +1007,17 @@
       "installationId": "INS-012",
       "libelle": "Soins intensifs",
       "secteur": "Soins intensifs (unité ≤ 6 lits)",
+      "categorieActivite": "soins-intensifs",
+      "activites": [
+        "soins-intensifs"
+      ],
+      "termesRecherche": [
+        "soins intensifs",
+        "si",
+        "reanimation",
+        "réanimation"
+      ],
+      "ancre": "soins-intensifs",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -774,6 +1034,18 @@
       "installationId": "INS-007",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -790,6 +1062,18 @@
       "installationId": "INS-008",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -806,6 +1090,18 @@
       "installationId": "INS-009",
       "libelle": "Longue durée",
       "secteur": "Longue durée",
+      "categorieActivite": "longue-duree",
+      "activites": [
+        "longue-duree"
+      ],
+      "termesRecherche": [
+        "longue duree",
+        "longue durée",
+        "chsld",
+        "hebergement",
+        "hébergement"
+      ],
+      "ancre": "longue-duree",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -822,6 +1118,22 @@
       "installationId": "INS-010",
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "categorieActivite": "sad-siad-sp",
+      "activites": [
+        "sad-siad-sp",
+        "soins-domicile"
+      ],
+      "termesRecherche": [
+        "sad",
+        "siad",
+        "sp",
+        "pec",
+        "domicile",
+        "palliatif",
+        "palliatifs",
+        "prise en charge"
+      ],
+      "ancre": "sad-siad-sp-prise-en-charge",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -838,6 +1150,22 @@
       "installationId": "INS-011",
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "categorieActivite": "sad-siad-sp",
+      "activites": [
+        "sad-siad-sp",
+        "soins-domicile"
+      ],
+      "termesRecherche": [
+        "sad",
+        "siad",
+        "sp",
+        "pec",
+        "domicile",
+        "palliatif",
+        "palliatifs",
+        "prise en charge"
+      ],
+      "ancre": "sad-siad-sp-prise-en-charge",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -854,6 +1182,18 @@
       "installationId": "INS-021",
       "libelle": "GMF-U",
       "secteur": "GMF-U",
+      "categorieActivite": "gmf-u",
+      "activites": [
+        "gmf-u",
+        "enseignement"
+      ],
+      "termesRecherche": [
+        "gmf-u",
+        "gmfu",
+        "universitaire",
+        "enseignement"
+      ],
+      "ancre": "recrutement-gmf-u",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -870,6 +1210,15 @@
       "installationId": "INS-006",
       "libelle": "Urgence",
       "secteur": "Urgence",
+      "categorieActivite": "urgence",
+      "activites": [
+        "urgence"
+      ],
+      "termesRecherche": [
+        "urgence",
+        "urgences"
+      ],
+      "ancre": "urgence",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -886,6 +1235,15 @@
       "installationId": "INS-006",
       "libelle": "Hospitalisation",
       "secteur": "Hospitalisation",
+      "categorieActivite": "hospitalisation",
+      "activites": [
+        "hospitalisation"
+      ],
+      "termesRecherche": [
+        "hospitalisation",
+        "hospit"
+      ],
+      "ancre": "hospitalisation",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -902,6 +1260,14 @@
       "installationId": "INS-006",
       "libelle": "UCDG",
       "secteur": "UCDG",
+      "categorieActivite": "ucdg",
+      "activites": [
+        "ucdg"
+      ],
+      "termesRecherche": [
+        "ucdg"
+      ],
+      "ancre": "ucdg",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -918,6 +1284,17 @@
       "installationId": "INS-016",
       "libelle": "Centre de détention",
       "secteur": "Centre de détention",
+      "categorieActivite": "detention",
+      "activites": [
+        "detention"
+      ],
+      "termesRecherche": [
+        "detention",
+        "détention",
+        "carceral",
+        "carceral"
+      ],
+      "ancre": "medecine-en-detention",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -934,6 +1311,20 @@
       "installationId": "INS-017",
       "libelle": "Réadaptation en dépendance",
       "secteur": "Centre de réadaptation en dépendance (CRD)",
+      "categorieActivite": "crd",
+      "activites": [
+        "crd",
+        "readaptation",
+        "réadaptation"
+      ],
+      "termesRecherche": [
+        "crd",
+        "readaptation",
+        "réadaptation",
+        "dependance",
+        "dépendance"
+      ],
+      "ancre": "dependance",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -950,6 +1341,20 @@
       "installationId": "INS-019",
       "libelle": "Réadaptation en dépendance",
       "secteur": "Centre de réadaptation en dépendance (CRD)",
+      "categorieActivite": "crd",
+      "activites": [
+        "crd",
+        "readaptation",
+        "réadaptation"
+      ],
+      "termesRecherche": [
+        "crd",
+        "readaptation",
+        "réadaptation",
+        "dependance",
+        "dépendance"
+      ],
+      "ancre": "dependance",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
@@ -966,6 +1371,20 @@
       "installationId": "INS-018",
       "libelle": "Réadaptation en dépendance",
       "secteur": "Centre de réadaptation en dépendance (CRD)",
+      "categorieActivite": "crd",
+      "activites": [
+        "crd",
+        "readaptation",
+        "réadaptation"
+      ],
+      "termesRecherche": [
+        "crd",
+        "readaptation",
+        "réadaptation",
+        "dependance",
+        "dépendance"
+      ],
+      "ancre": "dependance",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
