@@ -227,6 +227,19 @@ function lienCourrielRecrutement(valeur) {
   return esc(texte);
 }
 
+/* Bouton mailto pour l'encadré d'appel à l'action — sans afficher l'adresse en clair. */
+function boutonCourrielRecrutement(valeur) {
+  const texte = String(valeur || '').trim();
+  if (!texte) return '';
+  const reMail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  const parts = texte.split(/[,;]+|\s+/).map(p => p.trim()).filter(Boolean);
+  if (parts.length && parts.every(p => reMail.test(p))) {
+    const href = 'mailto:' + parts.join(',');
+    return `<a class="button secondary" href="${esc(href)}">Contacter par courriel</a>`;
+  }
+  return esc(texte);
+}
+
 /*
  * Badge « Vérifié » — voir aussi index.html (.badge-verif / estValide / badgeVerifHtml, ajoutés
  * le 26 août 2026 pour l'application). Même logique côté pages statiques : le badge n'apparaît
@@ -599,7 +612,7 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   ajouter('Site web', rempli(c.site)
     ? `<a href="${esc(c.site)}" rel="noopener nofollow" target="_blank">${esc(c.site)}</a>` : '');
   if (rempli(c.responsableNom)) {
-    ajouter('Responsable du recrutement', esc(c.responsableNom));
+    ajouter('Responsable', esc(c.responsableNom));
   }
   if (PUBLIER_COURRIELS && rempli(c.personneRessource)) {
     ajouter('Contact recrutement', lienCourrielRecrutement(c.personneRessource));
@@ -731,7 +744,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
   <div class="callout"><strong>Ne recrute pas actuellement :</strong> ce milieu est publié à titre de référence dans le répertoire. Consultez la carte interactive pour connaître les milieux du secteur qui recrutent actuellement.</div>`
     : (PUBLIER_COURRIELS && rempli(c.personneRessource))
     ? `
-  <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> ${lienCourrielRecrutement(c.personneRessource)}</div>`
+  <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> ${boutonCourrielRecrutement(c.personneRessource)}</div>`
     : PUBLIER_COURRIELS
     ? ''
     : `
