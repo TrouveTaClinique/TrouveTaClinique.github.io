@@ -311,6 +311,11 @@ h1{
   background:#e1faf7;
 }
 
+/* Espace entre un bloc de liste cliniques et la section suivante (pages RLS, répertoire). */
+main > section:has(.repertoire) + section{
+  margin-top:2.5rem;
+}
+
 .site-footer{
   border-top:5px solid var(--mint);
   background:var(--navy);
