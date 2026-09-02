@@ -1605,6 +1605,9 @@ document.documentElement.dataset.region = 'Est';
 let gmfs = [];
 let cliniques = [];
 let etablissements = [];
+let installationsEtab = [];
+let secteursEtab = [];
+let dataEtabMeta = {};
 let modeCarte = 'cliniques';
 let donneesPretes = false;
 // Hôpitaux : repères de référence affichés sur la carte, ENTIÈREMENT séparés des cliniques
@@ -1644,6 +1647,108 @@ const ANNONCE_KEY = 'dtmf-mtg-annonce-fermee';
 // (notes, ordre et marqueurs sont initialisés dans initData(), après le chargement de data.json)
 
 const byId = id => gmfs.find(g => g.id === id);
+const installationEtabById = id => installationsEtab.find(i => i.id === id);
+
+function getMarqueursSource() {
+  return modeCarte === 'etablissements' ? installationsEtab : gmfs;
+}
+
+function typeEtabAffichage(type) {
+  const map = {
+    hopital: 'Hôpital',
+    chsld: 'CHSLD',
+    clsc: 'CLSC',
+    'gmf-u': 'GMF-U',
+    crd: 'Centre de réadaptation',
+    detention: 'Centre de détention'
+  };
+  return map[type] || type || 'Établissement';
+}
+
+function preparerCoucheEtablissements(donneesEtab) {
+  installationsEtab = [];
+  secteursEtab = [];
+  etablissements = [];
+  dataEtabMeta = {};
+  if (!donneesEtab || !Array.isArray(donneesEtab.installations) || !Array.isArray(donneesEtab.secteurs)) return;
+
+  dataEtabMeta = donneesEtab.meta || {};
+  const instMap = new Map();
+
+  installationsEtab = donneesEtab.installations.filter(inst => {
+    const lat = Number(inst.lat);
+    const lng = Number(inst.lng);
+    const ok = isFinite(lat) && isFinite(lng) && typeof inst.nom === 'string' && inst.nom.trim();
+    if (!ok) console.warn('Installation établissement ignorée (données invalides) :', inst && inst.id, inst && inst.nom);
+    return ok;
+  }).map(inst => ({
+    id: inst.id,
+    nom: inst.nom.trim(),
+    type: typeEtabAffichage(inst.type),
+    rls: inst.missionRegionale ? 'Régional' : (inst.territoireSource || ''),
+    ville: inst.ville || '',
+    lat: Number(inst.lat),
+    lng: Number(inst.lng),
+    adresse: inst.adresse || '',
+    missionRegionale: !!inst.missionRegionale,
+    mentionPublique: inst.mentionPublique || '',
+    lienWeb: inst.lienWeb || '',
+    _installationEtab: true
+  }));
+
+  installationsEtab.forEach(inst => instMap.set(inst.id, inst));
+
+  secteursEtab = donneesEtab.secteurs.map(sec => {
+    const inst = instMap.get(sec.installationId);
+    if (!inst) {
+      console.warn('Secteur sans installation :', sec && sec.id, sec && sec.installationId);
+      return null;
+    }
+    const recrute = !!(sec.recrutement && sec.recrutement.statutDeclare === 'actif');
+    return {
+      id: sec.id,
+      installationId: sec.installationId,
+      nom: (sec.libelle || sec.secteur || '').trim(),
+      nomInstallation: inst.nom,
+      type: typeEtabAffichage(inst.type),
+      secteur: sec.secteur || sec.libelle || '',
+      rls: inst.rls,
+      ville: inst.ville,
+      lat: inst.lat,
+      lng: inst.lng,
+      adresse: inst.adresse,
+      recrutementActif: recrute,
+      missionRegionale: inst.missionRegionale,
+      mentionPublique: inst.mentionPublique,
+      regroupe: !!sec.regroupe,
+      lienWeb: inst.lienWeb,
+      _secteurEtab: true
+    };
+  }).filter(Boolean);
+
+  etablissements = secteursEtab;
+}
+
+function nbSecteursVisiblesInstallation(installationId) {
+  return gmfs.filter(s => s.installationId === installationId && matchesFilters(s.id)).length;
+}
+
+function matchesFiltersInstallation(installationId) {
+  return gmfs.some(s => s.installationId === installationId && matchesFilters(s.id));
+}
+
+function badgeMarqueur(g) {
+  if (modeCarte === 'etablissements' && g._installationEtab) {
+    const n = nbSecteursVisiblesInstallation(g.id);
+    return n > 0 ? n : '';
+  }
+  return rankOf(g.id);
+}
+
+function marqueurActifId(g) {
+  if (modeCarte === 'etablissements' && g && g._secteurEtab) return g.installationId;
+  return g && g.id;
+}
 const libelleMode = (pluriel = true) => modeCarte === 'etablissements'
   ? (pluriel ? 'établissements' : 'établissement')
   : (pluriel ? 'cliniques' : 'clinique');
@@ -1663,7 +1768,10 @@ function matchesFilters(id) {
   if (favOnly && !favoris.has(id)) return false;
   if (searchQuery) {
     const g = byId(id);
-    const hay = normTxt([g && g.nom, g && g.alias, g && g.ville, g && g.type, g && g.rls].filter(Boolean).join(' '));
+    const champs = g && g._secteurEtab
+      ? [g.nom, g.nomInstallation, g.ville, g.secteur, g.type, g.rls]
+      : [g && g.nom, g && g.alias, g && g.ville, g && g.type, g && g.rls];
+    const hay = normTxt(champs.filter(Boolean).join(' '));
     if (!hay.includes(searchQuery)) return false;
   }
   if (rlsFilter) {
@@ -1856,12 +1964,14 @@ map.on('locationerror', function () {
 const RLS_COLORS_REGION = {
   'Pierre-Boucher':    '#0080D7',
   'Richelieu-Yamaska': '#08A0A0',
-  'Pierre-De Saurel':  '#170A72'
+  'Pierre-De Saurel':  '#170A72',
+  'Régional':          '#6D28D9'
 };
 const RLS_COLORS_PALES_REGION = {
   'Pierre-Boucher':    '#A8DCF4',
   'Richelieu-Yamaska': '#A7DFDC',
-  'Pierre-De Saurel':  '#B8B1DF'
+  'Pierre-De Saurel':  '#B8B1DF',
+  'Régional':          '#C4B5FD'
 };
 function couleurMilieu(g) {
   return (g && RLS_COLORS_REGION[g.rls]) || '#08A0A0';
@@ -1928,13 +2038,13 @@ const markerOffsets = new Map();
 function calculerDecalagesMarqueurs() {
   markerOffsets.clear();
   const groupes = new Map();
-  gmfs.forEach(g => {
+  getMarqueursSource().forEach(g => {
     const cle = `${Number(g.lat).toFixed(6)},${Number(g.lng).toFixed(6)}`;
     if (!groupes.has(cle)) groupes.set(cle, []);
     groupes.get(cle).push(g);
   });
   groupes.forEach(groupe => {
-    groupe.sort((a, b) => Number(a.id) - Number(b.id));
+    groupe.sort((a, b) => String(a.id).localeCompare(String(b.id), 'fr', { sensitivity: 'base' }));
     const n = groupe.length;
     if (n === 1) {
       markerOffsets.set(groupe[0].id, [0, 0]);
@@ -2031,8 +2141,9 @@ function makeIcon(active, rank, couleur, id) {
     const size = active ? 32 : 27;
     const border = active ? '#90F1E9' : '#FFFFFF';
     const bw = active ? 4 : 2.5;
+    const label = rank != null && rank !== '' ? rank : '';
     return L.divIcon({ className:'',
-      html:`<div class="etab-marker${active ? ' active' : ''}" style="width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border}">${rank}</div>`,
+      html:`<div class="etab-marker${active ? ' active' : ''}" style="width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border}">${label}</div>`,
       iconSize:[size,size], iconAnchor:[size/2-dx,size/2-dy], popupAnchor:[dx,dy-size/2-7] });
   }
   const size = active ? 26 : 20;
@@ -2050,7 +2161,17 @@ function makeIcon(active, rank, couleur, id) {
 // touche pas plutôt que de leur écrire une icône fausse qui resterait figée
 // (bug du 18 août : jusqu'à « 0 » sur 58 épingles après un glisser-déposer).
 function refreshMarkerIcons() {
-  gmfs.forEach(g => { if (markers[g.id] && matchesFilters(g.id)) markers[g.id].setIcon(makeIcon(g.id === activeId, rankOf(g.id), couleurEpingle(g), g.id)); });
+  getMarqueursSource().forEach(g => {
+    const visible = modeCarte === 'etablissements'
+      ? matchesFiltersInstallation(g.id)
+      : matchesFilters(g.id);
+    if (markers[g.id] && visible) {
+      const actif = modeCarte === 'etablissements'
+        ? (activeId !== null && byId(activeId) && byId(activeId).installationId === g.id)
+        : (g.id === activeId);
+      markers[g.id].setIcon(makeIcon(actif, badgeMarqueur(g), couleurEpingle(g), g.id));
+    }
+  });
 }
 
 function buildMarkers() {
@@ -2058,17 +2179,26 @@ function buildMarkers() {
   // fiche invalide passait le filtre, une erreur ici ne doit interrompre que
   // CETTE fiche, jamais toute la boucle — sinon buildFilters(), renderSidebar()
   // et fitToData() ne s'exécutent jamais et la page reste vide.
-  gmfs.forEach(g => {
+  getMarqueursSource().forEach(g => {
     try {
-      const m = L.marker([g.lat, g.lng], { icon:makeIcon(false, rankOf(g.id), couleurEpingle(g), g.id), draggable:false });
-      // 27 août 2026 : n'ajouter à la carte que si le milieu satisfait déjà les filtres (donc
-      // statutVisible) — sinon les milieux ne recrutant pas s'afficheraient un instant au
-      // chargement, avant que quoi que ce soit ne les masque.
-      if (matchesFilters(g.id)) m.addTo(map);
+      const visible = modeCarte === 'etablissements'
+        ? matchesFiltersInstallation(g.id)
+        : matchesFilters(g.id);
+      const m = L.marker([g.lat, g.lng], { icon:makeIcon(false, badgeMarqueur(g), couleurEpingle(g), g.id), draggable:false });
+      if (visible) m.addTo(map);
       const [dx, dy] = markerOffsets.get(g.id) || [0, 0];
-      const infoBulle = `${esc(g.ville)}${modeCarte === 'etablissements' ? ' · ' + esc(g.rls || '') : ''}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}`;
-      m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${infoBulle}</small>`, { direction:'top', offset:[dx,dy-20] });
-      m.on('click', (e) => { L.DomEvent.stopPropagation(e); toggleDetail(g.id); });
+      if (modeCarte === 'etablissements') {
+        m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${nbSecteursVisiblesInstallation(g.id)} secteur(s) · ${esc(g.ville)}${g.missionRegionale ? ' · Mission régionale' : ''}</small>`, { direction:'top', offset:[dx,dy-20] });
+        m.on('click', (e) => {
+          L.DomEvent.stopPropagation(e);
+          const secteurs = gmfs.filter(s => s.installationId === g.id && matchesFilters(s.id));
+          if (secteurs.length) toggleDetail(secteurs[0].id);
+        });
+      } else {
+        const infoBulle = `${esc(g.ville)} · ${esc(g.rls || '')}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}`;
+        m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${infoBulle}</small>`, { direction:'top', offset:[dx,dy-20] });
+        m.on('click', (e) => { L.DomEvent.stopPropagation(e); toggleDetail(g.id); });
+      }
       markers[g.id] = m;
     } catch (e) {
       console.warn('Marqueur ignoré (erreur de construction) :', g && g.id, g && g.nom, e);
@@ -2210,12 +2340,20 @@ let dragSrcId = null, justDragged = false;
 
 function recalculerOrdre() {
   const typeRank = modeCarte === 'etablissements'
-    ? { 'CLSC': 0, 'Clinique médicale (hors GMF)': 1, 'Clinique médicale': 1, 'Clinique': 1 }
+    ? {}
     : { 'GMF-U': 0, 'GMF-R': 1, 'GMF': 2, 'GMF satellite': 3, 'CH': 4 };
   const rlsRank = Object.keys(RLS_COLORS_REGION).reduce((o, r, i) => (o[r] = i, o), {});
+  if (modeCarte === 'etablissements') {
+    rlsRank['Régional'] = 99;
+  }
   order = gmfs.slice().sort((a, b) => {
-    const rla = rlsRank[a.rls] ?? 99, rlb = rlsRank[b.rls] ?? 99;
+    const rla = rlsRank[a.rls] ?? 98, rlb = rlsRank[b.rls] ?? 98;
     if (rla !== rlb) return rla - rlb;
+    if (modeCarte === 'etablissements') {
+      const instCmp = (a.nomInstallation || '').localeCompare(b.nomInstallation || '', 'fr', { sensitivity: 'base' });
+      if (instCmp !== 0) return instCmp;
+      return (a.nom || '').localeCompare(b.nom || '', 'fr', { sensitivity: 'base' });
+    }
     const ra = typeRank[a.type] ?? 99, rb = typeRank[b.type] ?? 99;
     if (ra !== rb) return ra - rb;
     return (a.nom || '').localeCompare(b.nom || '', 'fr', { sensitivity: 'base' });
@@ -2285,7 +2423,7 @@ function activerModeCarte(prochainMode) {
     delete markers[id];
   });
   modeCarte = prochainMode;
-  gmfs = modeCarte === 'etablissements' ? etablissements : cliniques;
+  gmfs = modeCarte === 'etablissements' ? secteursEtab : cliniques;
   showAllClinics = false;
   favOnly = false;
   rlsFilter = '';
@@ -2342,7 +2480,9 @@ function renderSidebar() {
     // 1 ou 2 caractères après le mot-clé, sinon « (clinique Dre Sophie Lavallée) » — un simple
     // complément décoratif — serait conservé lui aussi.
     const suffixeDistinctif = parenMatch && /^\((clinique|unit[ée]|site)\s+[A-Z0-9]{1,2}\b/i.test(parenMatch[2]);
-    const nomMain = (parenMatch && !suffixeDistinctif) ? parenMatch[1] : g.nom.trim();
+    const nomMain = (modeCarte === 'etablissements' && g._secteurEtab)
+      ? g.nom
+      : ((parenMatch && !suffixeDistinctif) ? parenMatch[1] : g.nom.trim());
     const el = document.createElement('div');
     const nonRecruiting = !recruteActuellement(g);
     el.className = 'sb-item' + (nonRecruiting ? ' non-recruiting' : '') + (id === activeId ? ' active' : '');
@@ -2352,8 +2492,8 @@ function renderSidebar() {
       <div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>
       <div class="sb-info">
         <div class="sb-name">${esc(nomMain)}${badgeVerifHtml(g)}</div>
-        <div class="sb-city">📍 ${esc(g.ville)}</div>
-        ${modeCarte === 'etablissements' ? `<div class="sb-estab-meta">${esc(typeLabel(g.type))} · RLS ${esc(g.rls || 'À venir')}</div>` : ''}
+        <div class="sb-city">${modeCarte === 'etablissements' && g._secteurEtab ? esc(g.nomInstallation) + ' · 📍 ' + esc(g.ville) : '📍 ' + esc(g.ville)}</div>
+        ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · RLS ${esc(g.rls || 'À venir')}${g.missionRegionale ? ' · Mission régionale' : ''}</div>` : (modeCarte === 'etablissements' ? `<div class="sb-estab-meta">${esc(typeLabel(g.type))} · RLS ${esc(g.rls || 'À venir')}</div>` : '')}
         ${nonRecruiting ? '<span class="sb-status">Ne recrute pas actuellement</span>' : ''}
       </div>
       <button class="sb-star${favoris.has(id) ? ' fav' : ''}" title="Marquer comme favori" aria-label="${esc((favoris.has(id) ? 'Retirer ' : 'Ajouter ') + nomMain + (favoris.has(id) ? ' des favoris' : ' aux favoris'))}" draggable="false">${favoris.has(id) ? '★' : '☆'}</button>`;
@@ -2552,13 +2692,23 @@ function hopitalMatchesFilters(h) {
 }
 
 function updateMarkerVisibility() {
-  gmfs.forEach(g => {
-    const m = markers[g.id];
-    if (!m) return;
-    const show = matchesFilters(g.id);
-    if (show && !map.hasLayer(m)) m.addTo(map);
-    else if (!show && map.hasLayer(m)) map.removeLayer(m);
-  });
+  if (modeCarte === 'etablissements') {
+    installationsEtab.forEach(g => {
+      const m = markers[g.id];
+      if (!m) return;
+      const show = matchesFiltersInstallation(g.id);
+      if (show && !map.hasLayer(m)) m.addTo(map);
+      else if (!show && map.hasLayer(m)) map.removeLayer(m);
+    });
+  } else {
+    gmfs.forEach(g => {
+      const m = markers[g.id];
+      if (!m) return;
+      const show = matchesFilters(g.id);
+      if (show && !map.hasLayer(m)) m.addTo(map);
+      else if (!show && map.hasLayer(m)) map.removeLayer(m);
+    });
+  }
   hopitaux.forEach(h => {
     const m = hospitalMarkers[h.id];
     if (!m) return;
@@ -2594,7 +2744,7 @@ function syncAllClinicsToggle() {
   const titre = document.getElementById('sb-title');
   if (titre) {
     if (modeCarte === 'etablissements') {
-      titre.textContent = showAllClinics ? 'Tous les établissements' : 'Établissements en recrutement';
+      titre.textContent = showAllClinics ? 'Tous les secteurs' : 'Secteurs en recrutement';
     } else {
       titre.textContent = showAllClinics ? 'Toutes les cliniques' : 'Cliniques en recrutement';
     }
@@ -2944,6 +3094,14 @@ function buildFilters() {
   if (btnWrap) populateRlsButtons();
 }
 
+function majIconeMarqueurDetail(fiche, actif) {
+  if (!fiche) return;
+  const mid = fiche._secteurEtab ? fiche.installationId : fiche.id;
+  const mg = fiche._secteurEtab ? installationEtabById(mid) : fiche;
+  if (!markers[mid] || !mg) return;
+  markers[mid].setIcon(makeIcon(actif, badgeMarqueur(mg), couleurEpingle(mg), mid));
+}
+
 function toggleDetail(id) {
   if (id === activeId) { closeDetail(); }
   else { openDetail(id); }
@@ -2955,12 +3113,10 @@ function openDetail(id) {
   if (activeId !== null && activeId !== id && notesDirty &&
       !confirm("Vos notes ne sont pas sauvegardées. Changer de fiche sans les sauvegarder ?")) return;
   notesDirty = false;
-  if (activeId !== null && markers[activeId]) markers[activeId].setIcon(makeIcon(false, rankOf(activeId), couleurMilieu(byId(activeId)), activeId));
+  if (activeId !== null) majIconeMarqueurDetail(byId(activeId), false);
   document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
   activeId = id;
-  // Garde : buildMarkers() peut avoir sauté ce marqueur (fiche invalide,
-  // filet de sécurité du 17 août) sans que la fiche elle-même soit exclue.
-  if (markers[id]) markers[id].setIcon(makeIcon(true, rankOf(id), couleurMilieu(g), id));
+  majIconeMarqueurDetail(g, true);
   updateLegendVisibility();
   document.getElementById('si-'+id)?.classList.add('active');
   // 29 août 2026 : le flyTo() était ICI, AVANT la construction de la fiche. Si la couche
@@ -2980,6 +3136,51 @@ function openDetail(id) {
   if (sbOverlay) sbOverlay.classList.remove('show');
   if (sbToggle) sbToggle.classList.add('hidden');
   if (typeof peekOff === 'function') peekOff();
+
+  if (modeCarte === 'etablissements' && g._secteurEtab) {
+    document.getElementById('dp-tag').textContent = g.type;
+    document.getElementById('dp-name-disp').innerHTML = esc(g.nom.trim());
+    (function(){ var c = couleurMilieu(g); var dh = document.querySelector('#detail .dp-head'); if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; } var tg = document.getElementById('dp-tag'); if (tg) tg.style.color = c; })();
+    const statutHtml = recruteActuellement(g)
+      ? '<span class="cmp-stat cmp-stat-on"><span class="cmp-stat-dot"></span>En recrutement</span>'
+      : '<span class="cmp-stat cmp-stat-off"><span class="cmp-stat-dot"></span>Ne recrute pas actuellement</span>';
+    document.getElementById('dp-body').innerHTML = `
+      <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(g.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(g.id) ? '★ Retirer des favoris' : '☆ Ajouter aux favoris'}</button></div>
+      <div class="vw-sec">
+        <div class="vw-sec-title">Milieu</div>
+        <div class="vw-row"><span class="vw-label">Installation</span><span class="vw-value">${esc(g.nomInstallation)}</span></div>
+        <div class="vw-row"><span class="vw-label">Ville</span><span class="vw-value">${esc(g.ville)}</span></div>
+        <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(g.rls || 'À venir')}${g.missionRegionale ? ' · Mission régionale' : ''}</span></div>
+        <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(g)}</span></div>
+        ${g.mentionPublique ? `<div class="vw-row"><span class="vw-label">Note</span><span class="vw-value">${esc(g.mentionPublique)}</span></div>` : ''}
+      </div>
+      <div class="vw-divider"></div>
+      <div class="vw-sec">
+        <div class="vw-sec-title">Recrutement</div>
+        <div class="vw-row"><span class="vw-label">Statut</span><span class="vw-value">${statutHtml}</span></div>
+        ${g.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
+        <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">À venir</span></div>
+      </div>
+      <div class="vw-divider"></div>
+      <div class="notes-sec">
+        <div class="vw-sec-title">Mes notes</div>
+        <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur ce secteur (sauvegardées dans votre navigateur)">${esc(g.notes || '')}</textarea>
+        <div class="notes-actions">
+          <button class="btn-save" id="btn-save-notes" aria-label="Sauvegarder mes notes">💾 Sauvegarder mes notes</button>
+          <span class="save-msg" id="save-msg">✅ Notes sauvegardées</span>
+        </div>
+      </div>`;
+    document.getElementById('detail').classList.add('open');
+    document.body.classList.add('fiche-open');
+    try { map.flyTo([g.lat, g.lng], 14, { duration:1 }); } catch (err) {
+      console.warn('Déplacement de la carte impossible, la fiche reste ouverte :', err);
+    }
+    const notesTa = document.getElementById('notes-input');
+    if (notesTa) notesTa.addEventListener('input', () => { notesDirty = true; });
+    const favBtn = document.getElementById('dp-fav-btn');
+    if (favBtn) favBtn.addEventListener('click', () => toggleFav(g.id));
+    return;
+  }
 
   document.getElementById('dp-tag').textContent = typeLabel(g.type);
   document.getElementById('dp-name-disp').innerHTML = esc(g.nom.trim()) + badgeVerifHtml(g);
@@ -3184,7 +3385,7 @@ function saveNotes(flash = true) {
 function closeDetailUI() {
   // On retire le paramètre ?c= pour que l'URL reflète l'état réel de l'app.
   if (location.search) { try { history.replaceState({}, '', urlEtat()); } catch (e) {} }
-  if (activeId !== null && markers[activeId]) markers[activeId].setIcon(makeIcon(false, rankOf(activeId), couleurMilieu(byId(activeId)), activeId));
+  if (activeId !== null) majIconeMarqueurDetail(byId(activeId), false);
   activeId = null;
   document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
   document.getElementById('detail').classList.remove('open');
@@ -3422,7 +3623,7 @@ function showUpdateDate() {
   }
 }
 
-function initData(data) {
+function initData(data, etabData) {
   const brut = Array.isArray(data) ? data : (data.cliniques || []);
   // Une fiche dont « visible » vaut false est conservée dans data.json mais
   // n'apparaît nulle part dans l'application : c'est le cas d'un milieu qui ne
@@ -3450,17 +3651,11 @@ function initData(data) {
     return true;
   };
   cliniques = brut.filter(g => g.visible !== false && g.categorie !== 'etablissement' && ficheValide(g));
-  // Les sept fiches « établissement » de la Montérégie-Est sont conservées dans data.json et
-  // activées uniquement dans leur onglet distinct, avec le même filtre de recrutement que les
-  // cliniques (voir statutVisible() et l'interrupteur « Tous les établissements »).
-  etablissements = brut.filter(g => g.categorie === 'etablissement' && ficheValide(g));
-  // Garde-fou défensif : le fichier est déjà filtré à l'Est, mais une donnée importée par erreur
-  // ne peut tout de même pas apparaître dans cette application autonome.
+  preparerCoucheEtablissements(etabData);
   cliniques = cliniques.filter(g => g.region === 'Est');
-  etablissements = etablissements.filter(g => g.region === 'Est');
   const paramsInit = new URLSearchParams(location.search);
   modeCarte = paramsInit.get('mode') === 'etablissements' ? 'etablissements' : 'cliniques';
-  gmfs = modeCarte === 'etablissements' ? etablissements : cliniques;
+  gmfs = modeCarte === 'etablissements' ? secteursEtab : cliniques;
   calculerDecalagesMarqueurs();
   // 27 août 2026 : (ré)initialise la vue « Toutes les cliniques » à chaque chargement des
   // données — un rechargement de page ne doit jamais garder une vue élargie ouverte par accident.
@@ -3538,11 +3733,17 @@ function initData(data) {
 
 fetch('../data.json', { cache: 'no-cache' })
   .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-  .then(initData)
+  .then(data => Promise.all([
+    data,
+    fetch('../data-etablissements.json', { cache: 'no-cache' })
+      .then(r => (r.ok ? r.json() : null))
+      .catch(() => null)
+  ]))
+  .then(([data, etabData]) => initData(data, etabData))
   .catch(err => {
-    console.error('Chargement de data.json impossible :', err);
+    console.error('Chargement des données impossible :', err);
     const el = document.getElementById('maj-date');
-    if (el) el.textContent = '\u26a0 Données indisponibles (vérifiez data.json)';
+    if (el) el.textContent = '\u26a0 Données indisponibles (vérifiez data.json et data-etablissements.json)';
     // Sur téléphone, la liste latérale est un tiroir fermé : le message ci-dessus
     // y serait invisible. Le toast, lui, s'affiche par-dessus la carte.
     if (typeof showToast === 'function') {

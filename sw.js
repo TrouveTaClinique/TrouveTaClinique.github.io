@@ -5,13 +5,15 @@
 'use strict';
 
 const CACHE_PREFIX = 'trouve-clinique-est-';
-const CACHE = CACHE_PREFIX + 'v53-sq-restaure';
+// v54-secteurs-etablissements (2 septembre 2026) : couche data-etablissements.json pour l'onglet Établissements.
+const CACHE = CACHE_PREFIX + 'v54-secteurs-etablissements';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [
   '/monteregie-est/',
   '/monteregie-est/index.html',
   '/data.json',
+  '/data-etablissements.json',
   '/territoires-monteregie.js',
   '/territoires-rls-est.js',
   '/leaflet.css',
@@ -32,7 +34,8 @@ const CORE = [
 
 const CORE_PATHS = new Set(CORE);
 const MUTABLES = new Set([
-  '/data.json', '/territoires-monteregie.js', '/territoires-rls-est.js'
+  '/data.json',
+  '/data-etablissements.json', '/territoires-monteregie.js', '/territoires-rls-est.js'
 ]);
 
 self.addEventListener('install', event => {

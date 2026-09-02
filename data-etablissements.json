@@ -1,0 +1,981 @@
+{
+  "schemaVersion": 1,
+  "regionApplication": "Est",
+  "cycleBesoins": "2027",
+  "dateSource": "2026-08-28",
+  "meta": {
+    "politiqueAffichage": {
+      "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec Nancy mais ne sortent jamais dans le HTML.",
+      "besoinsDichotomiques": true,
+      "afficherETC": false,
+      "afficherResponsableNom": false,
+      "afficherResponsableCourriel": false,
+      "contactAffiche": "À venir",
+      "champsInternes": [
+        "etc",
+        "responsableNom",
+        "responsableCourriel",
+        "notesInternes",
+        "valeursSource",
+        "decision"
+      ]
+    },
+    "statutValidation": "brouillon - non valide pour publication",
+    "nbInstallations": 22,
+    "nbSecteurs": 31
+  },
+  "installations": [
+    {
+      "id": "INS-003",
+      "nom": "Centre D'hébergement de Contrecoeur",
+      "type": "chsld",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "4700, route Marie-Victorin",
+      "ville": "Contrecoeur",
+      "codePostal": "J0L 1C0",
+      "lat": 45.854819,
+      "lng": -73.243849,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-contrecoeur",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-002",
+      "nom": "Centre D'hébergement Jeanne-Crevier",
+      "type": "chsld",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "151, rue De Muy",
+      "ville": "Boucherville",
+      "codePostal": "J4B 4W7",
+      "lat": 45.613575,
+      "lng": -73.452255,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-jeanne-crevier",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-004",
+      "nom": "CLSC de Longueuil-Ouest",
+      "type": "clsc",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 4
+      },
+      "adresse": "201, boulevard Curé-Poirier Ouest",
+      "ville": "Longueuil",
+      "codePostal": "J4J 2G4",
+      "lat": 45.527516,
+      "lng": -73.483193,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-de-longueuil-ouest",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-005",
+      "nom": "CLSC des Seigneuries",
+      "type": "clsc",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 124
+      },
+      "adresse": "2220, boulevard René-Gaultier, Varennes",
+      "ville": "Varennes",
+      "codePostal": "J3X 2J4",
+      "lat": 45.68248,
+      "lng": -73.43608,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-de-vercheres",
+      "coordonneesApproximatives": false,
+      "mentionPublique": "Le CLSC des Seigneuries dessert plusieurs points de service (Varennes, Verchères, et possiblement d'autres).",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-020",
+      "nom": "CLSC Simonne-Monet-Chartrand",
+      "type": "clsc",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 3
+      },
+      "adresse": "1303, boulevard Jacques-Cartier Est",
+      "ville": "Longueuil",
+      "codePostal": "J4M 2Y8",
+      "lat": 45.53628,
+      "lng": -73.45844,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-simonne-monet-chartrand",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-022",
+      "nom": "GMF-U des Montérégiennes",
+      "type": "gmf-u",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 7
+      },
+      "adresse": "20-N, boulevard de Mortagne",
+      "ville": "Boucherville",
+      "codePostal": "J4B 5K6",
+      "lat": 45.568534,
+      "lng": -73.447808,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-001",
+      "nom": "Hôpital Pierre-Boucher",
+      "type": "hopital",
+      "territoireSource": "Pierre-Boucher",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "hopitaux",
+        "id": 1
+      },
+      "adresse": "1333, boulevard Jacques-Cartier Est",
+      "ville": "Longueuil",
+      "codePostal": "J4M 2A5",
+      "lat": 45.53781,
+      "lng": -73.45925,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hopital-pierre-boucher",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-014",
+      "nom": "Centre D'hébergement J.-Arsène-Parenteau",
+      "type": "chsld",
+      "territoireSource": "Pierre-De Saurel",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "40, rue De Ramezay",
+      "ville": "Sorel-Tracy",
+      "codePostal": "J3P 3Y7",
+      "lat": 46.04638,
+      "lng": -73.11006,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-j-arsene-parenteau",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-013",
+      "nom": "Centre D'hébergement Élisabeth-Lafrance",
+      "type": "chsld",
+      "territoireSource": "Pierre-De Saurel",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "151, rue George",
+      "ville": "Sorel-Tracy",
+      "codePostal": "J3P 1C8",
+      "lat": 46.046002,
+      "lng": -73.108695,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-elisabeth-lafrance",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-015",
+      "nom": "CLSC Gaston-Bélanger",
+      "type": "clsc",
+      "territoireSource": "Pierre-De Saurel",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 23
+      },
+      "adresse": "30, rue Ferland",
+      "ville": "Sorel-Tracy",
+      "codePostal": "J3P 3C7",
+      "lat": 46.045153,
+      "lng": -73.093733,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-gaston-belanger",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-012",
+      "nom": "Hôtel-Dieu de Sorel",
+      "type": "hopital",
+      "territoireSource": "Pierre-De Saurel",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "hopitaux",
+        "id": 3
+      },
+      "adresse": "400, avenue de l'Hôtel-Dieu",
+      "ville": "Sorel-Tracy",
+      "codePostal": "J3P 1N5",
+      "lat": 46.045277,
+      "lng": -73.095157,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hotel-dieu-de-sorel",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-007",
+      "nom": "Centre D'hébergement de L'hôtel-Dieu-De-Saint-Hyacinthe",
+      "type": "chsld",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "1800, rue Dessaulles",
+      "ville": "Saint-Hyacinthe",
+      "codePostal": "J2S 2T2",
+      "lat": 45.62557,
+      "lng": -72.95044,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-lhotel-dieu-de-saint-hyacinthe",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-008",
+      "nom": "Centre D'hébergement de Montarville",
+      "type": "chsld",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "265, boulevard Seigneurial Ouest",
+      "ville": "Saint-Bruno-de-Montarville",
+      "codePostal": "J3V 2H4",
+      "lat": 45.52169,
+      "lng": -73.34482,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-montarville",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-009",
+      "nom": "Centre D'hébergement Marguerite-Adam",
+      "type": "chsld",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "425, rue Hubert",
+      "ville": "Beloeil",
+      "codePostal": "J3G 2T1",
+      "lat": 45.57194,
+      "lng": -73.20735,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-marguerite-adam",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-010",
+      "nom": "CLSC des Maskoutains",
+      "type": "clsc",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 13
+      },
+      "adresse": "1015, rue Gauthier",
+      "ville": "Saint-Hyacinthe",
+      "codePostal": "J2S 8T2",
+      "lat": 45.636887,
+      "lng": -72.959969,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-des-maskoutains",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-011",
+      "nom": "CLSC des Patriotes",
+      "type": "clsc",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 12
+      },
+      "adresse": "300, rue Serge-Pepin",
+      "ville": "Beloeil",
+      "codePostal": "J3G 0B8",
+      "lat": 45.590953,
+      "lng": -73.199961,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-des-patriotes",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-021",
+      "nom": "GMF-U Richelieu-Yamaska",
+      "type": "gmf-u",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 14
+      },
+      "adresse": "1021, rue Gauthier",
+      "ville": "Saint-Hyacinthe",
+      "codePostal": "J2S 8T2",
+      "lat": 45.637442,
+      "lng": -72.959092,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/groupe-de-medecine-de-famille-universitaire-richelieu-yamaska-gmf-u",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-006",
+      "nom": "Hôpital Honoré-Mercier",
+      "type": "hopital",
+      "territoireSource": "Richelieu-Yamaska",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "hopitaux",
+        "id": 2
+      },
+      "adresse": "2750, boulevard Laframboise",
+      "ville": "Saint-Hyacinthe",
+      "codePostal": "J2S 4Y8",
+      "lat": 45.634864,
+      "lng": -72.959487,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hopital-honore-mercier",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-016",
+      "nom": "Centre de Détention",
+      "type": "detention",
+      "territoireSource": "Régional",
+      "missionRegionale": true,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 87
+      },
+      "adresse": "400, rue Auber",
+      "ville": "Sorel-Tracy",
+      "codePostal": "J3P 0S3",
+      "lat": 46.03026,
+      "lng": -73.07782,
+      "lienWeb": null,
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-017",
+      "nom": "Centre de Réadaptation en dépendance Saint-Hyacinthe",
+      "type": "crd",
+      "territoireSource": "Régional",
+      "missionRegionale": true,
+      "referenceExistante": null,
+      "adresse": "2115, boulevard Casavant Ouest, bureau 202",
+      "ville": "Saint-Hyacinthe",
+      "codePostal": "J2S 7E5",
+      "lat": 45.634373,
+      "lng": -72.965607,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-hyacinthe",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-019",
+      "nom": "Centre de Réadaptation en Dépendance Longueuil",
+      "type": "crd",
+      "territoireSource": "Régional",
+      "missionRegionale": true,
+      "referenceExistante": null,
+      "adresse": "1525, rue Joliette, Longueuil (QC) J4K 4W4",
+      "ville": "Longueuil",
+      "codePostal": "J3Y 7G5",
+      "lat": 45.523361,
+      "lng": -73.495821,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-la-rue-joliette",
+      "coordonneesApproximatives": false,
+      "mentionPublique": null,
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-018",
+      "nom": "Centre de Réadaptation en Dépendance Ste-Philippe",
+      "type": "crd",
+      "territoireSource": "Régional",
+      "missionRegionale": true,
+      "referenceExistante": null,
+      "adresse": "6, rue Foucreault, Saint-Philippe",
+      "ville": "Sainte-Philippe",
+      "codePostal": "J0L 2K0",
+      "lat": 45.354144,
+      "lng": -73.477644,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-philippe-saint-philippe-addiction",
+      "coordonneesApproximatives": false,
+      "mentionPublique": "Mission régionale — site situé en Montérégie-Ouest.",
+      "publication": {
+        "visible": true
+      }
+    }
+  ],
+  "secteurs": [
+    {
+      "id": "SEC-007",
+      "installationId": "INS-003",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-006",
+      "installationId": "INS-002",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-008",
+      "installationId": "INS-004",
+      "libelle": "Soins à domicile, soins palliatifs et prise en charge",
+      "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": true,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-009",
+      "installationId": "INS-005",
+      "libelle": "Soins à domicile, soins palliatifs et prise en charge",
+      "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": true,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-031",
+      "installationId": "INS-020",
+      "libelle": "Soins à domicile, soins palliatifs et prise en charge",
+      "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": true,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-005",
+      "installationId": "INS-022",
+      "libelle": "GMF-U",
+      "secteur": "GMF-U",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": "oui",
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-001",
+      "installationId": "INS-001",
+      "libelle": "Urgence",
+      "secteur": "Urgence",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-002",
+      "installationId": "INS-001",
+      "libelle": "Hospitalisation",
+      "secteur": "Hospitalisation",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-003",
+      "installationId": "INS-001",
+      "libelle": "UCDG",
+      "secteur": "UCDG",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-004",
+      "installationId": "INS-001",
+      "libelle": "Soins intensifs",
+      "secteur": "Soins intensifs (unité ≤ 6 lits)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-025",
+      "installationId": "INS-014",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-024",
+      "installationId": "INS-013",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-026",
+      "installationId": "INS-015",
+      "libelle": "Soins à domicile, soins palliatifs et prise en charge",
+      "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": true,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-019",
+      "installationId": "INS-012",
+      "libelle": "Urgence",
+      "secteur": "Urgence",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-020",
+      "installationId": "INS-012",
+      "libelle": "Hospitalisation",
+      "secteur": "Hospitalisation",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-021",
+      "installationId": "INS-012",
+      "libelle": "UCDG",
+      "secteur": "UCDG",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-022",
+      "installationId": "INS-012",
+      "libelle": "Obstétrique",
+      "secteur": "Obstétrique",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-023",
+      "installationId": "INS-012",
+      "libelle": "Soins intensifs",
+      "secteur": "Soins intensifs (unité ≤ 6 lits)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-014",
+      "installationId": "INS-007",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-015",
+      "installationId": "INS-008",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-016",
+      "installationId": "INS-009",
+      "libelle": "Longue durée",
+      "secteur": "Longue durée",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-017",
+      "installationId": "INS-010",
+      "libelle": "Soins à domicile, soins palliatifs et prise en charge",
+      "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": true,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-018",
+      "installationId": "INS-011",
+      "libelle": "Soins à domicile, soins palliatifs et prise en charge",
+      "secteur": "SAD-SIAD-SP (Prise en charge)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": true,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-013",
+      "installationId": "INS-021",
+      "libelle": "GMF-U",
+      "secteur": "GMF-U",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": "oui",
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-010",
+      "installationId": "INS-006",
+      "libelle": "Urgence",
+      "secteur": "Urgence",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-011",
+      "installationId": "INS-006",
+      "libelle": "Hospitalisation",
+      "secteur": "Hospitalisation",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-012",
+      "installationId": "INS-006",
+      "libelle": "UCDG",
+      "secteur": "UCDG",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-027",
+      "installationId": "INS-016",
+      "libelle": "Centre de détention",
+      "secteur": "Centre de détention",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-028",
+      "installationId": "INS-017",
+      "libelle": "Réadaptation en dépendance",
+      "secteur": "Centre de réadaptation en dépendance (CRD)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-030",
+      "installationId": "INS-019",
+      "libelle": "Réadaptation en dépendance",
+      "secteur": "Centre de réadaptation en dépendance (CRD)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    },
+    {
+      "id": "SEC-029",
+      "installationId": "INS-018",
+      "libelle": "Réadaptation en dépendance",
+      "secteur": "Centre de réadaptation en dépendance (CRD)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-08-28"
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": {
+        "etat": "a-valider",
+        "verifieLe": null
+      }
+    }
+  ]
+}

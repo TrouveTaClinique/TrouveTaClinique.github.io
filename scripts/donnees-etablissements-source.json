@@ -1,0 +1,911 @@
+{
+  "meta": {
+    "titre": "Secteurs en recrutement en etablissement - Monteregie-Est - PTEM 2027",
+    "source": "Modele_Carte_Recrutement_Medical_CISSSME_1_rempli_avec_CLSC_Simonne_Monet_Chartrand.xlsx",
+    "transmisPar": "Nancy Langlois, Sante Quebec Monteregie-Est",
+    "dateReception": "2026-09-02",
+    "dateDonnees": "2026-08-28",
+    "statutValidation": "brouillon - non valide pour publication",
+    "politiqueAffichage": {
+      "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec Nancy mais ne sortent jamais dans le HTML.",
+      "besoinsDichotomiques": true,
+      "afficherETC": false,
+      "afficherResponsableNom": false,
+      "afficherResponsableCourriel": false,
+      "contactAffiche": "À venir",
+      "champsInternes": [
+        "etc",
+        "responsableNom",
+        "responsableCourriel",
+        "notesInternes",
+        "valeursSource",
+        "decision"
+      ]
+    },
+    "nbEtablissements": 22,
+    "nbSecteurs": 31,
+    "totalEtc": 53.8
+  },
+  "etablissements": [
+    {
+      "id": "INS-003",
+      "nom": "CENTRE D'HÉBERGEMENT DE CONTRECOEUR",
+      "type": "CHSLD / hébergement",
+      "rls": "Pierre-Boucher",
+      "ville": "Contrecoeur",
+      "adresse": "4700, route Marie-Victorin",
+      "codePostal": "J0L 1C0",
+      "lat": 45.85431,
+      "lng": -73.242544,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-contrecoeur",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-007",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Mailan Pham",
+          "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 12. Commentaire source : DRE ML PHAM"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-002",
+      "nom": "CENTRE D'HÉBERGEMENT JEANNE-CREVIER",
+      "type": "CHSLD / hébergement",
+      "rls": "Pierre-Boucher",
+      "ville": "Boucherville",
+      "adresse": "151, rue De Muy",
+      "codePostal": "J4B 4W7",
+      "lat": 45.613575,
+      "lng": -73.452255,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-jeanne-crevier",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-006",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Mailan Pham",
+          "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 10. Commentaire source : DRE ML PHAM"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-004",
+      "nom": "CLSC DE LONGUEUIL-OUEST",
+      "type": "CLSC",
+      "rls": "Pierre-Boucher",
+      "ville": "Longueuil",
+      "adresse": "201, boulevard Curé-Poirier Ouest",
+      "codePostal": "J4J 2G4",
+      "lat": 45.527516,
+      "lng": -73.483193,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-de-longueuil-ouest",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-008",
+          "secteur": "SAD-SIAD-SP (Prise en charge)",
+          "libelleAffichage": "Soins à domicile, soins palliatifs et prise en charge",
+          "etc": 3,
+          "statut": "Actif",
+          "responsableNom": "Angela Leach Orts",
+          "responsableCourriel": "angela.leach.orts.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 17. Aucun responsable indiqué dans le commentaire source."
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 3.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 4
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-005",
+      "nom": "CLSC DES SEIGNEURIES",
+      "type": "CLSC",
+      "rls": "Pierre-Boucher",
+      "ville": "Varennes",
+      "adresse": "2220, boulevard René-Gaultier, Varennes",
+      "codePostal": "J3X 2J4",
+      "lat": 45.66762,
+      "lng": -73.43178,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-de-vercheres",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-009",
+          "secteur": "SAD-SIAD-SP (Prise en charge)",
+          "libelleAffichage": "Soins à domicile, soins palliatifs et prise en charge",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Josée Mercier",
+          "responsableCourriel": "josee.mercier.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 19. Commentaire source : CLSC : Josée Mercier\nLatitude/longitude : centroïde municipal de Verchères (point exact à valider)."
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 124
+        },
+        "multisite": true,
+        "mentionPublique": "Le CLSC des Seigneuries dessert plusieurs points de service (Varennes, Verchères, et possiblement d'autres).",
+        "motif": "Olivier, 2 sept. 2026 : le CLSC des Seigneuries est une entite multi-sites ; le point retenu est l'installation de Varennes deja presente dans data.json. L'onglet Secteurs donnait l'adresse de Vercheres — a valider avec Nancy.",
+        "validation": "provisoire"
+      },
+      "adresseSource": "50, rue de la Gabelle",
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-020",
+      "nom": "CLSC SIMONNE-MONET-CHARTRAND",
+      "type": "CLSC",
+      "rls": "Pierre-Boucher",
+      "ville": "Longueuil",
+      "adresse": "1303, boulevard Jacques-Cartier Est",
+      "codePostal": "J4M 2Y8",
+      "lat": 45.53614,
+      "lng": -73.45855,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-simonne-monet-chartrand",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-031",
+          "secteur": "SAD-SIAD-SP (Prise en charge)",
+          "libelleAffichage": "Soins à domicile, soins palliatifs et prise en charge",
+          "etc": 3,
+          "statut": "Actif",
+          "responsableNom": "Angela Leach Orts",
+          "responsableCourriel": "angela.leach.orts.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": null
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 3.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 3
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-022",
+      "nom": "GMF-U DES MONTÉRÉGIENNES",
+      "type": "GMF-U",
+      "rls": "Pierre-Boucher",
+      "ville": "Boucherville",
+      "adresse": "20-N, boulevard de Mortagne",
+      "codePostal": "J4B 5K6",
+      "lat": 45.56899,
+      "lng": -73.44854,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-005",
+          "secteur": "GMF-U",
+          "libelleAffichage": "GMF-U",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Elise O'Carroll",
+          "responsableCourriel": "elise.ocarroll.med@ssss.gouv.qc.ca",
+          "enseignement": "oui",
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 7
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-001",
+      "nom": "HÔPITAL PIERRE-BOUCHER",
+      "type": "Hôpital",
+      "rls": "Pierre-Boucher",
+      "ville": "Longueuil",
+      "adresse": "1333, boulevard Jacques-Cartier Est",
+      "codePostal": "J4M 2A5",
+      "lat": 45.53811,
+      "lng": -73.4582,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hopital-pierre-boucher",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-001",
+          "secteur": "Urgence",
+          "libelleAffichage": "Urgence",
+          "etc": 3,
+          "statut": "Actif",
+          "responsableNom": "MJ Arsenault",
+          "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
+        },
+        {
+          "id": "SEC-002",
+          "secteur": "Hospitalisation",
+          "libelleAffichage": "Hospitalisation",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "UCDG - Mailan Pham",
+          "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
+        },
+        {
+          "id": "SEC-003",
+          "secteur": "UCDG",
+          "libelleAffichage": "UCDG",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Mailan Pham",
+          "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
+        },
+        {
+          "id": "SEC-004",
+          "secteur": "Soins intensifs (unité ≤ 6 lits)",
+          "libelleAffichage": "Soins intensifs",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Marie-Christine Gélinas",
+          "responsableCourriel": "marie-christine.gelinas.med1@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 8.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "hopitaux",
+          "id": 1
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-014",
+      "nom": "CENTRE D'HÉBERGEMENT J.-ARSÈNE-PARENTEAU",
+      "type": "CHSLD / hébergement",
+      "rls": "Pierre-De Saurel",
+      "ville": "Sorel-Tracy",
+      "adresse": "40, rue De Ramezay",
+      "codePostal": "J3P 3Y7",
+      "lat": 46.04178,
+      "lng": -73.11358,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-j-arsene-parenteau",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-025",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Mylène Coté",
+          "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 37. Aucun responsable indiqué dans le commentaire source."
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-013",
+      "nom": "CENTRE D'HÉBERGEMENT ÉLISABETH-LAFRANCE",
+      "type": "CHSLD / hébergement",
+      "rls": "Pierre-De Saurel",
+      "ville": "Sorel-Tracy",
+      "adresse": "151, rue George",
+      "codePostal": "J3P 1C8",
+      "lat": 46.04178,
+      "lng": -73.11358,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-elisabeth-lafrance",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-024",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Mylène Coté",
+          "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 36. Aucun responsable indiqué dans le commentaire source."
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 2.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-015",
+      "nom": "CLSC GASTON-BÉLANGER",
+      "type": "CLSC",
+      "rls": "Pierre-De Saurel",
+      "ville": "Sorel-Tracy",
+      "adresse": "30, rue Ferland",
+      "codePostal": "J3P 3C7",
+      "lat": 46.04536,
+      "lng": -73.09348,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-gaston-belanger",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-026",
+          "secteur": "SAD-SIAD-SP (Prise en charge)",
+          "libelleAffichage": "Soins à domicile, soins palliatifs et prise en charge",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Dr Mathieu Galfard",
+          "responsableCourriel": "mathieu.galfard.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 39. Commentaire source : Dr Mathieu Galfard ; possiblement plusieurs temps partiels ; IPSPL bienvenu(e)!"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 23
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-012",
+      "nom": "HÔTEL-DIEU DE SOREL",
+      "type": "Hôpital",
+      "rls": "Pierre-De Saurel",
+      "ville": "Sorel-Tracy",
+      "adresse": "400, avenue de l'Hôtel-Dieu",
+      "codePostal": "J3P 1N5",
+      "lat": 46.04567,
+      "lng": -73.095042,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hotel-dieu-de-sorel",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-019",
+          "secteur": "Urgence",
+          "libelleAffichage": "Urgence",
+          "etc": 3,
+          "statut": "Actif",
+          "responsableNom": "MJ Arsenault",
+          "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
+        },
+        {
+          "id": "SEC-020",
+          "secteur": "Hospitalisation",
+          "libelleAffichage": "Hospitalisation",
+          "etc": 4,
+          "statut": "Actif",
+          "responsableNom": "Mylène Coté",
+          "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
+        },
+        {
+          "id": "SEC-021",
+          "secteur": "UCDG",
+          "libelleAffichage": "UCDG",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Mylène Coté",
+          "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
+        },
+        {
+          "id": "SEC-022",
+          "secteur": "Obstétrique",
+          "libelleAffichage": "Obstétrique",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "G. Cadieux",
+          "responsableCourriel": "genevieve.cadieux.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
+        },
+        {
+          "id": "SEC-023",
+          "secteur": "Soins intensifs (unité ≤ 6 lits)",
+          "libelleAffichage": "Soins intensifs",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Mylène Coté",
+          "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 11.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "hopitaux",
+          "id": 3
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-007",
+      "nom": "CENTRE D'HÉBERGEMENT DE L'HÔTEL-DIEU-DE-SAINT-HYACINTHE",
+      "type": "CHSLD / hébergement",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Saint-Hyacinthe",
+      "adresse": "1800, rue Dessaulles",
+      "codePostal": "J2S 2T2",
+      "lat": 45.62615,
+      "lng": -72.95042,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-lhotel-dieu-de-saint-hyacinthe",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-014",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Natacha Leblanc-Gagnon",
+          "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 23. Commentaire source : Natacha Leblanc-Gagnon"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-008",
+      "nom": "CENTRE D'HÉBERGEMENT DE MONTARVILLE",
+      "type": "CHSLD / hébergement",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Saint-Bruno-de-Montarville",
+      "adresse": "265, boulevard Seigneurial Ouest",
+      "codePostal": "J3V 2H4",
+      "lat": 45.533333,
+      "lng": -73.349998,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-montarville",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-015",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Natacha Leblanc-Gagnon",
+          "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 24. Commentaire source : Natacha Leblanc-Gagnon"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-009",
+      "nom": "CENTRE D'HÉBERGEMENT MARGUERITE-ADAM",
+      "type": "CHSLD / hébergement",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Beloeil",
+      "adresse": "425, rue Hubert",
+      "codePostal": "J3G 2T1",
+      "lat": 45.567924,
+      "lng": -73.203949,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-marguerite-adam",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-016",
+          "secteur": "Longue durée",
+          "libelleAffichage": "Longue durée",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Natacha Leblanc-Gagnon",
+          "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 25. Commentaire source : Natacha Leblanc-Gagnon"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-010",
+      "nom": "CLSC DES MASKOUTAINS",
+      "type": "CLSC",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Saint-Hyacinthe",
+      "adresse": "1015, rue Gauthier",
+      "codePostal": "J2S 8T2",
+      "lat": 45.63076,
+      "lng": -72.95699,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-des-maskoutains",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-017",
+          "secteur": "SAD-SIAD-SP (Prise en charge)",
+          "libelleAffichage": "Soins à domicile, soins palliatifs et prise en charge",
+          "etc": 1,
+          "statut": "Actif",
+          "responsableNom": "Julie Gagnon",
+          "responsableCourriel": "Julie.gagnon.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 29. Commentaire source :  Julie Gagnon  - Aurions besoin de 1 ETC MD ou 1 IPS"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 1.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 13
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-011",
+      "nom": "CLSC DES PATRIOTES",
+      "type": "CLSC",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Beloeil",
+      "adresse": "300, rue Serge-Pepin",
+      "codePostal": "J3G 0B8",
+      "lat": 45.567924,
+      "lng": -73.203949,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-des-patriotes",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-018",
+          "secteur": "SAD-SIAD-SP (Prise en charge)",
+          "libelleAffichage": "Soins à domicile, soins palliatifs et prise en charge",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Claire Wadoux",
+          "responsableCourriel": "claire.wadoux.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 30. Commentaire source : Carmen Messier"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 2.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 12
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-021",
+      "nom": "GMF-U RICHELIEU-YAMASKA",
+      "type": "GMF-U",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Saint-Hyacinthe",
+      "adresse": "1021, rue Gauthier",
+      "codePostal": "J2S 8T2",
+      "lat": 45.637532,
+      "lng": -72.959282,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/groupe-de-medecine-de-famille-universitaire-richelieu-yamaska-gmf-u",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-013",
+          "secteur": "GMF-U",
+          "libelleAffichage": "GMF-U",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Dr Philippe Imbeault",
+          "responsableCourriel": "philippe.imbeault.med@ssss.gouv.qc.ca",
+          "enseignement": "oui",
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 2.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 14
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-006",
+      "nom": "HÔPITAL HONORÉ-MERCIER",
+      "type": "Hôpital",
+      "rls": "Richelieu-Yamaska",
+      "ville": "Saint-Hyacinthe",
+      "adresse": "2750, boulevard Laframboise",
+      "codePostal": "J2S 4Y8",
+      "lat": 45.633439,
+      "lng": -72.960346,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hopital-honore-mercier",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-010",
+          "secteur": "Urgence",
+          "libelleAffichage": "Urgence",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "MJ Arsenault",
+          "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
+        },
+        {
+          "id": "SEC-011",
+          "secteur": "Hospitalisation",
+          "libelleAffichage": "Hospitalisation",
+          "etc": 4,
+          "statut": "Actif",
+          "responsableNom": "Natacha Leblanc-Gagnon",
+          "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
+        },
+        {
+          "id": "SEC-012",
+          "secteur": "UCDG",
+          "libelleAffichage": "UCDG",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Natacha Leblanc-Gagnon",
+          "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 8.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "hopitaux",
+          "id": 2
+        }
+      },
+      "missionRegionale": false
+    },
+    {
+      "id": "INS-016",
+      "nom": "CENTRE DE DÉTENTION",
+      "type": "Centre de détention",
+      "rls": "Régional",
+      "ville": "Sorel-Tracy",
+      "adresse": "400, rue Auber",
+      "codePostal": "J3P 0S3",
+      "lat": 46.04178,
+      "lng": -73.11358,
+      "lienWeb": null,
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-027",
+          "secteur": "Centre de détention",
+          "libelleAffichage": "Centre de détention",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Dr Haméon-Plante",
+          "responsableCourriel": "christophe.hameon-plante.med@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 47. Commentaire source : Détention - Dr Haméon Plante"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 2.0,
+      "decision": {
+        "referenceExistante": {
+          "collection": "cliniques",
+          "id": 87
+        },
+        "missionRegionale": true
+      },
+      "missionRegionale": true
+    },
+    {
+      "id": "INS-017",
+      "nom": "CENTRE DE READAPTATION EN DEPENDANCE SAINT-HYACINTHE",
+      "type": "Centre de réadaptation",
+      "rls": "Régional",
+      "ville": "Saint-Hyacinthe",
+      "adresse": "2115, boulevard Casavant Ouest, bureau 202",
+      "codePostal": "J2S 7E5",
+      "lat": 45.63427,
+      "lng": -72.96586,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-hyacinthe",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-028",
+          "secteur": "Centre de réadaptation en dépendance (CRD)",
+          "libelleAffichage": "Réadaptation en dépendance",
+          "etc": 0.3,
+          "statut": "Actif",
+          "responsableNom": "Marie-Eve Turgeon",
+          "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 48. Commentaire source : CRD - Marie-Eve Turgeon"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 0.3,
+      "decision": {
+        "missionRegionale": true
+      },
+      "missionRegionale": true
+    },
+    {
+      "id": "INS-019",
+      "nom": "CENTRE DE READAPTATION EN DÉPENDANCE LONGUEUIL",
+      "type": "Centre de réadaptation",
+      "rls": "Régional",
+      "ville": "Longueuil",
+      "adresse": "1525, rue Joliette, Longueuil (QC) J4K 4W4",
+      "codePostal": "J3Y 7G5",
+      "lat": 45.52341,
+      "lng": -73.49584,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-la-rue-joliette",
+      "coordonneesApproximatives": false,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-030",
+          "secteur": "Centre de réadaptation en dépendance (CRD)",
+          "libelleAffichage": "Réadaptation en dépendance",
+          "etc": 0.5,
+          "statut": "Actif",
+          "responsableNom": "Marie-Eve Turgeon",
+          "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 51. Commentaire source : Dre Marie-Eve Turgeon"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 0.5,
+      "decision": {
+        "missionRegionale": true,
+        "motif": "Olivier, 2 sept. 2026 : rue Joliette retenue. La ligne du secteur porte cette adresse ET le lien officiel de ce site ; l'onglet Installations donnait le 5110 boul. Cousineau, ecarte.",
+        "validation": "provisoire"
+      },
+      "adresseSource": "5110, boulevard Cousineau, 4e étage",
+      "villeSource": "Longueuil",
+      "latSource": 45.521906,
+      "lngSource": -73.464458,
+      "missionRegionale": true
+    },
+    {
+      "id": "INS-018",
+      "nom": "CENTRE DE READAPTATION EN DÉPENDANCE Ste-PHILIPPE",
+      "type": "Centre de réadaptation",
+      "rls": "Régional",
+      "ville": "Sainte-Philippe",
+      "adresse": "6, rue Foucreault, Saint-Philippe",
+      "codePostal": "J0L 2K0",
+      "lat": 45.376,
+      "lng": -73.4811,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-philippe-saint-philippe-addiction",
+      "coordonneesApproximatives": true,
+      "recrutementActif": true,
+      "besoins": [
+        {
+          "id": "SEC-029",
+          "secteur": "Centre de réadaptation en dépendance (CRD)",
+          "libelleAffichage": "Réadaptation en dépendance",
+          "etc": 2,
+          "statut": "Actif",
+          "responsableNom": "Marie-Eve Turgeon",
+          "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
+          "enseignement": null,
+          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 50. Commentaire source : CRD - Marie-Eve Turgeon"
+        }
+      ],
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "dateMaj": "2026-08-28",
+      "totalEtc": 2.0,
+      "decision": {
+        "missionRegionale": true,
+        "regionGeographique": "Ouest",
+        "afficherSurCarteEst": true,
+        "mentionPublique": "Mission régionale — site situé en Montérégie-Ouest.",
+        "motif": "Olivier, 2 sept. 2026 : affiche, etiquete mission regionale avec sa vraie ville. Un resident cherchant en readaptation en dependance gagne a voir les trois sites.",
+        "validation": "provisoire"
+      },
+      "missionRegionale": true
+    }
+  ],
+  "secteursOrphelins": []
+}

@@ -18,7 +18,7 @@ const DOSSIERS = new Set([
   'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest'
 ]);
 const FICHIERS = new Set([
-  'index.html', '404.html', 'data.json', 'leaflet.css', 'leaflet.js',
+  'index.html', '404.html', 'data.json', 'data-etablissements.json', 'leaflet.css', 'leaflet.js',
   'territoires-monteregie.js', 'territoires-rls-est.js', 'territoires-rls-centre-ouest.js',
   'sw.js', 'manifest-est.webmanifest', 'manifest.json', 'LICENSE',
   'apple-touch-icon-180.png', 'apple-touch-icon-est.png',
