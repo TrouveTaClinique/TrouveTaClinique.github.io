@@ -2831,12 +2831,12 @@ function openDetail(id) {
       ${recruteActuellement(g) ? `
       ${recruitRows}
       ${poRaw ? `<div class="vw-row"><span class="vw-label">Portes ouvertes</span><span class="vw-value">${poDisp}</span></div>` : ''}
-      ${/* 29 août 2026 : la fiche affichait « Contact » + personneRessource, donc un COURRIEL en
-            clair, alors que la décision du 19 août est de ne pas publier les courriels et que
-            responsableNom existe pour ça. On publie le NOM seulement ; aucune ligne si le nom
-            est absent (pas de faux « À venir »). */''}
+            ${/* Contact recrutement : nom + courriel(s) publiés (décision du 2 sept. 2026). */''}
       ${String(g.responsableNom || '').trim()
         ? `<div class="vw-row"><span class="vw-label">Responsable du recrutement</span><span class="vw-value">${esc(String(g.responsableNom).trim())}</span></div>`
+        : ''}
+      ${String(g.personneRessource || '').trim()
+        ? `<div class="vw-row"><span class="vw-label">Contact recrutement</span><span class="vw-value">${contactLink(String(g.personneRessource).trim())}</span></div>`
         : ''}
       ` : `<div class="recruit-status"><span class="status-i" aria-hidden="true">i</span><span><strong>Cette clinique ne recrute pas actuellement.</strong></span></div>`}
     </div>

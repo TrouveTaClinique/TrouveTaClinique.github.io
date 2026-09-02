@@ -102,23 +102,25 @@ jobs:
       - name: Fabriquer la carte complète et les trois cartes régionales
         run: node scripts/publier-regions.js
 
-      - name: Vérifier l'absence de la police interdite et la présence de Segoe UI
-        # Ajouté le 30 août 2026 avec le thème Santé Québec. La police à lettres attachées ne
-        # doit plus jamais réapparaître, y compris dans un commentaire de code — voir l'incident
-        # documenté dans le journal du projet, où ce nom avait été écrit par erreur dans un
-        # commentaire explicatif. « Segoe UI » doit être présente dans index.html : son absence
-        # signifierait qu'une régénération a écrasé le thème en place.
+      - name: Vérifier les polices selon le périmètre visuel approuvé
+        # 2 septembre 2026 : Kaushan Script reste autorisé sur les cartes historiques
+        # (complète, Centre, Ouest) via carte.template.html. Elle est interdite sur le
+        # prototype Santé Québec de l'Est, qui utilise Segoe UI exclusivement.
         run: |
           set -e
-          if grep -riIl "kaushan" index.html scripts/carte.template.html scripts/carte-est-sq.template.html monteregie/index.html monteregie-est/index.html monteregie-centre/index.html monteregie-ouest/index.html scripts/publier-regions.js 2>/dev/null; then
-            echo "::error::Police à lettres attachées détectée dans un fichier actif. Publication annulée."
+          if grep -riIl "kaushan" scripts/carte-est-sq.template.html monteregie-est/index.html 2>/dev/null; then
+            echo "::error::Police à lettres attachées détectée dans le thème Santé Québec de l'Est. Publication annulée."
             exit 1
           fi
           if ! grep -q "Segoe UI" scripts/carte.template.html || ! grep -q "Segoe UI" assets/seo-pages.css; then
             echo "::error::« Segoe UI » est absente d'un gabarit actif. Le thème Santé Québec a peut-être été écrasé. Publication annulée."
             exit 1
           fi
-          echo "Vérification police/Kaushan : ok."
+          if ! grep -q "Segoe UI" scripts/carte-est-sq.template.html; then
+            echo "::error::« Segoe UI » est absente du gabarit SQ Est. Publication annulée."
+            exit 1
+          fi
+          echo "Vérification polices (Kaushan hors Est, Segoe UI présent) : ok."
 
       - name: Vérifier l'absence du nom protégé
         # Le nom de la personne-ressource de Santé Québec ne doit apparaître dans AUCUN fichier
@@ -144,9 +146,9 @@ jobs:
           echo "Vérification du nom protégé : ok."
 
       - name: Vérifier qu'aucune donnée privée n'a fui
-        # Filet de sécurité : ce robot publie sans qu'un humain relise. Si le générateur venait à
-        # être modifié de travers, on préfère que la publication ÉCHOUE plutôt qu'elle mette en
-        # ligne des courriels nominatifs ou des notes personnelles.
+        # Filet de sécurité : ce robot publie sans qu'un humain relise. Les courriels de
+        # recrutement sont publiés volontairement (PUBLIER_COURRIELS = true, 2 sept. 2026).
+        # On refuse toujours les champs internes (notes personnelles, posApprox, alias).
         run: |
           set -e
           # Les mêmes vérifications portent sur les copies étanches des trois univers régionaux.
@@ -157,9 +159,8 @@ jobs:
           for R in monteregie-est monteregie-centre monteregie-ouest; do
             PAGES_GENEREES="$PAGES_GENEREES $R/cliniques/ $R/rls/ $R/ptem/ $R/amp/"
           done
-          echo "Recherche d'adresses courriel dans les pages générées..."
-          if grep -rIEl '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' $PAGES_GENEREES ; then
-            echo "::error::Une adresse courriel apparaît dans les pages générées. Publication annulée."
+          if ! grep -q 'const PUBLIER_COURRIELS = true' scripts/generer-pages-seo.js; then
+            echo "::error::PUBLIER_COURRIELS doit être true (courriels de recrutement publiés). Publication annulée."
             exit 1
           fi
           echo "Recherche de champs internes (notes, posApprox, alias)..."
@@ -184,7 +185,9 @@ jobs:
           echo "Vérification que le générateur n'a pas modifié data.json après sa datation..."
           sha256sum -c "$RUNNER_TEMP/data-json-apres-date.sha256"
           echo "Vérification de l'architecture accueil/carte et de la PWA Est..."
-          grep -q 'href="/monteregie/"' index.html
+          # Accueil recentré sur l'Est (plus de lien principal vers /monteregie/).
+          grep -q 'href="/monteregie-est/"' index.html
+          grep -q 'canonical" href="https://trouvetaclinique.ca/"' index.html
           grep -q 'canonical" href="https://trouvetaclinique.ca/monteregie/"' monteregie/index.html
           if grep -q 'rel="manifest"' monteregie/index.html monteregie-centre/index.html monteregie-ouest/index.html; then
             echo "::error::Une carte autre que Montérégie-Est contient un manifeste PWA. Publication annulée."

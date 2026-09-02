@@ -27,7 +27,7 @@
  *   3. Une CLINIQUE "visible: false" est ignorée dans les pages et le sitemap. Une fiche dont
  *      `categorie` vaut "etablissement" suit une règle distincte : elle n'a pas de page SEO,
  *      mais peut apparaître dans la couche informative Établissements des cartes.
- *   4. Les courriels de recrutement ne sont PAS publiés (voir PUBLIER_COURRIELS).
+ *   4. Les courriels de recrutement SONT publiés (voir PUBLIER_COURRIELS, décision du 2 sept. 2026).
  *   5. On ne copie jamais le HTML de la fiche de l'application (#dp-body / exportFiche) : cette
  *      fiche contient des éléments propres à l'app (notes, boutons). Les pages ci-dessous sont
  *      construites à partir des DONNÉES, pas de l'affichage.
@@ -97,12 +97,11 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')document.que
 /* ------------------------------------------------------------------------------------------- */
 
 /*
- * Publier ou non les courriels de recrutement sur les pages indexables.
- * Choix confirmé le 30 août 2026 : NON. Le dépôt public conserve seulement le nom des
- * responsables du recrutement. Les adresses courriel nominatives sont retirées de data.json et
- * ne doivent pas être remises dans les pages indexables ou dans la carte.
+ * Publier ou non les courriels de recrutement sur les pages indexables et la carte.
+ * Décision du 2 septembre 2026 : OUI. Les adresses fournies pour le recrutement sont
+ * affichées sur les fiches (carte et pages SEO), conformément au formulaire public.
  */
-const PUBLIER_COURRIELS = false;
+const PUBLIER_COURRIELS = true;
 
 /*
  * Seuil de contenu à partir duquel une page de clinique est jugée assez substantielle pour être
@@ -129,7 +128,6 @@ const CHAMPS_SUBSTANCE = [
  * LISTE BLANCHE des champs de data.json autorisés à sortir sur le site public.
  * Tout ce qui n'est pas ici n'est jamais rendu. Volontairement absents :
  *   notes            → notes personnelles des usagers, ne doivent jamais fuir
- *   personneRessource→ courriels de recrutement (voir PUBLIER_COURRIELS)
  *   alias            → mots-clés de recherche interne, pas du contenu
  *   lat / lng        → utiles à la carte, inutiles au lecteur ; restent dans data.json
  *   posApprox        → indicateur technique de précision du géocodage
@@ -148,11 +146,10 @@ const CHAMPS_PUBLICS = [
      uniquement à décider si le badge « Vérifié » apparaît et à afficher sa date (voir
      estValide()/badgeVerif() plus bas). Le sous-champ "source" n'est jamais publié. */
   'validation',
-  /* responsableNom → ajouté le 29 août 2026, avec l'accord explicite d'Olivier. Seul le NOM
-     du médecin responsable est publié. Le champ personneRessource reste vide dans la version
-     publique. Affiché en ligne de fiche
-     (« Responsable du recrutement ») et dans le JSON-LD (ContactPoint) — voir pageClinique(). */
-  'responsableNom'
+  /* responsableNom → nom du médecin responsable du recrutement. */
+  'responsableNom',
+  /* personneRessource → courriel(s) de recrutement, publiés depuis le 2 sept. 2026. */
+  'personneRessource'
 ];
 
 /*
@@ -216,6 +213,18 @@ function rempli(v) {
   if (Array.isArray(v)) return v.length > 0;
   if (typeof v === 'object') return Object.values(v).some(rempli);
   return true;
+}
+
+/* Rend chaque adresse courriel de recrutement cliquable (séparateurs : virgule, ;, espace). */
+function lienCourrielRecrutement(valeur) {
+  const texte = String(valeur || '').trim();
+  if (!texte) return '';
+  const reMail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  const parts = texte.split(/[,;]+|\s+/).map(p => p.trim()).filter(Boolean);
+  if (parts.length && parts.every(p => reMail.test(p))) {
+    return parts.map(p => `<a href="mailto:${esc(p)}">${esc(p)}</a>`).join(', ');
+  }
+  return esc(texte);
 }
 
 /*
@@ -593,7 +602,7 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
     ajouter('Responsable du recrutement', esc(c.responsableNom));
   }
   if (PUBLIER_COURRIELS && rempli(c.personneRessource)) {
-    ajouter('Contact recrutement', esc(c.personneRessource));
+    ajouter('Contact recrutement', lienCourrielRecrutement(c.personneRessource));
   }
 
   /* --- Horaires --- */
@@ -667,15 +676,18 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     }
     if (specs.length) clinique.openingHoursSpecification = specs;
   }
-  /* Nom du responsable du recrutement (29 août 2026) : uniquement le nom, jamais le courriel
-     brut, conformément à la règle d'or — aucune identité personnelle autre que le nom du
-     médecin responsable, déjà public par ailleurs. */
-  if (rempli(c.responsableNom)) {
-    clinique.contactPoint = [{
+  /* Contact de recrutement : nom et, si publié, courriel(s). */
+  if (rempli(c.responsableNom) || (PUBLIER_COURRIELS && rempli(c.personneRessource))) {
+    const point = {
       '@type': 'ContactPoint',
-      contactType: 'recrutement médical',
-      name: c.responsableNom
-    }];
+      contactType: 'recrutement médical'
+    };
+    if (rempli(c.responsableNom)) point.name = c.responsableNom;
+    if (PUBLIER_COURRIELS && rempli(c.personneRessource)) {
+      const premier = String(c.personneRessource).split(/[,;]+|\s+/).map(s => s.trim()).find(Boolean);
+      if (premier && premier.includes('@')) point.email = premier;
+    }
+    clinique.contactPoint = [point];
   }
 
   const jsonLd = {
@@ -711,13 +723,15 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     ]
   };
 
-  /* 27 août 2026 : un milieu qui ne recrute pas actuellement n'a pas de courriel de recrutement
-     à joindre (voir data.json — personneRessource y est vide sur ces 43 fiches). Le bandeau de
-     contact est donc remplacé par une simple mention de statut, jamais affiché comme un appel à
-     contacter le milieu au sujet d'un recrutement qui n'a pas lieu. */
+  /* 27 août 2026 / 2 sept. 2026 : hors recrutement → mention de statut.
+     En recrutement avec PUBLIER_COURRIELS : le courriel apparaît déjà dans la fiche.
+     Sinon, renvoyer vers la carte. */
   const contact = !enRecrutement
     ? `
   <div class="callout"><strong>Ne recrute pas actuellement :</strong> ce milieu est publié à titre de référence dans le répertoire. Consultez la carte interactive pour connaître les milieux du secteur qui recrutent actuellement.</div>`
+    : (PUBLIER_COURRIELS && rempli(c.personneRessource))
+    ? `
+  <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> ${lienCourrielRecrutement(c.personneRessource)}</div>`
     : PUBLIER_COURRIELS
     ? ''
     : `
@@ -1299,7 +1313,10 @@ const PAGES_FIXES = [
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/ptem/', lastmod: '2026-08-31', changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/amp/', lastmod: '2026-08-31', changefreq: 'monthly', priority: '0.9' },
-  { loc: '/monteregie/', lastmod: null, changefreq: 'monthly', priority: '0.4' }
+  { loc: '/monteregie/', lastmod: null, changefreq: 'monthly', priority: '0.4' },
+  /* Cartes Centre/Ouest : indexables et présentes sur l'accueil ; aligner le sitemap (2 sept.). */
+  { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.3' },
+  { loc: '/monteregie-ouest/', lastmod: null, changefreq: 'monthly', priority: '0.3' }
 ];
 
 function sitemap(entrees) {
@@ -1331,13 +1348,15 @@ function ecrire(relatif, contenu) {
  * Page de redirection statique pour une ancienne adresse dont la page canonique vit désormais
  * dans un univers régional (ou, inversement, pour une copie régionale d'une page générale).
  *
- * GitHub Pages ne permet pas de déclarer des redirections HTTP côté serveur. Cette page combine
- * donc les trois mécanismes utiles ici : canonical + noindex pour les moteurs, meta refresh sans
- * JavaScript et location.replace() pour le navigateur. Le lien visible reste le dernier recours.
+ * GitHub Pages ne permet pas de déclarer des redirections HTTP 301 côté serveur. Cette page
+ * combine canonical + noindex, meta refresh, et location.replace() en conservant la query
+ * string et le fragment (#ancre) — critique pour /ptem/#… et les liens partagés.
+ * Les 301 Cloudflare restent préférables dès qu'ils sont disponibles sans risque.
  */
 function pageRedirectionStatique(destination, libelle) {
   const urlHtml = esc(destination);
   const libelleHtml = esc(libelle);
+  const destJs = JSON.stringify(String(destination));
   return `<!doctype html>
 <html lang="fr-CA">
 <head>
@@ -1347,7 +1366,7 @@ function pageRedirectionStatique(destination, libelle) {
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="${urlHtml}">
 <meta http-equiv="refresh" content="0; url=${urlHtml}">
-<script>location.replace(${JSON.stringify(String(destination))});</script>
+<script>(function(){var b=${destJs};var d=b;if(location.search)d+= (d.indexOf("?")>=0?"&":"?")+location.search.slice(1);if(location.hash)d+=location.hash;location.replace(d);})();</script>
 </head>
 <body>
 <p>${libelleHtml} a été déplacée. <a href="${urlHtml}">Continuer vers la nouvelle adresse</a>.</p>
@@ -1583,7 +1602,7 @@ function main() {
   console.log(`Pages de RLS       : ${parRls.size}`);
   console.log(`Répertoire         : cliniques/index.html`);
   console.log(`Sitemap            : ${entrees.length} URL`);
-  console.log(`Courriels publiés  : ${PUBLIER_COURRIELS ? 'OUI' : 'non (choix du 19 août 2026)'}`);
+  console.log(`Courriels publiés  : ${PUBLIER_COURRIELS ? 'OUI (décision du 2 sept. 2026)' : 'non'}`);
   if (nouveaux.length) {
     console.log(`\nNouveaux slugs attribués (${nouveaux.length}) — désormais figés :`);
     nouveaux.forEach(n => console.log(`  id ${n.id} → /cliniques/${n.slug}/   (${n.nom})`));

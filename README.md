@@ -78,7 +78,8 @@ page SEO de clinique. Dans le prototype Est restauré, elle apparaît dans l'ong
 
 ### Données sensibles
 
-- Les courriels de recrutement ne sont pas publiés.
+- Les courriels de recrutement (`personneRessource`) sont publiés sur les fiches (carte et pages
+  SEO) depuis le 2 septembre 2026 (`PUBLIER_COURRIELS = true`).
 - Le champ `notes` de `data.json` ne doit contenir aucune information destinée au public.
 - Aucun montant négocié ni renseignement personnel non autorisé ne doit entrer dans le dépôt.
 - Le nom protégé configuré dans le secret GitHub `NOM_PROTEGE_SANTE_QUEBEC` ne doit apparaître
@@ -146,8 +147,8 @@ utilisé pour une nouvelle page.
 
 Le site de production est servi par GitHub Pages depuis `main`. Cette copie de travail ne doit
 pas être poussée sur `main` avant la validation finale et une autorisation explicite. La workflow
-refuse notamment une génération invalide, une fuite de courriel, l'ancienne police retirée, une
-PWA hors de Montérégie-Est ou le nom protégé lorsqu'il est configuré.
+refuse notamment une génération invalide, des champs internes (notes, alias), Kaushan Script
+dans le thème Est SQ, une PWA hors de Montérégie-Est ou le nom protégé lorsqu'il est configuré.
 
 ## Vie privée et services externes
 

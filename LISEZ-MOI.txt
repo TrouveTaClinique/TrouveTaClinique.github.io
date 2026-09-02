@@ -22,7 +22,9 @@ LES FICHIERS IMPORTANTS
 -----------------------
 data.json ................ toutes les données publiques de la carte
 scripts/carte.template.html
-                          gabarit unique des quatre cartes
+                          gabarit des cartes complète / Centre / Ouest
+scripts/carte-est-sq.template.html
+                          gabarit Santé Québec de Montérégie-Est
 scripts/publier-regions.js
                           fabrique les quatre cartes
 scripts/generer-pages-seo.js
@@ -31,9 +33,19 @@ scripts/slugs.json ........ conserve les adresses web existantes
 assets/seo-pages.css ...... style des pages web hors cartes
 sw.js ..................... mode hors ligne de Montérégie-Est seulement
 manifest-est.webmanifest .. installation de la carte Montérégie-Est
+PTEM2027_v2.gs ............ archive Apps Script (export ; ne publie pas tout seul)
+scripts/reconciliation-maitre-33-absents.csv
+                          33 cliniques publiées à réintégrer dans la base maître
+scripts/RECONCILIATION-MAITRE.md
+                          marche à suivre pour la réconciliation Sheet ↔ JSON
+scripts/NOTES-REDIRECTIONS-SEO.md
+                          redirections HTML + 301 Cloudflare à prévoir
 
 Ne pas modifier à la main les pages générées. Le changement serait effacé à la prochaine
 génération.
+
+Les courriels de recrutement (champ personneRessource) sont publiés sur les fiches
+depuis le 2 septembre 2026 (PUBLIER_COURRIELS = true).
 
 
 METTRE À JOUR LES DONNÉES

@@ -229,11 +229,17 @@ function appliquerIdentiteRegionale(source, t) {
       '<meta name="theme-color" content="#170A72">', 'theme-color Est SQ');
     const debutStyle = etat.html.indexOf('<style>');
     if (debutStyle < 0) throw new Error('Head de Montérégie-Est introuvable.');
+    // L'Est SQ n'utilise pas Raleway/Lato/Kaushan : retirer le chargement Google Fonts
+    // hérité du gabarit commun (audit 2 sept. 2026).
     const head = etat.html.slice(0, debutStyle)
-      .replace('<html lang="fr">', '<html lang="fr" data-region="Est">');
+      .replace('<html lang="fr">', '<html lang="fr" data-region="Est">')
+      .replace(/\n?<link href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*" rel="stylesheet">/g, '');
     const carteSq = fs.readFileSync(SOURCE_EST_SQ, 'utf8').replace(/\r\n/g, '\n');
     if (!carteSq.includes('<!-- PWA_SERVICE_WORKER -->')) {
       throw new Error('Point d’injection PWA absent du gabarit SQ.');
+    }
+    if (/kaushan/i.test(carteSq) || /kaushan/i.test(head)) {
+      throw new Error('Kaushan Script ne doit pas apparaître dans la carte Est SQ.');
     }
     return head + carteSq.replace('<!-- PWA_SERVICE_WORKER -->', pwaServiceWorker());
   }
