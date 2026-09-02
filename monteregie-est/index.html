@@ -795,7 +795,18 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .activite-btn:hover { filter:brightness(1.08); }
 .activite-btn.dim { background:var(--champ); color:var(--orange); }
 .activite-btn.dim:hover { background:color-mix(in srgb, var(--orange) 12%, var(--champ)); filter:none; }
-.activite-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
+.dp-sect-link:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
+.dp-sect-intro { font-size:13px; color:var(--muted, #64748b); margin:12px 16px 8px; line-height:1.4; }
+.dp-sect-list { display:flex; flex-direction:column; gap:8px; padding:0 16px 16px; }
+.dp-sect-link { display:flex; flex-direction:column; align-items:flex-start; gap:4px; width:100%; padding:12px 14px; box-sizing:border-box;
+  border:1.5px solid var(--border); border-radius:10px; background:var(--champ); cursor:pointer; text-align:left; font-family:inherit; }
+.dp-sect-link:hover { border-color:var(--orange); }
+.dp-sect-link-compact { padding:10px 12px; }
+.dp-sect-nom { font-weight:700; font-size:14px; color:var(--text); }
+.dp-sect-stat { font-size:12px; color:var(--muted, #64748b); }
+.dp-autres-secteurs { padding:0 16px 4px; }
+.dp-gmf-condition { font-size:12.5px; line-height:1.45; }
+.care-mode-btn[data-mode="etablissements"][aria-disabled="true"] { opacity:.45; cursor:not-allowed; }
 /* PTEM / AMP — accès rapide aux 3 pages du site (icônes rondes), repliées
    derrière un bouton « 📄 PTEM / AMP » comme avant (pour ne pas tout étaler
    d'emblée dès l'arrivée sur la page). Les 2 PDF externes (moins
@@ -1669,12 +1680,38 @@ const ORDER_KEY = 'dtmf-mtg-ordre';
 const FAVORDER_KEY = 'dtmf-mtg-ordre-favoris';
 const FAVORDER_ETAB_KEY = 'dtmf-mtg-ordre-favoris-etablissements';
 const FAV_KEY   = 'dtmf-mtg-favoris';
+const FAV_SECTEURS_KEY = 'ttc-est-secteurs-favoris-v1';
+const NOTE_SECTEUR_KEY = id => 'ttc-est-secteur-note-v1-' + id;
+const GMFU_CONDITION = 'Recrutements en GMF-U : la candidature doit avoir obtenu l\u2019aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d\u2019inscription de patients.';
 const ANNONCE_KEY = 'dtmf-mtg-annonce-fermee';
+let etabCoucheDisponible = false;
+let legacyCliniqueVersInstallation = new Map();
 
 // (notes, ordre et marqueurs sont initialisés dans initData(), après le chargement de data.json)
 
 const byId = id => gmfs.find(g => g.id === id);
 const installationEtabById = id => installationsEtab.find(i => i.id === id);
+function favStorageKey() {
+  return modeCarte === 'etablissements' ? FAV_SECTEURS_KEY : FAV_KEY;
+}
+function noteKeyFor(g) {
+  if (g && g._secteurEtab) return NOTE_SECTEUR_KEY(g.id);
+  return NOTE_KEY(g.id);
+}
+function noteKeyForId(id) {
+  const g = byId(id);
+  return g && g._secteurEtab ? NOTE_SECTEUR_KEY(id) : NOTE_KEY(id);
+}
+function chargerFavorisMode() {
+  favoris = new Set();
+  try {
+    const f = JSON.parse(SAFE.get(favStorageKey()) || '[]');
+    if (Array.isArray(f)) favoris = new Set(f);
+  } catch (e) {}
+}
+function sauvegarderFavorisActifs() {
+  SAFE.set(favStorageKey(), JSON.stringify([...favoris]));
+}
 
 function getMarqueursSource() {
   return modeCarte === 'etablissements' ? installationsEtab : gmfs;
@@ -1697,9 +1734,17 @@ function preparerCoucheEtablissements(donneesEtab) {
   secteursEtab = [];
   etablissements = [];
   dataEtabMeta = {};
+  legacyCliniqueVersInstallation = new Map();
+  etabCoucheDisponible = false;
   if (!donneesEtab || !Array.isArray(donneesEtab.installations) || !Array.isArray(donneesEtab.secteurs)) return;
 
   dataEtabMeta = donneesEtab.meta || {};
+  (donneesEtab.installations || []).forEach(inst => {
+    const ref = inst.referenceExistante;
+    if (ref && ref.collection && ref.id != null) {
+      legacyCliniqueVersInstallation.set(String(ref.collection) + ':' + String(ref.id), inst.id);
+    }
+  });
   const instMap = new Map();
 
   installationsEtab = donneesEtab.installations.filter(inst => {
@@ -1720,6 +1765,7 @@ function preparerCoucheEtablissements(donneesEtab) {
     missionRegionale: !!inst.missionRegionale,
     mentionPublique: inst.mentionPublique || '',
     lienWeb: inst.lienWeb || '',
+    referenceExistante: inst.referenceExistante || null,
     _installationEtab: true
   }));
 
@@ -1759,6 +1805,7 @@ function preparerCoucheEtablissements(donneesEtab) {
   }).filter(Boolean);
 
   etablissements = secteursEtab;
+  etabCoucheDisponible = secteursEtab.length > 0 && installationsEtab.length > 0;
 }
 
 function nbSecteursVisiblesInstallation(installationId) {
@@ -2239,8 +2286,7 @@ function buildMarkers() {
         m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${nbSecteursVisiblesInstallation(g.id)} secteur(s) · ${esc(g.ville)}${g.missionRegionale ? ' · Mission régionale' : ''}</small>`, { direction:'top', offset:[dx,dy-20] });
         m.on('click', (e) => {
           L.DomEvent.stopPropagation(e);
-          const secteurs = gmfs.filter(s => s.installationId === g.id && matchesFilters(s.id));
-          if (secteurs.length) toggleDetail(secteurs[0].id);
+          openInstallationSecteurs(g.id);
         });
       } else {
         const infoBulle = `${esc(g.ville)} · ${esc(g.rls || '')}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}`;
@@ -2416,7 +2462,7 @@ function recalculerOrdre() {
 
 function appliquerNotesActives() {
   gmfs.forEach(g => {
-    const n = SAFE.get(NOTE_KEY(g.id));
+    const n = SAFE.get(noteKeyFor(g));
     if (n !== null) g.notes = n;
   });
 }
@@ -2439,10 +2485,125 @@ function chargerOrdreFavorisMode() {
 
 function urlEtat(id) {
   const params = new URLSearchParams();
-  if (modeCarte === 'etablissements') params.set('mode', 'etablissements');
-  if (id !== undefined && id !== null) params.set('c', String(id));
+  if (modeCarte === 'etablissements') {
+    params.set('mode', 'etablissements');
+    if (id !== undefined && id !== null) {
+      const g = byId(id);
+      if (g && g._secteurEtab) params.set('secteur', String(id));
+      else if (typeof id === 'string' && String(id).startsWith('INS-')) params.set('installation', String(id));
+      else params.set('c', String(id));
+    }
+  } else if (id !== undefined && id !== null) {
+    params.set('c', String(id));
+  }
   const q = params.toString();
   return location.pathname + (q ? '?' + q : '') + location.hash;
+}
+function htmlAutresSecteurs(g) {
+  const autres = gmfs.filter(s => s.installationId === g.installationId && s.id !== g.id);
+  if (!autres.length) return '';
+  const links = autres.map(s => `<button type="button" class="dp-sect-link dp-sect-link-compact" data-secteur="${esc(s.id)}"><span class="dp-sect-nom">${esc(s.nom)}</span></button>`).join('');
+  return `<div class="vw-divider"></div><div class="vw-sec dp-autres-secteurs"><div class="vw-sec-title">Autres secteurs dans cette installation</div><div class="dp-sect-list">${links}</div></div>`;
+}
+function lierBoutonsSecteurs(parent) {
+  if (!parent) return;
+  parent.querySelectorAll('.dp-sect-link[data-secteur]').forEach(btn => {
+    btn.addEventListener('click', () => toggleDetail(btn.getAttribute('data-secteur')));
+  });
+}
+function openInstallationSecteurs(installationId) {
+  const inst = installationEtabById(installationId);
+  if (!inst) return;
+  const secteurs = gmfs.filter(s => s.installationId === installationId && matchesFilters(s.id));
+  if (!secteurs.length) return;
+  if (secteurs.length === 1) { toggleDetail(secteurs[0].id); return; }
+  if (activeId !== null && notesDirty &&
+      !confirm("Vos notes ne sont pas sauvegardées. Changer de fiche sans les sauvegarder ?")) return;
+  notesDirty = false;
+  if (activeId !== null) majIconeMarqueurDetail(byId(activeId), false);
+  document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
+  activeId = null;
+  document.getElementById('dp-tag').textContent = inst.type;
+  document.getElementById('dp-name-disp').innerHTML = esc(inst.nom.trim());
+  (function(){ var c = couleurMilieu(inst); var dh = document.querySelector('#detail .dp-head'); if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; } var tg = document.getElementById('dp-tag'); if (tg) tg.style.color = c; })();
+  const liste = secteurs.map(s => {
+    const stat = recruteActuellement(s) ? 'En recrutement' : 'Ne recrute pas actuellement';
+    return `<button type="button" class="dp-sect-link" data-secteur="${esc(s.id)}"><span class="dp-sect-nom">${esc(s.nom)}</span><span class="dp-sect-stat">${stat}</span></button>`;
+  }).join('');
+  document.getElementById('dp-body').innerHTML = `<p class="dp-sect-intro">${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''} à ${esc(inst.nom)} · ${esc(inst.ville)}</p><div class="dp-sect-list" role="list">${liste}</div>`;
+  lierBoutonsSecteurs(document.getElementById('dp-body'));
+  document.getElementById('detail').classList.add('open');
+  document.body.classList.add('fiche-open');
+  if (sidebarEl) sidebarEl.classList.remove('open');
+  if (sbOverlay) sbOverlay.classList.remove('show');
+  if (sbToggle) sbToggle.classList.add('hidden');
+  if (typeof peekOff === 'function') peekOff();
+  const urlInst = urlEtat(installationId);
+  if (!detailHistoryActive) { history.pushState({ gmfDetail: true, installation: installationId }, '', urlInst); detailHistoryActive = true; }
+  else { history.replaceState({ gmfDetail: true, installation: installationId }, '', urlInst); }
+  try { map.flyTo([inst.lat, inst.lng], 14, { duration:1 }); } catch (err) {
+    console.warn('Déplacement de la carte impossible :', err);
+  }
+}
+function appliquerCibleUrl(paramsInit) {
+  const secteurParam = paramsInit.get('secteur');
+  if (secteurParam && secteursEtab.some(s => s.id === secteurParam)) {
+    const g = secteursEtab.find(s => s.id === secteurParam);
+    if (g && !recruteActuellement(g)) {
+      showAllClinics = true;
+      syncAllClinicsToggle();
+      renderSidebar();
+      updateMarkerVisibility();
+      refreshMarkerIcons();
+    }
+    openDetail(secteurParam);
+    return true;
+  }
+  const instParam = paramsInit.get('installation');
+  if (instParam && installationsEtab.some(i => i.id === instParam)) {
+    openInstallationSecteurs(instParam);
+    return true;
+  }
+  const cibleBrute = paramsInit.get('c');
+  if (!cibleBrute) return false;
+  if (modeCarte === 'etablissements') {
+    const instId = legacyCliniqueVersInstallation.get('cliniques:' + cibleBrute)
+      || legacyCliniqueVersInstallation.get('hopitaux:' + cibleBrute);
+    if (instId) {
+      const secteurs = secteursEtab.filter(s => s.installationId === instId);
+      if (secteurs.length === 1) {
+        openDetail(secteurs[0].id);
+      } else if (secteurs.length) {
+        openInstallationSecteurs(instId);
+      }
+      return true;
+    }
+    if (typeof showToast === 'function') {
+      showToast("Cette fiche n'est pas encore rattachée à un secteur d'établissement.");
+    }
+    try { history.replaceState(null, '', urlEtat()); } catch (e) {}
+    return true;
+  }
+  const cible = Number(cibleBrute);
+  if (cible && byId(cible)) {
+    const cliniqueCible = byId(cible);
+    if (!recruteActuellement(cliniqueCible)) {
+      showAllClinics = true;
+      syncAllClinicsToggle();
+      renderSidebar();
+      updateMarkerVisibility();
+      refreshMarkerIcons();
+    }
+    openDetail(cible);
+    return true;
+  }
+  if (cibleBrute) {
+    if (typeof showToast === 'function') {
+      showToast("Cette fiche n'est plus dans la liste (lien périmé ou retiré).");
+    }
+    try { history.replaceState(null, '', urlEtat()); } catch (e) {}
+  }
+  return false;
 }
 
 function syncModeCarteUI() {
@@ -2466,6 +2627,16 @@ function syncModeCarteUI() {
   if (activiteWrap) activiteWrap.hidden = modeCarte !== 'etablissements';
   const rlsWrap = document.getElementById('rls-btns');
   if (rlsWrap) rlsWrap.setAttribute('aria-label', modeCarte === 'etablissements' ? 'Filtrer par territoire' : 'Filtrer par RLS');
+  const etabBtn = document.querySelector('.care-mode-btn[data-mode="etablissements"]');
+  if (etabBtn) {
+    if (etabCoucheDisponible) {
+      etabBtn.removeAttribute('aria-disabled');
+      etabBtn.title = '';
+    } else {
+      etabBtn.setAttribute('aria-disabled', 'true');
+      etabBtn.title = 'Données établissements indisponibles';
+    }
+  }
   const fav = document.getElementById('fav-toggle');
   if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
   syncAllClinicsToggle();
@@ -2474,6 +2645,10 @@ function syncModeCarteUI() {
 
 function activerModeCarte(prochainMode) {
   if (!donneesPretes || !['cliniques', 'etablissements'].includes(prochainMode) || prochainMode === modeCarte) return;
+  if (prochainMode === 'etablissements' && !etabCoucheDisponible) {
+    if (typeof showToast === 'function') showToast('Les données établissements sont indisponibles. Réessayez plus tard.');
+    return;
+  }
   if (notesDirty && !confirm('Vos notes ne sont pas sauvegardées. Changer de vue sans les sauvegarder ?')) return;
   notesDirty = false;
   if (activeId !== null) {
@@ -2485,6 +2660,7 @@ function activerModeCarte(prochainMode) {
     if (m && map.hasLayer(m)) map.removeLayer(m);
     delete markers[id];
   });
+  sauvegarderFavorisActifs();
   modeCarte = prochainMode;
   gmfs = modeCarte === 'etablissements' ? secteursEtab : cliniques;
   showAllClinics = false;
@@ -2497,6 +2673,7 @@ function activerModeCarte(prochainMode) {
   document.getElementById('sb-search')?.classList.remove('has-text');
   recalculerOrdre();
   appliquerNotesActives();
+  chargerFavorisMode();
   chargerOrdreFavorisMode();
   calculerDecalagesMarqueurs();
   buildMarkers();
@@ -2713,7 +2890,7 @@ let sidebarEl = null, sbToggle = null, sbOverlay = null;
 
 function toggleFav(id) {
   if (favoris.has(id)) favoris.delete(id); else favoris.add(id);
-  const ecrit = SAFE.set(FAV_KEY, JSON.stringify([...favoris]));
+  const ecrit = SAFE.set(favStorageKey(), JSON.stringify([...favoris]));
   if (!ecrit) {
     // L'écriture locale a échoué (quota plein, navigation privée…) : on annule
     // le changement en mémoire pour ne pas laisser croire que le favori est
@@ -2938,8 +3115,8 @@ function buildComparatif(favs, totalFavs) {
     head += `<th class="cmp-clhead" style="border-top:6px solid ${couleurMilieu(g)}">
       <div class="cmp-clname">${esc(g.nom.trim())}</div>
       <div class="cmp-clcity">\uD83D\uDCCD ${esc(g.ville)}</div>
-      <div class="cmp-cltype"><span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${esc(typeLabel(g.type))}</div>
-      <div class="cmp-clmeta">${esc(g.ville)} · ${esc(typeLabel(g.type))}</div>
+      <div class="cmp-cltype"><span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${esc(etab ? g.type : typeLabel(g.type))}</div>
+      <div class="cmp-clmeta">${etab ? esc(g.nomInstallation || '') + ' · ' : ''}${esc(g.ville)}${etab ? '' : ' · ' + esc(typeLabel(g.type))}</div>
     </th>`;
   });
   let shade = 0;
@@ -2953,6 +3130,8 @@ function buildComparatif(favs, totalFavs) {
   rows += row('Réseau (RLS)', g => `<span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${cmpVal(g.rls)}`);
   rows += row('Statut', g => cmpStatutHtml(g, true));
   if (etab) {
+    rows += row('Installation', g => cmpVal(g.nomInstallation));
+    rows += row('Ville', g => cmpVal(g.ville));
     rows += sect('Notes personnelles');
     rows += row('', g => cmpNote(g.notes));
   } else {
@@ -3326,8 +3505,10 @@ function openDetail(id) {
         <div class="vw-sec-title">Recrutement</div>
         <div class="vw-row"><span class="vw-label">Statut</span><span class="vw-value">${statutHtml}</span></div>
         ${g.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
+        ${g.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
         <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">À venir</span></div>
       </div>
+      ${htmlAutresSecteurs(g)}
       <div class="vw-divider"></div>
       <div class="notes-sec">
         <div class="vw-sec-title">Mes notes</div>
@@ -3346,6 +3527,7 @@ function openDetail(id) {
     if (notesTa) notesTa.addEventListener('input', () => { notesDirty = true; });
     const favBtn = document.getElementById('dp-fav-btn');
     if (favBtn) favBtn.addEventListener('click', () => toggleFav(g.id));
+    lierBoutonsSecteurs(document.getElementById('dp-body'));
     return;
   }
 
@@ -3539,7 +3721,7 @@ function saveNotes(flash = true) {
   const ta = document.getElementById('notes-input');
   if (!ta) return;
   g.notes = ta.value;
-  SAFE.set(NOTE_KEY(activeId), g.notes);
+  SAFE.set(noteKeyForId(activeId), g.notes);
   notesDirty = false;
   if (flash) {
     const msg = document.getElementById('save-msg');
@@ -3691,12 +3873,13 @@ const careModeSwitch = document.getElementById('care-mode-switch');
 if (careModeSwitch) {
   careModeSwitch.addEventListener('click', e => {
     const b = e.target.closest('.care-mode-btn');
-    if (b) activerModeCarte(b.dataset.mode);
+    if (b && b.getAttribute('aria-disabled') !== 'true') activerModeCarte(b.dataset.mode);
   });
   careModeSwitch.addEventListener('keydown', e => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     e.preventDefault();
     const prochain = modeCarte === 'cliniques' ? 'etablissements' : 'cliniques';
+    if (prochain === 'etablissements' && !etabCoucheDisponible) return;
     activerModeCarte(prochain);
     careModeSwitch.querySelector('[data-mode="' + prochain + '"]')?.focus();
   });
@@ -3821,7 +4004,13 @@ function initData(data, etabData) {
   preparerCoucheEtablissements(etabData);
   cliniques = cliniques.filter(g => g.region === 'Est');
   const paramsInit = new URLSearchParams(location.search);
-  modeCarte = paramsInit.get('mode') === 'etablissements' ? 'etablissements' : 'cliniques';
+  const modeUrl = paramsInit.get('mode') === 'etablissements';
+  if (modeUrl && !etabCoucheDisponible) {
+    if (typeof showToast === 'function') showToast('Couche établissements indisponible pour le moment.');
+    modeCarte = 'cliniques';
+  } else {
+    modeCarte = modeUrl ? 'etablissements' : 'cliniques';
+  }
   gmfs = modeCarte === 'etablissements' ? secteursEtab : cliniques;
   calculerDecalagesMarqueurs();
   // 27 août 2026 : (ré)initialise la vue « Toutes les cliniques » à chaque chargement des
@@ -3847,12 +4036,8 @@ function initData(data, etabData) {
   appliquerNotesActives();
   recalculerOrdre();
 
-  // Favoris (étoiles) sauvegardés
-  favoris = new Set();
-  try {
-    const f = JSON.parse(SAFE.get(FAV_KEY) || '[]');
-    if (Array.isArray(f)) favoris = new Set(f);
-  } catch(e) {}
+  // Favoris (étoiles) sauvegardés — clés distinctes cliniques / secteurs (SPEC §8.6).
+  chargerFavorisMode();
 
   // Ordre des favoris propre à la vue active, avec migration de l'ancien ordre des cliniques.
   chargerOrdreFavorisMode();
@@ -3868,30 +4053,7 @@ function initData(data, etabData) {
   showUpdateDate();
   showBanner();
   fitToData();
-  // Lien direct : ?c=6 ouvre la fiche de la clinique 6.
-  const cibleBrute = paramsInit.get('c');
-  const cible = Number(cibleBrute);
-  if (cible && byId(cible)) {
-    const cliniqueCible = byId(cible);
-    // Un lien partagé (dont ceux des pages SEO /cliniques/<slug>/) vers une clinique qui ne
-    // recrute pas doit rester fonctionnel : on active la vue complète avant d'ouvrir sa fiche.
-    if (!recruteActuellement(cliniqueCible)) {
-      showAllClinics = true;
-      syncAllClinicsToggle();
-      renderSidebar();
-      updateMarkerVisibility();
-      refreshMarkerIcons();
-    }
-    openDetail(cible); return;
-  }
-  // ?c= présent mais invalide (clinique retirée, lien copié il y a longtemps…) :
-  // avant, rien ne s'affichait et l'URL gardait le paramètre mort en silence.
-  if (cibleBrute) {
-    if (typeof showToast === 'function') {
-      showToast("Cette fiche n'est plus dans la liste (lien périmé ou retiré).");
-    }
-    try { history.replaceState(null, '', urlEtat()); } catch(e) {}
-  }
+  if (appliquerCibleUrl(paramsInit)) return;
   // Aucune géolocalisation automatique au chargement : le navigateur ne doit jamais
   // demander l'autorisation de position tant que l'usager n'a pas cliqué lui-même sur
   // le bouton « Me localiser ». La carte s'ouvre donc sur l'ensemble de la Montérégie
