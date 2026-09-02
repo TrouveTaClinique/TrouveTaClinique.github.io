@@ -33,7 +33,7 @@ const TERRITOIRES = [
       ['Pierre-De Saurel', '#2f4a7a', 'pierre-de-saurel']
     ],
     banniere: {
-      url: 'https://trouvetaclinique.ca/assets/banniere_monteregie-est.png',
+      url: 'https://trouvetaclinique.ca/assets/banniere_monteregie-est.jpg',
       largeur: '1024', hauteur: '341',
       alt: 'Carte interactive Montérégie-Est — Trouve ta clinique.'
     }

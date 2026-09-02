@@ -366,23 +366,22 @@ p, li { text-wrap: pretty; }
 
 /* ─── Bannière « Carte interactive » ─────────────────────────────────────────
    Bannière officielle SEO : photo claire vers la carte interactive Montérégie-Est
-   (assets/banniere_monteregie-est.png). Le gabarit CSS .sqb ci-dessous est conservé
+   (assets/banniere_monteregie-est.jpg). Le gabarit CSS .sqb ci-dessous est conservé
    pour référence historique ; les pages utilisent .sqb-photo. */
 
-.sqb-wrap { margin:1.7rem 0 2.2rem; }
+.sqb-wrap { margin:1.7rem 0 2.2rem; width:100%; }
 .sqb-wrap.compact { margin-top:1.25rem; }
 
-/* Bannière officielle Montérégie-Est : image approuvée, lien vers la carte. */
+/* Bannière officielle Montérégie-Est : JPEG natif 1024×341, jamais agrandi au-delà. */
 .sqb-photo {
-  display:block; border-radius:18px; overflow:hidden; text-decoration:none; line-height:0;
-  max-width:1024px; margin-left:auto; margin-right:auto;
-  transition:transform .15s ease, box-shadow .15s ease;
+  display:block; width:100%; max-width:1024px; margin-inline:auto;
+  border-radius:18px; overflow:hidden; text-decoration:none; line-height:0;
+  transition:box-shadow .15s ease;
 }
 .sqb-photo img {
-  display:block; width:100%; height:auto;
+  display:block; width:1024px; max-width:100%; height:auto;
 }
 .sqb-photo:hover, .sqb-photo:focus-visible {
-  transform:translateY(-1px);
   box-shadow:0 8px 24px rgba(23,10,114,.18);
 }
 @media (max-width:700px) {

@@ -32,7 +32,7 @@ function lireOriginal(nom) {
 
 const banner = `<figure class="sqb-wrap">
 <a class="sqb-photo" aria-label="Ouvrir la carte interactive Montérégie-Est" href="/monteregie-est/">
-<img src="{{ASSETS}}/banniere_monteregie-est.png" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" loading="lazy">
+<img src="{{ASSETS}}/banniere_monteregie-est.jpg" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" loading="lazy">
 </a>
 </figure>`;
 
@@ -55,7 +55,7 @@ const navAmp = `<nav aria-label="Navigation principale" class="nav">
 function communs(html) {
   return html
     .replace(/href="\.\.\/assets\//g, 'href="{{ASSETS}}/')
-    .replace(/https:\/\/trouvetaclinique\.ca\/og-image\.png\?v=2/g, 'https://trouvetaclinique.ca/assets/banniere_monteregie-est.png')
+    .replace(/https:\/\/trouvetaclinique\.ca\/og-image\.png\?v=2/g, 'https://trouvetaclinique.ca/assets/banniere_monteregie-est.jpg')
     .replace(/content="1200"/g, 'content="1024"')
     .replace(/content="630"/g, 'content="341"')
     .replace(/Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique\./g, 'Carte interactive Montérégie-Est — Trouve ta clinique.')

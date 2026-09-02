@@ -386,6 +386,7 @@ const EST_ACCUEIL = EST_PREFIXE + '/';
 
 const BANNIERE_EST_LARGEUR = '1024';
 const BANNIERE_EST_HAUTEUR = '341';
+const BANNIERE_EST_FICHIER = 'banniere_monteregie-est.jpg';
 
 const UNIVERS_GENERAL = {
   regional: false,
@@ -395,7 +396,7 @@ const UNIVERS_GENERAL = {
   accueil: EST_ACCUEIL,
   dossier: '',
   canonique: true,
-  banniere: { fichier: 'banniere_monteregie-est.png', largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR }
+  banniere: { fichier: BANNIERE_EST_FICHIER, largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR }
 };
 
 /*
@@ -419,7 +420,7 @@ const UNIVERS_GENERAL = {
 const UNIVERS_REGIONS = [
   { region: 'Est',    nom: 'Montérégie-Est',    dossier: 'monteregie-est',    canonique: true,
     ordreRls: ['Pierre-Boucher', 'Richelieu-Yamaska', 'Pierre-De Saurel'],
-    banniere: { fichier: 'banniere_monteregie-est.png', largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR } },
+    banniere: { fichier: BANNIERE_EST_FICHIER, largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR } },
   { region: 'Centre', nom: 'Montérégie-Centre', dossier: 'monteregie-centre', canonique: true,
     ordreRls: ['Champlain', 'Haut-Richelieu–Rouville'],
     banniere: null },
@@ -446,8 +447,8 @@ const LIENS_NAV = [
 
 function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
   const wrap = compact ? 'sqb-wrap compact directory-banner' : 'sqb-wrap';
-  const img = `${assetsChemin}/banniere_monteregie-est.png`;
-  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" srcset="${img} ${BANNIERE_EST_LARGEUR}w" sizes="(max-width: 1024px) 100vw, 1024px" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="async" loading="lazy"></a></figure>`;
+  const img = `${assetsChemin}/${BANNIERE_EST_FICHIER}`;
+  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" srcset="${img} ${BANNIERE_EST_LARGEUR}w" sizes="(max-width: ${BANNIERE_EST_LARGEUR}px) 100vw, ${BANNIERE_EST_LARGEUR}px" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy"></a></figure>`;
 }
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
