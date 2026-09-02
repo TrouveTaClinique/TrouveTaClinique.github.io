@@ -95,7 +95,8 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.equal(manifeste.scope, '/monteregie-est/');
   assert.equal(manifeste.short_name, 'PTEM 2027');
   assert.match(lire('monteregie-est/ptem/index.html'), /PTEM 2027 en médecine familiale/);
-  assert.match(lire('ptem/index.html'), new RegExp('location\\.replace\\("' + ORIGINE.replace(/\./g, '\\.') + '/monteregie-est/ptem/"\\)'));
+  assert.match(lire('ptem/index.html'), new RegExp(ORIGINE.replace(/\./g, '\\.') + '/monteregie-est/ptem/'));
+  assert.match(lire('ptem/index.html'), /location\.replace\(d\)/);
   assert.match(lire('ptem/index.html'), /location\.hash/);
   assert.match(lire('ptem/index.html'), /location\.search/);
   assert.throws(() => preparerApercu(RACINE, destination), /vide/);
