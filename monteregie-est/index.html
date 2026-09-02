@@ -637,6 +637,10 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   body.sb-peekpause .sidebar, body.sb-peekpause .sidebar-toggle { animation-play-state: paused; }
   .rls-legend { margin-bottom: 96px; }
   .sb-close { display: block; }
+  /* Décaler le X un peu plus haut et le (i) un peu vers la gauche pour éviter le chevauchement. */
+  :root[data-region="Est"] .sb-close { top: 5px; right: 8px; z-index: 3; }
+  :root[data-region="Est"] .care-mode-info { right: 24px; }
+  :root[data-region="Est"] .care-mode-etab > .care-mode-btn { padding-right: 34px; }
   .sidebar-toggle { display: flex; flex-direction: column; align-items: center; gap: 9px; }
   .sidebar-overlay { display: block; }
 }
@@ -932,6 +936,22 @@ body.cmp-open { overflow:hidden; }
 #cmp-print.cmp-fit .cmp-qrsub { font-size:8.5px; }
 #cmp-print.cmp-fit .cmp-qrurl { font-size:8.5px; }
 #cmp-print.cmp-fit .cmp-note { font-size:7px; margin-top:5px; }
+#cmp-print .cmp-table-scroll { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+@media (max-width: 860px) {
+  #cmp-print.cmp-show .cmp-inner { padding:14px 12px 28px; }
+  #cmp-print.cmp-show .cmp-header { margin-bottom:10px; padding-bottom:8px; }
+  #cmp-print.cmp-show .cmp-title { font-size:20px; }
+  #cmp-print.cmp-show .cmp-table-scroll { margin:0 -4px; padding:0 4px 2px; }
+  #cmp-print.cmp-show.cmp-fit .cmp-corner,
+  #cmp-print.cmp-show.cmp-fit .cmp-rl { width:132px; }
+  #cmp-print.cmp-show.cmp-fit .cmp-corner-brand { padding:3px 5px; gap:4px; }
+  #cmp-print.cmp-show.cmp-fit .cmp-corner-logo { width:20px; height:20px; }
+  #cmp-print.cmp-show.cmp-fit .cmp-corner-org { font-size:5.5px; }
+  #cmp-print.cmp-show.cmp-fit .cmp-corner-text strong { font-size:8px; }
+  #cmp-print.cmp-show.cmp-fit .cmp-table { min-width:min(100%, 520px); }
+  #cmp-print.cmp-show .cmp-botbar { margin-top:12px; }
+  #cmp-print.cmp-show .cmp-qrcell img { width:84px; height:84px; }
+}
 @media print {
   @page { margin:1.4cm; }
   html, body { height:auto !important; min-height:0 !important; overflow:visible !important; background:#fff !important; }
@@ -1232,6 +1252,36 @@ body.cmp-open { overflow:hidden; }
 }
 :root[data-region="Est"] .leaflet-control-zoom a,
 :root[data-region="Est"] .leaflet-bar a { color: var(--sq-indigo); }
+:root[data-region="Est"][data-theme="sombre"] .leaflet-control-zoom,
+:root[data-region="Est"][data-theme="sombre"] .locate-ctrl {
+  box-shadow: 0 5px 16px rgba(0,0,0,.45) !important;
+}
+:root[data-region="Est"][data-theme="sombre"] .leaflet-control-zoom a,
+:root[data-region="Est"][data-theme="sombre"] .locate-ctrl a {
+  background: #243149 !important;
+  color: #E8F6FA !important;
+  border-color: #4A6278 !important;
+}
+:root[data-region="Est"][data-theme="sombre"] .leaflet-control-zoom a:hover,
+:root[data-region="Est"][data-theme="sombre"] .locate-ctrl a:hover {
+  background: #2F3F58 !important;
+  color: #fff !important;
+}
+:root[data-region="Est"][data-theme="sombre"] .logo-img::before {
+  content: '';
+  position: absolute;
+  top: -1px; right: 1px;
+  width: 20px; height: 12px;
+  border: 2px solid var(--sq-menthe);
+  border-bottom: none;
+  border-radius: 9px 9px 0 0;
+  background: linear-gradient(180deg, #2A4560 0%, #1A2A42 100%);
+  transform: rotate(14deg);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 1px 0 rgba(144,241,233,.35);
+}
+:root[data-region="Est"][data-theme="sombre"] .logo-img::after { z-index: 2; }
 :root[data-region="Est"] .sidebar-toggle {
   background: var(--sq-indigo);
   border-left-color: var(--sq-mint);
@@ -1632,6 +1682,7 @@ if (Array.isArray(window.TERRITOIRES_RLS_EST_MSSS_2026)) {
   map.createPane('territoiresRlsEstFond');
   map.getPane('territoiresRlsEstFond').style.zIndex = '260';
   map.getPane('territoiresRlsEstFond').style.pointerEvents = 'none';
+  const rlsFondRenderer = L.canvas({ padding: 0.5 });
 
   window.TERRITOIRES_RLS_EST_MSSS_2026.forEach(function (rls) {
     const couche = L.geoJSON({
@@ -1646,6 +1697,8 @@ if (Array.isArray(window.TERRITOIRES_RLS_EST_MSSS_2026)) {
     }, {
       pane: 'territoiresRlsEstFond',
       interactive: false,
+      renderer: rlsFondRenderer,
+      smoothFactor: 2,
       style: {
         color: COULEURS_RLS_EST_SQ[rls.nom] || rls.contour,
         opacity: 0.64,
@@ -2665,7 +2718,7 @@ function buildComparatif(favs, totalFavs) {
       <div class="cmp-exp">Exporté le ${date}${metaDate ? ' · ' + metaDate : ''}</div>
     </div>
     ${notice}
-    <table class="cmp-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>
+    <div class="cmp-table-scroll"><table class="cmp-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>
     <table class="cmp-botbar"><tr>
       <td class="cmp-qrcell"><img src="${QR_DATA}" alt="Code QR vers l'application"></td>
       <td>

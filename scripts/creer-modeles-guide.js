@@ -52,8 +52,6 @@ const navAmp = `<nav aria-label="Navigation principale" class="nav">
 <a aria-current="page" href="/monteregie-est/amp/">AMP</a>
 </nav>`;
 
-const footerExtra = '<p class="lien-carte-complete"><a href="/monteregie/">Carte des trois territoires</a> <span class="note-construction">(en construction)</span></p>';
-
 function communs(html) {
   return html
     .replace(/href="\.\.\/assets\//g, 'href="{{ASSETS}}/')
@@ -61,7 +59,7 @@ function communs(html) {
     .replace(/content="1200"/g, 'content="1024"')
     .replace(/content="630"/g, 'content="341"')
     .replace(/Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique\./g, 'Carte interactive Montérégie-Est — Trouve ta clinique.')
-    .replace(/<div class="site-footer__copyright">/, footerExtra + '<div class="site-footer__copyright">');
+    .replace(/<p class="lien-carte-complete">[\s\S]*?<\/p>/g, '');
 }
 
 const ptem = communs(lireOriginal('ptem'))

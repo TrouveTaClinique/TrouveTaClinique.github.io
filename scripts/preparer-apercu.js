@@ -109,7 +109,7 @@ function preparerApercu(racine, destination, options = {}) {
       if (extension === '.webmanifest' || fichier === 'manifest.json') {
         const manifeste = JSON.parse(texte);
         manifeste.name = 'BROUILLON | ' + manifeste.name;
-        manifeste.short_name = 'TTC brouillon';
+        manifeste.short_name = 'PTEM 2027';
         texte = JSON.stringify(manifeste, null, 2) + '\n';
       }
       if (fichier === 'sw.js') texte = texte.replace("'trouve-clinique-est-'", "'trouve-clinique-est-brouillon-'");
