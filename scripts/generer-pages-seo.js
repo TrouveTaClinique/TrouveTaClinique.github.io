@@ -383,7 +383,6 @@ function analyserPlages(texte) {
  */
 const EST_PREFIXE = '/monteregie-est';
 const EST_ACCUEIL = EST_PREFIXE + '/';
-const CARTE_COMPLETE = '/monteregie/';
 
 const BANNIERE_EST_LARGEUR = '1024';
 const BANNIERE_EST_HAUTEUR = '341';
@@ -435,8 +434,6 @@ const UNIVERS_REGIONS = [
 
 /* Accès par territoire : UNIVERS_PAR_REGION['Est'] → l'univers de la Montérégie-Est. */
 const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region, u]));
-
-const FOOTER_CARTE_COMPLETE = `<p class="lien-carte-complete"><a href="${CARTE_COMPLETE}">Carte des trois territoires</a> <span class="note-construction">(en construction)</span></p>`;
 
 /* Navigation identique sur toutes les pages SEO : la marque renvoie toujours à l'accueil. */
 const LIENS_NAV = [
@@ -531,7 +528,7 @@ ${nav}
   <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
 ${corps}
 </main>
-<footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.${FOOTER_CARTE_COMPLETE}<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante — Trouve ta clinique</div></div></footer>
+<footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante — Trouve ta clinique</div></div></footer>
 ${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
 ${SERVICE_WORKER_CLEANUP}
 ${CLOUDFLARE_ANALYTICS}
@@ -1109,7 +1106,6 @@ function pageAccueil(toutesEntrees, majDonnees) {
   <div class="cta-row">
     <a class="button primary" href="/monteregie-est/">Explorer Montérégie-Est</a>
   </div>
-  <p class="lien-carte-complete"><a href="${CARTE_COMPLETE}">Carte des trois territoires</a> <span class="note-construction">(en construction)</span></p>
 </section>
 
 <div class="fact-grid fact-grid-2">
