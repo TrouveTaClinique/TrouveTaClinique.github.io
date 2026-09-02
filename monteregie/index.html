@@ -2873,7 +2873,7 @@ function openDetail(id) {
       ${recruteActuellement(g) ? `
       ${recruitRows}
       ${poRaw ? `<div class="vw-row"><span class="vw-label">Portes ouvertes</span><span class="vw-value">${poDisp}</span></div>` : ''}
-            ${/* Contact recrutement : nom + courriel(s) publiés (décision du 2 sept. 2026). */''}
+      ${/* Contact recrutement : nom + courriel(s) publiés (décision du 2 sept. 2026). */''}
       ${String(g.responsableNom || '').trim()
         ? `<div class="vw-row"><span class="vw-label">Responsable</span><span class="vw-value">${esc(String(g.responsableNom).trim())}</span></div>`
         : ''}
