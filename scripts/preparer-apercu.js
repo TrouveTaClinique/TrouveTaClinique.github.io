@@ -1,13 +1,18 @@
 'use strict';
 
-// Prévisualisation uniquement. Aucun fichier source et aucun réglage Pages n'est modifié.
+// Prévisualisation uniquement. Aucun fichier source et aucun réglage Pages du dépôt principal
+// n'est modifié. La cible est TrouveTaClinique/apercu (apercu.trouvetaclinique.ca).
 const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 
 const RACINE = path.resolve(__dirname, '..');
-const DEPOT = 'TrouveTaClinique/TrouveTaClinique.github.io';
-const ORIGINE = 'https://trouvetaclinique.github.io';
+const DEPOT_SOURCE = 'TrouveTaClinique/TrouveTaClinique.github.io';
+const DEPOT_APERCU = 'TrouveTaClinique/apercu';
+const ORIGINE = 'https://apercu.trouvetaclinique.ca';
+const ORIGINE_PROJET = 'https://trouvetaclinique.github.io/apercu';
+const CNAME_APERCU = 'apercu.trouvetaclinique.ca';
+const DOMAINES_INTERDITS = new Set(['trouvetaclinique.ca', 'www.trouvetaclinique.ca']);
 const DOSSIERS = new Set([
   'assets', 'vendor', 'amp', 'ptem', 'cliniques', 'rls',
   'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest'
@@ -50,35 +55,56 @@ function adapterHtml(html) {
     .replace(/<link\b[^>]*\brel\s*=\s*["']canonical["'][^>]*>\s*/gi, '')
     .replace(/<script\b[^>]*\bsrc\s*=\s*["']https:\/\/static\.cloudflareinsights\.com\/[^"']*["'][^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/https?:\/\/(?:www\.)?trouvetaclinique\.ca(?=[/?#"'\\\s<]|$)/gi, ORIGINE)
+    .replace(/https?:\/\/trouvetaclinique\.github\.io\/apercu(?=[/?#"'\\\s<]|$)/gi, ORIGINE)
+    .replace(/https?:\/\/trouvetaclinique\.github\.io(?=[/?#"'\\\s<]|$)/gi, ORIGINE)
     .replace(/<head\b[^>]*>/i, '$&\n<meta name="robots" content="noindex, nofollow, noarchive">\n<meta name="ttc-version" content="brouillon">')
     .replace(/<title>/i, '<title>BROUILLON | ');
 }
 
 function verifierConfigurationPages(pages) {
-  if (pages.cname) throw new Error('Domaine personnalisé détecté. Déploiement arrêté sans modifier le domaine.');
   if (pages.build_type !== 'workflow') throw new Error('Pages doit utiliser GitHub Actions.');
+  const cname = (pages.cname || '').trim().toLowerCase();
+  if (DOMAINES_INTERDITS.has(cname)) {
+    throw new Error('Domaine de production détecté sur apercu. Déploiement arrêté sans modifier le domaine.');
+  }
+  if (cname && cname !== CNAME_APERCU) {
+    throw new Error('CNAME apercu inattendu (' + pages.cname + '). Attendu : ' + CNAME_APERCU + ' ou vide.');
+  }
   const url = new URL(pages.html_url);
-  if (url.origin !== ORIGINE || url.pathname !== '/' || url.search || url.hash || url.username || url.password) {
+  if (url.search || url.hash || url.username || url.password) {
     throw new Error('Adresse Pages inattendue. Déploiement arrêté.');
   }
-  return ORIGINE + '/';
+  const projet = url.origin + url.pathname.replace(/\/$/, '');
+  const personnalise = url.origin === ORIGINE && url.pathname === '/';
+  const githubProjet = projet === ORIGINE_PROJET;
+  if (!personnalise && !githubProjet) {
+    throw new Error('Adresse Pages hors apercu (' + pages.html_url + '). Déploiement arrêté.');
+  }
+  return personnalise ? ORIGINE + '/' : ORIGINE_PROJET + '/';
 }
 
 async function verifierPagesEnLigne() {
-  if (process.env.GITHUB_REPOSITORY !== DEPOT || process.env.GITHUB_REF !== 'refs/heads/brouillon') {
+  if (process.env.GITHUB_REPOSITORY !== DEPOT_SOURCE || process.env.GITHUB_REF !== 'refs/heads/brouillon') {
     throw new Error('Ce déploiement est réservé à la branche brouillon du dépôt autorisé.');
   }
-  if (!process.env.GH_TOKEN) throw new Error('Jeton GitHub Actions manquant.');
-  const reponse = await fetch('https://api.github.com/repos/' + DEPOT + '/pages', {
+  const jeton = process.env.APERCU_TOKEN || process.env.GH_TOKEN;
+  if (!jeton) throw new Error('Jeton APERCU_DEPLOY_TOKEN (ou GH_TOKEN) manquant.');
+  const reponse = await fetch('https://api.github.com/repos/' + DEPOT_APERCU + '/pages', {
     headers: {
       Accept: 'application/vnd.github+json',
-      Authorization: 'Bearer ' + process.env.GH_TOKEN,
+      Authorization: 'Bearer ' + jeton,
       'X-GitHub-Api-Version': '2022-11-28'
     }
   });
-  if (!reponse.ok) throw new Error('Lecture des réglages Pages refusée : HTTP ' + reponse.status);
+  if (reponse.status === 404) {
+    throw new Error(
+      'Pages n\'est pas encore activé sur ' + DEPOT_APERCU +
+      '. Settings → Pages → Source : GitHub Actions.'
+    );
+  }
+  if (!reponse.ok) throw new Error('Lecture des réglages Pages apercu refusée : HTTP ' + reponse.status);
   const url = verifierConfigurationPages(await reponse.json());
-  console.log('Destination vérifiée, sans domaine personnalisé : ' + url);
+  console.log('Destination apercu vérifiée : ' + url);
 }
 
 function preparerApercu(racine, destination, options = {}) {
@@ -125,14 +151,36 @@ function preparerApercu(racine, destination, options = {}) {
     fs.writeFileSync(sortie, contenu);
   }
   fs.writeFileSync(path.join(destination, '.nojekyll'), '');
-  fs.writeFileSync(path.join(destination, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
+  fs.writeFileSync(path.join(destination, 'CNAME'), CNAME_APERCU + '\n');
+  // Allow: / pour que le robot puisse lire le noindex de chaque page (sinon Disallow
+  // empêche de découvrir la balise). Pas de Sitemap : l'aperçu ne doit pas être proposé.
+  fs.writeFileSync(path.join(destination, 'robots.txt'), 'User-agent: *\nAllow: /\n');
   const revision = /^[a-f0-9]{40}$/.test(options.revision || '') ? options.revision : 'local';
-  const bilan = { version: 'brouillon', branche: 'brouillon', revision, origine: ORIGINE, empreinteSources: empreinte.digest('hex'), fichiers: fichiers.length };
+  const bilan = {
+    version: 'brouillon',
+    branche: 'brouillon',
+    revision,
+    origine: ORIGINE,
+    depot: DEPOT_APERCU,
+    empreinteSources: empreinte.digest('hex'),
+    fichiers: fichiers.length
+  };
   fs.writeFileSync(path.join(destination, 'apercu-version.json'), JSON.stringify(bilan, null, 2) + '\n');
   return bilan;
 }
 
-module.exports = { preparerApercu, adapterHtml, verifierConfigurationPages, lister, RACINE, ORIGINE };
+module.exports = {
+  preparerApercu,
+  adapterHtml,
+  verifierConfigurationPages,
+  lister,
+  RACINE,
+  ORIGINE,
+  ORIGINE_PROJET,
+  DEPOT_SOURCE,
+  DEPOT_APERCU,
+  CNAME_APERCU
+};
 
 if (require.main === module) {
   (async () => {

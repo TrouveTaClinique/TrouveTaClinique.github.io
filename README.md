@@ -2,8 +2,11 @@
 
 [Voir le brouillon Montérégie-Est](https://trouvetaclinique.github.io/monteregie-est/) · [Accueil du brouillon](https://trouvetaclinique.github.io/)
 
-Ces liens ouvrent l’aperçu de la branche `brouillon`, sans domaine officiel. Attendre la réussite
-du workflow « Aperçu du brouillon » après une mise à jour pour voir la nouvelle version.
+Ces liens ouvrent l’ancien aperçu github.io. La cible prévue est
+[`apercu.trouvetaclinique.ca`](https://apercu.trouvetaclinique.ca/)
+(dépôt [`TrouveTaClinique/apercu`](https://github.com/TrouveTaClinique/apercu)),
+après DNS EasyDNS et le workflow « Aperçu du brouillon ». Aucune bascule de
+`trouvetaclinique.ca` ni fusion `brouillon` → `main` dans cette étape.
 
 Site statique consacré aux cliniques en recrutement médical et aux points de repère du réseau
 de la santé en Montérégie. Le projet utilise Leaflet, MapLibre et des pages HTML générées depuis
