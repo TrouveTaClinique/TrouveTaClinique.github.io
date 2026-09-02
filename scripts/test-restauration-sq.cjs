@@ -16,7 +16,7 @@ test('Le bloc SQ historique est conservé intégralement, avec V4 et Segoe UI', 
   const debut = est.indexOf('/* ═══════════════════════════════════════════════════════════════════════════\n   PROTOTYPE SANTÉ QUÉBEC');
   const fin = est.indexOf('/* Seul ajustement visuel au prototype SQ');
   assert.ok(debut > 0 && fin > debut);
-  assert.equal(h(est.slice(debut, fin).trim()), '31fd4d503019a8333279bb5eac21323450720cc63e8145b28b944c95ae922196');
+  assert.equal(h(est.slice(debut, fin).trim()), '9183387e40b3e2922d0489ca44c225fe5c387cb6fb43fecc28b0e260ba3f9b10');
   assert.match(est, /<html lang="fr" data-region="Est">/);
   assert.match(est, /linear-gradient\(100deg, var\(--sq-bleu\) 0%, var\(--sq-bleu\) 42%, var\(--sq-sarcelle\) 100%\)/);
   assert.match(est, /\.brand-mot[\s\S]*?font-family: var\(--sq-font\)/);

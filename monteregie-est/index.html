@@ -57,10 +57,7 @@
   }
 }
 </script>
-<!-- Segoe UI est une police système (Windows) : aucun chargement externe requis. La pile
-     --sq-font définie plus bas fournit un repli propre sur macOS/iOS/Android. L'appel à
-     Google Fonts (Raleway, Lato) a été retiré le 30 août 2026 avec le passage au thème
-     Santé Québec — une dépendance externe et un aller-retour réseau en moins. -->
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&family=Lato:wght@300;400;700&family=Kaushan+Script&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#170A72">
 <link rel="manifest" href="../manifest-est.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1100,10 +1097,6 @@ body.cmp-open { overflow:hidden; }
   border-radius: 11px;
   background: #FFFFFF;
 }
-:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-view-row {
-  grid-template-columns: 1fr;
-}
-:root[data-region="Est"] body[data-mode-carte="etablissements"] .all-clinics-wrap { display: none; }
 :root[data-region="Est"] .rls-btn {
   min-height: 43px;
   border-radius: 11px;
@@ -1918,9 +1911,7 @@ function buildMarkers() {
       // chargement, avant que quoi que ce soit ne les masque.
       if (matchesFilters(g.id)) m.addTo(map);
       const [dx, dy] = markerOffsets.get(g.id) || [0, 0];
-      const infoBulle = modeCarte === 'etablissements'
-        ? `${esc(g.ville)} · ${esc(g.rls || '')}`
-        : `${esc(g.ville)}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}`;
+      const infoBulle = `${esc(g.ville)}${modeCarte === 'etablissements' ? ' · ' + esc(g.rls || '') : ''}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}`;
       m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${infoBulle}</small>`, { direction:'top', offset:[dx,dy-20] });
       m.on('click', (e) => { L.DomEvent.stopPropagation(e); toggleDetail(g.id); });
       markers[g.id] = m;
@@ -2122,6 +2113,7 @@ function syncModeCarteUI() {
   }
   const fav = document.getElementById('fav-toggle');
   if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
+  syncAllClinicsToggle();
 }
 
 function activerModeCarte(prochainMode) {
@@ -2435,26 +2427,38 @@ function toggleFavView() {
   refreshMarkerIcons();
 }
 
-// 27 août 2026 : interrupteur « Toutes les cliniques », repris du brouillon Montérégie-Est
-// — affiche aussi les milieux ne recrutant pas actuellement (voir statutVisible()).
+// 27 août 2026 : interrupteur « Toutes les cliniques » / « Tous les établissements » —
+// affiche aussi les milieux ne recrutant pas actuellement (voir statutVisible()).
 function syncAllClinicsToggle() {
   const b = document.getElementById('all-clinics-toggle');
-  if (b) b.setAttribute('aria-checked', showAllClinics ? 'true' : 'false');
+  if (b) {
+    b.setAttribute('aria-checked', showAllClinics ? 'true' : 'false');
+    const label = b.querySelector('span');
+    if (label) label.textContent = modeCarte === 'etablissements' ? 'Tous les établissements' : 'Toutes les cliniques';
+  }
   const titre = document.getElementById('sb-title');
-  if (titre) titre.textContent = modeCarte === 'etablissements'
-    ? 'Établissements en recrutement'
-    : (showAllClinics ? 'Toutes les cliniques' : 'Cliniques en recrutement');
+  if (titre) {
+    if (modeCarte === 'etablissements') {
+      titre.textContent = showAllClinics ? 'Tous les établissements' : 'Établissements en recrutement';
+    } else {
+      titre.textContent = showAllClinics ? 'Toutes les cliniques' : 'Cliniques en recrutement';
+    }
+  }
+  const infoBtn = document.getElementById('all-clinics-info');
+  const infoTip = document.getElementById('all-clinics-tip');
+  const mot = modeCarte === 'etablissements' ? 'établissements' : 'cliniques';
+  if (infoBtn) infoBtn.setAttribute('aria-label', 'Information sur les autres ' + mot);
+  if (infoTip) infoTip.textContent = 'Inclut aussi les ' + mot + ' qui ne recrutent pas pour le moment. Leurs épingles sont affichées dans une couleur plus pâle.';
 }
 
 function toggleAllClinics() {
-  if (modeCarte === 'etablissements') return;
   const prochainEtat = !showAllClinics;
   const active = activeId !== null ? byId(activeId) : null;
   // Si on désactive la vue complète alors qu'une fiche ne recrutant pas est ouverte, cette
   // fiche va disparaître de la liste et de la carte : on la referme d'abord, avec la même
   // protection des notes non sauvegardées qu'ailleurs dans l'application.
   if (!prochainEtat && active && !recruteActuellement(active)) {
-    if (notesDirty && !confirm("Vos notes ne sont pas sauvegardées. Masquer cette clinique sans les sauvegarder ?")) return;
+    if (notesDirty && !confirm('Vos notes ne sont pas sauvegardées. Masquer cet ' + articleMode() + ' sans les sauvegarder ?')) return;
     notesDirty = false;
     detailHistoryActive = false;
     closeDetailUI();
@@ -2466,9 +2470,11 @@ function toggleAllClinics() {
   refreshMarkerIcons();
   fitToVisible();
   const n = currentOrder().filter(id => matchesFilters(id)).length;
+  const lib = libelleMode(true);
+  const accord = modeCarte === 'etablissements' ? 'affichés' : 'affichées';
   annoncerA11y(showAllClinics
-    ? n + ' cliniques affichées, incluant celles qui ne recrutent pas actuellement.'
-    : n + ' cliniques en recrutement affichées.');
+    ? n + ' ' + lib + ' ' + accord + ', incluant ceux qui ne recrutent pas actuellement.'
+    : n + ' ' + lib + ' en recrutement ' + accord + '.');
 }
 
 // ===== Export du comparatif des favoris (PDF via impression) =====
@@ -3241,11 +3247,9 @@ function initData(data) {
   };
   cliniques = brut.filter(g => g.visible !== false && g.categorie !== 'etablissement' && ficheValide(g));
   // Les sept fiches « établissement » de la Montérégie-Est sont conservées dans data.json et
-  // activées uniquement dans leur onglet distinct. Leur statut de recrutement est appliqué en
-  // mémoire, sans modifier l'affichage des cliniques.
-  etablissements = brut
-    .filter(g => g.categorie === 'etablissement' && ficheValide(g))
-    .map(g => Object.assign({}, g, { recrutementActif: true }));
+  // activées uniquement dans leur onglet distinct, avec le même filtre de recrutement que les
+  // cliniques (voir statutVisible() et l'interrupteur « Tous les établissements »).
+  etablissements = brut.filter(g => g.categorie === 'etablissement' && ficheValide(g));
   // Garde-fou défensif : le fichier est déjà filtré à l'Est, mais une donnée importée par erreur
   // ne peut tout de même pas apparaître dans cette application autonome.
   cliniques = cliniques.filter(g => g.region === 'Est');
