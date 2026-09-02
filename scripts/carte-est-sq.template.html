@@ -80,20 +80,14 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   white-space: nowrap; }
 /* ── MOT DU TERRITOIRE ────────────────────────────────────────────────────
    Plus aucun lettrage attaché : « Est » s'écrit en Segoe UI, avec la même
-   graisse que « Montérégie ». Seule sa couleur Menthe → Azur le distingue. */
+   graisse que « Montérégie ». Seule sa couleur sarcelle le distingue. */
 .logo-text .brand-mot {
   font-family: var(--sq-font);
   font-weight: 700;
-  /* Dégradé Menthe → Azur conservé, désactivé pour le moment.
-  background: linear-gradient(92deg, var(--sq-menthe) 0%, var(--sq-azur) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  */
-  color: var(--sq-menthe);
+  color: var(--sq-sarcelle);
 }
 /* Trait d'union entre « Montérégie » et « Est ». */
-.logo-text .brand-tiret { color: var(--sq-menthe); }
+.logo-text .brand-tiret { color: var(--sq-sarcelle); }
 
 .header-right { margin-left: auto; display: flex; gap: 10px; align-items: center; padding-right: 12px; position: relative; }
 .btn-info { display: inline-flex; align-items: center; justify-content: center;
@@ -614,7 +608,7 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   background: linear-gradient(92deg, var(--sq-menthe) 0%, var(--sq-azur) 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent; }
 @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .logo-text .brand-mot,
+  .logo-text .brand-mot { color: var(--sq-sarcelle); background: none; }
   #app-loader .ldr-brand .ldr-mot { color: var(--sq-menthe); background: none; }
 }
 #app-loader .ldr-brand .ldr-ptem { font-size: 18px; font-weight: 600; letter-spacing: .3em;
