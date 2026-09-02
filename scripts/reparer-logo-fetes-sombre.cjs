@@ -31,6 +31,110 @@ function isNeutralLight(r, g, b) {
   return mn >= 215 && mx - mn <= 28;
 }
 
+function isTealBody(r, g, b) {
+  return g >= 120 && r <= 72 && b >= 70;
+}
+
+function isBlueDot(r, g, b) {
+  return b >= 140 && b >= g + 12 && r <= 110;
+}
+
+/** Lisière cyan pâle entre le point bleu et le corps teal (visible en mode sombre). */
+function isGapBlend(r, g, b) {
+  if (isTealBody(r, g, b) || isBlueDot(r, g, b)) return false;
+  if (r < 70 || g < 145) return false;
+  const spread = Math.max(r, g, b) - Math.min(r, g, b);
+  if (spread > 55) return false;
+  if (r / g > 0.5 && Math.abs(g - b) < 45) return true;
+  const mn = Math.min(r, g, b);
+  return mn >= 175 && spread <= 50;
+}
+
+function clearGapAroundBlueDot(px, w, h) {
+  const x0 = 96;
+  const y0 = 102;
+  for (let y = y0; y < h; y++) {
+    for (let x = x0; x < w; x++) {
+      const i = idx(w, x, y);
+      if (!px[i + 3]) continue;
+      const r = px[i];
+      const g = px[i + 1];
+      const b = px[i + 2];
+      if (isGapBlend(r, g, b)) px[i + 3] = 0;
+    }
+  }
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (let y = y0; y < h; y++) {
+      for (let x = x0; x < w; x++) {
+        const i = idx(w, x, y);
+        if (!px[i + 3]) continue;
+        const r = px[i];
+        const g = px[i + 1];
+        const b = px[i + 2];
+        if (!isGapBlend(r, g, b) && !isNeutralLight(r, g, b)) continue;
+        for (const [nx, ny] of [
+          [x + 1, y],
+          [x - 1, y],
+          [x, y + 1],
+          [x, y - 1],
+        ]) {
+          if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+          if (!px[idx(w, nx, ny) + 3]) {
+            px[i + 3] = 0;
+            changed = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  const isMilkyEdge = (r, g, b) => {
+    if (isSolidTeal(r, g, b) || isSolidBlue(r, g, b)) return false;
+    if (r > 32 && r < 115 && g >= 128 && b >= 95) return true;
+    if (b >= 175 && r >= 30 && g >= 95) return true;
+    const spread = Math.max(r, g, b) - Math.min(r, g, b);
+    if (spread <= 25 && Math.min(r, g, b) >= 55) return true;
+    return isGapBlend(r, g, b) || isNeutralLight(r, g, b);
+  };
+
+  for (let pass = 0; pass < 10; pass++) {
+    changed = false;
+    for (let y = 106; y < 118; y++) {
+      for (let x = 102; x < 130; x++) {
+        const i = idx(w, x, y);
+        if (!px[i + 3]) continue;
+        if (!isMilkyEdge(px[i], px[i + 1], px[i + 2])) continue;
+        for (const [nx, ny] of [
+          [x + 1, y],
+          [x - 1, y],
+          [x, y + 1],
+          [x, y - 1],
+        ]) {
+          if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+          if (!px[idx(w, nx, ny) + 3]) {
+            px[i + 3] = 0;
+            changed = true;
+            break;
+          }
+        }
+      }
+    }
+    if (!changed) break;
+  }
+}
+
+function isSolidTeal(r, g, b) {
+  return g >= 120 && r <= 32 && b >= 70;
+}
+
+function isSolidBlue(r, g, b) {
+  return b >= 175 && r <= 25 && g <= 145;
+}
+
 async function main() {
   const { data, info } = await sharp(target)
     .resize(168, 168, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 1 } })
@@ -137,6 +241,8 @@ async function main() {
       }
     }
   }
+
+  clearGapAroundBlueDot(px, w, h);
 
   await sharp(px, { raw: { width: w, height: h, channels: 4 } }).png().toFile(target);
   console.log('Réparé', target);
