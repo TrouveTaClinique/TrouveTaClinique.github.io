@@ -1224,11 +1224,24 @@ body.cmp-open { overflow:hidden; }
 :root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num {
   border-radius: 10px 10px 10px 3px;
   box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 4px rgba(23,10,114,.18);
+  margin-top: 3px;
+}
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-item {
+  align-items: flex-start;
 }
 :root[data-region="Est"] .sb-name { font-size: 16px; font-weight: 700; line-height: 1.22; }
-:root[data-region="Est"] .sb-city { font-size: 13.5px; }
+:root[data-region="Est"] .sb-city { font-size: 13.5px; line-height: 1.25; }
+:root[data-region="Est"] .sb-estab-install {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.25;
+}
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-city {
+  margin-top: 2px;
+}
 :root[data-region="Est"] .sb-estab-meta {
-  margin-top: 5px;
+  margin-top: 4px;
   color: var(--sq-teal);
   font-size: 11.5px;
   font-weight: 700;
@@ -1740,7 +1753,8 @@ function matchesFiltersInstallation(installationId) {
 function badgeMarqueur(g) {
   if (modeCarte === 'etablissements' && g._installationEtab) {
     const n = nbSecteursVisiblesInstallation(g.id);
-    return n > 0 ? n : '';
+    // Un seul secteur visible : pas de chiffre (évite 22 repères « 1 » identiques).
+    return n > 1 ? n : '';
   }
   return rankOf(g.id);
 }
@@ -2492,8 +2506,9 @@ function renderSidebar() {
       <div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>
       <div class="sb-info">
         <div class="sb-name">${esc(nomMain)}${badgeVerifHtml(g)}</div>
-        <div class="sb-city">${modeCarte === 'etablissements' && g._secteurEtab ? esc(g.nomInstallation) + ' · 📍 ' + esc(g.ville) : '📍 ' + esc(g.ville)}</div>
-        ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · RLS ${esc(g.rls || 'À venir')}${g.missionRegionale ? ' · Mission régionale' : ''}</div>` : (modeCarte === 'etablissements' ? `<div class="sb-estab-meta">${esc(typeLabel(g.type))} · RLS ${esc(g.rls || 'À venir')}</div>` : '')}
+        ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-install">${esc(g.nomInstallation)}</div>` : ''}
+        <div class="sb-city">📍 ${esc(g.ville)}</div>
+        ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · RLS ${esc(g.rls || 'À venir')}${g.missionRegionale ? ' · Mission régionale' : ''}</div>` : ''}
         ${nonRecruiting ? '<span class="sb-status">Ne recrute pas actuellement</span>' : ''}
       </div>
       <button class="sb-star${favoris.has(id) ? ' fav' : ''}" title="Marquer comme favori" aria-label="${esc((favoris.has(id) ? 'Retirer ' : 'Ajouter ') + nomMain + (favoris.has(id) ? ' des favoris' : ' aux favoris'))}" draggable="false">${favoris.has(id) ? '★' : '☆'}</button>`;
