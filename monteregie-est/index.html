@@ -787,14 +787,35 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .rls-btn.dim:hover { background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none; }
 .rls-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
 .sb-compteur { font-size:12px; color:var(--muted, #64748b); margin:4px 0 0; line-height:1.35; }
-.activite-btns { margin-top:8px; width:100%; display:flex; flex-wrap:wrap; gap:6px; }
+.activite-panel { margin-top:8px; width:100%; }
+.activite-panel > summary.filtre-section-label { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.activite-panel > summary.filtre-section-label::-webkit-details-marker { display:none; }
+.activite-panel > summary.filtre-section-label::after { content:'▾'; font-size:11px; color:var(--muted); transition:transform .15s ease; }
+.activite-panel:not([open]) > summary.filtre-section-label::after { transform:rotate(-90deg); }
+.filtre-section-label { font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted, #64748b); margin:10px 0 6px; }
+.filtre-territoire { width:100%; }
+.activite-btns { width:100%; display:flex; flex-wrap:wrap; gap:6px; }
+.activite-group { width:100%; display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start; margin-bottom:4px; }
+.activite-group-label { flex:0 0 100%; font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--sq-sarcelle, #08A0A0); margin:2px 0 0; }
 .activite-btn { flex:0 1 auto; padding:6px 10px; box-sizing:border-box; border-radius:999px;
-  border:1.5px solid var(--orange); background:var(--orange); color:#fff; cursor:pointer;
+  border:1.5px solid var(--sq-indigo, #170A72); background:transparent; color:var(--sq-indigo, #170A72); cursor:pointer;
   font-family:'Raleway',sans-serif; font-weight:700; font-size:11px; line-height:1.2;
-  text-align:center; transition:background .15s ease,color .15s ease,opacity .15s ease; }
-.activite-btn:hover { filter:brightness(1.08); }
-.activite-btn.dim { background:var(--champ); color:var(--orange); }
-.activite-btn.dim:hover { background:color-mix(in srgb, var(--orange) 12%, var(--champ)); filter:none; }
+  text-align:center; transition:background .15s ease,color .15s ease,opacity .15s ease,border-color .15s ease; }
+.activite-btn:hover { background:color-mix(in srgb, var(--sq-indigo, #170A72) 8%, var(--champ)); }
+.activite-btn[aria-pressed="true"] { background:var(--sq-indigo, #170A72); color:#fff; border-color:var(--sq-indigo, #170A72); }
+.activite-btn.dim { opacity:.42; }
+.activite-btn:focus-visible { outline:2px solid var(--sq-sarcelle, #08A0A0); outline-offset:2px; }
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-dot {
+  font-size:0; color:transparent; line-height:0;
+}
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-dot::before {
+  content:''; display:block; width:11px; height:11px; border-radius:50%;
+  background:var(--rls, var(--sq-indigo)); margin:11px auto 0;
+  box-shadow:0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--rls) 42%, transparent);
+}
+@media (max-width: 768px) {
+  .activite-panel:not(.activite-panel--force-open) { margin-top:6px; }
+}
 .dp-sect-link:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
 .dp-sect-intro { font-size:13px; color:var(--muted, #64748b); margin:12px 16px 8px; line-height:1.4; }
 .dp-sect-list { display:flex; flex-direction:column; gap:8px; padding:0 16px 16px; }
@@ -1448,6 +1469,32 @@ body.cmp-open { overflow:hidden; }
 </script>
 </head>
 <body>
+<script>
+(function () {
+  if (new URLSearchParams(location.search).get('mode') !== 'etablissements') return;
+  function preparerOngletEtablissements() {
+    document.body.dataset.modeCarte = 'etablissements';
+    var cliniques = document.querySelector('.care-mode-btn[data-mode="cliniques"]');
+    var etab = document.querySelector('.care-mode-btn[data-mode="etablissements"]');
+    if (cliniques && etab) {
+      cliniques.setAttribute('aria-selected', 'false');
+      cliniques.tabIndex = -1;
+      etab.setAttribute('aria-selected', 'true');
+      etab.tabIndex = 0;
+    }
+    var titre = document.getElementById('sb-title');
+    if (titre) titre.textContent = 'Secteurs en recrutement';
+    var compteur = document.getElementById('sb-compteur');
+    if (compteur) compteur.hidden = false;
+    var panel = document.getElementById('activite-panel');
+    if (panel) panel.hidden = false;
+    var territoire = document.getElementById('filtre-territoire-label');
+    if (territoire) territoire.hidden = false;
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', preparerOngletEtablissements);
+  else preparerOngletEtablissements();
+})();
+</script>
 
 <!-- Titre principal de la page. Rendu invisible à l'œil (.sr-only) parce que la carte
      occupe tout l'écran et que l'en-tête joue déjà ce rôle visuellement — mais il est lu
@@ -1591,7 +1638,14 @@ body.cmp-open { overflow:hidden; }
         <input type="search" id="sb-search-input" placeholder="Rechercher une clinique ou une ville…" autocomplete="off" aria-label="Rechercher une clinique ou une ville">
         <button type="button" class="sb-search-clear" id="sb-search-clear" aria-label="Effacer la recherche" title="Effacer">✕</button>
       </div>
-      <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité" hidden></div>
+      <div class="filtre-territoire" id="filtre-territoire-wrap">
+        <div class="filtre-section-label" id="filtre-territoire-label" hidden>Territoire</div>
+        <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>
+      </div>
+      <details class="activite-panel" id="activite-panel" hidden>
+        <summary class="filtre-section-label">Secteur d'activité</summary>
+        <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité"></div>
+      </details>
       <div class="sb-view-row">
         <button class="fav-toggle" id="fav-toggle">★ Voir mes favoris</button>
         <div class="all-clinics-wrap">
@@ -1603,7 +1657,6 @@ body.cmp-open { overflow:hidden; }
         </div>
       </div>
       <button class="cmp-export-btn" id="cmp-export-btn">⤓ Exporter le comparatif (PDF)</button>
-      <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>
     </div>
     <div class="sb-list" id="sb-list"></div>
   </div>
@@ -1830,10 +1883,33 @@ function marqueurActifId(g) {
   return g && g.id;
 }
 const libelleMode = (pluriel = true) => modeCarte === 'etablissements'
-  ? (pluriel ? 'établissements' : 'établissement')
+  ? (pluriel ? 'secteurs' : 'secteur')
   : (pluriel ? 'cliniques' : 'clinique');
-const articleMode = () => modeCarte === 'etablissements' ? 'un établissement' : 'une clinique';
-const aucunMode = () => modeCarte === 'etablissements' ? 'Aucun établissement' : 'Aucune clinique';
+const articleMode = () => modeCarte === 'etablissements' ? 'un secteur' : 'une clinique';
+const aucunMode = () => modeCarte === 'etablissements' ? 'Aucun secteur' : 'Aucune clinique';
+function libelleTerritoireSecteur(g) {
+  if (!g) return 'À venir';
+  if (g.missionRegionale) return 'Mission régionale';
+  return g.rls ? ('RLS ' + g.rls) : 'À venir';
+}
+function mettreAJourMetaPage() {
+  const h1 = document.getElementById('page-h1');
+  const desc = document.getElementById('page-desc');
+  const prefix = /^BROUILLON \| /.test(document.title) ? 'BROUILLON | ' : '';
+  if (modeCarte === 'etablissements') {
+    document.title = prefix + 'Secteurs en recrutement — Montérégie-Est | Trouve ta clinique';
+    if (h1) h1.textContent = 'Trouve ta clinique — Secteurs en recrutement en Montérégie-Est';
+    if (desc) desc.textContent = 'Carte interactive des secteurs en recrutement en établissement en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel, et en mission régionale.';
+  } else {
+    document.title = prefix + 'Cliniques en recrutement — Montérégie-Est | Trouve ta clinique';
+    if (h1) h1.textContent = 'Trouve ta clinique — Cliniques en recrutement en Montérégie-Est';
+    if (desc) desc.textContent = 'Carte interactive des cliniques et points de service qui recrutent des médecins de famille en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu : coordonnées, type de clinique, réseau local de services, pratiques offertes, horaires et personne-ressource pour le recrutement.';
+  }
+}
+const GROUPES_ACTIVITE = [
+  { label: 'Hospitalier', ids: ['urgence', 'hospitalisation', 'ucdg', 'soins-intensifs', 'obstetrique'] },
+  { label: 'Communautaire', ids: ['gmf-u', 'longue-duree', 'sad-siad-sp', 'crd', 'detention'] }
+];
 const normTxt = s => (s == null ? '' : String(s)).toLowerCase().replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 // Un milieu \u00ab en recrutement \u00bb a recrutementActif !== false (absent = recrute, comme avant
 // l'ajout du champ). statutVisible() est LE point d'entr\u00e9e unique : matchesFilters(),
@@ -2624,7 +2700,18 @@ function syncModeCarteUI() {
     }
   }
   const activiteWrap = document.getElementById('activite-btns');
-  if (activiteWrap) activiteWrap.hidden = modeCarte !== 'etablissements';
+  const activitePanel = document.getElementById('activite-panel');
+  if (activitePanel) {
+    activitePanel.hidden = modeCarte !== 'etablissements';
+    if (modeCarte === 'etablissements' && window.matchMedia('(max-width: 768px)').matches && !activiteFilter) {
+      activitePanel.removeAttribute('open');
+    } else if (modeCarte === 'etablissements') {
+      activitePanel.setAttribute('open', '');
+    }
+  }
+  if (activiteWrap && modeCarte !== 'etablissements') activiteWrap.innerHTML = '';
+  const territoireLabel = document.getElementById('filtre-territoire-label');
+  if (territoireLabel) territoireLabel.hidden = modeCarte !== 'etablissements';
   const rlsWrap = document.getElementById('rls-btns');
   if (rlsWrap) rlsWrap.setAttribute('aria-label', modeCarte === 'etablissements' ? 'Filtrer par territoire' : 'Filtrer par RLS');
   const etabBtn = document.querySelector('.care-mode-btn[data-mode="etablissements"]');
@@ -2641,6 +2728,7 @@ function syncModeCarteUI() {
   if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
   syncAllClinicsToggle();
   updateCompteurEtab();
+  mettreAJourMetaPage();
 }
 
 function activerModeCarte(prochainMode) {
@@ -2687,6 +2775,7 @@ function activerModeCarte(prochainMode) {
   fitToData();
   try { history.replaceState({}, '', urlEtat()); } catch (e) {}
   annoncerA11y(gmfs.length + ' ' + libelleMode(true) + (modeCarte === 'etablissements' ? ' affichés.' : ' affichées.'));
+  mettreAJourMetaPage();
 }
 
 // Ordre des favoris : ceux déjà rangés, puis les nouveaux (ordre par défaut)
@@ -2730,12 +2819,14 @@ function renderSidebar() {
     el.id = 'si-' + id;
     el.draggable = dragEnabled;
     el.innerHTML = `${dragEnabled ? '<span class="sb-grip" title="Glisser pour reclasser">⠿</span>' : ''}
-      <div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>
+      ${modeCarte === 'etablissements' && g._secteurEtab
+        ? `<div class="sb-num sb-num-dot" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}" aria-hidden="true"></div>`
+        : `<div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>`}
       <div class="sb-info">
         <div class="sb-name">${esc(nomMain)}${badgeVerifHtml(g)}</div>
         ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-install">${esc(g.nomInstallation)}</div>` : ''}
         <div class="sb-city">📍 ${esc(g.ville)}</div>
-        ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · RLS ${esc(g.rls || 'À venir')}${g.missionRegionale ? ' · Mission régionale' : ''}</div>` : ''}
+        ${modeCarte === 'etablissements' && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · ${esc(libelleTerritoireSecteur(g))}</div>` : ''}
         ${nonRecruiting ? '<span class="sb-status">Ne recrute pas actuellement</span>' : ''}
       </div>
       <button class="sb-star${favoris.has(id) ? ' fav' : ''}" title="Marquer comme favori" aria-label="${esc((favoris.has(id) ? 'Retirer ' : 'Ajouter ') + nomMain + (favoris.has(id) ? ' des favoris' : ' aux favoris'))}" draggable="false">${favoris.has(id) ? '★' : '☆'}</button>`;
@@ -2982,7 +3073,7 @@ function syncAllClinicsToggle() {
   if (b) {
     b.setAttribute('aria-checked', showAllClinics ? 'true' : 'false');
     const label = b.querySelector('span');
-    if (label) label.textContent = modeCarte === 'etablissements' ? 'Tous les établissements' : 'Toutes les cliniques';
+    if (label) label.textContent = modeCarte === 'etablissements' ? 'Tous les secteurs' : 'Toutes les cliniques';
   }
   const titre = document.getElementById('sb-title');
   if (titre) {
@@ -2994,9 +3085,13 @@ function syncAllClinicsToggle() {
   }
   const infoBtn = document.getElementById('all-clinics-info');
   const infoTip = document.getElementById('all-clinics-tip');
-  const mot = modeCarte === 'etablissements' ? 'établissements' : 'cliniques';
+  const mot = modeCarte === 'etablissements' ? 'secteurs' : 'cliniques';
   if (infoBtn) infoBtn.setAttribute('aria-label', 'Information sur les autres ' + mot);
-  if (infoTip) infoTip.textContent = 'Inclut aussi les ' + mot + ' qui ne recrutent pas pour le moment. Leurs épingles sont affichées dans une couleur plus pâle.';
+  if (infoTip) {
+    infoTip.textContent = modeCarte === 'etablissements'
+      ? 'Inclut aussi les secteurs qui ne recrutent pas pour le moment. Leurs repères sont affichés dans une couleur plus pâle.'
+      : 'Inclut aussi les cliniques qui ne recrutent pas pour le moment. Leurs épingles sont affichées dans une couleur plus pâle.';
+  }
 }
 
 function toggleAllClinics() {
@@ -3018,11 +3113,18 @@ function toggleAllClinics() {
   refreshMarkerIcons();
   fitToVisible();
   const n = currentOrder().filter(id => matchesFilters(id)).length;
-  const lib = libelleMode(true);
-  const accord = modeCarte === 'etablissements' ? 'affichés' : 'affichées';
-  annoncerA11y(showAllClinics
-    ? n + ' ' + lib + ' ' + accord + ', incluant ceux qui ne recrutent pas actuellement.'
-    : n + ' ' + lib + ' en recrutement ' + accord + '.');
+  if (modeCarte === 'etablissements') {
+    const insts = new Set(gmfs.filter(s => matchesFilters(s.id)).map(s => s.installationId));
+    annoncerA11y(showAllClinics
+      ? n + ' secteurs affichés dans ' + insts.size + ' installations, incluant ceux qui ne recrutent pas actuellement.'
+      : n + ' secteurs en recrutement affichés.');
+  } else {
+    const lib = libelleMode(true);
+    const accord = 'affichées';
+    annoncerA11y(showAllClinics
+      ? n + ' ' + lib + ' ' + accord + ', incluant celles qui ne recrutent pas actuellement.'
+      : n + ' ' + lib + ' en recrutement ' + accord + '.');
+  }
 }
 
 // ===== Export du comparatif des favoris (PDF via impression) =====
@@ -3105,8 +3207,8 @@ function cmpCornerBrandHtml() {
 function buildComparatif(favs, totalFavs) {
   const gs = favs.map(id => byId(id)).filter(Boolean);
   const etab = modeCarte === 'etablissements';
-  const titreMilieux = etab ? 'ÉTABLISSEMENTS' : 'CLINIQUES';
-  const libelleMilieux = etab ? 'établissements' : 'cliniques';
+  const titreMilieux = etab ? 'SECTEURS' : 'CLINIQUES';
+  const libelleMilieux = etab ? 'secteurs' : 'cliniques';
   const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
   const date = new Date().toLocaleDateString('fr-CA', { day:'numeric', month:'long', year:'numeric' });
   const metaDate = cmpMetaDateLine();
@@ -3127,7 +3229,7 @@ function buildComparatif(favs, totalFavs) {
   };
   const sect = (label) => { shade = 0; return `<tr class="cmp-sect-row"><td class="cmp-sect" colspan="${gs.length + 1}">${label}</td></tr>`; };
   let rows = '';
-  rows += row('Réseau (RLS)', g => `<span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${cmpVal(g.rls)}`);
+  rows += row('Réseau (RLS)', g => `<span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${cmpVal(g.missionRegionale ? 'Mission régionale' : g.rls)}`);
   rows += row('Statut', g => cmpStatutHtml(g, true));
   if (etab) {
     rows += row('Installation', g => cmpVal(g.nomInstallation));
@@ -3350,12 +3452,35 @@ function setActiviteFilter(id) {
   activiteFilter = (activiteFilter === id) ? '' : id;
   appliquerFiltresEtab();
 }
+function nbSecteursParActivite(catId) {
+  return secteursEtab.filter(s => s.categorieActivite === catId && statutVisible(s)).length;
+}
 function populateActiviteButtons() {
   const wrap = document.getElementById('activite-btns');
+  const panel = document.getElementById('activite-panel');
   if (!wrap) return;
   wrap.innerHTML = '';
-  if (modeCarte !== 'etablissements') { wrap.hidden = true; return; }
-  wrap.hidden = false;
+  if (modeCarte !== 'etablissements') {
+    if (panel) panel.hidden = true;
+    return;
+  }
+  if (panel) panel.hidden = false;
+  const cats = categoriesActiviteDisponibles();
+  const parId = new Map(cats.map(c => [c.id, c]));
+  const creerBtn = (cat, extraClass) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'activite-btn' + (extraClass ? ' ' + extraClass : '');
+    const n = nbSecteursParActivite(cat.id);
+    b.textContent = cat.libelle + (n ? ' (' + n + ')' : '');
+    if (cat.libelleComplet && cat.libelleComplet !== cat.libelle) b.title = cat.libelleComplet;
+    b.setAttribute('aria-label', 'Filtrer : ' + (cat.libelleComplet || cat.libelle));
+    const pale = activiteFilter !== '' && activiteFilter !== cat.id;
+    b.classList.toggle('dim', pale);
+    b.setAttribute('aria-pressed', activiteFilter === cat.id ? 'true' : 'false');
+    b.addEventListener('click', () => setActiviteFilter(cat.id));
+    return b;
+  };
   const tous = document.createElement('button');
   tous.type = 'button';
   tous.className = 'activite-btn';
@@ -3365,18 +3490,17 @@ function populateActiviteButtons() {
   tous.classList.toggle('dim', activiteFilter !== '');
   tous.addEventListener('click', () => { activiteFilter = ''; appliquerFiltresEtab(); });
   wrap.appendChild(tous);
-  categoriesActiviteDisponibles().forEach(cat => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'activite-btn';
-    b.textContent = cat.libelle;
-    if (cat.libelleComplet && cat.libelleComplet !== cat.libelle) b.title = cat.libelleComplet;
-    b.setAttribute('aria-label', 'Filtrer : ' + (cat.libelleComplet || cat.libelle));
-    const pale = activiteFilter !== '' && activiteFilter !== cat.id;
-    b.classList.toggle('dim', pale);
-    b.setAttribute('aria-pressed', activiteFilter === cat.id ? 'true' : 'false');
-    b.addEventListener('click', () => setActiviteFilter(cat.id));
-    wrap.appendChild(b);
+  GROUPES_ACTIVITE.forEach(groupe => {
+    const ids = groupe.ids.filter(id => parId.has(id));
+    if (!ids.length) return;
+    const bloc = document.createElement('div');
+    bloc.className = 'activite-group';
+    const label = document.createElement('div');
+    label.className = 'activite-group-label';
+    label.textContent = groupe.label;
+    bloc.appendChild(label);
+    ids.forEach(id => bloc.appendChild(creerBtn(parId.get(id))));
+    wrap.appendChild(bloc);
   });
 }
 /* Un bouton par RLS. Un second clic sur le bouton actif retire le filtre. */
@@ -3496,7 +3620,7 @@ function openDetail(id) {
         <div class="vw-sec-title">Milieu</div>
         <div class="vw-row"><span class="vw-label">Installation</span><span class="vw-value">${esc(g.nomInstallation)}</span></div>
         <div class="vw-row"><span class="vw-label">Ville</span><span class="vw-value">${esc(g.ville)}</span></div>
-        <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(g.rls || 'À venir')}${g.missionRegionale ? ' · Mission régionale' : ''}</span></div>
+        <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(libelleTerritoireSecteur(g))}</span></div>
         <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(g)}</span></div>
         ${g.mentionPublique ? `<div class="vw-row"><span class="vw-label">Note</span><span class="vw-value">${esc(g.mentionPublique)}</span></div>` : ''}
       </div>
@@ -4098,7 +4222,7 @@ fetch('../data.json', { cache: 'no-cache' })
 
   function contenuPartage() {
     var etab = typeof modeCarte !== 'undefined' && modeCarte === 'etablissements';
-    var milieux = etab ? 'établissements' : 'cliniques';
+    var milieux = etab ? 'secteurs en établissement' : 'cliniques';
     return {
       titre: TITRE,
       texte: 'Carte interactive des ' + milieux + ' en recrutement en ' + regNom + '. Installable sur téléphone.',
