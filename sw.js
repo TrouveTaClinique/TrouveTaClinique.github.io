@@ -6,7 +6,8 @@
 
 const CACHE_PREFIX = 'trouve-clinique-est-';
 // v54-secteurs-etablissements (2 septembre 2026) : couche data-etablissements.json pour l'onglet Établissements.
-const CACHE = CACHE_PREFIX + 'v54-secteurs-etablissements';
+// v55-lisibilite-carte (2 septembre 2026) : pastilles d'activité, repères chiffrés, déploiement des repères superposés.
+const CACHE = CACHE_PREFIX + 'v55-lisibilite-carte';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [

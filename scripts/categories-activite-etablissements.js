@@ -4,6 +4,7 @@
 const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   {
     id: 'urgence',
+    abbr: 'URG',
     libelle: 'Urgence',
     libelleComplet: 'Urgence',
     ancre: 'urgence',
@@ -12,6 +13,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'hospitalisation',
+    abbr: 'HOSP',
     libelle: 'Hospitalisation',
     libelleComplet: 'Hospitalisation',
     ancre: 'hospitalisation',
@@ -20,6 +22,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'ucdg',
+    abbr: 'UCDG',
     libelle: 'UCDG',
     libelleComplet: 'UCDG',
     ancre: 'ucdg',
@@ -28,6 +31,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'soins-intensifs',
+    abbr: 'USI',
     libelle: 'Soins intensifs',
     libelleComplet: 'Soins intensifs',
     ancre: 'soins-intensifs',
@@ -36,6 +40,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'gmf-u',
+    abbr: 'GMFU',
     libelle: 'GMF-U',
     libelleComplet: 'GMF-U',
     ancre: 'recrutement-gmf-u',
@@ -44,6 +49,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'longue-duree',
+    abbr: 'CHSLD',
     libelle: 'Longue durée',
     libelleComplet: 'Longue durée',
     ancre: 'longue-duree',
@@ -52,6 +58,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'sad-siad-sp',
+    abbr: 'SAD',
     libelle: 'Soins à domicile',
     libelleComplet: 'Soins à domicile, soins palliatifs et prise en charge',
     ancre: 'sad-siad-sp-prise-en-charge',
@@ -60,6 +67,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'obstetrique',
+    abbr: 'OBST',
     libelle: 'Obstétrique',
     libelleComplet: 'Obstétrique',
     ancre: 'obstetrique',
@@ -68,6 +76,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'detention',
+    abbr: 'DÉT',
     libelle: 'Centre de détention',
     libelleComplet: 'Centre de détention',
     ancre: 'medecine-en-detention',
@@ -76,6 +85,7 @@ const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   },
   {
     id: 'crd',
+    abbr: 'CRD',
     libelle: 'Réadaptation',
     libelleComplet: 'Réadaptation en dépendance',
     ancre: 'dependance',

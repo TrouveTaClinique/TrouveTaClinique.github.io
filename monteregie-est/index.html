@@ -786,17 +786,30 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .rls-btn.dim { background:var(--champ); color:var(--c); }
 .rls-btn.dim:hover { background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none; }
 .rls-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
-.sb-compteur { font-size:12px; color:var(--muted, #64748b); margin:4px 0 0; line-height:1.35; }
+/* Quatre territoires (mode établissements) : 4 × 86px + gouttières dépassent la
+   largeur du tiroir mobile, ce qui renvoyait « Missions régionales » seule sur une
+   2e ligne. Deux rangées de deux boutons de hauteur égale à la place. */
+.rls-btns[data-nb="4"] { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); }
+.rls-btns[data-nb="4"] .rls-btn { width:100%; padding:8px 6px; }
+/* Le compteur est le chiffre clé de la vue : il doit passer devant la règle
+   générale « .sb-head p », qui l'affichait en gris pâle et en graisse 300. */
+.sb-head .sb-compteur { font-size:13px; font-weight:600; color:var(--texte2, #334155); margin-top:6px; line-height:1.35; }
 .activite-panel { margin-top:8px; width:100%; }
-.activite-panel > summary.filtre-section-label { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.activite-panel > summary.filtre-section-label { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:flex-start; gap:5px; }
 .activite-panel > summary.filtre-section-label::-webkit-details-marker { display:none; }
 .activite-panel > summary.filtre-section-label::after { content:'▾'; font-size:11px; color:var(--muted); transition:transform .15s ease; }
 .activite-panel:not([open]) > summary.filtre-section-label::after { transform:rotate(-90deg); }
 .filtre-section-label { font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted, #64748b); margin:10px 0 6px; }
 .filtre-territoire { width:100%; }
 .activite-btns { width:100%; display:flex; flex-wrap:wrap; gap:6px; }
-.activite-group { width:100%; display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start; margin-bottom:4px; }
+.activite-group { width:100%; display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start;
+  margin:0 0 6px; padding-left:9px;
+  border-left:2px solid color-mix(in srgb, var(--sq-sarcelle, #08A0A0) 32%, transparent); }
 .activite-group-label { flex:0 0 100%; font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--sq-sarcelle, #08A0A0); margin:2px 0 0; }
+/* « Tous » n'est pas une catégorie mais une remise à zéro : trait pointillé au repos
+   pour qu'il ne soit pas lu comme une 11e activité. */
+.activite-btn-tous { border-style:dashed; margin-bottom:2px; }
+.activite-btn-tous[aria-pressed="true"] { border-style:solid; }
 .activite-btn { flex:0 1 auto; padding:6px 10px; box-sizing:border-box; border-radius:999px;
   border:1.5px solid var(--sq-indigo, #170A72); background:transparent; color:var(--sq-indigo, #170A72); cursor:pointer;
   font-family:'Raleway',sans-serif; font-weight:700; font-size:11px; line-height:1.2;
@@ -805,13 +818,25 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .activite-btn[aria-pressed="true"] { background:var(--sq-indigo, #170A72); color:#fff; border-color:var(--sq-indigo, #170A72); }
 .activite-btn.dim { opacity:.42; }
 .activite-btn:focus-visible { outline:2px solid var(--sq-sarcelle, #08A0A0); outline-offset:2px; }
-:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-dot {
-  font-size:0; color:transparent; line-height:0;
+/* En mode sombre, l'indigo Santé Québec disparaît sur le fond nuit : les puces
+   reprennent la menthe de la palette, qui sert déjà d'accent clair. */
+:root[data-theme="sombre"] .activite-btn { border-color:var(--sq-menthe, #90F1E9); color:var(--sq-menthe, #90F1E9); }
+:root[data-theme="sombre"] .activite-btn:hover { background:rgba(144,241,233,.14); }
+:root[data-theme="sombre"] .activite-btn[aria-pressed="true"] { background:var(--sq-menthe, #90F1E9); color:#0F1526; border-color:var(--sq-menthe, #90F1E9); }
+:root[data-theme="sombre"] .activite-group-label { color:var(--sq-menthe, #90F1E9); }
+:root[data-theme="sombre"] .activite-group { border-left-color:rgba(144,241,233,.32); }
+/* Pastille de secteur : abréviation de la catégorie d'activité, dans le même langage
+   visuel que les puces .prat-chip. Le rond cerclé de blanc utilisé auparavant se
+   lisait comme un « 0 » et ne distinguait pas deux secteurs du même territoire. */
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr {
+  font-family:'Raleway',sans-serif; font-weight:800; font-size:11.5px;
+  line-height:1; letter-spacing:0; padding:0 1px;
 }
-:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-dot::before {
-  content:''; display:block; width:11px; height:11px; border-radius:50%;
-  background:var(--rls, var(--sq-indigo)); margin:11px auto 0;
-  box-shadow:0 0 0 3px #fff, 0 0 0 4px color-mix(in srgb, var(--rls) 42%, transparent);
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="1"] { font-size:9.5px; }
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font-size:8px; letter-spacing:-.02em; padding:0; }
+/* Le halo blanc du prototype découpe un liseré clair sur fond sombre. */
+:root[data-region="Est"][data-theme="sombre"] body[data-mode-carte="etablissements"] .sb-num {
+  box-shadow:0 0 0 3px #1A2239, 0 0 0 4px rgba(144,241,233,.22);
 }
 @media (max-width: 768px) {
   .activite-panel:not(.activite-panel--force-open) { margin-top:6px; }
@@ -1849,6 +1874,7 @@ function preparerCoucheEtablissements(donneesEtab) {
       regroupe: !!sec.regroupe,
       lienWeb: inst.lienWeb,
       categorieActivite: sec.categorieActivite || '',
+      abbrActivite: sec.abbrActivite || '',
       activites: Array.isArray(sec.activites) ? sec.activites.slice() : [],
       termesRecherche: Array.isArray(sec.termesRecherche) ? sec.termesRecherche.slice() : [],
       ancre: sec.ancre || '',
@@ -1871,9 +1897,9 @@ function matchesFiltersInstallation(installationId) {
 
 function badgeMarqueur(g) {
   if (modeCarte === 'etablissements' && g._installationEtab) {
-    const n = nbSecteursVisiblesInstallation(g.id);
-    // Un seul secteur visible : pas de chiffre (évite 22 repères « 1 » identiques).
-    return n > 1 ? n : '';
+    // Toujours le nombre de secteurs visibles, y compris 1 : un repère vide se lisait
+    // comme un défaut d'affichage à côté des quelques repères chiffrés.
+    return nbSecteursVisiblesInstallation(g.id) || '';
   }
   return rankOf(g.id);
 }
@@ -2164,14 +2190,21 @@ let legendEl = null;
     const d = L.DomUtil.create('div', 'rls-legend');
     const ligne = (couleur, texte) =>
       `<div class="rls-legend-row"><span class="rls-dot" style="background:${couleur}"></span>${texte}</div>`;
+    // Contenu initial (mode cliniques) : « Régional » n'est porté par aucune clinique.
+    // majLegende() reprend la main dès syncModeCarteUI() — esc() n'existe pas encore ici.
     d.innerHTML = '<div class="rls-legend-title">Réseau local (RLS)</div>' +
-      Object.keys(RLS_COLORS_REGION).map(r => ligne(RLS_COLORS_REGION[r], r)).join('');
+      Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional')
+        .map(r => ligne(RLS_COLORS_REGION[r], r)).join('');
     L.DomEvent.disableClickPropagation(d);
     legendEl = d;
     return d;
   };
   legend.addTo(map);
 })();
+
+map.on('zoomend', function () {
+  if (typeof rafraichirDecalagesEcran === 'function') rafraichirDecalagesEcran();
+});
 
 /* Retour PWA depuis une page SEO : recalculer la hauteur visible (visualViewport)
    et la taille Leaflet — sans cela, le bas de la carte et la légende RLS restent coupés. */
@@ -2206,15 +2239,44 @@ const markers = {};
    dans data.json et on décale uniquement le dessin des épingles, en pixels. */
 const markerOffsets = new Map();
 
+/* Plusieurs installations d'une même ville sont distantes de 100 à 600 m
+   (quatre autour de l'Hôpital Honoré-Mercier, trois à Sorel-Tracy) : à l'échelle
+   de la région elles se recouvrent, alors que leurs coordonnées diffèrent — le
+   regroupement par coordonnées identiques ne les voyait pas. En mode
+   établissements, le regroupement se fait donc sur l'écart EN PIXELS au zoom
+   courant, et se défait tout seul quand on zoome. Les cliniques gardent le
+   comportement d'origine. */
+const SEUIL_REGROUPEMENT_PX = 34;
+
+function grouperParProximiteEcran(liste) {
+  const zoom = map.getZoom();
+  const points = liste.map(g => ({ g, p: map.project([g.lat, g.lng], zoom) }));
+  const groupes = [];
+  points.forEach(pt => {
+    const proche = groupes.find(gr => gr.some(o => o.p.distanceTo(pt.p) < SEUIL_REGROUPEMENT_PX));
+    if (proche) proche.push(pt); else groupes.push([pt]);
+  });
+  return groupes.map(gr => gr.map(o => o.g));
+}
+
+function grouperMarqueursPourDecalage() {
+  const source = getMarqueursSource();
+  if (modeCarte === 'etablissements') {
+    try { return grouperParProximiteEcran(source); }
+    catch (e) { /* carte pas encore initialisée : repli sur le regroupement exact */ }
+  }
+  const parCoordonnees = new Map();
+  source.forEach(g => {
+    const cle = `${Number(g.lat).toFixed(6)},${Number(g.lng).toFixed(6)}`;
+    if (!parCoordonnees.has(cle)) parCoordonnees.set(cle, []);
+    parCoordonnees.get(cle).push(g);
+  });
+  return Array.from(parCoordonnees.values());
+}
+
 function calculerDecalagesMarqueurs() {
   markerOffsets.clear();
-  const groupes = new Map();
-  getMarqueursSource().forEach(g => {
-    const cle = `${Number(g.lat).toFixed(6)},${Number(g.lng).toFixed(6)}`;
-    if (!groupes.has(cle)) groupes.set(cle, []);
-    groupes.get(cle).push(g);
-  });
-  groupes.forEach(groupe => {
+  grouperMarqueursPourDecalage().forEach(groupe => {
     groupe.sort((a, b) => String(a.id).localeCompare(String(b.id), 'fr', { sensitivity: 'base' }));
     const n = groupe.length;
     if (n === 1) {
@@ -2237,6 +2299,20 @@ function calculerDecalagesMarqueurs() {
       const angle = -Math.PI / 2 + (2 * Math.PI * i / n);
       markerOffsets.set(g.id, [Math.round(Math.cos(angle) * rayon), Math.round(Math.sin(angle) * rayon)]);
     });
+  });
+}
+
+/* Le déploiement en éventail dépend du zoom : il faut le recalculer après chaque
+   zoom, sinon deux repères restent écartés alors qu'ils ne se touchent plus. */
+function rafraichirDecalagesEcran() {
+  if (modeCarte !== 'etablissements') return;
+  calculerDecalagesMarqueurs();
+  refreshMarkerIcons();
+  Object.keys(markers).forEach(id => {
+    const infobulle = markers[id] && markers[id].getTooltip();
+    if (!infobulle) return;
+    const [dx, dy] = markerOffsets.get(id) || [0, 0];
+    infobulle.options.offset = L.point(dx, dy - 20);
   });
 }
 
@@ -2359,7 +2435,12 @@ function buildMarkers() {
       if (visible) m.addTo(map);
       const [dx, dy] = markerOffsets.get(g.id) || [0, 0];
       if (modeCarte === 'etablissements') {
-        m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${nbSecteursVisiblesInstallation(g.id)} secteur(s) · ${esc(g.ville)}${g.missionRegionale ? ' · Mission régionale' : ''}</small>`, { direction:'top', offset:[dx,dy-20] });
+        // Contenu recalculé à chaque survol : le chiffre porté par le repère change
+        // avec les filtres, l'infobulle doit dire la même chose que lui.
+        m.bindTooltip(() => {
+          const n = nbSecteursVisiblesInstallation(g.id);
+          return `<b>${esc(g.nom.trim())}</b><br><small>${n} secteur${n > 1 ? 's' : ''} · ${esc(g.ville)}${g.missionRegionale ? ' · Mission régionale' : ''}</small>`;
+        }, { direction:'top', offset:[dx,dy-20] });
         m.on('click', (e) => {
           L.DomEvent.stopPropagation(e);
           openInstallationSecteurs(g.id);
@@ -2682,6 +2763,21 @@ function appliquerCibleUrl(paramsInit) {
   return false;
 }
 
+/* La légende suit le mode : le libellé « Régional » du JSON devient « Missions
+   régionales », le même mot que le bouton de filtre, et n'apparaît qu'en mode
+   établissements — aucune clinique ne porte ce territoire. */
+function majLegende() {
+  if (!legendEl) return;
+  const etab = modeCarte === 'etablissements';
+  const ligne = (couleur, texte) =>
+    `<div class="rls-legend-row"><span class="rls-dot" style="background:${couleur}"></span>${esc(texte)}</div>`;
+  let html = `<div class="rls-legend-title">${etab ? 'Territoire' : 'Réseau local (RLS)'}</div>` +
+    Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional')
+      .map(r => ligne(RLS_COLORS_REGION[r], r)).join('');
+  if (etab && hasMissionsRegionales()) html += ligne(RLS_COLORS_REGION['Régional'], TERRITOIRE_MISSIONS);
+  legendEl.innerHTML = html;
+}
+
 function syncModeCarteUI() {
   document.body.dataset.modeCarte = modeCarte;
   document.querySelectorAll('.care-mode-btn').forEach(b => {
@@ -2728,6 +2824,7 @@ function syncModeCarteUI() {
   if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
   syncAllClinicsToggle();
   updateCompteurEtab();
+  majLegende();
   mettreAJourMetaPage();
 }
 
@@ -2820,7 +2917,7 @@ function renderSidebar() {
     el.draggable = dragEnabled;
     el.innerHTML = `${dragEnabled ? '<span class="sb-grip" title="Glisser pour reclasser">⠿</span>' : ''}
       ${modeCarte === 'etablissements' && g._secteurEtab
-        ? `<div class="sb-num sb-num-dot" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}" aria-hidden="true"></div>`
+        ? `<div class="sb-num sb-num-abbr" data-long="${abbrActivitePour(g).length >= 5 ? '2' : (abbrActivitePour(g).length > 3 ? '1' : '0')}" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}" title="${esc(libelleActivitePour(g))}" aria-hidden="true">${esc(abbrActivitePour(g))}</div>`
         : `<div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>`}
       <div class="sb-info">
         <div class="sb-name">${esc(nomMain)}${badgeVerifHtml(g)}</div>
@@ -3409,22 +3506,38 @@ function hasMissionsRegionales() {
   return modeCarte === 'etablissements' && gmfs.some(g => g._secteurEtab && g.missionRegionale);
 }
 const CATEGORIES_ACTIVITE_DEFAUT = [
-  { id: 'urgence', libelle: 'Urgence', libelleComplet: 'Urgence' },
-  { id: 'hospitalisation', libelle: 'Hospitalisation', libelleComplet: 'Hospitalisation' },
-  { id: 'ucdg', libelle: 'UCDG', libelleComplet: 'UCDG' },
-  { id: 'soins-intensifs', libelle: 'Soins intensifs', libelleComplet: 'Soins intensifs' },
-  { id: 'gmf-u', libelle: 'GMF-U', libelleComplet: 'GMF-U' },
-  { id: 'longue-duree', libelle: 'Longue durée', libelleComplet: 'Longue durée' },
-  { id: 'sad-siad-sp', libelle: 'Soins à domicile', libelleComplet: 'Soins à domicile, soins palliatifs et prise en charge' },
-  { id: 'obstetrique', libelle: 'Obstétrique', libelleComplet: 'Obstétrique' },
-  { id: 'detention', libelle: 'Centre de détention', libelleComplet: 'Centre de détention' },
-  { id: 'crd', libelle: 'Réadaptation', libelleComplet: 'Réadaptation en dépendance' }
+  { id: 'urgence', abbr: 'URG', libelle: 'Urgence', libelleComplet: 'Urgence' },
+  { id: 'hospitalisation', abbr: 'HOSP', libelle: 'Hospitalisation', libelleComplet: 'Hospitalisation' },
+  { id: 'ucdg', abbr: 'UCDG', libelle: 'UCDG', libelleComplet: 'UCDG' },
+  { id: 'soins-intensifs', abbr: 'USI', libelle: 'Soins intensifs', libelleComplet: 'Soins intensifs' },
+  { id: 'gmf-u', abbr: 'GMFU', libelle: 'GMF-U', libelleComplet: 'GMF-U' },
+  { id: 'longue-duree', abbr: 'CHSLD', libelle: 'Longue durée', libelleComplet: 'Longue durée' },
+  { id: 'sad-siad-sp', abbr: 'SAD', libelle: 'Soins à domicile', libelleComplet: 'Soins à domicile, soins palliatifs et prise en charge' },
+  { id: 'obstetrique', abbr: 'OBST', libelle: 'Obstétrique', libelleComplet: 'Obstétrique' },
+  { id: 'detention', abbr: 'DÉT', libelle: 'Centre de détention', libelleComplet: 'Centre de détention' },
+  { id: 'crd', abbr: 'CRD', libelle: 'Réadaptation', libelleComplet: 'Réadaptation en dépendance' }
 ];
 function categoriesActiviteDisponibles() {
   if (dataEtabMeta && Array.isArray(dataEtabMeta.categoriesActivite) && dataEtabMeta.categoriesActivite.length) {
     return dataEtabMeta.categoriesActivite;
   }
   return CATEGORIES_ACTIVITE_DEFAUT;
+}
+function categorieActivitePour(g) {
+  const id = g && g.categorieActivite;
+  if (!id) return null;
+  return categoriesActiviteDisponibles().find(c => c.id === id)
+    || CATEGORIES_ACTIVITE_DEFAUT.find(c => c.id === id)
+    || null;
+}
+function abbrActivitePour(g) {
+  if (g && g.abbrActivite) return g.abbrActivite;
+  const cat = categorieActivitePour(g);
+  return (cat && cat.abbr) || '•';
+}
+function libelleActivitePour(g) {
+  const cat = categorieActivitePour(g);
+  return (cat && (cat.libelleComplet || cat.libelle)) || (g && g.secteur) || '';
 }
 function updateCompteurEtab() {
   const el = document.getElementById('sb-compteur');
@@ -3483,7 +3596,7 @@ function populateActiviteButtons() {
   };
   const tous = document.createElement('button');
   tous.type = 'button';
-  tous.className = 'activite-btn';
+  tous.className = 'activite-btn activite-btn-tous';
   tous.textContent = 'Tous';
   tous.setAttribute('aria-label', 'Filtrer : tous les secteurs d\'activité');
   tous.setAttribute('aria-pressed', activiteFilter === '' ? 'true' : 'false');
@@ -3557,6 +3670,8 @@ function populateRlsButtons() {
     });
     wrap.appendChild(b);
   }
+  // Sert à la mise en page : 4 boutons passent en grille 2 × 2, 3 restent en ligne.
+  wrap.dataset.nb = String(wrap.children.length);
 }
 function buildFilters() {
   populateActiviteButtons();

@@ -26,51 +26,61 @@
     "categoriesActivite": [
       {
         "id": "urgence",
+        "abbr": "URG",
         "libelle": "Urgence",
         "libelleComplet": "Urgence"
       },
       {
         "id": "hospitalisation",
+        "abbr": "HOSP",
         "libelle": "Hospitalisation",
         "libelleComplet": "Hospitalisation"
       },
       {
         "id": "ucdg",
+        "abbr": "UCDG",
         "libelle": "UCDG",
         "libelleComplet": "UCDG"
       },
       {
         "id": "soins-intensifs",
+        "abbr": "USI",
         "libelle": "Soins intensifs",
         "libelleComplet": "Soins intensifs"
       },
       {
         "id": "gmf-u",
+        "abbr": "GMFU",
         "libelle": "GMF-U",
         "libelleComplet": "GMF-U"
       },
       {
         "id": "longue-duree",
+        "abbr": "CHSLD",
         "libelle": "Longue durée",
         "libelleComplet": "Longue durée"
       },
       {
         "id": "sad-siad-sp",
+        "abbr": "SAD",
         "libelle": "Soins à domicile",
         "libelleComplet": "Soins à domicile, soins palliatifs et prise en charge"
       },
       {
         "id": "obstetrique",
+        "abbr": "OBST",
         "libelle": "Obstétrique",
         "libelleComplet": "Obstétrique"
       },
       {
         "id": "detention",
+        "abbr": "DÉT",
         "libelle": "Centre de détention",
         "libelleComplet": "Centre de détention"
       },
       {
         "id": "crd",
+        "abbr": "CRD",
         "libelle": "Réadaptation",
         "libelleComplet": "Réadaptation en dépendance"
       }
@@ -539,6 +549,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -567,6 +578,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -595,6 +607,7 @@
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
       "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
       "activites": [
         "sad-siad-sp",
         "soins-domicile"
@@ -627,6 +640,7 @@
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
       "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
       "activites": [
         "sad-siad-sp",
         "soins-domicile"
@@ -659,6 +673,7 @@
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
       "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
       "activites": [
         "sad-siad-sp",
         "soins-domicile"
@@ -691,6 +706,7 @@
       "libelle": "GMF-U",
       "secteur": "GMF-U",
       "categorieActivite": "gmf-u",
+      "abbrActivite": "GMFU",
       "activites": [
         "gmf-u",
         "enseignement"
@@ -719,6 +735,7 @@
       "libelle": "Urgence",
       "secteur": "Urgence",
       "categorieActivite": "urgence",
+      "abbrActivite": "URG",
       "activites": [
         "urgence"
       ],
@@ -744,6 +761,7 @@
       "libelle": "Hospitalisation",
       "secteur": "Hospitalisation",
       "categorieActivite": "hospitalisation",
+      "abbrActivite": "HOSP",
       "activites": [
         "hospitalisation"
       ],
@@ -769,6 +787,7 @@
       "libelle": "UCDG",
       "secteur": "UCDG",
       "categorieActivite": "ucdg",
+      "abbrActivite": "UCDG",
       "activites": [
         "ucdg"
       ],
@@ -793,6 +812,7 @@
       "libelle": "Soins intensifs",
       "secteur": "Soins intensifs (unité ≤ 6 lits)",
       "categorieActivite": "soins-intensifs",
+      "abbrActivite": "USI",
       "activites": [
         "soins-intensifs"
       ],
@@ -820,6 +840,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -848,6 +869,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -876,6 +898,7 @@
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
       "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
       "activites": [
         "sad-siad-sp",
         "soins-domicile"
@@ -908,6 +931,7 @@
       "libelle": "Urgence",
       "secteur": "Urgence",
       "categorieActivite": "urgence",
+      "abbrActivite": "URG",
       "activites": [
         "urgence"
       ],
@@ -933,6 +957,7 @@
       "libelle": "Hospitalisation",
       "secteur": "Hospitalisation",
       "categorieActivite": "hospitalisation",
+      "abbrActivite": "HOSP",
       "activites": [
         "hospitalisation"
       ],
@@ -958,6 +983,7 @@
       "libelle": "UCDG",
       "secteur": "UCDG",
       "categorieActivite": "ucdg",
+      "abbrActivite": "UCDG",
       "activites": [
         "ucdg"
       ],
@@ -982,6 +1008,7 @@
       "libelle": "Obstétrique",
       "secteur": "Obstétrique",
       "categorieActivite": "obstetrique",
+      "abbrActivite": "OBST",
       "activites": [
         "obstetrique"
       ],
@@ -1008,6 +1035,7 @@
       "libelle": "Soins intensifs",
       "secteur": "Soins intensifs (unité ≤ 6 lits)",
       "categorieActivite": "soins-intensifs",
+      "abbrActivite": "USI",
       "activites": [
         "soins-intensifs"
       ],
@@ -1035,6 +1063,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -1063,6 +1092,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -1091,6 +1121,7 @@
       "libelle": "Longue durée",
       "secteur": "Longue durée",
       "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
       "activites": [
         "longue-duree"
       ],
@@ -1119,6 +1150,7 @@
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
       "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
       "activites": [
         "sad-siad-sp",
         "soins-domicile"
@@ -1151,6 +1183,7 @@
       "libelle": "Soins à domicile, soins palliatifs et prise en charge",
       "secteur": "SAD-SIAD-SP (Prise en charge)",
       "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
       "activites": [
         "sad-siad-sp",
         "soins-domicile"
@@ -1183,6 +1216,7 @@
       "libelle": "GMF-U",
       "secteur": "GMF-U",
       "categorieActivite": "gmf-u",
+      "abbrActivite": "GMFU",
       "activites": [
         "gmf-u",
         "enseignement"
@@ -1211,6 +1245,7 @@
       "libelle": "Urgence",
       "secteur": "Urgence",
       "categorieActivite": "urgence",
+      "abbrActivite": "URG",
       "activites": [
         "urgence"
       ],
@@ -1236,6 +1271,7 @@
       "libelle": "Hospitalisation",
       "secteur": "Hospitalisation",
       "categorieActivite": "hospitalisation",
+      "abbrActivite": "HOSP",
       "activites": [
         "hospitalisation"
       ],
@@ -1261,6 +1297,7 @@
       "libelle": "UCDG",
       "secteur": "UCDG",
       "categorieActivite": "ucdg",
+      "abbrActivite": "UCDG",
       "activites": [
         "ucdg"
       ],
@@ -1285,6 +1322,7 @@
       "libelle": "Centre de détention",
       "secteur": "Centre de détention",
       "categorieActivite": "detention",
+      "abbrActivite": "DÉT",
       "activites": [
         "detention"
       ],
@@ -1312,6 +1350,7 @@
       "libelle": "Réadaptation en dépendance",
       "secteur": "Centre de réadaptation en dépendance (CRD)",
       "categorieActivite": "crd",
+      "abbrActivite": "CRD",
       "activites": [
         "crd",
         "readaptation",
@@ -1342,6 +1381,7 @@
       "libelle": "Réadaptation en dépendance",
       "secteur": "Centre de réadaptation en dépendance (CRD)",
       "categorieActivite": "crd",
+      "abbrActivite": "CRD",
       "activites": [
         "crd",
         "readaptation",
@@ -1372,6 +1412,7 @@
       "libelle": "Réadaptation en dépendance",
       "secteur": "Centre de réadaptation en dépendance (CRD)",
       "categorieActivite": "crd",
+      "abbrActivite": "CRD",
       "activites": [
         "crd",
         "readaptation",

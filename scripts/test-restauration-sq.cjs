@@ -75,7 +75,7 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
   }
   assert.match(est, /fetch\('\.\.\/data\.json', \{ cache: 'no-cache' \}\)/);
   assert.match(est, /scope: '\/monteregie-est\/'/);
-  assert.match(lire('sw.js'), /v54-secteurs-etablissements/);
+  assert.match(lire('sw.js'), /v55-lisibilite-carte/);
   assert.doesNotMatch(est, /olaplante\.github\.io\/Monteregie-Est/);
 });
 

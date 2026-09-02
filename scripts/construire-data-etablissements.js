@@ -94,6 +94,7 @@ function construire() {
         libelle: besoin.libelleAffichage || besoin.secteur,
         secteur: besoin.secteur,
         categorieActivite: cat.id,
+        abbrActivite: cat.abbr,
         activites: cat.activites.slice(),
         termesRecherche: cat.termesRecherche.slice(),
         ancre: cat.ancre,
@@ -120,6 +121,7 @@ function construire() {
       nbSecteurs: secteurs.length,
       categoriesActivite: require('./categories-activite-etablissements.js').CATEGORIES_ACTIVITE_ETABLISSEMENTS.map(c => ({
         id: c.id,
+        abbr: c.abbr,
         libelle: c.libelle,
         libelleComplet: c.libelleComplet
       }))
