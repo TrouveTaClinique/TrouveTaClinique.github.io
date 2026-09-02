@@ -8,18 +8,20 @@ const sombreDecl =
   `  --app-logo-sombre: url(data:image/png;base64,${b64});`;
 const darkOverride = '  --app-logo: var(--app-logo-sombre);';
 
+const sombreRe = /  \/\* Épingle fêtes \(bonnet\), détourée — mode sombre uniquement\. \*\/\n  --app-logo-sombre: url\(data:image\/png;base64,[^)]+\);/;
+
 for (const rel of ['scripts/carte.template.html', 'scripts/carte-est-sq.template.html']) {
   const file = path.join(root, rel);
   let html = fs.readFileSync(file, 'utf8');
-  if (html.includes('--app-logo-sombre')) {
-    console.log(rel, 'déjà patché');
-    continue;
+  if (sombreRe.test(html)) {
+    html = html.replace(sombreRe, sombreDecl);
+  } else {
+    html = html.replace(/(--app-logo: url\(data:image\/png;base64,[^)]+\);)/, `$1\n${sombreDecl}`);
+    html = html.replace(/(:root\[data-theme="sombre"\] \{[^]*?)(\n\})/, (m, head, tail) => {
+      if (head.includes('--app-logo: var(--app-logo-sombre)')) return m;
+      return `${head}\n${darkOverride}${tail}`;
+    });
   }
-  html = html.replace(/(--app-logo: url\(data:image\/png;base64,[^)]+\);)/, `$1\n${sombreDecl}`);
-  html = html.replace(/(:root\[data-theme="sombre"\] \{[^]*?)(\n\})/, (m, head, tail) => {
-    if (head.includes('--app-logo: var(--app-logo-sombre)')) return m;
-    return `${head}\n${darkOverride}${tail}`;
-  });
   fs.writeFileSync(file, html);
-  console.log('patché', rel);
+  console.log('injecté', rel);
 }
