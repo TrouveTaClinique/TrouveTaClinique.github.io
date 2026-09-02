@@ -852,14 +852,20 @@ body.cmp-open { overflow:hidden; }
 #cmp-print .cmp-clhead { background:#fff; padding-top:8px; padding-bottom:8px; }
 #cmp-print .cmp-clname { font-size:12px; font-weight:700; color:var(--sq-bleu); line-height:1.2; font-family:var(--sq-font); }
 #cmp-print .cmp-clcity { font-size:10px; color:#5A6B7A; margin-top:3px; line-height:1.25; }
+#cmp-print.cmp-fit .cmp-clmeta { display:block; }
 #cmp-print .cmp-cltype { font-size:9px; font-weight:700; color:var(--sq-sarcelle); letter-spacing:.05em; text-transform:uppercase; margin-top:4px; display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
-#cmp-print .cmp-rl { background:#EFF8FA; color:var(--sq-bleu); font-size:10.5px; font-weight:700; width:140px; }
+#cmp-print .cmp-rl { background:#EFF8FA; color:var(--sq-bleu); font-size:10.5px; font-weight:700; width:188px; }
 #cmp-print .cmp-table td { font-size:10.5px; color:#1a3558; }
 #cmp-print .cmp-alt { background:#F7FCFD; }
 #cmp-print th.cmp-rl.cmp-alt { background:#E3F4F6; }
-#cmp-print .cmp-corner { background:var(--sq-bleu); border-color:var(--sq-bleu); width:140px; padding:0 !important; }
-#cmp-print .cmp-cornerlogo { display:flex; align-items:center; justify-content:flex-start; padding:6px 10px; }
-#cmp-print .cmp-cornerlogo i { flex:0 0 auto; width:26px; height:26px; display:block; background:var(--app-logo) center/contain no-repeat; }
+#cmp-print .cmp-corner { background:var(--sq-bleu); border-color:var(--sq-bleu); width:188px; padding:0 !important; vertical-align:top; }
+#cmp-print .cmp-corner-brand { display:flex; align-items:center; gap:7px; padding:7px 9px; min-height:100%; }
+#cmp-print .cmp-corner-logo { flex:0 0 auto; width:34px; height:34px; display:block; background:var(--app-logo) center/contain no-repeat; }
+#cmp-print .cmp-corner-text { min-width:0; color:#fff; line-height:1.1; }
+#cmp-print .cmp-corner-org { display:block; font-family:var(--sq-font); font-size:7px; font-weight:600; letter-spacing:.14em; opacity:.9; margin-bottom:2px; }
+#cmp-print .cmp-corner-text strong { display:block; font-family:var(--sq-font); font-weight:700; font-size:11.5px; white-space:nowrap; }
+#cmp-print .cmp-corner-tiret,
+#cmp-print .cmp-corner-mot { color:var(--sq-menthe); }
 #cmp-print .cmp-table td.cmp-sect { background:var(--sq-bleu); color:#fff; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:5px 10px; border-color:var(--sq-bleu); }
 #cmp-print .cmp-dot { display:inline-block; width:8px; height:8px; border-radius:50%; vertical-align:middle; margin-right:5px; flex:0 0 auto; }
 #cmp-print .cmp-stat { display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:10px; line-height:1.3; }
@@ -886,12 +892,46 @@ body.cmp-open { overflow:hidden; }
 #cmp-print.cmp-dense .cmp-subtitle { font-size:11px; }
 #cmp-print.cmp-dense .cmp-exp { font-size:9px; margin-top:3px; }
 #cmp-print.cmp-dense .cmp-clname { font-size:11px; }
-#cmp-print.cmp-dense .cmp-cornerlogo { padding:3px 8px; }
-#cmp-print.cmp-dense .cmp-cornerlogo i { width:21px; height:21px; }
+#cmp-print.cmp-dense .cmp-corner-brand { padding:4px 7px; gap:5px; }
+#cmp-print.cmp-dense .cmp-corner-logo { width:26px; height:26px; }
+#cmp-print.cmp-dense .cmp-corner-org { font-size:6.5px; }
+#cmp-print.cmp-dense .cmp-corner-text strong { font-size:10px; }
 #cmp-print.cmp-dense .cmp-table th, #cmp-print.cmp-dense .cmp-table td { padding:2.5px 8px; }
 #cmp-print.cmp-dense .cmp-rl, #cmp-print.cmp-dense .cmp-table td { font-size:9.5px; }
 #cmp-print.cmp-dense td.cmp-sect { padding:3px 8px; font-size:9px; }
 #cmp-print.cmp-dense .cmp-note { font-size:8px; margin-top:7px; }
+/* Mode compact : tient sur une page Letter en paysage à l'impression. */
+#cmp-print.cmp-fit .cmp-header { padding-bottom:6px; margin-bottom:8px; border-bottom-width:2px; }
+#cmp-print.cmp-fit .cmp-eyebrow { font-size:11px; letter-spacing:.14em; }
+#cmp-print.cmp-fit .cmp-title { font-size:18px; margin:2px 0; }
+#cmp-print.cmp-fit .cmp-subtitle { font-size:10px; }
+#cmp-print.cmp-fit .cmp-exp { font-size:8px; margin-top:2px; }
+#cmp-print.cmp-fit .cmp-notice { margin-bottom:8px; padding:7px 9px; font-size:10px; }
+#cmp-print.cmp-fit .cmp-corner { width:168px; }
+#cmp-print.cmp-fit .cmp-rl { width:168px; font-size:8px; padding:2px 5px !important; }
+#cmp-print.cmp-fit .cmp-clname { font-size:9px; line-height:1.15; }
+#cmp-print.cmp-fit .cmp-clcity,
+#cmp-print.cmp-fit .cmp-cltype { display:none; }
+#cmp-print.cmp-fit .cmp-clmeta { font-size:7.5px; color:#5A6B7A; margin-top:2px; line-height:1.2; }
+#cmp-print.cmp-fit .cmp-table th,
+#cmp-print.cmp-fit .cmp-table td { padding:2px 5px; font-size:8px; line-height:1.25; }
+#cmp-print.cmp-fit .cmp-clhead { padding-top:4px; padding-bottom:4px; }
+#cmp-print.cmp-fit .cmp-clhead[style] { border-top-width:4px !important; }
+#cmp-print.cmp-fit td.cmp-sect { padding:2px 5px; font-size:7.5px; letter-spacing:.1em; }
+#cmp-print.cmp-fit .cmp-stat { font-size:7.5px; gap:4px; }
+#cmp-print.cmp-fit .cmp-stat-dot { width:6px; height:6px; }
+#cmp-print.cmp-fit .cmp-chip { font-size:7px; padding:1px 4px; margin:0 2px 2px 0; }
+#cmp-print.cmp-fit .cmp-corner-brand { padding:4px 6px; gap:5px; }
+#cmp-print.cmp-fit .cmp-corner-logo { width:24px; height:24px; }
+#cmp-print.cmp-fit .cmp-corner-org { font-size:6px; letter-spacing:.1em; }
+#cmp-print.cmp-fit .cmp-corner-text strong { font-size:9px; }
+#cmp-print.cmp-fit .cmp-botbar { margin-top:8px; }
+#cmp-print.cmp-fit .cmp-qrcell img { width:72px; height:72px; }
+#cmp-print.cmp-fit .cmp-qrcell { width:80px; }
+#cmp-print.cmp-fit .cmp-qrtitle { font-size:10px; }
+#cmp-print.cmp-fit .cmp-qrsub { font-size:8.5px; }
+#cmp-print.cmp-fit .cmp-qrurl { font-size:8.5px; }
+#cmp-print.cmp-fit .cmp-note { font-size:7px; margin-top:5px; }
 @media print {
   @page { margin:1.4cm; }
   html, body { height:auto !important; min-height:0 !important; overflow:visible !important; background:#fff !important; }
@@ -922,8 +962,14 @@ body.cmp-open { overflow:hidden; }
   body.print-cmp #cmp-print .cmp-bar { display:none !important; }
   body.print-cmp #cmp-print .cmp-inner { max-width:none !important; margin:0 !important; padding:0 !important; }
   body.print-cmp #cmp-print, body.print-cmp #cmp-print * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
-  body.print-cmp #cmp-print .cmp-table tr { break-inside:avoid; page-break-inside:avoid; }
-  body.print-cmp #cmp-print .cmp-inner::before { opacity:.025; }
+  body.print-cmp #cmp-print .cmp-table thead tr,
+  body.print-cmp #cmp-print .cmp-table tr.cmp-sect-row { break-inside:avoid; page-break-inside:avoid; }
+  body.print-cmp #cmp-print .cmp-inner::before { display:none !important; }
+  body.print-cmp #cmp-print.cmp-fit .cmp-notice { margin-bottom:6px; padding:6px 8px; font-size:9px; }
+  body.print-cmp #cmp-print.cmp-fit .cmp-botbar { margin-top:8px; }
+  body.print-cmp #cmp-print.cmp-fit .cmp-botbar td { padding-top:8px; }
+  body.print-cmp #cmp-print.cmp-fit .cmp-qrcell img { width:68px; height:68px; }
+  body.print-cmp #cmp-print .cmp-fit .cmp-header { margin-bottom:4px; padding-bottom:4px; }
 }
 
 /* ─── Mode sombre ───────────────────────────────────────────────────────────
@@ -2511,9 +2557,34 @@ function cmpChips(codes) {
   if (!codes || !codes.length) return '<span class="cmp-tbd">À venir</span>';
   return codes.map(c => { const p = PRATIQUES.find(x => x.code === c); return p ? `<span class="cmp-chip" style="background:${p.color}">${p.abbr}</span>` : ''; }).join('');
 }
-function cmpStatutHtml(g) {
-  if (recruteActuellement(g)) return '<span class="cmp-stat cmp-stat-on"><span class="cmp-stat-dot"></span>En recrutement</span>';
-  return '<span class="cmp-stat cmp-stat-off"><span class="cmp-stat-dot"></span>Ne recrute pas actuellement</span>';
+function cmpStatutHtml(g, court) {
+  if (recruteActuellement(g)) {
+    return court
+      ? '<span class="cmp-stat cmp-stat-on"><span class="cmp-stat-dot"></span>Recrute</span>'
+      : '<span class="cmp-stat cmp-stat-on"><span class="cmp-stat-dot"></span>En recrutement</span>';
+  }
+  return court
+    ? '<span class="cmp-stat cmp-stat-off"><span class="cmp-stat-dot"></span>Non</span>'
+    : '<span class="cmp-stat cmp-stat-off"><span class="cmp-stat-dot"></span>Ne recrute pas actuellement</span>';
+}
+function cmpHoraireCompact(g, jours) {
+  const h = g.horaire || {};
+  const parts = jours.map(j => {
+    const v = (h[j] || '').trim();
+    if (!v) return '';
+    return j.slice(0, 3) + '. ' + v;
+  }).filter(Boolean);
+  if (!parts.length) return '<span class="cmp-tbd">À venir</span>';
+  return parts.map(p => esc(p)).join('<br>');
+}
+function cmpPersonnelCompact(g) {
+  const lines = staffDefs.map(sd => {
+    const v = (g.personnel || {})[sd.key];
+    if (!v || !String(v).trim()) return '';
+    return sd.lbl + ' : ' + String(v).trim();
+  }).filter(Boolean);
+  if (!lines.length) return '<span class="cmp-dash">—</span>';
+  return lines.map(l => esc(l)).join('<br>');
 }
 function cmpMetaDateLine() {
   if (!dataMeta || !dataMeta.miseAJour) return '';
@@ -2531,6 +2602,16 @@ function cmpBarHtml(titre, printFn) {
     '</div>';
 }
 
+function cmpCornerBrandHtml() {
+  return `<th class="cmp-corner"><div class="cmp-corner-brand">
+    <i class="cmp-corner-logo" aria-hidden="true"></i>
+    <div class="cmp-corner-text">
+      <span class="cmp-corner-org">TROUVE TA CLINIQUE</span>
+      <strong>Montérégie<span class="cmp-corner-tiret">-</span><span class="cmp-corner-mot">Est</span></strong>
+    </div>
+  </div></th>`;
+}
+
 function buildComparatif(favs, totalFavs) {
   const gs = favs.map(id => byId(id)).filter(Boolean);
   const etab = modeCarte === 'etablissements';
@@ -2539,12 +2620,13 @@ function buildComparatif(favs, totalFavs) {
   const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
   const date = new Date().toLocaleDateString('fr-CA', { day:'numeric', month:'long', year:'numeric' });
   const metaDate = cmpMetaDateLine();
-  let head = '<th class="cmp-corner"><div class="cmp-cornerlogo"><i></i></div></th>';
+  let head = cmpCornerBrandHtml();
   gs.forEach(g => {
     head += `<th class="cmp-clhead" style="border-top:6px solid ${couleurMilieu(g)}">
       <div class="cmp-clname">${esc(g.nom.trim())}</div>
       <div class="cmp-clcity">\uD83D\uDCCD ${esc(g.ville)}</div>
       <div class="cmp-cltype"><span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${esc(typeLabel(g.type))}</div>
+      <div class="cmp-clmeta">${esc(g.ville)} · ${esc(typeLabel(g.type))}</div>
     </th>`;
   });
   let shade = 0;
@@ -2553,12 +2635,10 @@ function buildComparatif(favs, totalFavs) {
     let tds = ''; gs.forEach(g => { tds += `<td class="${cls}">${render(g)}</td>`; });
     return `<tr><th class="cmp-rl ${cls}">${label}</th>${tds}</tr>`;
   };
-  const sect = (label) => { shade = 0; return `<tr><td class="cmp-sect" colspan="${gs.length + 1}">${label}</td></tr>`; };
+  const sect = (label) => { shade = 0; return `<tr class="cmp-sect-row"><td class="cmp-sect" colspan="${gs.length + 1}">${label}</td></tr>`; };
   let rows = '';
-  rows += row('Région', g => `<span class="cmp-dot" style="background:#170A72"></span>${REGION_LABELS[g.region] || ''}`);
   rows += row('Réseau (RLS)', g => `<span class="cmp-dot" style="background:${couleurMilieu(g)}"></span>${cmpVal(g.rls)}`);
-  rows += row('Statut', g => cmpStatutHtml(g));
-  rows += row('Ville', g => cmpVal(g.ville));
+  rows += row('Statut', g => cmpStatutHtml(g, true));
   if (etab) {
     rows += sect('Notes personnelles');
     rows += row('', g => cmpNote(g.notes));
@@ -2569,13 +2649,8 @@ function buildComparatif(favs, totalFavs) {
     rows += row('Frais de bureau', g => cmpVal(g.frais));
     rows += row('DMÉ', g => cmpVal(g.dme));
     rows += row('Portes ouvertes', g => cmpVal(g.porteOuverte));
-    rows += sect("Horaire d'ouverture");
-    JOURS.forEach(j => { rows += row(j, g => cmpHor((g.horaire || {})[j] || '')); });
-    rows += sect('Personnel clinique');
-    staffDefs.forEach(sd => {
-      const present = gs.some(g => { const v=(g.personnel||{})[sd.key]; return v && String(v).trim()!==''; });
-      if (present) rows += row(sd.lbl, g => cmpPers((g.personnel || {})[sd.key] || ''));
-    });
+    rows += row('Horaires', g => cmpHoraireCompact(g, JOURS));
+    rows += row('Personnel', g => cmpPersonnelCompact(g));
     rows += sect('Notes personnelles');
     rows += row('', g => cmpNote(g.notes));
   }
@@ -2590,7 +2665,7 @@ function buildComparatif(favs, totalFavs) {
       <div class="cmp-exp">Exporté le ${date}${metaDate ? ' · ' + metaDate : ''}</div>
     </div>
     ${notice}
-    <table class="cmp-table"><tr>${head}</tr>${rows}</table>
+    <table class="cmp-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>
     <table class="cmp-botbar"><tr>
       <td class="cmp-qrcell"><img src="${QR_DATA}" alt="Code QR vers l'application"></td>
       <td>
@@ -2610,10 +2685,12 @@ function exportComparatif() {
   const favs = all.slice(0, 4);
   const n = buildComparatif(favs, all.length);
   const cp = document.getElementById('cmp-print');
-  const landscape = n >= 4;
-  if (cp) cp.classList.toggle('cmp-dense', landscape);
+  if (cp) {
+    cp.classList.add('cmp-fit');
+    cp.classList.toggle('cmp-dense', n >= 3);
+  }
   const os = document.getElementById('cmp-orient');
-  if (os) os.textContent = '@page { size: Letter ' + (landscape ? 'landscape' : 'portrait') + '; margin: ' + (landscape ? '1.1cm' : '1.4cm') + '; }';
+  if (os) os.textContent = '@page { size: Letter landscape; margin: 0.65cm; }';
   if (all.length > 4 && cp) {
     const t = cp.querySelector('.cmp-bar-t');
     if (t) t.textContent = 'Comparatif \u2014 4 premiers favoris (sur ' + all.length + ')';
@@ -2659,7 +2736,7 @@ function cmpPrint() {
 }
 function cmpClose() {
   const cp = document.getElementById('cmp-print');
-  if (cp) { cp.classList.remove('cmp-show', 'cmp-dense'); cp.setAttribute('aria-hidden', 'true'); cp.innerHTML = ''; }
+  if (cp) { cp.classList.remove('cmp-show', 'cmp-dense', 'cmp-fit'); cp.setAttribute('aria-hidden', 'true'); cp.innerHTML = ''; }
   const os = document.getElementById('cmp-orient'); if (os) os.textContent = '';
   document.body.classList.remove('cmp-open', 'print-cmp', 'print-fiche');
 }
