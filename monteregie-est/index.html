@@ -786,30 +786,60 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .rls-btn.dim { background:var(--champ); color:var(--c); }
 .rls-btn.dim:hover { background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none; }
 .rls-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
-/* Quatre territoires (mode établissements) : 4 × 86px + gouttières dépassent la
-   largeur du tiroir mobile, ce qui renvoyait « Missions régionales » seule sur une
-   2e ligne. Deux rangées de deux boutons de hauteur égale à la place. */
-.rls-btns[data-nb="4"] { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); }
-.rls-btns[data-nb="4"] .rls-btn { width:100%; padding:8px 6px; }
+/* Mode établissements : les territoires tiennent sur UNE ligne qui défile
+   horizontalement. Deux rangées de gros boutons mangeaient une centaine de pixels
+   avant même d'atteindre les secteurs d'activité, qui sont le filtre principal.
+   Les couleurs sont conservées : elles font le lien avec les épingles et la légende. */
+body[data-mode-carte="etablissements"] .rls-btns {
+  flex-wrap:nowrap; gap:6px; overflow-x:auto; overflow-y:hidden; padding-bottom:5px;
+  -webkit-overflow-scrolling:touch;
+  /* scrollbar-color est indispensable : sans lui le rail garde le blanc par défaut,
+     très visible en mode sombre. Il neutralise aussi les pseudo-éléments plus bas. */
+  scrollbar-width:thin;
+  scrollbar-color:color-mix(in srgb, var(--muted, #64748b) 45%, transparent) transparent;
+  /* Estompe le bord droit tant qu'il reste des territoires hors champ. */
+  mask-image:linear-gradient(90deg, #000 calc(100% - 22px), transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg, #000 calc(100% - 22px), transparent 100%);
+}
+body[data-mode-carte="etablissements"] .rls-btns.tout-visible {
+  mask-image:none; -webkit-mask-image:none;
+}
+body[data-mode-carte="etablissements"] .rls-btn {
+  flex:0 0 auto; width:auto; white-space:nowrap;
+  padding:6px 12px; border-radius:999px; font-size:11.5px; line-height:1.25;
+}
+body[data-mode-carte="etablissements"] .rls-btns::-webkit-scrollbar { height:3px; }
+body[data-mode-carte="etablissements"] .rls-btns::-webkit-scrollbar-track { background:transparent; }
+body[data-mode-carte="etablissements"] .rls-btns::-webkit-scrollbar-thumb {
+  background:color-mix(in srgb, var(--muted, #64748b) 35%, transparent); border-radius:3px;
+}
 /* Le compteur est le chiffre clé de la vue : il doit passer devant la règle
    générale « .sb-head p », qui l'affichait en gris pâle et en graisse 300. */
 .sb-head .sb-compteur { font-size:13px; font-weight:600; color:var(--texte2, #334155); margin-top:6px; line-height:1.35; }
-.activite-panel { margin-top:8px; width:100%; }
-.activite-panel > summary.filtre-section-label { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:flex-start; gap:5px; }
-.activite-panel > summary.filtre-section-label::-webkit-details-marker { display:none; }
-.activite-panel > summary.filtre-section-label::after { content:'▾'; font-size:11px; color:var(--muted); transition:transform .15s ease; }
-.activite-panel:not([open]) > summary.filtre-section-label::after { transform:rotate(-90deg); }
+.activite-panel { margin-top:6px; width:100%; }
 .filtre-section-label { font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted, #64748b); margin:10px 0 6px; }
+.filtre-section-label--activite { display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+.activite-reset { border:0; background:none; padding:0; cursor:pointer;
+  font-family:'Raleway',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--sq-sarcelle, #08A0A0); text-decoration:underline; }
+.activite-reset:focus-visible { outline:2px solid var(--sq-sarcelle, #08A0A0); outline-offset:2px; }
 .filtre-territoire { width:100%; }
 .activite-btns { width:100%; display:flex; flex-wrap:wrap; gap:6px; }
-.activite-group { width:100%; display:flex; flex-wrap:wrap; gap:6px; align-items:flex-start;
-  margin:0 0 6px; padding-left:9px;
-  border-left:2px solid color-mix(in srgb, var(--sq-sarcelle, #08A0A0) 32%, transparent); }
-.activite-group-label { flex:0 0 100%; font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--sq-sarcelle, #08A0A0); margin:2px 0 0; }
-/* « Tous » n'est pas une catégorie mais une remise à zéro : trait pointillé au repos
-   pour qu'il ne soit pas lu comme une 11e activité. */
-.activite-btn-tous { border-style:dashed; margin-bottom:2px; }
-.activite-btn-tous[aria-pressed="true"] { border-style:solid; }
+/* Hospitalier / Communautaire : repliables, mais avec un en-tête franchement cliquable
+   (fond, chevron, pastille de comptage) — l'ancien résumé discret passait inaperçu. */
+.activite-group { width:100%; margin:0 0 6px; border:1px solid var(--border); border-radius:9px;
+  background:color-mix(in srgb, var(--sq-sarcelle, #08A0A0) 5%, transparent); overflow:hidden; }
+.activite-group-label { list-style:none; cursor:pointer; display:flex; align-items:center; gap:7px;
+  padding:7px 10px; font-family:'Raleway',sans-serif; font-size:10.5px; font-weight:800;
+  letter-spacing:.05em; text-transform:uppercase; color:var(--sq-sarcelle, #08A0A0); }
+.activite-group-label::-webkit-details-marker { display:none; }
+.activite-group-label::before { content:'▾'; font-size:10px; transition:transform .15s ease; }
+.activite-group:not([open]) > .activite-group-label::before { transform:rotate(-90deg); }
+.activite-group-label:hover { background:color-mix(in srgb, var(--sq-sarcelle, #08A0A0) 11%, transparent); }
+.activite-group-label:focus-visible { outline:2px solid var(--sq-sarcelle, #08A0A0); outline-offset:-2px; }
+.activite-group-actifs { margin-left:auto; padding:1px 7px; border-radius:999px;
+  background:var(--sq-indigo, #170A72); color:#fff; font-size:9.5px; letter-spacing:0; }
+.activite-group-btns { display:flex; flex-wrap:wrap; gap:6px; padding:2px 10px 10px; }
 .activite-btn { flex:0 1 auto; padding:6px 10px; box-sizing:border-box; border-radius:999px;
   border:1.5px solid var(--sq-indigo, #170A72); background:transparent; color:var(--sq-indigo, #170A72); cursor:pointer;
   font-family:'Raleway',sans-serif; font-weight:700; font-size:11px; line-height:1.2;
@@ -824,7 +854,10 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 :root[data-theme="sombre"] .activite-btn:hover { background:rgba(144,241,233,.14); }
 :root[data-theme="sombre"] .activite-btn[aria-pressed="true"] { background:var(--sq-menthe, #90F1E9); color:#0F1526; border-color:var(--sq-menthe, #90F1E9); }
 :root[data-theme="sombre"] .activite-group-label { color:var(--sq-menthe, #90F1E9); }
-:root[data-theme="sombre"] .activite-group { border-left-color:rgba(144,241,233,.32); }
+:root[data-theme="sombre"] .activite-group { border-color:rgba(144,241,233,.24); background:rgba(144,241,233,.05); }
+:root[data-theme="sombre"] .activite-group-label:hover { background:rgba(144,241,233,.11); }
+:root[data-theme="sombre"] .activite-group-actifs { background:var(--sq-menthe, #90F1E9); color:#0F1526; }
+:root[data-theme="sombre"] .activite-reset { color:var(--sq-menthe, #90F1E9); }
 /* Pastille de secteur : abréviation de la catégorie d'activité, dans le même langage
    visuel que les puces .prat-chip. Le rond cerclé de blanc utilisé auparavant se
    lisait comme un « 0 » et ne distinguait pas deux secteurs du même territoire. */
@@ -838,19 +871,43 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 :root[data-region="Est"][data-theme="sombre"] body[data-mode-carte="etablissements"] .sb-num {
   box-shadow:0 0 0 3px #1A2239, 0 0 0 4px rgba(144,241,233,.22);
 }
-@media (max-width: 768px) {
-  .activite-panel:not(.activite-panel--force-open) { margin-top:6px; }
-}
-.dp-sect-link:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
-.dp-sect-intro { font-size:13px; color:var(--muted, #64748b); margin:12px 16px 8px; line-height:1.4; }
-.dp-sect-list { display:flex; flex-direction:column; gap:8px; padding:0 16px 16px; }
-.dp-sect-link { display:flex; flex-direction:column; align-items:flex-start; gap:4px; width:100%; padding:12px 14px; box-sizing:border-box;
-  border:1.5px solid var(--border); border-radius:10px; background:var(--champ); cursor:pointer; text-align:left; font-family:inherit; }
-.dp-sect-link:hover { border-color:var(--orange); }
-.dp-sect-link-compact { padding:10px 12px; }
-.dp-sect-nom { font-weight:700; font-size:14px; color:var(--text); }
-.dp-sect-stat { font-size:12px; color:var(--muted, #64748b); }
-.dp-autres-secteurs { padding:0 16px 4px; }
+/* Accordéon des secteurs, à l'intérieur de la fiche d'installation. Un repère de carte
+   est un lieu : la fiche décrit le lieu, et les postes qu'il recrute se déplient dedans.
+   Un seul secteur ouvert à la fois — le champ de notes et le bouton favori qu'il contient
+   portent sur CE secteur, et deux formulaires actifs en même temps prêteraient à confusion. */
+.dp-sect-intro { font-size:13px; color:var(--muted, #64748b); margin:0 0 9px; line-height:1.4; }
+.dp-sect-masques { font-size:12px; font-style:italic; color:var(--muted, #64748b); margin:9px 0 0; line-height:1.4; }
+.dp-sect-list { display:flex; flex-direction:column; gap:8px; }
+.dp-sect { border:1.5px solid var(--border); border-radius:10px; background:var(--champ); overflow:hidden; }
+.dp-sect.open { border-color:var(--sq-sarcelle, #08A0A0); background:var(--carte); }
+.dp-sect-head { display:flex; align-items:center; gap:10px; width:100%; padding:10px 11px; box-sizing:border-box;
+  border:0; background:none; cursor:pointer; text-align:left; font-family:inherit; }
+.dp-sect-head:hover { background:var(--survol); }
+.dp-sect-head:focus-visible { outline:2px solid var(--orange); outline-offset:-2px; }
+.dp-sect-abbr { flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border-radius:9px 9px 9px 3px; box-sizing:border-box;
+  background:var(--rls, var(--sq-indigo, #170A72)); color:#fff;
+  font-family:'Raleway',sans-serif; font-weight:800; font-size:10.5px; line-height:1; }
+.dp-sect-abbr[data-long="1"] { font-size:9px; }
+.dp-sect-abbr[data-long="2"] { font-size:7.5px; letter-spacing:-.02em; }
+.dp-sect-txt { flex:1; min-width:0; }
+.dp-sect-nom { display:block; font-weight:700; font-size:14px; color:var(--texte2); line-height:1.25; }
+.dp-sect-stat { display:block; font-size:12px; color:var(--muted, #64748b); margin-top:3px; }
+/* Les styles de .cmp-stat sont portés par #cmp-print (le comparatif imprimable) :
+   hors de ce conteneur, la pastille de statut doit être redéclarée. */
+.dp-sect-stat .cmp-stat { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; }
+.dp-sect-stat .cmp-stat-dot { width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
+.dp-sect-stat .cmp-stat-on { color:#087C7C; }
+.dp-sect-stat .cmp-stat-on .cmp-stat-dot { background:var(--sq-sarcelle, #08A0A0); }
+.dp-sect-stat .cmp-stat-off { color:#6B7280; }
+.dp-sect-stat .cmp-stat-off .cmp-stat-dot { background:#CBD5E1; }
+:root[data-theme="sombre"] .dp-sect-stat .cmp-stat-on { color:var(--sq-menthe, #90F1E9); }
+.dp-sect-chev { flex:0 0 auto; font-size:13px; color:var(--sq-sarcelle, #08A0A0); transition:transform .15s ease; }
+.dp-sect.open .dp-sect-chev { transform:rotate(180deg); }
+.dp-sect-corps { padding:11px 12px 4px; border-top:1px solid var(--filet); }
+.dp-sect-corps .vw-row:last-of-type { margin-bottom:4px; }
+.dp-sect-corps .dp-actions { padding:6px 0 0; }
+.dp-sect-corps .notes-sec { padding:12px 0 0; }
 .dp-gmf-condition { font-size:12.5px; line-height:1.45; }
 .care-mode-btn[data-mode="etablissements"][aria-disabled="true"] { opacity:.45; cursor:not-allowed; }
 /* PTEM / AMP — accès rapide aux 3 pages du site (icônes rondes), repliées
@@ -1667,10 +1724,13 @@ body.cmp-open { overflow:hidden; }
         <div class="filtre-section-label" id="filtre-territoire-label" hidden>Territoire</div>
         <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>
       </div>
-      <details class="activite-panel" id="activite-panel" hidden>
-        <summary class="filtre-section-label">Secteur d'activité</summary>
+      <div class="activite-panel" id="activite-panel" hidden>
+        <div class="filtre-section-label filtre-section-label--activite">
+          <span>Secteur d'activité</span>
+          <button type="button" class="activite-reset" id="activite-reset" hidden>Tout effacer</button>
+        </div>
         <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité"></div>
-      </details>
+      </div>
       <div class="sb-view-row">
         <button class="fav-toggle" id="fav-toggle">★ Voir mes favoris</button>
         <div class="all-clinics-wrap">
@@ -1742,7 +1802,9 @@ let favOnly = false;
 // où ils apparaissent, sans jamais changer leur clas­sement une fois affichés.
 let showAllClinics = false;
 let rlsFilter = '';
-let activiteFilter = '';
+// Sélection multiple : un secteur est retenu s'il appartient à l'UNE des catégories
+// cochées. Ensemble vide = aucune restriction, comme l'ancien « Tous ».
+let activiteFilters = new Set();
 const TERRITOIRE_MISSIONS = 'Missions régionales';
 let searchQuery = '';
 let annonceFermee = false; // fermeture de la bannière pour la session courante seulement
@@ -1936,6 +1998,9 @@ const GROUPES_ACTIVITE = [
   { label: 'Hospitalier', ids: ['urgence', 'hospitalisation', 'ucdg', 'soins-intensifs', 'obstetrique'] },
   { label: 'Communautaire', ids: ['gmf-u', 'longue-duree', 'sad-siad-sp', 'crd', 'detention'] }
 ];
+// Les deux groupes sont dépliés au départ ; leur état survit aux reconstructions de la
+// liste de puces, qui a lieu à chaque changement de filtre.
+const groupesActiviteOuverts = new Set(GROUPES_ACTIVITE.map(g => g.label));
 const normTxt = s => (s == null ? '' : String(s)).toLowerCase().replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 // Un milieu \u00ab en recrutement \u00bb a recrutementActif !== false (absent = recrute, comme avant
 // l'ajout du champ). statutVisible() est LE point d'entr\u00e9e unique : matchesFilters(),
@@ -1956,9 +2021,9 @@ function matchesFilters(id) {
     const hay = normTxt(champs.filter(Boolean).join(' '));
     if (!hay.includes(searchQuery)) return false;
   }
-  if (activiteFilter && modeCarte === 'etablissements') {
+  if (activiteFilters.size && modeCarte === 'etablissements') {
     const g = byId(id);
-    if (!g || g.categorieActivite !== activiteFilter) return false;
+    if (!g || !activiteFilters.has(g.categorieActivite)) return false;
   }
   if (rlsFilter) {
     const g = byId(id);
@@ -2414,7 +2479,8 @@ function refreshMarkerIcons() {
       : matchesFilters(g.id);
     if (markers[g.id] && visible) {
       const actif = modeCarte === 'etablissements'
-        ? (activeId !== null && byId(activeId) && byId(activeId).installationId === g.id)
+        ? (g.id === ficheInstallationId
+           || (activeId !== null && byId(activeId) && byId(activeId).installationId === g.id))
         : (g.id === activeId);
       markers[g.id].setIcon(makeIcon(actif, badgeMarqueur(g), couleurEpingle(g), g.id));
     }
@@ -2656,51 +2722,137 @@ function urlEtat(id) {
   const q = params.toString();
   return location.pathname + (q ? '?' + q : '') + location.hash;
 }
-function htmlAutresSecteurs(g) {
-  const autres = gmfs.filter(s => s.installationId === g.installationId && s.id !== g.id);
-  if (!autres.length) return '';
-  const links = autres.map(s => `<button type="button" class="dp-sect-link dp-sect-link-compact" data-secteur="${esc(s.id)}"><span class="dp-sect-nom">${esc(s.nom)}</span></button>`).join('');
-  return `<div class="vw-divider"></div><div class="vw-sec dp-autres-secteurs"><div class="vw-sec-title">Autres secteurs dans cette installation</div><div class="dp-sect-list">${links}</div></div>`;
-}
+/* ═══ FICHE D'ÉTABLISSEMENT ═══════════════════════════════════════════════════
+   L'objet de la fiche est TOUJOURS l'installation : un repère de carte est un lieu,
+   pas un poste. L'adresse, le territoire et le lien web appartiennent au lieu ; le
+   statut, les modalités, le favori et les notes appartiennent au secteur, et vivent
+   donc dans l'accordéon. La liste de gauche, elle, reste centrée sur les secteurs :
+   on y cherche un poste. Les deux vues répondent à deux questions différentes, et
+   se rejoignent sur la même fiche — depuis la liste, le secteur arrive déplié. */
 function lierBoutonsSecteurs(parent) {
   if (!parent) return;
-  parent.querySelectorAll('.dp-sect-link[data-secteur]').forEach(btn => {
-    btn.addEventListener('click', () => toggleDetail(btn.getAttribute('data-secteur')));
+  parent.querySelectorAll('[data-secteur]').forEach(btn => {
+    btn.addEventListener('click', () => basculerSecteurFiche(btn.getAttribute('data-secteur')));
   });
 }
-function openInstallationSecteurs(installationId) {
+function basculerSecteurFiche(secteurId) {
+  const s = byId(secteurId);
+  if (!s) return;
+  openFicheEtablissement(s.installationId, secteurId === activeId ? null : secteurId);
+}
+/* Le statut est déjà porté par l'en-tête du secteur, déplié ou non : le répéter ici
+   en ferait la première ligne de tout corps de secteur, pour rien. */
+function htmlCorpsSecteur(s) {
+  return `<div class="dp-sect-corps">
+      ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
+      ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
+      <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">À venir</span></div>
+      <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
+      <div class="notes-sec">
+        <div class="vw-sec-title">Mes notes sur ce secteur</div>
+        <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur ce secteur (sauvegardées dans votre navigateur)">${esc(s.notes || '')}</textarea>
+        <div class="notes-actions">
+          <button class="btn-save" id="btn-save-notes" aria-label="Sauvegarder mes notes">💾 Sauvegarder mes notes</button>
+          <span class="save-msg" id="save-msg">✅ Notes sauvegardées</span>
+        </div>
+      </div>
+    </div>`;
+}
+function htmlAccordeonSecteurs(secteurs, ouvertId) {
+  return secteurs.map(s => {
+    const ouvert = s.id === ouvertId;
+    const abbr = abbrActivitePour(s);
+    const long = abbr.length >= 5 ? '2' : (abbr.length > 3 ? '1' : '0');
+    return `<div class="dp-sect${ouvert ? ' open' : ''}">
+      <button type="button" class="dp-sect-head" data-secteur="${esc(s.id)}" aria-expanded="${ouvert ? 'true' : 'false'}">
+        <span class="dp-sect-abbr" data-long="${long}" style="--rls:${couleurEpingle(s)}" aria-hidden="true">${esc(abbr)}</span>
+        <span class="dp-sect-txt">
+          <span class="dp-sect-nom">${esc(s.nom)}</span>
+          <span class="dp-sect-stat"><span class="cmp-stat ${recruteActuellement(s) ? 'cmp-stat-on' : 'cmp-stat-off'}"><span class="cmp-stat-dot"></span>${recruteActuellement(s) ? 'En recrutement' : 'Ne recrute pas actuellement'}</span>${!ouvert && favoris.has(s.id) ? ' · ★ favori' : ''}</span>
+        </span>
+        <span class="dp-sect-chev" aria-hidden="true">▾</span>
+      </button>
+      ${ouvert ? htmlCorpsSecteur(s) : ''}
+    </div>`;
+  }).join('');
+}
+function openFicheEtablissement(installationId, secteurOuvertId) {
   const inst = installationEtabById(installationId);
   if (!inst) return;
-  const secteurs = gmfs.filter(s => s.installationId === installationId && matchesFilters(s.id));
-  if (!secteurs.length) return;
-  if (secteurs.length === 1) { toggleDetail(secteurs[0].id); return; }
-  if (activeId !== null && notesDirty &&
+  const tous = gmfs.filter(s => s.installationId === installationId);
+  // On montre les secteurs retenus par les filtres, pour rester cohérent avec le chiffre
+  // porté par le repère ; le secteur visé par un lien est ajouté même s'il est filtré.
+  const visibles = tous.filter(s => matchesFilters(s.id) || s.id === secteurOuvertId);
+  if (!visibles.length) return;
+  const ouvertId = secteurOuvertId != null ? secteurOuvertId
+    : (visibles.length === 1 ? visibles[0].id : null);
+
+  if (activeId !== null && activeId !== ouvertId && notesDirty &&
       !confirm("Vos notes ne sont pas sauvegardées. Changer de fiche sans les sauvegarder ?")) return;
   notesDirty = false;
   if (activeId !== null) majIconeMarqueurDetail(byId(activeId), false);
+  // Une fiche d'installation peut être ouverte sans secteur déplié : sans cette
+  // référence, son repère resterait surligné après un clic sur un autre repère.
+  if (ficheInstallationId && ficheInstallationId !== installationId) {
+    majIconeMarqueurDetail(installationEtabById(ficheInstallationId), false);
+  }
+  ficheInstallationId = installationId;
   document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
-  activeId = null;
+  activeId = ouvertId;
+  majIconeMarqueurDetail(inst, true);
+  if (activeId !== null) document.getElementById('si-' + activeId)?.classList.add('active');
+
   document.getElementById('dp-tag').textContent = inst.type;
   document.getElementById('dp-name-disp').innerHTML = esc(inst.nom.trim());
-  (function(){ var c = couleurMilieu(inst); var dh = document.querySelector('#detail .dp-head'); if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; } var tg = document.getElementById('dp-tag'); if (tg) tg.style.color = c; })();
-  const liste = secteurs.map(s => {
-    const stat = recruteActuellement(s) ? 'En recrutement' : 'Ne recrute pas actuellement';
-    return `<button type="button" class="dp-sect-link" data-secteur="${esc(s.id)}"><span class="dp-sect-nom">${esc(s.nom)}</span><span class="dp-sect-stat">${stat}</span></button>`;
-  }).join('');
-  document.getElementById('dp-body').innerHTML = `<p class="dp-sect-intro">${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''} à ${esc(inst.nom)} · ${esc(inst.ville)}</p><div class="dp-sect-list" role="list">${liste}</div>`;
+  (function () {
+    const c = couleurMilieu(inst);
+    const dh = document.querySelector('#detail .dp-head');
+    if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; }
+    const tg = document.getElementById('dp-tag');
+    if (tg) tg.style.color = c;
+  })();
+
+  const nbMasques = tous.length - visibles.length;
+  document.getElementById('dp-body').innerHTML = `
+    <div class="vw-sec">
+      <div class="vw-sec-title">Le lieu</div>
+      <div class="vw-row"><span class="vw-label">Ville</span><span class="vw-value">${esc(inst.ville)}</span></div>
+      <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(libelleTerritoireSecteur(inst))}</span></div>
+      <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(inst)}</span></div>
+      ${inst.lienWeb ? `<div class="vw-row"><span class="vw-label">Site internet</span><span class="vw-value">${siteLink(inst.lienWeb)}</span></div>` : ''}
+      ${inst.mentionPublique ? `<div class="vw-row"><span class="vw-label">Note</span><span class="vw-value">${esc(inst.mentionPublique)}</span></div>` : ''}
+    </div>
+    <div class="vw-divider"></div>
+    <div class="vw-sec">
+      <div class="vw-sec-title">Secteurs en recrutement (${visibles.length})</div>
+      <p class="dp-sect-intro">Touchez un secteur pour voir ses modalités, l'ajouter à vos favoris ou y écrire une note.</p>
+      <div class="dp-sect-list">${htmlAccordeonSecteurs(visibles, ouvertId)}</div>
+      ${nbMasques > 0 ? `<p class="dp-sect-masques">${nbMasques} autre${nbMasques > 1 ? 's' : ''} secteur${nbMasques > 1 ? 's' : ''} de cette installation ${nbMasques > 1 ? 'sont masqués' : 'est masqué'} par vos filtres.</p>` : ''}
+    </div>
+    <div style="height:14px"></div>`;
   lierBoutonsSecteurs(document.getElementById('dp-body'));
+  const notesTa = document.getElementById('notes-input');
+  if (notesTa) notesTa.addEventListener('input', () => { notesDirty = true; });
+
   document.getElementById('detail').classList.add('open');
   document.body.classList.add('fiche-open');
   if (sidebarEl) sidebarEl.classList.remove('open');
   if (sbOverlay) sbOverlay.classList.remove('show');
   if (sbToggle) sbToggle.classList.add('hidden');
   if (typeof peekOff === 'function') peekOff();
-  const urlInst = urlEtat(installationId);
-  if (!detailHistoryActive) { history.pushState({ gmfDetail: true, installation: installationId }, '', urlInst); detailHistoryActive = true; }
-  else { history.replaceState({ gmfDetail: true, installation: installationId }, '', urlInst); }
-  try { map.flyTo([inst.lat, inst.lng], 14, { duration:1 }); } catch (err) {
-    console.warn('Déplacement de la carte impossible :', err);
+  updateLegendVisibility();
+
+  const etat = { gmfDetail: true, installation: installationId, c: activeId };
+  const url = urlEtat(activeId !== null ? activeId : installationId);
+  if (!detailHistoryActive) { history.pushState(etat, '', url); detailHistoryActive = true; }
+  else { history.replaceState(etat, '', url); }
+
+  try { map.flyTo([inst.lat, inst.lng], 14, { duration: 1 }); } catch (err) {
+    console.warn('Déplacement de la carte impossible, la fiche reste ouverte :', err);
   }
+}
+function openInstallationSecteurs(installationId) {
+  openFicheEtablissement(installationId, null);
 }
 function appliquerCibleUrl(paramsInit) {
   const secteurParam = paramsInit.get('secteur');
@@ -2797,14 +2949,7 @@ function syncModeCarteUI() {
   }
   const activiteWrap = document.getElementById('activite-btns');
   const activitePanel = document.getElementById('activite-panel');
-  if (activitePanel) {
-    activitePanel.hidden = modeCarte !== 'etablissements';
-    if (modeCarte === 'etablissements' && window.matchMedia('(max-width: 768px)').matches && !activiteFilter) {
-      activitePanel.removeAttribute('open');
-    } else if (modeCarte === 'etablissements') {
-      activitePanel.setAttribute('open', '');
-    }
-  }
+  if (activitePanel) activitePanel.hidden = modeCarte !== 'etablissements';
   if (activiteWrap && modeCarte !== 'etablissements') activiteWrap.innerHTML = '';
   const territoireLabel = document.getElementById('filtre-territoire-label');
   if (territoireLabel) territoireLabel.hidden = modeCarte !== 'etablissements';
@@ -2851,7 +2996,7 @@ function activerModeCarte(prochainMode) {
   showAllClinics = false;
   favOnly = false;
   rlsFilter = '';
-  activiteFilter = '';
+  activiteFilters.clear();
   searchQuery = '';
   const recherche = document.getElementById('sb-search-input');
   if (recherche) recherche.value = '';
@@ -2964,7 +3109,7 @@ function renderSidebar() {
 
     sbList.appendChild(el);
   });
-  if (shown === 0 && (favOnly || rlsFilter || activiteFilter || searchQuery)) {
+  if (shown === 0 && (favOnly || rlsFilter || activiteFilters.size || searchQuery)) {
     sbList.innerHTML = '<div class="sb-empty">' + (searchQuery
       ? aucunMode() + ' ne correspond à votre recherche.'
       : favOnly
@@ -3074,6 +3219,8 @@ function mapsLink(g) {
 
 // Navigation arrière (mobile) + références du tiroir latéral
 let detailHistoryActive = false;
+// Installation dont la fiche est ouverte, qu'un secteur soit déplié ou non.
+let ficheInstallationId = null;
 let sidebarEl = null, sbToggle = null, sbOverlay = null;
 
 function toggleFav(id) {
@@ -3102,7 +3249,8 @@ function toggleFav(id) {
   const favBtn = document.getElementById('dp-fav-btn');
   if (favBtn && id === activeId) {
     favBtn.classList.toggle('fav', f);
-    favBtn.textContent = f ? '★ Retirer des favoris' : '☆ Ajouter aux favoris';
+    const quoi = modeCarte === 'etablissements' ? ' ce secteur' : '';
+    favBtn.textContent = f ? '★ Retirer' + quoi + ' des favoris' : '☆ Ajouter' + quoi + ' aux favoris';
   }
   // Retirer/ajouter un favori en vue favoris décale le rang de tous les
   // autres (favListOrder() se recalcule) : sans ce recalcul, la liste et
@@ -3131,6 +3279,9 @@ function updateMarkerVisibility() {
       if (show && !map.hasLayer(m)) m.addTo(map);
       else if (!show && map.hasLayer(m)) map.removeLayer(m);
     });
+    // Le chiffre porté par un repère est un nombre de secteurs RETENUS : il change quand
+    // les filtres changent, même si l'installation, elle, reste affichée.
+    refreshMarkerIcons();
   } else {
     gmfs.forEach(g => {
       const m = markers[g.id];
@@ -3443,6 +3594,7 @@ const _searchWrap  = document.getElementById('sb-search');
 function applySearch() {
   searchQuery = normTxt(_searchInput ? _searchInput.value.trim() : '');
   if (_searchWrap) _searchWrap.classList.toggle('has-text', !!(_searchInput && _searchInput.value.length));
+  if (modeCarte === 'etablissements') populateActiviteButtons();
   renderSidebar();
   updateMarkerVisibility();
   if (searchQuery) fitToVisible();
@@ -3556,17 +3708,25 @@ function updateCompteurEtab() {
 }
 function appliquerFiltresEtab() {
   populateActiviteButtons();
-  populateRlsButtons();
   renderSidebar();
   updateMarkerVisibility();
   fitToVisible();
 }
 function setActiviteFilter(id) {
-  activiteFilter = (activiteFilter === id) ? '' : id;
+  if (activiteFilters.has(id)) activiteFilters.delete(id); else activiteFilters.add(id);
   appliquerFiltresEtab();
 }
+/* Le compteur d'une puce doit annoncer ce qu'elle donnerait si on la cochait : il tient
+   donc compte du territoire, de la recherche et des favoris, mais PAS de la sélection
+   d'activités en cours — sinon cocher une puce afficherait « (0) » sur les neuf autres. */
 function nbSecteursParActivite(catId) {
-  return secteursEtab.filter(s => s.categorieActivite === catId && statutVisible(s)).length;
+  const memo = activiteFilters;
+  activiteFilters = new Set();
+  try {
+    return secteursEtab.filter(s => s.categorieActivite === catId && matchesFilters(s.id)).length;
+  } finally {
+    activiteFilters = memo;
+  }
 }
 function populateActiviteButtons() {
   const wrap = document.getElementById('activite-btns');
@@ -3580,98 +3740,109 @@ function populateActiviteButtons() {
   if (panel) panel.hidden = false;
   const cats = categoriesActiviteDisponibles();
   const parId = new Map(cats.map(c => [c.id, c]));
-  const creerBtn = (cat, extraClass) => {
+  const creerBtn = (cat) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'activite-btn' + (extraClass ? ' ' + extraClass : '');
+    b.className = 'activite-btn';
     const n = nbSecteursParActivite(cat.id);
+    const coche = activiteFilters.has(cat.id);
     b.textContent = cat.libelle + (n ? ' (' + n + ')' : '');
     if (cat.libelleComplet && cat.libelleComplet !== cat.libelle) b.title = cat.libelleComplet;
     b.setAttribute('aria-label', 'Filtrer : ' + (cat.libelleComplet || cat.libelle));
-    const pale = activiteFilter !== '' && activiteFilter !== cat.id;
-    b.classList.toggle('dim', pale);
-    b.setAttribute('aria-pressed', activiteFilter === cat.id ? 'true' : 'false');
+    // Une catégorie sans résultat possible reste cliquable si elle est déjà cochée
+    // (pour pouvoir la décocher), sinon elle est estompée.
+    b.classList.toggle('dim', !coche && n === 0);
+    b.setAttribute('aria-pressed', coche ? 'true' : 'false');
     b.addEventListener('click', () => setActiviteFilter(cat.id));
     return b;
   };
-  const tous = document.createElement('button');
-  tous.type = 'button';
-  tous.className = 'activite-btn activite-btn-tous';
-  tous.textContent = 'Tous';
-  tous.setAttribute('aria-label', 'Filtrer : tous les secteurs d\'activité');
-  tous.setAttribute('aria-pressed', activiteFilter === '' ? 'true' : 'false');
-  tous.classList.toggle('dim', activiteFilter !== '');
-  tous.addEventListener('click', () => { activiteFilter = ''; appliquerFiltresEtab(); });
-  wrap.appendChild(tous);
+  const reset = document.getElementById('activite-reset');
+  if (reset) reset.hidden = activiteFilters.size === 0;
   GROUPES_ACTIVITE.forEach(groupe => {
     const ids = groupe.ids.filter(id => parId.has(id));
     if (!ids.length) return;
-    const bloc = document.createElement('div');
+    const nbActifs = ids.filter(id => activiteFilters.has(id)).length;
+    const bloc = document.createElement('details');
     bloc.className = 'activite-group';
-    const label = document.createElement('div');
+    // Un groupe replié ne doit jamais cacher une sélection en cours.
+    if (groupesActiviteOuverts.has(groupe.label) || nbActifs > 0) bloc.open = true;
+    bloc.addEventListener('toggle', () => {
+      if (bloc.open) groupesActiviteOuverts.add(groupe.label);
+      else groupesActiviteOuverts.delete(groupe.label);
+    });
+    const label = document.createElement('summary');
     label.className = 'activite-group-label';
-    label.textContent = groupe.label;
+    label.appendChild(document.createTextNode(groupe.label));
+    if (nbActifs > 0) {
+      const pastille = document.createElement('span');
+      pastille.className = 'activite-group-actifs';
+      pastille.textContent = nbActifs + ' actif' + (nbActifs > 1 ? 's' : '');
+      label.appendChild(pastille);
+    }
     bloc.appendChild(label);
-    ids.forEach(id => bloc.appendChild(creerBtn(parId.get(id))));
+    const btns = document.createElement('div');
+    btns.className = 'activite-group-btns';
+    ids.forEach(id => btns.appendChild(creerBtn(parId.get(id))));
+    bloc.appendChild(btns);
     wrap.appendChild(bloc);
   });
 }
 /* Un bouton par RLS. Un second clic sur le bouton actif retire le filtre. */
+function appliquerRlsFilter(wrap, territoire) {
+  rlsFilter = (rlsFilter === territoire) ? '' : territoire;
+  wrap.querySelectorAll('.rls-btn').forEach(btn => {
+    const nomBtn = btn.getAttribute('aria-label').slice('Filtrer : '.length);
+    btn.classList.toggle('dim', rlsFilter !== '' && rlsFilter !== nomBtn);
+    btn.setAttribute('aria-pressed', rlsFilter === nomBtn ? 'true' : 'false');
+  });
+  synchroniserOverlaysRlsEstOfficielle();
+  // Les compteurs des puces d'activité dépendent du territoire retenu.
+  if (modeCarte === 'etablissements') populateActiviteButtons();
+  renderSidebar(); updateMarkerVisibility(); fitToVisible();
+}
 function populateRlsButtons() {
   const wrap = document.getElementById('rls-btns');
   if (!wrap) return;
   const opts = Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional' && rlsForRegions().includes(r));
   wrap.innerHTML = '';
+  // Les boutons ne sont pas reconstruits au clic : la rangée est défilante, la
+  // reconstruire ferait sauter la position de défilement sous le doigt.
   opts.forEach(r => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'rls-btn';
-    const coupure = r.includes('-') ? r.indexOf('-') + 1 : r.indexOf(' ');
-    const ligne1 = coupure > 0 ? r.slice(0, coupure) : r;
-    const ligne2 = coupure > 0 ? r.slice(coupure) : '';
-    b.innerHTML = ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1);
+    // En mode établissements la rangée défile : les libellés restent sur une seule ligne.
+    if (modeCarte === 'etablissements') {
+      b.textContent = r;
+    } else {
+      const coupure = r.includes('-') ? r.indexOf('-') + 1 : r.indexOf(' ');
+      const ligne1 = coupure > 0 ? r.slice(0, coupure) : r;
+      const ligne2 = coupure > 0 ? r.slice(coupure) : '';
+      b.innerHTML = ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1);
+    }
     b.style.setProperty('--c', RLS_COLORS_REGION[r]);
     b.setAttribute('aria-label', 'Filtrer : ' + r);
     const pale = rlsFilter !== '' && rlsFilter !== r;
     b.classList.toggle('dim', pale);
     b.setAttribute('aria-pressed', rlsFilter === r ? 'true' : 'false');
-    b.addEventListener('click', () => {
-      rlsFilter = (rlsFilter === r) ? '' : r;
-      wrap.querySelectorAll('.rls-btn').forEach(btn => {
-        const nomBtn = btn.getAttribute('aria-label').slice('Filtrer : '.length);
-        const paleBtn = rlsFilter !== '' && rlsFilter !== nomBtn;
-        btn.classList.toggle('dim', paleBtn);
-        btn.setAttribute('aria-pressed', rlsFilter === nomBtn ? 'true' : 'false');
-      });
-      synchroniserOverlaysRlsEstOfficielle();
-      renderSidebar(); updateMarkerVisibility(); fitToVisible();
-    });
+    b.addEventListener('click', () => appliquerRlsFilter(wrap, r));
     wrap.appendChild(b);
   });
   if (hasMissionsRegionales()) {
     const m = TERRITOIRE_MISSIONS;
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'rls-btn';
-    b.innerHTML = 'Missions<br>régionales';
+    b.textContent = m;
     b.style.setProperty('--c', RLS_COLORS_REGION['Régional']);
     b.setAttribute('aria-label', 'Filtrer : ' + m);
     const pale = rlsFilter !== '' && rlsFilter !== m;
     b.classList.toggle('dim', pale);
     b.setAttribute('aria-pressed', rlsFilter === m ? 'true' : 'false');
-    b.addEventListener('click', () => {
-      rlsFilter = (rlsFilter === m) ? '' : m;
-      wrap.querySelectorAll('.rls-btn').forEach(btn => {
-        const nomBtn = btn.getAttribute('aria-label').slice('Filtrer : '.length);
-        const paleBtn = rlsFilter !== '' && rlsFilter !== nomBtn;
-        btn.classList.toggle('dim', paleBtn);
-        btn.setAttribute('aria-pressed', rlsFilter === nomBtn ? 'true' : 'false');
-      });
-      synchroniserOverlaysRlsEstOfficielle();
-      renderSidebar(); updateMarkerVisibility(); fitToVisible();
-    });
+    b.addEventListener('click', () => appliquerRlsFilter(wrap, m));
     wrap.appendChild(b);
   }
-  // Sert à la mise en page : 4 boutons passent en grille 2 × 2, 3 restent en ligne.
   wrap.dataset.nb = String(wrap.children.length);
+  // Le dégradé du bord droit ne sert que s'il reste des territoires hors champ.
+  wrap.classList.toggle('tout-visible', wrap.scrollWidth <= wrap.clientWidth + 1);
 }
 function buildFilters() {
   populateActiviteButtons();
@@ -3695,6 +3866,11 @@ function toggleDetail(id) {
 function openDetail(id) {
   const g = byId(id);
   if (!g) return;
+  // Mode établissements : c'est la fiche du LIEU qui s'ouvre, avec ce secteur déplié.
+  if (modeCarte === 'etablissements' && g._secteurEtab) {
+    openFicheEtablissement(g.installationId, id);
+    return;
+  }
   if (activeId !== null && activeId !== id && notesDirty &&
       !confirm("Vos notes ne sont pas sauvegardées. Changer de fiche sans les sauvegarder ?")) return;
   notesDirty = false;
@@ -3702,7 +3878,6 @@ function openDetail(id) {
   document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
   activeId = id;
   majIconeMarqueurDetail(g, true);
-  updateLegendVisibility();
   document.getElementById('si-'+id)?.classList.add('active');
   // 29 août 2026 : le flyTo() était ICI, AVANT la construction de la fiche. Si la couche
   // vectorielle levait une erreur pendant le déplacement (voir correctif « jumpTo » dans
@@ -3721,54 +3896,6 @@ function openDetail(id) {
   if (sbOverlay) sbOverlay.classList.remove('show');
   if (sbToggle) sbToggle.classList.add('hidden');
   if (typeof peekOff === 'function') peekOff();
-
-  if (modeCarte === 'etablissements' && g._secteurEtab) {
-    document.getElementById('dp-tag').textContent = g.type;
-    document.getElementById('dp-name-disp').innerHTML = esc(g.nom.trim());
-    (function(){ var c = couleurMilieu(g); var dh = document.querySelector('#detail .dp-head'); if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; } var tg = document.getElementById('dp-tag'); if (tg) tg.style.color = c; })();
-    const statutHtml = recruteActuellement(g)
-      ? '<span class="cmp-stat cmp-stat-on"><span class="cmp-stat-dot"></span>En recrutement</span>'
-      : '<span class="cmp-stat cmp-stat-off"><span class="cmp-stat-dot"></span>Ne recrute pas actuellement</span>';
-    document.getElementById('dp-body').innerHTML = `
-      <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(g.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(g.id) ? '★ Retirer des favoris' : '☆ Ajouter aux favoris'}</button></div>
-      <div class="vw-sec">
-        <div class="vw-sec-title">Milieu</div>
-        <div class="vw-row"><span class="vw-label">Installation</span><span class="vw-value">${esc(g.nomInstallation)}</span></div>
-        <div class="vw-row"><span class="vw-label">Ville</span><span class="vw-value">${esc(g.ville)}</span></div>
-        <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(libelleTerritoireSecteur(g))}</span></div>
-        <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(g)}</span></div>
-        ${g.mentionPublique ? `<div class="vw-row"><span class="vw-label">Note</span><span class="vw-value">${esc(g.mentionPublique)}</span></div>` : ''}
-      </div>
-      <div class="vw-divider"></div>
-      <div class="vw-sec">
-        <div class="vw-sec-title">Recrutement</div>
-        <div class="vw-row"><span class="vw-label">Statut</span><span class="vw-value">${statutHtml}</span></div>
-        ${g.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
-        ${g.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
-        <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">À venir</span></div>
-      </div>
-      ${htmlAutresSecteurs(g)}
-      <div class="vw-divider"></div>
-      <div class="notes-sec">
-        <div class="vw-sec-title">Mes notes</div>
-        <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur ce secteur (sauvegardées dans votre navigateur)">${esc(g.notes || '')}</textarea>
-        <div class="notes-actions">
-          <button class="btn-save" id="btn-save-notes" aria-label="Sauvegarder mes notes">💾 Sauvegarder mes notes</button>
-          <span class="save-msg" id="save-msg">✅ Notes sauvegardées</span>
-        </div>
-      </div>`;
-    document.getElementById('detail').classList.add('open');
-    document.body.classList.add('fiche-open');
-    try { map.flyTo([g.lat, g.lng], 14, { duration:1 }); } catch (err) {
-      console.warn('Déplacement de la carte impossible, la fiche reste ouverte :', err);
-    }
-    const notesTa = document.getElementById('notes-input');
-    if (notesTa) notesTa.addEventListener('input', () => { notesDirty = true; });
-    const favBtn = document.getElementById('dp-fav-btn');
-    if (favBtn) favBtn.addEventListener('click', () => toggleFav(g.id));
-    lierBoutonsSecteurs(document.getElementById('dp-body'));
-    return;
-  }
 
   document.getElementById('dp-tag').textContent = typeLabel(g.type);
   document.getElementById('dp-name-disp').innerHTML = esc(g.nom.trim()) + badgeVerifHtml(g);
@@ -3940,6 +4067,8 @@ function openDetail(id) {
 
   document.getElementById('detail').classList.add('open');
   document.body.classList.add('fiche-open');
+  // Après l'ouverture du panneau : updateLegendVisibility() lit la classe « open ».
+  updateLegendVisibility();
 
   // Déplacement de la carte APRÈS l'affichage de la fiche (voir note plus haut). Le try/catch
   // est une ceinture de sécurité : même si une couche de fond échoue, la fiche reste ouverte.
@@ -3974,6 +4103,8 @@ function closeDetailUI() {
   // On retire le paramètre ?c= pour que l'URL reflète l'état réel de l'app.
   if (location.search) { try { history.replaceState({}, '', urlEtat()); } catch (e) {} }
   if (activeId !== null) majIconeMarqueurDetail(byId(activeId), false);
+  if (ficheInstallationId) majIconeMarqueurDetail(installationEtabById(ficheInstallationId), false);
+  ficheInstallationId = null;
   activeId = null;
   document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
   document.getElementById('detail').classList.remove('open');
@@ -4013,7 +4144,7 @@ document.addEventListener('keydown', e => {
   if (infoTip && !infoTip.hidden) { closeAllClinicsInfo(); return; }
   const cp = document.getElementById('cmp-print');
   if (cp && cp.classList.contains('cmp-show')) { cmpClose(); return; }
-  if (activeId !== null) { closeDetail(); return; }
+  if (ficheOuverte()) { closeDetail(); return; }
   if (sidebarEl && sidebarEl.classList.contains('open')) { closeDrawer(); return; }
 });
 
@@ -4049,9 +4180,15 @@ function partagerFiche() {
 sidebarEl = document.querySelector('.sidebar');
 sbToggle = document.getElementById('sidebar-toggle');
 sbOverlay = document.getElementById('sidebar-overlay');
+/* La fiche d'établissement peut rester ouverte sans secteur déplié : « une fiche est
+   ouverte » se lit donc sur le panneau, pas sur activeId. */
+function ficheOuverte() {
+  const d = document.getElementById('detail');
+  return !!d && d.classList.contains('open');
+}
 function updateLegendVisibility() {
   if (!legendEl) return;
-  const masquer = (activeId !== null) || (sidebarEl && sidebarEl.classList.contains('open'));
+  const masquer = ficheOuverte() || (sidebarEl && sidebarEl.classList.contains('open'));
   legendEl.style.display = masquer ? 'none' : '';
 }
 
@@ -4108,6 +4245,11 @@ if (sbOverlay) sbOverlay.addEventListener('click', closeDrawer);
 
 const favToggleBtn = document.getElementById('fav-toggle');
 if (favToggleBtn) favToggleBtn.addEventListener('click', toggleFavView);
+const activiteResetBtn = document.getElementById('activite-reset');
+if (activiteResetBtn) activiteResetBtn.addEventListener('click', () => {
+  activiteFilters.clear();
+  appliquerFiltresEtab();
+});
 const careModeSwitch = document.getElementById('care-mode-switch');
 if (careModeSwitch) {
   careModeSwitch.addEventListener('click', e => {
