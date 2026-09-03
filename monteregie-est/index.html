@@ -454,7 +454,7 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 
 /* MARKER NUMBER */
 .pin-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  transform: rotate(45deg); color: #fff; font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 11px; }
+  transform: rotate(45deg); color: #fff; font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 12px; }
 
 /* MARQUEUR HÔPITAL — même construction de goutte que les épingles de clinique (carré à
    bord arrondi tourné à -45°), mais plus grande, toujours rouge, avec un rond blanc et un
@@ -2334,13 +2334,12 @@ const markers = {};
    dans data.json et on décale uniquement le dessin des épingles, en pixels. */
 const markerOffsets = new Map();
 
-/* Plusieurs installations d'une même ville sont distantes de 100 à 600 m
+/* Plusieurs milieux d'une même ville sont distants de 100 à 600 m
    (quatre autour de l'Hôpital Honoré-Mercier, trois à Sorel-Tracy) : à l'échelle
-   de la région elles se recouvrent, alors que leurs coordonnées diffèrent — le
-   regroupement par coordonnées identiques ne les voyait pas. En mode
-   établissements, le regroupement se fait donc sur l'écart EN PIXELS au zoom
-   courant, et se défait tout seul quand on zoome. Les cliniques gardent le
-   comportement d'origine. */
+   de la région ils se recouvrent, alors que leurs coordonnées diffèrent — le
+   regroupement par coordonnées identiques ne les voyait pas. Cliniques et
+   établissements regroupent donc sur l'écart EN PIXELS au zoom courant ; le
+   déploiement se défait tout seul quand on zoome. */
 const SEUIL_REGROUPEMENT_PX = 34;
 
 function grouperParProximiteEcran(liste) {
@@ -2356,10 +2355,8 @@ function grouperParProximiteEcran(liste) {
 
 function grouperMarqueursPourDecalage() {
   const source = getMarqueursSource();
-  if (modeCarte === 'etablissements') {
-    try { return grouperParProximiteEcran(source); }
-    catch (e) { /* carte pas encore initialisée : repli sur le regroupement exact */ }
-  }
+  try { return grouperParProximiteEcran(source); }
+  catch (e) { /* carte pas encore initialisée : repli sur le regroupement exact */ }
   const parCoordonnees = new Map();
   source.forEach(g => {
     const cle = `${Number(g.lat).toFixed(6)},${Number(g.lng).toFixed(6)}`;
@@ -2400,7 +2397,6 @@ function calculerDecalagesMarqueurs() {
 /* Le déploiement en éventail dépend du zoom : il faut le recalculer après chaque
    zoom, sinon deux repères restent écartés alors qu'ils ne se touchent plus. */
 function rafraichirDecalagesEcran() {
-  if (modeCarte !== 'etablissements') return;
   calculerDecalagesMarqueurs();
   refreshMarkerIcons();
   Object.keys(markers).forEach(id => {
@@ -2518,9 +2514,9 @@ function makeIcon(active, rank, couleur, id) {
       html:`<div class="etab-marker${active ? ' active' : ''}" style="width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border}">${label}</div>`,
       iconSize:[size,size], iconAnchor:[size/2-dx,size/2-dy], popupAnchor:[dx,dy-size/2-7] });
   }
-  const size = active ? 26 : 20;
+  const size = active ? 32 : 24;
   const border = active ? '#0f2240' : '#fff';
-  const bw = active ? 3 : 2.5;
+  const bw = active ? 3.5 : 2.5;
   return L.divIcon({ className:'',
     html:`<div style="position:relative;width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,.35)"><span class="pin-num">${rank}</span></div>`,
     iconSize:[size,size], iconAnchor:[size/2-dx,size-dy], popupAnchor:[dx,dy-size-2] });

@@ -14,7 +14,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // bloc Territoire replié, compteur « X secteurs dans Y installations » retiré.
 // v59-hopitaux-h (3 septembre 2026) : goutte H rouge pour les 3 hôpitaux ; numéros
 // d'identification 1–n sur les autres repères établissements.
-const CACHE = CACHE_PREFIX + 'v59-hopitaux-h';
+// v60-pins-cliniques (3 septembre 2026) : gouttes cliniques 24/32 px, regroupement
+// par proximité écran aussi en mode cliniques.
+const CACHE = CACHE_PREFIX + 'v60-pins-cliniques';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [
