@@ -319,7 +319,7 @@
     },
     {
       "id": "INS-007",
-      "nom": "Centre d'hébergement de l'hôtel-Dieu-De-Saint-Hyacinthe",
+      "nom": "Centre d'hébergement de l'Hôtel-Dieu-de-Saint-Hyacinthe",
       "type": "chsld",
       "territoireSource": "Richelieu-Yamaska",
       "missionRegionale": false,
@@ -464,7 +464,7 @@
     },
     {
       "id": "INS-016",
-      "nom": "Centre de Détention",
+      "nom": "Centre de détention",
       "type": "detention",
       "territoireSource": "Régional",
       "missionRegionale": true,
@@ -486,7 +486,7 @@
     },
     {
       "id": "INS-017",
-      "nom": "Centre de Réadaptation en dépendance Saint-Hyacinthe",
+      "nom": "Centre de réadaptation en dépendance Saint-Hyacinthe",
       "type": "crd",
       "territoireSource": "Régional",
       "missionRegionale": true,
@@ -505,7 +505,7 @@
     },
     {
       "id": "INS-019",
-      "nom": "Centre de Réadaptation en Dépendance Longueuil",
+      "nom": "Centre de réadaptation en dépendance Longueuil",
       "type": "crd",
       "territoireSource": "Régional",
       "missionRegionale": true,
@@ -524,7 +524,7 @@
     },
     {
       "id": "INS-018",
-      "nom": "Centre de Réadaptation en Dépendance Ste-Philippe",
+      "nom": "Centre de réadaptation en dépendance Saint-Philippe",
       "type": "crd",
       "territoireSource": "Régional",
       "missionRegionale": true,

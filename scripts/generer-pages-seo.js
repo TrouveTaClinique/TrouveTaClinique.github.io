@@ -1692,11 +1692,21 @@ ${sections}`;
   });
 }
 
+/* Ancien slug INS-018 : « Ste-Philippe » dans le nom produisait …/ste-philippe/. */
+const REDIRECTIONS_ETABLISSEMENTS = [
+  {
+    ancien: 'centre-de-readaptation-en-dependance-ste-philippe',
+    nouveau: 'centre-de-readaptation-en-dependance-saint-philippe',
+    libelle: 'La fiche du Centre de réadaptation en dépendance Saint-Philippe'
+  }
+];
+
 function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
   const donnees = chargerDonneesEtablissements();
   ecrire(path.join('monteregie-est', 'etablissements', 'index.html'),
     pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo));
   entrees.push({ loc: '/monteregie-est/etablissements/', lastmod: majPagesSeo, changefreq: 'weekly', priority: '0.8' });
+  const conserves = new Set();
   let n = 0;
   for (const id of PREMIER_LOT_ETABLISSEMENTS) {
     const inst = (donnees.installations || []).find(i => i.id === id);
@@ -1704,10 +1714,26 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
     const secteurs = secteursDe(donnees, id);
     const p = pageEtablissement(inst, secteurs, majPagesSeo);
     ecrire(path.join('monteregie-est', 'etablissements', p.slug, 'index.html'), p.html);
+    conserves.add(p.slug);
     if (p.indexable) {
       entrees.push({ loc: `${EST_PREFIXE}/etablissements/${p.slug}/`, lastmod: majPagesSeo, changefreq: 'monthly', priority: '0.7' });
     }
     n++;
+  }
+  for (const r of REDIRECTIONS_ETABLISSEMENTS) {
+    const destination = `${SITE}${EST_PREFIXE}/etablissements/${r.nouveau}/`;
+    ecrire(path.join('monteregie-est', 'etablissements', r.ancien, 'index.html'),
+      pageRedirectionStatique(destination, r.libelle));
+    conserves.add(r.ancien);
+  }
+  const racineEtab = path.join(RACINE, 'monteregie-est', 'etablissements');
+  if (fs.existsSync(racineEtab)) {
+    for (const nom of fs.readdirSync(racineEtab)) {
+      const dossier = path.join(racineEtab, nom);
+      if (!fs.lstatSync(dossier).isDirectory()) continue;
+      if (conserves.has(nom)) continue;
+      fs.rmSync(dossier, { recursive: true, force: true });
+    }
   }
   return n;
 }

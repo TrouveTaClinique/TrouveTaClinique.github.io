@@ -10,50 +10,39 @@ const SOURCE = path.join(__dirname, 'donnees-etablissements-source.json');
 const DATA_JSON = path.join(RACINE, 'data.json');
 const SORTIE = path.join(RACINE, 'data-etablissements.json');
 
-const SIGLES = new Set(['CLSC', 'GMF-U', 'UCDG', 'CHSLD', 'CRD', 'CH', 'GMF', 'GMF-R']);
+/* Noms d'affichage — table explicite, pas un algorithme. Les 22 installations du
+   relevé 2027 sont une liste close ; « détention / réadaptation / dépendance » restent
+   des noms communs, Hôtel-Dieu un nom propre. Toute installation absente de la table
+   doit faire échouer la génération plutôt que produire une casse approximative. */
+const NOMS_AFFICHAGE = {
+  'INS-001': 'Hôpital Pierre-Boucher',
+  'INS-002': 'Centre d\'hébergement Jeanne-Crevier',
+  'INS-003': 'Centre d\'hébergement de Contrecoeur',
+  'INS-004': 'CLSC de Longueuil-Ouest',
+  'INS-005': 'CLSC des Seigneuries',
+  'INS-020': 'CLSC Simonne-Monet-Chartrand',
+  'INS-022': 'GMF-U des Montérégiennes',
+  'INS-006': 'Hôpital Honoré-Mercier',
+  'INS-007': 'Centre d\'hébergement de l\'Hôtel-Dieu-de-Saint-Hyacinthe',
+  'INS-008': 'Centre d\'hébergement de Montarville',
+  'INS-009': 'Centre d\'hébergement Marguerite-Adam',
+  'INS-010': 'CLSC des Maskoutains',
+  'INS-011': 'CLSC des Patriotes',
+  'INS-021': 'GMF-U Richelieu-Yamaska',
+  'INS-012': 'Hôtel-Dieu de Sorel',
+  'INS-013': 'Centre d\'hébergement Élisabeth-Lafrance',
+  'INS-014': 'Centre d\'hébergement J.-Arsène-Parenteau',
+  'INS-015': 'CLSC Gaston-Bélanger',
+  'INS-016': 'Centre de détention',
+  'INS-017': 'Centre de réadaptation en dépendance Saint-Hyacinthe',
+  'INS-019': 'Centre de réadaptation en dépendance Longueuil',
+  'INS-018': 'Centre de réadaptation en dépendance Saint-Philippe'
+};
 
-const PETITS_MOTS = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'et', 'en']);
-/* d' / l' : élision, pas un mot à capitaliser — « Centre d'hébergement », « de l'hôtel-Dieu ». */
-const ARTICLES_ELIDES = new Set(['d', 'l']);
-
-function capitaliserMorceau(p) {
-  if (!p) return p;
-  const upper = p.toUpperCase();
-  if (SIGLES.has(upper)) return upper;
-  if (p.length <= 3 && /^[a-z]\.?$/i.test(p)) return p.toUpperCase().replace('.', '') + '.';
-  return p.charAt(0).toUpperCase() + p.slice(1);
-}
-
-function recapitaliserNom(nom) {
-  if (!nom || typeof nom !== 'string') return nom;
-  const brut = nom.trim();
-  if (!brut) return brut;
-  const mots = brut.toLowerCase().split(/\s+/);
-  return mots.map((mot, i) => {
-    const upper = mot.toUpperCase();
-    if (SIGLES.has(upper)) return upper;
-    const elision = mot.match(/^([^'’]*)(['’])(.*)$/);
-    if (elision) {
-      const [, avant, apo, apres] = elision;
-      const avantOut = (i > 0 && ARTICLES_ELIDES.has(avant))
-        ? avant
-        : (avant ? capitaliserMorceau(avant) : '');
-      /* Minuscule immédiatement après l'apostrophe ; les segments suivants d'un
-         composé à traits d'union gardent la capitalisation habituelle. */
-      const segments = apres.split('-');
-      const apresOut = segments.map((part, k) => (k === 0 ? part : capitaliserMorceau(part))).join('-');
-      return avantOut + apo + apresOut;
-    }
-    if (mot.includes('-')) {
-      return mot.split('-').map(capitaliserMorceau).join('-');
-    }
-    if (i === 0 || !PETITS_MOTS.has(mot)) return capitaliserMorceau(mot);
-    return mot;
-  }).join(' ')
-    .replace(/\bHopital\b/g, 'Hôpital')
-    .replace(/\bHotel-dieu\b/gi, 'Hôtel-Dieu')
-    .replace(/\bReadaptation\b/g, 'Réadaptation')
-    .replace(/\bDependance\b/g, 'dépendance');
+function nomAffichage(etab) {
+  const nom = NOMS_AFFICHAGE[etab.id];
+  if (!nom) throw new Error(`Nom d'affichage manquant pour ${etab.id} (${etab.nom || '?'})`);
+  return nom;
 }
 
 function normaliserType(type) {
@@ -98,15 +87,17 @@ function construire() {
   const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
   const installations = [];
   const secteurs = [];
+  const idsVus = new Set();
 
   for (const etab of source.etablissements || []) {
     const ref = etab.decision && etab.decision.referenceExistante;
     const owner = lireProprietaire(ref, data);
     const geo = coordsPour(etab, owner);
+    idsVus.add(etab.id);
 
     installations.push({
       id: etab.id,
-      nom: recapitaliserNom(etab.nom),
+      nom: nomAffichage(etab),
       type: normaliserType(etab.type),
       territoireSource: etab.rls || '',
       missionRegionale: !!etab.missionRegionale,
@@ -143,6 +134,14 @@ function construire() {
         validation: { etat: 'a-valider', verifieLe: null }
       });
     }
+  }
+
+  const manquants = Object.keys(NOMS_AFFICHAGE).filter(id => !idsVus.has(id));
+  if (manquants.length) {
+    throw new Error('Noms d\'affichage sans installation source : ' + manquants.join(', '));
+  }
+  if (idsVus.size !== Object.keys(NOMS_AFFICHAGE).length) {
+    throw new Error(`Nombre d'installations (${idsVus.size}) ≠ table des noms (${Object.keys(NOMS_AFFICHAGE).length})`);
   }
 
   const sortie = {
