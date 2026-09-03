@@ -2,12 +2,12 @@
   "meta": {
     "titre": "Secteurs en recrutement en etablissement - Monteregie-Est - PTEM 2027",
     "source": "Modele_Carte_Recrutement_Medical_CISSSME_1_rempli_avec_CLSC_Simonne_Monet_Chartrand.xlsx",
-    "transmisPar": "Nancy Langlois, Sante Quebec Monteregie-Est",
+    "transmisPar": "Sante Quebec Monteregie-Est",
     "dateReception": "2026-09-02",
     "dateDonnees": "2026-08-28",
     "statutValidation": "brouillon - non valide pour publication",
     "politiqueAffichage": {
-      "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec Nancy mais ne sortent jamais dans le HTML.",
+      "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec la personne-ressource de Sante Quebec mais ne sortent jamais dans le HTML.",
       "besoinsDichotomiques": true,
       "afficherETC": false,
       "afficherResponsableNom": false,
@@ -53,7 +53,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 12. Commentaire source : DRE ML PHAM"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "missionRegionale": false
@@ -84,7 +84,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 10. Commentaire source : DRE ML PHAM"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "missionRegionale": false
@@ -115,7 +115,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 17. Aucun responsable indiqué dans le commentaire source."
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 3.0,
       "decision": {
@@ -152,7 +152,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 19. Commentaire source : CLSC : Josée Mercier\nLatitude/longitude : centroïde municipal de Verchères (point exact à valider)."
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "decision": {
@@ -162,7 +162,7 @@
         },
         "multisite": true,
         "mentionPublique": "Le CLSC des Seigneuries dessert plusieurs points de service (Varennes, Verchères, et possiblement d'autres).",
-        "motif": "Olivier, 2 sept. 2026 : le CLSC des Seigneuries est une entite multi-sites ; le point retenu est l'installation de Varennes deja presente dans data.json. L'onglet Secteurs donnait l'adresse de Vercheres — a valider avec Nancy.",
+        "motif": "Olivier, 2 sept. 2026 : le CLSC des Seigneuries est une entite multi-sites ; le point retenu est l'installation de Varennes deja presente dans data.json. L'onglet Secteurs donnait l'adresse de Vercheres — a valider avec la personne-ressource de Sante Quebec.",
         "validation": "provisoire"
       },
       "adresseSource": "50, rue de la Gabelle",
@@ -194,7 +194,7 @@
           "notesInternes": null
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 3.0,
       "decision": {
@@ -231,7 +231,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "decision": {
@@ -301,7 +301,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 8.0,
       "decision": {
@@ -338,7 +338,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 37. Aucun responsable indiqué dans le commentaire source."
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "missionRegionale": false
@@ -369,7 +369,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 36. Aucun responsable indiqué dans le commentaire source."
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 2.0,
       "missionRegionale": false
@@ -400,7 +400,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 39. Commentaire source : Dr Mathieu Galfard ; possiblement plusieurs temps partiels ; IPSPL bienvenu(e)!"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "decision": {
@@ -481,7 +481,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 11.0,
       "decision": {
@@ -518,7 +518,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 23. Commentaire source : Natacha Leblanc-Gagnon"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "missionRegionale": false
@@ -549,7 +549,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 24. Commentaire source : Natacha Leblanc-Gagnon"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "missionRegionale": false
@@ -580,7 +580,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 25. Commentaire source : Natacha Leblanc-Gagnon"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "missionRegionale": false
@@ -611,7 +611,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 29. Commentaire source :  Julie Gagnon  - Aurions besoin de 1 ETC MD ou 1 IPS"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 1.0,
       "decision": {
@@ -648,7 +648,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 30. Commentaire source : Carmen Messier"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 2.0,
       "decision": {
@@ -685,7 +685,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 2.0,
       "decision": {
@@ -744,7 +744,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 8.0,
       "decision": {
@@ -781,7 +781,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 47. Commentaire source : Détention - Dr Haméon Plante"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 2.0,
       "decision": {
@@ -819,7 +819,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 48. Commentaire source : CRD - Marie-Eve Turgeon"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 0.3,
       "decision": {
@@ -853,7 +853,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 51. Commentaire source : Dre Marie-Eve Turgeon"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 0.5,
       "decision": {
@@ -893,7 +893,7 @@
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 50. Commentaire source : CRD - Marie-Eve Turgeon"
         }
       ],
-      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Nancy Langlois le 2 septembre 2026",
+      "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
       "totalEtc": 2.0,
       "decision": {

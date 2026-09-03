@@ -1,6 +1,6 @@
 'use strict';
 
-/** Dix catégories d'activité du classeur Nancy — GUIDE §15, SPEC §8.5. */
+/** Dix catégories d'activité du classeur source (CISSS Montérégie-Est). GUIDE §15, SPEC §8.5. */
 const CATEGORIES_ACTIVITE_ETABLISSEMENTS = [
   {
     id: 'urgence',

@@ -5,7 +5,7 @@
   "dateSource": "2026-08-28",
   "meta": {
     "politiqueAffichage": {
-      "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec Nancy mais ne sortent jamais dans le HTML.",
+      "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec la personne-ressource de Sante Quebec mais ne sortent jamais dans le HTML.",
       "besoinsDichotomiques": true,
       "afficherETC": false,
       "afficherResponsableNom": false,

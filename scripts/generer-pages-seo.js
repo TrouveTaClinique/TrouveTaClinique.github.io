@@ -1333,6 +1333,8 @@ ${sections}`;
  * Trois règles d'affichage — identiques à la carte, et DISTINCTES des pages de cliniques :
  * aucun ETC, aucun nom ni courriel de responsable, contact « À venir ».
  * JSON-LD : pas de contactPoint, pas de JobPosting.
+ * Le nom de la personne-ressource SQ n'apparaît dans aucun fichier du dépôt
+ * (garde-fou du secret NOM_PROTEGE_SANTE_QUEBEC).
  */
 const DATE_SOURCE_ETABLISSEMENTS = '2026-08-28';
 const PREMIER_LOT_ETABLISSEMENTS = ['INS-012', 'INS-003', 'INS-018'];
