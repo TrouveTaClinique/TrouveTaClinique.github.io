@@ -25,8 +25,8 @@
  *      tout champ oublié.
  *   2. "notes" NE SORT JAMAIS. C'est le champ réservé aux notes personnelles des usagers.
  *   3. Une CLINIQUE "visible: false" est ignorée dans les pages et le sitemap. Une fiche dont
- *      `categorie` vaut "etablissement" suit une règle distincte : elle n'a pas de page SEO,
- *      mais peut apparaître dans la couche informative Établissements des cartes.
+ *      `categorie` vaut "etablissement" n'a pas de page SEO clinique. Les pages
+ *      /monteregie-est/etablissements/ sont générées depuis data-etablissements.json.
  *   4. Les courriels de recrutement SONT publiés (voir PUBLIER_COURRIELS, décision du 2 sept. 2026).
  *   5. On ne copie jamais le HTML de la fiche de l'application (#dp-body / exportFiche) : cette
  *      fiche contient des éléments propres à l'app (notes, boutons). Les pages ci-dessous sont
@@ -463,6 +463,7 @@ const LIENS_NAV = [
   ['/', 'Accueil', 'accueil'],
   [EST_ACCUEIL, 'Carte interactive', 'carte'],
   [EST_PREFIXE + '/cliniques/', 'Cliniques', 'cliniques'],
+  [EST_PREFIXE + '/etablissements/', 'Établissements', 'etablissements'],
   [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
   [EST_PREFIXE + '/amp/', 'AMP', 'amp']
 ];
@@ -1321,6 +1322,396 @@ ${sections}`;
 /* ------------------------------------------------------------------------------------------- */
 
 /* Pages de contenu écrites à la main (pas générées). Ajouter ici toute nouvelle page-guide. */
+/* ------------------------------------------------------------------------------------------- */
+/* PAGES SEO DES SECTEURS EN ÉTABLISSEMENT                                                      */
+/* ------------------------------------------------------------------------------------------- */
+/*
+ * Premier lot (3 sept. 2026), avant le 24 : un répertoire + trois pages contrastées.
+ * Les dix-sept autres installations et les ancres GMF-U viendront après validation du gabarit.
+ *
+ * Trois règles d'affichage — identiques à la carte, et DISTINCTES des pages de cliniques :
+ * aucun ETC, aucun nom ni courriel de responsable, contact « À venir ».
+ * JSON-LD : pas de contactPoint, pas de JobPosting.
+ */
+const DATE_SOURCE_ETABLISSEMENTS = '2026-08-28';
+const PREMIER_LOT_ETABLISSEMENTS = ['INS-012', 'INS-003', 'INS-018'];
+const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir obtenu l’aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d’inscription de patients.';
+const NOTE_SOURCE_ETABLISSEMENTS = 'les secteurs en recrutement présentés sur cette page proviennent du relevé des besoins en effectifs médicaux 2027 du CISSS de la Montérégie-Est, transmis le 28 août 2026. Ils indiquent qu’un recrutement est en cours dans le secteur, sans préjuger du nombre de postes, de leur répartition ni des modalités d’exercice, qui se précisent avec le milieu. Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
+const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> le contact à privilégier pour les secteurs en établissement sera publié prochainement. En attendant, adressez-vous au service de recrutement médical du CISSS de la Montérégie-Est.</div>';
+
+const TYPE_ETAB_SEO = {
+  hopital: 'Hôpital',
+  chsld: 'CHSLD',
+  clsc: 'CLSC',
+  'gmf-u': 'GMF-U',
+  crd: 'Centre de réadaptation',
+  detention: 'Centre de détention'
+};
+
+function typeEtablissementLibelle(type) {
+  return TYPE_ETAB_SEO[type] || type || '';
+}
+
+function typeSchemaEtablissement(type) {
+  if (type === 'hopital') return 'Hospital';
+  if (type === 'chsld') return 'NursingHome';
+  return 'MedicalClinic';
+}
+
+function chargerDonneesEtablissements() {
+  return JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements.json'), 'utf8'));
+}
+
+function slugEtablissement(inst) {
+  return slugifier(inst.nom);
+}
+
+function secteursDe(donnees, installationId) {
+  return (donnees.secteurs || []).filter(s => s.installationId === installationId);
+}
+
+function lienCarteInstallation(id) {
+  return `${EST_PREFIXE}/?mode=etablissements&installation=${encodeURIComponent(id)}`;
+}
+
+function adresseCompleteEtablissement(inst) {
+  const rue = (inst.adresse || '').trim();
+  const ville = (inst.ville || '').trim();
+  const cp = (inst.codePostal || '').trim();
+  if (rue && ville && cp) return `${rue}, ${ville} QC ${cp}`;
+  if (rue && ville) return `${rue}, ${ville}`;
+  return rue || ville || '';
+}
+
+function listeSecteursHumaine(secteurs) {
+  const noms = secteurs.map(s => s.libelle);
+  if (noms.length === 0) return '';
+  if (noms.length === 1) return noms[0];
+  if (noms.length === 2) return noms[0] + ' et ' + noms[1];
+  return noms.slice(0, -1).join(', ') + ' et ' + noms[noms.length - 1];
+}
+
+function nombreEnLettresFr(n) {
+  return ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix'][n] || String(n);
+}
+
+function eyebrowEtablissement(inst) {
+  const type = typeEtablissementLibelle(inst.type);
+  if (inst.missionRegionale) return `${type} · Mission régionale`;
+  return `${type} · RLS ${inst.territoireSource}`;
+}
+
+function hrefPageOuCarte(inst, slugsCliniques, lot) {
+  if (lot.has(inst.id)) {
+    return `${EST_PREFIXE}/etablissements/${slugEtablissement(inst)}/`;
+  }
+  const ref = inst.referenceExistante;
+  if (inst.type === 'gmf-u' && ref && ref.collection === 'cliniques') {
+    const slug = slugsCliniques[String(ref.id)];
+    if (slug) return `${EST_PREFIXE}/cliniques/${slug}/`;
+  }
+  return lienCarteInstallation(inst.id);
+}
+
+function paragraphesSecteur(s, inst) {
+  if (inst.id === 'INS-012') {
+    const hotelDieu = {
+      urgence: '<p>Le service d’urgence de l’Hôtel-Dieu de Sorel dessert la population du RLS Pierre-De Saurel. Le secteur est en recrutement.</p>',
+      hospitalisation: '<p>La prise en charge des patients hospitalisés est en recrutement. Cette pratique se combine fréquemment à d’autres secteurs du même établissement.</p>',
+      ucdg: '<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>',
+      obstetrique: '<p>Le secteur d’obstétrique est en recrutement. L’Hôtel-Dieu de Sorel est le seul établissement du RLS Pierre-De Saurel offrant ce service.</p>',
+      'soins-intensifs': '<p>Les soins intensifs de l’Hôtel-Dieu de Sorel forment une unité de six lits ou moins. Le secteur est en recrutement.</p>'
+    };
+    if (hotelDieu[s.ancre]) return hotelDieu[s.ancre];
+  }
+  const extra = [];
+  if (s.categorieActivite === 'longue-duree') {
+    extra.push('<p>Le secteur de longue durée d’un CHSLD assure le suivi médical des personnes hébergées. Le secteur est en recrutement.</p>');
+  } else if (s.categorieActivite === 'crd') {
+    extra.push('<p>Un centre de réadaptation en dépendance offre des services spécialisés aux personnes aux prises avec un trouble lié à l’usage de substances. Le secteur est en recrutement.</p>');
+  } else if (s.categorieActivite === 'urgence') {
+    extra.push('<p>Le service d’urgence dessert la population du territoire. Le secteur est en recrutement.</p>');
+  } else if (s.categorieActivite === 'hospitalisation') {
+    extra.push('<p>La prise en charge des patients hospitalisés est en recrutement.</p>');
+  } else if (s.categorieActivite === 'ucdg') {
+    extra.push('<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>');
+  } else if (s.categorieActivite === 'gmf-u') {
+    extra.push(`<p>Le secteur GMF-U est en recrutement.</p><p>${esc(GMFU_CONDITION_SEO)}</p>`);
+  } else {
+    extra.push(`<p>Le secteur ${esc(s.libelle)} est en recrutement pour le cycle 2027.</p>`);
+  }
+  if (s.regroupe) {
+    extra.push('<p>Le besoin est regroupé : les modalités se précisent avec le milieu.</p>');
+  }
+  if (inst.id === 'INS-018') {
+    extra.push('<p>Ce site relève de la Montérégie-Ouest. Il est présenté ici comme mission régionale du CISSS de la Montérégie-Est, et non comme un RLS « Régional » — ce territoire n’existe pas.</p>');
+  }
+  if (inst.id === 'INS-005') {
+    extra.push('<p>Le service dessert Varennes, Verchères et possiblement d’autres points de service.</p>');
+  }
+  return extra.join('\n    ');
+}
+
+function titreH3Secteur(s) {
+  if (s.categorieActivite === 'ucdg') return 'UCDG — unité de courte durée gériatrique';
+  return s.libelle;
+}
+
+function chapeauEtablissement(inst, secteurs) {
+  if (inst.id === 'INS-012') {
+    return 'L’Hôtel-Dieu de Sorel est l’hôpital du réseau local de services Pierre-De Saurel, à Sorel-Tracy. Cinq de ses secteurs d’activité recrutent actuellement des médecins de famille : l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, l’obstétrique et les soins intensifs. Cette page présente chacun d’eux, tels que déclarés par le CISSS de la Montérégie-Est pour le cycle de besoins 2027.';
+  }
+  if (inst.id === 'INS-003') {
+    return 'Le centre d’hébergement de Contrecoeur est un CHSLD du RLS Pierre-Boucher. Son secteur de longue durée recrute actuellement des médecins de famille. Cette page présente ce secteur, tel que déclaré par le CISSS de la Montérégie-Est pour le cycle de besoins 2027.';
+  }
+  const n = secteurs.length;
+  const liste = listeSecteursHumaine(secteurs);
+  if (inst.missionRegionale && inst.id === 'INS-018') {
+    return `Le centre de réadaptation en dépendance de Saint-Philippe est une mission régionale. Le site se trouve à Saint-Philippe, en Montérégie-Ouest ; il est présenté ici parce que le relevé des besoins 2027 du CISSS de la Montérégie-Est l’inclut. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} d’activité en recrutement : ${esc(liste)}.`;
+  }
+  if (inst.missionRegionale) {
+    return `${esc(inst.nom)} est une mission régionale. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} en recrutement : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 du CISSS de la Montérégie-Est.`;
+  }
+  const type = typeEtablissementLibelle(inst.type).toLowerCase();
+  const rls = inst.territoireSource || '';
+  if (n === 1) {
+    return `Le ${type} ${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. Son secteur d’activité en recrutement est ${esc(liste)}. Cette page reprend le relevé des besoins 2027 du CISSS de la Montérégie-Est.`;
+  }
+  return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. ${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 du CISSS de la Montérégie-Est.`;
+}
+
+function pageEtablissement(inst, secteurs, majPagesSeo) {
+  const u = UNIVERS_PAR_REGION.Est;
+  const slug = slugEtablissement(inst);
+  const url = `${SITE}${EST_PREFIXE}/etablissements/${slug}/`;
+  const typeLib = typeEtablissementLibelle(inst.type);
+  const n = secteurs.length;
+  const liste = listeSecteursHumaine(secteurs);
+  const titre = `${inst.nom} — secteurs en recrutement | Trouve ta clinique`;
+  const description = inst.id === 'INS-012'
+    ? 'Hôtel-Dieu de Sorel, hôpital de Sorel-Tracy (RLS Pierre-De Saurel) : cinq secteurs en recrutement de médecins — urgence, hospitalisation, UCDG, obstétrique et soins intensifs.'
+    : `${inst.nom}, ${typeLib.toLowerCase()} à ${inst.ville}${inst.missionRegionale ? ' (mission régionale)' : ' (RLS ' + inst.territoireSource + ')'} : ${n === 1 ? 'secteur en recrutement' : n + ' secteurs en recrutement'} — ${liste}.`;
+  const h2 = n === 1 ? 'Le secteur en recrutement' : `Les ${nombreEnLettresFr(n)} secteurs en recrutement`;
+  const introSecteurs = n === 1
+    ? '<p>Le secteur ci-dessous est déclaré en recrutement pour le cycle 2027. Les modalités — volume, garde, répartition entre plusieurs médecins — se discutent avec le milieu : elles ne sont pas fixées ici.</p>'
+    : '<p>Chaque secteur ci-dessous est déclaré en recrutement pour le cycle 2027. Les modalités — volume, garde, répartition entre plusieurs médecins — se discutent avec le milieu : elles ne sont pas fixées ici.</p>';
+  const blocsSecteurs = secteurs.map(s => `    <h3 id="${esc(s.ancre)}">${esc(titreH3Secteur(s))}</h3>
+    ${paragraphesSecteur(s, inst)}`).join('\n\n');
+  const lienRls = (!inst.missionRegionale && inst.territoireSource)
+    ? `${EST_PREFIXE}/rls/${slugifier(inst.territoireSource)}/`
+    : null;
+  const libelleSite = inst.id === 'INS-012'
+    ? 'Fiche Santé Montérégie de l’Hôtel-Dieu de Sorel'
+    : `Fiche Santé Montérégie — ${inst.nom}`;
+  const siteOfficiel = inst.lienWeb
+    ? `<a href="${esc(inst.lienWeb)}" rel="noopener">${esc(libelleSite)}</a>`
+    : 'À venir';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': url + '#webpage',
+        url,
+        name: `${inst.nom} — secteurs en recrutement en Montérégie-Est | Trouve ta clinique`,
+        inLanguage: 'fr-CA',
+        dateModified: majPagesSeo,
+        isPartOf: { '@id': SITE + '/#website' },
+        about: { '@id': url + '#etablissement' }
+      },
+      {
+        '@type': typeSchemaEtablissement(inst.type),
+        '@id': url + '#etablissement',
+        name: inst.nom,
+        url,
+        ...(inst.lienWeb ? { sameAs: inst.lienWeb } : {}),
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: inst.ville || '',
+          addressRegion: 'QC',
+          addressCountry: 'CA',
+          ...(inst.codePostal ? { postalCode: inst.codePostal } : {}),
+          ...(inst.adresse ? { streetAddress: inst.adresse } : {})
+        },
+        ...(Number.isFinite(Number(inst.lat)) && Number.isFinite(Number(inst.lng))
+          ? { geo: { '@type': 'GeoCoordinates', latitude: inst.lat, longitude: inst.lng } }
+          : {})
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Montérégie-Est', item: SITE + EST_ACCUEIL },
+          { '@type': 'ListItem', position: 2, name: 'Secteurs en établissement', item: SITE + EST_PREFIXE + '/etablissements/' },
+          { '@type': 'ListItem', position: 3, name: inst.nom, item: url }
+        ]
+      }
+    ]
+  };
+  const territoireDd = inst.missionRegionale
+    ? 'Mission régionale'
+    : (lienRls
+      ? `<a href="${lienRls}">${esc(inst.territoireSource)}</a>`
+      : esc(inst.territoireSource || ''));
+  const corps = `  <section class="hero">
+    <p class="eyebrow">${esc(eyebrowEtablissement(inst))}</p>
+    <h1>${esc(inst.nom)} — secteurs en recrutement</h1>
+    <p class="lead">${chapeauEtablissement(inst, secteurs)}</p>
+    <p class="updated"><strong>Données déclarées par le milieu le :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
+    <div class="cta-row">
+      <a class="button primary" href="${esc(lienCarteInstallation(inst.id))}">Voir sur la carte interactive</a>
+      <a class="button secondary" href="${EST_PREFIXE}/etablissements/">Tous les secteurs en établissement</a>
+    </div>
+  </section>
+
+  ${CALLOUT_CONTACT_ETABLISSEMENT}
+
+  <section id="secteurs">
+    <h2>${esc(h2)}</h2>
+    ${introSecteurs}
+
+${blocsSecteurs}
+  </section>
+
+  <section id="renseignements">
+    <h2>Renseignements sur le lieu</h2>
+    <dl class="fiche">
+      <dt>Type de milieu</dt><dd>${esc(typeLib)}</dd>
+      <dt>Ville</dt><dd>${esc(inst.ville || '')}</dd>
+      <dt>Adresse</dt><dd>${esc(adresseCompleteEtablissement(inst))}</dd>
+      <dt>Territoire</dt><dd>Montérégie-Est</dd>
+      <dt>Réseau local de services (RLS)</dt><dd>${territoireDd}</dd>
+      <dt>Secteurs en recrutement</dt><dd>${esc(secteurs.map(s => s.libelle).join(' · '))}</dd>
+      <dt>Contact recrutement</dt><dd>À venir</dd>
+      <dt>Site officiel</dt><dd>${siteOfficiel}</dd>
+    </dl>
+  </section>
+
+  <div class="data-note"><strong>Source et vérification :</strong> ${NOTE_SOURCE_ETABLISSEMENTS}</div>
+
+  <section id="suite">
+    <h2>Pour aller plus loin</h2>
+    <ul class="source-list">
+      <li><a href="${EST_PREFIXE}/etablissements/">Tous les secteurs en recrutement en établissement de la Montérégie-Est</a></li>
+      ${lienRls ? `<li><a href="${lienRls}">Autres milieux du RLS ${esc(inst.territoireSource)}</a></li>` : '<li><a href="' + EST_PREFIXE + '/rls/">Réseaux locaux de services de la Montérégie-Est</a></li>'}
+      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
+      <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
+      <li><a href="${esc(lienCarteInstallation(inst.id))}">Fiche complète et itinéraire sur la carte interactive</a></li>
+    </ul>
+  </section>`;
+
+  return {
+    html: page({
+      titre, description, url, profondeur: 3, indexable: true, jsonLd,
+      filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › <a href="${EST_PREFIXE}/etablissements/">Secteurs en établissement</a> › ${esc(inst.nom)}`,
+      corps, actif: 'etablissements', univers: u
+    }),
+    indexable: true,
+    slug, url
+  };
+}
+
+function pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo) {
+  const u = UNIVERS_PAR_REGION.Est;
+  const url = `${SITE}${EST_PREFIXE}/etablissements/`;
+  const lot = new Set(PREMIER_LOT_ETABLISSEMENTS);
+  const installations = (donnees.installations || []).filter(i => !i.publication || i.publication.visible !== false);
+  const groupes = [
+    { id: 'Pierre-Boucher', titre: 'RLS Pierre-Boucher', rls: true },
+    { id: 'Richelieu-Yamaska', titre: 'RLS Richelieu-Yamaska', rls: true },
+    { id: 'Pierre-De Saurel', titre: 'RLS Pierre-De Saurel', rls: true },
+    { id: 'missions', titre: 'Missions régionales', rls: false }
+  ];
+  const sections = groupes.map(g => {
+    const liste = installations.filter(i => g.id === 'missions' ? i.missionRegionale : (!i.missionRegionale && i.territoireSource === g.id));
+    if (!liste.length) return '';
+    const items = liste.map(inst => {
+      const secteurs = secteursDe(donnees, inst.id);
+      const href = hrefPageOuCarte(inst, slugsCliniques, lot);
+      const meta = [typeEtablissementLibelle(inst.type), inst.ville, listeSecteursHumaine(secteurs)].filter(Boolean).join(' · ');
+      const viaCarte = !lot.has(inst.id);
+      const note = inst.type === 'gmf-u'
+        ? 'Page de la clinique GMF-U'
+        : (viaCarte ? 'Fiche sur la carte' : `${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''}`);
+      return `      <li>
+        <a href="${esc(href)}"><strong>${esc(inst.nom)}</strong></a>
+        <span class="rep-meta">${esc(meta)} · ${esc(note)}</span>
+      </li>`;
+    }).join('\n');
+    const lienRls = g.rls ? `<p class="rep-lien"><a href="${EST_PREFIXE}/rls/${slugifier(g.id)}/">Voir la page du RLS ${esc(g.id)} →</a></p>` : '';
+    return `  <section id="${g.id === 'missions' ? 'missions-regionales' : 'rls-' + slugifier(g.id)}">
+    <h2>${esc(g.titre)} <span class="compte">${liste.length}</span></h2>
+    ${lienRls}
+    <ul class="repertoire">
+${items}
+    </ul>
+  </section>`;
+  }).filter(Boolean).join('\n\n');
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage', '@id': url + '#webpage', url,
+        name: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
+        inLanguage: 'fr-CA', dateModified: majPagesSeo,
+        isPartOf: { '@id': SITE + '/#website' }
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Montérégie-Est', item: SITE + EST_ACCUEIL },
+          { '@type': 'ListItem', position: 2, name: 'Secteurs en établissement', item: url }
+        ]
+      }
+    ]
+  };
+
+  const corps = `  <section class="hero">
+    <p class="eyebrow">Médecine familiale · Montérégie-Est</p>
+    <h1>Secteurs en recrutement en établissement</h1>
+    <p class="lead">La pratique en établissement, pour un médecin de famille, ce n’est pas une clinique : c’est l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, la longue durée, les soins à domicile, ou une mission régionale (réadaptation, détention). Les installations ci-dessous sont celles du relevé des besoins 2027 du CISSS de la Montérégie-Est. Trois d’entre elles ont déjà une fiche détaillée ; les autres s’ouvrent sur la carte, en attendant la suite.</p>
+    <p class="updated"><strong>Données déclarées par le milieu le :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
+    <div class="cta-row">
+      <a class="button primary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
+      <a class="button secondary" href="${EST_PREFIXE}/cliniques/">Cliniques de la Montérégie-Est</a>
+    </div>
+  </section>
+
+  ${htmlBanniereSqb('../../assets')}
+
+  <div class="callout official"><strong>Ce que ces pages disent — et ne disent pas :</strong> un secteur « en recrutement » indique qu’un besoin a été déclaré, sans préjuger du nombre de postes ni des modalités d’exercice. Les coordonnées de recrutement des établissements seront publiées prochainement. <a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM →</a></div>
+
+${sections}`;
+
+  return page({
+    titre: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
+    description: 'Répertoire des installations de la Montérégie-Est dont un ou plusieurs secteurs d’activité recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.',
+    url, profondeur: 2, indexable: true, jsonLd, actif: 'etablissements', univers: u,
+    filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
+    corps
+  });
+}
+
+function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
+  const donnees = chargerDonneesEtablissements();
+  ecrire(path.join('monteregie-est', 'etablissements', 'index.html'),
+    pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo));
+  entrees.push({ loc: '/monteregie-est/etablissements/', lastmod: majPagesSeo, changefreq: 'weekly', priority: '0.8' });
+  let n = 0;
+  for (const id of PREMIER_LOT_ETABLISSEMENTS) {
+    const inst = (donnees.installations || []).find(i => i.id === id);
+    if (!inst) throw new Error('Installation du premier lot introuvable : ' + id);
+    const secteurs = secteursDe(donnees, id);
+    const p = pageEtablissement(inst, secteurs, majPagesSeo);
+    ecrire(path.join('monteregie-est', 'etablissements', p.slug, 'index.html'), p.html);
+    if (p.indexable) {
+      entrees.push({ loc: `${EST_PREFIXE}/etablissements/${p.slug}/`, lastmod: majPagesSeo, changefreq: 'monthly', priority: '0.7' });
+    }
+    n++;
+  }
+  return n;
+}
+
 const PAGES_FIXES = [
   { loc: '/', lastmod: null, changefreq: 'weekly', priority: '1.0' },
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
@@ -1414,7 +1805,7 @@ function main() {
      Une refonte du gabarit modifie aussi le contenu HTML, même si data.json n'a pas changé — le
      sitemap doit donc en tenir compte pour son lastmod. Mettre à jour cette date à la main lors
      d'une prochaine modification des templates ci-dessous. */
-  const majGabaritsSeo = '2026-09-01';
+  const majGabaritsSeo = '2026-09-03';
   const majPagesSeo = [majDonnees, majGabaritsSeo].sort().at(-1);
 
   const toutes = donnees.cliniques || [];
@@ -1536,6 +1927,8 @@ function main() {
      les anciennes adresses et celles des autres territoires redirigent vers l'Est. */
   publierPagesGuide();
 
+  const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo);
+
   /* Répertoire général + hub RLS de chaque univers régional + sitemap */
   ecrire(path.join('cliniques', 'index.html'),
     pageRedirectionStatique(`${SITE}${EST_PREFIXE}/cliniques/`, 'Cette page du répertoire des cliniques'));
@@ -1614,6 +2007,7 @@ function main() {
   console.log(`Pages de cliniques : ${cliniques.length} générées, ${indexables} indexables, ${minces.length} en noindex (moins de ${SEUIL_INDEXATION} champs remplis)`);
   console.log(`Pages de RLS       : ${parRls.size}`);
   console.log(`Répertoire         : cliniques/index.html`);
+  console.log(`Établissements     : répertoire + ${nEtabSeo} fiche(s) (premier lot)`);
   console.log(`Sitemap            : ${entrees.length} URL`);
   console.log(`Courriels publiés  : ${PUBLIER_COURRIELS ? 'OUI (décision du 2 sept. 2026)' : 'non'}`);
   if (nouveaux.length) {

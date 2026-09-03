@@ -89,7 +89,7 @@
   "installations": [
     {
       "id": "INS-003",
-      "nom": "Centre D'hébergement de Contrecoeur",
+      "nom": "Centre d'hébergement de Contrecoeur",
       "type": "chsld",
       "territoireSource": "Pierre-Boucher",
       "missionRegionale": false,
@@ -108,7 +108,7 @@
     },
     {
       "id": "INS-002",
-      "nom": "Centre D'hébergement Jeanne-Crevier",
+      "nom": "Centre d'hébergement Jeanne-Crevier",
       "type": "chsld",
       "territoireSource": "Pierre-Boucher",
       "missionRegionale": false,
@@ -237,7 +237,7 @@
     },
     {
       "id": "INS-014",
-      "nom": "Centre D'hébergement J.-Arsène-Parenteau",
+      "nom": "Centre d'hébergement J.-Arsène-Parenteau",
       "type": "chsld",
       "territoireSource": "Pierre-De Saurel",
       "missionRegionale": false,
@@ -256,7 +256,7 @@
     },
     {
       "id": "INS-013",
-      "nom": "Centre D'hébergement Élisabeth-Lafrance",
+      "nom": "Centre d'hébergement Élisabeth-Lafrance",
       "type": "chsld",
       "territoireSource": "Pierre-De Saurel",
       "missionRegionale": false,
@@ -319,7 +319,7 @@
     },
     {
       "id": "INS-007",
-      "nom": "Centre D'hébergement de L'hôtel-Dieu-De-Saint-Hyacinthe",
+      "nom": "Centre d'hébergement de l'hôtel-Dieu-De-Saint-Hyacinthe",
       "type": "chsld",
       "territoireSource": "Richelieu-Yamaska",
       "missionRegionale": false,
@@ -338,7 +338,7 @@
     },
     {
       "id": "INS-008",
-      "nom": "Centre D'hébergement de Montarville",
+      "nom": "Centre d'hébergement de Montarville",
       "type": "chsld",
       "territoireSource": "Richelieu-Yamaska",
       "missionRegionale": false,
@@ -357,7 +357,7 @@
     },
     {
       "id": "INS-009",
-      "nom": "Centre D'hébergement Marguerite-Adam",
+      "nom": "Centre d'hébergement Marguerite-Adam",
       "type": "chsld",
       "territoireSource": "Richelieu-Yamaska",
       "missionRegionale": false,
@@ -529,8 +529,8 @@
       "territoireSource": "Régional",
       "missionRegionale": true,
       "referenceExistante": null,
-      "adresse": "6, rue Foucreault, Saint-Philippe",
-      "ville": "Sainte-Philippe",
+      "adresse": "6, rue Foucreault",
+      "ville": "Saint-Philippe",
       "codePostal": "J0L 2K0",
       "lat": 45.354144,
       "lng": -73.477644,

@@ -12,6 +12,18 @@ const SORTIE = path.join(RACINE, 'data-etablissements.json');
 
 const SIGLES = new Set(['CLSC', 'GMF-U', 'UCDG', 'CHSLD', 'CRD', 'CH', 'GMF', 'GMF-R']);
 
+const PETITS_MOTS = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'et', 'en']);
+/* d' / l' : élision, pas un mot à capitaliser — « Centre d'hébergement », « de l'hôtel-Dieu ». */
+const ARTICLES_ELIDES = new Set(['d', 'l']);
+
+function capitaliserMorceau(p) {
+  if (!p) return p;
+  const upper = p.toUpperCase();
+  if (SIGLES.has(upper)) return upper;
+  if (p.length <= 3 && /^[a-z]\.?$/i.test(p)) return p.toUpperCase().replace('.', '') + '.';
+  return p.charAt(0).toUpperCase() + p.slice(1);
+}
+
 function recapitaliserNom(nom) {
   if (!nom || typeof nom !== 'string') return nom;
   const brut = nom.trim();
@@ -20,17 +32,22 @@ function recapitaliserNom(nom) {
   return mots.map((mot, i) => {
     const upper = mot.toUpperCase();
     if (SIGLES.has(upper)) return upper;
+    const elision = mot.match(/^([^'’]*)(['’])(.*)$/);
+    if (elision) {
+      const [, avant, apo, apres] = elision;
+      const avantOut = (i > 0 && ARTICLES_ELIDES.has(avant))
+        ? avant
+        : (avant ? capitaliserMorceau(avant) : '');
+      /* Minuscule immédiatement après l'apostrophe ; les segments suivants d'un
+         composé à traits d'union gardent la capitalisation habituelle. */
+      const segments = apres.split('-');
+      const apresOut = segments.map((part, k) => (k === 0 ? part : capitaliserMorceau(part))).join('-');
+      return avantOut + apo + apresOut;
+    }
     if (mot.includes('-')) {
-      return mot.split('-').map(part => {
-        const p = part.trim();
-        if (!p) return p;
-        if (p.length <= 3 && /^[a-z]\.?$/i.test(p)) return p.toUpperCase().replace('.', '') + '.';
-        return p.charAt(0).toUpperCase() + p.slice(1);
-      }).join('-');
+      return mot.split('-').map(capitaliserMorceau).join('-');
     }
-    if (i === 0 || !['de', 'du', 'des', 'la', 'le', 'les', 'et', 'en'].includes(mot)) {
-      return mot.charAt(0).toUpperCase() + mot.slice(1);
-    }
+    if (i === 0 || !PETITS_MOTS.has(mot)) return capitaliserMorceau(mot);
     return mot;
   }).join(' ')
     .replace(/\bHopital\b/g, 'Hôpital')

@@ -8,7 +8,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v54-secteurs-etablissements (2 septembre 2026) : couche data-etablissements.json pour l'onglet Établissements.
 // v56-fiche-installation (2 septembre 2026) : fiche centrée sur l'installation avec accordéon
 // de secteurs, sélection multiple d'activités, territoires en une ligne défilante.
-const CACHE = CACHE_PREFIX + 'v56-fiche-installation';
+// v57-rls-contour (3 septembre 2026) : boutons RLS établissements en contour, une ligne
+// sans défilement ; libellé de type mint sur le thème Est.
+const CACHE = CACHE_PREFIX + 'v57-rls-contour';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [

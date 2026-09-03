@@ -786,32 +786,30 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .rls-btn.dim { background:var(--champ); color:var(--c); }
 .rls-btn.dim:hover { background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none; }
 .rls-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
-/* Mode établissements : les territoires tiennent sur UNE ligne qui défile
-   horizontalement. Deux rangées de gros boutons mangeaient une centaine de pixels
-   avant même d'atteindre les secteurs d'activité, qui sont le filtre principal.
-   Les couleurs sont conservées : elles font le lien avec les épingles et la légende. */
+/* Mode établissements : les quatre territoires tiennent sur UNE ligne, sans
+   défilement. Style de contour — le filtre principal est l'activité, pas le RLS. */
 body[data-mode-carte="etablissements"] .rls-btns {
-  flex-wrap:nowrap; gap:6px; overflow-x:auto; overflow-y:hidden; padding-bottom:5px;
-  -webkit-overflow-scrolling:touch;
-  /* scrollbar-color est indispensable : sans lui le rail garde le blanc par défaut,
-     très visible en mode sombre. Il neutralise aussi les pseudo-éléments plus bas. */
-  scrollbar-width:thin;
-  scrollbar-color:color-mix(in srgb, var(--muted, #64748b) 45%, transparent) transparent;
-  /* Estompe le bord droit tant qu'il reste des territoires hors champ. */
-  mask-image:linear-gradient(90deg, #000 calc(100% - 22px), transparent 100%);
-  -webkit-mask-image:linear-gradient(90deg, #000 calc(100% - 22px), transparent 100%);
-}
-body[data-mode-carte="etablissements"] .rls-btns.tout-visible {
+  flex-wrap:nowrap; gap:4px; overflow:visible; padding-bottom:0;
   mask-image:none; -webkit-mask-image:none;
 }
 body[data-mode-carte="etablissements"] .rls-btn {
-  flex:0 0 auto; width:auto; white-space:nowrap;
-  padding:6px 12px; border-radius:999px; font-size:11.5px; line-height:1.25;
+  flex:1 1 0; min-width:0; width:auto; white-space:normal;
+  padding:4px 5px; border-radius:8px; font-size:10px; line-height:1.15;
+  font-weight:700; background:transparent; color:var(--c);
+  border:1.5px solid var(--c); box-shadow:none; min-height:0;
+  filter:none;
 }
-body[data-mode-carte="etablissements"] .rls-btns::-webkit-scrollbar { height:3px; }
-body[data-mode-carte="etablissements"] .rls-btns::-webkit-scrollbar-track { background:transparent; }
-body[data-mode-carte="etablissements"] .rls-btns::-webkit-scrollbar-thumb {
-  background:color-mix(in srgb, var(--muted, #64748b) 35%, transparent); border-radius:3px;
+body[data-mode-carte="etablissements"] .rls-btn:hover {
+  filter:none; background:color-mix(in srgb, var(--c) 12%, var(--champ));
+}
+body[data-mode-carte="etablissements"] .rls-btn.dim {
+  background:transparent; color:var(--c); opacity:.42; box-shadow:none;
+}
+body[data-mode-carte="etablissements"] .rls-btn.dim:hover {
+  background:color-mix(in srgb, var(--c) 10%, var(--champ)); filter:none; opacity:.7;
+}
+body[data-mode-carte="etablissements"] .rls-btn[aria-pressed="true"] {
+  background:var(--c); color:#fff; opacity:1;
 }
 /* Le compteur est le chiffre clé de la vue : il doit passer devant la règle
    générale « .sb-head p », qui l'affichait en gris pâle et en graisse 300. */
@@ -1511,6 +1509,14 @@ body.cmp-open { overflow:hidden; }
   border-radius: 10px; box-shadow: 0 5px 18px rgba(23,10,114,.18);
   font: 400 13px/1.5 var(--sq-font); text-align: left;
 }
+/* Établissements : le prototype SQ impose min-height 43px et une ombre aux
+   boutons RLS. Hors périmètre du bloc haché ci-dessus, on les ramène au contour. */
+:root[data-region="Est"] body[data-mode-carte="etablissements"] .rls-btn {
+  min-height: 0;
+  box-shadow: none;
+  border-radius: 8px;
+}
+
 /* Demandes visuelles temporaires : le prototype SQ ci-dessus n'est pas modifié.
    Pour réactiver : retirer ce bloc et remettre AFFICHER_ECRAN_CHARGEMENT à true. */
 :root[data-region="Est"] header { background: var(--sq-bleu); }
@@ -2408,6 +2414,27 @@ const TYPE_LABELS = {
   'Coopérative': 'Coopérative de santé'
 };
 function typeLabel(t) { return TYPE_LABELS[t] || t || ''; }
+const TYPE_ETAB_LABELS = {
+  hopital: 'Hôpital',
+  chsld: 'CHSLD',
+  clsc: 'CLSC',
+  'gmf-u': 'GMF-U',
+  crd: 'Centre de réadaptation',
+  detention: 'Centre de détention'
+};
+function typeLabelEtab(t) { return TYPE_ETAB_LABELS[t] || t || ''; }
+
+/* Thème Est : .dp-tag est mint (#90F1E9) sur fond indigo (#170A72 / #082F70),
+   contraste ≥ 4,5:1. couleurMilieu() (Pierre-De Saurel = indigo plein) est
+   illisible sur ce même fond — on n'écrase donc pas la règle CSS. */
+function appliquerCouleurEnteteFiche(c) {
+  const dh = document.querySelector('#detail .dp-head');
+  if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; }
+  const tg = document.getElementById('dp-tag');
+  if (!tg) return;
+  if (document.documentElement.getAttribute('data-region') === 'Est') tg.style.color = '';
+  else tg.style.color = c;
+}
 
 /* Badge « Vérifié » — voir aussi le bloc CSS .badge-verif (recherche « Ajouté le 26 août 2026 »).
    Le badge ne s'affiche QUE si validation.statut === 'valide' : une simple réponse reçue au
@@ -2802,15 +2829,9 @@ function openFicheEtablissement(installationId, secteurOuvertId) {
   majIconeMarqueurDetail(inst, true);
   if (activeId !== null) document.getElementById('si-' + activeId)?.classList.add('active');
 
-  document.getElementById('dp-tag').textContent = inst.type;
+  document.getElementById('dp-tag').textContent = typeLabelEtab(inst.type);
   document.getElementById('dp-name-disp').innerHTML = esc(inst.nom.trim());
-  (function () {
-    const c = couleurMilieu(inst);
-    const dh = document.querySelector('#detail .dp-head');
-    if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; }
-    const tg = document.getElementById('dp-tag');
-    if (tg) tg.style.color = c;
-  })();
+  appliquerCouleurEnteteFiche(couleurMilieu(inst));
 
   const nbMasques = tous.length - visibles.length;
   document.getElementById('dp-body').innerHTML = `
@@ -3805,20 +3826,13 @@ function populateRlsButtons() {
   if (!wrap) return;
   const opts = Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional' && rlsForRegions().includes(r));
   wrap.innerHTML = '';
-  // Les boutons ne sont pas reconstruits au clic : la rangée est défilante, la
-  // reconstruire ferait sauter la position de défilement sous le doigt.
   opts.forEach(r => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'rls-btn';
-    // En mode établissements la rangée défile : les libellés restent sur une seule ligne.
-    if (modeCarte === 'etablissements') {
-      b.textContent = r;
-    } else {
-      const coupure = r.includes('-') ? r.indexOf('-') + 1 : r.indexOf(' ');
-      const ligne1 = coupure > 0 ? r.slice(0, coupure) : r;
-      const ligne2 = coupure > 0 ? r.slice(coupure) : '';
-      b.innerHTML = ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1);
-    }
+    const coupure = r.includes('-') ? r.indexOf('-') + 1 : r.indexOf(' ');
+    const ligne1 = coupure > 0 ? r.slice(0, coupure) : r;
+    const ligne2 = coupure > 0 ? r.slice(coupure) : '';
+    b.innerHTML = ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1);
     b.style.setProperty('--c', RLS_COLORS_REGION[r]);
     b.setAttribute('aria-label', 'Filtrer : ' + r);
     const pale = rlsFilter !== '' && rlsFilter !== r;
@@ -3831,7 +3845,8 @@ function populateRlsButtons() {
     const m = TERRITOIRE_MISSIONS;
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'rls-btn';
-    b.textContent = m;
+    const iEspace = m.indexOf(' ');
+    b.innerHTML = iEspace > 0 ? `${esc(m.slice(0, iEspace))}<br>${esc(m.slice(iEspace + 1))}` : esc(m);
     b.style.setProperty('--c', RLS_COLORS_REGION['Régional']);
     b.setAttribute('aria-label', 'Filtrer : ' + m);
     const pale = rlsFilter !== '' && rlsFilter !== m;
@@ -3841,8 +3856,6 @@ function populateRlsButtons() {
     wrap.appendChild(b);
   }
   wrap.dataset.nb = String(wrap.children.length);
-  // Le dégradé du bord droit ne sert que s'il reste des territoires hors champ.
-  wrap.classList.toggle('tout-visible', wrap.scrollWidth <= wrap.clientWidth + 1);
 }
 function buildFilters() {
   populateActiviteButtons();
@@ -3899,7 +3912,7 @@ function openDetail(id) {
 
   document.getElementById('dp-tag').textContent = typeLabel(g.type);
   document.getElementById('dp-name-disp').innerHTML = esc(g.nom.trim()) + badgeVerifHtml(g);
-  (function(){ var c = couleurMilieu(g); var dh = document.querySelector('#detail .dp-head'); if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; } var tg = document.getElementById('dp-tag'); if (tg) tg.style.color = c; })();
+  appliquerCouleurEnteteFiche(couleurMilieu(g));
 
   // Horaire (lecture seule)
   let horRows = '';
