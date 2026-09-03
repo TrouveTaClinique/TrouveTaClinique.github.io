@@ -1,7 +1,9 @@
 'use strict';
 
 /** Coordonnées retenues — guide Validation Claude 2026-09-02, §16 et §22.
- *  INS-005 (Varennes) et INS-019 (Joliette) : décisions SPEC / Olivier. */
+ *  INS-005 (Varennes) et INS-019 (Joliette) : décisions SPEC / Olivier.
+ *  Pour une installation qui porte referenceExistante, construire-data-etablissements.js
+ *  lit lat/lng dans data.json (le propriétaire) et n'utilise cette table qu'en repli. */
 const GEO_ETABLISSEMENTS_EST = Object.freeze({
   'INS-001': { lat: 45.53781, lng: -73.45925 },
   'INS-002': { lat: 45.613575, lng: -73.452255 },

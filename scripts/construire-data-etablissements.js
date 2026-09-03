@@ -56,6 +56,26 @@ function lireProprietaire(ref, data) {
   return liste.find(o => o.id === ref.id) || null;
 }
 
+function nombreFini(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+/* Une installation déjà présente dans data.json (clinique ou hôpital) doit
+   réutiliser ce point : sinon la carte cliniques et la carte établissements
+   dessinent le même bâtiment à deux endroits. Le guide GEO_ETABLISSEMENTS_EST
+   reste la source pour les installations sans référence existante. */
+function coordsPour(etab, owner) {
+  if (etab.decision && etab.decision.referenceExistante && owner) {
+    const lat = nombreFini(owner.lat);
+    const lng = nombreFini(owner.lng);
+    if (lat != null && lng != null) return { lat, lng };
+  }
+  const geo = GEO_ETABLISSEMENTS_EST[etab.id];
+  if (!geo) throw new Error(`Coordonnées manquantes pour ${etab.id}`);
+  return geo;
+}
+
 function construire() {
   const source = JSON.parse(fs.readFileSync(SOURCE, 'utf8'));
   const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
@@ -63,10 +83,9 @@ function construire() {
   const secteurs = [];
 
   for (const etab of source.etablissements || []) {
-    const geo = GEO_ETABLISSEMENTS_EST[etab.id];
-    if (!geo) throw new Error(`Coordonnées manquantes pour ${etab.id}`);
     const ref = etab.decision && etab.decision.referenceExistante;
     const owner = lireProprietaire(ref, data);
+    const geo = coordsPour(etab, owner);
 
     installations.push({
       id: etab.id,
