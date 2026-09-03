@@ -1909,7 +1909,7 @@ function preparerCoucheEtablissements(donneesEtab) {
   }).map(inst => ({
     id: inst.id,
     nom: inst.nom.trim(),
-    type: typeEtabAffichage(inst.type),
+    type: inst.type,
     rls: inst.missionRegionale ? 'Régional' : (inst.territoireSource || ''),
     ville: inst.ville || '',
     lat: Number(inst.lat),
@@ -1972,9 +1972,23 @@ function matchesFiltersInstallation(installationId) {
 
 function badgeMarqueur(g) {
   if (modeCarte === 'etablissements' && g._installationEtab) {
-    // Toujours le nombre de secteurs visibles, y compris 1 : un repère vide se lisait
-    // comme un défaut d'affichage à côté des quelques repères chiffrés.
-    return nbSecteursVisiblesInstallation(g.id) || '';
+    if (g.type === 'hopital') return '';
+    // Position dans la liste filtrée, parmi les installations non hospitalières
+    // seulement — même parcours que renderSidebar() (currentOrder + matchesFilters).
+    const seen = new Set();
+    let n = 0;
+    for (const sid of currentOrder()) {
+      if (!matchesFilters(sid)) continue;
+      const sec = byId(sid);
+      const iid = sec && sec.installationId;
+      if (!iid || seen.has(iid)) continue;
+      seen.add(iid);
+      const inst = installationEtabById(iid);
+      if (!inst || inst.type === 'hopital') continue;
+      n += 1;
+      if (iid === g.id) return n;
+    }
+    return '';
   }
   return rankOf(g.id);
 }
@@ -2487,6 +2501,15 @@ function makeIcon(active, rank, couleur, id) {
   const c = couleur;
   const [dx, dy] = markerOffsets.get(id) || [0, 0];
   if (modeCarte === 'etablissements') {
+    const inst = installationEtabById(id);
+    if (inst && inst.type === 'hopital') {
+      const size = active ? 40 : 34;
+      const border = active ? '#90F1E9' : '#FFFFFF';
+      const bw = active ? 5 : 3;
+      return L.divIcon({ className:'',
+        html:`<div style="position:relative;width:${size}px;height:${size}px;background:#c0182c;border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)"><div class="hosp-pin-circle"><div class="hosp-pin-circle-inner"><span style="font-size:13px">H</span></div></div></div>`,
+        iconSize:[size,size], iconAnchor:[size/2-dx,size-dy], popupAnchor:[dx,dy-size-2] });
+    }
     const size = active ? 32 : 27;
     const border = active ? '#90F1E9' : '#FFFFFF';
     const bw = active ? 4 : 2.5;
@@ -2538,12 +2561,12 @@ function buildMarkers() {
       if (visible) m.addTo(map);
       const [dx, dy] = markerOffsets.get(g.id) || [0, 0];
       if (modeCarte === 'etablissements') {
-        // Contenu recalculé à chaque survol : le chiffre porté par le repère change
-        // avec les filtres, l'infobulle doit dire la même chose que lui.
+        // Infobulle = nombre de secteurs visibles. Le chiffre sur le repère, lui,
+        // est le rang dans la liste (installations non hospitalières) — deux infos distinctes.
         m.bindTooltip(() => {
           const n = nbSecteursVisiblesInstallation(g.id);
           return `<b>${esc(g.nom.trim())}</b><br><small>${n} secteur${n > 1 ? 's' : ''} · ${esc(g.ville)}${g.missionRegionale ? ' · Mission régionale' : ''}</small>`;
-        }, { direction:'top', offset:[dx,dy-20] });
+        }, { direction:'top', offset:[dx, dy - (g.type === 'hopital' ? 36 : 20)] });
         m.on('click', (e) => {
           L.DomEvent.stopPropagation(e);
           openInstallationSecteurs(g.id);
@@ -2816,8 +2839,8 @@ function openFicheEtablissement(installationId, secteurOuvertId) {
   const inst = installationEtabById(installationId);
   if (!inst) return;
   const tous = gmfs.filter(s => s.installationId === installationId);
-  // On montre les secteurs retenus par les filtres, pour rester cohérent avec le chiffre
-  // porté par le repère ; le secteur visé par un lien est ajouté même s'il est filtré.
+  // On montre les secteurs retenus par les filtres ; le secteur visé par un lien
+  // est ajouté même s'il est filtré.
   const visibles = tous.filter(s => matchesFilters(s.id) || s.id === secteurOuvertId);
   if (!visibles.length) return;
   const ouvertId = secteurOuvertId != null ? secteurOuvertId
@@ -3307,8 +3330,7 @@ function updateMarkerVisibility() {
       if (show && !map.hasLayer(m)) m.addTo(map);
       else if (!show && map.hasLayer(m)) map.removeLayer(m);
     });
-    // Le chiffre porté par un repère est un nombre de secteurs RETENUS : il change quand
-    // les filtres changent, même si l'installation, elle, reste affichée.
+    // Les rangs 1–n se recalculent avec la liste filtrée (badgeMarqueur / currentOrder).
     refreshMarkerIcons();
   } else {
     gmfs.forEach(g => {

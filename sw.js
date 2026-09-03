@@ -12,7 +12,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // sans défilement ; libellé de type mint sur le thème Est.
 // v58-territoire-repli (3 septembre 2026) : boutons RLS établissements pleins par défaut,
 // bloc Territoire replié, compteur « X secteurs dans Y installations » retiré.
-const CACHE = CACHE_PREFIX + 'v58-territoire-repli';
+// v59-hopitaux-h (3 septembre 2026) : goutte H rouge pour les 3 hôpitaux ; numéros
+// d'identification 1–n sur les autres repères établissements.
+const CACHE = CACHE_PREFIX + 'v59-hopitaux-h';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [
