@@ -1684,14 +1684,19 @@ ${items}
 
 ${sections}`;
 
-  return page({
-    titre: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
-    description: 'Répertoire des installations de la Montérégie-Est dont un ou plusieurs secteurs d’activité recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.',
-    // TODO : remettre indexable: true une fois les 22 fiches établissements publiées (actuellement 3/22). La page reste en ligne et navigable (elle est déjà honnête sur son état — « Trois d'entre elles ont déjà une fiche détaillée ; les autres s'ouvrent sur la carte »), seulement retirée de l'indexation Google jusqu'au lot complet.
-    url, profondeur: 2, indexable: false, jsonLd, actif: 'etablissements', univers: u,
-    filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
-    corps
-  });
+  // TODO : remettre à true une fois les 22 fiches établissements publiées (3/22 au 3 sept. 2026).
+  // Tant que c'est faux, le répertoire sort aussi de sitemap.xml (voir publierPagesEtablissements).
+  const indexable = false;
+  return {
+    html: page({
+      titre: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
+      description: 'Répertoire des installations de la Montérégie-Est dont un ou plusieurs secteurs d’activité recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.',
+      url, profondeur: 2, indexable, jsonLd, actif: 'etablissements', univers: u,
+      filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
+      corps
+    }),
+    indexable
+  };
 }
 
 /* Ancien slug INS-018 : « Ste-Philippe » dans le nom produisait …/ste-philippe/. */
@@ -1705,9 +1710,11 @@ const REDIRECTIONS_ETABLISSEMENTS = [
 
 function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
   const donnees = chargerDonneesEtablissements();
-  ecrire(path.join('monteregie-est', 'etablissements', 'index.html'),
-    pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo));
-  /* Hors sitemap tant que le répertoire est en noindex (lot 3/22). */
+  const repertoire = pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo);
+  ecrire(path.join('monteregie-est', 'etablissements', 'index.html'), repertoire.html);
+  if (repertoire.indexable) {
+    entrees.push({ loc: '/monteregie-est/etablissements/', lastmod: majPagesSeo, changefreq: 'weekly', priority: '0.8' });
+  }
   const conserves = new Set();
   let n = 0;
   for (const id of PREMIER_LOT_ETABLISSEMENTS) {

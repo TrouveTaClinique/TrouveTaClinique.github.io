@@ -1,15 +1,16 @@
 # Trouve ta clinique
 
-Site public : [trouvetaclinique.ca](https://trouvetaclinique.ca/)
-(GitHub Pages, branche `main`).
+[Voir le site](https://trouvetaclinique.ca/) · [Aperçu de travail](https://apercu.trouvetaclinique.ca/)
 
-L’environnement de test de la branche `brouillon` est
-[`apercu.trouvetaclinique.ca`](https://apercu.trouvetaclinique.ca/)
-(dépôt [`TrouveTaClinique/apercu`](https://github.com/TrouveTaClinique/apercu)).
+Le site de production vit sur `main` et sert `trouvetaclinique.ca`. La branche `brouillon` reste
+la branche de travail courante ; son aperçu public se publie automatiquement sur
+[`apercu.trouvetaclinique.ca`](https://apercu.trouvetaclinique.ca/) (dépôt
+[`TrouveTaClinique/apercu`](https://github.com/TrouveTaClinique/apercu)) via le workflow
+« Aperçu du brouillon », pour relecture avant qu'un changement soit fusionné dans `main`.
 
-Site statique consacré aux cliniques en recrutement médical et aux points de
-repère du réseau de la santé en Montérégie. Le projet utilise Leaflet, MapLibre
-et des pages HTML générées depuis une seule source de données, `data.json`.
+Site statique consacré aux cliniques en recrutement médical et aux points de repère du réseau
+de la santé en Montérégie. Le projet utilise Leaflet, MapLibre et des pages HTML générées depuis
+une seule source de données, `data.json`.
 
 ## Architecture publique
 
@@ -18,7 +19,6 @@ et des pages HTML générées depuis une seule source de données, `data.json`.
 | `/` | Page d'accueil du site | Non |
 | `/monteregie/` | Carte complète Est, Centre et Ouest | Non |
 | `/monteregie-est/` | Carte dédiée à la Montérégie-Est | PWA et mode hors ligne |
-| `/monteregie-est/etablissements/` | Répertoire des secteurs en établissement (Est) | Non |
 | `/monteregie-centre/` | Carte dédiée à la Montérégie-Centre | Non |
 | `/monteregie-ouest/` | Carte dédiée à la Montérégie-Ouest | Non |
 | `/cliniques/` | Répertoire général | Non |
@@ -75,9 +75,6 @@ Une fiche dont `categorie` vaut `etablissement` peut être affichée dans la cou
 des cartes même si elle porte encore historiquement `visible: false`. Elle ne reçoit jamais de
 page SEO de clinique. Dans le prototype Est restauré, elle apparaît dans l'onglet distinct
 « Établissements », avec les outils historiques de cet onglet.
-
-Le répertoire `/monteregie-est/etablissements/` est en ligne, mais reste hors index Google
-tant que les 22 fiches détaillées ne sont pas publiées (premier lot : 3 fiches).
 
 ### Données sensibles
 
@@ -148,15 +145,11 @@ utilisé pour une nouvelle page.
 
 ## Déploiement
 
-Le site de production est servi par GitHub Pages depuis `main` sur
-[trouvetaclinique.ca](https://trouvetaclinique.ca/).
-
-La branche `brouillon` reste l’espace de travail. Son aperçu de test est
-[apercu.trouvetaclinique.ca](https://apercu.trouvetaclinique.ca/).
-
-Le workflow refuse notamment une génération invalide, des champs internes (notes, alias),
-Kaushan Script dans le thème Est SQ, une PWA hors de Montérégie-Est ou le nom protégé
-lorsqu'il est configuré.
+Le site de production est servi par GitHub Pages depuis `main`. Tout changement se prépare et se
+relit sur `brouillon` (relecture sur `apercu.trouvetaclinique.ca`) avant d'être fusionné dans
+`main` par pull request. La workflow refuse notamment une génération invalide, des champs internes
+(notes, alias), Kaushan Script dans le thème Est SQ, une PWA hors de Montérégie-Est ou le nom
+protégé lorsqu'il est configuré.
 
 ## Vie privée et services externes
 

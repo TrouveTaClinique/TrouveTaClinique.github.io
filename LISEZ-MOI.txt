@@ -1,10 +1,11 @@
 TROUVE TA CLINIQUE - GUIDE D'ENTRETIEN
 ======================================
 
-ADRESSES PUBLIQUES
-------------------
-Production .............. https://trouvetaclinique.ca/  (branche main)
-Aperçu de test .......... https://apercu.trouvetaclinique.ca/  (branche brouillon)
+IMPORTANT
+---------
+Ce guide décrit le site en production (branche main, trouvetaclinique.ca). Les changements se
+préparent et se relisent sur la branche brouillon (apercu.trouvetaclinique.ca) avant d'être
+fusionnés dans main par pull request.
 
 
 ADRESSES PRINCIPALES
@@ -12,7 +13,6 @@ ADRESSES PRINCIPALES
 / ........................ accueil du site
 /monteregie/ ............. carte complète
 /monteregie-est/ ......... carte Montérégie-Est et seule PWA installable
-/monteregie-est/etablissements/  répertoire des secteurs en établissement (Est)
 /monteregie-centre/ ...... carte Montérégie-Centre
 /monteregie-ouest/ ....... carte Montérégie-Ouest
 /cliniques/ .............. répertoire général
@@ -73,17 +73,15 @@ CLINIQUE
 ÉTABLISSEMENT
 - categorie vaut "etablissement";
 - apparaît dans la couche « Établissements », même si visible:false est encore présent;
-- sert de repère informatif sur la carte;
-- n'entre jamais dans la recherche, les favoris, les notes, le classement ou le comparatif;
-- le répertoire /monteregie-est/etablissements/ et les fiches détaillées du premier lot
-  (3/22) sont des pages web distinctes de la carte.
+- sert seulement de repère informatif;
+- n'entre jamais dans la recherche, les favoris, les notes, le classement ou le comparatif.
 
 Le bouton (i) de la carte explique cette différence aux visiteurs.
 
 
 INFORMATIONS À NE PAS PUBLIER
 -----------------------------
-- courriels personnels (les courriels de recrutement sont publiés);
+- courriels personnels ou de recrutement;
 - montants négociés;
 - notes internes;
 - renseignements personnels non autorisés;

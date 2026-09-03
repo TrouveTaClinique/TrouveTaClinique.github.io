@@ -1,7 +1,7 @@
 # Historique du projet
 
 La production est servie depuis `main` sur [trouvetaclinique.ca](https://trouvetaclinique.ca/).
-Ce fichier conserve les jalons utiles. Il remplace l’ancien `ETAT-DU-BROUILLON.md`.
+Ce fichier conserve les jalons utiles. L’archive datée du 31 août 2026 reste dans `ETAT-DU-BROUILLON.md`.
 
 ## 2 septembre 2026 — premier lot établissements et correctifs pré-merge
 

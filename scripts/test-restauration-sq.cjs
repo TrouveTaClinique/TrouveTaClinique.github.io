@@ -89,6 +89,6 @@ test('La génération est stable et ne change ni données ni autres cartes', () 
   for (const p of ['monteregie/index.html', 'monteregie-centre/index.html', 'monteregie-ouest/index.html']) {
     assert.ok(!lire(p).includes('PROTOTYPE SANTÉ QUÉBEC'));
   }
-  assert.ok(lire('README.md').includes('trouvetaclinique.ca'));
-  assert.doesNotMatch(lire('README.md'), /Ne pas la publier sur `main`/);
+  assert.ok(lire('README.md').includes('[Voir le site](https://trouvetaclinique.ca/)'));
+  assert.ok(lire('README.md').includes('apercu.trouvetaclinique.ca'));
 });
