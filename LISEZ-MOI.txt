@@ -1,176 +1,143 @@
-Trouve ta clinique — Carte interactive des cliniques en recrutement (PTEM 2027)
-Montérégie — Est, Centre et Ouest
-==========================================================
+TROUVE TA CLINIQUE - GUIDE D'ENTRETIEN
+======================================
 
-Adresse en ligne : https://trouvetaclinique.ca/
-Dépôt GitHub     : https://github.com/DTMF-Monteregie/Map
-
-Ce fichier s'adresse à la personne qui tient les données à jour.
-Aucune connaissance en programmation n'est nécessaire.
-
-
-CONTENU DU DOSSIER
-------------------
-- index.html ................. l'application (carte + liste + fiches)
-- data.json .................. les données des cliniques (À MODIFIER ICI)
-- manifest.json .............. infos d'installation (nom, icônes, couleurs)
-- sw.js ...................... service worker (hors-ligne + installation)
-- leaflet.js / leaflet.css ... la bibliothèque de cartographie
-- 404.html ................... page affichée si une adresse n'existe pas
-- icon-192.png ............... icône
-- icon-512.png ............... icône
-- icon-192-maskable.png ...... icône adaptative (Android)
-- icon-512-maskable.png ...... icône adaptative (Android)
-- apple-touch-icon-180.png ... icône iPhone
-- og-image.png ............... image affichée quand on partage le lien
-- banniere-recrutement.png ... bannière pour le site de recrutement
-- README.md / LICENSE ........ documentation et licence
-
-FICHIERS À NE JAMAIS SUPPRIMER (ajoutés le 18 août 2026)
-- CNAME ...................... indique à GitHub de servir le site sur
-                               trouvetaclinique.ca. Sans lui, le domaine cesse
-                               de fonctionner.
-- google0e6f553795bbb4a9.html  fichier par lequel Google vérifie que le site
-                               nous appartient. Google le revérifie de temps en
-                               temps ; s'il disparaît, on perd l'accès aux
-                               statistiques de recherche.
-- robots.txt / sitemap.xml ... aident Google à trouver et indexer les pages.
-                               (sitemap.xml est maintenant fabriqué automatiquement —
-                                voir plus bas ; ne pas le modifier à la main.)
-- .github/ ................... le robot qui régénère les pages automatiquement quand
-                               data.json change. Ne pas supprimer : sans lui, les pages
-                               de cliniques cesseraient de se mettre à jour toutes seules.
-- scripts/ ................... le générateur des pages du site et sa mémoire des
-                               adresses web (slugs.json). Ne sert qu'à fabriquer les
-                               pages ; ne s'affiche nulle part pour les visiteurs, mais
-                               NE PAS SUPPRIMER : sans slugs.json, les adresses des
-                               pages de cliniques déjà connues de Google changeraient.
-
-Tous les fichiers doivent rester À LA RACINE du dépôt (à côté de index.html), sauf
-ceux qui sont déjà dans un sous-dossier (ptem/, amp/, cliniques/, rls/, assets/, scripts/,
-.github/) :
-ceux-là gardent leur sous-dossier.
-
-PAGES DE CONTENU DU SITE (19 août 2026)
------------------------------------------------------
-En plus de l'application carte, le site contient des pages de texte, pour être trouvé sur Google
-par les recherches « PTEM », « AMP », « clinique qui recrute Montérégie », etc.
-
-ÉCRITES À LA MAIN (à modifier directement dans le fichier) :
-- ptem/index.html ............ https://trouvetaclinique.ca/ptem/
-- amp/index.html ............. https://trouvetaclinique.ca/amp/
-- assets/seo-pages.css ....... habillage visuel de TOUTES les pages de contenu (pas la carte)
-
-GÉNÉRÉES AUTOMATIQUEMENT — NE JAMAIS LES MODIFIER À LA MAIN :
-- cliniques/index.html ....... le répertoire de toutes les cliniques
-- cliniques/<nom>/index.html . une page par clinique publiée (nombre calculé automatiquement)
-- rls/<nom>/index.html ....... une page par RLS ayant des cliniques publiées
-- monteregie-*/cliniques/ .... trois répertoires régionaux et leurs fiches propres
-- sitemap.xml ................ la liste des pages pour Google
-
-Toute modification faite à la main dans ces fichiers-là sera EFFACÉE à la prochaine génération
-(qui est automatique — voir la section suivante). Pour les changer, on modifie data.json.
+IMPORTANT
+---------
+Ce guide décrit le site en production (branche main, trouvetaclinique.ca). Les changements se
+préparent et se relisent sur la branche brouillon (apercu.trouvetaclinique.ca) avant d'être
+fusionnés dans main par pull request.
 
 
-LES PAGES SE REFONT TOUTES SEULES APRÈS UNE MODIFICATION DE data.json
-----------------------------------------------------------------------
-**data.json est la seule source de vérité.** Les pages ci-dessus en sont fabriquées, et
-depuis le 19 août 2026 c'est GitHub qui s'en charge automatiquement :
-
-    on modifie data.json  →  GitHub régénère les pages  →  le site est à jour
-                             (une à deux minutes plus tard)
-
-Il n'y a donc RIEN à faire de plus après avoir modifié data.json. Pas de zip à demander, pas de
-fichier à redéposer. On modifie data.json comme d'habitude (voir la section suivante), on
-enregistre, et c'est fini.
-
-Pour voir où ça en est : onglet « Actions » du dépôt GitHub. Une pastille verte = les pages ont
-été refaites. Une pastille rouge = quelque chose a été refusé (voir plus bas).
-
-CE QUI SE PASSE EXACTEMENT
-Le robot (fichier .github/workflows/generer-pages-seo.yml) relance le générateur et publie
-automatiquement les pages à jour après chaque modification de data.json (une à deux minutes).
-
-Ce que le générateur protège tout seul, sans qu'on ait à y penser :
-- les notes personnelles et les courriels de recrutement ne sortent jamais sur le site public ;
-- une fiche « visible: false » n'apparaît nulle part ;
-- l'adresse web d'une clinique NE CHANGE PAS si on corrige son nom (elle est mémorisée dans
-  scripts/slugs.json — ne pas supprimer ce fichier, sinon les adresses déjà connues de Google
-  seraient perdues) ;
-- une fiche trop peu remplie (moins de 5 renseignements) reçoit sa page, mais on ne la propose
-  pas à Google tant qu'elle reste presque vide ; elle y entre toute seule une fois complétée.
-
-La commande, pour information, si on veut la lancer sur son propre ordinateur :
-   node scripts/generer-pages-seo.js
-
-
-METTRE À JOUR UNE CLINIQUE (sans toucher au code)
---------------------------------------------------
-1. Sur GitHub : dépôt Map -> data.json -> crayon (modifier).
-2. Changer la valeur voulue (téléphone, horaire, site, etc.).
-   - Texte entre guillemets droits "..."
-   - Virgule entre les éléments, PAS de virgule après le dernier d'une liste.
-3. Commit. Le robot inscrit automatiquement la date du jour dans "miseAJour"
-   selon le fuseau de Montréal, puis régénère les pages.
-4. La nouvelle version s'affiche à la prochaine ouverture.
-   (Si data.json est invalide, l'app affiche « Données indisponibles » :
-    il suffit de corriger la virgule fautive.)
-
-   Il n'est PAS nécessaire de changer la version du cache pour data.json :
-   ce fichier est toujours rechargé depuis le réseau.
-
-
-DEUX CHAMPS À NE PAS CONFONDRE
--------------------------------
-- "infos"  : information publique sur la clinique. C'est ici qu'on écrit.
-- "notes"  : réservé aux notes personnelles de chaque utilisateur, qui sont
-             conservées sur son appareil. Tout ce qu'on écrirait ici serait
-             effacé à l'affichage. Laisser vide.
-
-
-AJOUTER UNE CLINIQUE
+ADRESSES PRINCIPALES
 --------------------
-Copier un bloc complet entre accolades { ... }, le coller à la fin de la liste
-(en ajoutant une virgule après le bloc précédent), puis :
-  - donner un "id" qui n'existe pas déjà ;
-  - remplir au minimum : nom, type, region, rls, lat, lng.
-La latitude et la longitude s'obtiennent sur Google Maps : clic droit sur le
-point -> les deux nombres apparaissent en haut du menu.
+/ ........................ accueil du site
+/monteregie/ ............. carte complète
+/monteregie-est/ ......... carte Montérégie-Est et seule PWA installable
+/monteregie-centre/ ...... carte Montérégie-Centre
+/monteregie-ouest/ ....... carte Montérégie-Ouest
+/cliniques/ .............. répertoire général
+/ptem/ et /amp/ .......... guides d'information
 
 
-FORCER UNE MISE À JOUR APRÈS UN CHANGEMENT DE CODE
----------------------------------------------------
-Seulement si on a modifié index.html, sw.js ou les icônes.
-Dans sw.js, augmenter le numéro de version du cache :
-   const CACHE = 'ptem-2027-v28';   ->   'ptem-2027-v29'
-puis re-téléverser sw.js. Sans cela, les personnes qui ont déjà ouvert
-l'application continueront de voir l'ancienne version.
-(Depuis le 19 août 2026, il n'y a PLUS de liste de pages à tenir à jour dans
-sw.js : le fichier reconnaît tout seul que seule la page d'accueil appartient
-à l'application. On peut donc ajouter autant de pages de contenu qu'on veut
-sans jamais toucher à sw.js.)
-
-
-INSTALLER L'APPLICATION
+LES FICHIERS IMPORTANTS
 -----------------------
-- Android / ordinateur : bouton « Installer l'application » dans l'app,
-  ou menu du navigateur -> « Installer ».
-- iPhone (Safari) : bouton Partager -> « Sur l'écran d'accueil ».
+data.json ................ toutes les données publiques de la carte
+scripts/carte.template.html
+                          gabarit des cartes complète / Centre / Ouest
+scripts/carte-est-sq.template.html
+                          gabarit Santé Québec de Montérégie-Est
+scripts/publier-regions.js
+                          fabrique les quatre cartes
+scripts/generer-pages-seo.js
+                          fabrique l'accueil, les répertoires, les fiches, les RLS et le sitemap
+scripts/slugs.json ........ conserve les adresses web existantes
+assets/seo-pages.css ...... style des pages web hors cartes
+sw.js ..................... mode hors ligne de Montérégie-Est seulement
+manifest-est.webmanifest .. installation de la carte Montérégie-Est
+PTEM2027_v2.gs ............ archive Apps Script (export ; ne publie pas tout seul)
+scripts/reconciliation-maitre-33-absents.csv
+                          33 cliniques publiées à réintégrer dans la base maître
+scripts/RECONCILIATION-MAITRE.md
+                          marche à suivre pour la réconciliation Sheet ↔ JSON
+scripts/NOTES-REDIRECTIONS-SEO.md
+                          redirections HTML + 301 Cloudflare à prévoir
+
+Ne pas modifier à la main les pages générées. Le changement serait effacé à la prochaine
+génération.
+
+Les courriels de recrutement (champ personneRessource) sont publiés sur les fiches
+depuis le 2 septembre 2026 (PUBLIER_COURRIELS = true).
 
 
-PARTAGER LE LIEN
-----------------
-Le bouton rond à côté du « i », en haut à droite, ouvre le partage du
-téléphone. Sur ordinateur, il copie l'adresse dans le presse-papiers.
+METTRE À JOUR LES DONNÉES
+-------------------------
+1. Modifier data.json.
+2. Vérifier les virgules, guillemets et identifiants uniques.
+3. Enregistrer la modification.
+4. Le robot GitHub met la date à jour, régénère les pages et lance ses vérifications.
+
+Commandes équivalentes sur un ordinateur :
+
+  node scripts/generer-pages-seo.js
+  node scripts/publier-regions.js
 
 
-CHANGEMENT D'ANNÉE (décembre)
-------------------------------
-Depuis le 18 août 2026, l'application s'appelle « Trouve ta clinique » — ce
-nom ne change JAMAIS. Seul « PTEM 2027 », le nom du PLAN gouvernemental,
-doit être renommé chaque décembre, à SIX endroits, tous indiqués par un
-commentaire au début de index.html.
-Ne PAS renommer les clés « dtmf-mtg-* » : les favoris et les notes de tout
-le monde seraient perdus. Ne PAS renommer non plus le nom de domaine
-trouvetaclinique.ca, qui ne contient aucune année et n'a donc pas à
-changer.
+DIFFÉRENCE ENTRE UNE CLINIQUE ET UN ÉTABLISSEMENT
+-------------------------------------------------
+CLINIQUE
+- categorie ne vaut pas "etablissement";
+- visible:false retire la clinique de la carte et des pages;
+- recrutementActif:false la conserve, mais elle apparaît seulement avec « Toutes les cliniques »;
+- peut avoir une fiche, des favoris, des notes et participer au comparatif.
+
+ÉTABLISSEMENT
+- categorie vaut "etablissement";
+- apparaît dans la couche « Établissements », même si visible:false est encore présent;
+- sert seulement de repère informatif;
+- n'entre jamais dans la recherche, les favoris, les notes, le classement ou le comparatif.
+
+Le bouton (i) de la carte explique cette différence aux visiteurs.
+
+
+INFORMATIONS À NE PAS PUBLIER
+-----------------------------
+- courriels personnels ou de recrutement;
+- montants négociés;
+- notes internes;
+- renseignements personnels non autorisés;
+- nom protégé Santé Québec configuré dans le secret NOM_PROTEGE_SANTE_QUEBEC.
+
+Le champ notes de data.json n'est pas un espace de publication.
+
+
+PWA ET MODE HORS LIGNE
+----------------------
+Seule la carte /monteregie-est/ est installable et gérée par sw.js.
+
+Après une modification d'un fichier mis en cache, augmenter la version dans sw.js :
+
+  trouve-clinique-est-v52  ->  trouve-clinique-est-v53
+
+Une modification de data.json ne demande normalement pas ce changement, car les données sont
+chargées en priorité depuis le réseau.
+
+Le fichier manifest.json est un ancien vestige non référencé. Ne pas le relier à une page.
+
+
+HEADERS
+-------
+- Les cartes conservent le header V4 Santé Québec.
+- Les autres pages utilisent le header bleu marine avec le logo et « Trouve ta clinique ».
+- Les boutons de navigation sont générés automatiquement. Ne pas les recopier dans chaque page.
+
+
+FICHIERS À NE PAS SUPPRIMER
+---------------------------
+CNAME ...................... maintient le domaine trouvetaclinique.ca
+google0e6f553795bbb4a9.html . vérification Google Search Console
+robots.txt / sitemap.xml ... référencement
+.github/ ................... génération et contrôles automatiques
+scripts/slugs.json .......... mémoire des adresses web existantes
+vendor/ et ses licences ..... bibliothèques cartographiques locales
+
+
+TEST LOCAL
+----------
+Dans le dossier du projet :
+
+  python3 -m http.server 8000
+
+Puis ouvrir http://localhost:8000. Ne pas ouvrir index.html directement avec file://.
+
+
+CHANGEMENT D'ANNÉE PTEM
+-----------------------
+La marque « Trouve ta clinique » ne change jamais.
+
+Mettre à jour seulement :
+1. les étiquettes PTEM dans scripts/carte.template.html;
+2. short_name dans manifest-est.webmanifest;
+3. le titre iOS dans scripts/publier-regions.js;
+4. les faits et sources de la page PTEM.
+
+Ne jamais renommer les clés localStorage dtmf-mtg-*, l'identifiant du manifeste ou le domaine.

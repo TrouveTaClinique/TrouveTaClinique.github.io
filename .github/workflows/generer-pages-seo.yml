@@ -1,23 +1,24 @@
-# Régénération automatique des pages du site à partir de data.json / index.html
+# Régénération automatique des pages du site à partir de data.json et des gabarits
 # ================================================================================
-# Mis en place le 19 août 2026. Étendu le 20 août 2026 (copie Montérégie-Est).
+# Mis en place le 19 août 2026. Étendu le 31 août 2026 aux quatre cartes et aux trois régions.
 #
 # CE QUE ÇA FAIT
 #   Dès que data.json est modifié sur GitHub (par le crayon « modifier » du site web, par un
 #   téléversement, ou par n'importe quel autre moyen), ce robot :
-#     1. régénère les 61 pages de cliniques, les 6 pages de RLS, le répertoire et sitemap.xml ;
+#     1. régénère les fiches de cliniques publiables, les pages de RLS, les répertoires et sitemap.xml ;
 #     2. vérifie qu'aucune donnée privée n'a fui dans les pages produites ;
 #     3. publie le résultat directement sur le site.
-#   Dès que index.html est modifié, ce robot recopie aussi ce même fichier vers
-#   monteregie-est/index.html, monteregie-centre/index.html et monteregie-ouest/index.html (avec
-#   le <head> — titre/description/canonical/Open Graph — et le lettrage du territoire adaptés ;
+#   Dès que scripts/carte.template.html est modifié, ce robot refabrique aussi /monteregie/
+#   et les trois cartes régionales (avec
+#   le <head> — titre/description/canonical/Open Graph — et le nom du territoire adaptés ;
 #   voir scripts/publier-regions.js). C'est la même application, les mêmes données : les trois
 #   cartes régionales ne sont jamais maintenues à la main.
 #   Il n'y a donc plus rien à faire à la main après avoir modifié data.json ou index.html : le
 #   site se met à jour tout seul en une à deux minutes.
 #
 # CE QUE ÇA NE TOUCHE JAMAIS
-#   data.json lui-même (le robot le lit, il ne l'écrit jamais), sw.js, ptem/, amp/.
+#   Le contenu métier de data.json (seule sa date publique peut être actualisée), sw.js,
+#   ainsi que les pages racines ptem/ et amp/. Leurs copies régionales noindex sont régénérées.
 #
 # SI ÇA NE DÉMARRE PAS
 #   Il faut autoriser une seule fois les robots à écrire dans le dépôt :
@@ -35,13 +36,15 @@ on:
       # Volontairement PAS « scripts/** » : le robot peut avoir à écrire scripts/slugs.json quand
       # une nouvelle clinique apparaît, et ce commit-là relancerait le robot en boucle sans fin.
       # On ne réagit donc qu'aux fichiers qui sont réellement des entrées : les deux qui
-      # pilotaient déjà le robot, plus index.html (source de la copie Montérégie-Est).
+      # pilotaient déjà le robot, plus le gabarit unique des quatre cartes. index.html est une
+      # SORTIE générée : le surveiller relancerait le robot en boucle après son propre commit.
       - 'data.json'
       - 'scripts/generer-pages-seo.js'
       - 'scripts/mettre-a-jour-date-donnees.js'
       - 'scripts/publier-regions.js'
       - '.github/workflows/generer-pages-seo.yml'
-      - 'index.html'
+      - 'scripts/carte.template.html'
+      - 'scripts/carte-est-sq.template.html'
       # /ptem/ et /amp/ sont écrites à la main, mais leurs copies étanches de l'univers
       # Montérégie-Est en sont dérivées : si on les modifie, les copies doivent suivre.
       - 'ptem/index.html'
@@ -96,13 +99,56 @@ jobs:
       - name: Régénérer les pages et le sitemap
         run: node scripts/generer-pages-seo.js
 
-      - name: Recopier index.html vers les trois cartes régionales
+      - name: Fabriquer la carte complète et les trois cartes régionales
         run: node scripts/publier-regions.js
 
+      - name: Vérifier les polices selon le périmètre visuel approuvé
+        # 2 septembre 2026 : Kaushan Script reste autorisé sur les cartes historiques
+        # (complète, Centre, Ouest) via carte.template.html. Elle est interdite sur le
+        # prototype Santé Québec de l'Est, qui utilise Segoe UI exclusivement.
+        run: |
+          set -e
+          if grep -riIl "kaushan" scripts/carte-est-sq.template.html monteregie-est/index.html 2>/dev/null; then
+            echo "::error::Police à lettres attachées détectée dans le thème Santé Québec de l'Est. Publication annulée."
+            exit 1
+          fi
+          if ! grep -q "Segoe UI" scripts/carte.template.html || ! grep -q "Segoe UI" assets/seo-pages.css; then
+            echo "::error::« Segoe UI » est absente d'un gabarit actif. Le thème Santé Québec a peut-être été écrasé. Publication annulée."
+            exit 1
+          fi
+          if ! grep -q "Segoe UI" scripts/carte-est-sq.template.html; then
+            echo "::error::« Segoe UI » est absente du gabarit SQ Est. Publication annulée."
+            exit 1
+          fi
+          echo "Vérification polices (Kaushan hors Est, Segoe UI présent) : ok."
+
+      - name: Vérifier l'absence du nom protégé
+        # Le nom de la personne-ressource de Santé Québec ne doit apparaître dans AUCUN fichier
+        # public du dépôt — ni dans les données, ni dans un commentaire de code. Le nom lui-même
+        # n'est PAS écrit ici : il vit uniquement dans le secret NOM_PROTEGE_SANTE_QUEBEC du
+        # dépôt (Settings → Secrets and variables → Actions), pour ne jamais apparaître en clair
+        # dans ce fichier de configuration public, conformément au mandat du 30 août 2026 (§9).
+        # SI CETTE ÉTAPE ÉCHOUE AVEC « secret manquant » : le secret n'a pas encore été créé —
+        # voir le README pour la marche à suivre. Elle ne doit alors PAS être ignorée : tant que
+        # le secret n'existe pas, cette vérification ne protège rien.
+        env:
+          NOM_PROTEGE: ${{ secrets.NOM_PROTEGE_SANTE_QUEBEC }}
+        run: |
+          set -e
+          if [ -z "$NOM_PROTEGE" ]; then
+            echo "::error::Le secret NOM_PROTEGE_SANTE_QUEBEC n'est pas configuré. Publication annulée par prudence — voir Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          if grep -riIl -F "$NOM_PROTEGE" . --exclude-dir=.git 2>/dev/null; then
+            echo "::error::Le nom protégé apparaît dans un fichier du dépôt. Publication annulée."
+            exit 1
+          fi
+          echo "Vérification du nom protégé : ok."
+
       - name: Vérifier qu'aucune donnée privée n'a fui
-        # Filet de sécurité : ce robot publie sans qu'un humain relise. Si le générateur venait à
-        # être modifié de travers, on préfère que la publication ÉCHOUE plutôt qu'elle mette en
-        # ligne des courriels nominatifs ou des notes personnelles.
+        # Filet de sécurité : ce robot publie sans qu'un humain relise. Les courriels de
+        # recrutement sont publiés volontairement (PUBLIER_COURRIELS = true, 2 sept. 2026).
+        # On refuse toujours les champs internes (notes personnelles, posApprox, alias).
         run: |
           set -e
           # Les mêmes vérifications portent sur les copies étanches des trois univers régionaux.
@@ -113,9 +159,8 @@ jobs:
           for R in monteregie-est monteregie-centre monteregie-ouest; do
             PAGES_GENEREES="$PAGES_GENEREES $R/cliniques/ $R/rls/ $R/ptem/ $R/amp/"
           done
-          echo "Recherche d'adresses courriel dans les pages générées..."
-          if grep -rIEl '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' $PAGES_GENEREES ; then
-            echo "::error::Une adresse courriel apparaît dans les pages générées. Publication annulée."
+          if ! grep -q 'const PUBLIER_COURRIELS = true' scripts/generer-pages-seo.js; then
+            echo "::error::PUBLIER_COURRIELS doit être true (courriels de recrutement publiés). Publication annulée."
             exit 1
           fi
           echo "Recherche de champs internes (notes, posApprox, alias)..."
@@ -123,16 +168,33 @@ jobs:
             echo "::error::Un champ interne apparaît dans les pages générées. Publication annulée."
             exit 1
           fi
-          echo "Vérification de l'étanchéité de l'univers Montérégie-Est..."
-          # Aucune page de /monteregie-est/ ne doit renvoyer vers la carte générale, vers le
-          # répertoire des trois territoires ou vers un RLS hors Est. C'est LA garantie demandée
-          # par le CISSS Montérégie-Est : on préfère ne rien publier plutôt que de la rompre.
-          if grep -rIoE 'href="/(cliniques|rls|ptem|amp)/' monteregie-est/cliniques/ monteregie-est/rls/ monteregie-est/ptem/ monteregie-est/amp/ ; then
-            echo "::error::Une page de /monteregie-est/ renvoie hors de l'univers Montérégie-Est. Publication annulée."
+          echo "Vérification : aucun lien direct de Montérégie-Est vers les autres territoires..."
+          # Assoupli le 30 août 2026 (décision d'Olivier) : l'étanchéité totale est abandonnée —
+          # les pages de /monteregie-est/ peuvent désormais renvoyer vers les ressources
+          # génériques partagées (/cliniques/{slug}/, /rls/{slug}/, /ptem/, /amp/), nécessaire à
+          # l'unification des routes du mandat du 30 août. Ce qui reste interdit, plus étroitement
+          # : un lien DIRECT depuis l'univers Montérégie-Est vers la carte Centre, la carte Ouest,
+          # ou la carte complète des trois territoires (qui montre Centre et Ouest). L'app elle-
+          # même respecte déjà cette règle via les blocs « hors-region » de index.html, retirés à
+          # la publication (voir scripts/publier-regions.js) — cette vérification est un filet de
+          # sécurité en plus, pas le seul mécanisme.
+          if grep -rIoE 'href="[^"]*/?monteregie-centre/|href="[^"]*/?monteregie-ouest/|href="/monteregie/"' monteregie-est/index.html monteregie-est/cliniques/ monteregie-est/rls/ monteregie-est/ptem/ monteregie-est/amp/ 2>/dev/null ; then
+            echo "::error::Une page de /monteregie-est/ pointe directement vers Centre, Ouest, ou la carte complète. Publication annulée."
             exit 1
           fi
           echo "Vérification que le générateur n'a pas modifié data.json après sa datation..."
           sha256sum -c "$RUNNER_TEMP/data-json-apres-date.sha256"
+          echo "Vérification de l'architecture accueil/carte et de la PWA Est..."
+          # Accueil recentré sur l'Est (plus de lien principal vers /monteregie/).
+          grep -q 'href="/monteregie-est/"' index.html
+          grep -q 'canonical" href="https://trouvetaclinique.ca/"' index.html
+          grep -q 'canonical" href="https://trouvetaclinique.ca/monteregie/"' monteregie/index.html
+          if grep -q 'rel="manifest"' monteregie/index.html monteregie-centre/index.html monteregie-ouest/index.html; then
+            echo "::error::Une carte autre que Montérégie-Est contient un manifeste PWA. Publication annulée."
+            exit 1
+          fi
+          grep -q 'rel="manifest" href="../manifest-est.webmanifest"' monteregie-est/index.html
+          grep -q "scope: '/monteregie-est/'" monteregie-est/index.html
           echo "Vérification du sitemap..."
           python3 -c "import xml.dom.minidom; xml.dom.minidom.parse('sitemap.xml')"
           echo "Toutes les vérifications sont passées."
@@ -142,7 +204,7 @@ jobs:
           set -e
           git config user.name  "Robot Trouve ta clinique"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json cliniques rls sitemap.xml scripts/slugs.json monteregie-est monteregie-centre monteregie-ouest
+          git add data.json index.html cliniques rls sitemap.xml scripts/slugs.json monteregie monteregie-est monteregie-centre monteregie-ouest
           if git diff --cached --quiet ; then
             echo "Les pages étaient déjà à jour : rien à publier."
             exit 0

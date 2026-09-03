@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GMF Saint-Constant (de la gare) — Saint-Constant | Trouve ta clinique</title>
   <meta name="description" content="GMF Saint-Constant (de la gare), GMF de Saint-Constant (RLS Jardins-Roussillon) en recrutement de médecins de famille en Montérégie : type de milieu, pratiques offertes, heures d’ouverture.">
-  <link rel="canonical" href="https://trouvetaclinique.ca/cliniques/gmf-saint-constant-de-la-gare/">
-  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-saint-constant-de-la-gare/">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />
   <meta property="og:locale" content="fr_CA">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trouve ta clinique">
@@ -36,7 +37,7 @@
         "url": "https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-saint-constant-de-la-gare/",
         "name": "GMF Saint-Constant (de la gare) — clinique en recrutement en Montérégie | Trouve ta clinique",
         "inLanguage": "fr-CA",
-        "dateModified": "2026-08-29",
+        "dateModified": "2026-09-02",
         "isPartOf": {
           "@id": "https://trouvetaclinique.ca/#website"
         },
@@ -141,12 +142,17 @@
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="/monteregie-ouest/">Trouve ta clinique — Montérégie-Ouest</a>
+    <a class="brand" href="/">
+      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+      <span class="brand-name">Trouve ta clinique</span>
+    </a>
     <nav class="nav" aria-label="Navigation principale">
-      <a href="/monteregie-ouest/">Carte Montérégie-Ouest</a>
-      <a href="/monteregie-ouest/cliniques/">Cliniques</a>
-      <a href="/monteregie-ouest/ptem/">PTEM</a>
-      <a href="/monteregie-ouest/amp/">AMP</a>
+      <a href="/">Accueil</a>
+      <a href="/monteregie-est/">Carte interactive</a>
+      <a href="/monteregie-est/cliniques/">Cliniques</a>
+      <a href="/monteregie-est/etablissements/">Établissements</a>
+      <a href="/monteregie-est/ptem/">PTEM</a>
+      <a href="/monteregie-est/amp/">AMP</a>
     </nav>
   </div>
 </header>
@@ -156,14 +162,13 @@
     <p class="eyebrow">GMF · RLS Jardins-Roussillon</p>
     <h1>GMF Saint-Constant (de la gare)</h1>
     <p class="lead">GMF Saint-Constant (de la gare) — GMF situé à Saint-Constant, en Montérégie — recrute des médecins de famille. Cette page rassemble les renseignements actuellement publiés dans le répertoire pour aider à évaluer le milieu avant de le contacter.</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> 2026-08-29.</p>
+    <p class="updated"><strong>Données mises à jour le :</strong> 2026-09-02.</p>
     <div class="cta-row">
       <a class="button primary" href="/monteregie-ouest/?c=33">Voir sur la carte interactive</a>
       <a class="button secondary" href="/monteregie-ouest/rls/jardins-roussillon/">Autres cliniques du RLS Jardins-Roussillon</a>
     </div>
   </section>
 
-  <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> les coordonnées de la personne-ressource sont affichées dans la fiche de la clinique sur la carte interactive. <a href="/monteregie-ouest/?c=33">Ouvrir la fiche de GMF Saint-Constant (de la gare) sur la carte →</a></div>
   <section id="renseignements">
     <h2>Renseignements</h2>
     <dl class="fiche">
@@ -214,6 +219,26 @@
   </section>
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->

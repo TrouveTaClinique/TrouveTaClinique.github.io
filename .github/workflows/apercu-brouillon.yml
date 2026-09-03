@@ -1,0 +1,121 @@
+# Aperçu public de brouillon → dépôt TrouveTaClinique/apercu uniquement.
+# Ne publie jamais main, trouvetaclinique.ca, ni les Settings Pages du dépôt principal.
+name: Aperçu du brouillon
+
+on:
+  push:
+    branches: [brouillon]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-brouillon-apercu
+  cancel-in-progress: false
+
+jobs:
+  preparer:
+    if: github.repository == 'TrouveTaClinique/TrouveTaClinique.github.io' && github.ref == 'refs/heads/brouillon'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Lire la révision du brouillon sans droit de push
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Vérifier Pages sur le dépôt apercu (pas la production)
+        env:
+          APERCU_TOKEN: ${{ secrets.APERCU_DEPLOY_TOKEN }}
+        run: node scripts/preparer-apercu.js --verifier-pages
+
+      - name: Reconstruire les pages dans le runner, sans commit ni changement de date
+        run: |
+          sha256sum data.json > "$RUNNER_TEMP/donnees-avant-apercu.sha256"
+          node scripts/generer-pages-seo.js
+          node scripts/publier-regions.js
+          sha256sum -c "$RUNNER_TEMP/donnees-avant-apercu.sha256"
+
+      - name: Tester l'isolation du brouillon et la conservation des fonctions
+        run: node --test scripts/test-apercu.cjs scripts/test-restauration-sq.cjs
+
+      - name: Préparer le site (noindex, CNAME apercu, sans scripts internes)
+        env:
+          NOM_PROTEGE: ${{ secrets.NOM_PROTEGE_SANTE_QUEBEC }}
+        run: node scripts/preparer-apercu.js "$RUNNER_TEMP/site-brouillon" --nom-obligatoire
+
+      - name: Conserver l'artefact du site préparé
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-apercu
+          path: ${{ runner.temp }}/site-brouillon
+          retention-days: 3
+
+  synchroniser:
+    if: github.repository == 'TrouveTaClinique/TrouveTaClinique.github.io' && github.ref == 'refs/heads/brouillon'
+    needs: preparer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Relire les garde-fous de la même révision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Revérifier Pages apercu juste avant synchronisation
+        env:
+          APERCU_TOKEN: ${{ secrets.APERCU_DEPLOY_TOKEN }}
+        run: node scripts/preparer-apercu.js --verifier-pages
+
+      - name: Récupérer le site préparé
+        uses: actions/download-artifact@v4
+        with:
+          name: site-apercu
+          path: ${{ runner.temp }}/site-brouillon
+
+      - name: Cloner le dépôt apercu
+        uses: actions/checkout@v4
+        with:
+          repository: TrouveTaClinique/apercu
+          token: ${{ secrets.APERCU_DEPLOY_TOKEN }}
+          path: apercu-dest
+
+      - name: Remplacer le contenu public sans toucher .github ni README
+        env:
+          SOURCE: ${{ runner.temp }}/site-brouillon
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          cd apercu-dest
+          # Conserver uniquement la méta du dépôt d'aperçu.
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name '.git' \
+            ! -name '.github' \
+            ! -name 'README.md' \
+            ! -name 'README-PAGES.txt' \
+            ! -name '.gitignore' \
+            -exec rm -rf {} +
+          cp -a "$SOURCE"/. .
+          test -f index.html
+          test -f CNAME
+          grep -qx 'apercu.trouvetaclinique.ca' CNAME
+          if grep -RInE 'https?://(www\.)?trouvetaclinique\.ca' --include='*.html' . \
+            | grep -v 'apercu\.trouvetaclinique\.ca'; then
+            echo "Lien vers le domaine de production détecté dans l'aperçu."
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Aucune différence à pousser."
+            exit 0
+          fi
+          git commit -m "Synchroniser l'aperçu depuis brouillon ${SHA}."
+          git push origin HEAD:main

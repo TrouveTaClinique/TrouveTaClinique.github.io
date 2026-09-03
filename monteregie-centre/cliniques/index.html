@@ -7,6 +7,7 @@
   <meta name="description" content="Répertoire des 20 milieux publiés en Montérégie-Centre (dont 20 en recrutement actif de médecins de famille), classés par 2 RLS avec fiche détaillée.">
   <link rel="canonical" href="https://trouvetaclinique.ca/monteregie-centre/cliniques/">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />
   <meta property="og:locale" content="fr_CA">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trouve ta clinique">
@@ -36,7 +37,7 @@
         "url": "https://trouvetaclinique.ca/monteregie-centre/cliniques/",
         "name": "Cliniques en recrutement en Montérégie-Centre | Trouve ta clinique",
         "inLanguage": "fr-CA",
-        "dateModified": "2026-08-29",
+        "dateModified": "2026-09-02",
         "isPartOf": {
           "@id": "https://trouvetaclinique.ca/#website"
         }
@@ -66,12 +67,17 @@
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="/monteregie-centre/">Trouve ta clinique — Montérégie-Centre</a>
+    <a class="brand" href="/">
+      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
+      <span class="brand-name">Trouve ta clinique</span>
+    </a>
     <nav class="nav" aria-label="Navigation principale">
-      <a href="/monteregie-centre/">Carte Montérégie-Centre</a>
-      <a href="/monteregie-centre/cliniques/" aria-current="page">Cliniques</a>
-      <a href="/monteregie-centre/ptem/">PTEM</a>
-      <a href="/monteregie-centre/amp/">AMP</a>
+      <a href="/">Accueil</a>
+      <a href="/monteregie-est/">Carte interactive</a>
+      <a href="/monteregie-est/cliniques/" aria-current="page">Cliniques</a>
+      <a href="/monteregie-est/etablissements/">Établissements</a>
+      <a href="/monteregie-est/ptem/">PTEM</a>
+      <a href="/monteregie-est/amp/">AMP</a>
     </nav>
   </div>
 </header>
@@ -81,7 +87,7 @@
     <p class="eyebrow">Médecine familiale · Montérégie</p>
     <h1>Cliniques en recrutement en Montérégie-Centre</h1>
     <p class="lead"><strong>20 milieux en recrutement actif</strong> de médecins de famille, sur 20 milieux publiés au total dans le répertoire, répartis dans <strong>2 RLS</strong> et 9 municipalités. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="/monteregie-centre/">carte interactive</a> ajoute les filtres et la vue géographique.</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> 2026-08-29.</p>
+    <p class="updated"><strong>Données mises à jour le :</strong> 2026-09-02.</p>
     <div class="cta-row">
       <a class="button primary" href="/monteregie-centre/">Explorer sur la carte interactive</a>
       <a class="button secondary" href="/monteregie-centre/ptem/">Guide PTEM</a>
@@ -90,7 +96,7 @@
 
   
 
-  <figure class="sqb-wrap compact directory-banner"><a class="sqb" href="/monteregie-centre/" aria-label="Ouvrir la carte interactive des cliniques en recrutement en Montérégie-Centre"><span class="sqb-pattern" aria-hidden="true"></span><span class="sqb-inner"><img class="sqb-logo" src="../../assets/logo-banniere.png" alt="" width="210" height="252" loading="lazy"><span class="sqb-vline" aria-hidden="true"></span><span class="sqb-eyebrow">Carte interactive</span><span class="sqb-title">Trouve ta clinique</span><span class="sqb-region">Montérégie-Centre</span><span class="sqb-rule" aria-hidden="true"></span></span></a></figure>
+  <figure class="sqb-wrap compact directory-banner"><a class="sqb-photo" href="/monteregie-est/" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="../../assets/banniere_monteregie-est.jpg" srcset="../../assets/banniere_monteregie-est.jpg 1024w" sizes="(max-width: 1024px) 100vw, 1024px" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" decoding="sync" loading="lazy"></a></figure>
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
@@ -189,6 +195,26 @@
   </section>
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+document.querySelectorAll('.brand').forEach(function (b) {
+  b.addEventListener('click', function () {
+    b.classList.remove('tapped');
+    void b.offsetWidth;
+    b.classList.add('tapped');
+  });
+});
+</script>
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->

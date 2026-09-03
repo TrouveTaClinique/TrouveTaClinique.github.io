@@ -1,9 +1,9 @@
 /**
  * PTEM 2027 — Montérégie · classeur maître v2
- * Version : v2-2026-08-03
+ * Version : v2-2026-09-02
  *
  * Départ à neuf. Aucune migration, aucune table LEGACY, aucune donnée figée
- * dans le script : les 58 fiches sont lues depuis le data.json publié.
+ * dans le script : les fiches sont lues depuis le data.json publié.
  *
  * RÈGLE ABSOLUE : ce script n'envoie aucun courriel, ne partage aucun fichier
  * et ne publie rien. genererDataJson_ produit le fichier dans un onglet, pour
@@ -12,12 +12,18 @@
  * Runtime V8 obligatoire.
  *
  * À exécuter une seule fois, sur un classeur NEUF et VIDE : initialiserV2
+ *
+ * Correctifs du 2 septembre 2026 (audit Main/Brouillon) :
+ *   - URL de référence pointant vers le dépôt officiel TrouveTaClinique ;
+ *   - échec de lecture de la référence = refus d'export (plus un simple avertissement) ;
+ *   - conservation du tableau hopitaux et des champs absents du classeur ;
+ *   - les courriels de recrutement (personneRessource) sont conservés volontairement.
  */
 
 var PTEM2 = {
-  version: 'v2-2026-08-03',
+  version: 'v2-2026-09-02',
   titreClasseur: 'PTEM 2027 — Base maître des cliniques de la Montérégie',
-  sourceDataJson: 'https://raw.githubusercontent.com/DTMF-Monteregie/Map/main/data.json',
+  sourceDataJson: 'https://raw.githubusercontent.com/TrouveTaClinique/TrouveTaClinique.github.io/main/data.json',
   propVersion: 'PTEM2027_V2_VERSION',
   propAmorce: 'PTEM2027_V2_AMORCE',
   fMaitre: 'Cliniques maître',
@@ -1232,6 +1238,7 @@ function versCarte_(r, gabaritPersonnel) {
     lat: (r.latitude === '' || r.latitude === null) ? null : Number(r.latitude),
     lng: (r.longitude === '' || r.longitude === null) ? null : Number(r.longitude),
     site: txt_(r.q12_website),
+    // Courriel de recrutement : publié volontairement sur le site (décision du 2 sept. 2026).
     personneRessource: txt_(r.q19_recruit_email),
     dme: r.q26_emrs ? chercher_(inverser_(DME), r.q26_emrs, String(r.q26_emrs)) : '',
     horaire: vide ? {} : horaire,
@@ -1255,6 +1262,37 @@ function versCarte_(r, gabaritPersonnel) {
   };
   if (r.q22_doctors_sought) o.medecinsRecherches = String(r.q22_doctors_sought);
   return o;
+}
+
+/**
+ * Conserve les champs présents dans le JSON publié mais absents du classeur
+ * (audit 2 sept. 2026). N'écrase jamais une valeur déjà fournie par le formulaire.
+ */
+function enrichirDepuisPrecedent_(fiche, precedente, ligneClasseur) {
+  if (!precedente) return fiche;
+  var CHAMPS_A_PRESERVER = [
+    'responsableNom', 'categorie', 'recrutementActif', 'statutRecrutement',
+    'horaireSource', 'sourceRepertoire', 'raisonMasquage', 'publication',
+    'validation', 'niveaux'
+  ];
+  CHAMPS_A_PRESERVER.forEach(function(k) {
+    if (fiche[k] === undefined || fiche[k] === null || fiche[k] === '') {
+      if (precedente[k] !== undefined) fiche[k] = precedente[k];
+    }
+  });
+  // Déduire recrutementActif depuis la réponse formulaire si elle est explicite.
+  var recrute = String(ligneClasseur && ligneClasseur.q8_recruitment || '').trim();
+  if (recrute === 'Non, le milieu ne recrute pas actuellement' ||
+      recrute === 'Non, l’établissement ne recrute pas actuellement') {
+    fiche.recrutementActif = false;
+  } else if (recrute.indexOf('Oui') === 0) {
+    fiche.recrutementActif = true;
+  }
+  // Ne jamais écraser un courriel déjà saisi dans le classeur par une valeur vide.
+  if (!String(fiche.personneRessource || '').trim() && String(precedente.personneRessource || '').trim()) {
+    fiche.personneRessource = precedente.personneRessource;
+  }
+  return fiche;
 }
 
 /**
@@ -1392,13 +1430,12 @@ function genererDataJson_(ss) {
       manquantes.slice(0, 5).map(function(c) { return c.title; }).join(', '));
   }
 
-  var precedent = null;
-  try { precedent = lireDataJson_(); } catch (e) {
-    console.warn('Impossible de lire le data.json publié pour comparaison : ' + e.message);
-  }
+  var precedent = lireDataJson_();
   var gabarits = {};
-  if (precedent) precedent.cliniques.forEach(function(c) {
+  var precedenteParId = {};
+  precedent.cliniques.forEach(function(c) {
     gabarits[String(c.id)] = Object.keys(c.personnel || {});
+    precedenteParId[String(c.id)] = c;
   });
 
   var fiches = [], erreurs = [], avis = [], exclues = [], masquees = [];
@@ -1440,7 +1477,7 @@ function genererDataJson_(ss) {
     if (String(r.latitude || '') === '' || String(r.longitude || '') === '') {
       avis.push('fiche ' + id + ' : latitude ou longitude absente — aucun marqueur, à géocoder à la main');
     }
-    fiches.push(versCarte_(r, gabarits[id]));
+    fiches.push(enrichirDepuisPrecedent_(versCarte_(r, gabarits[id]), precedenteParId[id], r));
   }
   fiches.sort(function(a, b) { return a.id - b.id; });
 
@@ -1449,31 +1486,35 @@ function genererDataJson_(ss) {
     throw new Error('Export refusé — ' + erreurs.length + ' problème(s) : ' + erreurs.slice(0, 6).join(' · '));
   }
   if (!fiches.length) throw new Error('Export refusé : aucune fiche valide.');
-  if (precedent) {
-    var avant = precedent.cliniques.length, apres = fiches.length;
-    if (apres < avant * (1 - PTEM2.seuilBaisse)) {
-      throw new Error('Export refusé : le nombre de fiches passerait de ' + avant + ' à ' + apres +
-        ', soit une baisse de plus de ' + Math.round(PTEM2.seuilBaisse * 100) + ' %. ' +
-        'Vérifiez « ' + PTEM2.fMaitre + ' » avant de réessayer.');
-    }
-    var idsAvant = precedent.cliniques.map(function(c) { return String(c.id); });
-    var disparus = idsAvant.filter(function(x) { return !ids[x] && exclues.indexOf(x) === -1; });
-    if (disparus.length) {
-      throw new Error('Export refusé : fiche(s) présente(s) en ligne mais absente(s) du classeur : ' +
-        disparus.join(', ') + '. Restaurez-les ou retirez-les volontairement du data.json publié.');
-    }
+  var avant = precedent.cliniques.length, apres = fiches.length;
+  if (apres < avant * (1 - PTEM2.seuilBaisse)) {
+    throw new Error('Export refusé : le nombre de fiches passerait de ' + avant + ' à ' + apres +
+      ', soit une baisse de plus de ' + Math.round(PTEM2.seuilBaisse * 100) + ' %. ' +
+      'Vérifiez « ' + PTEM2.fMaitre + ' » avant de réessayer.');
+  }
+  var idsAvant = precedent.cliniques.map(function(c) { return String(c.id); });
+  var disparus = idsAvant.filter(function(x) { return !ids[x] && exclues.indexOf(x) === -1; });
+  if (disparus.length) {
+    throw new Error('Export refusé : fiche(s) présente(s) en ligne mais absente(s) du classeur : ' +
+      disparus.join(', ') + '. Restaurez-les ou retirez-les volontairement du data.json publié.');
   }
 
   var sortie = {
     miseAJour: Utilities.formatDate(new Date(), Session.getScriptTimeZone() || 'America/Toronto', 'yyyy-MM-dd'),
-    annonce: precedent && precedent.annonce ? precedent.annonce : {titre:'', texte:'', lien:'', lienCarte:'', dateFin:''},
+    annonce: precedent.annonce ? precedent.annonce : {titre:'', texte:'', lien:'', lienCarte:'', dateFin:''},
+    hopitaux: Array.isArray(precedent.hopitaux) ? precedent.hopitaux : [],
     cliniques: fiches
   };
+  if (!sortie.hopitaux.length) {
+    throw new Error('Export refusé : le data.json de référence ne contient pas le tableau hopitaux. '
+      + 'Corrigez la référence avant de préparer un export.');
+  }
   var json = JSON.stringify(sortie, null, 2);
   var court = fiches.length + ' fiches prêtes. Rien n’a été publié.';
   var rapport = [
     'Export préparé le ' + sortie.miseAJour,
-    'Fiches : ' + fiches.length + (precedent ? ' (en ligne actuellement : ' + precedent.cliniques.length + ')' : ''),
+    'Fiches : ' + fiches.length + ' (en ligne actuellement : ' + precedent.cliniques.length + ')',
+    'Hôpitaux conservés : ' + sortie.hopitaux.length,
     'Caractères : ' + json.length,
     'Tous les garde-fous sont passés.',
     exclues.length ? 'ABSENTES de data.json (Non publiée) : ' + exclues.join(', ') : 'Aucune fiche retirée.',
