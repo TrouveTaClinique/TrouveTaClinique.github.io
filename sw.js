@@ -10,7 +10,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // de secteurs, sélection multiple d'activités, territoires en une ligne défilante.
 // v57-rls-contour (3 septembre 2026) : boutons RLS établissements en contour, une ligne
 // sans défilement ; libellé de type mint sur le thème Est.
-const CACHE = CACHE_PREFIX + 'v57-rls-contour';
+// v58-territoire-repli (3 septembre 2026) : boutons RLS établissements pleins par défaut,
+// bloc Territoire replié, compteur « X secteurs dans Y installations » retiré.
+const CACHE = CACHE_PREFIX + 'v58-territoire-repli';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [

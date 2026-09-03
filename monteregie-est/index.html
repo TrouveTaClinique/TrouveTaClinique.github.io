@@ -787,7 +787,8 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .rls-btn.dim:hover { background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none; }
 .rls-btn:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
 /* Mode établissements : les quatre territoires tiennent sur UNE ligne, sans
-   défilement. Style de contour — le filtre principal est l'activité, pas le RLS. */
+   défilement. Pleins par défaut (tous actifs) ; le contour n'apparaît que sur
+   .dim, une fois un territoire isolé — même logique que le mode cliniques. */
 body[data-mode-carte="etablissements"] .rls-btns {
   flex-wrap:nowrap; gap:4px; overflow:visible; padding-bottom:0;
   mask-image:none; -webkit-mask-image:none;
@@ -795,25 +796,24 @@ body[data-mode-carte="etablissements"] .rls-btns {
 body[data-mode-carte="etablissements"] .rls-btn {
   flex:1 1 0; min-width:0; width:auto; white-space:normal;
   padding:4px 5px; border-radius:8px; font-size:10px; line-height:1.15;
-  font-weight:700; background:transparent; color:var(--c);
+  font-weight:700; background:var(--c); color:#fff;
   border:1.5px solid var(--c); box-shadow:none; min-height:0;
-  filter:none;
 }
 body[data-mode-carte="etablissements"] .rls-btn:hover {
-  filter:none; background:color-mix(in srgb, var(--c) 12%, var(--champ));
+  filter:brightness(1.08);
 }
 body[data-mode-carte="etablissements"] .rls-btn.dim {
-  background:transparent; color:var(--c); opacity:.42; box-shadow:none;
+  background:var(--champ); color:var(--c); opacity:1; box-shadow:none; filter:none;
 }
 body[data-mode-carte="etablissements"] .rls-btn.dim:hover {
-  background:color-mix(in srgb, var(--c) 10%, var(--champ)); filter:none; opacity:.7;
+  background:color-mix(in srgb, var(--c) 12%, var(--champ)); filter:none;
 }
 body[data-mode-carte="etablissements"] .rls-btn[aria-pressed="true"] {
   background:var(--c); color:#fff; opacity:1;
 }
-/* Le compteur est le chiffre clé de la vue : il doit passer devant la règle
-   générale « .sb-head p », qui l'affichait en gris pâle et en graisse 300. */
-.sb-head .sb-compteur { font-size:13px; font-weight:600; color:var(--texte2, #334155); margin-top:6px; line-height:1.35; }
+body[data-mode-carte="etablissements"] #filtre-territoire-details.activite-group .rls-btns {
+  margin-top:0; padding:2px 8px 10px;
+}
 .activite-panel { margin-top:6px; width:100%; }
 .filtre-section-label { font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted, #64748b); margin:10px 0 6px; }
 .filtre-section-label--activite { display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
@@ -1510,7 +1510,7 @@ body.cmp-open { overflow:hidden; }
   font: 400 13px/1.5 var(--sq-font); text-align: left;
 }
 /* Établissements : le prototype SQ impose min-height 43px et une ombre aux
-   boutons RLS. Hors périmètre du bloc haché ci-dessus, on les ramène au contour. */
+   boutons RLS. Hors périmètre du bloc haché ci-dessus, on garde la taille réduite. */
 :root[data-region="Est"] body[data-mode-carte="etablissements"] .rls-btn {
   min-height: 0;
   box-shadow: none;
@@ -1572,12 +1572,18 @@ body.cmp-open { overflow:hidden; }
     }
     var titre = document.getElementById('sb-title');
     if (titre) titre.textContent = 'Secteurs en recrutement';
-    var compteur = document.getElementById('sb-compteur');
-    if (compteur) compteur.hidden = false;
     var panel = document.getElementById('activite-panel');
     if (panel) panel.hidden = false;
-    var territoire = document.getElementById('filtre-territoire-label');
-    if (territoire) territoire.hidden = false;
+    var territoire = document.getElementById('filtre-territoire-details');
+    var territoireLabel = document.getElementById('filtre-territoire-label');
+    if (territoire) {
+      territoire.classList.add('activite-group');
+      territoire.open = false;
+    }
+    if (territoireLabel) {
+      territoireLabel.hidden = false;
+      territoireLabel.classList.add('activite-group-label');
+    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', preparerOngletEtablissements);
   else preparerOngletEtablissements();
@@ -1719,7 +1725,6 @@ body.cmp-open { overflow:hidden; }
         </div>
       </div>
       <h2 id="sb-title">Cliniques en recrutement</h2>
-      <p class="sb-compteur" id="sb-compteur" hidden></p>
       <p class="maj" id="maj-date"></p>
       <div class="sb-search" id="sb-search">
         <span class="sb-search-ic" aria-hidden="true">🔍</span>
@@ -1727,8 +1732,10 @@ body.cmp-open { overflow:hidden; }
         <button type="button" class="sb-search-clear" id="sb-search-clear" aria-label="Effacer la recherche" title="Effacer">✕</button>
       </div>
       <div class="filtre-territoire" id="filtre-territoire-wrap">
-        <div class="filtre-section-label" id="filtre-territoire-label" hidden>Territoire</div>
-        <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>
+        <details id="filtre-territoire-details" open>
+          <summary id="filtre-territoire-label" hidden>Territoire</summary>
+          <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>
+        </details>
       </div>
       <div class="activite-panel" id="activite-panel" hidden>
         <div class="filtre-section-label filtre-section-label--activite">
@@ -2007,6 +2014,9 @@ const GROUPES_ACTIVITE = [
 // Les deux groupes sont dépliés au départ ; leur état survit aux reconstructions de la
 // liste de puces, qui a lieu à chaque changement de filtre.
 const groupesActiviteOuverts = new Set(GROUPES_ACTIVITE.map(g => g.label));
+/* Territoire : replié par défaut en mode établissements, même patron <details>
+   que Hospitalier / Communautaire. L'état survit aux reconstructions des boutons. */
+let territoireFiltreOuvert = false;
 const normTxt = s => (s == null ? '' : String(s)).toLowerCase().replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 // Un milieu \u00ab en recrutement \u00bb a recrutementActif !== false (absent = recrute, comme avant
 // l'ajout du champ). statutVisible() est LE point d'entr\u00e9e unique : matchesFilters(),
@@ -2676,7 +2686,6 @@ function fitToVisible() {
   } else {
     annoncerA11y(aucunMode() + ' ne correspond à cette recherche.');
   }
-  updateCompteurEtab();
 }
 
 // Clic sur la carte (fond) → fermer la fiche et revenir à la carte
@@ -2972,8 +2981,7 @@ function syncModeCarteUI() {
   const activitePanel = document.getElementById('activite-panel');
   if (activitePanel) activitePanel.hidden = modeCarte !== 'etablissements';
   if (activiteWrap && modeCarte !== 'etablissements') activiteWrap.innerHTML = '';
-  const territoireLabel = document.getElementById('filtre-territoire-label');
-  if (territoireLabel) territoireLabel.hidden = modeCarte !== 'etablissements';
+  syncPanneauTerritoire();
   const rlsWrap = document.getElementById('rls-btns');
   if (rlsWrap) rlsWrap.setAttribute('aria-label', modeCarte === 'etablissements' ? 'Filtrer par territoire' : 'Filtrer par RLS');
   const etabBtn = document.querySelector('.care-mode-btn[data-mode="etablissements"]');
@@ -2989,7 +2997,6 @@ function syncModeCarteUI() {
   const fav = document.getElementById('fav-toggle');
   if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
   syncAllClinicsToggle();
-  updateCompteurEtab();
   majLegende();
   mettreAJourMetaPage();
 }
@@ -3017,6 +3024,7 @@ function activerModeCarte(prochainMode) {
   showAllClinics = false;
   favOnly = false;
   rlsFilter = '';
+  territoireFiltreOuvert = false;
   activiteFilters.clear();
   searchQuery = '';
   const recherche = document.getElementById('sb-search-input');
@@ -3138,7 +3146,6 @@ function renderSidebar() {
       : aucunMode() + ' ne correspond aux filtres sélectionnés.') + '</div>';
   }
   updateCmpButton();
-  updateCompteurEtab();
 }
 
 // ═══════════════════════════════════════════
@@ -3712,21 +3719,34 @@ function libelleActivitePour(g) {
   const cat = categorieActivitePour(g);
   return (cat && (cat.libelleComplet || cat.libelle)) || (g && g.secteur) || '';
 }
-function updateCompteurEtab() {
-  const el = document.getElementById('sb-compteur');
-  if (!el) return;
-  if (modeCarte !== 'etablissements') {
-    el.hidden = true;
-    el.textContent = '';
-    return;
+function syncPanneauTerritoire() {
+  const details = document.getElementById('filtre-territoire-details');
+  const summary = document.getElementById('filtre-territoire-label');
+  if (!details) return;
+  if (modeCarte === 'etablissements') {
+    details.classList.add('activite-group');
+    if (summary) {
+      summary.hidden = false;
+      summary.classList.add('activite-group-label');
+    }
+    details.open = territoireFiltreOuvert;
+  } else {
+    details.classList.remove('activite-group');
+    if (summary) {
+      summary.hidden = true;
+      summary.classList.remove('activite-group-label');
+    }
+    details.open = true;
   }
-  el.hidden = false;
-  const secteurs = gmfs.filter(s => matchesFilters(s.id));
-  const insts = new Set(secteurs.map(s => s.installationId));
-  const xs = secteurs.length;
-  const ys = insts.size;
-  el.textContent = xs + ' secteur' + (xs > 1 ? 's' : '') + ' dans ' + ys + ' installation' + (ys > 1 ? 's' : '');
 }
+(function brancherRepliTerritoire() {
+  const details = document.getElementById('filtre-territoire-details');
+  if (!details || details.dataset.repliBranche) return;
+  details.dataset.repliBranche = '1';
+  details.addEventListener('toggle', () => {
+    if (modeCarte === 'etablissements') territoireFiltreOuvert = details.open;
+  });
+})();
 function appliquerFiltresEtab() {
   populateActiviteButtons();
   renderSidebar();
@@ -3861,6 +3881,7 @@ function buildFilters() {
   populateActiviteButtons();
   const btnWrap = document.getElementById('rls-btns');
   if (btnWrap) populateRlsButtons();
+  syncPanneauTerritoire();
 }
 
 function majIconeMarqueurDetail(fiche, actif) {
