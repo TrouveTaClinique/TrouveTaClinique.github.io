@@ -512,6 +512,7 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${esc(canonical || url)}">
   <meta name="robots" content="${robots}">
+  <meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />
   <meta property="og:locale" content="fr_CA">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trouve ta clinique">
@@ -1686,7 +1687,8 @@ ${sections}`;
   return page({
     titre: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
     description: 'Répertoire des installations de la Montérégie-Est dont un ou plusieurs secteurs d’activité recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.',
-    url, profondeur: 2, indexable: true, jsonLd, actif: 'etablissements', univers: u,
+    // TODO : remettre indexable: true une fois les 22 fiches établissements publiées (actuellement 3/22). La page reste en ligne et navigable (elle est déjà honnête sur son état — « Trois d'entre elles ont déjà une fiche détaillée ; les autres s'ouvrent sur la carte »), seulement retirée de l'indexation Google jusqu'au lot complet.
+    url, profondeur: 2, indexable: false, jsonLd, actif: 'etablissements', univers: u,
     filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
     corps
   });
@@ -1705,7 +1707,7 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
   const donnees = chargerDonneesEtablissements();
   ecrire(path.join('monteregie-est', 'etablissements', 'index.html'),
     pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo));
-  entrees.push({ loc: '/monteregie-est/etablissements/', lastmod: majPagesSeo, changefreq: 'weekly', priority: '0.8' });
+  /* Hors sitemap tant que le répertoire est en noindex (lot 3/22). */
   const conserves = new Set();
   let n = 0;
   for (const id of PREMIER_LOT_ETABLISSEMENTS) {

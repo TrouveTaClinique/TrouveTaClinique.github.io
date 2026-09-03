@@ -1,12 +1,14 @@
-# Rapport de livraison finale du brouillon
+# Rapport de livraison — 31 août 2026 (archive)
 
 Date : 31 août 2026  
 Projet : Trouve ta clinique  
-Cible prévue : branche `brouillon` de `TrouveTaClinique/TrouveTaClinique.github.io`
 
-## État livré
+Document d’archive. Il décrit l’état du chantier à la clôture de l’étape 4.
+La production est aujourd’hui servie depuis `main` sur trouvetaclinique.ca.
 
-Cette archive contient le brouillon complet validé à l’étape 4, notamment :
+## État livré à cette date
+
+Cette archive contenait le site validé à l’étape 4, notamment :
 
 - la nouvelle page d’accueil;
 - la carte complète dans `/monteregie/`;
@@ -21,26 +23,23 @@ Cette archive contient le brouillon complet validé à l’étape 4, notamment :
 
 Le détail des validations est conservé dans `RAPPORT-QA-ETAPE-4.md`.
 
-## Situation du nouveau repo
+## Situation du repo à cette date
 
-Le repo existe, mais il est entièrement vide : aucune branche et aucun commit n’existent. Il est
-donc impossible de créer `brouillon` à partir de `main` sans initialiser ou modifier `main`, ce qui
-est expressément interdit sans autorisation.
+Le 31 août 2026, le nouveau dépôt GitHub existait mais était encore vide : aucune branche
+et aucun commit. Aucune écriture GitHub n’avait encore été effectuée depuis cette archive.
 
-Aucune écriture GitHub n’a été effectuée.
+## Préparation alors demandée au propriétaire
 
-## Préparation requise par le propriétaire
+Ces étapes ont ensuite été réalisées hors de ce rapport (import de `main`, secrets GitHub,
+branche `brouillon`, aperçu sur apercu.trouvetaclinique.ca).
 
-1. Importer ou transférer la version officielle actuelle dans la branche `main` du nouveau repo.
-2. Vérifier que le site officiel actuel demeure accessible pendant la migration.
+1. Importer ou transférer la version officielle alors en ligne dans la branche `main`.
+2. Vérifier que le site officiel demeure accessible pendant la migration.
 3. Configurer dans les secrets GitHub Actions le secret de protection prévu par le projet.
-4. Confirmer ensuite que la branche `brouillon` peut être créée depuis `main`.
+4. Créer la branche `brouillon` depuis `main`.
 
-Après cette confirmation, le contenu de l’archive pourra être déposé uniquement dans
-`brouillon`. Aucun changement de `main`, de GitHub Pages ou du domaine ne devra être réalisé sans
-une nouvelle autorisation explicite.
+## Limite notée à cette date
 
-## Limite avant une publication officielle
-
-Les validations techniques sont réussies. L’inspection visuelle automatisée bureau et mobile
-reste à effectuer dès qu’un navigateur de test ou une prévisualisation privée est disponible.
+Les validations techniques étaient réussies. L’inspection visuelle automatisée bureau et
+mobile restait à effectuer dès qu’un navigateur de test ou une prévisualisation privée
+serait disponible.

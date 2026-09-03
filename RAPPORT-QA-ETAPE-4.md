@@ -1,12 +1,15 @@
-# Rapport QA — étape 4
+# Rapport QA — étape 4 (archive du 31 août 2026)
 
 Date : 31 août 2026  
 Statut : contrôles techniques réussis, inspection visuelle automatisée indisponible
 
+Rapport d’archive. Conservé pour l’historique ; il décrit les contrôles du 31 août 2026.
+
 ## Résultat
 
-Le brouillon se régénère de façon déterministe et les fichiers produits sont cohérents avec
-l’architecture définie. Aucun fichier n’a été envoyé sur `main` ou mis en production.
+Le site se régénérait de façon déterministe et les fichiers produits étaient cohérents
+avec l’architecture définie. À cette date, aucun fichier de cette archive n’avait encore
+été envoyé sur `main`.
 
 | Contrôle | Résultat |
 | --- | ---: |
