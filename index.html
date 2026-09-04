@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trouve ta clinique — Cliniques qui recrutent en médecine familiale | Montérégie</title>
-  <meta name="description" content="Carte interactive des cliniques et établissements de la Montérégie. Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM en médecine familiale.">
+  <title>Cliniques qui recrutent en médecine familiale — Montérégie</title>
+  <meta name="description" content="Carte des cliniques et établissements de la Montérégie : coordonnées, horaires et contacts pour préparer votre PTEM en médecine familiale.">
   <link rel="canonical" href="https://trouvetaclinique.ca/">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />
   <meta property="og:locale" content="fr_CA">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trouve ta clinique">
-  <meta property="og:title" content="Trouve ta clinique — Cliniques qui recrutent en médecine familiale | Montérégie">
-  <meta property="og:description" content="Carte interactive des cliniques et établissements de la Montérégie. Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM en médecine familiale.">
+  <meta property="og:title" content="Cliniques qui recrutent en médecine familiale — Montérégie">
+  <meta property="og:description" content="Carte des cliniques et établissements de la Montérégie : coordonnées, horaires et contacts pour préparer votre PTEM en médecine familiale.">
   <meta property="og:url" content="https://trouvetaclinique.ca/">
-  <meta property="og:image" content="https://trouvetaclinique.ca/assets/banniere_monteregie-est.jpg">
-  <meta property="og:image:width" content="1024">
-  <meta property="og:image:height" content="341">
-  <meta property="og:image:alt" content="Carte interactive Montérégie-Est — Trouve ta clinique.">
+  <meta property="og:image" content="https://trouvetaclinique.ca/assets/og-image-accueil.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Trouve ta clinique — cliniques et établissements en recrutement en Montérégie.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Trouve ta clinique — Cliniques qui recrutent en médecine familiale | Montérégie">
-  <meta name="twitter:description" content="Carte interactive des cliniques et établissements de la Montérégie. Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM en médecine familiale.">
-  <meta name="twitter:image" content="https://trouvetaclinique.ca/assets/banniere_monteregie-est.jpg">
+  <meta name="twitter:title" content="Cliniques qui recrutent en médecine familiale — Montérégie">
+  <meta name="twitter:description" content="Carte des cliniques et établissements de la Montérégie : coordonnées, horaires et contacts pour préparer votre PTEM en médecine familiale.">
+  <meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-image-accueil.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
@@ -32,14 +32,24 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "@id": "https://trouvetaclinique.ca/#organisation",
+        "name": "Trouve ta clinique",
+        "url": "https://trouvetaclinique.ca/",
+        "logo": "https://trouvetaclinique.ca/apple-touch-icon-180.png",
+        "founder": {
+          "@id": "https://trouvetaclinique.ca/#auteur"
+        }
+      },
+      {
         "@type": "WebSite",
         "@id": "https://trouvetaclinique.ca/#website",
         "name": "Trouve ta clinique",
         "url": "https://trouvetaclinique.ca/",
         "inLanguage": "fr-CA",
-        "description": "Carte interactive des cliniques et établissements de la Montérégie. Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM en médecine familiale.",
+        "description": "Carte des cliniques et établissements de la Montérégie : coordonnées, horaires et contacts pour préparer votre PTEM en médecine familiale.",
         "publisher": {
-          "@id": "https://trouvetaclinique.ca/#auteur"
+          "@id": "https://trouvetaclinique.ca/#organisation"
         }
       },
       {
@@ -53,7 +63,7 @@
         "@type": "WebPage",
         "@id": "https://trouvetaclinique.ca/#accueil",
         "url": "https://trouvetaclinique.ca/",
-        "name": "Trouve ta clinique — Cliniques qui recrutent en médecine familiale | Montérégie",
+        "name": "Cliniques qui recrutent en médecine familiale — Montérégie",
         "isPartOf": {
           "@id": "https://trouvetaclinique.ca/#website"
         },
@@ -122,8 +132,8 @@
   <span>Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel</span>
   <span class="text-cta">Ouvrir la carte →</span>
 </a>
-<h3 class="soustitre">Autres territoires de la Montérégie <span class="note-construction">(en construction)</span></h3>
-<p class="terr-autres-note">Les cartes Centre et Ouest sont en préparation ; seule la Montérégie-Est est pleinement disponible pour l'instant.</p>
+<h3 class="soustitre">Autres territoires de la Montérégie</h3>
+<p class="terr-autres-note">Les cartes Centre et Ouest sont publiées. La Montérégie-Est reste le territoire le plus complet (cliniques, établissements, PTEM et AMP).</p>
 <div class="terr-autres">
   <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
   <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
@@ -170,12 +180,12 @@
 </div>
 <h3 class="soustitre">Autres RLS de la Montérégie</h3>
 <div class="rls-liste rls-liste-autres">
-      <a href="/rls/champlain/">Champlain</a>
-      <a href="/rls/haut-richelieu-rouville/">Haut-Richelieu–Rouville</a>
-      <a href="/rls/jardins-roussillon/">Jardins-Roussillon</a>
-      <a href="/rls/vaudreuil-soulanges/">Vaudreuil-Soulanges</a>
-      <a href="/rls/du-suroit/">du Suroît</a>
-      <a href="/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a>
+      <a href="/monteregie-centre/rls/champlain/">Champlain</a>
+      <a href="/monteregie-centre/rls/haut-richelieu-rouville/">Haut-Richelieu–Rouville</a>
+      <a href="/monteregie-ouest/rls/jardins-roussillon/">Jardins-Roussillon</a>
+      <a href="/monteregie-ouest/rls/vaudreuil-soulanges/">Vaudreuil-Soulanges</a>
+      <a href="/monteregie-ouest/rls/du-suroit/">du Suroît</a>
+      <a href="/monteregie-ouest/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a>
 </div>
 
 <div class="fact-card encart-gp">

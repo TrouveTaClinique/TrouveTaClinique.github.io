@@ -127,20 +127,22 @@ function appliquerIdentiteRegionale(source, t) {
   const etat = { html: source.replace(/\r\n/g, '\n').replace(BLOC_HORS_REGION, ''), manques: [] };
   const r = (ancien, nouveau, libelle) => remplacer(etat, ancien, nouveau, libelle);
 
-  r('<title>Carte complète de la Montérégie — Cliniques en recrutement | Trouve ta clinique</title>',
-    `<title>Cliniques en recrutement — ${t.nom} | Trouve ta clinique</title>`, 'titre');
+  r('<title>Carte complète de la Montérégie — Cliniques en recrutement</title>',
+    `<title>Cliniques en recrutement — ${t.nom}</title>`, 'titre');
   r('<meta name="description" content="Explorez la carte complète des cliniques en recrutement et des établissements de la Montérégie pour préparer votre PTEM en médecine familiale.">',
     `<meta name="description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}, pour préparer votre PTEM en médecine familiale.">`, 'description');
   r('<link rel="canonical" href="https://trouvetaclinique.ca/monteregie/">',
     `<link rel="canonical" href="https://trouvetaclinique.ca/${t.dossier}/">`, 'canonical');
+  r('<meta name="robots" content="noindex,follow">',
+    '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">', 'robots');
   r('<meta property="og:url" content="https://trouvetaclinique.ca/monteregie/">',
     `<meta property="og:url" content="https://trouvetaclinique.ca/${t.dossier}/">`, 'og:url');
   r('<meta property="og:title" content="Carte complète de la Montérégie | Trouve ta clinique">',
-    `<meta property="og:title" content="Cliniques en recrutement — ${t.nom} | Trouve ta clinique">`, 'og:title');
+    `<meta property="og:title" content="Cliniques en recrutement — ${t.nom}">`, 'og:title');
   r('<meta property="og:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">',
     `<meta property="og:description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}.">`, 'og:description');
   r('<meta name="twitter:title" content="Carte complète de la Montérégie | Trouve ta clinique">',
-    `<meta name="twitter:title" content="Cliniques en recrutement — ${t.nom} | Trouve ta clinique">`, 'twitter:title');
+    `<meta name="twitter:title" content="Cliniques en recrutement — ${t.nom}">`, 'twitter:title');
   r('<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">',
     `<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}.">`, 'twitter:description');
 
@@ -191,16 +193,8 @@ function appliquerIdentiteRegionale(source, t) {
     `    <strong>Montérégie<span class="brand-tiret">-</span><span class="brand-mot">${t.mot}</span></strong>`, 'identité du header');
 
   if (t.banniere) {
-    r('<meta property="og:image" content="https://trouvetaclinique.ca/og-image.png?v=2">',
-      `<meta property="og:image" content="${t.banniere.url}">`, 'og:image');
-    r('<meta property="og:image:width" content="1200">',
-      `<meta property="og:image:width" content="${t.banniere.largeur}">`, 'og:image:width');
-    r('<meta property="og:image:height" content="630">',
-      `<meta property="og:image:height" content="${t.banniere.hauteur}">`, 'og:image:height');
     r('<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique.">',
       `<meta property="og:image:alt" content="${t.banniere.alt}">`, 'og:image:alt');
-    r('<meta name="twitter:image" content="https://trouvetaclinique.ca/og-image.png?v=2">',
-      `<meta name="twitter:image" content="${t.banniere.url}">`, 'twitter:image');
   } else {
     r('<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique.">',
       `<meta property="og:image:alt" content="Carte interactive ${t.nom} — Trouve ta clinique.">`, 'og:image:alt');
@@ -232,7 +226,7 @@ function appliquerIdentiteRegionale(source, t) {
     // L'Est SQ n'utilise pas Raleway/Lato/Kaushan : retirer le chargement Google Fonts
     // hérité du gabarit commun (audit 2 sept. 2026).
     const head = etat.html.slice(0, debutStyle)
-      .replace('<html lang="fr">', '<html lang="fr" data-region="Est">')
+      .replace('<html lang="fr-CA">', '<html lang="fr-CA" data-region="Est">')
       .replace(/\n?<link href="https:\/\/fonts\.googleapis\.com\/css2\?[^"]*" rel="stylesheet">/g, '');
     const carteSq = fs.readFileSync(SOURCE_EST_SQ, 'utf8').replace(/\r\n/g, '\n');
     if (!carteSq.includes('<!-- PWA_SERVICE_WORKER -->')) {

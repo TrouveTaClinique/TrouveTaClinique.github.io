@@ -1,0 +1,12 @@
+# Trouve ta clinique
+
+Site d'information pour les médecins de famille et les résidents qui cherchent un milieu de pratique en Montérégie (Québec) : cliniques en recrutement, secteurs en établissement, PTEM et AMP.
+
+- Public : médecins et résidents, pas les patients à la recherche d'un rendez-vous.
+- Territoires : Montérégie-Est, Montérégie-Centre, Montérégie-Ouest.
+- URL canonique : https://trouvetaclinique.ca/
+- Carte Est : https://trouvetaclinique.ca/monteregie-est/
+- PTEM : https://trouvetaclinique.ca/monteregie-est/ptem/
+- AMP : https://trouvetaclinique.ca/monteregie-est/amp/
+
+Ne pas utiliser ce site pour prendre rendez-vous comme patient : Rendez-vous santé Québec ou le 811.

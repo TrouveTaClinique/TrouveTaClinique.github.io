@@ -24,7 +24,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // renommage de l'identifiant des territoires dans territoires-monteregie.js (ressource en cache).
 // v64-accueil-fraiche (4 septembre 2026) : auto-destruction de l'ancien enregistrement de
 // portée « / », qui servait encore une page d'accueil périmée au premier chargement.
-const CACHE = CACHE_PREFIX + 'v64-accueil-fraiche';
+// v65-seo-meta (4 septembre 2026) : lang fr-CA, noindex de /monteregie/, OG 1200×630,
+// meta Search Console retirée des cartes (conservée sur l’accueil).
+const CACHE = CACHE_PREFIX + 'v65-seo-meta';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

@@ -294,6 +294,143 @@ function rempli(v) {
   return true;
 }
 
+/* Titles / meta : Google coupe vers 60 / 155–160 caractères. Le nom du site est déjà
+   fourni par og:site_name — on ne le répète plus dans <title>. */
+function limiterTexte(s, max) {
+  const t = String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  const coupe = t.slice(0, max - 1);
+  const espace = coupe.lastIndexOf(' ');
+  return ((espace > max * 0.55 ? coupe.slice(0, espace) : coupe).replace(/[ ,;:–—-]+$/, '') + '…');
+}
+
+function listeFr(items) {
+  const vals = (items || []).map(x => String(x).trim()).filter(Boolean);
+  if (vals.length === 0) return '';
+  if (vals.length === 1) return vals[0];
+  if (vals.length === 2) return vals[0] + ' et ' + vals[1];
+  return vals.slice(0, -1).join(', ') + ' et ' + vals[vals.length - 1];
+}
+
+function articleIndefini(type) {
+  const t = String(type || '').trim();
+  if (!t) return 'un';
+  if (/^(h[oô]pital|gmf|clsc|chsld|centre)\b/i.test(t) || /^gmf/i.test(t)) return 'un';
+  if (/^[aeiouéèêàâîïôùûh]/i.test(t) && !/^un\b/i.test(t)) return "un";
+  if (/^(clinique|coopérative|coop)/i.test(t)) return 'une';
+  return 'un';
+}
+
+/* Paragraphe unique dérivé uniquement des champs déjà publics. Ne compte PAS dans
+   SEUIL_INDEXATION : on n’indexe pas une fiche mince en recyclant les 3 champs déjà là. */
+function presentationDepuisDonnees(c) {
+  if (rempli(c.presentation)) return String(c.presentation).trim();
+  const type = rempli(c.type) ? c.type : 'milieu de pratique';
+  const ville = rempli(c.ville) ? c.ville : 'la Montérégie';
+  const rls = rempli(c.rls) ? ` dans le RLS ${c.rls}` : '';
+  const territoire = rempli(c.region) ? ` (Montérégie-${c.region})` : '';
+  const phrases = [];
+  if (recrute(c)) {
+    phrases.push(`${c.nom} est ${articleIndefini(type)} ${type} situé à ${ville}${rls}${territoire}. Le milieu recrute actuellement des médecins de famille.`);
+  } else {
+    phrases.push(`${c.nom} est ${articleIndefini(type)} ${type} situé à ${ville}${rls}${territoire}. Il figure au répertoire à titre de référence et ne recrute pas de médecin de famille pour le moment.`);
+  }
+  const pratiques = Array.isArray(c.pratiques) ? c.pratiques.map(p => PRATIQUES[p] || p).filter(Boolean) : [];
+  if (pratiques.length) {
+    phrases.push(`Les pratiques indiquées comprennent ${listeFr(pratiques)}.`);
+  }
+  if (rempli(c.dme)) phrases.push(`Le dossier médical électronique utilisé est ${c.dme}.`);
+  if (rempli(c.horaire)) {
+    const ouverts = JOURS.filter(j => rempli(c.horaire[j]) && !/^ferm/i.test(String(c.horaire[j])));
+    if (ouverts.length) phrases.push(`Des heures d’ouverture sont publiées pour ${listeFr(ouverts)}.`);
+  }
+  if (rempli(c.personnel)) {
+    const postes = Object.keys(PERSONNEL).filter(k => rempli(c.personnel[k]));
+    if (postes.length) {
+      phrases.push(`L’équipe déclarée compte notamment ${listeFr(postes.map(k => PERSONNEL[k]))}.`);
+    }
+  }
+  if (String(c.type || '').toUpperCase() === 'GMF-U') {
+    phrases.push('Comme tout GMF-U, un recrutement suppose l’aval du directeur du département universitaire de médecine familiale concerné.');
+  }
+  return phrases.join(' ');
+}
+
+function titreClinique(c) {
+  const base = rempli(c.ville) ? `${c.nom} — ${c.ville}` : String(c.nom || '');
+  return limiterTexte(base, 58);
+}
+
+function descriptionClinique(c) {
+  const type = rempli(c.type) ? c.type : 'milieu';
+  const ville = rempli(c.ville) ? c.ville : 'Montérégie';
+  const rls = rempli(c.rls) ? ` (RLS ${c.rls})` : '';
+  const extra = [];
+  if (Array.isArray(c.pratiques) && c.pratiques.length) extra.push('pratiques');
+  if (rempli(c.dme)) extra.push('DMÉ');
+  if (rempli(c.horaire)) extra.push('horaires');
+  const queue = extra.length ? ` : ${listeFr(extra)}.` : '.';
+  const corps = recrute(c)
+    ? `${c.nom}, ${type} à ${ville}${rls}, recrute des médecins de famille${queue}`
+    : `${c.nom}, ${type} à ${ville}${rls}, ne recrute pas actuellement${queue}`;
+  return limiterTexte(corps, 155);
+}
+
+/* Image de partage 1200×630 (pas la bannière Est 1024×341). */
+const OG_PARTAGE = {
+  url: `${SITE}/assets/og-image-accueil.png`,
+  largeur: '1200',
+  hauteur: '630',
+  alt: 'Trouve ta clinique — cliniques et établissements en recrutement en Montérégie.'
+};
+
+/* GMF-U qui ont aussi une fiche établissement : une seule URL indexable (l’établissement).
+   Rempli dans main() avant la génération. Clé = id clinique (string) → slug établissement. */
+let HREF_GMFU_ETABLISSEMENT = {};
+
+function indexerGmfuCanoniques() {
+  const donnees = chargerDonneesEtablissements();
+  const lot = new Set(PREMIER_LOT_ETABLISSEMENTS);
+  const map = {};
+  for (const inst of donnees.installations || []) {
+    if (inst.type !== 'gmf-u' || !lot.has(inst.id)) continue;
+    const ref = inst.referenceExistante;
+    if (ref && ref.collection === 'cliniques' && ref.id != null) {
+      map[String(ref.id)] = slugEtablissement(inst);
+    }
+  }
+  HREF_GMFU_ETABLISSEMENT = map;
+}
+
+function hrefFicheMilieu(c, slug, prefixe) {
+  const etab = HREF_GMFU_ETABLISSEMENT[String(c.id)];
+  if (etab) return `${EST_PREFIXE}/etablissements/${etab}/`;
+  return `${prefixe}/cliniques/${slug}/`;
+}
+
+function jsonLdJobPosting(c, url, majDonnees) {
+  if (!recrute(c)) return null;
+  return {
+    '@type': 'JobPosting',
+    title: 'Médecin de famille',
+    description: presentationDepuisDonnees(c),
+    datePosted: majDonnees,
+    validThrough: '2027-11-30',
+    employmentType: 'FULL_TIME',
+    hiringOrganization: {
+      '@type': 'MedicalOrganization',
+      name: c.nom,
+      url
+    },
+    jobLocation: {
+      '@type': 'Place',
+      address: Object.assign({ '@type': 'PostalAddress' }, decouperAdresse(c.adresse, c.ville))
+    },
+    url,
+    identifier: { '@type': 'PropertyValue', name: 'Trouve ta clinique', value: String(c.id) }
+  };
+}
+
 /* Rend chaque adresse courriel de recrutement cliquable (séparateurs : virgule, ;, espace). */
 function lienCourrielRecrutement(valeur) {
   const texte = String(valeur || '').trim();
@@ -537,15 +674,26 @@ const UNIVERS_REGIONS = [
 /* Accès par territoire : UNIVERS_PAR_REGION['Est'] → l'univers de la Montérégie-Est. */
 const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region, u]));
 
-/* Navigation identique sur toutes les pages SEO : la marque renvoie toujours à l'accueil. */
-const LIENS_NAV = [
-  ['/', 'Accueil', 'accueil'],
-  [EST_ACCUEIL, 'Carte interactive', 'carte'],
-  [EST_PREFIXE + '/cliniques/', 'Cliniques', 'cliniques'],
-  [EST_PREFIXE + '/etablissements/', 'Établissements', 'etablissements'],
-  [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
-  [EST_PREFIXE + '/amp/', 'AMP', 'amp']
-];
+/* Navigation : carte et cliniques suivent le territoire de la page. PTEM/AMP restent
+   les guides canoniques de l’Est (les copies Centre/Ouest ne sont que des redirections).
+   Le répertoire établissements n’existe qu’en Montérégie-Est. */
+function liensNav(u) {
+  const prefixe = (u && u.regional) ? u.prefixe : EST_PREFIXE;
+  const carte = (u && u.regional) ? u.accueil : EST_ACCUEIL;
+  const liens = [
+    ['/', 'Accueil', 'accueil'],
+    [carte, 'Carte interactive', 'carte'],
+    [prefixe + '/cliniques/', 'Cliniques', 'cliniques']
+  ];
+  if (!u || !u.regional || u.region === 'Est') {
+    liens.push([EST_PREFIXE + '/etablissements/', 'Établissements', 'etablissements']);
+  }
+  liens.push(
+    [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
+    [EST_PREFIXE + '/amp/', 'AMP', 'amp']
+  );
+  return liens;
+}
 
 function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
   const wrap = compact ? 'sqb-wrap compact directory-banner' : 'sqb-wrap';
@@ -554,7 +702,8 @@ function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
 }
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
-                filDAriane, corps, actif, univers = UNIVERS_GENERAL, ogImageOverride = null }) {
+                filDAriane, corps, actif, univers = UNIVERS_GENERAL, ogImageOverride = null,
+                verification = false }) {
   const u = univers;
   /* Feuille de style : chemin relatif dans l'univers général (comme avant), absolu dans
      l'univers Est, dont les pages ne vivent pas toutes à la même profondeur. */
@@ -564,23 +713,18 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
   const robots = indexable
     ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
     : 'noindex,follow';
-  // Aperçu de partage (og:image) : la bannière Montérégie-Est dans l'univers Est, pour qu'un
-  // lien partagé (courriel, réseaux sociaux…) affiche la bonne image — pas celle de la
-  // carte générale des 3 territoires (22 août : bannière officielle appliquée de façon
-  // cohérente partout).
   const ogImage = ogImageOverride
     ? `${SITE}/assets/${ogImageOverride.fichier}`
-    : (u.banniere ? `${SITE}/assets/${u.banniere.fichier}` : `${SITE}/og-image.png?v=2`);
-  const ogImageW = ogImageOverride ? ogImageOverride.largeur : (u.banniere ? u.banniere.largeur : '1200');
-  const ogImageH = ogImageOverride ? ogImageOverride.hauteur : (u.banniere ? u.banniere.hauteur : '630');
-  const ogImageAlt = ogImageOverride ? ogImageOverride.alt
-    : (u.regional
-      ? `Carte interactive ${u.nom} — Trouve ta clinique.`
-      : 'Carte interactive Montérégie-Est — Trouve ta clinique.');
-  /* Navigation unifiée : même libellés et mêmes cibles sur toutes les pages SEO. */
-  const liens = LIENS_NAV;
+    : OG_PARTAGE.url;
+  const ogImageW = ogImageOverride ? ogImageOverride.largeur : OG_PARTAGE.largeur;
+  const ogImageH = ogImageOverride ? ogImageOverride.hauteur : OG_PARTAGE.hauteur;
+  const ogImageAlt = ogImageOverride ? ogImageOverride.alt : OG_PARTAGE.alt;
+  const liens = liensNav(u);
   const nav = liens.map(([href, txt, cle]) =>
     `      <a href="${href}"${actif === cle ? ' aria-current="page"' : ''}>${txt}</a>`).join('\n');
+  const metaVerification = verification
+    ? '  <meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />\n'
+    : '';
 
   return `<!doctype html>
 <html lang="fr-CA">
@@ -591,8 +735,7 @@ function page({ titre, description, url, profondeur, indexable = true, canonical
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${esc(canonical || url)}">
   <meta name="robots" content="${robots}">
-  <meta name="google-site-verification" content="-8EkDVTZKsywxr7fJMd3kZIMVaUedo7eU9ThFutr8dY" />
-  <meta property="og:locale" content="fr_CA">
+${metaVerification}  <meta property="og:locale" content="fr_CA">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trouve ta clinique">
   <meta property="og:title" content="${esc(titre)}">
@@ -693,7 +836,7 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   ajouter('Autres gardes', esc(c.gardeAutre));
   ajouter('Porte ouverte', esc(c.porteOuverte));
   ajouter('Site web', rempli(c.site)
-    ? `<a href="${esc(c.site)}" rel="noopener nofollow" target="_blank">${esc(c.site)}</a>` : '');
+    ? `<a href="${esc(c.site)}" rel="noopener" target="_blank">${esc(c.site)}</a>` : '');
   if (rempli(c.responsableNom)) {
     ajouter('Responsable', esc(c.responsableNom));
   }
@@ -736,16 +879,14 @@ ${items}
     }
   }
 
-  /* --- Texte libre du milieu (vide pour l'instant dans data.json, apparaîtra tout seul) --- */
-  let blocTexte = '';
-  if (rempli(c.presentation) || rempli(c.infos)) {
-    blocTexte = `
+  /* --- Texte du milieu : champ libre, sinon paragraphe dérivé des champs publics --- */
+  const textePresentation = presentationDepuisDonnees(c);
+  let blocTexte = `
   <section id="presentation">
     <h2>Présentation du milieu</h2>
-${rempli(c.presentation) ? '    <p>' + esc(c.presentation) + '</p>' : ''}
+    <p>${esc(textePresentation)}</p>
 ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
   </section>`;
-  }
 
   /* --- Données structurées : uniquement ce qu'on sait réellement --- */
   const clinique = {
@@ -786,6 +927,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     clinique.contactPoint = [point];
   }
 
+  const job = jsonLdJobPosting(c, url, majDonnees);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -793,15 +935,14 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
         '@type': 'WebPage',
         '@id': url + '#webpage',
         url: url,
-        name: enRecrutement
-          ? `${c.nom} — clinique en recrutement en Montérégie | Trouve ta clinique`
-          : `${c.nom} — clinique de la Montérégie | Trouve ta clinique`,
+        name: titreClinique(c),
         inLanguage: 'fr-CA',
         dateModified: majDonnees,
         isPartOf: { '@id': SITE + '/#website' },
         about: { '@id': url + '#clinique' }
       },
       clinique,
+      ...(job ? [job] : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: u.regional
@@ -836,9 +977,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
   const corps = `  <section class="hero">
     <p class="eyebrow">${esc(c.type)}${rempli(c.rls) ? ' · RLS ' + esc(c.rls) : ''}${enRecrutement ? '' : ' · Ne recrute pas actuellement'}</p>
     <h1>${esc(c.nom)}${badgeVerif(c)}</h1>
-    <p class="lead">${enRecrutement
-      ? `${esc(c.nom)} — ${esc(c.type)} situé à ${esc(c.ville)}, en Montérégie — recrute des médecins de famille. Cette page rassemble les renseignements actuellement publiés dans le répertoire pour aider à évaluer le milieu avant de le contacter.`
-      : `${esc(c.nom)} — ${esc(c.type)} situé à ${esc(c.ville)}, en Montérégie. Ce milieu ne recrute pas de médecin de famille actuellement; cette page rassemble les renseignements publiés dans le répertoire à titre de référence.`}</p>
+    <p class="lead">${esc(textePresentation)}</p>
     <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${u.accueil}?c=${c.id}">Voir sur la carte interactive</a>
@@ -860,18 +999,16 @@ ${lignes.join('\n')}
     <h2>Pour aller plus loin</h2>
     <ul class="source-list">
       <li><a href="${lienPrefixe}/rls/${slugifier(c.rls || '')}/">Autres milieux du RLS ${esc(c.rls)}</a></li>
-      <li><a href="${lienPrefixe}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
-      <li><a href="${lienPrefixe}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
+      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
+      <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
       <li><a href="${u.accueil}?c=${c.id}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
   </section>`;
 
   return {
     html: page({
-      titre: `${c.nom} — ${c.ville} | Trouve ta clinique`,
-      description: enRecrutement
-        ? `${c.nom}, ${c.type} de ${c.ville} (RLS ${c.rls}) en recrutement de médecins de famille en Montérégie : type de milieu, pratiques offertes${rempli(c.dme) ? ', DMÉ' : ''}${rempli(c.horaire) ? ', heures d’ouverture' : ''}.`
-        : `${c.nom}, ${c.type} de ${c.ville} (RLS ${c.rls}) en Montérégie — ne recrute pas de médecin de famille actuellement : type de milieu, coordonnées et heures d’ouverture publiées à titre de référence.`,
+      titre: titreClinique(c),
+      description: descriptionClinique(c),
       url, canonical, profondeur: 2, indexable, jsonLd, univers: u,
       actif: u.regional ? null : 'cliniques',
       filDAriane: u.regional
@@ -944,7 +1081,7 @@ function pageRls(rls, liste, slugs, majDonnees, u = UNIVERS_GENERAL) {
   // NB : le badge est un frère de <a>, jamais imbriqué dedans — un <button> à l'intérieur d'un
   // <a> est du HTML invalide (contenu interactif imbriqué) et casserait le clic/le focus.
   const item = c => `      <li>
-        <a href="${u.prefixe}/cliniques/${slugs[String(c.id)]}/"><strong>${esc(c.nom)}</strong></a>${badgeVerif(c)}
+        <a href="${hrefFicheMilieu(c, slugs[String(c.id)], u.prefixe)}"><strong>${esc(c.nom)}</strong></a>${badgeVerif(c)}
         <span class="rep-meta">${esc(c.ville)} · ${esc(c.type)}${rempli(c.dme) ? ' · DMÉ ' + esc(c.dme) : ''}${recrute(c) ? '' : ' · Ne recrute pas actuellement'}</span>
       </li>`;
   const items = actifs.map(item).join('\n');
@@ -955,7 +1092,7 @@ function pageRls(rls, liste, slugs, majDonnees, u = UNIVERS_GENERAL) {
     '@graph': [
       {
         '@type': 'WebPage', '@id': url + '#webpage', url,
-        name: `Cliniques en recrutement — RLS ${rls} | Trouve ta clinique`,
+        name: `Cliniques en recrutement — RLS ${rls}`,
         inLanguage: 'fr-CA', dateModified: majDonnees,
         isPartOf: { '@id': SITE + '/#website' }
       },
@@ -981,14 +1118,14 @@ function pageRls(rls, liste, slugs, majDonnees, u = UNIVERS_GENERAL) {
     <div class="cta-row">
       <a class="button primary" href="${u.accueil}">Voir ce RLS sur la carte</a>
       ${u.regional
-        ? `<a class="button secondary" href="${u.prefixe}/ptem/">Comprendre le PTEM</a>`
+        ? `<a class="button secondary" href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a>`
         : `<a class="button secondary" href="${EST_PREFIXE}/cliniques/">Toutes les cliniques</a>`}
       ${(!u.regional && uRegion)
         ? `<a class="button secondary" href="${uRegion.accueil}">${esc(uRegion.nom)}</a>` : ''}
     </div>
   </section>
 
-  <div class="callout official"><strong>Pourquoi le RLS compte :</strong> l’avis de conformité PTEM précise la région ou le sous-territoire où le médecin doit réaliser au moins 55 % de ses jours de facturation. Le choix du RLS se fait donc en même temps que celui du milieu. <a href="${u.regional ? u.prefixe : EST_PREFIXE}/ptem/">Comprendre le PTEM →</a> <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
+  <div class="callout official"><strong>Pourquoi le RLS compte :</strong> l’avis de conformité PTEM précise la région ou le sous-territoire où le médecin doit réaliser au moins 55 % de ses jours de facturation. Le choix du RLS se fait donc en même temps que celui du milieu. <a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM →</a> <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
   <section id="milieux">
     <h2>Les ${actifs.length} milieu${actifs.length > 1 ? 'x' : ''} qui recrutent</h2>
@@ -1016,8 +1153,13 @@ ${prats.length ? `      <dt>Pratiques offertes dans le RLS</dt><dd>${esc(prats.j
   </section>`;
 
   return { indexable, html: page({
-    titre: `Cliniques en recrutement — RLS ${rls} (Montérégie) | Trouve ta clinique`,
-    description: `Les ${actifs.length} cliniques en recrutement de médecins de famille du RLS ${rls}, en Montérégie : ${villesActifs.slice(0, 4).join(', ')}. Type de milieu, pratiques et fiche détaillée pour chacune.${inactifs.length ? ` ${inactifs.length} autre(s) milieu(x) du RLS, publiés à titre de référence, ne recrutent pas actuellement.` : ''}`,
+    titre: limiterTexte(`Cliniques en recrutement — RLS ${rls}`, 58),
+    description: limiterTexte(
+      inactifs.length
+        ? `${actifs.length} milieux en recrutement dans le RLS ${rls} (${villesActifs.slice(0, 3).join(', ')}), plus ${inactifs.length} publié${inactifs.length > 1 ? 's' : ''} à titre de référence.`
+        : `${actifs.length} milieux en recrutement dans le RLS ${rls} (${villesActifs.slice(0, 4).join(', ')}). Fiches, pratiques et coordonnées.`,
+      155
+    ),
     url, canonical, profondeur: 2, indexable, jsonLd, univers: u,
     actif: u.regional ? null : 'cliniques',
     filDAriane: u.regional
@@ -1070,7 +1212,7 @@ function pageRlsHubRegion(u, parRls, majDonnees) {
     '@graph': [
       {
         '@type': 'CollectionPage', '@id': url + '#webpage', url,
-        name: `Réseaux locaux de services (RLS) — ${u.nom} | Trouve ta clinique`,
+        name: `RLS de la ${u.nom}`,
         inLanguage: 'fr-CA', dateModified: majDonnees,
         isPartOf: { '@id': SITE + '/#website' }
       },
@@ -1091,15 +1233,15 @@ function pageRlsHubRegion(u, parRls, majDonnees) {
     <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${u.accueil}">Voir sur la carte interactive</a>
-      <a class="button secondary" href="${u.prefixe}/ptem/">Comprendre le PTEM</a>
+      <a class="button secondary" href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a>
     </div>
   </section>
 
 ${sections}`;
 
   return page({
-    titre: `Réseaux locaux de services (RLS) — ${u.nom} | Trouve ta clinique`,
-    description: `Les ${rlsPresents.length} RLS de la ${u.nom} et leurs milieux en recrutement de médecins de famille.`,
+    titre: limiterTexte(`RLS de la ${u.nom}`, 58),
+    description: limiterTexte(`Les ${rlsPresents.length} RLS de la ${u.nom} et leurs milieux en recrutement de médecins de famille.`, 155),
     /* Indexable seulement là où le territoire tient aussi ses pages de RLS (voir `canonique`) :
        sinon ce hub renverrait Google vers des pages qu'on a nous-mêmes mises en noindex. */
     url, profondeur: 1, indexable: u.canonique, jsonLd, univers: u, actif: null,
@@ -1171,12 +1313,12 @@ function pageAccueil(toutesEntrees, majDonnees) {
 
   const RLS_EST = ['Pierre-Boucher', 'Richelieu-Yamaska', 'Pierre-De Saurel'];
   const RLS_AUTRES = [
-    ['Champlain', '/rls/champlain/'],
-    ['Haut-Richelieu–Rouville', '/rls/haut-richelieu-rouville/'],
-    ['Jardins-Roussillon', '/rls/jardins-roussillon/'],
-    ['Vaudreuil-Soulanges', '/rls/vaudreuil-soulanges/'],
-    ['du Suroît', '/rls/du-suroit/'],
-    ['du Haut-Saint-Laurent', '/rls/du-haut-saint-laurent/']
+    ['Champlain', '/monteregie-centre/rls/champlain/'],
+    ['Haut-Richelieu–Rouville', '/monteregie-centre/rls/haut-richelieu-rouville/'],
+    ['Jardins-Roussillon', '/monteregie-ouest/rls/jardins-roussillon/'],
+    ['Vaudreuil-Soulanges', '/monteregie-ouest/rls/vaudreuil-soulanges/'],
+    ['du Suroît', '/monteregie-ouest/rls/du-suroit/'],
+    ['du Haut-Saint-Laurent', '/monteregie-ouest/rls/du-haut-saint-laurent/']
   ];
   const rlsEstHtml = RLS_EST.map(nom =>
     `      <a href="/monteregie-est/rls/${slugifier(nom)}/">${esc(nom)}</a>`).join('\n');
@@ -1184,18 +1326,27 @@ function pageAccueil(toutesEntrees, majDonnees) {
     `      <a href="${href}">${esc(nom)}</a>`).join('\n');
 
   const url = `${SITE}/`;
-  const titre = 'Trouve ta clinique — Cliniques qui recrutent en médecine familiale | Montérégie';
-  const description = `Carte interactive des cliniques et établissements de la Montérégie. `
-    + `Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM en médecine `
-    + `familiale.`;
+  const titre = 'Cliniques qui recrutent en médecine familiale — Montérégie';
+  const description = limiterTexte(
+    'Carte des cliniques et établissements de la Montérégie : coordonnées, horaires et contacts pour préparer votre PTEM en médecine familiale.',
+    155
+  );
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'Organization',
+        '@id': `${url}#organisation`,
+        name: 'Trouve ta clinique',
+        url,
+        logo: `${SITE}/apple-touch-icon-180.png`,
+        founder: { '@id': `${url}#auteur` }
+      },
+      {
         '@type': 'WebSite', '@id': `${url}#website`, name: 'Trouve ta clinique', url,
         inLanguage: 'fr-CA', description,
-        publisher: { '@id': `${url}#auteur` }
+        publisher: { '@id': `${url}#organisation` }
       },
       { '@type': 'Person', '@id': `${url}#auteur`, name: 'Olivier Laplante',
         jobTitle: 'Résident en médecine familiale', url },
@@ -1238,8 +1389,8 @@ function pageAccueil(toutesEntrees, majDonnees) {
   <span>Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel</span>
   <span class="text-cta">Ouvrir la carte →</span>
 </a>
-<h3 class="soustitre">Autres territoires de la Montérégie <span class="note-construction">(en construction)</span></h3>
-<p class="terr-autres-note">Les cartes Centre et Ouest sont en préparation ; seule la Montérégie-Est est pleinement disponible pour l'instant.</p>
+<h3 class="soustitre">Autres territoires de la Montérégie</h3>
+<p class="terr-autres-note">Les cartes Centre et Ouest sont publiées. La Montérégie-Est reste le territoire le plus complet (cliniques, établissements, PTEM et AMP).</p>
 <div class="terr-autres">
   <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
   <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
@@ -1312,7 +1463,7 @@ ${rlsAutresHtml}
 
   const html = page({
     titre, description, url, profondeur: 0, indexable: true, canonical: url, jsonLd,
-    filDAriane: '', corps, actif: 'accueil', univers: UNIVERS_GENERAL
+    filDAriane: '', corps, actif: 'accueil', univers: UNIVERS_GENERAL, verification: true
   });
   return { html, indexable: true };
 }
@@ -1329,7 +1480,7 @@ function pageRepertoire(cliniques, slugs, parRls, majDonnees, u = null) {
   const sections = [...parRls.keys()].sort((a, b) => a.localeCompare(b, 'fr')).map(rls => {
     const liste = parRls.get(rls);
     const items = liste.map(c => `      <li>
-        <a href="${prefixe}/cliniques/${slugs[String(c.id)]}/"><strong>${esc(c.nom)}</strong></a>${badgeVerif(c)}
+        <a href="${hrefFicheMilieu(c, slugs[String(c.id)], prefixe)}"><strong>${esc(c.nom)}</strong></a>${badgeVerif(c)}
         <span class="rep-meta">${esc(c.ville)} · ${esc(c.type)}${recrute(c) ? '' : ' · Ne recrute pas actuellement'}</span>
       </li>`).join('\n');
     return `  <section id="rls-${slugifier(rls)}">
@@ -1346,7 +1497,7 @@ ${items}
     '@graph': [
       {
         '@type': 'CollectionPage', '@id': url + '#webpage', url,
-        name: `Cliniques en recrutement en ${nomTerritoire} | Trouve ta clinique`,
+        name: `Cliniques en recrutement en ${nomTerritoire}`,
         inLanguage: 'fr-CA', dateModified: majDonnees,
         isPartOf: { '@id': SITE + '/#website' }
       },
@@ -1372,7 +1523,7 @@ ${items}
     <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${u ? u.accueil : UNIVERS_GENERAL.accueil}">Explorer sur la carte interactive</a>
-      <a class="button secondary" href="${u ? u.prefixe : EST_PREFIXE}/ptem/">Guide PTEM</a>
+      <a class="button secondary" href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </div>
   </section>
 
@@ -1391,8 +1542,8 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
 ${sections}`;
 
   return page({
-    titre: `Cliniques en recrutement en ${nomTerritoire} | Trouve ta clinique`,
-    description: `Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement actif de médecins de famille), classés par ${parRls.size} RLS avec fiche détaillée.`,
+    titre: limiterTexte(`Cliniques en recrutement en ${nomTerritoire}`, 58),
+    description: limiterTexte(`Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement), classés par ${parRls.size} RLS.`, 155),
     url, profondeur: u ? 2 : 1, indexable: true, jsonLd, actif: 'cliniques', univers: u || UNIVERS_GENERAL,
     filDAriane: u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`,
     corps
@@ -1412,8 +1563,8 @@ ${sections}`;
  * Les dix-sept autres installations et les ancres GMF-U viendront après validation du gabarit.
  *
  * Trois règles d'affichage — identiques à la carte, et DISTINCTES des pages de cliniques :
- * aucun ETC, aucun nom ni courriel de responsable, contact « À venir ».
- * JSON-LD : pas de contactPoint, pas de JobPosting.
+ * aucun ETC, aucun nom ni courriel de responsable.
+ * JSON-LD : pas de contactPoint. JobPosting uniquement si une fiche clinique liée recrute.
  * Le nom de la personne-ressource SQ n'apparaît dans aucun fichier du dépôt
  * (garde-fou du secret NOM_PROTEGE_SANTE_QUEBEC).
  */
@@ -1427,7 +1578,7 @@ const PREMIER_LOT_ETABLISSEMENTS = [
 ];
 const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir obtenu l’aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d’inscription de patients.';
 const NOTE_SOURCE_ETABLISSEMENTS = 'les secteurs en recrutement présentés sur cette page proviennent du relevé des besoins en effectifs médicaux 2027 de Santé Québec Montérégie-Est, transmis le 28 août 2026. Ils indiquent qu’un recrutement est en cours dans le secteur, sans préjuger du nombre de postes, de leur répartition ni des modalités d’exercice, qui se précisent avec le milieu. Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
-const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> le contact à privilégier pour les secteurs en établissement sera publié prochainement. En attendant, adressez-vous au service de recrutement médical de Santé Québec Montérégie-Est.</div>';
+const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> adressez-vous au service de recrutement médical de Santé Québec Montérégie-Est. Les coordonnées nominatives des établissements ne sont pas publiées sur ces fiches.</div>';
 
 const TYPE_ETAB_SEO = {
   hopital: 'Hôpital',
@@ -1440,6 +1591,11 @@ const TYPE_ETAB_SEO = {
 
 function typeEtablissementLibelle(type) {
   return TYPE_ETAB_SEO[type] || type || '';
+}
+
+function typeEnPhrase(typeLib) {
+  if (['GMF-U', 'CLSC', 'CHSLD'].includes(typeLib)) return typeLib;
+  return String(typeLib || '').toLowerCase();
 }
 
 function typeSchemaEtablissement(type) {
@@ -1645,7 +1801,7 @@ function chapeauEtablissement(inst, secteurs) {
   if (inst.missionRegionale) {
     return `${esc(inst.nom)} est une mission régionale. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} en recrutement : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
   }
-  const type = typeEtablissementLibelle(inst.type).toLowerCase();
+  const type = typeEnPhrase(typeEtablissementLibelle(inst.type));
   const rls = inst.territoireSource || '';
   if (n === 1) {
     return `Le ${type} ${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. Son secteur d’activité en recrutement est ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
@@ -1653,17 +1809,20 @@ function chapeauEtablissement(inst, secteurs) {
   return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. ${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
 }
 
-function pageEtablissement(inst, secteurs, majPagesSeo) {
+function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null) {
   const u = UNIVERS_PAR_REGION.Est;
   const slug = slugEtablissement(inst);
   const url = `${SITE}${EST_PREFIXE}/etablissements/${slug}/`;
   const typeLib = typeEtablissementLibelle(inst.type);
   const n = secteurs.length;
   const liste = listeSecteursHumaine(secteurs);
-  const titre = `${inst.nom} — secteurs en recrutement | Trouve ta clinique`;
-  const description = inst.id === 'INS-012'
-    ? 'Hôtel-Dieu de Sorel, hôpital de Sorel-Tracy (RLS Pierre-De Saurel) : cinq secteurs en recrutement de médecins — urgence, hospitalisation, UCDG, obstétrique et soins intensifs.'
-    : `${inst.nom}, ${typeLib.toLowerCase()} à ${inst.ville}${inst.missionRegionale ? ' (mission régionale)' : ' (RLS ' + inst.territoireSource + ')'} : ${n === 1 ? 'secteur en recrutement' : n + ' secteurs en recrutement'} — ${liste}.`;
+  const titre = limiterTexte(inst.ville ? `${inst.nom} — ${inst.ville}` : `${inst.nom} — ${typeLib}`, 58);
+  const description = limiterTexte(
+    inst.id === 'INS-012'
+      ? 'Hôtel-Dieu de Sorel, hôpital de Sorel-Tracy (RLS Pierre-De Saurel) : cinq secteurs en recrutement — urgence, hospitalisation, UCDG, obstétrique et soins intensifs.'
+      : `${inst.nom}, ${typeEnPhrase(typeLib)} à ${inst.ville}${inst.missionRegionale ? ' (mission régionale)' : ' (RLS ' + inst.territoireSource + ')'} : ${n === 1 ? 'secteur en recrutement' : n + ' secteurs en recrutement'} — ${liste}.`,
+    155
+  );
   const h2 = n === 1 ? 'Le secteur en recrutement' : `Les ${nombreEnLettresFr(n)} secteurs en recrutement`;
   const introSecteurs = n === 1
     ? '<p>Le secteur ci-dessous est déclaré en recrutement pour le cycle 2027. Les modalités — volume, garde, répartition entre plusieurs médecins — se discutent avec le milieu : elles ne sont pas fixées ici.</p>'
@@ -1678,7 +1837,8 @@ function pageEtablissement(inst, secteurs, majPagesSeo) {
     : `Fiche Santé Montérégie — ${inst.nom}`;
   const siteOfficiel = inst.lienWeb
     ? `<a href="${esc(inst.lienWeb)}" rel="noopener">${esc(libelleSite)}</a>`
-    : 'À venir';
+    : '';
+  const job = cliniqueLiee ? jsonLdJobPosting(cliniqueLiee, url, majPagesSeo) : null;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -1686,7 +1846,7 @@ function pageEtablissement(inst, secteurs, majPagesSeo) {
         '@type': 'WebPage',
         '@id': url + '#webpage',
         url,
-        name: `${inst.nom} — secteurs en recrutement en Montérégie-Est | Trouve ta clinique`,
+        name: titre,
         inLanguage: 'fr-CA',
         dateModified: majPagesSeo,
         isPartOf: { '@id': SITE + '/#website' },
@@ -1697,7 +1857,7 @@ function pageEtablissement(inst, secteurs, majPagesSeo) {
         '@id': url + '#etablissement',
         name: inst.nom,
         url,
-        ...(inst.lienWeb ? { sameAs: inst.lienWeb } : {}),
+        ...(inst.lienWeb ? { sameAs: [inst.lienWeb] } : {}),
         address: {
           '@type': 'PostalAddress',
           addressLocality: inst.ville || '',
@@ -1710,6 +1870,7 @@ function pageEtablissement(inst, secteurs, majPagesSeo) {
           ? { geo: { '@type': 'GeoCoordinates', latitude: inst.lat, longitude: inst.lng } }
           : {})
       },
+      ...(job ? [job] : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -1720,11 +1881,54 @@ function pageEtablissement(inst, secteurs, majPagesSeo) {
       }
     ]
   };
+  let blocHoraireEtab = '';
+  let blocEquipeEtab = '';
+  let lignesClinique = '';
+  if (cliniqueLiee) {
+    if (rempli(cliniqueLiee.dme)) {
+      lignesClinique += `      <dt>Dossier médical électronique (DMÉ)</dt><dd>${esc(cliniqueLiee.dme)}</dd>\n`;
+    }
+    if (Array.isArray(cliniqueLiee.pratiques) && cliniqueLiee.pratiques.length) {
+      lignesClinique += `      <dt>Pratiques offertes</dt><dd>${esc(cliniqueLiee.pratiques.map(p => PRATIQUES[p] || p).join(', '))}</dd>\n`;
+    }
+    if (rempli(cliniqueLiee.horaire)) {
+      const rangs = JOURS.filter(j => rempli(cliniqueLiee.horaire[j]))
+        .map(j => `        <tr><th scope="row">${j}</th><td>${esc(cliniqueLiee.horaire[j])}</td></tr>`).join('\n');
+      if (rangs) {
+        blocHoraireEtab = `
+  <section id="horaire">
+    <h2>Heures d’ouverture</h2>
+    <table class="horaire">
+      <tbody>
+${rangs}
+      </tbody>
+    </table>
+  </section>`;
+      }
+    }
+    if (rempli(cliniqueLiee.personnel)) {
+      const items = Object.keys(PERSONNEL).filter(k => rempli(cliniqueLiee.personnel[k]))
+        .map(k => `      <li><span class="eq-n">${esc(cliniqueLiee.personnel[k])}</span> ${esc(PERSONNEL[k])}</li>`).join('\n');
+      if (items) {
+        blocEquipeEtab = `
+  <section id="equipe">
+    <h2>Équipe sur place</h2>
+    <ul class="equipe">
+${items}
+    </ul>
+    <p class="note">Composition indiquée dans le répertoire des cliniques; à confirmer auprès du milieu.</p>
+  </section>`;
+      }
+    }
+  }
   const territoireDd = inst.missionRegionale
     ? 'Mission régionale'
     : (lienRls
       ? `<a href="${lienRls}">${esc(inst.territoireSource)}</a>`
       : esc(inst.territoireSource || ''));
+  const ligneSite = siteOfficiel
+    ? `      <dt>Site officiel</dt><dd>${siteOfficiel}</dd>\n`
+    : '';
   const corps = `  <section class="hero">
     <p class="eyebrow">${esc(eyebrowEtablissement(inst))}</p>
     <h1>${esc(inst.nom)} — secteurs en recrutement</h1>
@@ -1744,7 +1948,7 @@ function pageEtablissement(inst, secteurs, majPagesSeo) {
 
 ${blocsSecteurs}
   </section>
-
+${blocHoraireEtab}${blocEquipeEtab}
   <section id="renseignements">
     <h2>Renseignements sur le lieu</h2>
     <dl class="fiche">
@@ -1754,9 +1958,7 @@ ${blocsSecteurs}
       <dt>Territoire</dt><dd>Montérégie-Est</dd>
       <dt>Réseau local de services (RLS)</dt><dd>${territoireDd}</dd>
       <dt>Secteurs en recrutement</dt><dd>${esc(secteurs.map(s => s.libelle).join(' · '))}</dd>
-      <dt>Contact recrutement</dt><dd>À venir</dd>
-      <dt>Site officiel</dt><dd>${siteOfficiel}</dd>
-    </dl>
+${lignesClinique}${ligneSite}    </dl>
   </section>
 
   <div class="data-note"><strong>Source et vérification :</strong> ${NOTE_SOURCE_ETABLISSEMENTS}</div>
@@ -1825,7 +2027,7 @@ ${items}
     '@graph': [
       {
         '@type': 'CollectionPage', '@id': url + '#webpage', url,
-        name: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
+        name: 'Secteurs en établissement en Montérégie-Est',
         inLanguage: 'fr-CA', dateModified: majPagesSeo,
         isPartOf: { '@id': SITE + '/#website' }
       },
@@ -1854,15 +2056,13 @@ ${items}
 
 ${sections}`;
 
-  // Les 22 fiches sont publiées depuis le 4 septembre 2026 : la condition posée le 3 septembre
-  // (« remettre à true une fois les 22 fiches publiées ») est remplie, et le répertoire est donc
-  // indexable et présent dans sitemap.xml. Les coordonnées de recrutement restent « À venir » sur
-  // les fiches — c'est assumé, pas un oubli.
+  // Les 22 fiches sont publiées. Les coordonnées nominatives d’établissement ne sont
+  // pas affichées (pas de ligne « À venir »).
   const indexable = true;
   return {
     html: page({
-      titre: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
-      description: 'Répertoire des installations de la Montérégie-Est dont un ou plusieurs secteurs d’activité recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.',
+      titre: limiterTexte('Secteurs en établissement en Montérégie-Est', 58),
+      description: limiterTexte('Installations de la Montérégie-Est dont un ou plusieurs secteurs recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.', 155),
       url, profondeur: 2, indexable, jsonLd, actif: 'etablissements', univers: u,
       filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
       corps
@@ -1880,7 +2080,7 @@ const REDIRECTIONS_ETABLISSEMENTS = [
   }
 ];
 
-function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
+function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo, cliniquesById) {
   const donnees = chargerDonneesEtablissements();
   const repertoire = pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo);
   ecrire(path.join('monteregie-est', 'etablissements', 'index.html'), repertoire.html);
@@ -1893,7 +2093,11 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
     const inst = (donnees.installations || []).find(i => i.id === id);
     if (!inst) throw new Error('Installation du premier lot introuvable : ' + id);
     const secteurs = secteursDe(donnees, id);
-    const p = pageEtablissement(inst, secteurs, majPagesSeo);
+    const cliniqueLiee = (inst.referenceExistante && inst.referenceExistante.collection === 'cliniques'
+      && cliniquesById)
+      ? cliniquesById.get(String(inst.referenceExistante.id))
+      : null;
+    const p = pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee);
     ecrire(path.join('monteregie-est', 'etablissements', p.slug, 'index.html'), p.html);
     conserves.add(p.slug);
     if (p.indexable) {
@@ -1922,12 +2126,12 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo) {
 const PAGES_FIXES = [
   { loc: '/', lastmod: null, changefreq: 'weekly', priority: '1.0' },
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
-  { loc: '/monteregie-est/ptem/', lastmod: '2026-08-31', changefreq: 'weekly', priority: '0.9' },
-  { loc: '/monteregie-est/amp/', lastmod: '2026-08-31', changefreq: 'monthly', priority: '0.9' },
-  { loc: '/monteregie/', lastmod: null, changefreq: 'monthly', priority: '0.4' },
-  /* Cartes Centre/Ouest : indexables et présentes sur l'accueil ; aligner le sitemap (2 sept.). */
-  { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.3' },
-  { loc: '/monteregie-ouest/', lastmod: null, changefreq: 'monthly', priority: '0.3' }
+  { loc: '/monteregie-est/ptem/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
+  { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },
+  /* /monteregie/ (carte des 3 territoires) reste en ligne pour les humains mais n’est plus
+     dans le sitemap : elle concurrence l’accueil et /monteregie-est/. */
+  { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
+  { loc: '/monteregie-ouest/', lastmod: null, changefreq: 'monthly', priority: '0.6' }
 ];
 
 function sitemap(entrees) {
@@ -1965,9 +2169,17 @@ function ecrire(relatif, contenu) {
  * Les 301 Cloudflare restent préférables dès qu'ils sont disponibles sans risque.
  */
 function pageRedirectionStatique(destination, libelle) {
-  const urlHtml = esc(destination);
+  /* Canonical en URL de production (Google). Refresh et location.replace en chemin relatif
+     pour rester sur le même hôte (aperçu, localhost) au lieu de forcer trouvetaclinique.ca. */
+  const dest = String(destination);
+  const chemin = dest.startsWith('http')
+    ? (dest.replace(/^https?:\/\/[^/]+/, '') || '/')
+    : (dest.startsWith('/') ? dest : '/' + dest);
+  const canon = SITE + chemin;
+  const urlHtml = esc(chemin);
+  const canonHtml = esc(canon);
   const libelleHtml = esc(libelle);
-  const destJs = JSON.stringify(String(destination));
+  const destJs = JSON.stringify(chemin);
   return `<!doctype html>
 <html lang="fr-CA">
 <head>
@@ -1975,7 +2187,7 @@ function pageRedirectionStatique(destination, libelle) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Page déplacée | Trouve ta clinique</title>
 <meta name="robots" content="noindex,follow">
-<link rel="canonical" href="${urlHtml}">
+<link rel="canonical" href="${canonHtml}">
 <meta http-equiv="refresh" content="0; url=${urlHtml}">
 <script>(function(){var b=${destJs};var d=b;if(location.search)d+= (d.indexOf("?")>=0?"&":"?")+location.search.slice(1);if(location.hash)d+=location.hash;location.replace(d);})();</script>
 </head>
@@ -1986,6 +2198,58 @@ function pageRedirectionStatique(destination, libelle) {
 `;
 }
 
+const FAQ_PTEM = {
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Qu’est-ce que le PTEM?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Les plans territoriaux des effectifs médicaux (PTEM) répartissent géographiquement les effectifs en médecine de famille. Une cible annuelle de recrutement est autorisée pour chaque région.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'PTEM ou PREM : quelle différence?',
+      acceptedAnswer: { '@type': 'Answer', text: 'PTEM est l’appellation actuelle de ce qui était auparavant appelé PREM en médecine de famille. Les deux termes désignent la même réalité administrative.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Qu’est-ce que la règle du 55 %?',
+      acceptedAnswer: { '@type': 'Answer', text: 'L’avis de conformité PTEM précise la région ou le sous-territoire où le médecin doit réaliser au moins 55 % de ses jours de facturation.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Quand déposer une demande PTEM 2027?',
+      acceptedAnswer: { '@type': 'Answer', text: 'L’Accord no 820 fixe la période initiale de dépôt du 1er au 15 décembre 2026. Une demande ne peut pas être soumise avant le 1er décembre 2026.' }
+    }
+  ]
+};
+
+const FAQ_AMP = {
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Qu’est-ce qu’une AMP?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Une activité médicale particulière (AMP) est une activité reconnue dans l’Entente particulière AMP, utilisée par les DTMF pour orienter une partie de l’activité des médecins de famille vers des besoins prioritaires.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Combien d’heures d’AMP faut-il faire?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Pour les 15 premières années de pratique, l’engagement est de 12 heures d’AMP par semaine ou l’équivalent, soit au moins 132 heures par trimestre selon la RAMQ.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Que se passe-t-il après 15 ans de pratique?',
+      acceptedAnswer: { '@type': 'Answer', text: 'L’adhésion à l’Entente AMP reste obligatoire. Sauf circonstances particulières, les activités usuelles sont alors reconnues à titre d’AMP par le DTMF.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Qui doit adhérer aux AMP?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Tous les médecins de famille qui exercent dans le régime public sont visés par l’engagement AMP.' }
+    }
+  ]
+};
+
 /*
  * Les pages PTEM et AMP sont publiées depuis un instantané figé (scripts/sources/*.html)
  * pris avant le passage de la navigation mobile au menu hamburger : leur header n'a donc
@@ -1994,7 +2258,7 @@ function pageRedirectionStatique(destination, libelle) {
  * normalise à la publication. La fonction est idempotente : si l'instantané est un jour
  * régénéré avec le bouton, rien n'est ajouté deux fois.
  */
-function normaliserPageGuide(html) {
+function normaliserPageGuide(html, nom) {
   let sortie = html;
 
   /* L'instantané embarque aussi l'ancien ménage de service worker (désinscription seule,
@@ -2022,6 +2286,36 @@ function normaliserPageGuide(html) {
     sortie = sortie.replace('</body>', `${NAV_TOGGLE_SCRIPT}\n</body>`);
   }
 
+  if (!sortie.includes('/etablissements/')) {
+    sortie = sortie.replace(
+      '<a href="/monteregie-est/cliniques/">Cliniques</a>',
+      '<a href="/monteregie-est/cliniques/">Cliniques</a>\n<a href="/monteregie-est/etablissements/">Établissements</a>'
+    );
+  }
+
+  sortie = sortie.replace(/https:\/\/trouvetaclinique\.ca\/assets\/banniere_monteregie-est\.jpg/g, OG_PARTAGE.url);
+  sortie = sortie.replace(/property="og:image:width" content="1024"/g, `property="og:image:width" content="${OG_PARTAGE.largeur}"`);
+  sortie = sortie.replace(/property="og:image:height" content="341"/g, `property="og:image:height" content="${OG_PARTAGE.hauteur}"`);
+  sortie = sortie.replace(/"dateModified": "[0-9]{4}-[0-9]{2}-[0-9]{2}"/g, '"dateModified": "2026-09-04"');
+  sortie = sortie.replace(/<meta name="google-site-verification"[^>]*>\s*/g, '');
+
+  if (nom === 'amp') {
+    sortie = sortie.replace(
+      /<title>AMP en médecine familiale — règles et Montérégie \| Trouve ta clinique<\/title>/,
+      '<title>AMP en médecine familiale — Montérégie</title>'
+    );
+    sortie = sortie.replace(
+      /property="og:title" content="AMP en médecine familiale — règles et Montérégie \| Trouve ta clinique"/,
+      'property="og:title" content="AMP en médecine familiale — Montérégie"'
+    );
+  }
+
+  if (nom && !sortie.includes('"@type": "FAQPage"')) {
+    const faq = nom === 'amp' ? FAQ_AMP : FAQ_PTEM;
+    const bloc = `<script type="application/ld+json">\n${JSON.stringify({ '@context': 'https://schema.org', ...faq }, null, 2)}\n</script>\n`;
+    sortie = sortie.replace('</head>', bloc + '</head>');
+  }
+
   return sortie;
 }
 
@@ -2032,7 +2326,8 @@ function publierPagesGuide() {
       throw new Error(`Source manquante : scripts/sources/${nom}.html — exécuter node scripts/creer-modeles-guide.js une fois.`);
     }
     const html = normaliserPageGuide(
-      fs.readFileSync(source, 'utf8').replace(/\{\{ASSETS\}\}/g, '../../assets')
+      fs.readFileSync(source, 'utf8').replace(/\{\{ASSETS\}\}/g, '../../assets'),
+      nom
     );
     ecrire(path.join('monteregie-est', nom, 'index.html'), html);
     const libelle = nom === 'ptem' ? 'La page PTEM' : 'La page AMP';
@@ -2045,6 +2340,56 @@ function publierPagesGuide() {
   }
 }
 
+function exporterRedirectionsCloudflare() {
+  /* Format Cloudflare (pas d’en-tête) :
+     source,target,status,preserve_query_string,include_subdomains,subpath_matching
+     include_subdomains=FALSE : ne pas attraper apercu.trouvetaclinique.ca.
+     subpath_matching=FALSE : /cliniques/ ne doit pas tout envoyer vers l’Est. */
+  const lignes = [];
+  const vus = new Set();
+  function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) {
+        if (['.git', 'node_modules', 'canvases', '.github'].includes(e.name)) continue;
+        walk(p);
+      } else if (e.name === 'index.html') {
+        const html = fs.readFileSync(p, 'utf8');
+        if (!html.includes('location.replace') || !html.includes('http-equiv="refresh"')) continue;
+        const canon = (html.match(/rel="canonical" href="([^"]+)/) || [])[1];
+        if (!canon) continue;
+        let rel = path.relative(RACINE, path.dirname(p)).replace(/\\/g, '/');
+        if (rel === '.') rel = '';
+        const source = SITE + '/' + (rel ? rel + '/' : '');
+        if (source === canon) continue;
+        const cle = source + '>' + canon;
+        if (vus.has(cle)) continue;
+        vus.add(cle);
+        lignes.push([source, canon, '301', 'TRUE', 'FALSE', 'FALSE'].join(','));
+      }
+    }
+  }
+  walk(RACINE);
+  ecrire(path.join('scripts', 'cloudflare-bulk-redirects.csv'), lignes.join('\n') + '\n');
+  return lignes.length;
+}
+
+function ecrireLlmsTxt() {
+  ecrire('llms.txt', `# Trouve ta clinique
+
+Site d'information pour les médecins de famille et les résidents qui cherchent un milieu de pratique en Montérégie (Québec) : cliniques en recrutement, secteurs en établissement, PTEM et AMP.
+
+- Public : médecins et résidents, pas les patients à la recherche d'un rendez-vous.
+- Territoires : Montérégie-Est, Montérégie-Centre, Montérégie-Ouest.
+- URL canonique : https://trouvetaclinique.ca/
+- Carte Est : https://trouvetaclinique.ca/monteregie-est/
+- PTEM : https://trouvetaclinique.ca/monteregie-est/ptem/
+- AMP : https://trouvetaclinique.ca/monteregie-est/amp/
+
+Ne pas utiliser ce site pour prendre rendez-vous comme patient : Rendez-vous santé Québec ou le 811.
+`);
+}
+
 function main() {
   const donnees = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
   const majDonnees = donnees.miseAJour || new Date().toISOString().slice(0, 10);
@@ -2053,7 +2398,7 @@ function main() {
      Une refonte du gabarit modifie aussi le contenu HTML, même si data.json n'a pas changé — le
      sitemap doit donc en tenir compte pour son lastmod. Mettre à jour cette date à la main lors
      d'une prochaine modification des templates ci-dessous. */
-  const majGabaritsSeo = '2026-09-03';
+  const majGabaritsSeo = '2026-09-04';
   const majPagesSeo = [majDonnees, majGabaritsSeo].sort().at(-1);
 
   const toutes = donnees.cliniques || [];
@@ -2090,6 +2435,8 @@ function main() {
   /* Territoire de chaque RLS — à établir AVANT toute génération : pageRls, le hub régional et
      le choix des adresses canoniques en dépendent tous. */
   indexerRlsParRegion(cliniques);
+  indexerGmfuCanoniques();
+  const cliniquesById = new Map(cliniques.map(c => [String(c.id), c]));
 
   const entrees = PAGES_FIXES.map(p => Object.assign({}, p, { lastmod: p.lastmod || majPagesSeo }));
 
@@ -2104,6 +2451,18 @@ function main() {
   };
   for (const c of cliniques) {
     const slug = slugs[String(c.id)];
+    const slugEtab = HREF_GMFU_ETABLISSEMENT[String(c.id)];
+    if (slugEtab) {
+      const dest = `${SITE}${EST_PREFIXE}/etablissements/${slugEtab}/`;
+      const redir = pageRedirectionStatique(dest, `La fiche de ${c.nom}`);
+      ecrire(path.join('cliniques', slug, 'index.html'), redir);
+      const uRegion = UNIVERS_PAR_REGION[c.region];
+      if (uRegion) {
+        ecrire(path.join(uRegion.dossier, 'cliniques', slug, 'index.html'), redir);
+        copiesRegionales++;
+      }
+      continue;
+    }
 
     const general = pageClinique(c, slug, majDonnees, UNIVERS_GENERAL);
     const uCanon = UNIVERS_PAR_REGION[c.region];
@@ -2175,7 +2534,7 @@ function main() {
      les anciennes adresses et celles des autres territoires redirigent vers l'Est. */
   publierPagesGuide();
 
-  const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo);
+  const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo, cliniquesById);
 
   /* Répertoire général + hub RLS de chaque univers régional + sitemap */
   ecrire(path.join('cliniques', 'index.html'),
@@ -2248,6 +2607,8 @@ function main() {
   ecrire('index.html', accueil.html);
 
   ecrire('sitemap.xml', sitemap(entrees));
+  ecrireLlmsTxt();
+  const nRedirCf = exporterRedirectionsCloudflare();
 
   /* Rapport */
   console.log('=== GÉNÉRATION DES PAGES SEO ===');
@@ -2257,6 +2618,8 @@ function main() {
   console.log(`Répertoire         : cliniques/index.html`);
   console.log(`Établissements     : répertoire + ${nEtabSeo} fiche(s) (premier lot)`);
   console.log(`Sitemap            : ${entrees.length} URL`);
+  console.log(`Redirections CF    : ${nRedirCf} (scripts/cloudflare-bulk-redirects.csv)`);
+  console.log(`GMF-U canoniques   : ${Object.keys(HREF_GMFU_ETABLISSEMENT).length} fiches cliniques redirigées vers /etablissements/`);
   console.log(`Courriels publiés  : ${PUBLIER_COURRIELS ? 'OUI (décision du 2 sept. 2026)' : 'non'}`);
   if (nouveaux.length) {
     console.log(`\nNouveaux slugs attribués (${nouveaux.length}) — désormais figés :`);
