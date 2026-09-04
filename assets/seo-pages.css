@@ -536,8 +536,24 @@ p, li { text-wrap: pretty; }
 .encart-gp{border-left:5px solid var(--mint);margin:1.6rem 0}
 
 /* Discrète volontairement : présente pour Google et pour la transparence, mais pas mise en
-   évidence visuellement — voir la décision du 30 août 2026. */
+   évidence visuellement — voir la décision du 30 août 2026.
+   Repliée par défaut (4 sept. 2026) : le titre reste visible, le texte s'ouvre au clic. */
 .apropos-discret{border-top:1px solid var(--line);padding:1.2rem 0 .3rem;margin-top:1rem}
-.apropos-discret h2{font-size:1rem;color:var(--muted);font-weight:700}
+.apropos-discret summary{
+  font-size:1rem;color:var(--muted);font-weight:700;cursor:pointer;list-style:none;
+  display:flex;align-items:center;gap:.5rem;width:fit-content;max-width:100%;
+  padding:.15rem 0;
+}
+.apropos-discret summary::-webkit-details-marker{display:none}
+.apropos-discret summary::marker{content:""}
+.apropos-discret summary::before{
+  content:"";width:.42em;height:.42em;flex:none;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(-45deg);margin-top:-.05em;
+  transition:transform .15s ease;
+}
+.apropos-discret[open] summary::before{transform:rotate(45deg);margin-top:-.18em}
+.apropos-discret summary:hover{color:var(--ink)}
+.apropos-discret summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
 .apropos-discret p{color:var(--muted);font-size:.88rem;max-width:74ch}
 .apropos-discret .maj{font-size:.85rem;margin-top:.4rem}

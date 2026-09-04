@@ -1298,8 +1298,8 @@ ${rlsAutresHtml}
      <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d'accès à un médecin de famille</a>.</p>
 </div>
 
-<div class="apropos-discret">
-  <h2>D'où viennent ces informations</h2>
+<details class="apropos-discret">
+  <summary>D'où viennent ces informations</summary>
   <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la
      collaboration du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches
      sont constituées à partir des renseignements transmis par les cliniques elles-mêmes,
@@ -1307,7 +1307,7 @@ ${rlsAutresHtml}
   <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche
      officielle. Une erreur ou une information à corriger ? Les signalements sont bienvenus.</p>
   <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
-</div>
+</details>
 `;
 
   const html = page({
