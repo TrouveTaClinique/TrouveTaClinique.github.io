@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explorez par secteurs — prototype</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="intro">
+      <span class="proto">Prototype — hors site</span>
+      <h1>Explorez par secteurs</h1>
+      <p class="lead">Deux familles, puis les secteurs de pratique. Le chiffre sur chaque sphère est le nombre de milieux en recrutement. Les RLS restent un second chemin.</p>
+      <ol class="path" aria-label="Étapes">
+        <li class="is-now" data-step="1">Famille</li>
+        <li data-step="2">Secteur</li>
+        <li data-step="3">Milieux</li>
+      </ol>
+    </header>
+
+    <div class="studio" id="studio">
+      <div class="studio-wash" aria-hidden="true">
+        <div class="wash wash-a"></div>
+        <div class="wash wash-b"></div>
+      </div>
+
+      <div class="chooser" id="chooser">
+        <button type="button" class="planet" data-famille="hospitalier">
+          <span class="planet-fig">
+            <span class="orb orb-hosp">
+              <span class="orb-face" aria-hidden="true"></span>
+              <span class="orb-spec" aria-hidden="true"></span>
+              <span class="orb-rim" aria-hidden="true"></span>
+              <span class="orb-icon" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <path d="M16 46V20.5L28 12l12 8.5V46" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                  <path d="M24 46V34h8v12M28 24v10M23.5 29h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </span>
+            <span class="planet-floor" aria-hidden="true"></span>
+          </span>
+          <span class="planet-name">Hospitalier</span>
+          <span class="planet-meta">12 secteurs · 3 hôpitaux</span>
+        </button>
+
+        <button type="button" class="planet" data-famille="communautaire">
+          <span class="planet-fig">
+            <span class="orb orb-comm">
+              <span class="orb-face" aria-hidden="true"></span>
+              <span class="orb-spec" aria-hidden="true"></span>
+              <span class="orb-rim" aria-hidden="true"></span>
+              <span class="orb-icon" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <circle cx="21" cy="21" r="6.2" stroke="currentColor" stroke-width="1.7"/>
+                  <circle cx="36.5" cy="22.5" r="5.2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M10.5 42c1.8-7.2 6.2-10.8 10.5-10.8S29.4 34.8 31.2 42M29 42c1.3-5.4 4.5-8.8 8.8-8.8S45.4 36.8 47 42" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </span>
+            <span class="planet-floor" aria-hidden="true"></span>
+          </span>
+          <span class="planet-name">Communautaire</span>
+          <span class="planet-meta">19 secteurs · GMF-U, CHSLD, CLSC…</span>
+        </button>
+      </div>
+
+      <div class="explorer" id="explorer" hidden>
+        <div class="orbit-col">
+          <div class="crumb">
+            <button type="button" class="back" id="btn-back">Familles</button>
+            <span class="crumb-sep" aria-hidden="true">/</span>
+            <span class="crumb-now" id="crumb-now"></span>
+          </div>
+          <div class="orbit-stage" id="orbit-stage"></div>
+        </div>
+        <section class="panel" id="panel" aria-live="polite"></section>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
