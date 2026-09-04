@@ -15,8 +15,7 @@ const CNAME_APERCU = 'apercu.trouvetaclinique.ca';
 const DOMAINES_INTERDITS = new Set(['trouvetaclinique.ca', 'www.trouvetaclinique.ca']);
 const DOSSIERS = new Set([
   'assets', 'vendor', 'amp', 'ptem', 'cliniques', 'rls',
-  'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest',
-  'prototypes'
+  'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest'
 ]);
 const FICHIERS = new Set([
   'index.html', '404.html', 'data.json', 'data-etablissements.json', 'leaflet.css', 'leaflet.js',
