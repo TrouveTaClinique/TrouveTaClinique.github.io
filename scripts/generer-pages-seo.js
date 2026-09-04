@@ -183,6 +183,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')document.que
 const PUBLIER_COURRIELS = true;
 
 /*
+ * JSON-LD JobPosting sur les fiches (cliniques et GMF-U). Coupé le 4 septembre 2026 :
+ * Search Console refuse hiringOrganization en MedicalOrganization, et les extraits
+ * « offre d’emploi » ne sont pas encore le but. La fonction jsonLdJobPosting reste ;
+ * repasser à true pour republier les balises, après '@type': 'Organization'.
+ * Les annonces de la carte (data.json → annonce) ne passent pas par ici.
+ */
+const PUBLIER_JOB_POSTING = false;
+
+/*
  * Seuil de contenu à partir duquel une page de clinique est jugée assez substantielle pour être
  * proposée à l'indexation. En dessous, la page existe quand même (elle sert au visiteur) mais
  * porte "noindex" et reste hors du sitemap.
@@ -409,6 +418,7 @@ function hrefFicheMilieu(c, slug, prefixe) {
 }
 
 function jsonLdJobPosting(c, url, majDonnees) {
+  if (!PUBLIER_JOB_POSTING) return null;
   if (!recrute(c)) return null;
   return {
     '@type': 'JobPosting',
@@ -418,7 +428,7 @@ function jsonLdJobPosting(c, url, majDonnees) {
     validThrough: '2027-11-30',
     employmentType: 'FULL_TIME',
     hiringOrganization: {
-      '@type': 'MedicalOrganization',
+      '@type': 'Organization',
       name: c.nom,
       url
     },
@@ -1564,7 +1574,8 @@ ${sections}`;
  *
  * Trois règles d'affichage — identiques à la carte, et DISTINCTES des pages de cliniques :
  * aucun ETC, aucun nom ni courriel de responsable.
- * JSON-LD : pas de contactPoint. JobPosting uniquement si une fiche clinique liée recrute.
+ * JSON-LD : pas de contactPoint. JobPosting uniquement si PUBLIER_JOB_POSTING et une fiche
+ * clinique liée recrute (éteint le 4 sept. 2026, générateur conservé).
  * Le nom de la personne-ressource SQ n'apparaît dans aucun fichier du dépôt
  * (garde-fou du secret NOM_PROTEGE_SANTE_QUEBEC).
  */
