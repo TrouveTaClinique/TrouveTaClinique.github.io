@@ -137,7 +137,10 @@
       <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
       <span class="brand-name">Trouve ta clinique</span>
     </a>
-    <nav class="nav" aria-label="Navigation principale">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Navigation principale">
       <a href="/">Accueil</a>
       <a href="/monteregie-est/">Carte interactive</a>
       <a href="/monteregie-est/cliniques/">Cliniques</a>
@@ -206,6 +209,29 @@ document.querySelectorAll('.brand').forEach(function (b) {
     b.classList.add('tapped');
   });
 });
+</script>
+<script>
+(function () {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+  function fermer() {
+    toggle.setAttribute('aria-expanded', 'false');
+    nav.removeAttribute('data-open');
+  }
+  toggle.addEventListener('click', function () {
+    var ouvert = toggle.getAttribute('aria-expanded') === 'true';
+    if (ouvert) { fermer(); } else {
+      toggle.setAttribute('aria-expanded', 'true');
+      nav.setAttribute('data-open', 'true');
+    }
+  });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) fermer(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fermer(); });
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) fermer();
+  });
+})();
 </script>
 <script>
 if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {

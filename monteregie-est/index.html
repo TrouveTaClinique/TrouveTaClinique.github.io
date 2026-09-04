@@ -73,7 +73,7 @@
      5e2a2f1fcdee2f385f73730a644906885ecd39c6 (prototype v53, header V4).
      Le bloc visuel SQ est conservé intact. Le CSS original reste au-dessus.
      Le head régional et la PWA à portée limitée sont injectés par publier-regions.js.
-     Seul changement demandé dans l'interface : le compteur devient un bouton i.
+     Les onglets Cliniques / Établissements sont rétablis.
      Ne pas remplacer ce gabarit par la carte générale lors d'une régénération. -->
 <style>
 :root {
@@ -385,7 +385,9 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 12.5px; cursor: pointer; }
 .cmp-export-btn:hover { background: var(--navy2); }
 .sb-empty { padding: 28px 20px; text-align: center; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
-.sb-list { overflow-y: auto; flex: 1; }
+.sb-scroll { overflow-y: auto; flex: 1; min-height: 0; }
+.sb-scroll > .activite-panel { padding: 0 16px; box-sizing: border-box; }
+.sb-scroll > .cmp-export-btn { margin-left: 16px; margin-right: 16px; width: calc(100% - 32px); }
 .sb-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; position: relative;
   border-bottom: 1px solid var(--filet); cursor: pointer; transition: background .12s; user-select: none; }
 .sb-star { position: absolute; top: 4px; right: 6px; background: none; border: none;
@@ -585,8 +587,8 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 .save-msg.show { display:flex; }
 
 /* scrollbar */
-.dp-body::-webkit-scrollbar, .sb-list::-webkit-scrollbar { width:4px; }
-.dp-body::-webkit-scrollbar-thumb, .sb-list::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.dp-body::-webkit-scrollbar, .sb-scroll::-webkit-scrollbar { width:4px; }
+.dp-body::-webkit-scrollbar-thumb, .sb-scroll::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
 
 .sidebar-toggle {
   display: none;
@@ -652,10 +654,8 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   body.sb-peekpause .sidebar, body.sb-peekpause .sidebar-toggle { animation-play-state: paused; }
   .rls-legend { margin-bottom: 96px; }
   .sb-close { display: block; }
-  /* Décaler le X un peu plus haut et le (i) un peu vers la gauche pour éviter le chevauchement. */
+  /* Décaler le X un peu plus haut pour éviter le chevauchement avec les onglets. */
   :root[data-region="Est"] .sb-close { top: 5px; right: 8px; z-index: 3; }
-  :root[data-region="Est"] .care-mode-info { right: 24px; }
-  :root[data-region="Est"] .care-mode-etab > .care-mode-btn { padding-right: 34px; }
   .sidebar-toggle { display: flex; flex-direction: column; align-items: center; gap: 9px; }
   .sidebar-overlay { display: block; }
 }
@@ -1491,24 +1491,7 @@ body.cmp-open { overflow:hidden; }
   :root[data-region="Est"] .sb-item { padding: 11px 12px; margin-bottom: 7px; }
 }
 
-/* Seul ajustement visuel au prototype SQ : information à la place du compteur. */
-:root[data-region="Est"] .care-mode-etab { position: relative; min-width: 0; }
-:root[data-region="Est"] .care-mode-etab > .care-mode-btn { width: 100%; height: 100%; padding-right: 32px; }
-:root[data-region="Est"] .care-mode-info {
-  position: absolute; right: 9px; top: 50%; transform: translateY(-50%);
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 20px; height: 20px; padding: 0; border-radius: 50%;
-  border: 1px solid var(--border); background: var(--carte); color: var(--texte);
-  font: italic 600 12px/1 var(--sq-font); cursor: pointer;
-}
-:root[data-region="Est"] .care-mode-info:focus-visible { outline: 2px solid var(--sq-azur); outline-offset: 3px; }
-:root[data-region="Est"] .care-mode-tip {
-  position: absolute; top: calc(100% + 8px); right: 0; z-index: 1100;
-  width: 320px; max-width: calc(91vw - 36px); padding: 12px 14px;
-  background: var(--carte); color: var(--texte); border: 1px solid var(--border);
-  border-radius: 10px; box-shadow: 0 5px 18px rgba(23,10,114,.18);
-  font: 400 13px/1.5 var(--sq-font); text-align: left;
-}
+/* Seul ajustement visuel au prototype SQ : bulle d'information retirée. */
 /* Établissements : le prototype SQ impose min-height 43px et une ombre aux
    boutons RLS. Hors périmètre du bloc haché ci-dessus, on garde la taille réduite. */
 :root[data-region="Est"] body[data-mode-carte="etablissements"] .rls-btn {
@@ -1718,11 +1701,7 @@ body.cmp-open { overflow:hidden; }
       <button class="sb-close" id="sb-close" aria-label="Fermer la liste">&times;</button>
       <div class="care-mode-switch" id="care-mode-switch" role="tablist" aria-label="Choisir les milieux affichés">
         <button type="button" class="care-mode-btn" data-mode="cliniques" role="tab" aria-selected="true">Cliniques</button>
-        <div class="care-mode-etab">
-          <button type="button" class="care-mode-btn" data-mode="etablissements" role="tab" aria-selected="false">Établissements</button>
-          <button type="button" class="care-mode-info" id="etablissements-info" aria-label="Qu’est-ce qu’un établissement ?" aria-expanded="false" aria-controls="etablissements-tip">i</button>
-          <div class="care-mode-tip" id="etablissements-tip" role="tooltip" hidden>Un établissement est une installation publique du réseau de la santé (CLSC, Hôpital, CHSLD, Centre de Réadaptation, etc.)</div>
-        </div>
+        <button type="button" class="care-mode-btn" data-mode="etablissements" role="tab" aria-selected="false">Établissements</button>
       </div>
       <h2 id="sb-title">Cliniques en recrutement</h2>
       <p class="maj" id="maj-date"></p>
@@ -1737,13 +1716,6 @@ body.cmp-open { overflow:hidden; }
           <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>
         </details>
       </div>
-      <div class="activite-panel" id="activite-panel" hidden>
-        <div class="filtre-section-label filtre-section-label--activite">
-          <span>Secteur d'activité</span>
-          <button type="button" class="activite-reset" id="activite-reset" hidden>Tout effacer</button>
-        </div>
-        <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité"></div>
-      </div>
       <div class="sb-view-row">
         <button class="fav-toggle" id="fav-toggle">★ Voir mes favoris</button>
         <div class="all-clinics-wrap">
@@ -1754,9 +1726,18 @@ body.cmp-open { overflow:hidden; }
           <div class="all-clinics-tip" id="all-clinics-tip" role="tooltip" hidden>Inclut aussi les cliniques qui ne recrutent pas pour le moment. Leurs épingles sont affichées dans une couleur plus pâle.</div>
         </div>
       </div>
+    </div><!-- fin .sb-head -->
+    <div class="sb-scroll" id="sb-scroll">
+      <div class="activite-panel" id="activite-panel" hidden>
+        <div class="filtre-section-label filtre-section-label--activite">
+          <span>Secteur d'activité</span>
+          <button type="button" class="activite-reset" id="activite-reset" hidden>Tout effacer</button>
+        </div>
+        <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité"></div>
+      </div>
       <button class="cmp-export-btn" id="cmp-export-btn">⤓ Exporter le comparatif (PDF)</button>
+      <div class="sb-list" id="sb-list"></div>
     </div>
-    <div class="sb-list" id="sb-list"></div>
   </div>
   <div id="map"></div>
 </div>
@@ -3039,6 +3020,8 @@ function activerModeCarte(prochainMode) {
   });
   sauvegarderFavorisActifs();
   modeCarte = prochainMode;
+  const zoneScroll = document.getElementById('sb-scroll');
+  if (zoneScroll) zoneScroll.scrollTop = 0;
   gmfs = modeCarte === 'etablissements' ? secteursEtab : cliniques;
   showAllClinics = false;
   favOnly = false;
@@ -3428,7 +3411,7 @@ function updateCmpButton() {
   const b = document.getElementById('cmp-export-btn');
   if (!b) return;
   const n = favListOrder().length;
-  b.style.display = (favOnly && n >= 2) ? 'flex' : 'none';
+  b.style.display = (modeCarte === 'cliniques' && favOnly && n >= 2) ? 'flex' : 'none';
 }
 
 function cmpVal(v) { return (v && String(v).trim()) ? esc(v) : '<span class="cmp-tbd">À venir</span>'; }
@@ -4709,42 +4692,6 @@ if ('serviceWorker' in navigator) {
     refleter();
   });
   refleter();
-})();
-</script>
-
-<script>
-// Le bouton d'information ne change jamais l'onglet ou les filtres.
-(function () {
-  const bouton = document.getElementById('etablissements-info');
-  const bulle = document.getElementById('etablissements-tip');
-  if (!bouton || !bulle) return;
-  let epinglee = false;
-  function afficher(ouvert) {
-    bulle.hidden = !ouvert;
-    bouton.setAttribute('aria-expanded', String(ouvert));
-  }
-  bouton.addEventListener('click', function (e) {
-    e.stopPropagation();
-    epinglee = !epinglee;
-    afficher(epinglee);
-  });
-  bouton.addEventListener('mouseenter', function () { afficher(true); });
-  bouton.parentElement.addEventListener('mouseleave', function () {
-    if (!epinglee && document.activeElement !== bouton) afficher(false);
-  });
-  document.addEventListener('click', function (e) {
-    if (!bouton.parentElement.contains(e.target)) { epinglee = false; afficher(false); }
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !bulle.hidden) {
-      epinglee = false;
-      afficher(false);
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      bouton.focus();
-    }
-  }, true);
-  bouton.addEventListener('blur', function () { epinglee = false; afficher(false); });
 })();
 </script>
 </body></html>

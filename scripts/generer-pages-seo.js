@@ -64,6 +64,30 @@ document.querySelectorAll('.brand').forEach(function (b) {
 });
 </script>`;
 
+const NAV_TOGGLE_SCRIPT = `<script>
+(function () {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+  function fermer() {
+    toggle.setAttribute('aria-expanded', 'false');
+    nav.removeAttribute('data-open');
+  }
+  toggle.addEventListener('click', function () {
+    var ouvert = toggle.getAttribute('aria-expanded') === 'true';
+    if (ouvert) { fermer(); } else {
+      toggle.setAttribute('aria-expanded', 'true');
+      nav.setAttribute('data-open', 'true');
+    }
+  });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) fermer(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fermer(); });
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) fermer();
+  });
+})();
+</script>`;
+
 /* Migration v52 : l'ancienne application générale enregistrait un service worker de portée
    « / ». La PWA étant désormais réservée à Montérégie-Est, toutes les pages de contenu retirent
    cette ancienne inscription si elle existe. La PWA Est, de portée /monteregie-est/, est
@@ -544,7 +568,10 @@ ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
       <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
       <span class="brand-name">Trouve ta clinique</span>
     </a>
-    <nav class="nav" aria-label="Navigation principale">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Navigation principale">
 ${nav}
     </nav>
   </div>
@@ -555,6 +582,7 @@ ${corps}
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante — Trouve ta clinique</div></div></footer>
 ${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
+${NAV_TOGGLE_SCRIPT}
 ${SERVICE_WORKER_CLEANUP}
 ${CLOUDFLARE_ANALYTICS}
 </body>

@@ -10,7 +10,6 @@ const racine = path.join(__dirname, '..');
 const lire = p => fs.readFileSync(path.join(racine, p), 'utf8');
 const h = s => createHash('sha256').update(s).digest('hex');
 const est = lire('monteregie-est/index.html');
-const info = 'Un établissement est une installation publique du réseau de la santé (CLSC, Hôpital, CHSLD, Centre de Réadaptation, etc.)';
 
 test('Le bloc SQ historique est conservé intégralement, avec V4 et Segoe UI', () => {
   const debut = est.indexOf('/* ═══════════════════════════════════════════════════════════════════════════\n   PROTOTYPE SANTÉ QUÉBEC');
@@ -24,43 +23,28 @@ test('Le bloc SQ historique est conservé intégralement, avec V4 et Segoe UI', 
   for (const couleur of ['#0080D7', '#08A0A0', '#170A72', '#A8DCF4', '#A7DFDC', '#B8B1DF']) assert.ok(est.includes(couleur));
 });
 
-test('Les deux onglets sont rétablis et le i contient exactement le texte demandé', () => {
+test('Les deux onglets sont rétablis sans bulle d\'information', () => {
   assert.match(est, /id="care-mode-switch" role="tablist"/);
   assert.match(est, /data-mode="cliniques" role="tab" aria-selected="true"/);
   assert.match(est, /data-mode="etablissements" role="tab" aria-selected="false"/);
-  assert.ok(est.includes(info));
   assert.doesNotMatch(est, /etab-count/);
-  assert.match(est, /id="etablissements-info"[^>]*aria-controls="etablissements-tip"/);
-  assert.match(est, /id="etablissements-tip" role="tooltip" hidden/);
+  assert.doesNotMatch(est, /id="etablissements-info"/);
+  assert.doesNotMatch(est, /id="etablissements-tip"/);
+  assert.doesNotMatch(est, /class="care-mode-etab"/);
 });
 
-test('Le i fonctionne au clic, au survol et avec Échap sans activer un onglet', () => {
-  function element() {
-    return { handlers: {}, attrs: {}, addEventListener(n, f) { this.handlers[n] = f; },
-      setAttribute(n, v) { this.attrs[n] = v; }, focus() {} };
-  }
-  const bouton = element(), bulle = { hidden: true }, parent = element(), document = element();
-  parent.contains = cible => cible === bouton || cible === bulle;
-  bouton.parentElement = parent;
-  document.getElementById = id => id === 'etablissements-info' ? bouton : bulle;
-  const script = [...est.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
-    .map(m => m[1]).find(s => s.includes('// Le bouton d’information') || s.includes("// Le bouton d'information"));
-  assert.ok(script);
-  vm.runInNewContext(script, { document });
-  const e = { stopPropagation() {}, preventDefault() {}, stopImmediatePropagation() {} };
-  bouton.handlers.mouseenter();
-  assert.equal(bulle.hidden, false);
-  bouton.handlers.click(e);
-  assert.equal(bulle.hidden, false);
-  assert.equal(bouton.attrs['aria-expanded'], 'true');
-  bouton.handlers.click(e);
-  assert.equal(bulle.hidden, true);
-  bouton.handlers.click(e);
-  document.handlers.keydown({ ...e, key: 'Escape' });
-  assert.equal(bulle.hidden, true);
-  bouton.handlers.click(e);
-  document.handlers.click({ target: {} });
-  assert.equal(bulle.hidden, true);
+test('Le panneau scinde tete fixe et zone defilante', () => {
+  assert.match(est, /class="sb-scroll" id="sb-scroll"/);
+  const tete = est.slice(est.indexOf('class="sb-head"'), est.indexOf('id="sb-scroll"'));
+  assert.match(tete, /id="filtre-territoire-wrap"/);
+  assert.match(tete, /class="sb-view-row"/);
+  assert.doesNotMatch(tete, /id="activite-panel"/);
+  assert.doesNotMatch(tete, /id="cmp-export-btn"/);
+  const defile = est.slice(est.indexOf('id="sb-scroll"'), est.indexOf('id="map"'));
+  assert.match(defile, /id="activite-panel"/);
+  assert.match(defile, /id="cmp-export-btn"/);
+  assert.match(defile, /id="sb-list"/);
+  assert.match(est, /modeCarte === 'cliniques' && favOnly && n >= 2/);
 });
 
 test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonnes routes', () => {
@@ -75,7 +59,7 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
   }
   assert.match(est, /fetch\('\.\.\/data\.json', \{ cache: 'no-cache' \}\)/);
   assert.match(est, /scope: '\/monteregie-est\/'/);
-  assert.match(lire('sw.js'), /v60-pins-cliniques/);
+  assert.match(lire('sw.js'), /v61-panneau-scroll/);
   assert.doesNotMatch(est, /olaplante\.github\.io\/Monteregie-Est/);
 });
 

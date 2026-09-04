@@ -16,7 +16,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // d'identification 1–n sur les autres repères établissements.
 // v60-pins-cliniques (3 septembre 2026) : gouttes cliniques 24/32 px, regroupement
 // par proximité écran aussi en mode cliniques.
-const CACHE = CACHE_PREFIX + 'v60-pins-cliniques';
+// v61-panneau-scroll (3 septembre 2026) : bulle i établissements retirée ;
+// tête du panneau fixe, liste et secteurs d'activité défilent ensemble.
+const CACHE = CACHE_PREFIX + 'v61-panneau-scroll';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [
