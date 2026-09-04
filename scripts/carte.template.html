@@ -1390,7 +1390,7 @@ const HOME = { center:[45.45,-73.15], zoom:9 };
 const map = L.map('map', { center:HOME.center, zoom:HOME.zoom, zoomControl:false });
 L.control.zoom({ position:'topright' }).addTo(map);
 
-/* Repères des trois territoires CISSS, repris exactement du brouillon Montérégie-Est.
+/* Repères des trois territoires de Santé Québec, repris exactement du brouillon Montérégie-Est.
    Les surfaces restent sous les épingles et ne captent aucun clic. */
 const couchesTerritoiresCisss = new Map();
 function synchroniserOverlaysTerritoires() {
@@ -1412,12 +1412,14 @@ function synchroniserOverlaysTerritoires() {
   });
 }
 
-if (!MODE_REGION && Array.isArray(window.TERRITOIRES_CISSS_MSSS_2026)) {
+const territoiresSanteQuebec = window.TERRITOIRES_SANTE_QUEBEC_MSSS_2026
+  || window.TERRITOIRES_CISSS_MSSS_2026;
+if (!MODE_REGION && Array.isArray(territoiresSanteQuebec)) {
   map.createPane('territoiresCisssFond');
   map.getPane('territoiresCisssFond').style.zIndex = '260';
   map.getPane('territoiresCisssFond').style.pointerEvents = 'none';
 
-  window.TERRITOIRES_CISSS_MSSS_2026.forEach(function (territoire) {
+  territoiresSanteQuebec.forEach(function (territoire) {
     const couche = L.geoJSON({
       type: 'Feature',
       properties: {
@@ -1615,7 +1617,7 @@ function regionColor(r) { return REGION_COLORS[r] || '#64748b'; }
    territoires, les épingles restent colorées par territoire (rose/vert/bleu) : y ajouter des
    couleurs de RLS donnerait neuf couleurs concurrentes sans rien clarifier. Sur une carte
    régionale, à l'inverse, tout serait de la même couleur : distinguer les RLS y redevient
-   utile, comme sur la première carte du CISSS Montérégie-Est.
+   utile, comme sur la première carte de Santé Québec Montérégie-Est.
    MONTÉRÉGIE-EST — ce sont les couleurs EXACTES de la toute première carte
    (cisssme.github.io/Map/), relevées par échantillonnage de sa légende. Elles vivaient déjà
    dans ce fichier sans plus servir à rien : ce sont celles des trois épingles de l'écran de
@@ -3512,15 +3514,48 @@ fetch('../data.json', { cache: 'no-cache' })
 <script>
 // Migration v52 : retire l'ancien service worker de portée « / ». La nouvelle PWA Est est
 // enregistrée séparément et ne contrôle plus le reste du site.
-if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
-  navigator.serviceWorker.getRegistrations().then(registrations => {
-    registrations.forEach(registration => {
-      try {
-        if (new URL(registration.scope).pathname === '/') registration.unregister();
-      } catch (e) {}
-    });
-  }).catch(() => {});
-}
+// 4 septembre 2026 : la désinscription seule laissait l'ancien service worker servir la
+// page depuis son cache pour la navigation en cours — la page correcte n'apparaissait
+// qu'au clic suivant. On purge donc aussi les caches hérités et on recharge une fois,
+// uniquement si un service worker racine contrôlait effectivement cette page.
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  var horsEst = location.pathname.indexOf('/monteregie-est/') !== 0;
+  var controlee = !!navigator.serviceWorker.controller;
+  var taches = [];
+
+  if (navigator.serviceWorker.getRegistrations) {
+    taches.push(navigator.serviceWorker.getRegistrations().then(function (enregistrements) {
+      return Promise.all(enregistrements.map(function (enr) {
+        var racine = false;
+        try { racine = new URL(enr.scope).pathname === '/'; } catch (e) {}
+        if (!racine) return false;
+        return enr.unregister().then(function () { return true; }, function () { return false; });
+      }));
+    }).then(function (faits) {
+      return faits.indexOf(true) !== -1;
+    }, function () { return false; }));
+  }
+
+  if (window.caches && caches.keys) {
+    taches.push(caches.keys().then(function (noms) {
+      return Promise.all(noms.filter(function (n) {
+        return n.indexOf('ptem-2027-') === 0;
+      }).map(function (n) { return caches.delete(n); }));
+    }).then(function () { return false; }, function () { return false; }));
+  }
+
+  Promise.all(taches).then(function (resultats) {
+    if (resultats.indexOf(true) === -1) return;
+    if (!horsEst || !controlee) return;
+    var deja = false;
+    try {
+      deja = sessionStorage.getItem('ttc-sw-purge') === '1';
+      sessionStorage.setItem('ttc-sw-purge', '1');
+    } catch (e) {}
+    if (!deja) location.reload();
+  });
+})();
 </script>
 <!-- PWA_SERVICE_WORKER -->
 <script>

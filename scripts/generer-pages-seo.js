@@ -64,6 +64,15 @@ document.querySelectorAll('.brand').forEach(function (b) {
 });
 </script>`;
 
+/*
+ * Bouton hamburger du header. Défini une seule fois pour que le gabarit page() et la
+ * normalisation des pages guide (PTEM/AMP, publiées depuis un instantané figé dans
+ * scripts/sources/) produisent exactement le même balisage — donc le même CSS.
+ */
+const NAV_TOGGLE_BOUTON = `<button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+    </button>`;
+
 const NAV_TOGGLE_SCRIPT = `<script>
 (function () {
   var toggle = document.getElementById('nav-toggle');
@@ -92,16 +101,62 @@ const NAV_TOGGLE_SCRIPT = `<script>
    « / ». La PWA étant désormais réservée à Montérégie-Est, toutes les pages de contenu retirent
    cette ancienne inscription si elle existe. La PWA Est, de portée /monteregie-est/, est
    conservée. */
+/*
+ * Ménage des anciens service workers de portée « / ».
+ *
+ * 4 septembre 2026 — la désinscription seule ne suffisait pas. Un ancien service worker
+ * enregistré à la racine contrôle encore la page au moment où le script s'exécute : il a
+ * déjà répondu à la navigation depuis son cache, donc le visiteur qui tape
+ * trouvetaclinique.ca voyait l'ancienne page d'accueil. La désinscription ne prenait effet
+ * qu'à la navigation suivante — d'où « je clique ailleurs, je reviens, et là c'est la
+ * bonne page ». On ajoute donc deux choses : la purge des caches hérités (ptem-2027-*),
+ * que unregister() ne supprime pas, et un rechargement unique quand on a effectivement
+ * retiré un service worker racine qui contrôlait la page.
+ *
+ * Pas de boucle possible : après le rechargement il n'y a plus d'enregistrement racine à
+ * retirer, la condition est donc fausse et le script s'arrête tout seul.
+ * Les pages sous /monteregie-est/ sont exclues du rechargement : elles sont légitimement
+ * contrôlées par le service worker de la PWA Est, dont la portée n'est pas « / ».
+ */
 const SERVICE_WORKER_CLEANUP = `<script>
-if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
-  navigator.serviceWorker.getRegistrations().then(function (registrations) {
-    registrations.forEach(function (registration) {
-      try {
-        if (new URL(registration.scope).pathname === '/') registration.unregister();
-      } catch (e) {}
-    });
-  }).catch(function () {});
-}
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  var horsEst = location.pathname.indexOf('/monteregie-est/') !== 0;
+  var controlee = !!navigator.serviceWorker.controller;
+  var taches = [];
+
+  if (navigator.serviceWorker.getRegistrations) {
+    taches.push(navigator.serviceWorker.getRegistrations().then(function (enregistrements) {
+      return Promise.all(enregistrements.map(function (enr) {
+        var racine = false;
+        try { racine = new URL(enr.scope).pathname === '/'; } catch (e) {}
+        if (!racine) return false;
+        return enr.unregister().then(function () { return true; }, function () { return false; });
+      }));
+    }).then(function (faits) {
+      return faits.indexOf(true) !== -1;
+    }, function () { return false; }));
+  }
+
+  if (window.caches && caches.keys) {
+    taches.push(caches.keys().then(function (noms) {
+      return Promise.all(noms.filter(function (n) {
+        return n.indexOf('ptem-2027-') === 0;
+      }).map(function (n) { return caches.delete(n); }));
+    }).then(function () { return false; }, function () { return false; }));
+  }
+
+  Promise.all(taches).then(function (resultats) {
+    if (resultats.indexOf(true) === -1) return;
+    if (!horsEst || !controlee) return;
+    var deja = false;
+    try {
+      deja = sessionStorage.getItem('ttc-sw-purge') === '1';
+      sessionStorage.setItem('ttc-sw-purge', '1');
+    } catch (e) {}
+    if (!deja) location.reload();
+  });
+})();
 </script>`;
 
 /*
@@ -416,7 +471,7 @@ function analyserPlages(texte) {
  *                                               étendu aux trois territoires le 26 août.
  *
  * Pourquoi un univers séparé plutôt qu'un simple filtre : choix du 21 août, en
- * réponse au besoin exprimé par le CISSS Montérégie-Est. Une personne qui entre par
+ * réponse au besoin exprimé par Santé Québec Montérégie-Est. Une personne qui entre par
  * /monteregie-est/ ne doit JAMAIS croiser un lien vers la carte des trois territoires, vers le
  * répertoire /cliniques/ (qui mélange les territoires) ni vers un RLS d'un autre CISSS — ni dans
  * l'en-tête, ni dans le fil d'Ariane, ni dans un bouton, ni dans « pour aller plus loin ». Les
@@ -568,9 +623,7 @@ ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
       <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
       <span class="brand-name">Trouve ta clinique</span>
     </a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
-      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
-    </button>
+    ${NAV_TOGGLE_BOUTON}
     <nav class="nav" id="site-nav" aria-label="Navigation principale">
 ${nav}
     </nav>
@@ -1365,10 +1418,16 @@ ${sections}`;
  * (garde-fou du secret NOM_PROTEGE_SANTE_QUEBEC).
  */
 const DATE_SOURCE_ETABLISSEMENTS = '2026-08-28';
-const PREMIER_LOT_ETABLISSEMENTS = ['INS-012', 'INS-003', 'INS-018'];
+/* Les 22 installations ont maintenant une description propre, rédigée à partir de leur page
+   officielle (voir DESCRIPTIONS_ETABLISSEMENTS plus bas) : le lot couvre donc tout le relevé. */
+const PREMIER_LOT_ETABLISSEMENTS = [
+  'INS-001', 'INS-002', 'INS-003', 'INS-004', 'INS-005', 'INS-006', 'INS-007', 'INS-008',
+  'INS-009', 'INS-010', 'INS-011', 'INS-012', 'INS-013', 'INS-014', 'INS-015', 'INS-016',
+  'INS-017', 'INS-018', 'INS-019', 'INS-020', 'INS-021', 'INS-022'
+];
 const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir obtenu l’aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d’inscription de patients.';
-const NOTE_SOURCE_ETABLISSEMENTS = 'les secteurs en recrutement présentés sur cette page proviennent du relevé des besoins en effectifs médicaux 2027 du CISSS de la Montérégie-Est, transmis le 28 août 2026. Ils indiquent qu’un recrutement est en cours dans le secteur, sans préjuger du nombre de postes, de leur répartition ni des modalités d’exercice, qui se précisent avec le milieu. Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
-const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> le contact à privilégier pour les secteurs en établissement sera publié prochainement. En attendant, adressez-vous au service de recrutement médical du CISSS de la Montérégie-Est.</div>';
+const NOTE_SOURCE_ETABLISSEMENTS = 'les secteurs en recrutement présentés sur cette page proviennent du relevé des besoins en effectifs médicaux 2027 de Santé Québec Montérégie-Est, transmis le 28 août 2026. Ils indiquent qu’un recrutement est en cours dans le secteur, sans préjuger du nombre de postes, de leur répartition ni des modalités d’exercice, qui se précisent avec le milieu. Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
+const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> le contact à privilégier pour les secteurs en établissement sera publié prochainement. En attendant, adressez-vous au service de recrutement médical de Santé Québec Montérégie-Est.</div>';
 
 const TYPE_ETAB_SEO = {
   hopital: 'Hôpital',
@@ -1444,17 +1503,43 @@ function hrefPageOuCarte(inst, slugsCliniques, lot) {
   return lienCarteInstallation(inst.id);
 }
 
-function paragraphesSecteur(s, inst) {
-  if (inst.id === 'INS-012') {
-    const hotelDieu = {
-      urgence: '<p>Le service d’urgence de l’Hôtel-Dieu de Sorel dessert la population du RLS Pierre-De Saurel. Le secteur est en recrutement.</p>',
-      hospitalisation: '<p>La prise en charge des patients hospitalisés est en recrutement. Cette pratique se combine fréquemment à d’autres secteurs du même établissement.</p>',
-      ucdg: '<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>',
-      obstetrique: '<p>Le secteur d’obstétrique est en recrutement. L’Hôtel-Dieu de Sorel est le seul établissement du RLS Pierre-De Saurel offrant ce service.</p>',
-      'soins-intensifs': '<p>Les soins intensifs de l’Hôtel-Dieu de Sorel forment une unité de six lits ou moins. Le secteur est en recrutement.</p>'
-    };
-    if (hotelDieu[s.ancre]) return hotelDieu[s.ancre];
+/*
+ * Textes de secteur propres à une installation, pour les milieux où la source officielle
+ * dit quelque chose de précis sur ce secteur. Ailleurs, le texte générique par catégorie
+ * plus bas suffit — mieux vaut un texte générique exact qu'un texte propre inventé.
+ */
+const PARAGRAPHES_SECTEUR_PAR_INSTALLATION = {
+  'INS-012': {
+    urgence: '<p>Le service d’urgence de l’Hôtel-Dieu de Sorel dessert la population du RLS Pierre-De Saurel. Le secteur est en recrutement.</p>',
+    hospitalisation: '<p>La prise en charge des patients hospitalisés est en recrutement. Cette pratique se combine fréquemment à d’autres secteurs du même établissement.</p>',
+    ucdg: '<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>',
+    obstetrique: '<p>Le secteur d’obstétrique est en recrutement. L’Hôtel-Dieu de Sorel est le seul établissement du RLS Pierre-De Saurel offrant ce service.</p>',
+    'soins-intensifs': '<p>Les soins intensifs de l’Hôtel-Dieu de Sorel forment une unité de six lits ou moins. Le secteur est en recrutement.</p>'
+  },
+  'INS-001': {
+    urgence: '<p>Le service d’urgence de l’Hôpital Pierre-Boucher est ouvert 24 heures sur 24. Le secteur est en recrutement.</p>',
+    hospitalisation: '<p>L’Hôpital Pierre-Boucher accueille des usagers pour des séjours de courte durée en médecine, chirurgie, soins intensifs, natalité, santé mentale et gériatrie active. La prise en charge des patients hospitalisés est en recrutement.</p>',
+    ucdg: '<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>',
+    'soins-intensifs': '<p>Les soins intensifs font partie des séjours de courte durée offerts par l’Hôpital Pierre-Boucher. Le secteur est en recrutement.</p>'
+  },
+  'INS-006': {
+    urgence: '<p>Le service d’urgence de l’Hôpital Honoré-Mercier est ouvert 24 heures sur 24. Santé Québec Montérégie-Est le décrit comme reconnu pour le traitement des patients ayant des problèmes cardiaques et de ceux dont les problèmes de santé sont liés au vieillissement et à la santé mentale. Le secteur est en recrutement.</p>',
+    hospitalisation: '<p>La prise en charge des patients hospitalisés est en recrutement. L’Hôpital Honoré-Mercier est également un centre de niveau secondaire en traumatologie.</p>',
+    ucdg: '<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>'
+  },
+  /* Les deux CRD ci-dessous ont déjà la description des services dans leur chapeau : le texte
+     de secteur porte donc sur le recrutement lui-même, pas sur une répétition de l'offre. */
+  'INS-017': {
+    dependance: '<p>Le secteur de réadaptation en dépendance est en recrutement pour le cycle 2027. Les modalités d’exercice se précisent avec le milieu.</p>'
+  },
+  'INS-019': {
+    dependance: '<p>Le secteur de réadaptation en dépendance est en recrutement pour le cycle 2027. Les modalités d’exercice se précisent avec le milieu.</p>'
   }
+};
+
+function paragraphesSecteur(s, inst) {
+  const propres = PARAGRAPHES_SECTEUR_PAR_INSTALLATION[inst.id];
+  if (propres && propres[s.ancre]) return propres[s.ancre];
   const extra = [];
   if (s.categorieActivite === 'longue-duree') {
     extra.push('<p>Le secteur de longue durée d’un CHSLD assure le suivi médical des personnes hébergées. Le secteur est en recrutement.</p>');
@@ -1466,6 +1551,8 @@ function paragraphesSecteur(s, inst) {
     extra.push('<p>La prise en charge des patients hospitalisés est en recrutement.</p>');
   } else if (s.categorieActivite === 'ucdg') {
     extra.push('<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>');
+  } else if (s.categorieActivite === 'detention') {
+    extra.push('<p>Le secteur de médecine en établissement de détention est en recrutement pour le cycle 2027. Les modalités d’exercice se précisent avec le milieu.</p>');
   } else if (s.categorieActivite === 'gmf-u') {
     extra.push(`<p>Le secteur GMF-U est en recrutement.</p><p>${esc(GMFU_CONDITION_SEO)}</p>`);
   } else {
@@ -1475,7 +1562,7 @@ function paragraphesSecteur(s, inst) {
     extra.push('<p>Le besoin est regroupé : les modalités se précisent avec le milieu.</p>');
   }
   if (inst.id === 'INS-018') {
-    extra.push('<p>Ce site relève de la Montérégie-Ouest. Il est présenté ici comme mission régionale du CISSS de la Montérégie-Est, et non comme un RLS « Régional » — ce territoire n’existe pas.</p>');
+    extra.push('<p>Ce site relève de la Montérégie-Ouest. Il est présenté ici comme mission régionale de Santé Québec Montérégie-Est, et non comme un RLS « Régional » — ce territoire n’existe pas.</p>');
   }
   if (inst.id === 'INS-005') {
     extra.push('<p>Le service dessert Varennes, Verchères et possiblement d’autres points de service.</p>');
@@ -1488,27 +1575,82 @@ function titreH3Secteur(s) {
   return s.libelle;
 }
 
+/*
+ * Description propre à chaque installation, rédigée à partir de sa page officielle sur
+ * santemonteregie.qc.ca (consultées le 4 septembre 2026), sauf INS-016 (établissement de
+ * détention), documenté à partir de quebec.ca — ministère de la Sécurité publique.
+ * Règle : rien ici ne doit dépasser ce que la source officielle affirme. Pas de capacité,
+ * de volume, de modalité d'exercice ni de coordonnées de recrutement inventés. La phrase
+ * finale sur les secteurs en recrutement est ajoutée dynamiquement par chapeauEtablissement(),
+ * pour qu'elle suive data.json si les besoins 2027 changent.
+ */
+const DESCRIPTIONS_ETABLISSEMENTS = {
+  // ── RLS Pierre-Boucher ─────────────────────────────────────────────────────
+  'INS-001': 'L’Hôpital Pierre-Boucher est l’hôpital du réseau local de services Pierre-Boucher, à Longueuil. Il offre des services d’urgence 24 heures sur 24 et accueille des usagers pour des séjours de courte durée en médecine, chirurgie, soins intensifs, natalité, santé mentale et gériatrie active.',
+  'INS-002': 'Le Centre d’hébergement Jeanne-Crevier est un CHSLD de 93 lits situé à Boucherville, dans le RLS Pierre-Boucher. Il offre des services d’hébergement, des soins de fin de vie et des soins palliatifs, ainsi qu’un centre de jour.',
+  'INS-004': 'Le CLSC de Longueuil-Ouest est une installation de première ligne du RLS Pierre-Boucher, à Longueuil. Son offre comprend notamment le soutien à domicile, les soins de fin de vie et les soins palliatifs, une clinique jeunesse, les services psychosociaux et en santé mentale, et les soins infirmiers.',
+  /* Le relevé de Santé Québec nomme cette installation « CLSC des Seigneuries » à l'adresse de
+     Varennes, mais santemonteregie.qc.ca n'a pas de page sous ce nom (le lien de la fiche
+     pointe vers le CLSC de Verchères). Tant que l'écart n'est pas tranché avec Santé Québec, la
+     description reste sur ce que le relevé affirme, sans revendiquer de page officielle. */
+  'INS-005': 'Le CLSC des Seigneuries est une installation de première ligne du RLS Pierre-Boucher. Le relevé des besoins de Santé Québec Montérégie-Est le situe au 2220, boulevard René-Gaultier, à Varennes.',
+  'INS-020': 'Le CLSC Simonne-Monet-Chartrand est une installation de première ligne du RLS Pierre-Boucher, à Longueuil. Son offre comprend notamment le soutien à domicile, les soins de fin de vie et les soins palliatifs, les services psychosociaux et en santé mentale, les soins infirmiers et les services intégrés de dépistage et de prévention des ITSS (SIDEP).',
+  'INS-022': 'Le GMF-U des Montérégiennes est un groupe de médecine de famille universitaire situé à Boucherville, dans le RLS Pierre-Boucher, anciennement le Centre Médical Longueuil. Il a pour mission d’enseigner aux professionnels de la santé de première ligne tout en soignant des usagers et en favorisant la recherche en première ligne. Il assure la prise en charge de clientèles de tous âges, le suivi de maladies chroniques, le suivi de grossesse, des chirurgies mineures et des visites à domicile.',
+  // ── RLS Pierre-De Saurel ───────────────────────────────────────────────────
+  'INS-013': 'Le Centre d’hébergement Élisabeth-Lafrance est un CHSLD du RLS Pierre-De Saurel, à Sorel-Tracy. Il offre des services d’hébergement ainsi que des soins de fin de vie et des soins palliatifs.',
+  'INS-014': 'Le Centre d’hébergement J.-Arsène-Parenteau est un CHSLD du RLS Pierre-De Saurel, à Sorel-Tracy. Il offre des services d’hébergement ainsi que des soins de fin de vie et des soins palliatifs.',
+  'INS-015': 'Le CLSC Gaston-Bélanger offre des services à la population de Sorel-Tracy, dans le RLS Pierre-De Saurel. Son offre comprend notamment le soutien à domicile, les soins de fin de vie et les soins palliatifs, un centre de jour et un hôpital de jour, une clinique jeunesse, une clinique de santé sexuelle et les services psychosociaux et en santé mentale.',
+  // ── RLS Richelieu-Yamaska ──────────────────────────────────────────────────
+  'INS-006': 'L’Hôpital Honoré-Mercier est l’hôpital du réseau local de services Richelieu-Yamaska, à Saint-Hyacinthe. Il offre des services d’urgence 24 heures sur 24 et constitue un centre de niveau secondaire en traumatologie.',
+  'INS-007': 'Le Centre d’hébergement de l’Hôtel-Dieu-de-Saint-Hyacinthe est un CHSLD du RLS Richelieu-Yamaska, décrit par Santé Québec Montérégie-Est comme l’un des plus importants CHSLD du Québec. Outre l’hébergement, il abrite une unité de soins palliatifs de 12 lits et l’Unité de réadaptation fonctionnelle intensive (URFI) du Verger.',
+  'INS-008': 'Le Centre d’hébergement de Montarville est un CHSLD de 146 lits situé à Saint-Bruno-de-Montarville, dans le RLS Richelieu-Yamaska. Construit en 1979, il accueille une clientèle en perte d’autonomie et compte notamment une unité prothétique.',
+  'INS-009': 'Le Centre d’hébergement Marguerite-Adam est un CHSLD du RLS Richelieu-Yamaska, à Beloeil. Construit en 1977 et agrandi en 2010, il offre des services d’hébergement, des soins de fin de vie et des soins palliatifs, ainsi qu’un centre de jour.',
+  'INS-010': 'Le CLSC des Maskoutains est une installation de première ligne du RLS Richelieu-Yamaska, à Saint-Hyacinthe. Son offre comprend notamment le soutien à domicile, les soins de fin de vie et les soins palliatifs, une clinique jeunesse, une clinique des réfugiés et des services en diabète et en maladies respiratoires.',
+  'INS-011': 'Le CLSC des Patriotes est une installation de première ligne du RLS Richelieu-Yamaska, à Beloeil. Son offre comprend notamment le soutien à domicile, les soins de fin de vie et les soins palliatifs, une clinique jeunesse, des services en diabète et les services intégrés de dépistage et de prévention des ITSS (SIDEP).',
+  'INS-021': 'Le GMF-U Richelieu-Yamaska est un groupe de médecine de famille universitaire affilié à l’Université de Sherbrooke, à Saint-Hyacinthe, dans le RLS Richelieu-Yamaska. Anciennement l’Unité de médecine familiale (UMF), il assure la prise en charge de clientèles de tous âges, les suivis de grossesse et les accouchements, le suivi pédiatrique, le suivi de maladies chroniques, des chirurgies mineures et une clinique du locomoteur. Il accueille des résidents en médecine et des stagiaires des sciences de la santé.',
+  // ── Missions régionales ────────────────────────────────────────────────────
+  'INS-016': 'L’établissement de détention de Sorel-Tracy est un établissement de détention provincial du ministère de la Sécurité publique du Québec. Il accueille des personnes prévenues ou purgeant une peine d’emprisonnement de moins de deux ans. Les services médicaux qui y sont dispensés sont présentés ici comme une mission régionale de Santé Québec Montérégie-Est.',
+  'INS-017': 'Le Centre de réadaptation en dépendance de Saint-Hyacinthe est une mission régionale. Les centres de réadaptation en dépendance offrent des services de désintoxication, de réadaptation et de réinsertion sociale aux personnes aux prises avec une dépendance à l’alcool, aux drogues et aux médicaments, aux jeux de hasard et d’argent ou à une utilisation problématique d’Internet, ainsi que des services à leur entourage.',
+  'INS-019': 'Le Centre de réadaptation en dépendance de la rue Joliette, à Longueuil, est une mission régionale. Les centres de réadaptation en dépendance offrent des services de désintoxication, de réadaptation et de réinsertion sociale aux personnes aux prises avec une dépendance à l’alcool, aux drogues et aux médicaments, aux jeux de hasard et d’argent ou à une utilisation problématique d’Internet, ainsi que des services à leur entourage.'
+};
+
+/* Phrase finale commune : générée depuis data.json plutôt que recopiée dans chaque
+   description, pour qu'elle reste juste si les besoins 2027 sont modifiés. */
+function phraseSecteursEnRecrutement(secteurs) {
+  const n = secteurs.length;
+  const liste = listeSecteursHumaine(secteurs);
+  if (n === 0) return '';
+  if (n === 1) {
+    return ` Le secteur d’activité en recrutement pour le cycle de besoins 2027 de Santé Québec Montérégie-Est : ${esc(liste)}.`;
+  }
+  const nombre = nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase());
+  return ` ${nombre} de ses secteurs d’activité sont en recrutement pour le cycle de besoins 2027 de Santé Québec Montérégie-Est : ${esc(liste)}.`;
+}
+
 function chapeauEtablissement(inst, secteurs) {
   if (inst.id === 'INS-012') {
-    return 'L’Hôtel-Dieu de Sorel est l’hôpital du réseau local de services Pierre-De Saurel, à Sorel-Tracy. Cinq de ses secteurs d’activité recrutent actuellement des médecins de famille : l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, l’obstétrique et les soins intensifs. Cette page présente chacun d’eux, tels que déclarés par le CISSS de la Montérégie-Est pour le cycle de besoins 2027.';
+    return 'L’Hôtel-Dieu de Sorel est l’hôpital du réseau local de services Pierre-De Saurel, à Sorel-Tracy. Cinq de ses secteurs d’activité recrutent actuellement des médecins de famille : l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, l’obstétrique et les soins intensifs. Cette page présente chacun d’eux, tels que déclarés par Santé Québec Montérégie-Est pour le cycle de besoins 2027.';
   }
   if (inst.id === 'INS-003') {
-    return 'Le centre d’hébergement de Contrecoeur est un CHSLD du RLS Pierre-Boucher. Son secteur de longue durée recrute actuellement des médecins de famille. Cette page présente ce secteur, tel que déclaré par le CISSS de la Montérégie-Est pour le cycle de besoins 2027.';
+    return 'Le centre d’hébergement de Contrecoeur est un CHSLD du RLS Pierre-Boucher. Son secteur de longue durée recrute actuellement des médecins de famille. Cette page présente ce secteur, tel que déclaré par Santé Québec Montérégie-Est pour le cycle de besoins 2027.';
+  }
+  if (DESCRIPTIONS_ETABLISSEMENTS[inst.id]) {
+    return DESCRIPTIONS_ETABLISSEMENTS[inst.id] + phraseSecteursEnRecrutement(secteurs);
   }
   const n = secteurs.length;
   const liste = listeSecteursHumaine(secteurs);
   if (inst.missionRegionale && inst.id === 'INS-018') {
-    return `Le centre de réadaptation en dépendance de Saint-Philippe est une mission régionale. Le site se trouve à Saint-Philippe, en Montérégie-Ouest ; il est présenté ici parce que le relevé des besoins 2027 du CISSS de la Montérégie-Est l’inclut. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} d’activité en recrutement : ${esc(liste)}.`;
+    return `Le centre de réadaptation en dépendance de Saint-Philippe est une mission régionale. Le site se trouve à Saint-Philippe, en Montérégie-Ouest ; il est présenté ici parce que le relevé des besoins 2027 de Santé Québec Montérégie-Est l’inclut. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} d’activité en recrutement : ${esc(liste)}.`;
   }
   if (inst.missionRegionale) {
-    return `${esc(inst.nom)} est une mission régionale. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} en recrutement : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 du CISSS de la Montérégie-Est.`;
+    return `${esc(inst.nom)} est une mission régionale. ${n === 1 ? 'Son secteur' : 'Ses secteurs'} en recrutement : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
   }
   const type = typeEtablissementLibelle(inst.type).toLowerCase();
   const rls = inst.territoireSource || '';
   if (n === 1) {
-    return `Le ${type} ${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. Son secteur d’activité en recrutement est ${esc(liste)}. Cette page reprend le relevé des besoins 2027 du CISSS de la Montérégie-Est.`;
+    return `Le ${type} ${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. Son secteur d’activité en recrutement est ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
   }
-  return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. ${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 du CISSS de la Montérégie-Est.`;
+  return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. ${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
 }
 
 function pageEtablissement(inst, secteurs, majPagesSeo) {
@@ -1660,9 +1802,9 @@ function pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo) {
       const href = hrefPageOuCarte(inst, slugsCliniques, lot);
       const meta = [typeEtablissementLibelle(inst.type), inst.ville, listeSecteursHumaine(secteurs)].filter(Boolean).join(' · ');
       const viaCarte = !lot.has(inst.id);
-      const note = inst.type === 'gmf-u'
-        ? 'Page de la clinique GMF-U'
-        : (viaCarte ? 'Fiche sur la carte' : `${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''}`);
+      const note = viaCarte
+        ? (inst.type === 'gmf-u' ? 'Page de la clinique GMF-U' : 'Fiche sur la carte')
+        : `${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''}`;
       return `      <li>
         <a href="${esc(href)}"><strong>${esc(inst.nom)}</strong></a>
         <span class="rep-meta">${esc(meta)} · ${esc(note)}</span>
@@ -1700,7 +1842,7 @@ ${items}
   const corps = `  <section class="hero">
     <p class="eyebrow">Médecine familiale · Montérégie-Est</p>
     <h1>Secteurs en recrutement en établissement</h1>
-    <p class="lead">La pratique en établissement, pour un médecin de famille, ce n’est pas une clinique : c’est l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, la longue durée, les soins à domicile, ou une mission régionale (réadaptation, détention). Les installations ci-dessous sont celles du relevé des besoins 2027 du CISSS de la Montérégie-Est. Trois d’entre elles ont déjà une fiche détaillée ; les autres s’ouvrent sur la carte, en attendant la suite.</p>
+    <p class="lead">Les secteurs d’activité en établissement se distinguent de la pratique en clinique : urgence, hospitalisation, unité de courte durée gériatrique (UCDG), longue durée (CHSLD), soins à domicile, réadaptation, détention, etc. Les installations ci-dessous proviennent du relevé des besoins en effectifs médicaux 2027 de Santé Québec Montérégie-Est.</p>
     <p class="updated"><strong>Données déclarées par le milieu le :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
     <div class="cta-row">
       <a class="button primary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
@@ -1710,13 +1852,13 @@ ${items}
 
   ${htmlBanniereSqb('../../assets')}
 
-  <div class="callout official"><strong>Ce que ces pages disent — et ne disent pas :</strong> un secteur « en recrutement » indique qu’un besoin a été déclaré, sans préjuger du nombre de postes ni des modalités d’exercice. Les coordonnées de recrutement des établissements seront publiées prochainement. <a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM →</a></div>
-
 ${sections}`;
 
-  // TODO : remettre à true une fois les 22 fiches établissements publiées (3/22 au 3 sept. 2026).
-  // Tant que c'est faux, le répertoire sort aussi de sitemap.xml (voir publierPagesEtablissements).
-  const indexable = false;
+  // Les 22 fiches sont publiées depuis le 4 septembre 2026 : la condition posée le 3 septembre
+  // (« remettre à true une fois les 22 fiches publiées ») est remplie, et le répertoire est donc
+  // indexable et présent dans sitemap.xml. Les coordonnées de recrutement restent « À venir » sur
+  // les fiches — c'est assumé, pas un oubli.
+  const indexable = true;
   return {
     html: page({
       titre: 'Secteurs en établissement en Montérégie-Est | Trouve ta clinique',
@@ -1844,13 +1986,54 @@ function pageRedirectionStatique(destination, libelle) {
 `;
 }
 
+/*
+ * Les pages PTEM et AMP sont publiées depuis un instantané figé (scripts/sources/*.html)
+ * pris avant le passage de la navigation mobile au menu hamburger : leur header n'a donc
+ * ni bouton, ni id="site-nav", ni le script d'ouverture, et le menu disparaissait sous
+ * 680 px. Plutôt que de refiger les instantanés à chaque évolution du header, on les
+ * normalise à la publication. La fonction est idempotente : si l'instantané est un jour
+ * régénéré avec le bouton, rien n'est ajouté deux fois.
+ */
+function normaliserPageGuide(html) {
+  let sortie = html;
+
+  /* L'instantané embarque aussi l'ancien ménage de service worker (désinscription seule,
+     sans purge ni rechargement). On le remplace par la version courante. */
+  sortie = sortie.replace(
+    /<script>\s*if \('serviceWorker' in navigator && navigator\.serviceWorker\.getRegistrations\)[\s\S]*?<\/script>/,
+    () => SERVICE_WORKER_CLEANUP
+  );
+
+  if (!/id="site-nav"/.test(sortie)) {
+    sortie = sortie.replace(
+      /<nav aria-label="Navigation principale" class="nav">/,
+      '<nav aria-label="Navigation principale" class="nav" id="site-nav">'
+    );
+  }
+
+  if (!/class="nav-toggle"/.test(sortie)) {
+    sortie = sortie.replace(
+      /(<nav aria-label="Navigation principale" class="nav"[^>]*>)/,
+      `${NAV_TOGGLE_BOUTON}\n$1`
+    );
+  }
+
+  if (!/getElementById\('nav-toggle'\)/.test(sortie)) {
+    sortie = sortie.replace('</body>', `${NAV_TOGGLE_SCRIPT}\n</body>`);
+  }
+
+  return sortie;
+}
+
 function publierPagesGuide() {
   for (const nom of ['ptem', 'amp']) {
     const source = path.join(RACINE, 'scripts', 'sources', nom + '.html');
     if (!fs.existsSync(source)) {
       throw new Error(`Source manquante : scripts/sources/${nom}.html — exécuter node scripts/creer-modeles-guide.js une fois.`);
     }
-    const html = fs.readFileSync(source, 'utf8').replace(/\{\{ASSETS\}\}/g, '../../assets');
+    const html = normaliserPageGuide(
+      fs.readFileSync(source, 'utf8').replace(/\{\{ASSETS\}\}/g, '../../assets')
+    );
     ecrire(path.join('monteregie-est', nom, 'index.html'), html);
     const libelle = nom === 'ptem' ? 'La page PTEM' : 'La page AMP';
     const redirection = pageRedirectionStatique(`${SITE}/monteregie-est/${nom}/`, libelle);

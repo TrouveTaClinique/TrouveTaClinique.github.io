@@ -398,7 +398,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hotel-dieu-de-sorel/</loc>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hopital-pierre-boucher/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-jeanne-crevier/</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -410,7 +422,115 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-de-longueuil-ouest/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-des-seigneuries/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hopital-honore-mercier/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-de-l-hotel-dieu-de-saint-hyacinthe/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-de-montarville/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-marguerite-adam/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-des-maskoutains/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-des-patriotes/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hotel-dieu-de-sorel/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-elisabeth-lafrance/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-j-arsene-parenteau/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-gaston-belanger/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-detention/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-philippe/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-readaptation-en-dependance-longueuil/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-simonne-monet-chartrand/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/gmf-u-richelieu-yamaska/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/gmf-u-des-monteregiennes/</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -20,8 +20,19 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // tête du panneau fixe, liste et secteurs d'activité défilent ensemble.
 // v62-territoire-fixe (3 septembre 2026) : les 4 boutons de territoire restent
 // visibles, sans sous-titre ni repli.
-const CACHE = CACHE_PREFIX + 'v62-territoire-fixe';
+// v63-sante-quebec (4 septembre 2026) : dénomination « Santé Québec Montérégie-Est » partout et
+// renommage de l'identifiant des territoires dans territoires-monteregie.js (ressource en cache).
+// v64-accueil-fraiche (4 septembre 2026) : auto-destruction de l'ancien enregistrement de
+// portée « / », qui servait encore une page d'accueil périmée au premier chargement.
+const CACHE = CACHE_PREFIX + 'v64-accueil-fraiche';
 const ANCIEN_PREFIX = 'ptem-2027-';
+
+/* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
+   enregistrement hérité d'avant la migration v52. Ce fichier est resté à la même adresse
+   (/sw.js) : le navigateur y met donc à jour l'ancien enregistrement racine, et c'est le
+   seul endroit d'où l'on peut encore reprendre la main sur lui — une page servie depuis
+   son cache ne contient, par définition, aucun de nos scripts récents. */
+const PORTEE_EST = '/monteregie-est/';
 
 const CORE = [
   '/monteregie-est/',
@@ -52,13 +63,51 @@ const MUTABLES = new Set([
   '/data-etablissements.json', '/territoires-monteregie.js', '/territoires-rls-est.js'
 ]);
 
+function porteeLegitime() {
+  try { return new URL(self.registration.scope).pathname === PORTEE_EST; } catch (e) { return false; }
+}
+
 self.addEventListener('install', event => {
+  /* Sous une portée héritée, on ne précharge rien : ce worker n'existe que pour se
+     supprimer à l'activation. Un addAll() qui échouerait ferait échouer l'installation,
+     donc l'activation, donc le ménage — exactement ce qu'on veut éviter. */
+  if (!porteeLegitime()) {
+    event.waitUntil(self.skipWaiting());
+    return;
+  }
   event.waitUntil(
     caches.open(CACHE)
       .then(cache => cache.addAll(CORE))
       .then(() => self.skipWaiting())
   );
 });
+
+/*
+ * Un ancien service worker de portée « / » continuait de servir sa page d'accueil en cache :
+ * le visiteur qui tapait trouvetaclinique.ca tombait sur l'ancienne page, puis obtenait la
+ * bonne au clic suivant. Aucun script de page ne pouvait corriger cela — la page périmée
+ * venait du cache et ne contenait pas nos scripts. La reprise se fait donc ici : quand cette
+ * mise à jour s'active sous une portée qui n'est pas /monteregie-est/, c'est l'ancien
+ * enregistrement racine. On le supprime, puis on recharge ses fenêtres pour qu'elles
+ * repartent du réseau. Sans boucle possible : l'enregistrement disparaît du même coup.
+ */
+function detruireEnregistrementRacine() {
+  let portee;
+  try { portee = new URL(self.registration.scope).pathname; } catch (e) { return Promise.resolve(); }
+  if (portee === PORTEE_EST) return Promise.resolve();
+
+  return self.clients.matchAll({ type: 'window' })
+    .then(fenetres => {
+      const aRecharger = fenetres.filter(f => {
+        try { return new URL(f.url).pathname.indexOf(PORTEE_EST) !== 0; } catch (e) { return false; }
+      });
+      return self.registration.unregister()
+        .catch(() => {})
+        .then(() => Promise.all(aRecharger.map(f =>
+          (f.navigate ? f.navigate(f.url).catch(() => {}) : Promise.resolve()))));
+    })
+    .catch(() => {});
+}
 
 self.addEventListener('activate', event => {
   event.waitUntil(
@@ -68,6 +117,7 @@ self.addEventListener('activate', event => {
           (key.startsWith(CACHE_PREFIX) || key.startsWith(ANCIEN_PREFIX)))
         .map(key => caches.delete(key))))
       .then(() => self.clients.claim())
+      .then(() => detruireEnregistrementRacine())
   );
 });
 

@@ -105,26 +105,30 @@ a:hover{color:#170a72}
 .site-header::after{content:none;display:none}
 .site-header{position:sticky;}
 
-.site-header__inner{min-height:70px}
+/* 4 septembre 2026 : le logo et le lettrage occupent maintenant la hauteur du header
+   au lieu de flotter au milieu d'une bande vide. */
+.site-header__inner{min-height:76px}
 
 .brand{
   display:inline-flex;
   align-items:center;
-  gap:.58rem;
+  gap:.62rem;
   text-decoration:none;
   color:#fff;
-  font-size:1.08rem;
+  font-size:1.24rem;
   font-weight:900;
-  letter-spacing:-.025em;
+  letter-spacing:.015em;
 }
 .brand::after{content:none;display:none}
 .brand:hover{color:#fff;opacity:.9;text-decoration:none}
 
-/* Logo officiel statique, volontairement plus discret que dans le header V4 des cartes. */
-.logo-img{position:relative;width:34px;height:34px;flex-shrink:0;
+/* Logo officiel statique, dimensionné pour remplir la bande du header. */
+.logo-img{position:relative;width:46px;height:46px;flex-shrink:0;
   background:var(--app-logo) center/contain no-repeat; }
 .logo-img::after{content:none;display:none}
-.brand-name{color:#fff;white-space:nowrap}
+/* Majuscules en CSS : le HTML garde « Trouve ta clinique » pour les lecteurs d'écran
+   et le copier-coller, l'affichage seul passe en capitales. */
+.brand-name{color:#fff;white-space:nowrap;text-transform:uppercase}
 
 .nav{gap:.35rem}
 
@@ -330,9 +334,9 @@ main > section:has(.repertoire) + section{
 }
 
 @media(max-width:680px){
-  .site-header__inner{position:relative;flex-direction:row;align-items:center;padding:.8rem 0}
-  .brand{font-size:1rem}
-  .logo-img{width:31px;height:31px}
+  .site-header__inner{position:relative;flex-direction:row;align-items:center;padding:.7rem 0;min-height:66px}
+  .brand{font-size:1.02rem;gap:.5rem;letter-spacing:.01em}
+  .logo-img{width:38px;height:38px}
   .nav-toggle {
     display: inline-flex; flex-direction: column; justify-content: center; align-items: center;
     gap: 4px; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 8px;
@@ -352,6 +356,14 @@ main > section:has(.repertoire) + section{
   .nav a { text-align: center; padding: .7rem .8rem; }
   .hero{border-radius:16px}
   .hero::before{right:-112px;bottom:-125px}
+}
+
+/* Très petits écrans : « TROUVE TA CLINIQUE » en capitales reste sur une seule ligne
+   à côté du logo et du bouton hamburger. */
+@media(max-width:400px){
+  .site-header__inner{min-height:60px}
+  .brand{font-size:.88rem;gap:.42rem;letter-spacing:0}
+  .logo-img{width:33px;height:33px}
 }
 
 /* ─── Mise en page et coupures de texte — 29 août 2026 ────────────────────────
