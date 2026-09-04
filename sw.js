@@ -18,7 +18,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // par proximité écran aussi en mode cliniques.
 // v61-panneau-scroll (3 septembre 2026) : bulle i établissements retirée ;
 // tête du panneau fixe, liste et secteurs d'activité défilent ensemble.
-const CACHE = CACHE_PREFIX + 'v61-panneau-scroll';
+// v62-territoire-fixe (3 septembre 2026) : les 4 boutons de territoire restent
+// visibles, sans sous-titre ni repli.
+const CACHE = CACHE_PREFIX + 'v62-territoire-fixe';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 const CORE = [

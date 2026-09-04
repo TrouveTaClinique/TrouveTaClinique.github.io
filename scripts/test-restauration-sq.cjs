@@ -37,6 +37,9 @@ test('Le panneau scinde tete fixe et zone defilante', () => {
   assert.match(est, /class="sb-scroll" id="sb-scroll"/);
   const tete = est.slice(est.indexOf('class="sb-head"'), est.indexOf('id="sb-scroll"'));
   assert.match(tete, /id="filtre-territoire-wrap"/);
+  assert.match(tete, /id="filtre-territoire-label" hidden>Territoire/);
+  assert.doesNotMatch(est, /territoireFiltreOuvert/);
+  assert.doesNotMatch(est, /territoire\.open = false/);
   assert.match(tete, /class="sb-view-row"/);
   assert.doesNotMatch(tete, /id="activite-panel"/);
   assert.doesNotMatch(tete, /id="cmp-export-btn"/);
@@ -59,7 +62,7 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
   }
   assert.match(est, /fetch\('\.\.\/data\.json', \{ cache: 'no-cache' \}\)/);
   assert.match(est, /scope: '\/monteregie-est\/'/);
-  assert.match(lire('sw.js'), /v61-panneau-scroll/);
+  assert.match(lire('sw.js'), /v62-territoire-fixe/);
   assert.doesNotMatch(est, /olaplante\.github\.io\/Monteregie-Est/);
 });
 
