@@ -1408,11 +1408,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
 </div>
 
 <h2>Explorer par territoire</h2>
-<a class="terr-priorite terr-priorite-est" href="/monteregie-est/">
-  <strong>Montérégie-Est</strong>
-  <span>Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel</span>
-  <span class="text-cta">Ouvrir la carte →</span>
-</a>
+${htmlBanniereSqb('/assets', { compact: true, estActif: true })}
 <h3 class="soustitre">Autres territoires de la Montérégie</h3>
 <p class="terr-autres-note">Les cartes Centre et Ouest sont publiées. La Montérégie-Est reste le territoire le plus complet (cliniques, établissements, PTEM et AMP).</p>
 <div class="terr-autres">
@@ -1559,9 +1555,11 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
     </ul>
   </section>`}
 
-  ${htmlBanniereSqb(u ? '../../assets' : '../assets', { estActif: Boolean(u && u.region === 'Est') })}
+  ${u && u.region === 'Est' ? '' : htmlBanniereSqb(u ? '../../assets' : '../assets')}
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
+
+  ${u && u.region === 'Est' ? htmlBanniereSqb('../../assets', { estActif: true }) : ''}
 
 ${sections}`;
 
@@ -2432,9 +2430,9 @@ ${items}
     </div>
   </section>
 
-  ${htmlBanniereSqb('../../assets', { estActif: true })}
-
   ${htmlExplorezSecteurs()}
+
+  ${htmlBanniereSqb('../../assets', { estActif: true })}
 
 ${sections}`;
 
