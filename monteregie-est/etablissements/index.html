@@ -98,6 +98,356 @@
 
   <figure class="sqb-wrap compact directory-banner"><a class="sqb-photo" href="/monteregie-est/" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="../../assets/banniere_monteregie-est.jpg" srcset="../../assets/banniere_monteregie-est.jpg 1024w" sizes="(max-width: 1024px) 100vw, 1024px" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" decoding="sync" loading="lazy"></a></figure>
 
+  
+  <section class="es-wrap" aria-labelledby="es-titre">
+    <h2 id="es-titre">Explorez par secteurs</h2>
+    <p class="es-lead">Choisissez d’abord une famille de pratique, puis un secteur. Le chiffre indique le nombre de milieux en recrutement pour le cycle 2027.</p>
+
+    <div class="es-card">
+      <div class="es-chooser" id="es-chooser">
+        <button type="button" class="es-fam es-fam--hosp" data-famille="hospitalier">
+          <span class="es-fam-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 56 56" fill="none"><path d="M16 46V20.5L28 12l12 8.5V46" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 46V34h8v12M28 24v10M23.5 29h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <span class="es-fam-name">Hospitalier</span>
+          <span class="es-fam-meta">12 secteurs · 3 hôpitaux</span>
+          <span class="es-fam-cta">Voir les secteurs →</span>
+        </button>
+        <button type="button" class="es-fam es-fam--comm" data-famille="communautaire">
+          <span class="es-fam-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 56 56" fill="none"><circle cx="21" cy="21" r="6.2" stroke="currentColor" stroke-width="1.8"/><circle cx="36.5" cy="22.5" r="5.2" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 42c1.8-7.2 6.2-10.8 10.5-10.8S29.4 34.8 31.2 42M29 42c1.3-5.4 4.5-8.8 8.8-8.8S45.4 36.8 47 42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <span class="es-fam-name">Communautaire</span>
+          <span class="es-fam-meta">19 secteurs · GMF-U, CHSLD, CLSC…</span>
+          <span class="es-fam-cta">Voir les secteurs →</span>
+        </button>
+      </div>
+
+      <div class="es-explorer" id="es-explorer" hidden>
+        <div class="es-tabs">
+          <div class="es-tabs-row">
+            <button type="button" class="es-tab" data-famille="hospitalier" id="es-tab-hosp">Hospitalier</button>
+            <button type="button" class="es-tab" data-famille="communautaire" id="es-tab-comm">Communautaire</button>
+            <button type="button" class="es-back" id="es-btn-back">Retour à l’accueil</button>
+          </div>
+        </div>
+        <div class="es-body">
+          <ul class="es-list" id="es-list" role="list"></ul>
+          <section class="es-panel" id="es-panel" aria-live="polite"></section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  .es-wrap{
+    --es-bleu:#170A72;--es-menthe:#90F1E9;--es-sarcelle:#08A0A0;--es-azur:#0080D7;
+    --es-ink:#27213f;--es-muted:#625d75;--es-line:#d8e3ea;
+    margin:2.3rem 0;
+    font-family:"Segoe UI",SegoeUI,Arial,sans-serif;
+  }
+  .es-wrap h2{color:var(--es-bleu);margin:0 0 .5rem}
+  .es-lead{color:var(--es-muted);max-width:46rem;margin:0 0 1.3rem;font-size:1rem;line-height:1.6}
+  .es-card{border:1px solid var(--es-line);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 8px 28px rgba(23,10,114,.06)}
+
+  .es-chooser{display:grid;grid-template-columns:1fr 1fr}
+  .es-chooser[hidden]{display:none!important}
+  .es-fam{appearance:none;border:none;background:#fff;cursor:pointer;text-align:left;padding:2rem 1.8rem;display:flex;flex-direction:column;gap:.5rem;font-family:inherit;color:var(--es-ink);border-left:4px solid transparent;transition:background .2s;position:relative}
+  .es-fam:first-child{border-right:1px solid var(--es-line)}
+  .es-fam:hover{background:color-mix(in srgb, var(--es-line) 18%, #fff)}
+  .es-fam:focus-visible{outline:2px solid var(--es-sarcelle);outline-offset:-2px}
+  .es-fam--hosp{border-left-color:var(--es-azur)}
+  .es-fam--comm{border-left-color:var(--es-sarcelle)}
+  .es-fam-icon{width:36px;height:36px;display:grid;place-items:center;margin-bottom:.4rem}
+  .es-fam--hosp .es-fam-icon{color:var(--es-azur)}
+  .es-fam--comm .es-fam-icon{color:var(--es-sarcelle)}
+  .es-fam-name{font-size:1.22rem;font-weight:700;letter-spacing:-.015em;color:var(--es-bleu)}
+  .es-fam-meta{font-size:.88rem;color:var(--es-muted)}
+  .es-fam-cta{margin-top:.5rem;font-size:.82rem;font-weight:650;color:var(--es-sarcelle)}
+
+  .es-explorer[hidden]{display:none!important}
+  .es-tabs{display:flex;border-bottom:1px solid var(--es-line);padding:0 1.4rem}
+  .es-tabs-row{display:flex;align-items:center;width:100%}
+  .es-tab{appearance:none;border:none;background:none;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:650;color:var(--es-muted);padding:1.05rem 1.05rem .95rem;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .18s,border-color .18s}
+  .es-tab:hover{color:var(--es-bleu)}
+  .es-tab:focus-visible{outline:2px solid var(--es-sarcelle);outline-offset:2px}
+  .es-tab.on{color:var(--es-bleu);border-bottom-color:var(--es-bleu)}
+  .es-back{appearance:none;border:none;background:none;cursor:pointer;margin-left:auto;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--es-muted);padding:.5rem .25rem}
+  .es-back:hover{color:var(--es-sarcelle)}
+  .es-back:focus-visible{outline:2px solid var(--es-sarcelle);outline-offset:2px}
+
+  .es-body{display:grid;grid-template-columns:280px minmax(0,1fr)}
+  .es-list{list-style:none;margin:0;padding:.7rem;border-right:1px solid var(--es-line);display:flex;flex-direction:column;gap:2px}
+  .es-row{appearance:none;border:none;background:none;cursor:pointer;width:100%;display:flex;align-items:center;gap:.7rem;padding:.7rem .7rem;border-radius:8px;text-align:left;font-family:inherit;color:var(--es-ink);transition:background .16s}
+  .es-row:hover{background:color-mix(in srgb, var(--es-line) 22%, #fff)}
+  .es-row:focus-visible{outline:2px solid var(--es-sarcelle);outline-offset:-2px}
+  .es-row[aria-pressed="true"]{background:color-mix(in srgb, var(--dot) 9%, #fff)}
+  .es-row .es-chip{width:8px;height:8px;border-radius:50%;background:var(--dot);flex-shrink:0}
+  .es-row .es-txt{flex:1;min-width:0}
+  .es-row .es-nom{display:block;font-size:.9rem;font-weight:650;color:var(--es-bleu)}
+  .es-row .es-sous{display:block;font-size:.76rem;color:var(--es-muted);margin-top:1px}
+  .es-row .es-count{flex-shrink:0;font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--es-muted);background:color-mix(in srgb, var(--es-line) 30%, #fff);border-radius:999px;padding:2px 9px}
+  .es-row[aria-pressed="true"] .es-count{color:#fff;background:var(--dot)}
+
+  .es-panel{padding:1.7rem 1.9rem;display:flex;flex-direction:column;gap:1rem;min-width:0}
+  .es-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+  .es-panel-head h3{margin:0;font-size:1.2rem;font-weight:700;letter-spacing:-.01em;color:var(--es-bleu);line-height:1.3}
+  .es-panel-head .es-sous{margin:.25rem 0 0;font-size:.88rem;color:var(--es-muted)}
+  .es-seg{display:flex;gap:6px;align-self:flex-start;flex-shrink:0}
+  .es-seg button{appearance:none;border:1px solid var(--es-line);background:#fff;border-radius:6px;padding:.4rem .7rem;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:650;color:var(--es-muted);transition:all .18s}
+  .es-seg button:hover{border-color:var(--es-sarcelle);color:var(--es-sarcelle)}
+  .es-seg button.on{background:var(--es-bleu);border-color:var(--es-bleu);color:#fff}
+  .es-seg button:focus-visible{outline:2px solid var(--es-sarcelle);outline-offset:2px}
+
+  .es-cards{display:flex;flex-direction:column;gap:8px}
+  .es-mcard{display:block;padding:.7rem .85rem;border-radius:8px;border:1px solid var(--es-line);border-left:3px solid var(--es-line);background:#fff;font-size:.9rem;line-height:1.5;text-decoration:none;color:inherit;transition:border-color .16s,background .16s}
+  .es-mcard:hover{background:color-mix(in srgb, var(--es-line) 16%, #fff)}
+  .es-mcard:focus-visible{outline:2px solid var(--es-sarcelle);outline-offset:1px}
+  .es-mcard .es-type{display:block;font-size:.72rem;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--es-muted);margin-bottom:2px}
+  .es-mcard strong{display:block;color:var(--es-bleu);font-weight:650}
+  .es-mcard .es-meta{display:block;font-size:.8rem;color:var(--es-muted);margin-top:2px}
+  .es-mcard.es-accent-bleu{border-left-color:var(--es-bleu)}
+  .es-mcard.es-accent-azur{border-left-color:var(--es-azur)}
+  .es-mcard.es-accent-sarcelle{border-left-color:var(--es-sarcelle)}
+
+  .es-rls-label{display:block;font-size:.8rem;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--es-sarcelle);margin:.6rem 0 .4rem}
+  .es-rls-label:first-child{margin-top:0}
+
+  @media(max-width:820px){
+    .es-chooser{grid-template-columns:1fr}
+    .es-fam:first-child{border-right:none;border-bottom:1px solid var(--es-line)}
+    .es-body{grid-template-columns:1fr}
+    .es-list{border-right:none;border-bottom:1px solid var(--es-line);flex-direction:row;overflow-x:auto;padding:.6rem}
+    .es-row{flex:0 0 auto;min-width:170px}
+    .es-panel{padding:1.3rem 1.1rem}
+    .es-panel-head{flex-direction:column;align-items:stretch}
+    .es-seg{align-self:auto}
+  }
+  @media(max-width:520px){
+    .es-fam{padding:1.5rem 1.2rem}
+    .es-tabs{padding:0 .7rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .es-wrap *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+  </style>
+
+  <script>
+  (function () {
+    var ES_MILIEUX = {
+      urgence: [
+        { nom: "Hôpital Pierre-Boucher", ville: "Longueuil", rls: "Pierre-Boucher", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-pierre-boucher/" },
+        { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "/monteregie-est/etablissements/hotel-dieu-de-sorel/" },
+        { nom: "Hôpital Honoré-Mercier", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-honore-mercier/" }
+      ],
+      hospitalisation: [
+        { nom: "Hôpital Pierre-Boucher", ville: "Longueuil", rls: "Pierre-Boucher", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-pierre-boucher/" },
+        { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "/monteregie-est/etablissements/hotel-dieu-de-sorel/" },
+        { nom: "Hôpital Honoré-Mercier", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-honore-mercier/" }
+      ],
+      ucdg: [
+        { nom: "Hôpital Pierre-Boucher", ville: "Longueuil", rls: "Pierre-Boucher", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-pierre-boucher/" },
+        { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "/monteregie-est/etablissements/hotel-dieu-de-sorel/" },
+        { nom: "Hôpital Honoré-Mercier", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-honore-mercier/" }
+      ],
+      "soins-intensifs": [
+        { nom: "Hôpital Pierre-Boucher", ville: "Longueuil", rls: "Pierre-Boucher", type: "Hôpital", href: "/monteregie-est/etablissements/hopital-pierre-boucher/" },
+        { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "/monteregie-est/etablissements/hotel-dieu-de-sorel/" }
+      ],
+      obstetrique: [
+        { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "/monteregie-est/etablissements/hotel-dieu-de-sorel/" }
+      ],
+      "gmf-u": [
+        { nom: "GMF-U des Montérégiennes", ville: "Boucherville", rls: "Pierre-Boucher", type: "GMF-U", href: "/monteregie-est/etablissements/gmf-u-des-monteregiennes/" },
+        { nom: "GMF-U Richelieu-Yamaska", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "GMF-U", href: "/monteregie-est/etablissements/gmf-u-richelieu-yamaska/" }
+      ],
+      chsld: [
+        { nom: "Centre d'hébergement de Contrecoeur", ville: "Contrecoeur", rls: "Pierre-Boucher", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-de-contrecoeur/" },
+        { nom: "Centre d'hébergement Jeanne-Crevier", ville: "Boucherville", rls: "Pierre-Boucher", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-jeanne-crevier/" },
+        { nom: "Centre d'hébergement J.-Arsène-Parenteau", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-j-arsene-parenteau/" },
+        { nom: "Centre d'hébergement Élisabeth-Lafrance", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-elisabeth-lafrance/" },
+        { nom: "Centre d'hébergement de l'Hôtel-Dieu-de-Saint-Hyacinthe", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-de-l-hotel-dieu-de-saint-hyacinthe/" },
+        { nom: "Centre d'hébergement de Montarville", ville: "Saint-Bruno-de-Montarville", rls: "Richelieu-Yamaska", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-de-montarville/" },
+        { nom: "Centre d'hébergement Marguerite-Adam", ville: "Beloeil", rls: "Richelieu-Yamaska", type: "CHSLD", href: "/monteregie-est/etablissements/centre-d-hebergement-marguerite-adam/" }
+      ],
+      sad: [
+        { nom: "CLSC de Longueuil-Ouest", ville: "Longueuil", rls: "Pierre-Boucher", type: "CLSC", href: "/monteregie-est/etablissements/clsc-de-longueuil-ouest/" },
+        { nom: "CLSC des Seigneuries", ville: "Varennes", rls: "Pierre-Boucher", type: "CLSC", href: "/monteregie-est/etablissements/clsc-des-seigneuries/" },
+        { nom: "CLSC Simonne-Monet-Chartrand", ville: "Longueuil", rls: "Pierre-Boucher", type: "CLSC", href: "/monteregie-est/etablissements/clsc-simonne-monet-chartrand/" },
+        { nom: "CLSC Gaston-Bélanger", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "CLSC", href: "/monteregie-est/etablissements/clsc-gaston-belanger/" },
+        { nom: "CLSC des Maskoutains", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "CLSC", href: "/monteregie-est/etablissements/clsc-des-maskoutains/" },
+        { nom: "CLSC des Patriotes", ville: "Beloeil", rls: "Richelieu-Yamaska", type: "CLSC", href: "/monteregie-est/etablissements/clsc-des-patriotes/" }
+      ],
+      autres: [
+        { nom: "Centre de réadaptation en dépendance Longueuil", ville: "Longueuil", rls: "Mission régionale", type: "CRD", href: "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-longueuil/" },
+        { nom: "Centre de réadaptation en dépendance Saint-Hyacinthe", ville: "Saint-Hyacinthe", rls: "Mission régionale", type: "CRD", href: "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/" },
+        { nom: "Centre de réadaptation en dépendance Saint-Philippe", ville: "Saint-Philippe", rls: "Mission régionale", type: "CRD", href: "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-philippe/" },
+        { nom: "Centre de détention", ville: "Sorel-Tracy", rls: "Mission régionale", type: "Détention", href: "/monteregie-est/etablissements/centre-de-detention/" }
+      ]
+    };
+
+    var ES_HOSPITALIER = [
+      { id: "urgence", nom: "Urgence", sous: "Accueil 24 h", dot: "var(--es-azur)" },
+      { id: "hospitalisation", nom: "Hospitalisation", sous: "Courte durée", dot: "var(--es-bleu)" },
+      { id: "obstetrique", nom: "Obstétrique", sous: "Sorel seulement", dot: "var(--es-sarcelle)" },
+      { id: "ucdg", nom: "UCDG", sous: "Gériatrie courte durée", dot: "var(--es-sarcelle)" },
+      { id: "soins-intensifs", nom: "Soins intensifs", sous: "Unités ≤ 6 lits", dot: "var(--es-bleu)" }
+    ];
+
+    var ES_COMMUNAUTAIRE = [
+      { id: "gmf-u", nom: "GMF-U", sous: "Première ligne universitaire", dot: "var(--es-azur)" },
+      { id: "chsld", nom: "CHSLD", sous: "Longue durée", dot: "var(--es-sarcelle)" },
+      { id: "sad", nom: "Soins à domicile", sous: "SAD, SIAD et palliatifs", dot: "var(--es-azur)" },
+      { id: "autres", nom: "Autres", sous: "Réadaptation et détention", dot: "var(--es-bleu)" }
+    ];
+
+    var esState = { famille: null, secteur: "", parRls: false };
+    var esChooser = document.getElementById("es-chooser");
+    var esExplorer = document.getElementById("es-explorer");
+    var esList = document.getElementById("es-list");
+    var esPanel = document.getElementById("es-panel");
+    var esTabHosp = document.getElementById("es-tab-hosp");
+    var esTabComm = document.getElementById("es-tab-comm");
+    if (!esChooser || !esExplorer || !esList || !esPanel || !esTabHosp || !esTabComm) return;
+
+    function esItems() {
+      return esState.famille === "hospitalier" ? ES_HOSPITALIER : ES_COMMUNAUTAIRE;
+    }
+
+    function esListe() {
+      if (esState.secteur && ES_MILIEUX[esState.secteur]) return ES_MILIEUX[esState.secteur];
+      var ids = esItems().map(function (s) { return s.id; });
+      var vus = {};
+      var out = [];
+      ids.forEach(function (id) {
+        ES_MILIEUX[id].forEach(function (m) {
+          var cle = m.nom + m.rls;
+          if (vus[cle]) return;
+          vus[cle] = true;
+          out.push(m);
+        });
+      });
+      return out;
+    }
+
+    function esFamilleNom() {
+      return esState.famille === "hospitalier" ? "Hospitalier" : "Communautaire";
+    }
+
+    function esSyncTabs() {
+      esTabHosp.classList.toggle("on", esState.famille === "hospitalier");
+      esTabComm.classList.toggle("on", esState.famille === "communautaire");
+    }
+
+    function esOpenFamille(famille) {
+      esState.famille = famille;
+      esState.secteur = "";
+      esState.parRls = false;
+      esChooser.hidden = true;
+      esExplorer.hidden = false;
+      esSyncTabs();
+      esDrawList();
+      esDrawPanel();
+      esExplorer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function esBack() {
+      esState.famille = null;
+      esState.secteur = "";
+      esState.parRls = false;
+      esChooser.hidden = false;
+      esExplorer.hidden = true;
+      esList.innerHTML = "";
+      esPanel.innerHTML = "";
+    }
+
+    function esMilieuxLabel(n) {
+      return n + (n > 1 ? " milieux" : " milieu");
+    }
+
+    function esDrawList() {
+      var list = esItems();
+      esList.innerHTML = list.map(function (item) {
+        var n = ES_MILIEUX[item.id].length;
+        var pressed = esState.secteur === item.id;
+        return '<li><button type="button" class="es-row" data-id="' + item.id +
+          '" aria-pressed="' + pressed + '" style="--dot:' + item.dot + '">' +
+          '<span class="es-chip" aria-hidden="true"></span>' +
+          '<span class="es-txt"><span class="es-nom">' + item.nom + '</span>' +
+          '<span class="es-sous">' + item.sous + '</span></span>' +
+          '<span class="es-count">' + n + '</span></button></li>';
+      }).join("");
+      esList.querySelectorAll(".es-row").forEach(function (btn) {
+        btn.onclick = function () { esSelectSecteur(btn.getAttribute("data-id")); };
+      });
+    }
+
+    function esSelectSecteur(id) {
+      esState.secteur = esState.secteur === id ? "" : id;
+      esState.parRls = false;
+      esList.querySelectorAll(".es-row").forEach(function (b) {
+        var on = b.getAttribute("data-id") === esState.secteur;
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      esDrawPanel();
+    }
+
+    function esAccent(type) {
+      if (type === "Hôpital") return " es-accent-bleu";
+      if (type === "CLSC" || type === "GMF-U") return " es-accent-azur";
+      if (type === "CHSLD") return " es-accent-sarcelle";
+      return "";
+    }
+
+    function esCard(m) {
+      return '<a class="es-mcard' + esAccent(m.type) + '" href="' + m.href + '"><span class="es-type">' + m.type +
+        "</span><strong>" + m.nom + '</strong><span class="es-meta">' + m.ville + " · " + m.rls + "</span></a>";
+    }
+
+    function esDrawPanel() {
+      var meta = esItems().filter(function (s) { return s.id === esState.secteur; })[0];
+      var milieux = esListe();
+      var titre = meta ? meta.nom : "Tous les milieux";
+      var sous = meta
+        ? meta.sous + " · " + esMilieuxLabel(milieux.length)
+        : (esState.famille === "hospitalier"
+          ? milieux.length + " établissements · tous les secteurs de cette famille"
+          : esMilieuxLabel(milieux.length) + " · tous les secteurs de cette famille");
+      var body = "";
+      if (esState.parRls) {
+        var groupes = [];
+        var index = {};
+        milieux.forEach(function (m) {
+          if (!index[m.rls]) { index[m.rls] = []; groupes.push({ rls: m.rls, arr: index[m.rls] }); }
+          index[m.rls].push(m);
+        });
+        groupes.forEach(function (g) {
+          body += '<div class="es-rls-label">' + g.rls + " · " + g.arr.length + '</div><div class="es-cards">' + g.arr.map(esCard).join("") + "</div>";
+        });
+      } else {
+        body = '<div class="es-cards">' + milieux.map(esCard).join("") + "</div>";
+      }
+      esPanel.innerHTML =
+        '<div class="es-panel-head"><div><h3>' + titre + '</h3><p class="es-sous">' + sous + "</p></div>" +
+        '<div class="es-seg" role="group" aria-label="Classement">' +
+        '<button type="button" id="es-btn-list" aria-pressed="' + (esState.parRls ? "false" : "true") + '"' + (esState.parRls ? "" : ' class="on"') + ">Liste</button>" +
+        '<button type="button" id="es-btn-rls" aria-pressed="' + (esState.parRls ? "true" : "false") + '"' + (esState.parRls ? ' class="on"' : "") + ">Par RLS</button></div></div>" +
+        '<div class="es-panel-body">' + body + "</div>";
+      document.getElementById("es-btn-list").onclick = function () { esState.parRls = false; esDrawPanel(); };
+      document.getElementById("es-btn-rls").onclick = function () { esState.parRls = true; esDrawPanel(); };
+    }
+
+    document.querySelectorAll(".es-fam").forEach(function (btn) {
+      btn.onclick = function () { esOpenFamille(btn.getAttribute("data-famille")); };
+    });
+    esTabHosp.onclick = function () { esOpenFamille("hospitalier"); };
+    esTabComm.onclick = function () { esOpenFamille("communautaire"); };
+    document.getElementById("es-btn-back").onclick = esBack;
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      if (esState.secteur) { esSelectSecteur(esState.secteur); return; }
+      if (esState.famille) esBack();
+    });
+  })();
+  </script>
+
   <section id="rls-pierre-boucher">
     <h2>RLS Pierre-Boucher <span class="compte">7</span></h2>
     <p class="rep-lien"><a href="/monteregie-est/rls/pierre-boucher/">Voir la page du RLS Pierre-Boucher →</a></p>
