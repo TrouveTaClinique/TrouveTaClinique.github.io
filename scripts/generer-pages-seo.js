@@ -636,6 +636,14 @@ const BANNIERE_EST_LARGEUR = '1024';
 const BANNIERE_EST_HAUTEUR = '341';
 const BANNIERE_EST_FICHIER = 'banniere_monteregie-est.jpg';
 
+/* Bannière « cellulaire » (desktop uniquement) : sur les 4 pages Montérégie-Est où le
+   contexte est sans ambiguïté (établissements, cliniques, PTEM, AMP), on montre le mockup
+   téléphone à partir de BANNIERE_EST_DESKTOP_SEUIL px. En dessous — mobile — on garde la
+   bannière pâle existante, plus lisible à petite taille. Ne jamais utiliser cette variante
+   sur les pages Centre/Ouest : le mockup affiche la carte de l'Est. */
+const BANNIERE_EST_DESKTOP_FICHIER = 'banniere-cellulaire-monteregie-est.jpg';
+const BANNIERE_EST_DESKTOP_SEUIL = 701;
+
 const UNIVERS_GENERAL = {
   regional: false,
   region: null,
@@ -705,10 +713,16 @@ function liensNav(u) {
   return liens;
 }
 
-function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
+function htmlBanniereSqb(assetsChemin, { compact = true, estActif = false } = {}) {
   const wrap = compact ? 'sqb-wrap compact directory-banner' : 'sqb-wrap';
   const img = `${assetsChemin}/${BANNIERE_EST_FICHIER}`;
-  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" srcset="${img} ${BANNIERE_EST_LARGEUR}w" sizes="(max-width: ${BANNIERE_EST_LARGEUR}px) 100vw, ${BANNIERE_EST_LARGEUR}px" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy"></a></figure>`;
+  const alt = 'Carte interactive Trouve ta clinique — Montérégie-Est';
+  const imgFallback = `<img src="${img}" alt="${alt}" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy">`;
+  if (!estActif) {
+    return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" srcset="${img} ${BANNIERE_EST_LARGEUR}w" sizes="(max-width: ${BANNIERE_EST_LARGEUR}px) 100vw, ${BANNIERE_EST_LARGEUR}px" alt="${alt}" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy"></a></figure>`;
+  }
+  const imgDesktop = `${assetsChemin}/${BANNIERE_EST_DESKTOP_FICHIER}`;
+  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><picture><source media="(min-width: ${BANNIERE_EST_DESKTOP_SEUIL}px)" srcset="${imgDesktop}">${imgFallback}</picture></a></figure>`;
 }
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
@@ -1545,7 +1559,7 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
     </ul>
   </section>`}
 
-  ${htmlBanniereSqb(u ? '../../assets' : '../assets')}
+  ${htmlBanniereSqb(u ? '../../assets' : '../assets', { estActif: Boolean(u && u.region === 'Est') })}
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
@@ -2418,7 +2432,7 @@ ${items}
     </div>
   </section>
 
-  ${htmlBanniereSqb('../../assets')}
+  ${htmlBanniereSqb('../../assets', { estActif: true })}
 
   ${htmlExplorezSecteurs()}
 

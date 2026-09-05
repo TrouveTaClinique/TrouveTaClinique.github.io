@@ -32,7 +32,7 @@ function lireOriginal(nom) {
 
 const banner = `<figure class="sqb-wrap">
 <a class="sqb-photo" aria-label="Ouvrir la carte interactive Montérégie-Est" href="/monteregie-est/">
-<img src="{{ASSETS}}/banniere_monteregie-est.jpg" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" loading="lazy">
+<picture><source media="(min-width: 701px)" srcset="{{ASSETS}}/banniere-cellulaire-monteregie-est.jpg"><img src="{{ASSETS}}/banniere_monteregie-est.jpg" alt="Carte interactive Trouve ta clinique — Montérégie-Est" width="1024" height="341" loading="lazy"></picture>
 </a>
 </figure>`;
 
