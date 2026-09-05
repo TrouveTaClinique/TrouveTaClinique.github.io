@@ -400,14 +400,16 @@ p, li { text-wrap: pretty; }
 .sqb-wrap { margin:1.7rem 0 2.2rem; width:100%; }
 .sqb-wrap.compact { margin-top:1.25rem; }
 
-/* Bannière officielle Montérégie-Est : JPEG natif 1024×341, jamais agrandi au-delà. */
+/* Bannière : même largeur que la colonne de la page (1080 px max, voir main).
+   La hauteur suit le ratio de l’image, sans plafond à 1024 px. */
 .sqb-photo {
-  display:block; width:100%; max-width:1024px; margin-inline:auto;
+  display:block; width:100%; margin-inline:auto;
   border-radius:18px; overflow:hidden; text-decoration:none; line-height:0;
   transition:box-shadow .15s ease;
 }
+.sqb-photo picture,
 .sqb-photo img {
-  display:block; width:1024px; max-width:100%; height:auto;
+  display:block; width:100%; height:auto;
 }
 .sqb-photo:hover, .sqb-photo:focus-visible {
   box-shadow:0 8px 24px rgba(23,10,114,.18);

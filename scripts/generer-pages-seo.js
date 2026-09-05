@@ -632,17 +632,19 @@ function analyserPlages(texte) {
 const EST_PREFIXE = '/monteregie-est';
 const EST_ACCUEIL = EST_PREFIXE + '/';
 
+/* Bannière des pages web Est (répertoires, PTEM, AMP) : JPEG clair 1024×341.
+   Distincte de l’en-tête des formulaires Google :
+   assets/banniere-formulaire-monteregie-est.png (1600×400). */
 const BANNIERE_EST_LARGEUR = '1024';
 const BANNIERE_EST_HAUTEUR = '341';
 const BANNIERE_EST_FICHIER = 'banniere_monteregie-est.jpg';
 
-/* Bannière « cellulaire » (desktop uniquement) : sur les 4 pages Montérégie-Est où le
-   contexte est sans ambiguïté (établissements, cliniques, PTEM, AMP), on montre le mockup
-   téléphone à partir de BANNIERE_EST_DESKTOP_SEUIL px. En dessous — mobile — on garde la
-   bannière pâle existante, plus lisible à petite taille. Ne jamais utiliser cette variante
-   sur les pages Centre/Ouest : le mockup affiche la carte de l'Est. */
+/* Bannière « cellulaire » : mockup téléphone, sur les 4 pages Montérégie-Est
+   (établissements, cliniques, PTEM, AMP), ordinateur et téléphone. Ne jamais
+   utiliser cette variante sur les pages Centre/Ouest : le mockup affiche la carte de l'Est. */
 const BANNIERE_EST_DESKTOP_FICHIER = 'banniere-cellulaire-monteregie-est.jpg';
-const BANNIERE_EST_DESKTOP_SEUIL = 701;
+const BANNIERE_EST_DESKTOP_LARGEUR = '1774';
+const BANNIERE_EST_DESKTOP_HAUTEUR = '887';
 
 const UNIVERS_GENERAL = {
   regional: false,
@@ -715,14 +717,12 @@ function liensNav(u) {
 
 function htmlBanniereSqb(assetsChemin, { compact = true, estActif = false } = {}) {
   const wrap = compact ? 'sqb-wrap compact directory-banner' : 'sqb-wrap';
-  const img = `${assetsChemin}/${BANNIERE_EST_FICHIER}`;
   const alt = 'Carte interactive Trouve ta clinique — Montérégie-Est';
-  const imgFallback = `<img src="${img}" alt="${alt}" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy">`;
-  if (!estActif) {
-    return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" srcset="${img} ${BANNIERE_EST_LARGEUR}w" sizes="(max-width: ${BANNIERE_EST_LARGEUR}px) 100vw, ${BANNIERE_EST_LARGEUR}px" alt="${alt}" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy"></a></figure>`;
-  }
-  const imgDesktop = `${assetsChemin}/${BANNIERE_EST_DESKTOP_FICHIER}`;
-  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><picture><source media="(min-width: ${BANNIERE_EST_DESKTOP_SEUIL}px)" srcset="${imgDesktop}">${imgFallback}</picture></a></figure>`;
+  const fichier = estActif ? BANNIERE_EST_DESKTOP_FICHIER : BANNIERE_EST_FICHIER;
+  const largeur = estActif ? BANNIERE_EST_DESKTOP_LARGEUR : BANNIERE_EST_LARGEUR;
+  const hauteur = estActif ? BANNIERE_EST_DESKTOP_HAUTEUR : BANNIERE_EST_HAUTEUR;
+  const img = `${assetsChemin}/${fichier}`;
+  return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" alt="${alt}" width="${largeur}" height="${hauteur}" decoding="sync" loading="lazy"></a></figure>`;
 }
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
