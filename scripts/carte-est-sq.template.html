@@ -16,7 +16,6 @@
   --sq-menthe: #90F1E9;
   --sq-sarcelle: #08A0A0;
   --sq-azur: #0080D7;
-  --app-header: 99px;
 
   /* Segoe UI, avec replis compatibles iOS, Android et macOS. */
   --sq-font: 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif;
@@ -42,12 +41,12 @@ html, body { height: 100%; overflow: hidden; position: fixed; inset: 0; width: 1
 
 /* HEADER */
 header {
-  position: fixed; top: 0; left: 0; right: 0; height: var(--app-header);
+  position: fixed; top: 0; left: 0; right: 0; height: 76px;
   background: linear-gradient(100deg, var(--sq-bleu) 0%, var(--sq-bleu) 42%, var(--sq-sarcelle) 100%); border-bottom: none;
   display: flex; align-items: center; padding: 0 0 0 26px; gap: 16px; z-index: 1000;
 }
-header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
-  background: linear-gradient(90deg, var(--sq-azur), var(--sq-sarcelle)); }
+header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 6px;
+  background: linear-gradient(90deg, var(--logo-blue), var(--logo-teal), var(--logo-mint)); }
 .brand { display:flex; align-items:center; gap:14px; cursor:pointer; }
 .brand:hover { opacity:.85; }
 .brand:focus-visible { outline:2px solid var(--orange); outline-offset:3px; border-radius:6px; }
@@ -64,7 +63,7 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   .sb-dots i { animation: none !important; } }
 /* Le logo est un bloc et non une image : un <img> ne peut pas porter de
    pseudo-élément, donc pas de reflet par-dessus. */
-.logo-img { position: relative; width: 73px; height: 73px; flex-shrink: 0;
+.logo-img { position: relative; width: 56px; height: 56px; flex-shrink: 0;
   background: var(--app-logo) center/contain no-repeat; }
 .logo-img::after { content: ''; position: absolute; inset: 0;
   -webkit-mask: var(--app-logo) center/contain no-repeat;
@@ -172,7 +171,7 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
      devaient aussi rétrécir, pas seulement les 4 ronds. */
   header { padding-left: 12px; gap: 8px; }
   .brand { gap: 8px; }
-  .logo-img { width: 52px; height: 52px; }
+  .logo-img { width: 40px; height: 40px; }
   .header-right { gap: 6px; padding-right: 6px; }
   .btn-theme, .btn-share, .btn-info { width: 32px; height: 32px; }
 }
@@ -193,7 +192,7 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
 .ios-tip b { color: #ffd76b; }
 
 /* LAYOUT */
-.layout { display: flex; height: var(--app-vh, 100dvh); padding-top: var(--app-header); }
+.layout { display: flex; height: var(--app-vh, 100dvh); padding-top: 76px; }
 
 .annonce-banner { display: none; position: fixed; top: 86px; left: 50%; transform: translateX(-50%);
   z-index: 920; width: min(330px, calc(100% - 104px));
@@ -407,7 +406,7 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   background: var(--navy); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .03em; }
 
 /* DETAIL PANEL (READ-ONLY VIEWER) */
-.detail { position: fixed; top: var(--app-header); right: 0; bottom: 0; width: 480px;
+.detail { position: fixed; top: 76px; right: 0; bottom: 0; width: 480px;
   background: var(--white); border-left: 1px solid var(--border);
   box-shadow: -6px 0 30px rgba(0,0,0,.1); z-index: 960;
   display: flex; flex-direction: column; overflow: hidden;
@@ -561,7 +560,7 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   7%, 100% { transform: translateY(0); }
 }
 .sidebar-overlay {
-  display: none; position: fixed; inset: var(--app-header) 0 0 0;
+  display: none; position: fixed; inset: 76px 0 0 0;
   background: rgba(15,34,64,.4); z-index: 945;
   opacity: 0; pointer-events: none; transition: opacity .3s;
 }
@@ -570,7 +569,7 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
 @media (max-width: 860px) {
   .detail { width: 100%; }
   .sidebar {
-    display: flex; position: fixed; top: var(--app-header); left: 0; bottom: 0;
+    display: flex; position: fixed; top: 76px; left: 0; bottom: 0;
     width: 86%; max-width: 360px; z-index: 950;
     transform: translateX(-100%);
     transition: transform .3s cubic-bezier(.4,0,.2,1);
@@ -1430,10 +1429,6 @@ body.cmp-open { overflow:hidden; }
 /* Demandes visuelles temporaires : le prototype SQ ci-dessus n'est pas modifié.
    Pour réactiver : retirer ce bloc et remettre AFFICHER_ECRAN_CHARGEMENT à true. */
 :root[data-region="Est"] header { background: var(--sq-bleu); }
-:root[data-region="Est"] header::after {
-  height: 3px;
-  background: linear-gradient(90deg, var(--sq-azur), var(--sq-sarcelle));
-}
 :root[data-region="Est"] .etab-marker::after,
 :root[data-region="Est"] .etab-marker.active::after { content: none; display: none; }
 #app-loader { display: none !important; }
