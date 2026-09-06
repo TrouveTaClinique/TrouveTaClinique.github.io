@@ -2106,7 +2106,7 @@ function htmlExplorezSecteurs() {
   .es-fam-meta{font-size:1.05rem;color:rgba(255,255,255,.9);font-weight:600}
   .es-fam-cta{margin-top:.7rem;font-size:1rem;font-weight:800;color:#fff}
 
-  .es-explorer{background:#fff;border:1px solid var(--es-line);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(23,10,114,.08)}
+  .es-explorer{background:#F7F4EF;border:1px solid var(--es-line);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(23,10,114,.08)}
   .es-explorer[hidden]{display:none!important}
   .es-tabs{display:flex;border-bottom:1px solid var(--es-line);padding:.85rem 1.1rem}
   .es-tabs-row{display:flex;align-items:center;width:100%;gap:.55rem;flex-wrap:wrap}
@@ -2115,7 +2115,7 @@ function htmlExplorezSecteurs() {
   .es-tab[data-famille="communautaire"]{background:var(--es-shine),var(--es-sarcelle)}
   .es-tab:hover{filter:brightness(1.06)}
   .es-tab:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-  .es-tab.on{box-shadow:0 0 0 3px var(--es-menthe)}
+  .es-tab.on{box-shadow:0 0 0 3px var(--es-menthe),0 0 0 6px var(--es-bleu)}
   .es-back{appearance:none;border:none;cursor:pointer;margin-left:auto;font-family:inherit;font-size:.88rem;font-weight:800;color:#fff;background:var(--es-shine),var(--es-bleu);padding:.7rem 1rem;border-radius:12px}
   .es-back:hover{filter:brightness(1.08)}
   .es-back:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
@@ -2125,7 +2125,7 @@ function htmlExplorezSecteurs() {
   .es-row{appearance:none;border:none;background:var(--es-shine),var(--dot);cursor:pointer;width:100%;display:flex;align-items:center;gap:.7rem;padding:.85rem .85rem;border-radius:12px;text-align:left;font-family:inherit;color:#fff;transition:filter .15s ease,box-shadow .15s ease}
   .es-row:hover{filter:brightness(1.06)}
   .es-row:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-  .es-row[aria-pressed="true"]{background:var(--es-shine),var(--es-bleu);box-shadow:0 0 0 3px var(--es-menthe)}
+  .es-row[aria-pressed="true"]{background:var(--es-shine),var(--es-bleu);box-shadow:0 0 0 3px var(--es-menthe),0 0 0 6px var(--es-bleu)}
   .es-row .es-chip{width:10px;height:10px;border-radius:50%;background:#fff;flex-shrink:0}
   .es-row .es-txt{flex:1;min-width:0}
   .es-row .es-nom{display:block;font-size:1rem;font-weight:800;color:#fff}
@@ -2142,7 +2142,7 @@ function htmlExplorezSecteurs() {
   .es-seg button#es-btn-list{background:var(--es-shine),var(--es-azur)}
   .es-seg button#es-btn-rls{background:var(--es-shine),var(--es-sarcelle)}
   .es-seg button:hover{filter:brightness(1.06)}
-  .es-seg button.on{background:var(--es-shine),var(--es-bleu);box-shadow:0 0 0 3px var(--es-menthe)}
+  .es-seg button.on{background:var(--es-shine),var(--es-bleu);box-shadow:0 0 0 3px var(--es-menthe),0 0 0 6px var(--es-bleu)}
   .es-seg button:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
 
   .es-cards{display:flex;flex-direction:column;gap:8px}
@@ -2246,7 +2246,7 @@ function htmlExplorezSecteurs() {
       { id: "gmf-u", nom: "GMF-U", sous: "Première ligne universitaire", dot: "var(--es-azur)" },
       { id: "chsld", nom: "CHSLD", sous: "Longue durée", dot: "var(--es-sarcelle)" },
       { id: "sad", nom: "Soins à domicile", sous: "SAD, SIAD et palliatifs", dot: "var(--es-azur)" },
-      { id: "autres", nom: "Autres", sous: "Réadaptation et détention", dot: "var(--es-bleu)" }
+      { id: "autres", nom: "Autres", sous: "Réadaptation et détention", dot: "var(--es-sarcelle)" }
     ];
 
     var esState = { famille: null, secteur: "", parRls: false };
@@ -2343,7 +2343,7 @@ function htmlExplorezSecteurs() {
     function esAccent(type) {
       if (type === "Hôpital") return " es-accent-bleu";
       if (type === "CLSC" || type === "GMF-U") return " es-accent-azur";
-      if (type === "CHSLD") return " es-accent-sarcelle";
+      if (type === "CHSLD" || type === "CRD" || type === "Détention") return " es-accent-sarcelle";
       return "";
     }
 
