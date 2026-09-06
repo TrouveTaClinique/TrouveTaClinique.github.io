@@ -1194,8 +1194,8 @@ body.cmp-open { overflow:hidden; }
   box-shadow: 0 8px 28px rgba(23,10,114,.24);
 }
 :root[data-region="Est"] header::after {
-  height: 3px;
-  background: linear-gradient(90deg, var(--sq-azur), var(--sq-sarcelle));
+  height: 5px;
+  background: linear-gradient(90deg, var(--sq-mint) 0 34%, var(--sq-teal) 34% 67%, var(--sq-azure) 67%);
 }
 :root[data-region="Est"] #app-loader { background: linear-gradient(145deg, #170A72, #082F70); }
 :root[data-region="Est"] #app-loader .ldr-glow {
@@ -1500,6 +1500,10 @@ body.cmp-open { overflow:hidden; }
 /* Demandes visuelles temporaires : le prototype SQ ci-dessus n'est pas modifié.
    Pour réactiver : retirer ce bloc et remettre AFFICHER_ECRAN_CHARGEMENT à true. */
 :root[data-region="Est"] header { background: var(--sq-bleu); }
+:root[data-region="Est"] header::after {
+  height: 3px;
+  background: linear-gradient(90deg, var(--sq-azur), var(--sq-sarcelle));
+}
 :root[data-region="Est"] .etab-marker::after,
 :root[data-region="Est"] .etab-marker.active::after { content: none; display: none; }
 #app-loader { display: none !important; }
