@@ -84,6 +84,9 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
     assert.doesNotMatch(html, /https?:\/\/(?:www\.)?trouvetaclinique\.ca[/"']/i, fichier);
     assert.doesNotMatch(html, /static\.cloudflareinsights\.com/, fichier);
   }
+  assert.ok(fs.existsSync(path.join(destination, 'recherche/donnees.json')));
+  assert.ok(fs.existsSync(path.join(destination, 'recherche/index.html')));
+  assert.ok(fs.existsSync(path.join(destination, 'assets/recherche.js')));
   for (const chemin of ['/', '/monteregie/', '/monteregie-est/', '/monteregie-centre/', '/monteregie-ouest/', '/ptem/', '/amp/', '/cliniques/']) {
     assert.match(lire(chemin.slice(1) + 'index.html'), /ttc-version/);
   }

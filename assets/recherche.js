@@ -5,6 +5,7 @@
   var INDEX_URL = '/recherche/donnees.json';
   var index = null;
   var indexCharge = false;
+  var indexErreur = false;
   var chargement = null;
 
   function norm(s) {
@@ -27,7 +28,13 @@
     if (indexCharge) return Promise.resolve(index);
     if (chargement) return chargement;
     chargement = fetch(INDEX_URL, { credentials: 'same-origin' })
-      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (r) {
+        if (!r.ok) {
+          indexErreur = true;
+          return [];
+        }
+        return r.json();
+      })
       .then(function (data) {
         index = Array.isArray(data) ? data : (data.items || []);
         indexCharge = true;
@@ -36,6 +43,7 @@
       .catch(function () {
         index = [];
         indexCharge = true;
+        indexErreur = true;
         return index;
       });
     return chargement;
@@ -95,6 +103,16 @@
       if (statutEl) statutEl.textContent = 'Tapez au moins deux lettres (nom, ville ou secteur).';
       return;
     }
+    if (!indexCharge) {
+      listeEl.innerHTML = '';
+      if (statutEl) statutEl.textContent = 'Chargement de la liste…';
+      return;
+    }
+    if (indexErreur) {
+      listeEl.innerHTML = '';
+      if (statutEl) statutEl.textContent = 'La liste n’a pas pu se charger. Réessayez dans un instant.';
+      return;
+    }
     var items = filtrer(texte);
     var n = items.length;
     var vus = limite ? items.slice(0, limite) : items;
@@ -123,12 +141,13 @@
 
     function ouvrir(e) {
       if (e) e.preventDefault();
+      panel.removeAttribute('hidden');
+      document.body.classList.add('search-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      input.focus();
+      input.select();
       chargerIndex().then(function () {
-        panel.removeAttribute('hidden');
-        document.body.classList.add('search-open');
-        toggle.setAttribute('aria-expanded', 'true');
-        input.focus();
-        input.select();
+        afficher(results, status, input.value, 8);
       });
     }
 
@@ -163,6 +182,7 @@
         if ((input.value || '').trim().length < 2) e.preventDefault();
       });
     }
+    chargerIndex();
   }
 
   function initPage() {
