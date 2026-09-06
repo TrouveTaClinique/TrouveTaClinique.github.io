@@ -36,7 +36,7 @@
         "url": "https://trouvetaclinique.ca/monteregie-est/etablissements/",
         "name": "Secteurs en établissement en Montérégie-Est",
         "inLanguage": "fr-CA",
-        "dateModified": "2026-09-04",
+        "dateModified": "2026-09-05",
         "isPartOf": {
           "@id": "https://trouvetaclinique.ca/#website"
         }
@@ -81,8 +81,26 @@
       <a href="/monteregie-est/ptem/">PTEM</a>
       <a href="/monteregie-est/amp/">AMP</a>
     </nav>
+    <a href="/recherche/" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-haspopup="dialog" aria-label="Ouvrir la recherche">
+      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="8.4" cy="8.4" r="5.3" stroke="currentColor" stroke-width="1.7"/><path d="M12.4 12.4 L16.6 16.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </a>
   </div>
 </header>
+<div class="search-panel" id="search-panel" hidden>
+  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <div class="search-panel__top">
+      <h2 id="search-title">Rechercher</h2>
+      <button type="button" class="search-panel__close" id="search-close" aria-label="Fermer la recherche">×</button>
+    </div>
+    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
+      <label class="visually-hidden" for="search-input">Rechercher un milieu ou une page</label>
+      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+      <button type="submit">Rechercher</button>
+    </form>
+    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+    <ul class="search-hits" id="search-results"></ul>
+  </div>
+</div>
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › Secteurs en établissement</nav>
   <section class="hero">
@@ -149,8 +167,8 @@
   .es-fam{appearance:none;border:none;cursor:pointer;text-align:left;padding:2.15rem 1.9rem;display:flex;flex-direction:column;gap:.45rem;font-family:inherit;color:#fff;border-radius:18px;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;position:relative;min-height:11.5rem;box-shadow:0 12px 28px rgba(23,10,114,.18)}
   .es-fam:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 16px 32px rgba(23,10,114,.22)}
   .es-fam:focus-visible{outline:3px solid var(--es-menthe);outline-offset:3px}
-  .es-fam--hosp{background:var(--es-azur)}
-  .es-fam--comm{background:var(--es-sarcelle)}
+  .es-fam--hosp{background:linear-gradient(160deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 48%),var(--es-azur)}
+  .es-fam--comm{background:linear-gradient(160deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 48%),var(--es-sarcelle)}
   .es-fam-icon{width:48px;height:48px;display:grid;place-items:center;margin-bottom:.35rem;color:#fff}
   .es-fam-icon svg{display:block;width:48px;height:48px}
   .es-fam-name{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.15}
@@ -602,6 +620,7 @@ document.querySelectorAll('.brand').forEach(function (b) {
   });
 })();
 </script>
+<script src="/assets/recherche.js" defer></script>
 <script>
 (function () {
   if (!('serviceWorker' in navigator)) return;

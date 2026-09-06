@@ -204,7 +204,7 @@ jobs:
           set -e
           git config user.name  "Robot Trouve ta clinique"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json index.html cliniques rls sitemap.xml scripts/slugs.json monteregie monteregie-est monteregie-centre monteregie-ouest
+          git add data.json index.html cliniques rls sitemap.xml scripts/slugs.json monteregie monteregie-est monteregie-centre monteregie-ouest recherche
           if git diff --cached --quiet ; then
             echo "Les pages étaient déjà à jour : rien à publier."
             exit 0

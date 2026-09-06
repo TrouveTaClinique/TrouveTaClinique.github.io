@@ -119,8 +119,26 @@
       <a href="/monteregie-est/ptem/">PTEM</a>
       <a href="/monteregie-est/amp/">AMP</a>
     </nav>
+    <a href="/recherche/" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-haspopup="dialog" aria-label="Ouvrir la recherche">
+      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="8.4" cy="8.4" r="5.3" stroke="currentColor" stroke-width="1.7"/><path d="M12.4 12.4 L16.6 16.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </a>
   </div>
 </header>
+<div class="search-panel" id="search-panel" hidden>
+  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <div class="search-panel__top">
+      <h2 id="search-title">Rechercher</h2>
+      <button type="button" class="search-panel__close" id="search-close" aria-label="Fermer la recherche">×</button>
+    </div>
+    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
+      <label class="visually-hidden" for="search-input">Rechercher un milieu ou une page</label>
+      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+      <button type="submit">Rechercher</button>
+    </form>
+    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+    <ul class="search-hits" id="search-results"></ul>
+  </div>
+</div>
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › <a href="/monteregie-est/rls/pierre-boucher/">RLS Pierre-Boucher</a> › Clinique le Médical</nav>
   <section class="hero">
@@ -211,6 +229,7 @@ document.querySelectorAll('.brand').forEach(function (b) {
   });
 })();
 </script>
+<script src="/assets/recherche.js" defer></script>
 <script>
 (function () {
   if (!('serviceWorker' in navigator)) return;

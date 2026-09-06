@@ -97,6 +97,30 @@ const NAV_TOGGLE_SCRIPT = `<script>
 })();
 </script>`;
 
+/* Loupe du bandeau, même geste que sante.quebec : cercle + icône, panneau au clic.
+   Sans JavaScript, le lien ouvre /recherche/. */
+const SEARCH_TOGGLE_BOUTON = `<a href="/recherche/" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-haspopup="dialog" aria-label="Ouvrir la recherche">
+      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="8.4" cy="8.4" r="5.3" stroke="currentColor" stroke-width="1.7"/><path d="M12.4 12.4 L16.6 16.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </a>`;
+
+const SEARCH_PANEL = `<div class="search-panel" id="search-panel" hidden>
+  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <div class="search-panel__top">
+      <h2 id="search-title">Rechercher</h2>
+      <button type="button" class="search-panel__close" id="search-close" aria-label="Fermer la recherche">×</button>
+    </div>
+    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
+      <label class="visually-hidden" for="search-input">Rechercher un milieu ou une page</label>
+      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+      <button type="submit">Rechercher</button>
+    </form>
+    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+    <ul class="search-hits" id="search-results"></ul>
+  </div>
+</div>`;
+
+const SEARCH_SCRIPT = `<script src="/assets/recherche.js" defer></script>`;
+
 /* Migration v52 : l'ancienne application générale enregistrait un service worker de portée
    « / ». La PWA étant désormais réservée à Montérégie-Est, toutes les pages de contenu retirent
    cette ancienne inscription si elle existe. La PWA Est, de portée /monteregie-est/, est
@@ -794,8 +818,10 @@ ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
     <nav class="nav" id="site-nav" aria-label="Navigation principale">
 ${nav}
     </nav>
+    ${SEARCH_TOGGLE_BOUTON}
   </div>
 </header>
+${SEARCH_PANEL}
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
 ${corps}
@@ -803,6 +829,7 @@ ${corps}
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante — Trouve ta clinique</div></div></footer>
 ${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
 ${NAV_TOGGLE_SCRIPT}
+${SEARCH_SCRIPT}
 ${SERVICE_WORKER_CLEANUP}
 ${CLOUDFLARE_ANALYTICS}
 </body>
@@ -1370,7 +1397,12 @@ function pageAccueil(toutesEntrees, majDonnees) {
       {
         '@type': 'WebSite', '@id': `${url}#website`, name: 'Trouve ta clinique', url,
         inLanguage: 'fr-CA', description,
-        publisher: { '@id': `${url}#organisation` }
+        publisher: { '@id': `${url}#organisation` },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${SITE}/recherche/?q={search_term_string}`,
+          'query-input': 'required name=search_term_string'
+        }
       },
       { '@type': 'Person', '@id': `${url}#auteur`, name: 'Olivier Laplante',
         jobTitle: 'Résident en médecine familiale', url },
@@ -2065,8 +2097,8 @@ function htmlExplorezSecteurs() {
   .es-fam{appearance:none;border:none;cursor:pointer;text-align:left;padding:2.15rem 1.9rem;display:flex;flex-direction:column;gap:.45rem;font-family:inherit;color:#fff;border-radius:18px;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;position:relative;min-height:11.5rem;box-shadow:0 12px 28px rgba(23,10,114,.18)}
   .es-fam:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 16px 32px rgba(23,10,114,.22)}
   .es-fam:focus-visible{outline:3px solid var(--es-menthe);outline-offset:3px}
-  .es-fam--hosp{background:var(--es-azur)}
-  .es-fam--comm{background:var(--es-sarcelle)}
+  .es-fam--hosp{background:linear-gradient(160deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 48%),var(--es-azur)}
+  .es-fam--comm{background:linear-gradient(160deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 48%),var(--es-sarcelle)}
   .es-fam-icon{width:48px;height:48px;display:grid;place-items:center;margin-bottom:.35rem;color:#fff}
   .es-fam-icon svg{display:block;width:48px;height:48px}
   .es-fam-name{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.15}
@@ -2510,6 +2542,7 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo, cliniq
 
 const PAGES_FIXES = [
   { loc: '/', lastmod: null, changefreq: 'weekly', priority: '1.0' },
+  { loc: '/recherche/', lastmod: null, changefreq: 'weekly', priority: '0.5' },
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/ptem/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },
@@ -2518,6 +2551,115 @@ const PAGES_FIXES = [
   { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
   { loc: '/monteregie-ouest/', lastmod: null, changefreq: 'monthly', priority: '0.6' }
 ];
+
+function pageRecherche() {
+  const url = `${SITE}/recherche/`;
+  const titre = 'Rechercher un milieu — Montérégie';
+  const description = limiterTexte(
+    'Recherchez une clinique, un établissement, une ville ou un guide (PTEM, AMP) en Montérégie.',
+    155
+  );
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SearchResultsPage',
+    name: titre,
+    url
+  };
+  const corps = `
+<section class="hero">
+  <p class="eyebrow">Montérégie</p>
+  <h1>Rechercher un milieu</h1>
+  <p class="lead">Tapez le nom d’une clinique, d’un hôpital, d’une ville ou d’un secteur (urgence, GMF-U, PTEM…).</p>
+  <form class="search-page-form" action="/recherche/" method="get" role="search">
+    <label class="visually-hidden" for="search-page-input">Rechercher</label>
+    <input id="search-page-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+    <button type="submit">Rechercher</button>
+  </form>
+  <p class="search-page-status" id="search-page-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+  <ul class="search-hits" id="search-page-results"></ul>
+</section>`;
+  return page({
+    titre, description, url, profondeur: 1, indexable: true, jsonLd,
+    filDAriane: `<a href="/">Accueil</a> › Rechercher`,
+    corps, actif: null
+  });
+}
+
+function construireIndexRecherche(cliniques, slugs) {
+  const items = [];
+  const pages = [
+    { nom: 'Accueil', url: '/', extra: 'accueil trouve ta clinique' },
+    { nom: 'Carte interactive Montérégie-Est', url: '/monteregie-est/', extra: 'carte interactive est' },
+    { nom: 'Carte interactive Montérégie-Centre', url: '/monteregie-centre/', extra: 'carte centre' },
+    { nom: 'Carte interactive Montérégie-Ouest', url: '/monteregie-ouest/', extra: 'carte ouest' },
+    { nom: 'Cliniques de la Montérégie-Est', url: '/monteregie-est/cliniques/', extra: 'repertoire cliniques' },
+    { nom: 'Cliniques de la Montérégie-Centre', url: '/monteregie-centre/cliniques/', extra: 'repertoire cliniques centre' },
+    { nom: 'Cliniques de la Montérégie-Ouest', url: '/monteregie-ouest/cliniques/', extra: 'repertoire cliniques ouest' },
+    { nom: 'Secteurs en établissement', url: '/monteregie-est/etablissements/', extra: 'hopital chsld clsc gmf-u' },
+    { nom: 'PTEM — plans territoriaux des effectifs médicaux', url: '/monteregie-est/ptem/', extra: 'ptem prem avis de conformite' },
+    { nom: 'AMP — activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' }
+  ];
+  for (const p of pages) {
+    items.push({ kind: 'page', nom: p.nom, url: p.url, ville: '', rls: '', extra: p.extra, type: 'Page' });
+  }
+
+  const rlsVus = new Set();
+  for (const c of cliniques) {
+    if (HREF_GMFU_ETABLISSEMENT[String(c.id)]) continue;
+    const slug = slugs[String(c.id)];
+    if (!slug) continue;
+    const uRegion = UNIVERS_PAR_REGION[c.region];
+    const prefixe = uRegion ? uRegion.prefixe : EST_PREFIXE;
+    items.push({
+      kind: 'clinique',
+      nom: c.nom,
+      url: hrefFicheMilieu(c, slug, prefixe),
+      ville: c.ville || '',
+      rls: c.rls || '',
+      type: c.type || 'Clinique',
+      extra: [c.type, c.region ? 'Montérégie-' + c.region : ''].filter(Boolean).join(' ')
+    });
+    if (c.rls && uRegion) {
+      const cle = uRegion.region + '|' + c.rls;
+      if (!rlsVus.has(cle)) {
+        rlsVus.add(cle);
+        items.push({
+          kind: 'rls',
+          nom: 'RLS ' + c.rls,
+          url: `${uRegion.prefixe}/rls/${slugifier(c.rls)}/`,
+          ville: '',
+          rls: c.rls,
+          type: 'RLS',
+          extra: 'reseau local de services Montérégie-' + uRegion.region
+        });
+      }
+    }
+  }
+
+  const donneesEtab = chargerDonneesEtablissements();
+  const lot = new Set(PREMIER_LOT_ETABLISSEMENTS);
+  for (const inst of donneesEtab.installations || []) {
+    if (!lot.has(inst.id)) continue;
+    const secteurs = secteursDe(donneesEtab, inst.id).map(s => s.libelle).join(' ');
+    items.push({
+      kind: 'etablissement',
+      nom: inst.nom,
+      url: `${EST_PREFIXE}/etablissements/${slugEtablissement(inst)}/`,
+      ville: inst.ville || '',
+      rls: inst.territoireSource || '',
+      type: typeEtablissementLibelle(inst.type),
+      extra: [typeEtablissementLibelle(inst.type), secteurs].filter(Boolean).join(' ')
+    });
+  }
+  return items;
+}
+
+function publierRecherche(cliniques, slugs) {
+  const items = construireIndexRecherche(cliniques, slugs);
+  ecrire(path.join('recherche', 'donnees.json'), JSON.stringify(items) + '\n');
+  ecrire(path.join('recherche', 'index.html'), pageRecherche());
+  return items.length;
+}
 
 function sitemap(entrees) {
   const urls = entrees.map(e => `  <url>
@@ -2671,6 +2813,19 @@ function normaliserPageGuide(html, nom) {
     sortie = sortie.replace('</body>', `${NAV_TOGGLE_SCRIPT}\n</body>`);
   }
 
+  if (!/id="search-toggle"/.test(sortie)) {
+    sortie = sortie.replace(
+      /(<nav[^>]*id="site-nav"[^>]*>[\s\S]*?<\/nav>)/,
+      `$1\n    ${SEARCH_TOGGLE_BOUTON}`
+    );
+  }
+  if (!/id="search-panel"/.test(sortie)) {
+    sortie = sortie.replace('</header>', `</header>\n${SEARCH_PANEL}`);
+  }
+  if (!sortie.includes('/assets/recherche.js')) {
+    sortie = sortie.replace('</body>', `${SEARCH_SCRIPT}\n</body>`);
+  }
+
   if (!sortie.includes('/etablissements/')) {
     sortie = sortie.replace(
       '<a href="/monteregie-est/cliniques/">Cliniques</a>',
@@ -2783,7 +2938,7 @@ function main() {
      Une refonte du gabarit modifie aussi le contenu HTML, même si data.json n'a pas changé — le
      sitemap doit donc en tenir compte pour son lastmod. Mettre à jour cette date à la main lors
      d'une prochaine modification des templates ci-dessous. */
-  const majGabaritsSeo = '2026-09-04';
+  const majGabaritsSeo = '2026-09-05';
   const majPagesSeo = [majDonnees, majGabaritsSeo].sort().at(-1);
 
   const toutes = donnees.cliniques || [];
@@ -2920,6 +3075,7 @@ function main() {
   publierPagesGuide();
 
   const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo, cliniquesById);
+  const nRecherche = publierRecherche(cliniques, slugs);
 
   /* Répertoire général + hub RLS de chaque univers régional + sitemap */
   ecrire(path.join('cliniques', 'index.html'),
@@ -3002,6 +3158,7 @@ function main() {
   console.log(`Pages de RLS       : ${parRls.size}`);
   console.log(`Répertoire         : cliniques/index.html`);
   console.log(`Établissements     : répertoire + ${nEtabSeo} fiche(s) (premier lot)`);
+  console.log(`Recherche          : ${nRecherche} entrées (recherche/donnees.json)`);
   console.log(`Sitemap            : ${entrees.length} URL`);
   console.log(`Redirections CF    : ${nRedirCf} (scripts/cloudflare-bulk-redirects.csv)`);
   console.log(`GMF-U canoniques   : ${Object.keys(HREF_GMFU_ETABLISSEMENT).length} fiches cliniques redirigées vers /etablissements/`);

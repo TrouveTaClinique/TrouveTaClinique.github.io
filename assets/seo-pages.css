@@ -559,3 +559,97 @@ p, li { text-wrap: pretty; }
 .apropos-discret summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
 .apropos-discret p{color:var(--muted);font-size:.88rem;max-width:74ch}
 .apropos-discret .maj{font-size:.85rem;margin-top:.4rem}
+
+/* Loupe du bandeau (geste Santé Québec : cercle + icône, panneau de recherche). */
+.visually-hidden{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.nav{margin-left:auto}
+.search-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;flex-shrink:0;padding:0;
+  border:2px solid #fff;border-radius:50%;
+  background:transparent;color:#fff;text-decoration:none;cursor:pointer;
+}
+.search-toggle svg{display:block}
+.search-toggle:hover,.search-toggle:focus-visible{
+  background:var(--sq-menthe);color:var(--sq-bleu);border-color:var(--sq-menthe);
+  outline:none;text-decoration:none;
+}
+.search-panel{
+  position:fixed;inset:0;z-index:80;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:5.5rem 1rem 2rem;
+  background:rgba(23,10,114,.45);
+}
+.search-panel[hidden]{display:none}
+.search-panel__dialog{
+  width:min(640px,100%);
+  background:#fff;color:var(--ink);
+  border-radius:18px;
+  box-shadow:0 24px 60px rgba(23,10,114,.28);
+  padding:1.15rem 1.2rem 1.3rem;
+  max-height:min(78vh,640px);
+  overflow:auto;
+}
+.search-panel__top{
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+  margin-bottom:.85rem;
+}
+.search-panel__top h2{
+  margin:0;font-size:1.15rem;letter-spacing:-.02em;
+}
+.search-panel__close{
+  width:40px;height:40px;border:0;border-radius:50%;
+  background:#eef7f6;color:var(--sq-bleu);font-size:1.4rem;line-height:1;
+  cursor:pointer;
+}
+.search-panel__close:hover,.search-panel__close:focus-visible{
+  background:var(--sq-menthe);outline:2px solid var(--sq-azur);outline-offset:2px;
+}
+.search-panel__form,.search-page-form{
+  display:flex;gap:.55rem;align-items:stretch;
+}
+.search-panel__form input[type="search"],
+.search-page-form input[type="search"]{
+  flex:1;min-width:0;font:inherit;font-size:1.05rem;
+  padding:.72rem .9rem;border:1px solid #c9e0e4;border-radius:12px;
+  color:var(--ink);
+}
+.search-panel__form input[type="search"]:focus,
+.search-page-form input[type="search"]:focus{
+  outline:2px solid var(--sq-azur);outline-offset:1px;border-color:var(--sq-azur);
+}
+.search-panel__form button[type="submit"],
+.search-page-form button[type="submit"]{
+  font:inherit;font-weight:800;padding:.72rem 1rem;border:0;border-radius:12px;
+  background:var(--sq-bleu);color:#fff;cursor:pointer;
+}
+.search-panel__hint,.search-page-status{
+  margin:.7rem 0 .35rem;color:var(--muted);font-size:.9rem;
+}
+.search-hits{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.4rem}
+.search-hit{
+  display:grid;gap:.12rem;padding:.7rem .8rem;border-radius:12px;
+  border:1px solid var(--line);background:#f8fbfd;text-decoration:none;color:inherit;
+}
+.search-hit:hover,.search-hit:focus-visible{
+  border-color:var(--sq-azur);background:#eef8ff;text-decoration:none;
+}
+.search-hit__type{
+  font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--sq-sarcelle);
+}
+.search-hit__nom{font-weight:800;color:var(--sq-bleu);font-size:1.02rem}
+.search-hit__meta{font-size:.88rem;color:var(--muted)}
+body.search-open{overflow:hidden}
+
+@media(max-width:680px){
+  .nav{margin-left:0}
+  .brand{order:1}
+  .search-toggle{order:2;margin-left:auto;width:38px;height:38px}
+  .nav-toggle{order:3}
+  .nav{order:4}
+  .search-panel{padding:4.6rem .7rem 1.2rem}
+}
