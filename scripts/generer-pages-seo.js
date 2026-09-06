@@ -2236,10 +2236,10 @@ function htmlExplorezSecteurs() {
 
     var ES_HOSPITALIER = [
       { id: "urgence", nom: "Urgence", sous: "Accueil 24 h", dot: "var(--es-azur)" },
-      { id: "hospitalisation", nom: "Hospitalisation", sous: "Courte durée", dot: "var(--es-bleu)" },
-      { id: "obstetrique", nom: "Obstétrique", sous: "Sorel seulement", dot: "var(--es-sarcelle)" },
+      { id: "hospitalisation", nom: "Hospitalisation", sous: "Courte durée", dot: "var(--es-sarcelle)" },
+      { id: "obstetrique", nom: "Obstétrique", sous: "Sorel seulement", dot: "var(--es-azur)" },
       { id: "ucdg", nom: "UCDG", sous: "Gériatrie courte durée", dot: "var(--es-sarcelle)" },
-      { id: "soins-intensifs", nom: "Soins intensifs", sous: "Unités ≤ 6 lits", dot: "var(--es-bleu)" }
+      { id: "soins-intensifs", nom: "Soins intensifs", sous: "Unités ≤ 6 lits", dot: "var(--es-azur)" }
     ];
 
     var ES_COMMUNAUTAIRE = [
