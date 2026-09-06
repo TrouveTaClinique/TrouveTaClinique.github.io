@@ -1600,7 +1600,7 @@ const PREMIER_LOT_ETABLISSEMENTS = [
   'INS-017', 'INS-018', 'INS-019', 'INS-020', 'INS-021', 'INS-022'
 ];
 const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir obtenu l’aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d’inscription de patients.';
-const NOTE_SOURCE_ETABLISSEMENTS = 'les secteurs en recrutement présentés sur cette page proviennent du relevé des besoins en effectifs médicaux 2027 de Santé Québec Montérégie-Est, transmis le 28 août 2026. Ils indiquent qu’un recrutement est en cours dans le secteur, sans préjuger du nombre de postes, de leur répartition ni des modalités d’exercice, qui se précisent avec le milieu. Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
+const NOTE_SOURCE_ETABLISSEMENTS = 'Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> adressez-vous au service de recrutement médical de Santé Québec Montérégie-Est. Les coordonnées nominatives des établissements ne sont pas publiées sur ces fiches.</div>';
 
 const TYPE_ETAB_SEO = {
@@ -1984,7 +1984,7 @@ ${blocHoraireEtab}${blocEquipeEtab}
 ${lignesClinique}${ligneSite}    </dl>
   </section>
 
-  <div class="data-note"><strong>Source et vérification :</strong> ${NOTE_SOURCE_ETABLISSEMENTS}</div>
+  <div class="data-note">${NOTE_SOURCE_ETABLISSEMENTS}</div>
 
   <section id="suite">
     <h2>Pour aller plus loin</h2>
