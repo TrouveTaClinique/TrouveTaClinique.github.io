@@ -749,6 +749,20 @@ function htmlBanniereSqb(assetsChemin, { compact = true, estActif = false } = {}
   return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" alt="${alt}" width="${largeur}" height="${hauteur}" decoding="sync" loading="lazy"></a></figure>`;
 }
 
+function htmlVideoTerritoireEst() {
+  return `<section class="video-territoire" aria-labelledby="video-territoire-titre">
+  <h2 id="video-territoire-titre">Découvrir la Montérégie-Est</h2>
+  <p class="lead" style="font-size:1rem">Des médecins du territoire parlent de leur pratique.</p>
+  <div class="video-cadre">
+    <iframe src="https://player.vimeo.com/video/485759050?dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
+      title="Médecins en Montérégie-Est — Santé Québec Montérégie-Est"
+      allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <p class="video-credit">Vidéo de Santé Québec Montérégie-Est.</p>
+</section>`;
+}
+
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
                 filDAriane, corps, actif, univers = UNIVERS_GENERAL, ogImageOverride = null,
                 verification = false }) {
@@ -1448,18 +1462,6 @@ ${htmlBanniereSqb('/assets', { compact: true, estActif: true })}
   <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
 </div>
 
-<section class="video-territoire" aria-labelledby="video-territoire-titre">
-  <h2 id="video-territoire-titre">Découvrir la Montérégie-Est</h2>
-  <p class="lead" style="font-size:1rem">Des médecins du territoire parlent de leur pratique.</p>
-  <div class="video-cadre">
-    <iframe src="https://player.vimeo.com/video/485759050?dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
-      title="Médecins en Montérégie-Est — Santé Québec Montérégie-Est"
-      allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"
-      referrerpolicy="strict-origin-when-cross-origin"></iframe>
-  </div>
-  <p class="video-credit">Vidéo de Santé Québec Montérégie-Est.</p>
-</section>
-
 <h2>Comment l'utiliser</h2>
 <p class="lead" style="font-size:1rem">Que vous soyez résident en fin de formation ou déjà en
    pratique et à la recherche d'un nouveau milieu.</p>
@@ -1604,6 +1606,8 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
   ${u && u.region === 'Est' ? htmlBanniereSqb('../../assets', { estActif: true }) : ''}
+
+  ${u && u.region === 'Est' ? htmlVideoTerritoireEst() : ''}
 
 ${sections}`;
 
