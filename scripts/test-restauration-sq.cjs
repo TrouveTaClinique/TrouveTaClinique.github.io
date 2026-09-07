@@ -62,7 +62,7 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
   }
   assert.match(est, /fetch\('\.\.\/data\.json', \{ cache: 'no-cache' \}\)/);
   assert.match(est, /scope: '\/monteregie-est\/'/);
-  assert.match(lire('sw.js'), /v65-seo-meta/);
+  assert.match(lire('sw.js'), /v66-icones-blanc/);
   assert.match(est, /ouverteCommeApplis/);
   assert.match(est, /getInstalledRelatedApps/);
   assert.doesNotMatch(est, /Toujours visible dès le chargement/);

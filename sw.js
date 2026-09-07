@@ -26,7 +26,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // portée « / », qui servait encore une page d'accueil périmée au premier chargement.
 // v65-seo-meta (4 septembre 2026) : lang fr-CA, noindex de /monteregie/, OG 1200×630,
 // meta Search Console retirée des cartes (conservée sur l’accueil).
-const CACHE = CACHE_PREFIX + 'v65-seo-meta';
+// v66-icones-blanc (6 septembre 2026) : icônes PWA Est sur fond blanc.
+const CACHE = CACHE_PREFIX + 'v66-icones-blanc';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
