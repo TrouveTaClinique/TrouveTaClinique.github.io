@@ -3441,11 +3441,8 @@ fetch('../data.json', { cache: 'no-cache' })
 </script>
 
 <script>
-// Bouton d'installation visible (PWA). Visible EN PERMANENCE dans l'en-tête (tant que l'appli
-// n'est pas déjà installée) — plus seulement quand le navigateur déclenche son invite native
-// (Chrome/Edge attend parfois plusieurs visites avant de le faire, et Safari ne le fait jamais) :
-// choix du 22 août, « comme avant ». Un second accès identique vit dans le menu
-// « i » (#info-menu-install), pour qui ne remarque pas le bouton de l'en-tête.
+// Bouton d'installation (PWA). Affiché seulement si Chrome peut vraiment installer
+// (beforeinstallprompt), ou sur iPhone. Masqué si l'appli est déjà ouverte, ou déjà installée.
 (function () {
   var btn = document.getElementById('btn-install');
   var menuBtn = document.getElementById('info-menu-install');
@@ -3461,24 +3458,53 @@ fetch('../data.json', { cache: 'no-cache' })
   // Rien à installer, rien à faire : on sort avant tout le reste.
   if (!btn) { if (menuBtn) menuBtn.style.display = 'none'; return; }
 
-  var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  if (standalone) {
-    // Déjà installée : rien à proposer nulle part, y compris l'entrée du menu « i ».
-    if (menuBtn) menuBtn.style.display = 'none';
-    return;
+  var dejaInstallee = false;
+  function ouverteCommeApplis() {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.matchMedia('(display-mode: window-controls-overlay)').matches
+      || window.navigator.standalone === true;
+  }
+  function cacherInstallation() {
+    btn.classList.remove('show');
+    if (menuBtn) {
+      menuBtn.style.display = 'none';
+      var sep = menuBtn.previousElementSibling;
+      if (sep && sep.tagName === 'HR') sep.style.display = 'none';
+    }
+  }
+  function montrerInstallation() {
+    if (dejaInstallee || ouverteCommeApplis()) { cacherInstallation(); return; }
+    btn.classList.add('show');
+    if (menuBtn) {
+      menuBtn.style.display = '';
+      var sep = menuBtn.previousElementSibling;
+      if (sep && sep.tagName === 'HR') sep.style.display = '';
+    }
+  }
+
+  // Déjà ouverte comme application, ou pas encore installable : ne pas proposer le bouton.
+  // Chrome n'envoie beforeinstallprompt que si l'installation est possible (pas déjà faite).
+  cacherInstallation();
+  if (ouverteCommeApplis()) return;
+  if (navigator.getInstalledRelatedApps) {
+    navigator.getInstalledRelatedApps().then(function (apps) {
+      if (apps && apps.length) {
+        dejaInstallee = true;
+        cacherInstallation();
+      }
+    }).catch(function () {});
   }
 
   function showTip(msg) { tipMsg.innerHTML = msg; tip.classList.add('show'); }
   if (tipClose) tipClose.addEventListener('click', function () { tip.classList.remove('show'); });
 
-  // Toujours visible dès le chargement — ne dépend plus de beforeinstallprompt pour apparaître.
-  btn.classList.add('show');
+  if (isIOS) montrerInstallation();
 
-  // Android / Chrome / Edge : on capte quand même l'invite native, pour l'utiliser au clic.
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferred = e;
+    montrerInstallation();
   });
 
   async function lancerInstallation() {
@@ -3487,14 +3513,13 @@ fetch('../data.json', { cache: 'no-cache' })
       try { await deferred.userChoice; } catch (e) {}
       deferred = null;
     } else if (isIOS) {
-      showTip("Pour installer\u00a0: touchez le bouton <b>Partager</b> \u2b06\ufe0f en bas de Safari, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
+      showTip("Pour installer\u00a0: touchez le bouton <b>Partager</b> en bas de Safari, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
     } else {
-      showTip("Pour installer\u00a0: ouvrez le menu de votre navigateur (\u22ee) puis choisissez <b>\u00ab Installer l\u2019application \u00bb</b>.");
+      showTip("Pour installer\u00a0: à droite de la barre d'adresse, cliquez sur l'icône d'écran d'ordinateur. Si elle n'y est pas, l'application est déjà installée\u00a0: ouvrez-la depuis le menu Démarrer de Windows.");
     }
   }
   btn.addEventListener('click', lancerInstallation);
   if (menuBtn) menuBtn.addEventListener('click', function () {
-    // Referme le menu « i » avant de lancer l'invite, comme un lien normal du menu.
     var im = document.getElementById('info-menu');
     var bi = document.getElementById('btn-info');
     if (im) im.hidden = true;
@@ -3503,8 +3528,7 @@ fetch('../data.json', { cache: 'no-cache' })
   });
 
   window.addEventListener('appinstalled', function () {
-    btn.classList.remove('show');
-    if (menuBtn) menuBtn.style.display = 'none';
+    cacherInstallation();
     tip.classList.remove('show');
   });
 })();
