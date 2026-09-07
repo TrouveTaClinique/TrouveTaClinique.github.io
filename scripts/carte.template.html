@@ -3441,8 +3441,8 @@ fetch('../data.json', { cache: 'no-cache' })
 </script>
 
 <script>
-// Bouton d'installation (PWA). Affiché seulement si Chrome peut vraiment installer
-// (beforeinstallprompt), ou sur iPhone. Masqué si l'appli est déjà ouverte, ou déjà installée.
+// Bouton d'installation (PWA). Sur téléphone : toujours proposé (sauf si l'appli est
+// déjà ouverte). Sur ordinateur : seulement si Chrome peut vraiment installer.
 (function () {
   var btn = document.getElementById('btn-install');
   var menuBtn = document.getElementById('info-menu-install');
@@ -3458,7 +3458,10 @@ fetch('../data.json', { cache: 'no-cache' })
   // Rien à installer, rien à faire : on sort avant tout le reste.
   if (!btn) { if (menuBtn) menuBtn.style.display = 'none'; return; }
 
-  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var ua = navigator.userAgent || '';
+  var isIOS = /iphone|ipad|ipod/i.test(ua)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isTelephone = isIOS || /android/i.test(ua);
   var dejaInstallee = false;
   function ouverteCommeApplis() {
     return window.matchMedia('(display-mode: standalone)').matches
@@ -3487,7 +3490,9 @@ fetch('../data.json', { cache: 'no-cache' })
   // Chrome n'envoie beforeinstallprompt que si l'installation est possible (pas déjà faite).
   cacherInstallation();
   if (ouverteCommeApplis()) return;
-  if (navigator.getInstalledRelatedApps) {
+  // Sur ordinateur seulement : si l'appli est déjà installée, ne pas réafficher le bouton.
+  // Sur téléphone, cet essai masquait le bouton même après une désinstallation.
+  if (!isTelephone && navigator.getInstalledRelatedApps) {
     navigator.getInstalledRelatedApps().then(function (apps) {
       if (apps && apps.length) {
         dejaInstallee = true;
@@ -3499,7 +3504,7 @@ fetch('../data.json', { cache: 'no-cache' })
   function showTip(msg) { tipMsg.innerHTML = msg; tip.classList.add('show'); }
   if (tipClose) tipClose.addEventListener('click', function () { tip.classList.remove('show'); });
 
-  if (isIOS) montrerInstallation();
+  if (isTelephone) montrerInstallation();
 
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
@@ -3514,6 +3519,8 @@ fetch('../data.json', { cache: 'no-cache' })
       deferred = null;
     } else if (isIOS) {
       showTip("Pour installer\u00a0: touchez le bouton <b>Partager</b> en bas de Safari, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
+    } else if (isTelephone) {
+      showTip("Pour installer\u00a0: touchez le menu <b>⋮</b> en haut à droite de Chrome, puis <b>\u00ab Installer l\u2019application \u00bb</b> (ou <b>\u00ab Ajouter à l\u2019écran d\u2019accueil \u00bb</b>).");
     } else {
       showTip("Pour installer\u00a0: à droite de la barre d'adresse, cliquez sur l'icône d'écran d'ordinateur. Si elle n'y est pas, l'application est déjà installée\u00a0: ouvrez-la depuis le menu Démarrer de Windows.");
     }
