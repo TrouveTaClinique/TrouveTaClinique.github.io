@@ -1375,7 +1375,9 @@
       "gardeUrgence": "",
       "gardeAutre": "",
       "presentation": "",
-      "responsableNom": "Dre Christine Fyfe"
+      "responsableNom": "Dre Christine Fyfe",
+      "recrutementActif": false,
+      "statutRecrutement": "Ne recrute pas actuellement"
     },
     {
       "id": 25,
@@ -6275,7 +6277,9 @@
       "gardeUrgence": "",
       "gardeAutre": "",
       "presentation": "",
-      "responsableNom": "Dre Karine Laliberté"
+      "responsableNom": "Dre Karine Laliberté",
+      "recrutementActif": false,
+      "statutRecrutement": "Ne recrute pas actuellement"
     },
     {
       "id": 130,
