@@ -121,6 +121,40 @@ const SEARCH_PANEL = `<div class="search-panel" id="search-panel" hidden>
 
 const SEARCH_SCRIPT = `<script src="/assets/recherche.js" defer></script>`;
 
+/* Bouton Pause / Lire du bandeau vidéo (page Cliniques Montérégie-Est).
+   La lecture automatique est muette : les navigateurs bloquent le son sans clic.
+   Si la personne a demandé moins de mouvement dans son système, la vidéo démarre à l’arrêt. */
+const VIDEO_HERO_SCRIPT = `<script>
+(function () {
+  var hero = document.querySelector('.video-hero');
+  if (!hero) return;
+  var iframe = hero.querySelector('iframe');
+  var btn = hero.querySelector('.video-hero-pause');
+  if (!iframe || !btn) return;
+  var cible = 'https://player.vimeo.com';
+  var enLecture = true;
+  function parler(methode) {
+    if (!iframe.contentWindow) return;
+    iframe.contentWindow.postMessage(JSON.stringify({ method: methode }), cible);
+  }
+  function afficher() {
+    btn.setAttribute('aria-pressed', enLecture ? 'false' : 'true');
+    btn.textContent = enLecture ? 'Mettre en pause' : 'Lire la vidéo';
+  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    enLecture = false;
+    iframe.addEventListener('load', function () { parler('pause'); });
+    parler('pause');
+  }
+  afficher();
+  btn.addEventListener('click', function () {
+    enLecture = !enLecture;
+    parler(enLecture ? 'play' : 'pause');
+    afficher();
+  });
+})();
+</script>`;
+
 /* Migration v52 : l'ancienne application générale enregistrait un service worker de portée
    « / ». La PWA étant désormais réservée à Montérégie-Est, toutes les pages de contenu retirent
    cette ancienne inscription si elle existe. La PWA Est, de portée /monteregie-est/, est
@@ -749,17 +783,26 @@ function htmlBanniereSqb(assetsChemin, { compact = true, estActif = false } = {}
   return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" alt="${alt}" width="${largeur}" height="${hauteur}" decoding="sync" loading="lazy"></a></figure>`;
 }
 
-function htmlVideoTerritoireEst() {
-  return `<section class="video-territoire" aria-labelledby="video-territoire-titre">
-  <h2 id="video-territoire-titre">Découvrir la Montérégie-Est</h2>
-  <p class="lead" style="font-size:1rem">Des médecins du territoire parlent de leur pratique.</p>
-  <div class="video-cadre">
-    <iframe src="https://player.vimeo.com/video/485759050?dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
-      title="Médecins en Montérégie-Est — Santé Québec Montérégie-Est"
-      allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"
-      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane }) {
+  const src = 'https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1';
+  return `<section class="video-hero" aria-labelledby="video-hero-titre">
+  <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
+    <img src="https://i.vimeocdn.com/video/1196920171-84d1dca608d530e599f54ffe3de4d56c6831f01730b8f381cbdcd7e5e2fff4fc-d_1280x720?region=us" alt="" width="1280" height="720">
+    <iframe src="${src}" allow="autoplay; fullscreen" tabindex="-1" title="Médecins en Montérégie-Est — Santé Québec Montérégie-Est"></iframe>
   </div>
-  <p class="video-credit">Vidéo de Santé Québec Montérégie-Est.</p>
+  <div class="video-hero-voile" aria-hidden="true"></div>
+  <button type="button" class="video-hero-pause" aria-pressed="false" aria-controls="video-hero-media">Mettre en pause</button>
+  <nav class="breadcrumbs video-hero-crumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
+  <div class="video-hero-texte">
+    <p class="video-hero-eyebrow">Montérégie-Est</p>
+    <h1 id="video-hero-titre">${esc(titre)}</h1>
+    <p class="video-hero-sous">${esc(sousTitre)}</p>
+    <p class="video-hero-liens">
+      <a href="${accueil}">Explorer la carte</a>
+      <a href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
+    </p>
+    <p class="video-hero-credit">Vidéo de Santé Québec Montérégie-Est.</p>
+  </div>
 </section>`;
 }
 
@@ -841,7 +884,7 @@ ${SEARCH_PANEL}
 ${corps}
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante — Trouve ta clinique</div></div></footer>
-${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
+${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${corps.includes('video-hero') ? VIDEO_HERO_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
 ${NAV_TOGGLE_SCRIPT}
 ${SEARCH_SCRIPT}
 ${SERVICE_WORKER_CLEANUP}
@@ -1582,16 +1625,33 @@ ${items}
     ]
   };
 
-  const corps = `  <section class="hero">
+  const accueilCarte = u ? u.accueil : UNIVERS_GENERAL.accueil;
+  const titreRepertoire = `Cliniques en recrutement en ${nomTerritoire}`;
+  const leadRepertoire = `<p class="lead"><strong>${enRecrutementTotal} milieu${enRecrutementTotal > 1 ? 'x' : ''} en recrutement actif</strong> de médecins de famille, sur ${cliniques.length} milieux publiés au total dans le répertoire, répartis dans <strong>${parRls.size} RLS</strong> et ${villes.size} municipalités${enRecrutementTotal < cliniques.length ? ` — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement` : ''}. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="${accueilCarte}">carte interactive</a> ajoute les filtres et la vue géographique.</p>`;
+  const majRepertoire = `<p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>`;
+  const heroClassique = `  <section class="hero">
     <p class="eyebrow">Médecine familiale · Montérégie</p>
-    <h1>Cliniques en recrutement en ${esc(nomTerritoire)}</h1>
-    <p class="lead"><strong>${enRecrutementTotal} milieu${enRecrutementTotal > 1 ? 'x' : ''} en recrutement actif</strong> de médecins de famille, sur ${cliniques.length} milieux publiés au total dans le répertoire, répartis dans <strong>${parRls.size} RLS</strong> et ${villes.size} municipalités${enRecrutementTotal < cliniques.length ? ` — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement` : ''}. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="${u ? u.accueil : UNIVERS_GENERAL.accueil}">carte interactive</a> ajoute les filtres et la vue géographique.</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
+    <h1>${esc(titreRepertoire)}</h1>
+    ${leadRepertoire}
+    ${majRepertoire}
     <div class="cta-row">
-      <a class="button primary" href="${u ? u.accueil : UNIVERS_GENERAL.accueil}">Explorer sur la carte interactive</a>
+      <a class="button primary" href="${accueilCarte}">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </div>
-  </section>
+  </section>`;
+  const heroEst = htmlHeroVideoEst({
+    titre: titreRepertoire,
+    sousTitre: 'Des médecins du territoire parlent de leur pratique.',
+    accueil: accueilCarte,
+    filDAriane: u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`
+  });
+
+  const corps = `  ${u && u.region === 'Est' ? heroEst : heroClassique}
+
+  ${u && u.region === 'Est' ? `<div class="video-hero-suite">
+    ${leadRepertoire}
+    ${majRepertoire}
+  </div>` : ''}
 
   ${u ? '' : `<section id="territoires">
     <h2>Explorer par territoire</h2>
@@ -1607,15 +1667,13 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
 
   ${u && u.region === 'Est' ? htmlBanniereSqb('../../assets', { estActif: true }) : ''}
 
-  ${u && u.region === 'Est' ? htmlVideoTerritoireEst() : ''}
-
 ${sections}`;
 
   return page({
     titre: limiterTexte(`Cliniques en recrutement en ${nomTerritoire}`, 58),
     description: limiterTexte(`Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement), classés par ${parRls.size} RLS.`, 155),
     url, profondeur: u ? 2 : 1, indexable: true, jsonLd, actif: 'cliniques', univers: u || UNIVERS_GENERAL,
-    filDAriane: u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`,
+    filDAriane: u && u.region === 'Est' ? '' : (u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`),
     corps
   });
 }
