@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- build: 2026-08-31 -->
-<html lang="fr-CA" data-region="Centre"><head>
+<html lang="fr-CA" data-region="Centre" data-etab-ui="1"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- « Trouve ta clinique » est la marque permanente. Lors d'un changement de cycle PTEM,
@@ -1023,10 +1023,10 @@ body.cmp-open { overflow:hidden; }
 :root[data-theme="sombre"] .leaflet-popup-tip {
   background: var(--carte); color: var(--texte); }
 
-/* ── Mode Établissements, Montérégie-Centre ─────────────────────────────────
-   Même mécanique que la carte Est (onglets Cliniques / Établissements, secteurs,
-   filtres d'activité). Couleurs et logo : thème Montérégie (marine, vert Centre,
-   bleu), jamais le thème Santé Québec de l'Est. */
+/* ── Mode Établissements (onglets Cliniques / Établissements) ────────────────
+   Même mécanique que la carte Est (secteurs, filtres d'activité). Couleurs et
+   logo : thème Montérégie (marine, vert Centre, bleu), jamais le thème Santé
+   Québec de l'Est. Visible sur la carte des 3 territoires, le Centre et l'Ouest. */
 .care-mode-switch { display: none; }
 .sb-scroll { overflow-y: auto; flex: 1; min-height: 0; }
 .sb-scroll > .activite-panel { padding: 0 16px; box-sizing: border-box; }
@@ -1103,25 +1103,25 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
   font: 800 12px/1 var(--sq-font);
   box-shadow: 0 5px 14px rgba(15,34,64,.28);
 }
-:root[data-region="Centre"] .care-mode-switch {
+:root[data-etab-ui="1"] .care-mode-switch {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 4px; margin: 0 0 14px; padding: 4px;
   border: 1px solid var(--border); border-radius: 14px;
   background: var(--cream); box-shadow: inset 0 1px 2px rgba(15,34,64,.06);
 }
-:root[data-region="Centre"] .care-mode-btn {
+:root[data-etab-ui="1"] .care-mode-btn {
   min-height: 42px; padding: 8px 10px; border: 0; border-radius: 10px;
   background: transparent; color: var(--texte2); cursor: pointer;
   font-family: var(--sq-font); font-size: 13px; font-weight: 700; line-height: 1.15;
 }
-:root[data-region="Centre"] .care-mode-btn:hover { color: var(--navy); background: rgba(255,255,255,.7); }
-:root[data-region="Centre"] .care-mode-btn[aria-selected="true"] {
+:root[data-etab-ui="1"] .care-mode-btn:hover { color: var(--navy); background: rgba(255,255,255,.7); }
+:root[data-etab-ui="1"] .care-mode-btn[aria-selected="true"] {
   color: #fff; background: var(--navy); box-shadow: 0 4px 12px rgba(15,34,64,.22);
 }
 :root[data-region="Centre"] .care-mode-btn[data-mode="etablissements"][aria-selected="true"] {
   color: #fff; background: var(--reg-centre); box-shadow: 0 4px 12px rgba(67,160,71,.28);
 }
-:root[data-region="Centre"] .care-mode-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+:root[data-etab-ui="1"] .care-mode-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
 :root[data-theme="sombre"] .activite-btn { border-color: var(--reg-centre); color: var(--reg-centre); }
 :root[data-theme="sombre"] .activite-btn[aria-pressed="true"] { background: var(--reg-centre); color: #fff; border-color: var(--reg-centre); }
 :root[data-theme="sombre"] .activite-group-label { color: var(--reg-centre); }
@@ -1379,7 +1379,18 @@ const MODE_REGION = REGION_PAGE !== null;   // sur une carte régionale, quelle 
 // désormais par MODE_REGION / REGION_PAGE et vaut pour les trois territoires.
 const MODE_EST = REGION_PAGE === 'Est';
 const MODE_CENTRE = REGION_PAGE === 'Centre';
+const MODE_OUEST = REGION_PAGE === 'Ouest';
+// Ce gabarit sert la carte des 3 territoires, le Centre et l'Ouest. L'Est a son propre gabarit.
+const MODE_ETAB_UI = true;
+document.documentElement.setAttribute('data-etab-ui', '1');
 if (MODE_CENTRE) document.documentElement.setAttribute('data-region', 'Centre');
+if (MODE_OUEST) document.documentElement.setAttribute('data-region', 'Ouest');
+function nomTerritoirePage() {
+  if (MODE_CENTRE) return 'Montérégie-Centre';
+  if (MODE_OUEST) return 'Montérégie-Ouest';
+  if (MODE_EST) return 'Montérégie-Est';
+  return 'Montérégie';
+}
 // NOTE : rien n'est retiré ni réécrit ici au chargement. Tout ce qui distingue une page
 // régionale — titre et identité de l'en-tête, absence des liens vers les autres
 // territoires — est inscrit directement dans le HTML de cette page par
@@ -1445,14 +1456,15 @@ let ficheInstallationId = null;
 let activiteFilters = new Set();
 let legacyCliniqueVersInstallation = new Map();
 const GROUPES_ACTIVITE = [
-  { label: 'Hospitalier', ids: ['urgence', 'hospitalisation', 'ucdg', 'obstetrique', 'hopital-jour', 'readaptation'] },
-  { label: 'Communautaire', ids: ['gmf-u', 'longue-duree', 'sad-siad-sp', 'clinique-jeunesse', 'pediatrie-sociale'] }
+  { label: 'Hospitalier', ids: ['urgence', 'hospitalisation', 'ucdg', 'soins-intensifs', 'obstetrique', 'hopital-jour', 'readaptation'] },
+  { label: 'Communautaire', ids: ['gmf-u', 'longue-duree', 'sad-siad-sp', 'clinique-jeunesse', 'pediatrie-sociale', 'crd', 'detention'] }
 ];
 const groupesActiviteOuverts = new Set(GROUPES_ACTIVITE.map(g => g.label));
 const CATEGORIES_ACTIVITE_DEFAUT = [
   { id: 'urgence', abbr: 'URG', libelle: 'Urgence', libelleComplet: 'Urgence' },
   { id: 'hospitalisation', abbr: 'HOSP', libelle: 'Hospitalisation', libelleComplet: 'Hospitalisation' },
   { id: 'ucdg', abbr: 'UCDG', libelle: 'UCDG', libelleComplet: 'UCDG' },
+  { id: 'soins-intensifs', abbr: 'USI', libelle: 'Soins intensifs', libelleComplet: 'Soins intensifs' },
   { id: 'obstetrique', abbr: 'OBST', libelle: 'Obstétrique', libelleComplet: 'Obstétrique' },
   { id: 'hopital-jour', abbr: 'HDJ', libelle: 'Hôpital de jour', libelleComplet: 'Hôpital de jour' },
   { id: 'readaptation', abbr: 'RÉAD', libelle: 'Réadaptation', libelleComplet: 'Réadaptation et convalescence' },
@@ -1460,7 +1472,9 @@ const CATEGORIES_ACTIVITE_DEFAUT = [
   { id: 'longue-duree', abbr: 'CHSLD', libelle: 'Longue durée', libelleComplet: 'Longue durée' },
   { id: 'sad-siad-sp', abbr: 'SAD', libelle: 'Soins à domicile', libelleComplet: 'Soutien à domicile' },
   { id: 'clinique-jeunesse', abbr: 'JEUN', libelle: 'Clinique jeunesse', libelleComplet: 'Clinique jeunesse' },
-  { id: 'pediatrie-sociale', abbr: 'PÉD', libelle: 'Pédiatrie sociale', libelleComplet: 'Pédiatrie sociale' }
+  { id: 'pediatrie-sociale', abbr: 'PÉD', libelle: 'Pédiatrie sociale', libelleComplet: 'Pédiatrie sociale' },
+  { id: 'crd', abbr: 'CRD', libelle: 'Réadaptation', libelleComplet: 'Réadaptation en dépendance' },
+  { id: 'detention', abbr: 'DÉT', libelle: 'Centre de détention', libelleComplet: 'Centre de détention' }
 ];
 
 // (notes, ordre et marqueurs sont initialisés dans initData(), après le chargement de data.json)
@@ -1468,7 +1482,7 @@ const CATEGORIES_ACTIVITE_DEFAUT = [
 const byId = id => gmfs.find(g => g.id === id);
 const installationEtabById = id => installationsEtab.find(i => i.id === id);
 function favStorageKey() {
-  return (MODE_CENTRE && modeCarte === 'etablissements') ? FAV_SECTEURS_CENTRE_KEY : FAV_KEY;
+  return modeEtablissementsActif() ? FAV_SECTEURS_CENTRE_KEY : FAV_KEY;
 }
 function noteKeyFor(g) {
   if (g && g._secteurEtab) return NOTE_SECTEUR_CENTRE_KEY(g.id);
@@ -1489,7 +1503,7 @@ function sauvegarderFavorisActifs() {
   SAFE.set(favStorageKey(), JSON.stringify([...favoris]));
 }
 function getMarqueursSource() {
-  return (MODE_CENTRE && modeCarte === 'etablissements') ? installationsEtab : gmfs;
+  return modeEtablissementsActif() ? installationsEtab : gmfs;
 }
 function typeEtabAffichage(type) {
   const map = {
@@ -1498,7 +1512,9 @@ function typeEtabAffichage(type) {
     clsc: 'CLSC',
     'gmf-u': 'GMF-U',
     'clinique-jeunesse': 'Clinique jeunesse',
-    'pediatrie-sociale': 'Pédiatrie sociale'
+    'pediatrie-sociale': 'Pédiatrie sociale',
+    crd: 'Centre de réadaptation',
+    detention: 'Centre de détention'
   };
   return map[type] || type || 'Établissement';
 }
@@ -1508,7 +1524,9 @@ const TYPE_ETAB_LABELS = {
   clsc: 'CLSC',
   'gmf-u': 'GMF-U',
   'clinique-jeunesse': 'Clinique jeunesse',
-  'pediatrie-sociale': 'Pédiatrie sociale'
+  'pediatrie-sociale': 'Pédiatrie sociale',
+  crd: 'Centre de réadaptation',
+  detention: 'Centre de détention'
 };
 function typeLabelEtab(t) { return TYPE_ETAB_LABELS[t] || t || ''; }
 function politiqueAffichageEtab() {
@@ -1537,16 +1555,21 @@ function libelleActivitePour(g) {
   return (cat && (cat.libelleComplet || cat.libelle)) || (g && g.secteur) || '';
 }
 function libelleMode(pluriel = true) {
-  return (MODE_CENTRE && modeCarte === 'etablissements')
+  return modeEtablissementsActif()
     ? (pluriel ? 'secteurs' : 'secteur')
     : (pluriel ? 'cliniques' : 'clinique');
 }
 function libelleTerritoireSecteur(g) {
   if (!g) return 'À venir';
-  return g.rls ? ('RLS ' + g.rls) : 'À venir';
+  const rls = g.rls ? ('RLS ' + g.rls) : '';
+  if (!MODE_REGION && g.region) {
+    const nom = REGION_LABELS[g.region] || g.region;
+    return rls ? (nom + ' · ' + rls) : nom;
+  }
+  return rls || 'À venir';
 }
 function modeEtablissementsActif() {
-  return MODE_CENTRE && modeCarte === 'etablissements';
+  return MODE_ETAB_UI && modeCarte === 'etablissements';
 }
 const normTxt = s => (s == null ? '' : String(s)).toLowerCase().replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 // Un milieu \u00ab en recrutement \u00bb a recrutementActif !== false (absent = recrute, comme avant
@@ -1608,22 +1631,21 @@ function badgeMarqueur(g) {
   }
   return rankOf(g.id);
 }
-function preparerCoucheEtablissements(donneesEtab) {
-  installationsEtab = [];
-  secteursEtab = [];
-  etabCoucheDisponible = false;
-  legacyCliniqueVersInstallation = new Map();
-  dataEtabMeta = {};
-  if (!donneesEtab || !Array.isArray(donneesEtab.installations) || !Array.isArray(donneesEtab.secteurs)) return;
-  dataEtabMeta = donneesEtab.meta || {};
+function extraireCoucheEtablissements(donneesEtab, region) {
+  const vide = { installations: [], secteurs: [], legacy: new Map(), categories: [] };
+  if (!donneesEtab || !Array.isArray(donneesEtab.installations) || !Array.isArray(donneesEtab.secteurs)) return vide;
+  const politiqueAffichage = (donneesEtab.meta && donneesEtab.meta.politiqueAffichage) || {};
+  const categories = (donneesEtab.meta && Array.isArray(donneesEtab.meta.categoriesActivite))
+    ? donneesEtab.meta.categoriesActivite.slice() : [];
+  const legacy = new Map();
   (donneesEtab.installations || []).forEach(inst => {
     const ref = inst.referenceExistante;
     if (ref && ref.collection && ref.id != null) {
-      legacyCliniqueVersInstallation.set(String(ref.collection) + ':' + String(ref.id), inst.id);
+      legacy.set(String(ref.collection) + ':' + String(ref.id), inst.id);
     }
   });
   const instMap = new Map();
-  installationsEtab = donneesEtab.installations.filter(inst => {
+  const installations = donneesEtab.installations.filter(inst => {
     if (inst.publication && inst.publication.visible === false) return false;
     const lat = Number(inst.lat);
     const lng = Number(inst.lng);
@@ -1635,7 +1657,7 @@ function preparerCoucheEtablissements(donneesEtab) {
     nom: inst.nom.trim(),
     type: inst.type,
     rls: inst.territoireSource || '',
-    region: 'Centre',
+    region: region,
     ville: inst.ville || '',
     lat: Number(inst.lat),
     lng: Number(inst.lng),
@@ -1649,8 +1671,8 @@ function preparerCoucheEtablissements(donneesEtab) {
     coordonneesApproximatives: !!inst.coordonneesApproximatives,
     _installationEtab: true
   }));
-  installationsEtab.forEach(inst => instMap.set(inst.id, inst));
-  secteursEtab = donneesEtab.secteurs.map(sec => {
+  installations.forEach(inst => instMap.set(inst.id, inst));
+  const secteurs = donneesEtab.secteurs.map(sec => {
     const inst = instMap.get(sec.installationId);
     if (!inst) {
       console.warn('Secteur sans installation :', sec && sec.id, sec && sec.installationId);
@@ -1666,7 +1688,7 @@ function preparerCoucheEtablissements(donneesEtab) {
       type: typeEtabAffichage(inst.type),
       secteur: sec.secteur || sec.libelle || '',
       rls: inst.rls,
-      region: 'Centre',
+      region: inst.region,
       ville: inst.ville,
       lat: inst.lat,
       lng: inst.lng,
@@ -1687,10 +1709,36 @@ function preparerCoucheEtablissements(donneesEtab) {
       besoinDeclare: rec.besoinDeclare || '',
       notesPubliques: Array.isArray(rec.notesPubliques) ? rec.notesPubliques.slice() : [],
       dme: sec.dme || rec.dme || '',
+      politiqueAffichage: politiqueAffichage,
       _secteurEtab: true
     };
   }).filter(Boolean);
-  etabCoucheDisponible = secteursEtab.length > 0 && installationsEtab.length > 0;
+  return { installations, secteurs, legacy, categories };
+}
+function preparerCoucheEtablissementsDepuisLots(lots) {
+  installationsEtab = [];
+  secteursEtab = [];
+  etabCoucheDisponible = false;
+  legacyCliniqueVersInstallation = new Map();
+  dataEtabMeta = { categoriesActivite: [], politiqueAffichage: {} };
+  const seenCat = new Set();
+  (lots || []).forEach(lot => {
+    if (!lot || !lot.data || !lot.region) return;
+    const couche = extraireCoucheEtablissements(lot.data, lot.region);
+    installationsEtab.push(...couche.installations);
+    secteursEtab.push(...couche.secteurs);
+    couche.legacy.forEach((v, k) => legacyCliniqueVersInstallation.set(k, v));
+    couche.categories.forEach(c => {
+      if (c && c.id && !seenCat.has(c.id)) {
+        seenCat.add(c.id);
+        dataEtabMeta.categoriesActivite.push(c);
+      }
+    });
+  });
+  if (lots && lots.length === 1 && lots[0].data && lots[0].data.meta) {
+    dataEtabMeta.politiqueAffichage = lots[0].data.meta.politiqueAffichage || {};
+  }
+  etabCoucheDisponible = (secteursEtab.length > 0 && installationsEtab.length > 0) || MODE_OUEST;
 }
 const rankOf = id => currentOrder().indexOf(id) + 1;
 
@@ -2533,7 +2581,12 @@ function renderSidebar() {
 
     sbList.appendChild(el);
   });
-  if (shown === 0 && (favOnly || regionFilter.size || rlsFilter || searchQuery || activiteFilters.size)) {
+  if (shown === 0 && modeEtablissementsActif() && secteursEtab.length === 0) {
+    const msg = MODE_OUEST
+      ? 'Aucun secteur en établissement n’est encore publié pour la Montérégie-Ouest.'
+      : 'Aucun secteur en établissement n’est encore publié pour ce territoire.';
+    sbList.innerHTML = '<div class="sb-empty">' + msg + '</div>';
+  } else if (shown === 0 && (favOnly || regionFilter.size || rlsFilter || searchQuery || activiteFilters.size)) {
     sbList.innerHTML = '<div class="sb-empty">' + (searchQuery
       ? (modeEtablissementsActif() ? 'Aucun secteur ne correspond à votre recherche.' : 'Aucune clinique ne correspond à votre recherche.')
       : favOnly
@@ -2817,7 +2870,7 @@ function syncEstablishmentsToggle() {
   const btn = document.getElementById('establishments-toggle');
   const label = document.getElementById('establishments-label');
   const n = etablissements.length;
-  if (control) control.hidden = MODE_CENTRE || n === 0;
+  if (control) control.hidden = MODE_ETAB_UI || n === 0;
   if (btn) btn.setAttribute('aria-checked', showEstablishments ? 'true' : 'false');
   if (label) label.textContent = 'Établissements';
 }
@@ -3176,7 +3229,7 @@ function urlEtat(id) {
   return location.pathname + (q ? '?' + q : '') + location.hash;
 }
 function htmlContactSecteur(s) {
-  const pol = politiqueAffichageEtab();
+  const pol = (s && s.politiqueAffichage) || politiqueAffichageEtab();
   const bits = [];
   if (pol.afficherResponsableNom !== false && s.responsableNom) bits.push(esc(s.responsableNom));
   if (pol.afficherResponsableCourriel !== false && s.responsableCourriel) {
@@ -3391,9 +3444,16 @@ function recalculerOrdre() {
     ? {}
     : { 'GMF-U': 0, 'GMF-R': 1, 'GMF': 2, 'GMF satellite': 3, 'CH': 4 };
   const rlsRank = Object.keys(RLS_COLORS_REGION).reduce((o, r, i) => (o[r] = i, o), {});
+  const regRank = { 'Ouest': 0, 'Centre': 1, 'Est': 2 };
   order = gmfs.slice().sort((a, b) => {
-    const rla = rlsRank[a.rls] ?? 98, rlb = rlsRank[b.rls] ?? 98;
-    if (rla !== rlb) return rla - rlb;
+    if (!MODE_REGION) {
+      const rga = regRank[a.region] ?? 9, rgb = regRank[b.region] ?? 9;
+      if (rga !== rgb) return rga - rgb;
+    }
+    if (MODE_REGION || modeEtablissementsActif()) {
+      const rla = rlsRank[a.rls] ?? 98, rlb = rlsRank[b.rls] ?? 98;
+      if (rla !== rlb) return rla - rlb;
+    }
     if (modeEtablissementsActif()) {
       const instCmp = (a.nomInstallation || '').localeCompare(b.nomInstallation || '', 'fr', { sensitivity: 'base' });
       if (instCmp !== 0) return instCmp;
@@ -3444,7 +3504,7 @@ function syncModeCarteUI() {
   const activitePanel = document.getElementById('activite-panel');
   if (activitePanel) activitePanel.hidden = !modeEtablissementsActif();
   const switchEl = document.getElementById('care-mode-switch');
-  if (switchEl) switchEl.hidden = !MODE_CENTRE;
+  if (switchEl) switchEl.hidden = !MODE_ETAB_UI;
   const etabBtn = document.querySelector('.care-mode-btn[data-mode="etablissements"]');
   if (etabBtn) {
     if (etabCoucheDisponible) {
@@ -3461,9 +3521,11 @@ function syncModeCarteUI() {
   if (modeEtablissementsActif()) populateActiviteButtons();
   const prefix = /^BROUILLON \| /.test(document.title) ? 'BROUILLON | ' : '';
   if (modeEtablissementsActif()) {
-    document.title = prefix + 'Secteurs en recrutement — Montérégie-Centre | Trouve ta clinique';
-  } else if (MODE_CENTRE) {
-    document.title = prefix + 'Cliniques en recrutement — Montérégie-Centre | Trouve ta clinique';
+    document.title = prefix + 'Secteurs en recrutement — ' + nomTerritoirePage() + ' | Trouve ta clinique';
+  } else if (MODE_REGION) {
+    document.title = prefix + 'Cliniques en recrutement — ' + nomTerritoirePage() + ' | Trouve ta clinique';
+  } else {
+    document.title = prefix + 'Carte complète de la Montérégie — Cliniques en recrutement';
   }
 }
 function activerModeCarte(prochainMode) {
@@ -3513,7 +3575,7 @@ function activerModeCarte(prochainMode) {
   annoncerA11y(gmfs.length + ' ' + libelleMode(true) + (modeEtablissementsActif() ? ' affichés.' : ' affichées.'));
 }
 function appliquerCibleUrl(paramsInit) {
-  if (!MODE_CENTRE) return false;
+  if (!MODE_ETAB_UI) return false;
   const modeUrl = paramsInit.get('mode') === 'etablissements';
   if (modeUrl && modeCarte !== 'etablissements' && etabCoucheDisponible) {
     activerModeCarte('etablissements');
@@ -3731,11 +3793,6 @@ function openDetail(id) {
       <div class="staff-grid">${staffCells}</div>
     </div>
     <div class="vw-divider"></div>
-    ${g.infos ? `<div class="vw-sec">
-      <div class="vw-sec-title">Informations</div>
-      <p class="vw-infos">${esc(g.infos)}</p>
-    </div>
-    <div class="vw-divider"></div>` : ''}
     <div class="notes-sec">
       <div class="vw-sec-title">Mes notes</div>
       <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur cette clinique (sauvegardées dans votre navigateur)">${esc(g.notes || '')}</textarea>
@@ -4066,7 +4123,7 @@ function showUpdateDate() {
   }
 }
 
-function initData(data, etabData) {
+function initData(data, lotsEtab) {
   const brut = Array.isArray(data) ? data : (data.cliniques || []);
   // Une fiche dont « visible » vaut false est conservée dans data.json mais
   // n'apparaît nulle part dans l'application : c'est le cas d'un milieu qui ne
@@ -4100,18 +4157,16 @@ function initData(data, etabData) {
   // automatiquement, sans rien pouvoir « réactiver » depuis l'interface.
   if (MODE_REGION) gmfs = gmfs.filter(g => g.region === REGION_PAGE);
   cliniques = gmfs.slice();
-  if (MODE_CENTRE) preparerCoucheEtablissements(etabData);
+  preparerCoucheEtablissementsDepuisLots(lotsEtab || []);
   const paramsInit = new URLSearchParams(location.search);
-  if (MODE_CENTRE) {
-    const modeUrl = paramsInit.get('mode') === 'etablissements';
-    if (modeUrl && !etabCoucheDisponible) {
-      if (typeof showToast === 'function') showToast('Couche établissements indisponible pour le moment.');
-      modeCarte = 'cliniques';
-    } else {
-      modeCarte = modeUrl ? 'etablissements' : 'cliniques';
-    }
-    gmfs = modeEtablissementsActif() ? secteursEtab : cliniques;
+  const modeUrl = paramsInit.get('mode') === 'etablissements';
+  if (modeUrl && !etabCoucheDisponible) {
+    if (typeof showToast === 'function') showToast('Couche établissements indisponible pour le moment.');
+    modeCarte = 'cliniques';
+  } else {
+    modeCarte = modeUrl ? 'etablissements' : 'cliniques';
   }
+  gmfs = modeEtablissementsActif() ? secteursEtab : cliniques;
   calculerDecalagesMarqueurs();
   // 27 août 2026 : (ré)initialise la vue « Toutes les cliniques » à chaque chargement des
   // données — un rechargement de page ne doit jamais garder une vue élargie ouverte par accident.
@@ -4154,75 +4209,24 @@ function initData(data, etabData) {
     return true;
   });
 
-  // Notes personnelles sauvegardées
-  if (MODE_CENTRE) {
-    appliquerNotesActives();
-    recalculerOrdre();
-    chargerFavorisMode();
-    chargerOrdreFavorisMode();
-  } else {
-  gmfs.forEach(g => { const n = SAFE.get(NOTE_KEY(g.id)); if (n !== null) g.notes = n; });
-
-  // Ordre de la liste principale : toujours l'ordre par défaut (RLS puis alphabétique), non réordonnable
-  const typeRank = { 'GMF-U': 0, 'GMF-R': 1, 'GMF': 2, 'GMF satellite': 3, 'CH': 4 };
-  const regRank = { 'Ouest': 0, 'Centre': 1, 'Est': 2 };
-  /* Sur la carte des trois territoires, le premier critère de tri est le TERRITOIRE : la liste
-     est donc déjà regroupée par couleur d'épingle. Sur une carte régionale, ce critère devient
-     inopérant puisque tout appartient au même territoire — la liste retombait sur le type de
-     milieu et les couleurs de RLS s'alternaient au fil de la liste et de la numérotation.
-     On remplace donc ce premier palier par le RLS sur ces pages. L'ordre des RLS est celui de
-     RLS_COLORS_REGION, donc exactement celui de la légende : la liste, la numérotation des
-     épingles et la légende racontent la même histoire. */
-  const rlsRank = MODE_REGION
-    ? Object.keys(RLS_COLORS_REGION).reduce((o, r, i) => (o[r] = i, o), {})
-    : null;
-  order = gmfs.slice().sort((a, b) => {
-    if (rlsRank) {
-      const rla = rlsRank[a.rls] ?? 99, rlb = rlsRank[b.rls] ?? 99;
-      if (rla !== rlb) return rla - rlb;
-    } else {
-      const rga = regRank[a.region] ?? 9, rgb = regRank[b.region] ?? 9;
-      if (rga !== rgb) return rga - rgb;
-    }
-    const ra = typeRank[a.type] ?? 99, rb = typeRank[b.type] ?? 99;
-    if (ra !== rb) return ra - rb;
-    return (a.nom || '').localeCompare(b.nom || '', 'fr', { sensitivity: 'base' });
-  }).map(g => g.id);
-
-  // Favoris (étoiles) sauvegardés
-  favoris = new Set();
-  try {
-    const f = JSON.parse(SAFE.get(FAV_KEY) || '[]');
-    if (Array.isArray(f)) favoris = new Set(f);
-  } catch(e) {}
-
-  // Ordre des favoris (sauvegardé). Migration : à défaut, on récupère l'ancien ordre de liste filtré aux favoris.
-  favOrder = [];
-  try {
-    const sf = JSON.parse(SAFE.get(FAVORDER_KEY) || 'null');
-    if (Array.isArray(sf)) favOrder = sf.filter(id => gmfs.some(g => g.id === id));
-  } catch(e) {}
-  if (favOrder.length === 0) {
-    try {
-      const old = JSON.parse(SAFE.get(ORDER_KEY) || 'null');
-      if (Array.isArray(old)) favOrder = old.filter(id => favoris.has(id));
-    } catch(e) {}
-  }
-  }
+  appliquerNotesActives();
+  recalculerOrdre();
+  chargerFavorisMode();
+  chargerOrdreFavorisMode();
 
   buildMarkers();
   if (!modeEtablissementsActif()) buildEtablissementMarkers();
   buildHopitalMarkers();
   buildFilters();
   donneesPretes = true;
-  if (MODE_CENTRE) syncModeCarteUI();
+  syncModeCarteUI();
   syncAllClinicsToggle();
   syncEstablishmentsToggle();
   renderSidebar();
   showUpdateDate();
   showBanner();
   fitToData();
-  if (MODE_CENTRE && appliquerCibleUrl(paramsInit)) return;
+  if (appliquerCibleUrl(paramsInit)) return;
   // Lien direct : ?c=6 ouvre la fiche de la clinique 6.
   const cibleBrute = paramsInit.get('c');
   const cible = Number(cibleBrute);
@@ -4253,14 +4257,28 @@ function initData(data, etabData) {
   // (fitToData ci-dessus).
 }
 
+function chargerJsonOptionnel(url) {
+  return fetch(url, { cache: 'no-cache' })
+    .then(r => (r.ok ? r.json() : null))
+    .catch(() => null);
+}
 fetch('../data.json', { cache: 'no-cache' })
   .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
   .then(data => {
-    if (!MODE_CENTRE) return initData(data, null);
-    return fetch('../data-etablissements-centre.json', { cache: 'no-cache' })
-      .then(r => (r.ok ? r.json() : null))
-      .catch(() => null)
-      .then(etabData => initData(data, etabData));
+    if (MODE_OUEST) return initData(data, []);
+    if (MODE_CENTRE) {
+      return chargerJsonOptionnel('../data-etablissements-centre.json')
+        .then(centre => initData(data, centre ? [{ data: centre, region: 'Centre' }] : []));
+    }
+    return Promise.all([
+      chargerJsonOptionnel('../data-etablissements.json'),
+      chargerJsonOptionnel('../data-etablissements-centre.json')
+    ]).then(([est, centre]) => {
+      const lots = [];
+      if (est) lots.push({ data: est, region: 'Est' });
+      if (centre) lots.push({ data: centre, region: 'Centre' });
+      return initData(data, lots);
+    });
   })
   .catch(err => {
     console.error('Chargement des données impossible :', err);

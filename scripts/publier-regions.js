@@ -238,7 +238,10 @@ function appliquerIdentiteRegionale(source, t) {
     return head + carteSq.replace('<!-- PWA_SERVICE_WORKER -->', pwaServiceWorker());
   }
   if (t.region === 'Centre') {
-    r('<html lang="fr-CA">', '<html lang="fr-CA" data-region="Centre">', 'data-region Centre');
+    r('<html lang="fr-CA">', '<html lang="fr-CA" data-region="Centre" data-etab-ui="1">', 'data-region Centre');
+  }
+  if (t.region === 'Ouest') {
+    r('<html lang="fr-CA">', '<html lang="fr-CA" data-region="Ouest" data-etab-ui="1">', 'data-region Ouest');
   }
   return etat.html;
 }
@@ -283,7 +286,7 @@ function main() {
 
   // La carte complète n'est pas installable. Les commentaires de substitution sont inoffensifs
   // et facilitent le contrôle visuel du gabarit; aucune balise manifest ni aucun bouton n'existe.
-  ecrire(SORTIE_GENERALE, source);
+  ecrire(SORTIE_GENERALE, source.replace('<html lang="fr-CA">', '<html lang="fr-CA" data-etab-ui="1">'));
   console.log('  monteregie/index.html régénéré (carte complète, non installable).');
 
   for (const t of TERRITOIRES) {
