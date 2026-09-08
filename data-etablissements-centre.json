@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "regionApplication": "Centre",
+  "cycleBesoins": "2027",
+  "dateSource": "2026-06-01",
+  "meta": {
+    "politiqueAffichage": {
+      "note": "Recrutement HRR juin 2026. Contacts publiés comme pour les cliniques du même cycle. Téléphones d’installation seulement s’ils figurent déjà sur un site public.",
+      "besoinsDichotomiques": false,
+      "afficherETC": true,
+      "afficherResponsableNom": true,
+      "afficherResponsableCourriel": true,
+      "contactAffiche": "source",
+      "champsInternes": [
+        "notesInternes"
+      ]
+    },
+    "statutValidation": "extrait HRR juin 2026",
+    "nbInstallations": 8,
+    "nbSecteurs": 13,
+    "sourceDocument": "Recrutement-HRR-2026_2026-09-08.pdf",
+    "categoriesActivite": [
+      {
+        "id": "urgence",
+        "abbr": "URG",
+        "libelle": "Urgence",
+        "libelleComplet": "Urgence"
+      },
+      {
+        "id": "hospitalisation",
+        "abbr": "HOSP",
+        "libelle": "Hospitalisation",
+        "libelleComplet": "Hospitalisation"
+      },
+      {
+        "id": "ucdg",
+        "abbr": "UCDG",
+        "libelle": "UCDG",
+        "libelleComplet": "Unité de courte durée gériatrique"
+      },
+      {
+        "id": "obstetrique",
+        "abbr": "OBST",
+        "libelle": "Obstétrique",
+        "libelleComplet": "Obstétrique"
+      },
+      {
+        "id": "hopital-jour",
+        "abbr": "HDJ",
+        "libelle": "Hôpital de jour",
+        "libelleComplet": "Hôpital de jour"
+      },
+      {
+        "id": "readaptation",
+        "abbr": "RÉAD",
+        "libelle": "Réadaptation",
+        "libelleComplet": "Réadaptation et convalescence"
+      },
+      {
+        "id": "gmf-u",
+        "abbr": "GMFU",
+        "libelle": "GMF-U",
+        "libelleComplet": "GMF-U"
+      },
+      {
+        "id": "longue-duree",
+        "abbr": "CHSLD",
+        "libelle": "Longue durée",
+        "libelleComplet": "Longue durée"
+      },
+      {
+        "id": "sad-siad-sp",
+        "abbr": "SAD",
+        "libelle": "Soins à domicile",
+        "libelleComplet": "Soutien à domicile"
+      },
+      {
+        "id": "clinique-jeunesse",
+        "abbr": "JEUN",
+        "libelle": "Clinique jeunesse",
+        "libelleComplet": "Clinique jeunesse"
+      },
+      {
+        "id": "pediatrie-sociale",
+        "abbr": "PÉD",
+        "libelle": "Pédiatrie sociale",
+        "libelleComplet": "Pédiatrie sociale"
+      }
+    ]
+  },
+  "installations": [
+    {
+      "id": "INS-C-001",
+      "nom": "Hôpital du Haut-Richelieu",
+      "type": "hopital",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "hopitaux",
+        "id": 5
+      },
+      "adresse": "920, boulevard du Séminaire Nord",
+      "ville": "Saint-Jean-sur-Richelieu",
+      "codePostal": "J3A 1B7",
+      "telephone": "450 359-5000",
+      "lat": 45.3324042,
+      "lng": -73.2702951,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/hopital-du-haut-richelieu",
+      "coordonneesApproximatives": false,
+      "mentionPublique": "DSP : Dr Philippe More. Réadaptation et convalescence : complet pour 2027.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-002",
+      "nom": "GMF-U de Saint-Jean-sur-Richelieu",
+      "type": "gmf-u",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": {
+        "collection": "cliniques",
+        "id": 45
+      },
+      "adresse": "1225, rue Douglas",
+      "ville": "Saint-Jean-sur-Richelieu",
+      "codePostal": "J2W 0J2",
+      "telephone": "",
+      "lat": 45.34011,
+      "lng": -73.283997,
+      "lienWeb": "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/",
+      "coordonneesApproximatives": false,
+      "mentionPublique": "Site public, sans frais de bureau. Affilié à l’Université de Sherbrooke.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-003",
+      "nom": "CLSC Vallée-des-Forts — soutien à domicile",
+      "type": "clsc",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "320, boulevard du Séminaire Nord, unité 003",
+      "ville": "Saint-Jean-sur-Richelieu",
+      "codePostal": "J3B 5K9",
+      "telephone": "",
+      "lat": 45.3102408,
+      "lng": -73.2652247,
+      "lienWeb": null,
+      "coordonneesApproximatives": false,
+      "mentionPublique": "Un déménagement est prévu.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-004",
+      "nom": "Clinique des jeunes du Bassin de Chambly",
+      "type": "clinique-jeunesse",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "650, boulevard Sénécal",
+      "ville": "Chambly",
+      "codePostal": "J3L 1N9",
+      "telephone": "",
+      "lat": 45.4472,
+      "lng": -73.2878,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clinique-des-jeunes-du-bassin-de-chambly",
+      "coordonneesApproximatives": true,
+      "mentionPublique": "N’est pas une installation de Santé Québec Montérégie-Centre ; des employés et médecins de l’organisation y offrent des soins.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-005",
+      "nom": "Clinique jeunesse de Saint-Jean-sur-Richelieu",
+      "type": "clinique-jeunesse",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "185, rue Champlain",
+      "ville": "Saint-Jean-sur-Richelieu",
+      "codePostal": "J3B 6V5",
+      "telephone": "450 358-8922",
+      "lat": 45.30567,
+      "lng": -73.2519981,
+      "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-et-aire-ouverte-de-la-rue-champlain-clinique-jeunesse-12-25-ans",
+      "coordonneesApproximatives": false,
+      "mentionPublique": "Clientèle de 12 à 25 ans. Projet d’aire ouverte.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-006",
+      "nom": "Centre de pédiatrie sociale L’Étoile",
+      "type": "pediatrie-sociale",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "212, rue Saint-Jacques",
+      "ville": "Saint-Jean-sur-Richelieu",
+      "codePostal": "J3B 2K7",
+      "telephone": "",
+      "lat": 45.3060359,
+      "lng": -73.2582645,
+      "lienWeb": null,
+      "coordonneesApproximatives": false,
+      "mentionPublique": "Clientèle de 0 à 18 ans. Clinique mobile.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-007",
+      "nom": "CHSLD de Saint-Jean-sur-Richelieu",
+      "type": "chsld",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "40, rue Labrèche",
+      "ville": "Saint-Jean-sur-Richelieu",
+      "codePostal": "J3B 0J3",
+      "telephone": "450 529-7646",
+      "lat": 45.311756,
+      "lng": -73.261326,
+      "lienWeb": "https://www.chslddesaint-jean-sur-richelieu.com/",
+      "coordonneesApproximatives": false,
+      "mentionPublique": "CHSLD en partenariat public-privé. Deux médecins sur place.",
+      "publication": {
+        "visible": true
+      }
+    },
+    {
+      "id": "INS-C-008",
+      "nom": "Manoir Soleil",
+      "type": "chsld",
+      "territoireSource": "Haut-Richelieu–Rouville",
+      "missionRegionale": false,
+      "referenceExistante": null,
+      "adresse": "125, rue Daigneault",
+      "ville": "Chambly",
+      "codePostal": "J3L 1G7",
+      "telephone": "450 658-4441",
+      "lat": 45.4605371,
+      "lng": -73.2992478,
+      "lienWeb": "https://www.manoirsoleil.com/",
+      "coordonneesApproximatives": true,
+      "mentionPublique": "CHSLD privé conventionné. Approche Montessori Or.",
+      "publication": {
+        "visible": true
+      }
+    }
+  ],
+  "secteurs": [
+    {
+      "id": "SEC-C-001",
+      "installationId": "INS-C-001",
+      "libelle": "Urgence",
+      "secteur": "Urgence",
+      "categorieActivite": "urgence",
+      "abbrActivite": "URG",
+      "activites": ["urgence"],
+      "termesRecherche": ["urgence", "urgences", "mu3"],
+      "ancre": "urgence",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "Jusqu’à 6 ETC en 2027",
+        "responsableNom": "Dre Geneviève Hardy",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": [
+          "Profil MU3 ou expérience en urgence de haute acuité."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-002",
+      "installationId": "INS-C-001",
+      "libelle": "Hospitalisation",
+      "secteur": "Hospitalisation",
+      "categorieActivite": "hospitalisation",
+      "abbrActivite": "HOSP",
+      "activites": ["hospitalisation"],
+      "termesRecherche": ["hospitalisation", "hospitalisé", "hospitalises"],
+      "ancre": "hospitalisation",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "4 à 5 collègues",
+        "responsableNom": "Dre Julie Robitaille / Dr Frederic Benny",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": []
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-003",
+      "installationId": "INS-C-001",
+      "libelle": "Obstétrique",
+      "secteur": "Obstétrique",
+      "categorieActivite": "obstetrique",
+      "abbrActivite": "OBST",
+      "activites": ["obstetrique"],
+      "termesRecherche": ["obstetrique", "accouchement", "grossesse"],
+      "ancre": "obstetrique",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "1 poste en 2027",
+        "responsableNom": "Dre Maryse Lefebvre-Laporte",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": [
+          "Environ 1400 naissances par année.",
+          "Douze médecins, trois cliniques (Coteau, GMF-U, Iberville).",
+          "Garde 24 heures."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-004",
+      "installationId": "INS-C-001",
+      "libelle": "UCDG",
+      "secteur": "UCDG",
+      "categorieActivite": "ucdg",
+      "abbrActivite": "UCDG",
+      "activites": ["ucdg", "geriatrie"],
+      "termesRecherche": ["ucdg", "geriatrie", "courte duree"],
+      "ancre": "ucdg",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "Recrutement 2027",
+        "responsableNom": "Dre Marie-Pier Levreault",
+        "responsableCourriel": "marie-pier.levreault.med@ssss.gouv.qc.ca",
+        "telephone": null,
+        "notesPubliques": []
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-005",
+      "installationId": "INS-C-001",
+      "libelle": "Hôpital de jour",
+      "secteur": "Hôpital de jour",
+      "categorieActivite": "hopital-jour",
+      "abbrActivite": "HDJ",
+      "activites": ["hopital-jour"],
+      "termesRecherche": ["hopital de jour", "hdj"],
+      "ancre": "hopital-de-jour",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "Recrutement 2027",
+        "responsableNom": "Dre Marie-Pier Levreault",
+        "responsableCourriel": "marie-pier.levreault.med@ssss.gouv.qc.ca",
+        "telephone": null,
+        "notesPubliques": []
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-006",
+      "installationId": "INS-C-001",
+      "libelle": "Réadaptation et convalescence",
+      "secteur": "Réadaptation",
+      "categorieActivite": "readaptation",
+      "abbrActivite": "RÉAD",
+      "activites": ["readaptation", "convalescence"],
+      "termesRecherche": ["readaptation", "convalescence", "urfi", "utrf"],
+      "ancre": "readaptation",
+      "recrutement": {
+        "statutDeclare": "inactif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "Complet",
+        "responsableNom": "Dre Marie-Pier Levreault",
+        "responsableCourriel": "marie-pier.levreault.med@ssss.gouv.qc.ca",
+        "telephone": null,
+        "notesPubliques": [
+          "Complet pour 2027."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-007",
+      "installationId": "INS-C-002",
+      "libelle": "GMF-U",
+      "secteur": "GMF-U",
+      "categorieActivite": "gmf-u",
+      "abbrActivite": "GMFU",
+      "activites": ["gmf-u", "enseignement", "prise-en-charge"],
+      "termesRecherche": ["gmf-u", "gmfu", "universitaire", "enseignement", "pec"],
+      "ancre": "gmf-u",
+      "dme": "Medesync (Telus)",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "Prise en charge et enseignement",
+        "responsableNom": "Dre Joannie Ponton",
+        "responsableCourriel": "joannie.ponton.med@ssss.gouv.qc.ca",
+        "telephone": null,
+        "notesPubliques": [
+          "Seize médecins superviseurs et 16 résidents."
+        ]
+      },
+      "enseignement": "oui",
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-008",
+      "installationId": "INS-C-003",
+      "libelle": "Soutien à domicile",
+      "secteur": "SAD",
+      "categorieActivite": "sad-siad-sp",
+      "abbrActivite": "SAD",
+      "activites": ["sad-siad-sp", "soins-domicile"],
+      "termesRecherche": ["sad", "domicile", "clsc", "vallee-des-forts", "vdf"],
+      "ancre": "soutien-a-domicile",
+      "dme": "Medesync",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "2 postes",
+        "responsableNom": "Dre Emilie Gemme",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": [
+          "Pratique exclusive en soutien à domicile, ou jumelée à une prise en charge / Henryville."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-009",
+      "installationId": "INS-C-004",
+      "libelle": "Clinique jeunesse",
+      "secteur": "Clinique jeunesse",
+      "categorieActivite": "clinique-jeunesse",
+      "abbrActivite": "JEUN",
+      "activites": ["clinique-jeunesse"],
+      "termesRecherche": ["jeunesse", "chambly", "ados", "12-25"],
+      "ancre": "clinique-jeunesse",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "1 poste",
+        "responsableNom": "Dre Maude Tousignant",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": [
+          "Lundi, mardi et mercredi.",
+          "Complémentaire à un GMF."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-010",
+      "installationId": "INS-C-005",
+      "libelle": "Clinique jeunesse",
+      "secteur": "Clinique jeunesse",
+      "categorieActivite": "clinique-jeunesse",
+      "abbrActivite": "JEUN",
+      "activites": ["clinique-jeunesse"],
+      "termesRecherche": ["jeunesse", "saint-jean", "12-25", "aire ouverte"],
+      "ancre": "clinique-jeunesse",
+      "dme": "Medesync",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "1 poste, 5 jours par semaine",
+        "responsableNom": "Dre Jessica Boucher",
+        "responsableCourriel": "jessicaboucher27@gmail.com",
+        "telephone": null,
+        "notesPubliques": [
+          "Clientèle de 12 à 25 ans.",
+          "Projet d’aire ouverte."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-011",
+      "installationId": "INS-C-006",
+      "libelle": "Pédiatrie sociale",
+      "secteur": "Pédiatrie sociale",
+      "categorieActivite": "pediatrie-sociale",
+      "abbrActivite": "PÉD",
+      "activites": ["pediatrie-sociale"],
+      "termesRecherche": ["pediatrie", "etoile", "sociale", "0-18"],
+      "ancre": "pediatrie-sociale",
+      "dme": "Myle",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "1 jour par semaine, 3 à 4 semaines par mois",
+        "responsableNom": "Dre Sacha Lajoie",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": [
+          "Clientèle de 0 à 18 ans.",
+          "Clinique mobile."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-012",
+      "installationId": "INS-C-007",
+      "libelle": "Longue durée",
+      "secteur": "CHSLD",
+      "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
+      "activites": ["longue-duree", "chsld"],
+      "termesRecherche": ["chsld", "hebergement", "longue duree", "ppp"],
+      "ancre": "longue-duree",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": null,
+        "responsableNom": "Mme Noemis Bélanger",
+        "responsableCourriel": "nbelanger@chsldsainte-catherine.com",
+        "telephone": null,
+        "notesPubliques": [
+          "CHSLD en partenariat public-privé. Deux médecins."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    },
+    {
+      "id": "SEC-C-013",
+      "installationId": "INS-C-008",
+      "libelle": "Longue durée",
+      "secteur": "CHSLD",
+      "categorieActivite": "longue-duree",
+      "abbrActivite": "CHSLD",
+      "activites": ["longue-duree", "chsld"],
+      "termesRecherche": ["chsld", "manoir", "soleil", "chambly", "montessori"],
+      "ancre": "longue-duree",
+      "recrutement": {
+        "statutDeclare": "actif",
+        "dateInformation": "2026-06-01",
+        "besoinDeclare": "1 médecin",
+        "responsableNom": "Dre Geneviève Hardy",
+        "responsableCourriel": null,
+        "telephone": null,
+        "notesPubliques": [
+          "CHSLD privé conventionné. Approche Montessori Or."
+        ]
+      },
+      "enseignement": null,
+      "regroupe": false,
+      "validation": { "etat": "source-hrr-2026", "verifieLe": "2026-09-08" }
+    }
+  ]
+}

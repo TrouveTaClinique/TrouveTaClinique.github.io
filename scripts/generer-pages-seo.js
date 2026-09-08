@@ -288,6 +288,8 @@ const CHAMPS_PUBLICS = [
   'id', 'nom', 'ville', 'adresse', 'type', 'region', 'rls', 'niveau', 'niveaux',
   'dme', 'pratiques', 'bureau', 'frais', 'horaire', 'personnel', 'site',
   'porteOuverte', 'presentation', 'infos', 'gardeUrgence', 'gardeAutre',
+  /* medecinsRecherches → « Postes visés » sur les fiches (déjà « Postes disponibles » sur la carte). */
+  'medecinsRecherches',
   /* validation → ajouté le 26 août 2026. N'est PAS affiché comme ligne de fiche ; sert
      uniquement à décider si le badge « Vérifié » apparaît et à afficher sa date (voir
      estValide()/badgeVerif() plus bas). Le sous-champ "source" n'est jamais publié. */
@@ -443,6 +445,13 @@ function descriptionClinique(c) {
   return limiterTexte(corps, 155);
 }
 
+function htmlResumeListe(points) {
+  if (!Array.isArray(points) || !points.length) return '';
+  return `<ul class="source-list">
+      ${points.map(p => `<li>${esc(p)}</li>`).join('\n      ')}
+    </ul>`;
+}
+
 /* Image de partage 1200×630 (pas la bannière Est 1024×341). */
 const OG_PARTAGE = {
   url: `${SITE}/assets/og-image-accueil.png`,
@@ -481,7 +490,10 @@ function jsonLdJobPosting(c, url, majDonnees) {
   return {
     '@type': 'JobPosting',
     title: 'Médecin de famille',
-    description: presentationDepuisDonnees(c),
+    description: (c.region === 'Centre' && c.rls === 'Haut-Richelieu–Rouville'
+      && SEO_RESUME_CLINIQUES_HRR[String(c.id)] && SEO_RESUME_CLINIQUES_HRR[String(c.id)].lead)
+      ? SEO_RESUME_CLINIQUES_HRR[String(c.id)].lead
+      : presentationDepuisDonnees(c),
     datePosted: majDonnees,
     validThrough: '2027-11-30',
     employmentType: 'FULL_TIME',
@@ -689,6 +701,7 @@ function analyserPlages(texte) {
  */
 const EST_PREFIXE = '/monteregie-est';
 const EST_ACCUEIL = EST_PREFIXE + '/';
+const CENTRE_PREFIXE = '/monteregie-centre';
 
 /* Bannière des pages web Est (répertoires, PTEM, AMP) : JPEG clair 1024×341.
    Distincte de l’en-tête des formulaires Google :
@@ -754,7 +767,7 @@ const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region
 
 /* Navigation : carte et cliniques suivent le territoire de la page. PTEM/AMP restent
    les guides canoniques de l’Est (les copies Centre/Ouest ne sont que des redirections).
-   Le répertoire établissements n’existe qu’en Montérégie-Est. */
+   Le répertoire établissements existe en Montérégie-Est et en Montérégie-Centre. */
 function liensNav(u) {
   const prefixe = (u && u.regional) ? u.prefixe : EST_PREFIXE;
   const carte = (u && u.regional) ? u.accueil : EST_ACCUEIL;
@@ -765,6 +778,8 @@ function liensNav(u) {
   ];
   if (!u || !u.regional || u.region === 'Est') {
     liens.push([EST_PREFIXE + '/etablissements/', 'Établissements', 'etablissements']);
+  } else if (u.region === 'Centre') {
+    liens.push([u.prefixe + '/etablissements/', 'Établissements', 'etablissements']);
   }
   liens.push(
     [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
@@ -951,6 +966,11 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   if (PUBLIER_COURRIELS && rempli(c.personneRessource)) {
     ajouter('Contact recrutement', lienCourrielRecrutement(c.personneRessource));
   }
+  if (rempli(c.medecinsRecherches)) {
+    const n = Number(c.medecinsRecherches);
+    const mot = n > 1 ? 'médecins de famille' : 'médecin de famille';
+    ajouter('Postes visés', esc(String(c.medecinsRecherches) + ' ' + mot));
+  }
 
   /* --- Horaires --- */
   let blocHoraire = '';
@@ -987,14 +1007,26 @@ ${items}
     }
   }
 
-  /* --- Texte du milieu : champ libre, sinon paragraphe dérivé des champs publics --- */
-  const textePresentation = presentationDepuisDonnees(c);
-  let blocTexte = `
+  /* --- Texte du milieu : résumé en liste pour le RLS HRR (pas le texte source tel quel) --- */
+  const estHrr = c.region === 'Centre' && c.rls === 'Haut-Richelieu–Rouville';
+  const resumeHrr = estHrr ? (SEO_RESUME_CLINIQUES_HRR[String(c.id)] || null) : null;
+  const textePresentation = resumeHrr
+    ? resumeHrr.lead
+    : (estHrr
+      ? `${c.nom}${c.ville ? ', à ' + c.ville : ''}.`
+      : presentationDepuisDonnees(c));
+  let blocTexte = resumeHrr
+    ? `
+  <section id="presentation">
+    <h2>En résumé</h2>
+    ${htmlResumeListe(resumeHrr.points)}
+  </section>`
+    : (estHrr ? '' : `
   <section id="presentation">
     <h2>Présentation du milieu</h2>
     <p>${esc(textePresentation)}</p>
 ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
-  </section>`;
+  </section>`);
 
   /* --- Données structurées : uniquement ce qu'on sait réellement --- */
   const clinique = {
@@ -1107,6 +1139,7 @@ ${lignes.join('\n')}
     <h2>Pour aller plus loin</h2>
     <ul class="source-list">
       <li><a href="${lienPrefixe}/rls/${slugifier(c.rls || '')}/">Autres milieux du RLS ${esc(c.rls)}</a></li>
+      ${String(c.id) === '45' ? `<li><a href="${CENTRE_PREFIXE}/etablissements/gmf-u-de-saint-jean-sur-richelieu/">Secteurs en établissement du GMF-U</a></li>` : ''}
       <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
       <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
       <li><a href="${u.accueil}?c=${c.id}">Fiche complète et itinéraire sur la carte interactive</a></li>
@@ -1258,7 +1291,8 @@ ${itemsInactifs}
 ${prats.length ? `      <dt>Pratiques offertes dans le RLS</dt><dd>${esc(prats.join(', '))}</dd>` : ''}
     </dl>
     <p class="note">Ces éléments sont calculés à partir des fiches publiées ci-dessus; ils décrivent les milieux répertoriés par Trouve ta clinique, pas l’ensemble de l’offre du territoire.</p>
-  </section>`;
+  </section>
+${(u.region === 'Centre' && rls === 'Haut-Richelieu–Rouville') ? htmlExtraSeoRlsHrr() : ''}`;
 
   return { indexable, html: page({
     titre: limiterTexte(`Cliniques en recrutement — RLS ${rls}`, 58),
@@ -1715,7 +1749,10 @@ const TYPE_ETAB_SEO = {
   clsc: 'CLSC',
   'gmf-u': 'GMF-U',
   crd: 'Centre de réadaptation',
-  detention: 'Centre de détention'
+  detention: 'Centre de détention',
+  'clinique-jeunesse': 'Clinique jeunesse',
+  'pediatrie-sociale': 'Pédiatrie sociale',
+  'hopital-jour': 'Hôpital de jour'
 };
 
 function typeEtablissementLibelle(type) {
@@ -2615,6 +2652,502 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo, cliniq
   return n;
 }
 
+const DATE_SOURCE_ETABLISSEMENTS_CENTRE = 'juin 2026';
+const LOT_ETABLISSEMENTS_CENTRE = [
+  'INS-C-001', 'INS-C-002', 'INS-C-003', 'INS-C-004',
+  'INS-C-005', 'INS-C-006', 'INS-C-007', 'INS-C-008'
+];
+const DESCRIPTIONS_ETABLISSEMENTS_CENTRE = {
+  'INS-C-001': 'Hôpital de Saint-Jean-sur-Richelieu. Plusieurs secteurs hospitaliers recrutent ; la réadaptation est complète pour 2027.',
+  'INS-C-002': 'Groupe de médecine de famille universitaire affilié à Sherbrooke. Site public, sans frais de bureau.',
+  'INS-C-003': 'Soutien à domicile du CLSC Vallée-des-Forts, à Saint-Jean-sur-Richelieu. Un déménagement est prévu.',
+  'INS-C-004': 'Clinique jeunesse à Chambly, complémentaire à un GMF. Ouverte lundi, mardi et mercredi.',
+  'INS-C-005': 'Clinique jeunesse au 185, rue Champlain, pour les 12 à 25 ans, avec projet d’aire ouverte.',
+  'INS-C-006': 'Pédiatrie sociale à Saint-Jean-sur-Richelieu, pour les 0 à 18 ans, avec clinique mobile.',
+  'INS-C-007': 'CHSLD en partenariat public-privé, rue Labrèche. Deux médecins sur place.',
+  'INS-C-008': 'CHSLD privé conventionné à Chambly. Approche Montessori Or.'
+};
+const SEO_RESUME_SECTEURS_CENTRE = {
+  'SEC-C-001': ['Jusqu’à 6 ETC visés en 2027', 'Profil urgence de haute acuité (MU3 ou équivalent)'],
+  'SEC-C-002': ['4 à 5 collègues recherchés'],
+  'SEC-C-003': ['1 poste en 2027', 'Environ 1400 naissances par année', 'Garde 24 heures', 'Cliniques associées : Coteau, GMF-U, Iberville'],
+  'SEC-C-004': ['Recrutement 2027', 'Unité de courte durée gériatrique'],
+  'SEC-C-005': ['Recrutement 2027'],
+  'SEC-C-006': ['Complet pour 2027'],
+  'SEC-C-007': ['Besoins en prise en charge et en enseignement', '16 médecins superviseurs et 16 résidents', 'Site public, sans frais de bureau'],
+  'SEC-C-008': ['2 postes', 'Pratique exclusive ou jumelée à une prise en charge / Henryville', 'Déménagement prévu'],
+  'SEC-C-009': ['1 poste', 'Lundi, mardi et mercredi', 'Complémentaire à un GMF'],
+  'SEC-C-010': ['1 poste, 5 jours par semaine', '12 à 25 ans', 'Projet d’aire ouverte'],
+  'SEC-C-011': ['1 jour par semaine, 3 à 4 semaines par mois', '0 à 18 ans', 'Clinique mobile'],
+  'SEC-C-012': ['Deux médecins sur place', 'Partenariat public-privé'],
+  'SEC-C-013': ['1 médecin recherché', 'CHSLD privé conventionné', 'Approche Montessori Or']
+};
+const SEO_RESUME_CLINIQUES_HRR = {
+  '44': {
+    lead: 'GMF à deux sites, jumelé au GMF-U de Saint-Jean-sur-Richelieu.',
+    points: [
+      'Prise en charge, accès adapté et mini-urgence',
+      'Suivi de grossesse, pédiatrie, mini-chirurgie et échographie sur place',
+      'Cliniques spécialisées : pédiatrie, périnatalité, infiltrations, santé mentale, gynécologie',
+      'Soins à domicile avec résidents et IPSPL',
+      'Bureau dédié ; frais de loyer mensuel fixe'
+    ]
+  },
+  '45': {
+    lead: 'GMF-U public affilié à l’Université de Sherbrooke.',
+    points: [
+      'Besoins en prise en charge et en enseignement',
+      '16 médecins superviseurs et 16 résidents',
+      'Accès adapté ; locaux de 2016',
+      'Aucun frais de bureau ; bureaux partagés',
+      'Porte ouverte à l’automne',
+      'Gardes de soir et de fin de semaine partagées avec Iberville'
+    ]
+  },
+  '46': {
+    lead: 'GMF de 15 médecins, dont plusieurs en suivi obstétrical.',
+    points: [
+      '1 poste visé',
+      'Clinique informatisée, dossier en site unique',
+      'Formation continue interne',
+      'Bureaux partagés ; frais au mois selon les activités'
+    ]
+  },
+  '47': {
+    lead: 'GMF de 15 médecins, avec rénovation en cours.',
+    points: [
+      '1 poste visé',
+      'Prise en charge variée : pédiatrie, adulte, gériatrie, santé de la femme, mini-chirurgie, infiltrations',
+      'Sans rendez-vous modulable selon le projet de pratique',
+      'Triage ; formation continue',
+      'Services dans le même édifice (pharmacie, physiothérapie, dentiste, etc.)'
+    ]
+  },
+  '48': {
+    lead: 'GMF de Chambly, avec place pour trois nouveaux médecins.',
+    points: [
+      '3 postes visés',
+      'Mini-chirurgie ; formation continue hebdomadaire',
+      'Sans rendez-vous appuyé par une clinique de radiologie dans l’édifice',
+      'Spécialistes et services connexes sur place',
+      'Bureau dédié ; frais mensuel fixe, modulé en début de pratique'
+    ]
+  },
+  '49': {
+    lead: 'GMF de neuf médecins, rénové en 2016.',
+    points: [
+      'Chirurgie mineure, infiltrations et pose de stérilets',
+      'Accès adapté et sans rendez-vous ponctuel',
+      'Aucun bureau indiqué comme disponible pour l’instant',
+      'Frais fixes, modulables en début de pratique'
+    ]
+  },
+  '50': {
+    lead: 'Clinique communautaire de Marieville, ouverte en 2015.',
+    points: [
+      '2 postes visés ; capacité de 9 médecins et 5 IPS',
+      'Mini-chirurgie et salle de formation',
+      'IVG médical ; CHSLD à proximité',
+      'Milieu de stage IPS',
+      'Bureaux dédiés ou partagés ; frais mensuel fixe'
+    ]
+  },
+  '51': {
+    lead: 'GMF mixte sur trois sites, sans frais de bureau au CLSC.',
+    points: [
+      '1 poste visé',
+      'Prise en charge, sans rendez-vous, accès adapté',
+      'ECG, échographie, mini-chirurgie, stérilet et Nexplanon',
+      'Soins à domicile possibles au CLSC (quelques heures à combler)',
+      'Centre de prélèvements sur place'
+    ]
+  },
+  '52': {
+    lead: 'Point de service du GMF Richelieu – Saint-Césaire, rattaché au CLSC.',
+    points: [
+      '1 poste visé',
+      'Trois médecins sur place',
+      'Aucun frais de bureau',
+      'Infirmière GMF quatre jours par semaine'
+    ]
+  },
+  '53': {
+    lead: 'Troisième site du GMF Richelieu – Saint-Césaire, à Saint-Césaire.',
+    points: [
+      '1 poste visé',
+      'Trois médecins ; infirmière GMF un matin par semaine',
+      'Néphrologue et chirurgien une fois par mois',
+      'Frais : montant fixe'
+    ]
+  },
+  '54': {
+    lead: 'Un des deux sites du GMF Saint-Luc Saint-Eugène.',
+    points: [
+      '1 poste visé ; 5 médecins sur place',
+      'Santé des femmes, pédiatrie, jeunes ; certains collèges à l’hôpital ou en CHSLD',
+      'Accès adapté pour rendez-vous et sans rendez-vous',
+      'Services connexes dans l’édifice',
+      'Bureau dédié ; frais au mois selon les activités'
+    ]
+  },
+  '55': {
+    lead: 'Second site du GMF Saint-Luc Saint-Eugène, dans des locaux de 2021.',
+    points: [
+      '2 postes visés ; 7 médecins',
+      'Mini-chirurgie ; accès adapté et sans rendez-vous avec triage infirmier',
+      'Pédiatrie, santé de la femme, gériatrie, musculo-squelettique',
+      'Soins à domicile possibles',
+      'Rendez-vous en ligne et portail patient',
+      'Frais mensuel fixe, modulé la première année'
+    ]
+  },
+  '132': {
+    lead: 'CLSC d’Henryville, sans frais de bureau.',
+    points: [
+      '2 postes visés ; 5 médecins',
+      'Prise en charge et soins à domicile possibles',
+      'Bureau partagé disponible'
+    ]
+  },
+  '133': {
+    lead: 'Coopérative de santé à Venise-en-Québec, ni clinique privée ni GMF.',
+    points: [
+      '3 postes visés',
+      'Financement par les membres et la communauté, depuis 2007',
+      'Suivi rural, accès adapté, clientèle variée',
+      'Agrandissement 2025-2026 : bureaux et salle de mini-chirurgie',
+      'Infirmière auprès du médecin chaque jour',
+      'Frais journaliers ou à la demi-journée, modulables en début de pratique'
+    ]
+  },
+  '134': {
+    lead: 'Coopérative de Saint-Blaise-sur-Richelieu, ouverte depuis 2016.',
+    points: [
+      '1 poste visé',
+      'Horaires flexibles ; clientèle de tous âges',
+      'Pharmacie adjacente ; matériel inclus',
+      'Tarif mensuel fixe'
+    ]
+  }
+};
+const POINTS_AUTRES_MILIEUX_HRR = [
+  'Cinq CHSLD publics (adresses non nommées ici)',
+  'Deux maisons des aînés (adresses non nommées ici)',
+  'Unités URFI et UTRF (réadaptation fonctionnelle)',
+  'Service PEIO',
+  'La réadaptation et la convalescence de l’hôpital sont complètes pour 2027'
+];
+
+function chargerDonneesEtablissementsCentre() {
+  return JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements-centre.json'), 'utf8'));
+}
+
+function lienCarteInstallationCentre(id) {
+  return `${CENTRE_PREFIXE}/?mode=etablissements&installation=${encodeURIComponent(id)}`;
+}
+
+function htmlExtraSeoRlsHrr() {
+  return `  <section id="etablissements-hrr">
+    <h2>Secteurs en établissement</h2>
+    <p>Outre les cliniques, le RLS recrute aussi en hôpital, GMF-U, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale.</p>
+    ${htmlResumeListe([
+      'Hôpital du Haut-Richelieu : urgence, hospitalisation, obstétrique, UCDG, hôpital de jour',
+      'GMF-U de Saint-Jean-sur-Richelieu',
+      'Soutien à domicile du CLSC Vallée-des-Forts',
+      'Cliniques jeunesse de Chambly et de Saint-Jean-sur-Richelieu',
+      'Pédiatrie sociale L’Étoile',
+      'CHSLD de Saint-Jean-sur-Richelieu et Manoir Soleil'
+    ])}
+    <h3>Autres milieux, sans pastille sur la carte</h3>
+    ${htmlResumeListe(POINTS_AUTRES_MILIEUX_HRR)}
+    <p class="rep-lien"><a href="${CENTRE_PREFIXE}/etablissements/">Voir les établissements →</a></p>
+  </section>
+`;
+}
+
+function htmlContactSecteurSeo(sec) {
+  const rec = sec.recrutement || {};
+  const bits = [];
+  if (rec.responsableNom) bits.push(esc(rec.responsableNom));
+  if (rec.responsableCourriel) {
+    bits.push(`<a href="mailto:${esc(rec.responsableCourriel)}">${esc(rec.responsableCourriel)}</a>`);
+  }
+  return bits.length ? bits.join(' · ') : '';
+}
+
+function paragraphesSecteurCentre(s) {
+  const rec = s.recrutement || {};
+  const points = (SEO_RESUME_SECTEURS_CENTRE[s.id] || []).slice();
+  const blocs = [];
+  if (rec.statutDeclare === 'inactif') {
+    blocs.push('<p>Ce secteur n’est pas en recrutement pour 2027.</p>');
+  }
+  blocs.push(htmlResumeListe(points));
+  if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${esc(GMFU_CONDITION_SEO)}</p>`);
+  const contact = htmlContactSecteurSeo(s);
+  if (contact) blocs.push(`<p>Contact : ${contact}.</p>`);
+  if (s.dme) blocs.push(`<p>Dossier médical électronique : ${esc(s.dme)}.</p>`);
+  return blocs.filter(Boolean).join('\n    ');
+}
+
+function htmlBlocCliniqueLieeCentre(cliniqueLiee) {
+  if (!cliniqueLiee) return { lignes: '', horaire: '', equipe: '' };
+  let lignes = '';
+  if (rempli(cliniqueLiee.dme)) {
+    lignes += `      <dt>Dossier médical électronique (DMÉ)</dt><dd>${esc(cliniqueLiee.dme)}</dd>\n`;
+  }
+  if (Array.isArray(cliniqueLiee.pratiques) && cliniqueLiee.pratiques.length) {
+    lignes += `      <dt>Pratiques offertes</dt><dd>${esc(cliniqueLiee.pratiques.map(p => PRATIQUES[p] || p).join(', '))}</dd>\n`;
+  }
+  let horaire = '';
+  if (rempli(cliniqueLiee.horaire)) {
+    const rangs = JOURS.filter(j => rempli(cliniqueLiee.horaire[j]))
+      .map(j => `        <tr><th scope="row">${j}</th><td>${esc(cliniqueLiee.horaire[j])}</td></tr>`).join('\n');
+    if (rangs) {
+      horaire = `
+  <section id="horaire">
+    <h2>Heures d’ouverture</h2>
+    <table class="horaire">
+      <tbody>
+${rangs}
+      </tbody>
+    </table>
+  </section>`;
+    }
+  }
+  let equipe = '';
+  if (rempli(cliniqueLiee.personnel)) {
+    const items = Object.keys(PERSONNEL).filter(k => rempli(cliniqueLiee.personnel[k]))
+      .map(k => `      <li><span class="eq-n">${esc(cliniqueLiee.personnel[k])}</span> ${esc(PERSONNEL[k])}</li>`).join('\n');
+    if (items) {
+      equipe = `
+  <section id="equipe">
+    <h2>Équipe sur place</h2>
+    <ul class="equipe">
+${items}
+    </ul>
+  </section>`;
+    }
+  }
+  return { lignes, horaire, equipe };
+}
+
+function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee) {
+  const u = UNIVERS_PAR_REGION.Centre;
+  const slug = slugEtablissement(inst);
+  const url = `${SITE}${CENTRE_PREFIXE}/etablissements/${slug}/`;
+  const typeLib = typeEtablissementLibelle(inst.type);
+  const n = secteurs.filter(s => s.recrutement && s.recrutement.statutDeclare === 'actif').length;
+  const liste = listeSecteursHumaine(secteurs.filter(s => s.recrutement && s.recrutement.statutDeclare === 'actif'));
+  const titre = limiterTexte(inst.ville ? `${inst.nom} — ${inst.ville}` : `${inst.nom} — ${typeLib}`, 58);
+  const description = limiterTexte(
+    `${inst.nom}, ${typeEnPhrase(typeLib)} à ${inst.ville} (RLS ${inst.territoireSource}) : ${n === 1 ? 'secteur en recrutement' : n + ' secteurs en recrutement'} — ${liste}.`,
+    155
+  );
+  const h2 = n <= 1 ? 'Le secteur en recrutement' : `Les ${nombreEnLettresFr(n)} secteurs en recrutement`;
+  const blocsSecteurs = secteurs.map(s => `    <h3 id="${esc(s.ancre)}">${esc(titreH3Secteur(s))}</h3>
+    ${paragraphesSecteurCentre(s)}`).join('\n\n');
+  const lienRls = inst.territoireSource
+    ? `${CENTRE_PREFIXE}/rls/${slugifier(inst.territoireSource)}/`
+    : null;
+  const siteOfficiel = inst.lienWeb
+    ? `<a href="${esc(inst.lienWeb)}" rel="noopener">Fiche officielle — ${esc(inst.nom)}</a>`
+    : '';
+  const liee = htmlBlocCliniqueLieeCentre(cliniqueLiee);
+  const extraHopital = inst.id === 'INS-C-001'
+    ? `
+  <section id="autres-milieux">
+    <h2>Autres milieux du RLS, sans pastille sur la carte</h2>
+    ${htmlResumeListe(POINTS_AUTRES_MILIEUX_HRR)}
+  </section>`
+    : '';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': url + '#webpage',
+        url,
+        name: titre,
+        inLanguage: 'fr-CA',
+        dateModified: majPagesSeo,
+        isPartOf: { '@id': SITE + '/#website' },
+        about: { '@id': url + '#etablissement' }
+      },
+      {
+        '@type': typeSchemaEtablissement(inst.type),
+        '@id': url + '#etablissement',
+        name: inst.nom,
+        url,
+        ...(inst.lienWeb ? { sameAs: [inst.lienWeb] } : {}),
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: inst.ville || '',
+          addressRegion: 'QC',
+          addressCountry: 'CA',
+          ...(inst.codePostal ? { postalCode: inst.codePostal } : {}),
+          ...(inst.adresse ? { streetAddress: inst.adresse } : {})
+        },
+        ...(Number.isFinite(Number(inst.lat)) && Number.isFinite(Number(inst.lng))
+          ? { geo: { '@type': 'GeoCoordinates', latitude: inst.lat, longitude: inst.lng } }
+          : {})
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Montérégie-Centre', item: SITE + '/monteregie-centre/' },
+          { '@type': 'ListItem', position: 2, name: 'Secteurs en établissement', item: SITE + CENTRE_PREFIXE + '/etablissements/' },
+          { '@type': 'ListItem', position: 3, name: inst.nom, item: url }
+        ]
+      }
+    ]
+  };
+  const chapeau = DESCRIPTIONS_ETABLISSEMENTS_CENTRE[inst.id]
+    || `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(inst.territoireSource || '')}.`;
+  const ligneSite = siteOfficiel ? `      <dt>Site officiel</dt><dd>${siteOfficiel}</dd>\n` : '';
+  const ligneTel = inst.telephone ? `      <dt>Téléphone</dt><dd>${esc(inst.telephone)}</dd>\n` : '';
+  const corps = `  <section class="hero">
+    <p class="eyebrow">${esc(typeLib)} · RLS ${esc(inst.territoireSource || '')}</p>
+    <h1>${esc(inst.nom)} — secteurs en recrutement</h1>
+    <p class="lead">${chapeau}</p>
+    <p class="updated"><strong>Données déclarées par le milieu :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
+    <div class="cta-row">
+      <a class="button primary" href="${esc(lienCarteInstallationCentre(inst.id))}">Voir sur la carte interactive</a>
+      <a class="button secondary" href="${CENTRE_PREFIXE}/etablissements/">Tous les secteurs en établissement</a>
+    </div>
+  </section>
+
+  <section id="secteurs">
+    <h2>${esc(h2)}</h2>
+${blocsSecteurs}
+  </section>
+${liee.horaire}${liee.equipe}${extraHopital}
+  <section id="renseignements">
+    <h2>Renseignements sur le lieu</h2>
+    <dl class="fiche">
+      <dt>Type de milieu</dt><dd>${esc(typeLib)}</dd>
+      <dt>Ville</dt><dd>${esc(inst.ville || '')}</dd>
+      <dt>Adresse</dt><dd>${esc(adresseCompleteEtablissement(inst))}</dd>
+      <dt>Territoire</dt><dd>Montérégie-Centre</dd>
+      <dt>Réseau local de services (RLS)</dt><dd>${lienRls ? `<a href="${lienRls}">${esc(inst.territoireSource)}</a>` : esc(inst.territoireSource || '')}</dd>
+${ligneTel}${ligneSite}${liee.lignes}    </dl>
+  </section>
+
+  <div class="data-note">${NOTE_SOURCE_ETABLISSEMENTS}</div>
+
+  <section id="suite">
+    <h2>Pour aller plus loin</h2>
+    <ul class="source-list">
+      <li><a href="${CENTRE_PREFIXE}/etablissements/">Tous les secteurs en recrutement en établissement de la Montérégie-Centre</a></li>
+      ${lienRls ? `<li><a href="${lienRls}">Autres milieux du RLS ${esc(inst.territoireSource)}</a></li>` : ''}
+      ${cliniqueLiee ? `<li><a href="${CENTRE_PREFIXE}/cliniques/gmf-u-de-saint-jean-sur-richelieu/">Fiche clinique du GMF-U</a></li>` : ''}
+      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
+      <li><a href="${esc(lienCarteInstallationCentre(inst.id))}">Fiche complète et itinéraire sur la carte interactive</a></li>
+    </ul>
+  </section>`;
+  return {
+    html: page({
+      titre, description, url, profondeur: 3, indexable: true, jsonLd,
+      filDAriane: `<a href="/monteregie-centre/">Montérégie-Centre</a> › <a href="${CENTRE_PREFIXE}/etablissements/">Secteurs en établissement</a> › ${esc(inst.nom)}`,
+      corps, actif: 'etablissements', univers: u
+    }),
+    indexable: true,
+    slug, url
+  };
+}
+
+function pageRepertoireEtablissementsCentre(donnees, majPagesSeo) {
+  const u = UNIVERS_PAR_REGION.Centre;
+  const url = `${SITE}${CENTRE_PREFIXE}/etablissements/`;
+  const installations = (donnees.installations || []).filter(i => !i.publication || i.publication.visible !== false);
+  const liste = installations.filter(i => i.territoireSource === 'Haut-Richelieu–Rouville');
+  const items = liste.map(inst => {
+    const secteurs = secteursDe(donnees, inst.id).filter(s => s.recrutement && s.recrutement.statutDeclare === 'actif');
+    const href = `${CENTRE_PREFIXE}/etablissements/${slugEtablissement(inst)}/`;
+    const meta = [typeEtablissementLibelle(inst.type), inst.ville, listeSecteursHumaine(secteurs)].filter(Boolean).join(' · ');
+    return `      <li>
+        <a href="${esc(href)}"><strong>${esc(inst.nom)}</strong></a>
+        <span class="rep-meta">${esc(meta)} · ${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''}</span>
+      </li>`;
+  }).join('\n');
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Secteurs en établissement — Montérégie-Centre',
+    url,
+    inLanguage: 'fr-CA'
+  };
+  const corps = `  <section class="hero">
+    <p class="eyebrow">Médecine familiale · RLS Haut-Richelieu–Rouville</p>
+    <h1>Secteurs en recrutement en établissement</h1>
+    <p class="lead">Hôpital, GMF-U, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale du RLS Haut-Richelieu–Rouville.</p>
+    <p class="updated"><strong>Données déclarées par le milieu :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
+    <div class="cta-row">
+      <a class="button primary" href="${CENTRE_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
+      <a class="button secondary" href="${CENTRE_PREFIXE}/cliniques/">Cliniques de la Montérégie-Centre</a>
+    </div>
+  </section>
+
+  <section id="rls-haut-richelieu-rouville">
+    <h2>RLS Haut-Richelieu–Rouville <span class="compte">${liste.length}</span></h2>
+    <p class="rep-lien"><a href="${CENTRE_PREFIXE}/rls/haut-richelieu-rouville/">Voir la page du RLS Haut-Richelieu–Rouville →</a></p>
+    <ul class="repertoire">
+${items}
+    </ul>
+  </section>
+
+  <section id="autres-milieux">
+    <h2>Autres milieux, sans pastille sur la carte</h2>
+    ${htmlResumeListe(POINTS_AUTRES_MILIEUX_HRR)}
+  </section>`;
+  return {
+    html: page({
+      titre: limiterTexte('Secteurs en établissement en Montérégie-Centre', 58),
+      description: limiterTexte('Hôpital, GMF-U, CHSLD, cliniques jeunesse et autres secteurs en établissement du RLS Haut-Richelieu–Rouville.', 155),
+      url, profondeur: 2, indexable: true, jsonLd, actif: 'etablissements', univers: u,
+      filDAriane: `<a href="/monteregie-centre/">Montérégie-Centre</a> › Secteurs en établissement`,
+      corps
+    }),
+    indexable: true
+  };
+}
+
+function publierPagesEtablissementsCentre(entrees, majPagesSeo, cliniquesById) {
+  const donnees = chargerDonneesEtablissementsCentre();
+  const repertoire = pageRepertoireEtablissementsCentre(donnees, majPagesSeo);
+  ecrire(path.join('monteregie-centre', 'etablissements', 'index.html'), repertoire.html);
+  if (repertoire.indexable) {
+    entrees.push({ loc: '/monteregie-centre/etablissements/', lastmod: majPagesSeo, changefreq: 'weekly', priority: '0.8' });
+  }
+  const conserves = new Set();
+  let n = 0;
+  for (const id of LOT_ETABLISSEMENTS_CENTRE) {
+    const inst = (donnees.installations || []).find(i => i.id === id);
+    if (!inst) throw new Error('Installation Centre introuvable : ' + id);
+    const secteurs = secteursDe(donnees, id);
+    const cliniqueLiee = (inst.referenceExistante && inst.referenceExistante.collection === 'cliniques' && cliniquesById)
+      ? cliniquesById.get(String(inst.referenceExistante.id))
+      : null;
+    const p = pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee);
+    ecrire(path.join('monteregie-centre', 'etablissements', p.slug, 'index.html'), p.html);
+    conserves.add(p.slug);
+    if (p.indexable) {
+      entrees.push({ loc: `${CENTRE_PREFIXE}/etablissements/${p.slug}/`, lastmod: majPagesSeo, changefreq: 'monthly', priority: '0.7' });
+    }
+    n++;
+  }
+  const racineEtab = path.join(RACINE, 'monteregie-centre', 'etablissements');
+  if (fs.existsSync(racineEtab)) {
+    for (const nom of fs.readdirSync(racineEtab)) {
+      const dossier = path.join(racineEtab, nom);
+      if (!fs.lstatSync(dossier).isDirectory()) continue;
+      if (conserves.has(nom)) continue;
+      fs.rmSync(dossier, { recursive: true, force: true });
+    }
+  }
+  return n;
+}
+
 const PAGES_FIXES = [
   { loc: '/', lastmod: null, changefreq: 'weekly', priority: '1.0' },
   { loc: '/recherche/', lastmod: null, changefreq: 'weekly', priority: '0.5' },
@@ -2671,6 +3204,7 @@ function construireIndexRecherche(cliniques, slugs) {
     { nom: 'Cliniques de la Montérégie-Centre', url: '/monteregie-centre/cliniques/', extra: 'repertoire cliniques centre' },
     { nom: 'Cliniques de la Montérégie-Ouest', url: '/monteregie-ouest/cliniques/', extra: 'repertoire cliniques ouest' },
     { nom: 'Secteurs en établissement', url: '/monteregie-est/etablissements/', extra: 'hopital chsld clsc gmf-u' },
+    { nom: 'Secteurs en établissement Montérégie-Centre', url: '/monteregie-centre/etablissements/', extra: 'hopital chsld clsc gmf-u jeunesse hrr' },
     { nom: 'PTEM — plans territoriaux des effectifs médicaux', url: '/monteregie-est/ptem/', extra: 'ptem prem avis de conformite' },
     { nom: 'AMP — activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' }
   ];
@@ -2724,6 +3258,21 @@ function construireIndexRecherche(cliniques, slugs) {
       rls: inst.territoireSource || '',
       type: typeEtablissementLibelle(inst.type),
       extra: [typeEtablissementLibelle(inst.type), secteurs].filter(Boolean).join(' ')
+    });
+  }
+  const donneesEtabCentre = chargerDonneesEtablissementsCentre();
+  const lotCentre = new Set(LOT_ETABLISSEMENTS_CENTRE);
+  for (const inst of donneesEtabCentre.installations || []) {
+    if (!lotCentre.has(inst.id)) continue;
+    const secteurs = secteursDe(donneesEtabCentre, inst.id).map(s => s.libelle).join(' ');
+    items.push({
+      kind: 'etablissement',
+      nom: inst.nom,
+      url: `${CENTRE_PREFIXE}/etablissements/${slugEtablissement(inst)}/`,
+      ville: inst.ville || '',
+      rls: inst.territoireSource || '',
+      type: typeEtablissementLibelle(inst.type),
+      extra: [typeEtablissementLibelle(inst.type), 'Montérégie-Centre', secteurs].filter(Boolean).join(' ')
     });
   }
   return items;
@@ -3150,6 +3699,7 @@ function main() {
   publierPagesGuide();
 
   const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo, cliniquesById);
+  const nEtabCentre = publierPagesEtablissementsCentre(entrees, majPagesSeo, cliniquesById);
   const nRecherche = publierRecherche(cliniques, slugs);
 
   /* Répertoire général + hub RLS de chaque univers régional + sitemap */
@@ -3232,7 +3782,7 @@ function main() {
   console.log(`Pages de cliniques : ${cliniques.length} générées, ${indexables} indexables, ${minces.length} en noindex (moins de ${SEUIL_INDEXATION} champs remplis)`);
   console.log(`Pages de RLS       : ${parRls.size}`);
   console.log(`Répertoire         : cliniques/index.html`);
-  console.log(`Établissements     : répertoire + ${nEtabSeo} fiche(s) (premier lot)`);
+  console.log(`Établissements     : répertoire Est + ${nEtabSeo} fiche(s) ; répertoire Centre + ${nEtabCentre} fiche(s)`);
   console.log(`Recherche          : ${nRecherche} entrées (recherche/donnees.json)`);
   console.log(`Sitemap            : ${entrees.length} URL`);
   console.log(`Redirections CF    : ${nRedirCf} (scripts/cloudflare-bulk-redirects.csv)`);

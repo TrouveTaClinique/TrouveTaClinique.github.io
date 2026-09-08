@@ -237,6 +237,9 @@ function appliquerIdentiteRegionale(source, t) {
     }
     return head + carteSq.replace('<!-- PWA_SERVICE_WORKER -->', pwaServiceWorker());
   }
+  if (t.region === 'Centre') {
+    r('<html lang="fr-CA">', '<html lang="fr-CA" data-region="Centre">', 'data-region Centre');
+  }
   return etat.html;
 }
 
