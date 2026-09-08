@@ -107,7 +107,7 @@
       "lng": -73.2702951,
       "lienWeb": "https://www.santemonteregie.qc.ca/installations/hopital-du-haut-richelieu",
       "coordonneesApproximatives": false,
-      "mentionPublique": "DSP : Dr Philippe More. Réadaptation et convalescence : complet pour 2027.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -130,7 +130,7 @@
       "lng": -73.283997,
       "lienWeb": "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/",
       "coordonneesApproximatives": false,
-      "mentionPublique": "Site public, sans frais de bureau. Affilié à l’Université de Sherbrooke.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -170,7 +170,7 @@
       "lng": -73.2878,
       "lienWeb": "https://www.santemonteregie.qc.ca/installations/clinique-des-jeunes-du-bassin-de-chambly",
       "coordonneesApproximatives": true,
-      "mentionPublique": "N’est pas une installation de Santé Québec Montérégie-Centre ; des employés et médecins de l’organisation y offrent des soins.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -190,7 +190,7 @@
       "lng": -73.2519981,
       "lienWeb": "https://www.santemonteregie.qc.ca/installations/clsc-et-aire-ouverte-de-la-rue-champlain-clinique-jeunesse-12-25-ans",
       "coordonneesApproximatives": false,
-      "mentionPublique": "Clientèle de 12 à 25 ans. Projet d’aire ouverte.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -210,7 +210,7 @@
       "lng": -73.2582645,
       "lienWeb": null,
       "coordonneesApproximatives": false,
-      "mentionPublique": "Clientèle de 0 à 18 ans. Clinique mobile.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -230,7 +230,7 @@
       "lng": -73.261326,
       "lienWeb": "https://www.chslddesaint-jean-sur-richelieu.com/",
       "coordonneesApproximatives": false,
-      "mentionPublique": "CHSLD en partenariat public-privé. Deux médecins sur place.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -250,7 +250,7 @@
       "lng": -73.2992478,
       "lienWeb": "https://www.manoirsoleil.com/",
       "coordonneesApproximatives": true,
-      "mentionPublique": "CHSLD privé conventionné. Approche Montessori Or.",
+      "mentionPublique": "",
       "publication": {
         "visible": true
       }
@@ -421,9 +421,7 @@
         "responsableNom": "Dre Joannie Ponton",
         "responsableCourriel": "joannie.ponton.med@ssss.gouv.qc.ca",
         "telephone": null,
-        "notesPubliques": [
-          "Seize médecins superviseurs et 16 résidents."
-        ]
+        "notesPubliques": []
       },
       "enseignement": "oui",
       "regroupe": false,
@@ -499,10 +497,7 @@
         "responsableNom": "Dre Jessica Boucher",
         "responsableCourriel": "jessicaboucher27@gmail.com",
         "telephone": null,
-        "notesPubliques": [
-          "Clientèle de 12 à 25 ans.",
-          "Projet d’aire ouverte."
-        ]
+        "notesPubliques": []
       },
       "enseignement": null,
       "regroupe": false,
@@ -526,10 +521,7 @@
         "responsableNom": "Dre Sacha Lajoie",
         "responsableCourriel": null,
         "telephone": null,
-        "notesPubliques": [
-          "Clientèle de 0 à 18 ans.",
-          "Clinique mobile."
-        ]
+        "notesPubliques": []
       },
       "enseignement": null,
       "regroupe": false,
@@ -552,9 +544,7 @@
         "responsableNom": "Mme Noemis Bélanger",
         "responsableCourriel": "nbelanger@chsldsainte-catherine.com",
         "telephone": null,
-        "notesPubliques": [
-          "CHSLD en partenariat public-privé. Deux médecins."
-        ]
+        "notesPubliques": []
       },
       "enseignement": null,
       "regroupe": false,
@@ -577,9 +567,7 @@
         "responsableNom": "Dre Geneviève Hardy",
         "responsableCourriel": null,
         "telephone": null,
-        "notesPubliques": [
-          "CHSLD privé conventionné. Approche Montessori Or."
-        ]
+        "notesPubliques": []
       },
       "enseignement": null,
       "regroupe": false,

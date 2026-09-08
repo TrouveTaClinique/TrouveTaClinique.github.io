@@ -475,7 +475,7 @@
       "frais": "Aucun frais",
       "pratiques": [
         "pec",
-        "Musculosquelettique et infiltrations — MSK"
+        "msk"
       ],
       "niveaux": {
         "gmf": "",
@@ -944,7 +944,7 @@
       "frais": "Frais fixe",
       "pratiques": [
         "pec",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "chir"
       ],
       "niveaux": {
@@ -1419,7 +1419,7 @@
         "pec",
         "sad",
         "peri",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "chir"
       ],
       "niveaux": {
@@ -2343,7 +2343,7 @@
         "pec",
         "peri",
         "chir",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "sad"
       ],
       "niveaux": {
@@ -2401,7 +2401,7 @@
       "pratiques": [
         "pec",
         "chir",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "sad",
         "peri"
       ],
@@ -2504,7 +2504,7 @@
       "pratiques": [
         "pec",
         "chir",
-        "Musculosquelettique et infiltrations — MSK"
+        "msk"
       ],
       "niveaux": {
         "gmf": "",
@@ -2934,7 +2934,7 @@
       "pratiques": [
         "pec",
         "chir",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "sad"
       ],
       "niveaux": {
