@@ -403,9 +403,9 @@ p, li { text-wrap: pretty; }
 .resident-note p{ margin:0; color:#4a5568; font-size:.92rem; }
 
 /* ─── Bannière « Carte interactive » ─────────────────────────────────────────
-   Bannière officielle SEO : photo claire vers la carte interactive Montérégie-Est
-   (assets/banniere_monteregie-est.jpg). Le gabarit CSS .sqb ci-dessous est conservé
-   pour référence historique ; les pages utilisent .sqb-photo. */
+   Bannière officielle SEO : même image que la page d’accueil
+   (assets/banniere-cellulaire-monteregie-est.jpg). Le gabarit CSS .sqb ci-dessous
+   est conservé pour référence historique ; les pages utilisent .sqb-photo. */
 
 .sqb-wrap { margin:1.7rem 0 2.2rem; width:100%; }
 .sqb-wrap.compact { margin-top:1.25rem; }
