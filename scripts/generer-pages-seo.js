@@ -1671,6 +1671,9 @@ ${items}
     filDAriane: u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`
   });
 
+  const banniere = htmlBanniereSqb(u ? '../../assets' : '../assets');
+  const banniereEnBas = Boolean(u && u.region !== 'Est');
+
   const corps = `  ${u && u.region === 'Est' ? heroEst : heroClassique}
 
   ${u && u.region === 'Est' ? `<div class="video-hero-suite">
@@ -1686,12 +1689,14 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
     </ul>
   </section>`}
 
-  ${htmlBanniereSqb(u ? '../../assets' : '../assets')}
+  ${banniereEnBas ? '' : banniere}
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
 
-${sections}`;
+${sections}
+
+  ${banniereEnBas ? banniere : ''}`;
 
   return page({
     titre: limiterTexte(`Cliniques en recrutement en ${nomTerritoire}`, 58),
