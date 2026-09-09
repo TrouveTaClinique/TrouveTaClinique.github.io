@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- build: 2026-08-31 -->
-<html lang="fr-CA"><head>
+<html lang="fr-CA" data-region="Centre" data-etab-ui="1"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- « Trouve ta clinique » est la marque permanente. Lors d'un changement de cycle PTEM,
@@ -1022,6 +1022,111 @@ body.cmp-open { overflow:hidden; }
 :root[data-theme="sombre"] .leaflet-popup-content-wrapper,
 :root[data-theme="sombre"] .leaflet-popup-tip {
   background: var(--carte); color: var(--texte); }
+
+/* ── Mode Établissements (onglets Cliniques / Établissements) ────────────────
+   Même mécanique que la carte Est (secteurs, filtres d'activité). Couleurs et
+   logo : thème Montérégie (marine, vert Centre, bleu), jamais le thème Santé
+   Québec de l'Est. Visible sur la carte des 3 territoires, le Centre et l'Ouest. */
+.care-mode-switch { display: none; }
+.sb-scroll { overflow-y: auto; flex: 1; min-height: 0; }
+.sb-scroll > .activite-panel { padding: 0 16px; box-sizing: border-box; }
+.sb-list { overflow-y: visible; flex: none; }
+.activite-panel { margin-top: 6px; width: 100%; }
+.filtre-section-label { font-family: var(--sq-font); font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 10px 0 6px; }
+.filtre-section-label--activite { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.activite-reset { border: 0; background: none; padding: 0; cursor: pointer;
+  font-family: var(--sq-font); font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--blue); text-decoration: underline; }
+.activite-reset:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.activite-btns { width: 100%; display: flex; flex-wrap: wrap; gap: 6px; }
+.activite-group { width: 100%; margin: 0 0 6px; border: 1px solid var(--border); border-radius: 9px;
+  background: color-mix(in srgb, var(--reg-centre) 6%, transparent); overflow: hidden; }
+.activite-group-label { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 7px;
+  padding: 7px 10px; font-family: var(--sq-font); font-size: 10.5px; font-weight: 800;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--reg-centre); }
+.activite-group-label::-webkit-details-marker { display: none; }
+.activite-group-label::before { content: '▾'; font-size: 10px; transition: transform .15s ease; }
+.activite-group:not([open]) > .activite-group-label::before { transform: rotate(-90deg); }
+.activite-group-label:hover { background: color-mix(in srgb, var(--reg-centre) 12%, transparent); }
+.activite-group-label:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.activite-group-actifs { margin-left: auto; padding: 1px 7px; border-radius: 999px;
+  background: var(--navy); color: #fff; font-size: 9.5px; letter-spacing: 0; }
+.activite-group-btns { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 10px 10px; }
+.activite-btn { flex: 0 1 auto; padding: 6px 10px; box-sizing: border-box; border-radius: 999px;
+  border: 1.5px solid var(--navy); background: transparent; color: var(--navy); cursor: pointer;
+  font-family: var(--sq-font); font-weight: 700; font-size: 11px; line-height: 1.2; }
+.activite-btn:hover { background: color-mix(in srgb, var(--navy) 8%, var(--champ)); }
+.activite-btn[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+.activite-btn.dim { opacity: .42; }
+.activite-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.sb-estab-install { margin-top: 3px; color: var(--muted); font-size: 13px; line-height: 1.25; }
+.sb-estab-meta { margin-top: 4px; color: var(--reg-centre); font-size: 11.5px; font-weight: 700; line-height: 1.25; }
+body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr {
+  font-family: var(--sq-font); font-weight: 800; font-size: 11px; line-height: 1; letter-spacing: 0; padding: 0 1px; }
+body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="1"] { font-size: 9.5px; }
+body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font-size: 8px; letter-spacing: -.02em; padding: 0; }
+.dp-sect-intro { font-size: 13px; color: var(--muted); margin: 0 0 9px; line-height: 1.4; }
+.dp-sect-masques { font-size: 12px; font-style: italic; color: var(--muted); margin: 9px 0 0; line-height: 1.4; }
+.dp-sect-list { display: flex; flex-direction: column; gap: 8px; }
+.dp-sect { border: 1.5px solid var(--border); border-radius: 10px; background: var(--champ); overflow: hidden; }
+.dp-sect.open { border-color: var(--reg-centre); background: var(--carte); }
+.dp-sect-head { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 11px;
+  box-sizing: border-box; border: 0; background: none; cursor: pointer; text-align: left; font-family: inherit; }
+.dp-sect-head:hover { background: var(--survol); }
+.dp-sect-head:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.dp-sect-abbr { flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 9px 9px 9px 3px; box-sizing: border-box;
+  background: var(--rls, var(--navy)); color: #fff;
+  font-family: var(--sq-font); font-weight: 800; font-size: 10.5px; line-height: 1; }
+.dp-sect-abbr[data-long="1"] { font-size: 9px; }
+.dp-sect-abbr[data-long="2"] { font-size: 7.5px; letter-spacing: -.02em; }
+.dp-sect-txt { flex: 1; min-width: 0; }
+.dp-sect-nom { display: block; font-weight: 700; font-size: 14px; color: var(--texte2); line-height: 1.25; }
+.dp-sect-stat { display: block; font-size: 12px; color: var(--muted); margin-top: 3px; }
+.dp-sect-stat .cmp-stat { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; }
+.dp-sect-stat .cmp-stat-dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+.dp-sect-stat .cmp-stat-on { color: #28652b; }
+.dp-sect-stat .cmp-stat-on .cmp-stat-dot { background: var(--reg-centre); }
+.dp-sect-stat .cmp-stat-off { color: #6B7280; }
+.dp-sect-stat .cmp-stat-off .cmp-stat-dot { background: #CBD5E1; }
+.dp-sect-chev { flex: 0 0 auto; font-size: 13px; color: var(--reg-centre); transition: transform .15s ease; }
+.dp-sect.open .dp-sect-chev { transform: rotate(180deg); }
+.dp-sect-corps { padding: 11px 12px 4px; border-top: 1px solid var(--filet); }
+.dp-sect-corps .vw-row:last-of-type { margin-bottom: 4px; }
+.dp-sect-corps .dp-actions { padding: 6px 0 0; }
+.dp-sect-corps .notes-sec { padding: 12px 0 0; }
+.dp-gmf-condition { font-size: 12.5px; line-height: 1.45; }
+.etab-marker {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  border-radius: 11px 11px 11px 3px; color: #fff;
+  font: 800 12px/1 var(--sq-font);
+  box-shadow: 0 5px 14px rgba(15,34,64,.28);
+}
+:root[data-etab-ui="1"] .care-mode-switch {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px; margin: 0 0 14px; padding: 4px;
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--cream); box-shadow: inset 0 1px 2px rgba(15,34,64,.06);
+}
+:root[data-etab-ui="1"] .care-mode-btn {
+  min-height: 42px; padding: 8px 10px; border: 0; border-radius: 10px;
+  background: transparent; color: var(--texte2); cursor: pointer;
+  font-family: var(--sq-font); font-size: 13px; font-weight: 700; line-height: 1.15;
+}
+:root[data-etab-ui="1"] .care-mode-btn:hover { color: var(--navy); background: rgba(255,255,255,.7); }
+:root[data-etab-ui="1"] .care-mode-btn[aria-selected="true"] {
+  color: #fff; background: var(--navy); box-shadow: 0 4px 12px rgba(15,34,64,.22);
+}
+:root[data-region="Centre"] .care-mode-btn[data-mode="etablissements"][aria-selected="true"] {
+  color: #fff; background: var(--reg-centre); box-shadow: 0 4px 12px rgba(67,160,71,.28);
+}
+:root[data-etab-ui="1"] .care-mode-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+:root[data-theme="sombre"] .activite-btn { border-color: var(--reg-centre); color: var(--reg-centre); }
+:root[data-theme="sombre"] .activite-btn[aria-pressed="true"] { background: var(--reg-centre); color: #fff; border-color: var(--reg-centre); }
+:root[data-theme="sombre"] .activite-group-label { color: var(--reg-centre); }
+:root[data-theme="sombre"] .activite-reset { color: var(--blue); }
+:root[data-theme="sombre"] .dp-sect-stat .cmp-stat-on { color: #8fd992; }
 </style>
 <script>
 // Thème appliqué avant le premier rendu, pour éviter un éclair de blanc.
@@ -1173,6 +1278,10 @@ body.cmp-open { overflow:hidden; }
   <div class="sidebar">
     <div class="sb-head">
       <button class="sb-close" id="sb-close" aria-label="Fermer la liste">&times;</button>
+      <div class="care-mode-switch" id="care-mode-switch" role="tablist" aria-label="Choisir les milieux affichés" hidden>
+        <button type="button" class="care-mode-btn" data-mode="cliniques" role="tab" aria-selected="true">Cliniques</button>
+        <button type="button" class="care-mode-btn" data-mode="etablissements" role="tab" aria-selected="false">Établissements</button>
+      </div>
       <h2 id="sb-title">Cliniques en recrutement</h2>
       <p class="maj" id="maj-date"></p>
       <div class="sb-search" id="sb-search">
@@ -1206,7 +1315,16 @@ body.cmp-open { overflow:hidden; }
       <select class="rls-filter" id="rls-filter" aria-label="Filtrer par RLS"></select>
       <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS" hidden></div>
     </div>
-    <div class="sb-list" id="sb-list"></div>
+    <div class="sb-scroll" id="sb-scroll">
+      <div class="activite-panel" id="activite-panel" hidden>
+        <div class="filtre-section-label filtre-section-label--activite">
+          <span>Secteur d'activité</span>
+          <button type="button" class="activite-reset" id="activite-reset" hidden>Tout effacer</button>
+        </div>
+        <div class="activite-btns" id="activite-btns" role="group" aria-label="Filtrer par secteur d'activité"></div>
+      </div>
+      <div class="sb-list" id="sb-list"></div>
+    </div>
   </div>
   <div id="map"></div>
 </div>
@@ -1229,6 +1347,7 @@ body.cmp-open { overflow:hidden; }
 <script src="../vendor/leaflet-maplibre-gl.js"></script>
 <script src="../territoires-monteregie.js"></script>
 <script src="../territoires-rls-est.js"></script>
+<script src="../territoires-rls-centre-ouest.js"></script>
 <script>
 // ═══════════════════════════════════════════
 //  MODE « CARTE RÉGIONALE » (vue dédiée, même app/mêmes données)
@@ -1259,6 +1378,19 @@ const MODE_REGION = REGION_PAGE !== null;   // sur une carte régionale, quelle 
 // (adresse de la page « À propos du recrutement », bannière de partage). Tout le reste passe
 // désormais par MODE_REGION / REGION_PAGE et vaut pour les trois territoires.
 const MODE_EST = REGION_PAGE === 'Est';
+const MODE_CENTRE = REGION_PAGE === 'Centre';
+const MODE_OUEST = REGION_PAGE === 'Ouest';
+// Ce gabarit sert la carte des 3 territoires, le Centre et l'Ouest. L'Est a son propre gabarit.
+const MODE_ETAB_UI = true;
+document.documentElement.setAttribute('data-etab-ui', '1');
+if (MODE_CENTRE) document.documentElement.setAttribute('data-region', 'Centre');
+if (MODE_OUEST) document.documentElement.setAttribute('data-region', 'Ouest');
+function nomTerritoirePage() {
+  if (MODE_CENTRE) return 'Montérégie-Centre';
+  if (MODE_OUEST) return 'Montérégie-Ouest';
+  if (MODE_EST) return 'Montérégie-Est';
+  return 'Montérégie';
+}
 // NOTE : rien n'est retiré ni réécrit ici au chargement. Tout ce qui distingue une page
 // régionale — titre et identité de l'en-tête, absence des liens vers les autres
 // territoires — est inscrit directement dans le HTML de cette page par
@@ -1309,10 +1441,136 @@ const ORDER_KEY = 'dtmf-mtg-ordre';
 const FAVORDER_KEY = 'dtmf-mtg-ordre-favoris';
 const FAV_KEY   = 'dtmf-mtg-favoris';
 const ANNONCE_KEY = 'dtmf-mtg-annonce-fermee';
+const FAV_SECTEURS_CENTRE_KEY = 'ttc-centre-secteurs-favoris-v1';
+const FAVORDER_ETAB_CENTRE_KEY = 'ttc-centre-ordre-favoris-etablissements-v1';
+const NOTE_SECTEUR_CENTRE_KEY = id => 'ttc-centre-secteur-note-v1-' + id;
+const GMFU_CONDITION = 'Recrutements en GMF-U : la candidature doit avoir obtenu l\u2019aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d\u2019inscription de patients.';
+let cliniques = [];
+let installationsEtab = [];
+let secteursEtab = [];
+let dataEtabMeta = {};
+let modeCarte = 'cliniques';
+let donneesPretes = false;
+let etabCoucheDisponible = false;
+let ficheInstallationId = null;
+let activiteFilters = new Set();
+let legacyCliniqueVersInstallation = new Map();
+const GROUPES_ACTIVITE = [
+  { label: 'Hospitalier', ids: ['urgence', 'hospitalisation', 'ucdg', 'soins-intensifs', 'obstetrique', 'hopital-jour', 'readaptation'] },
+  { label: 'Communautaire', ids: ['gmf-u', 'longue-duree', 'sad-siad-sp', 'clinique-jeunesse', 'pediatrie-sociale', 'crd', 'detention'] }
+];
+const groupesActiviteOuverts = new Set(GROUPES_ACTIVITE.map(g => g.label));
+const CATEGORIES_ACTIVITE_DEFAUT = [
+  { id: 'urgence', abbr: 'URG', libelle: 'Urgence', libelleComplet: 'Urgence' },
+  { id: 'hospitalisation', abbr: 'HOSP', libelle: 'Hospitalisation', libelleComplet: 'Hospitalisation' },
+  { id: 'ucdg', abbr: 'UCDG', libelle: 'UCDG', libelleComplet: 'UCDG' },
+  { id: 'soins-intensifs', abbr: 'USI', libelle: 'Soins intensifs', libelleComplet: 'Soins intensifs' },
+  { id: 'obstetrique', abbr: 'OBST', libelle: 'Obstétrique', libelleComplet: 'Obstétrique' },
+  { id: 'hopital-jour', abbr: 'HDJ', libelle: 'Hôpital de jour', libelleComplet: 'Hôpital de jour' },
+  { id: 'readaptation', abbr: 'RÉAD', libelle: 'Réadaptation', libelleComplet: 'Réadaptation et convalescence' },
+  { id: 'gmf-u', abbr: 'GMFU', libelle: 'GMF-U', libelleComplet: 'GMF-U' },
+  { id: 'longue-duree', abbr: 'CHSLD', libelle: 'Longue durée', libelleComplet: 'Longue durée' },
+  { id: 'sad-siad-sp', abbr: 'SAD', libelle: 'Soins à domicile', libelleComplet: 'Soutien à domicile' },
+  { id: 'clinique-jeunesse', abbr: 'JEUN', libelle: 'Clinique jeunesse', libelleComplet: 'Clinique jeunesse' },
+  { id: 'pediatrie-sociale', abbr: 'PÉD', libelle: 'Pédiatrie sociale', libelleComplet: 'Pédiatrie sociale' },
+  { id: 'crd', abbr: 'CRD', libelle: 'Réadaptation', libelleComplet: 'Réadaptation en dépendance' },
+  { id: 'detention', abbr: 'DÉT', libelle: 'Centre de détention', libelleComplet: 'Centre de détention' }
+];
 
 // (notes, ordre et marqueurs sont initialisés dans initData(), après le chargement de data.json)
 
 const byId = id => gmfs.find(g => g.id === id);
+const installationEtabById = id => installationsEtab.find(i => i.id === id);
+function favStorageKey() {
+  return modeEtablissementsActif() ? FAV_SECTEURS_CENTRE_KEY : FAV_KEY;
+}
+function noteKeyFor(g) {
+  if (g && g._secteurEtab) return NOTE_SECTEUR_CENTRE_KEY(g.id);
+  return NOTE_KEY(g.id);
+}
+function noteKeyForId(id) {
+  const g = byId(id);
+  return g && g._secteurEtab ? NOTE_SECTEUR_CENTRE_KEY(id) : NOTE_KEY(id);
+}
+function chargerFavorisMode() {
+  favoris = new Set();
+  try {
+    const f = JSON.parse(SAFE.get(favStorageKey()) || '[]');
+    if (Array.isArray(f)) favoris = new Set(f);
+  } catch (e) {}
+}
+function sauvegarderFavorisActifs() {
+  SAFE.set(favStorageKey(), JSON.stringify([...favoris]));
+}
+function getMarqueursSource() {
+  return modeEtablissementsActif() ? installationsEtab : gmfs;
+}
+function typeEtabAffichage(type) {
+  const map = {
+    hopital: 'Hôpital',
+    chsld: 'CHSLD',
+    clsc: 'CLSC',
+    'gmf-u': 'GMF-U',
+    'clinique-jeunesse': 'Clinique jeunesse',
+    'pediatrie-sociale': 'Pédiatrie sociale',
+    crd: 'Centre de réadaptation',
+    detention: 'Centre de détention'
+  };
+  return map[type] || type || 'Établissement';
+}
+const TYPE_ETAB_LABELS = {
+  hopital: 'Hôpital',
+  chsld: 'CHSLD',
+  clsc: 'CLSC',
+  'gmf-u': 'GMF-U',
+  'clinique-jeunesse': 'Clinique jeunesse',
+  'pediatrie-sociale': 'Pédiatrie sociale',
+  crd: 'Centre de réadaptation',
+  detention: 'Centre de détention'
+};
+function typeLabelEtab(t) { return TYPE_ETAB_LABELS[t] || t || ''; }
+function politiqueAffichageEtab() {
+  return (dataEtabMeta && dataEtabMeta.politiqueAffichage) || {};
+}
+function categoriesActiviteDisponibles() {
+  if (dataEtabMeta && Array.isArray(dataEtabMeta.categoriesActivite) && dataEtabMeta.categoriesActivite.length) {
+    return dataEtabMeta.categoriesActivite;
+  }
+  return CATEGORIES_ACTIVITE_DEFAUT;
+}
+function categorieActivitePour(g) {
+  const id = g && g.categorieActivite;
+  if (!id) return null;
+  return categoriesActiviteDisponibles().find(c => c.id === id)
+    || CATEGORIES_ACTIVITE_DEFAUT.find(c => c.id === id)
+    || null;
+}
+function abbrActivitePour(g) {
+  if (g && g.abbrActivite) return g.abbrActivite;
+  const cat = categorieActivitePour(g);
+  return (cat && cat.abbr) || '•';
+}
+function libelleActivitePour(g) {
+  const cat = categorieActivitePour(g);
+  return (cat && (cat.libelleComplet || cat.libelle)) || (g && g.secteur) || '';
+}
+function libelleMode(pluriel = true) {
+  return modeEtablissementsActif()
+    ? (pluriel ? 'secteurs' : 'secteur')
+    : (pluriel ? 'cliniques' : 'clinique');
+}
+function libelleTerritoireSecteur(g) {
+  if (!g) return 'À venir';
+  const rls = g.rls ? ('RLS ' + g.rls) : '';
+  if (!MODE_REGION && g.region) {
+    const nom = REGION_LABELS[g.region] || g.region;
+    return rls ? (nom + ' · ' + rls) : nom;
+  }
+  return rls || 'À venir';
+}
+function modeEtablissementsActif() {
+  return MODE_ETAB_UI && modeCarte === 'etablissements';
+}
 const normTxt = s => (s == null ? '' : String(s)).toLowerCase().replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 // Un milieu \u00ab en recrutement \u00bb a recrutementActif !== false (absent = recrute, comme avant
 // l'ajout du champ). statutVisible() est LE point d'entr\u00e9e unique : matchesFilters(),
@@ -1327,8 +1585,15 @@ function matchesFilters(id) {
   if (favOnly && !favoris.has(id)) return false;
   if (searchQuery) {
     const g = byId(id);
-    const hay = normTxt([g && g.nom, g && g.alias, g && g.ville, g && g.type, g && g.rls].filter(Boolean).join(' '));
+    const champs = g && g._secteurEtab
+      ? [g.nom, g.nomInstallation, g.ville, g.secteur, g.type, g.rls, ...(g.termesRecherche || []), ...(g.activites || [])]
+      : [g && g.nom, g && g.alias, g && g.ville, g && g.type, g && g.rls];
+    const hay = normTxt(champs.filter(Boolean).join(' '));
     if (!hay.includes(searchQuery)) return false;
+  }
+  if (activiteFilters.size && modeEtablissementsActif()) {
+    const g = byId(id);
+    if (!g || !activiteFilters.has(g.categorieActivite)) return false;
   }
   if (regionFilter.size) {
     const g = byId(id);
@@ -1339,6 +1604,141 @@ function matchesFilters(id) {
     if (!g || (g.rls || '') !== rlsFilter) return false;
   }
   return true;
+}
+function nbSecteursVisiblesInstallation(installationId) {
+  return gmfs.filter(s => s.installationId === installationId && matchesFilters(s.id)).length;
+}
+function matchesFiltersInstallation(installationId) {
+  return gmfs.some(s => s.installationId === installationId && matchesFilters(s.id));
+}
+function badgeMarqueur(g) {
+  if (modeEtablissementsActif() && g && g._installationEtab) {
+    if (g.type === 'hopital') return '';
+    const seen = new Set();
+    let n = 0;
+    for (const sid of currentOrder()) {
+      if (!matchesFilters(sid)) continue;
+      const sec = byId(sid);
+      const iid = sec && sec.installationId;
+      if (!iid || seen.has(iid)) continue;
+      seen.add(iid);
+      const inst = installationEtabById(iid);
+      if (!inst || inst.type === 'hopital') continue;
+      n += 1;
+      if (iid === g.id) return n;
+    }
+    return '';
+  }
+  return rankOf(g.id);
+}
+function extraireCoucheEtablissements(donneesEtab, region) {
+  const vide = { installations: [], secteurs: [], legacy: new Map(), categories: [] };
+  if (!donneesEtab || !Array.isArray(donneesEtab.installations) || !Array.isArray(donneesEtab.secteurs)) return vide;
+  const politiqueAffichage = (donneesEtab.meta && donneesEtab.meta.politiqueAffichage) || {};
+  const categories = (donneesEtab.meta && Array.isArray(donneesEtab.meta.categoriesActivite))
+    ? donneesEtab.meta.categoriesActivite.slice() : [];
+  const legacy = new Map();
+  (donneesEtab.installations || []).forEach(inst => {
+    const ref = inst.referenceExistante;
+    if (ref && ref.collection && ref.id != null) {
+      legacy.set(String(ref.collection) + ':' + String(ref.id), inst.id);
+    }
+  });
+  const instMap = new Map();
+  const installations = donneesEtab.installations.filter(inst => {
+    if (inst.publication && inst.publication.visible === false) return false;
+    const lat = Number(inst.lat);
+    const lng = Number(inst.lng);
+    const ok = isFinite(lat) && isFinite(lng) && typeof inst.nom === 'string' && inst.nom.trim();
+    if (!ok) console.warn('Installation établissement ignorée (données invalides) :', inst && inst.id, inst && inst.nom);
+    return ok;
+  }).map(inst => ({
+    id: inst.id,
+    nom: inst.nom.trim(),
+    type: inst.type,
+    rls: inst.territoireSource || '',
+    region: region,
+    ville: inst.ville || '',
+    lat: Number(inst.lat),
+    lng: Number(inst.lng),
+    adresse: inst.adresse || '',
+    telephone: inst.telephone || '',
+    codePostal: inst.codePostal || '',
+    missionRegionale: !!inst.missionRegionale,
+    mentionPublique: inst.mentionPublique || '',
+    lienWeb: inst.lienWeb || '',
+    referenceExistante: inst.referenceExistante || null,
+    coordonneesApproximatives: !!inst.coordonneesApproximatives,
+    _installationEtab: true
+  }));
+  installations.forEach(inst => instMap.set(inst.id, inst));
+  const secteurs = donneesEtab.secteurs.map(sec => {
+    const inst = instMap.get(sec.installationId);
+    if (!inst) {
+      console.warn('Secteur sans installation :', sec && sec.id, sec && sec.installationId);
+      return null;
+    }
+    const rec = sec.recrutement || {};
+    const recrute = rec.statutDeclare === 'actif';
+    return {
+      id: sec.id,
+      installationId: sec.installationId,
+      nom: (sec.libelle || sec.secteur || '').trim(),
+      nomInstallation: inst.nom,
+      type: typeEtabAffichage(inst.type),
+      secteur: sec.secteur || sec.libelle || '',
+      rls: inst.rls,
+      region: inst.region,
+      ville: inst.ville,
+      lat: inst.lat,
+      lng: inst.lng,
+      adresse: inst.adresse,
+      recrutementActif: recrute,
+      missionRegionale: inst.missionRegionale,
+      mentionPublique: inst.mentionPublique,
+      regroupe: !!sec.regroupe,
+      lienWeb: inst.lienWeb,
+      categorieActivite: sec.categorieActivite || '',
+      abbrActivite: sec.abbrActivite || '',
+      activites: Array.isArray(sec.activites) ? sec.activites.slice() : [],
+      termesRecherche: Array.isArray(sec.termesRecherche) ? sec.termesRecherche.slice() : [],
+      ancre: sec.ancre || '',
+      responsableNom: rec.responsableNom || '',
+      responsableCourriel: rec.responsableCourriel || '',
+      responsableTelephone: rec.telephone || '',
+      besoinDeclare: rec.besoinDeclare || '',
+      notesPubliques: Array.isArray(rec.notesPubliques) ? rec.notesPubliques.slice() : [],
+      dme: sec.dme || rec.dme || '',
+      politiqueAffichage: politiqueAffichage,
+      _secteurEtab: true
+    };
+  }).filter(Boolean);
+  return { installations, secteurs, legacy, categories };
+}
+function preparerCoucheEtablissementsDepuisLots(lots) {
+  installationsEtab = [];
+  secteursEtab = [];
+  etabCoucheDisponible = false;
+  legacyCliniqueVersInstallation = new Map();
+  dataEtabMeta = { categoriesActivite: [], politiqueAffichage: {} };
+  const seenCat = new Set();
+  (lots || []).forEach(lot => {
+    if (!lot || !lot.data || !lot.region) return;
+    const couche = extraireCoucheEtablissements(lot.data, lot.region);
+    installationsEtab.push(...couche.installations);
+    secteursEtab.push(...couche.secteurs);
+    couche.legacy.forEach((v, k) => legacyCliniqueVersInstallation.set(k, v));
+    couche.categories.forEach(c => {
+      if (c && c.id && !seenCat.has(c.id)) {
+        seenCat.add(c.id);
+        dataEtabMeta.categoriesActivite.push(c);
+      }
+    });
+  });
+  if (lots && lots.length === 1 && lots[0].data && lots[0].data.meta) {
+    dataEtabMeta.politiqueAffichage = lots[0].data.meta.politiqueAffichage || {};
+  }
+  etabCoucheDisponible = (secteursEtab.length > 0 && installationsEtab.length > 0) || MODE_OUEST;
 }
 const rankOf = id => currentOrder().indexOf(id) + 1;
 
@@ -1449,6 +1849,48 @@ if (MODE_EST && Array.isArray(window.TERRITOIRES_RLS_EST_MSSS_2026)) {
     couchesRlsEstOfficielle.set(rls.nom, couche);
   });
 
+}
+
+const couchesRlsCentreOfficielle = new Map();
+function synchroniserOverlaysRlsCentreOfficielle() {
+  if (!MODE_CENTRE || !couchesRlsCentreOfficielle.size) return;
+  couchesRlsCentreOfficielle.forEach(function (couche, nomRls) {
+    const doitEtreVisible = !rlsFilter || rlsFilter === nomRls;
+    if (doitEtreVisible && !map.hasLayer(couche)) couche.addTo(map);
+    if (!doitEtreVisible && map.hasLayer(couche)) map.removeLayer(couche);
+  });
+}
+
+if (MODE_CENTRE && Array.isArray(window.TERRITOIRES_RLS_CENTRE_MSSS_2026)) {
+  map.createPane('territoiresRlsCentreFond');
+  map.getPane('territoiresRlsCentreFond').style.zIndex = '260';
+  map.getPane('territoiresRlsCentreFond').style.pointerEvents = 'none';
+
+  window.TERRITOIRES_RLS_CENTRE_MSSS_2026.forEach(function (rls) {
+    const couche = L.geoJSON({
+      type: 'Feature',
+      properties: {
+        nom: rls.nom,
+        code: rls.code,
+        source: 'MSSS',
+        version: '2026-04-01'
+      },
+      geometry: rls.geometry
+    }, {
+      pane: 'territoiresRlsCentreFond',
+      interactive: false,
+      style: {
+        color: rls.contour,
+        opacity: 0.58,
+        weight: 1.5,
+        fillColor: rls.remplissage,
+        fillOpacity: 0.21,
+        lineJoin: 'round'
+      }
+    });
+    couche.addTo(map);
+    couchesRlsCentreOfficielle.set(rls.nom, couche);
+  });
 }
 
 // Bouton « Me localiser » (sous les boutons de zoom)
@@ -1688,13 +2130,13 @@ const markerOffsets = new Map();
 function calculerDecalagesMarqueurs() {
   markerOffsets.clear();
   const groupes = new Map();
-  gmfs.forEach(g => {
+  getMarqueursSource().forEach(g => {
     const cle = `${Number(g.lat).toFixed(6)},${Number(g.lng).toFixed(6)}`;
     if (!groupes.has(cle)) groupes.set(cle, []);
     groupes.get(cle).push(g);
   });
   groupes.forEach(groupe => {
-    groupe.sort((a, b) => Number(a.id) - Number(b.id));
+    groupe.sort((a, b) => String(a.id).localeCompare(String(b.id), 'fr'));
     const n = groupe.length;
     if (n === 1) {
       markerOffsets.set(groupe[0].id, [0, 0]);
@@ -1786,10 +2228,28 @@ document.addEventListener('keydown', (e) => {
 
 function makeIcon(active, rank, couleur, id) {
   const c = couleur;
+  const [dx, dy] = markerOffsets.get(id) || [0, 0];
+  if (modeEtablissementsActif()) {
+    const inst = installationEtabById(id);
+    if (inst && inst.type === 'hopital') {
+      const size = active ? 40 : 34;
+      const border = active ? '#0f2240' : '#fff';
+      const bw = active ? 5 : 3;
+      return L.divIcon({ className:'',
+        html:`<div style="position:relative;width:${size}px;height:${size}px;background:#c0182c;border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)"><div class="hosp-pin-circle"><div class="hosp-pin-circle-inner"><span style="font-size:13px">H</span></div></div></div>`,
+        iconSize:[size,size], iconAnchor:[size/2-dx,size-dy], popupAnchor:[dx,dy-size-2] });
+    }
+    const size = active ? 32 : 27;
+    const border = active ? '#0f2240' : '#fff';
+    const bw = active ? 4 : 2.5;
+    const label = rank != null && rank !== '' ? rank : '';
+    return L.divIcon({ className:'',
+      html:`<div class="etab-marker${active ? ' active' : ''}" style="width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border}">${label}</div>`,
+      iconSize:[size,size], iconAnchor:[size/2-dx,size/2-dy], popupAnchor:[dx,dy-size/2-7] });
+  }
   const size = active ? 26 : 20;
   const border = active ? '#0f2240' : '#fff';
   const bw = active ? 3 : 2.5;
-  const [dx, dy] = markerOffsets.get(id) || [0, 0];
   return L.divIcon({ className:'',
     html:`<div style="position:relative;width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,.35)"><span class="pin-num">${rank}</span></div>`,
     iconSize:[size,size], iconAnchor:[size/2-dx,size-dy], popupAnchor:[dx,dy-size-2] });
@@ -1802,7 +2262,18 @@ function makeIcon(active, rank, couleur, id) {
 // touche pas plutôt que de leur écrire une icône fausse qui resterait figée
 // (bug du 18 août : jusqu'à « 0 » sur 58 épingles après un glisser-déposer).
 function refreshMarkerIcons() {
-  gmfs.forEach(g => { if (markers[g.id] && matchesFilters(g.id)) markers[g.id].setIcon(makeIcon(g.id === activeId, rankOf(g.id), couleurEpingle(g), g.id)); });
+  getMarqueursSource().forEach(g => {
+    const visible = modeEtablissementsActif()
+      ? matchesFiltersInstallation(g.id)
+      : matchesFilters(g.id);
+    if (markers[g.id] && visible) {
+      const actif = modeEtablissementsActif()
+        ? (g.id === ficheInstallationId
+           || (activeId !== null && byId(activeId) && byId(activeId).installationId === g.id))
+        : (g.id === activeId);
+      markers[g.id].setIcon(makeIcon(actif, badgeMarqueur(g), couleurEpingle(g), g.id));
+    }
+  });
 }
 
 function buildMarkers() {
@@ -1810,16 +2281,27 @@ function buildMarkers() {
   // fiche invalide passait le filtre, une erreur ici ne doit interrompre que
   // CETTE fiche, jamais toute la boucle — sinon buildFilters(), renderSidebar()
   // et fitToData() ne s'exécutent jamais et la page reste vide.
-  gmfs.forEach(g => {
+  getMarqueursSource().forEach(g => {
     try {
-      const m = L.marker([g.lat, g.lng], { icon:makeIcon(false, rankOf(g.id), couleurEpingle(g), g.id), draggable:false });
-      // 27 août 2026 : n'ajouter à la carte que si le milieu satisfait déjà les filtres (donc
-      // statutVisible) — sinon les milieux ne recrutant pas s'afficheraient un instant au
-      // chargement, avant que quoi que ce soit ne les masque.
-      if (matchesFilters(g.id)) m.addTo(map);
+      const visible = modeEtablissementsActif()
+        ? matchesFiltersInstallation(g.id)
+        : matchesFilters(g.id);
+      const m = L.marker([g.lat, g.lng], { icon:makeIcon(false, badgeMarqueur(g), couleurEpingle(g), g.id), draggable:false });
+      if (visible) m.addTo(map);
       const [dx, dy] = markerOffsets.get(g.id) || [0, 0];
-      m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${esc(g.ville)}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}</small>`, { direction:'top', offset:[dx,dy-20] });
-      m.on('click', (e) => { L.DomEvent.stopPropagation(e); toggleDetail(g.id); });
+      if (modeEtablissementsActif()) {
+        m.bindTooltip(() => {
+          const n = nbSecteursVisiblesInstallation(g.id);
+          return `<b>${esc(g.nom.trim())}</b><br><small>${n} secteur${n > 1 ? 's' : ''} · ${esc(g.ville)}</small>`;
+        }, { direction:'top', offset:[dx, dy - (g.type === 'hopital' ? 36 : 20)] });
+        m.on('click', (e) => {
+          L.DomEvent.stopPropagation(e);
+          openInstallationSecteurs(g.id);
+        });
+      } else {
+        m.bindTooltip(`<b>${esc(g.nom.trim())}</b><br><small>${esc(g.ville)}${recruteActuellement(g) ? '' : ' · Ne recrute pas actuellement'}</small>`, { direction:'top', offset:[dx,dy-20] });
+        m.on('click', (e) => { L.DomEvent.stopPropagation(e); toggleDetail(g.id); });
+      }
       markers[g.id] = m;
     } catch (e) {
       console.warn('Marqueur ignoré (erreur de construction) :', g && g.id, g && g.nom, e);
@@ -1970,7 +2452,11 @@ function buildHopitalMarkers() {
 }
 
 function fitToData() {
-  const pts = gmfs.filter(g => statutVisible(g) && g.lat && g.lng).map(g => [g.lat, g.lng]);
+  const source = getMarqueursSource();
+  const pts = (modeEtablissementsActif()
+    ? source.filter(g => matchesFiltersInstallation(g.id) && g.lat && g.lng)
+    : source.filter(g => statutVisible(g) && g.lat && g.lng)
+  ).map(g => [g.lat, g.lng]);
   if (pts.length) { try { map.fitBounds(pts, { padding:[40,40], maxZoom:11 }); } catch(e){} }
 }
 
@@ -1989,8 +2475,8 @@ function fitToVisible() {
       .concat(etablissementsVisibles.filter(e => e.lat && e.lng).map(e => [e.lat, e.lng]));
     if (pts.length) { try { map.fitBounds(pts, { padding:[40,40], maxZoom: pts.length === 1 ? 15 : 13 }); } catch(e){} }
     const morceaux = [];
-    if (n) morceaux.push(n + (n > 1 ? ' cliniques trouvées' : ' clinique trouvée'));
-    if (ne) morceaux.push(ne + (ne > 1 ? ' établissements affichés' : ' établissement affiché'));
+    if (n) morceaux.push(n + (n > 1 ? (modeEtablissementsActif() ? ' secteurs trouvés' : ' cliniques trouvées') : (modeEtablissementsActif() ? ' secteur trouvé' : ' clinique trouvée')));
+    if (ne && !modeEtablissementsActif()) morceaux.push(ne + (ne > 1 ? ' établissements affichés' : ' établissement affiché'));
     annoncerA11y(morceaux.join(' et ') + '.');
   } else {
     annoncerA11y('Aucun milieu ne correspond aux filtres actifs.');
@@ -2038,17 +2524,23 @@ function renderSidebar() {
     // 1 ou 2 caractères après le mot-clé, sinon « (clinique Dre Sophie Lavallée) » — un simple
     // complément décoratif — serait conservé lui aussi.
     const suffixeDistinctif = parenMatch && /^\((clinique|unit[ée]|site)\s+[A-Z0-9]{1,2}\b/i.test(parenMatch[2]);
-    const nomMain = (parenMatch && !suffixeDistinctif) ? parenMatch[1] : g.nom.trim();
+    const nomMain = (modeEtablissementsActif() && g._secteurEtab)
+      ? g.nom
+      : ((parenMatch && !suffixeDistinctif) ? parenMatch[1] : g.nom.trim());
     const el = document.createElement('div');
     const nonRecruiting = !recruteActuellement(g);
     el.className = 'sb-item' + (nonRecruiting ? ' non-recruiting' : '') + (id === activeId ? ' active' : '');
     el.id = 'si-' + id;
     el.draggable = dragEnabled;
     el.innerHTML = `${dragEnabled ? '<span class="sb-grip" title="Glisser pour reclasser">⠿</span>' : ''}
-      <div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>
+      ${modeEtablissementsActif() && g._secteurEtab
+        ? `<div class="sb-num sb-num-abbr" data-long="${abbrActivitePour(g).length >= 5 ? '2' : (abbrActivitePour(g).length > 3 ? '1' : '0')}" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}" title="${esc(libelleActivitePour(g))}" aria-hidden="true">${esc(abbrActivitePour(g))}</div>`
+        : `<div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>`}
       <div class="sb-info">
         <div class="sb-name">${esc(nomMain)}${badgeVerifHtml(g)}</div>
+        ${modeEtablissementsActif() && g._secteurEtab ? `<div class="sb-estab-install">${esc(g.nomInstallation)}</div>` : ''}
         <div class="sb-city">📍 ${esc(g.ville)}</div>
+        ${modeEtablissementsActif() && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · ${esc(libelleTerritoireSecteur(g))}</div>` : ''}
         ${nonRecruiting ? '<span class="sb-status">Ne recrute pas actuellement</span>' : ''}
       </div>
       <button class="sb-star${favoris.has(id) ? ' fav' : ''}" title="Marquer comme favori" aria-label="${esc((favoris.has(id) ? 'Retirer ' : 'Ajouter ') + nomMain + (favoris.has(id) ? ' des favoris' : ' aux favoris'))}" draggable="false">${favoris.has(id) ? '★' : '☆'}</button>`;
@@ -2081,7 +2573,7 @@ function renderSidebar() {
       const targetIdx = fo.indexOf(id);
       fo.splice(targetIdx, 0, dragSrcId);
       favOrder = fo;
-      SAFE.set(FAVORDER_KEY, JSON.stringify(favOrder));
+      SAFE.set(modeEtablissementsActif() ? FAVORDER_ETAB_CENTRE_KEY : FAVORDER_KEY, JSON.stringify(favOrder));
       renderSidebar();
       refreshMarkerIcons();
     });
@@ -2089,12 +2581,17 @@ function renderSidebar() {
 
     sbList.appendChild(el);
   });
-  if (shown === 0 && (favOnly || regionFilter.size || rlsFilter || searchQuery)) {
+  if (shown === 0 && modeEtablissementsActif() && secteursEtab.length === 0) {
+    const msg = MODE_OUEST
+      ? 'Aucun secteur en établissement n’est encore publié pour la Montérégie-Ouest.'
+      : 'Aucun secteur en établissement n’est encore publié pour ce territoire.';
+    sbList.innerHTML = '<div class="sb-empty">' + msg + '</div>';
+  } else if (shown === 0 && (favOnly || regionFilter.size || rlsFilter || searchQuery || activiteFilters.size)) {
     sbList.innerHTML = '<div class="sb-empty">' + (searchQuery
-      ? 'Aucune clinique ne correspond à votre recherche.'
+      ? (modeEtablissementsActif() ? 'Aucun secteur ne correspond à votre recherche.' : 'Aucune clinique ne correspond à votre recherche.')
       : favOnly
-      ? 'Aucune clinique en favori.<br>Touchez l\'étoile ☆ d\'une clinique pour l\'ajouter ici.'
-      : 'Aucune clinique ne correspond aux filtres sélectionnés.') + '</div>';
+      ? (modeEtablissementsActif() ? 'Aucun secteur en favori.<br>Touchez l\'étoile ☆ d\'un secteur pour l\'ajouter ici.' : 'Aucune clinique en favori.<br>Touchez l\'étoile ☆ d\'une clinique pour l\'ajouter ici.')
+      : (modeEtablissementsActif() ? 'Aucun secteur ne correspond aux filtres sélectionnés.' : 'Aucune clinique ne correspond aux filtres sélectionnés.')) + '</div>';
   }
   updateCmpButton();
 }
@@ -2202,7 +2699,7 @@ let sidebarEl = null, sbToggle = null, sbOverlay = null;
 
 function toggleFav(id) {
   if (favoris.has(id)) favoris.delete(id); else favoris.add(id);
-  const ecrit = SAFE.set(FAV_KEY, JSON.stringify([...favoris]));
+  const ecrit = SAFE.set(favStorageKey(), JSON.stringify([...favoris]));
   if (!ecrit) {
     // L'écriture locale a échoué (quota plein, navigation privée…) : on annule
     // le changement en mémoire pour ne pas laisser croire que le favori est
@@ -2226,7 +2723,9 @@ function toggleFav(id) {
   const favBtn = document.getElementById('dp-fav-btn');
   if (favBtn && id === activeId) {
     favBtn.classList.toggle('fav', f);
-    favBtn.textContent = f ? '★ Retirer des favoris' : '☆ Ajouter aux favoris';
+    favBtn.textContent = f
+      ? (modeEtablissementsActif() ? '★ Retirer ce secteur des favoris' : '★ Retirer des favoris')
+      : (modeEtablissementsActif() ? '☆ Ajouter ce secteur aux favoris' : '☆ Ajouter aux favoris');
   }
   // Retirer/ajouter un favori en vue favoris décale le rang de tous les
   // autres (favListOrder() se recalcule) : sans ce recalcul, la liste et
@@ -2241,6 +2740,9 @@ function toggleFav(id) {
 // territoire voisin reste seul sur la carte alors que tout le reste a été filtré.
 function hopitalMatchesFilters(h) {
   if (!h) return false;
+  if (modeEtablissementsActif()) {
+    if (legacyCliniqueVersInstallation.has('hopitaux:' + String(h.id))) return false;
+  }
   if (regionFilter.size && !regionFilter.has(h.region)) return false;
   if (rlsFilter && (h.rls || '') !== rlsFilter) return false;
   return true;
@@ -2257,13 +2759,24 @@ function etablissementMatchesFilters(e) {
 }
 
 function updateMarkerVisibility() {
-  gmfs.forEach(g => {
-    const m = markers[g.id];
-    if (!m) return;
-    const show = matchesFilters(g.id);
-    if (show && !map.hasLayer(m)) m.addTo(map);
-    else if (!show && map.hasLayer(m)) map.removeLayer(m);
-  });
+  if (modeEtablissementsActif()) {
+    installationsEtab.forEach(g => {
+      const m = markers[g.id];
+      if (!m) return;
+      const show = matchesFiltersInstallation(g.id);
+      if (show && !map.hasLayer(m)) m.addTo(map);
+      else if (!show && map.hasLayer(m)) map.removeLayer(m);
+    });
+    refreshMarkerIcons();
+  } else {
+    gmfs.forEach(g => {
+      const m = markers[g.id];
+      if (!m) return;
+      const show = matchesFilters(g.id);
+      if (show && !map.hasLayer(m)) m.addTo(map);
+      else if (!show && map.hasLayer(m)) map.removeLayer(m);
+    });
+  }
   hopitaux.forEach(h => {
     const m = hospitalMarkers[h.id];
     if (!m) return;
@@ -2271,20 +2784,22 @@ function updateMarkerVisibility() {
     if (show && !map.hasLayer(m)) m.addTo(map);
     else if (!show && map.hasLayer(m)) map.removeLayer(m);
   });
-  etablissements.forEach(e => {
-    const m = establishmentMarkers[e.id];
-    if (!m) return;
-    const show = etablissementMatchesFilters(e);
-    if (show && !map.hasLayer(m)) m.addTo(map);
-    else if (!show && map.hasLayer(m)) map.removeLayer(m);
-  });
+  if (!modeEtablissementsActif()) {
+    etablissements.forEach(e => {
+      const m = establishmentMarkers[e.id];
+      if (!m) return;
+      const show = etablissementMatchesFilters(e);
+      if (show && !map.hasLayer(m)) m.addTo(map);
+      else if (!show && map.hasLayer(m)) map.removeLayer(m);
+    });
+  }
 }
 
 function toggleFavView() {
   favOnly = !favOnly;
   const b = document.getElementById('fav-toggle');
   if (b) {
-    b.textContent = favOnly ? '↩ Voir toutes les cliniques' : '★ Voir mes favoris';
+    b.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
     b.classList.toggle('active', favOnly);
   }
   renderSidebar();
@@ -2298,9 +2813,25 @@ function toggleFavView() {
 // — affiche aussi les milieux ne recrutant pas actuellement (voir statutVisible()).
 function syncAllClinicsToggle() {
   const b = document.getElementById('all-clinics-toggle');
-  if (b) b.setAttribute('aria-checked', showAllClinics ? 'true' : 'false');
+  if (b) {
+    b.setAttribute('aria-checked', showAllClinics ? 'true' : 'false');
+    const label = b.querySelector('span');
+    if (label) label.textContent = modeEtablissementsActif() ? 'Tous les secteurs' : 'Toutes les cliniques';
+  }
   const titre = document.getElementById('sb-title');
-  if (titre) titre.textContent = showAllClinics ? 'Toutes les cliniques' : 'Cliniques en recrutement';
+  if (titre) {
+    if (modeEtablissementsActif()) titre.textContent = showAllClinics ? 'Tous les secteurs' : 'Secteurs en recrutement';
+    else titre.textContent = showAllClinics ? 'Toutes les cliniques' : 'Cliniques en recrutement';
+  }
+  const infoBtn = document.getElementById('all-clinics-info');
+  const infoTip = document.getElementById('all-clinics-tip');
+  const mot = modeEtablissementsActif() ? 'secteurs' : 'cliniques';
+  if (infoBtn) infoBtn.setAttribute('aria-label', 'Information sur les autres ' + mot);
+  if (infoTip) {
+    infoTip.textContent = modeEtablissementsActif()
+      ? 'Inclut aussi les secteurs qui ne recrutent pas pour le moment. Leurs repères sont affichés dans une couleur plus pâle.'
+      : 'Inclut aussi les cliniques qui ne recrutent pas pour le moment. Leurs épingles sont affichées dans une couleur plus pâle.';
+  }
 }
 
 function toggleAllClinics() {
@@ -2322,9 +2853,16 @@ function toggleAllClinics() {
   refreshMarkerIcons();
   fitToVisible();
   const n = currentOrder().filter(id => matchesFilters(id)).length;
-  annoncerA11y(showAllClinics
-    ? n + ' cliniques affichées, incluant celles qui ne recrutent pas actuellement.'
-    : n + ' cliniques en recrutement affichées.');
+  if (modeEtablissementsActif()) {
+    const insts = new Set(gmfs.filter(s => matchesFilters(s.id)).map(s => s.installationId));
+    annoncerA11y(showAllClinics
+      ? n + ' secteurs affichés dans ' + insts.size + ' installations, incluant ceux qui ne recrutent pas actuellement.'
+      : n + ' secteurs en recrutement affichés.');
+  } else {
+    annoncerA11y(showAllClinics
+      ? n + ' cliniques affichées, incluant celles qui ne recrutent pas actuellement.'
+      : n + ' cliniques en recrutement affichées.');
+  }
 }
 
 function syncEstablishmentsToggle() {
@@ -2332,7 +2870,7 @@ function syncEstablishmentsToggle() {
   const btn = document.getElementById('establishments-toggle');
   const label = document.getElementById('establishments-label');
   const n = etablissements.length;
-  if (control) control.hidden = n === 0;
+  if (control) control.hidden = MODE_ETAB_UI || n === 0;
   if (btn) btn.setAttribute('aria-checked', showEstablishments ? 'true' : 'false');
   if (label) label.textContent = 'Établissements';
 }
@@ -2613,6 +3151,8 @@ function populateRlsButtons() {
         btn.setAttribute('aria-pressed', rlsFilter === nomBtn ? 'true' : 'false');
       });
       synchroniserOverlaysRlsEstOfficielle();
+      synchroniserOverlaysRlsCentreOfficielle();
+      if (modeEtablissementsActif()) populateActiviteButtons();
       renderSidebar(); updateMarkerVisibility(); fitToVisible();
     });
     wrap.appendChild(b);
@@ -2672,6 +3212,396 @@ function buildFilters() {
   }
 }
 
+function urlEtat(id) {
+  const params = new URLSearchParams();
+  if (modeEtablissementsActif()) {
+    params.set('mode', 'etablissements');
+    if (id !== undefined && id !== null) {
+      const g = byId(id);
+      if (g && g._secteurEtab) params.set('secteur', String(id));
+      else if (typeof id === 'string' && String(id).startsWith('INS-')) params.set('installation', String(id));
+      else params.set('c', String(id));
+    }
+  } else if (id !== undefined && id !== null) {
+    params.set('c', String(id));
+  }
+  const q = params.toString();
+  return location.pathname + (q ? '?' + q : '') + location.hash;
+}
+function htmlContactSecteur(s) {
+  const pol = (s && s.politiqueAffichage) || politiqueAffichageEtab();
+  const bits = [];
+  if (pol.afficherResponsableNom !== false && s.responsableNom) bits.push(esc(s.responsableNom));
+  if (pol.afficherResponsableCourriel !== false && s.responsableCourriel) {
+    bits.push(`<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`);
+  }
+  if (s.responsableTelephone) {
+    const tel = String(s.responsableTelephone).replace(/[^\d+]/g, '');
+    bits.push(`<a href="tel:${esc(tel)}">${esc(s.responsableTelephone)}</a>`);
+  }
+  if (!bits.length) return 'À venir';
+  return bits.join('<br>');
+}
+function htmlCorpsSecteur(s) {
+  const notes = (s.notesPubliques || []).map(n => `<div class="vw-row"><span class="vw-label">Précision</span><span class="vw-value">${esc(n)}</span></div>`).join('');
+  return `<div class="dp-sect-corps">
+      ${s.besoinDeclare ? `<div class="vw-row"><span class="vw-label">Besoin déclaré</span><span class="vw-value">${esc(s.besoinDeclare)}</span></div>` : ''}
+      ${s.dme ? `<div class="vw-row"><span class="vw-label">Dossier médical</span><span class="vw-value">${esc(s.dme)}</span></div>` : ''}
+      ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
+      ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
+      ${notes}
+      <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>
+      <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
+      <div class="notes-sec">
+        <div class="vw-sec-title">Mes notes sur ce secteur</div>
+        <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur ce secteur (sauvegardées dans votre navigateur)">${esc(s.notes || '')}</textarea>
+        <div class="notes-actions">
+          <button class="btn-save" id="btn-save-notes" aria-label="Sauvegarder mes notes">💾 Sauvegarder mes notes</button>
+          <span class="save-msg" id="save-msg">✅ Notes sauvegardées</span>
+        </div>
+      </div>
+    </div>`;
+}
+function htmlAccordeonSecteurs(secteurs, ouvertId) {
+  return secteurs.map(s => {
+    const ouvert = s.id === ouvertId;
+    const abbr = abbrActivitePour(s);
+    const long = abbr.length >= 5 ? '2' : (abbr.length > 3 ? '1' : '0');
+    return `<div class="dp-sect${ouvert ? ' open' : ''}">
+      <button type="button" class="dp-sect-head" data-secteur="${esc(s.id)}" aria-expanded="${ouvert ? 'true' : 'false'}">
+        <span class="dp-sect-abbr" data-long="${long}" style="--rls:${couleurEpingle(s)}" aria-hidden="true">${esc(abbr)}</span>
+        <span class="dp-sect-txt">
+          <span class="dp-sect-nom">${esc(s.nom)}</span>
+          <span class="dp-sect-stat"><span class="cmp-stat ${recruteActuellement(s) ? 'cmp-stat-on' : 'cmp-stat-off'}"><span class="cmp-stat-dot"></span>${recruteActuellement(s) ? 'En recrutement' : 'Ne recrute pas actuellement'}</span>${!ouvert && favoris.has(s.id) ? ' · ★ favori' : ''}</span>
+        </span>
+        <span class="dp-sect-chev" aria-hidden="true">▾</span>
+      </button>
+      ${ouvert ? htmlCorpsSecteur(s) : ''}
+    </div>`;
+  }).join('');
+}
+function lierBoutonsSecteurs(parent) {
+  if (!parent) return;
+  parent.querySelectorAll('[data-secteur]').forEach(btn => {
+    btn.addEventListener('click', () => basculerSecteurFiche(btn.getAttribute('data-secteur')));
+  });
+  const favBtn = document.getElementById('dp-fav-btn');
+  if (favBtn && activeId != null) favBtn.addEventListener('click', () => toggleFav(activeId));
+  const saveBtn = document.getElementById('btn-save-notes');
+  if (saveBtn) saveBtn.addEventListener('click', () => saveNotes());
+}
+function basculerSecteurFiche(secteurId) {
+  const s = byId(secteurId);
+  if (!s) return;
+  openFicheEtablissement(s.installationId, secteurId === activeId ? null : secteurId);
+}
+function openFicheEtablissement(installationId, secteurOuvertId) {
+  const inst = installationEtabById(installationId);
+  if (!inst) return;
+  const tous = gmfs.filter(s => s.installationId === installationId);
+  const visibles = tous.filter(s => matchesFilters(s.id) || s.id === secteurOuvertId);
+  if (!visibles.length) return;
+  const ouvertId = secteurOuvertId != null ? secteurOuvertId
+    : (visibles.length === 1 ? visibles[0].id : null);
+  if (activeId !== null && activeId !== ouvertId && notesDirty &&
+      !confirm("Vos notes ne sont pas sauvegardées. Changer de fiche sans les sauvegarder ?")) return;
+  notesDirty = false;
+  if (activeId !== null && markers[ficheInstallationId || activeId]) {
+    const prev = installationEtabById(ficheInstallationId) || byId(activeId);
+    if (prev && markers[prev.id]) markers[prev.id].setIcon(makeIcon(false, badgeMarqueur(prev), couleurEpingle(prev), prev.id));
+  }
+  if (ficheInstallationId && ficheInstallationId !== installationId) {
+    const prevInst = installationEtabById(ficheInstallationId);
+    if (prevInst && markers[prevInst.id]) markers[prevInst.id].setIcon(makeIcon(false, badgeMarqueur(prevInst), couleurEpingle(prevInst), prevInst.id));
+  }
+  ficheInstallationId = installationId;
+  document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
+  activeId = ouvertId;
+  if (markers[inst.id]) markers[inst.id].setIcon(makeIcon(true, badgeMarqueur(inst), couleurEpingle(inst), inst.id));
+  if (activeId !== null) document.getElementById('si-' + activeId)?.classList.add('active');
+  document.getElementById('dp-tag').textContent = typeLabelEtab(inst.type);
+  document.getElementById('dp-name-disp').innerHTML = esc(inst.nom.trim());
+  (function(){ var c = couleurMilieu(inst); var dh = document.querySelector('#detail .dp-head'); if (dh) { dh.style.background = ''; dh.style.borderBottomColor = c; } var tg = document.getElementById('dp-tag'); if (tg) tg.style.color = c; })();
+  const nbMasques = tous.length - visibles.length;
+  const tel = String(inst.telephone || '').replace(/[^\d+]/g, '');
+  document.getElementById('dp-body').innerHTML = `
+    <div class="vw-sec">
+      <div class="vw-sec-title">Le lieu</div>
+      <div class="vw-row"><span class="vw-label">Ville</span><span class="vw-value">${esc(inst.ville)}</span></div>
+      <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(libelleTerritoireSecteur(inst))}</span></div>
+      <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(inst)}</span></div>
+      ${inst.telephone ? `<div class="vw-row"><span class="vw-label">Téléphone</span><span class="vw-value"><a href="tel:${esc(tel)}">${esc(inst.telephone)}</a></span></div>` : ''}
+      ${inst.lienWeb ? `<div class="vw-row"><span class="vw-label">Site internet</span><span class="vw-value">${siteLink(inst.lienWeb)}</span></div>` : ''}
+      ${inst.mentionPublique ? `<div class="vw-row"><span class="vw-label">Note</span><span class="vw-value">${esc(inst.mentionPublique)}</span></div>` : ''}
+      ${inst.coordonneesApproximatives ? `<div class="vw-row"><span class="vw-label">Carte</span><span class="vw-value">Emplacement approximatif (adresse officielle, pin à confirmer).</span></div>` : ''}
+    </div>
+    <div class="vw-divider"></div>
+    <div class="vw-sec">
+      <div class="vw-sec-title">Secteurs (${visibles.length})</div>
+      <p class="dp-sect-intro">Touchez un secteur pour voir ses modalités, l'ajouter à vos favoris ou y écrire une note.</p>
+      <div class="dp-sect-list">${htmlAccordeonSecteurs(visibles, ouvertId)}</div>
+      ${nbMasques > 0 ? `<p class="dp-sect-masques">${nbMasques} autre${nbMasques > 1 ? 's' : ''} secteur${nbMasques > 1 ? 's' : ''} de cette installation ${nbMasques > 1 ? 'sont masqués' : 'est masqué'} par vos filtres.</p>` : ''}
+    </div>
+    <div style="height:14px"></div>`;
+  lierBoutonsSecteurs(document.getElementById('dp-body'));
+  const notesTa = document.getElementById('notes-input');
+  if (notesTa) notesTa.addEventListener('input', () => { notesDirty = true; });
+  document.getElementById('detail').classList.add('open');
+  document.body.classList.add('fiche-open');
+  if (sidebarEl) sidebarEl.classList.remove('open');
+  if (sbOverlay) sbOverlay.classList.remove('show');
+  if (sbToggle) sbToggle.classList.add('hidden');
+  if (typeof peekOff === 'function') peekOff();
+  updateLegendVisibility();
+  const etat = { gmfDetail: true, installation: installationId, c: activeId };
+  const url = urlEtat(activeId !== null ? activeId : installationId);
+  if (!detailHistoryActive) { history.pushState(etat, '', url); detailHistoryActive = true; }
+  else { history.replaceState(etat, '', url); }
+  try { map.flyTo([inst.lat, inst.lng], 14, { duration: 1 }); } catch (err) {
+    console.warn('Déplacement de la carte impossible, la fiche reste ouverte :', err);
+  }
+}
+function openInstallationSecteurs(installationId) {
+  openFicheEtablissement(installationId, null);
+}
+function nbSecteursParActivite(catId) {
+  const memo = activiteFilters;
+  activiteFilters = new Set();
+  try {
+    return secteursEtab.filter(s => s.categorieActivite === catId && matchesFilters(s.id)).length;
+  } finally {
+    activiteFilters = memo;
+  }
+}
+function appliquerFiltresEtab() {
+  populateActiviteButtons();
+  renderSidebar();
+  updateMarkerVisibility();
+  fitToVisible();
+}
+function setActiviteFilter(id) {
+  if (activiteFilters.has(id)) activiteFilters.delete(id); else activiteFilters.add(id);
+  appliquerFiltresEtab();
+}
+function populateActiviteButtons() {
+  const wrap = document.getElementById('activite-btns');
+  const panel = document.getElementById('activite-panel');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  if (!modeEtablissementsActif()) {
+    if (panel) panel.hidden = true;
+    return;
+  }
+  if (panel) panel.hidden = false;
+  const cats = categoriesActiviteDisponibles();
+  const parId = new Map(cats.map(c => [c.id, c]));
+  const creerBtn = (cat) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'activite-btn';
+    const n = nbSecteursParActivite(cat.id);
+    const coche = activiteFilters.has(cat.id);
+    b.textContent = cat.libelle + (n ? ' (' + n + ')' : '');
+    if (cat.libelleComplet && cat.libelleComplet !== cat.libelle) b.title = cat.libelleComplet;
+    b.setAttribute('aria-label', 'Filtrer : ' + (cat.libelleComplet || cat.libelle));
+    b.classList.toggle('dim', !coche && n === 0);
+    b.setAttribute('aria-pressed', coche ? 'true' : 'false');
+    b.addEventListener('click', () => setActiviteFilter(cat.id));
+    return b;
+  };
+  const reset = document.getElementById('activite-reset');
+  if (reset) reset.hidden = activiteFilters.size === 0;
+  GROUPES_ACTIVITE.forEach(groupe => {
+    const ids = groupe.ids.filter(id => parId.has(id));
+    if (!ids.length) return;
+    const nbActifs = ids.filter(id => activiteFilters.has(id)).length;
+    const bloc = document.createElement('details');
+    bloc.className = 'activite-group';
+    if (groupesActiviteOuverts.has(groupe.label) || nbActifs > 0) bloc.open = true;
+    bloc.addEventListener('toggle', () => {
+      if (bloc.open) groupesActiviteOuverts.add(groupe.label);
+      else groupesActiviteOuverts.delete(groupe.label);
+    });
+    const label = document.createElement('summary');
+    label.className = 'activite-group-label';
+    label.appendChild(document.createTextNode(groupe.label));
+    if (nbActifs > 0) {
+      const pastille = document.createElement('span');
+      pastille.className = 'activite-group-actifs';
+      pastille.textContent = nbActifs + ' actif' + (nbActifs > 1 ? 's' : '');
+      label.appendChild(pastille);
+    }
+    bloc.appendChild(label);
+    const inner = document.createElement('div');
+    inner.className = 'activite-group-btns';
+    ids.forEach(id => inner.appendChild(creerBtn(parId.get(id))));
+    bloc.appendChild(inner);
+    wrap.appendChild(bloc);
+  });
+}
+function recalculerOrdre() {
+  const typeRank = modeEtablissementsActif()
+    ? {}
+    : { 'GMF-U': 0, 'GMF-R': 1, 'GMF': 2, 'GMF satellite': 3, 'CH': 4 };
+  const rlsRank = Object.keys(RLS_COLORS_REGION).reduce((o, r, i) => (o[r] = i, o), {});
+  const regRank = { 'Ouest': 0, 'Centre': 1, 'Est': 2 };
+  order = gmfs.slice().sort((a, b) => {
+    if (!MODE_REGION) {
+      const rga = regRank[a.region] ?? 9, rgb = regRank[b.region] ?? 9;
+      if (rga !== rgb) return rga - rgb;
+    }
+    if (MODE_REGION || modeEtablissementsActif()) {
+      const rla = rlsRank[a.rls] ?? 98, rlb = rlsRank[b.rls] ?? 98;
+      if (rla !== rlb) return rla - rlb;
+    }
+    if (modeEtablissementsActif()) {
+      const instCmp = (a.nomInstallation || '').localeCompare(b.nomInstallation || '', 'fr', { sensitivity: 'base' });
+      if (instCmp !== 0) return instCmp;
+      return (a.nom || '').localeCompare(b.nom || '', 'fr', { sensitivity: 'base' });
+    }
+    const ra = typeRank[a.type] ?? 99, rb = typeRank[b.type] ?? 99;
+    if (ra !== rb) return ra - rb;
+    return (a.nom || '').localeCompare(b.nom || '', 'fr', { sensitivity: 'base' });
+  }).map(g => g.id);
+}
+function appliquerNotesActives() {
+  gmfs.forEach(g => {
+    const n = SAFE.get(noteKeyFor(g));
+    if (n !== null) g.notes = n;
+  });
+}
+function chargerOrdreFavorisMode() {
+  favOrder = [];
+  const cle = modeEtablissementsActif() ? FAVORDER_ETAB_CENTRE_KEY : FAVORDER_KEY;
+  try {
+    const sf = JSON.parse(SAFE.get(cle) || 'null');
+    if (Array.isArray(sf)) favOrder = sf.filter(id => gmfs.some(g => g.id === id));
+  } catch (e) {}
+  if (!modeEtablissementsActif() && favOrder.length === 0) {
+    try {
+      const old = JSON.parse(SAFE.get(ORDER_KEY) || 'null');
+      if (Array.isArray(old)) favOrder = old.filter(id => favoris.has(id) && gmfs.some(g => g.id === id));
+    } catch (e) {}
+  }
+}
+function syncModeCarteUI() {
+  document.body.dataset.modeCarte = modeCarte;
+  document.querySelectorAll('.care-mode-btn').forEach(b => {
+    const actif = b.dataset.mode === modeCarte;
+    b.setAttribute('aria-selected', actif ? 'true' : 'false');
+    b.tabIndex = actif ? 0 : -1;
+  });
+  const recherche = document.getElementById('sb-search-input');
+  if (recherche) {
+    if (modeEtablissementsActif()) {
+      recherche.placeholder = 'Rechercher un secteur, un lieu ou une ville…';
+      recherche.setAttribute('aria-label', 'Rechercher un secteur, un lieu ou une ville');
+    } else {
+      recherche.placeholder = 'Rechercher une clinique ou une ville…';
+      recherche.setAttribute('aria-label', 'Rechercher une clinique ou une ville');
+    }
+  }
+  const activitePanel = document.getElementById('activite-panel');
+  if (activitePanel) activitePanel.hidden = !modeEtablissementsActif();
+  const switchEl = document.getElementById('care-mode-switch');
+  if (switchEl) switchEl.hidden = !MODE_ETAB_UI;
+  const etabBtn = document.querySelector('.care-mode-btn[data-mode="etablissements"]');
+  if (etabBtn) {
+    if (etabCoucheDisponible) {
+      etabBtn.removeAttribute('aria-disabled');
+      etabBtn.title = '';
+    } else {
+      etabBtn.setAttribute('aria-disabled', 'true');
+      etabBtn.title = 'Données établissements indisponibles';
+    }
+  }
+  const fav = document.getElementById('fav-toggle');
+  if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
+  syncAllClinicsToggle();
+  if (modeEtablissementsActif()) populateActiviteButtons();
+  const prefix = /^BROUILLON \| /.test(document.title) ? 'BROUILLON | ' : '';
+  if (modeEtablissementsActif()) {
+    document.title = prefix + 'Secteurs en recrutement — ' + nomTerritoirePage() + ' | Trouve ta clinique';
+  } else if (MODE_REGION) {
+    document.title = prefix + 'Cliniques en recrutement — ' + nomTerritoirePage() + ' | Trouve ta clinique';
+  } else {
+    document.title = prefix + 'Carte complète de la Montérégie — Cliniques en recrutement';
+  }
+}
+function activerModeCarte(prochainMode) {
+  if (!donneesPretes || !['cliniques', 'etablissements'].includes(prochainMode) || prochainMode === modeCarte) return;
+  if (prochainMode === 'etablissements' && !etabCoucheDisponible) {
+    if (typeof showToast === 'function') showToast('Les données établissements sont indisponibles. Réessayez plus tard.');
+    return;
+  }
+  if (notesDirty && !confirm('Vos notes ne sont pas sauvegardées. Changer de vue sans les sauvegarder ?')) return;
+  notesDirty = false;
+  if (activeId !== null || ficheInstallationId) {
+    detailHistoryActive = false;
+    closeDetailUI();
+  }
+  Object.keys(markers).forEach(id => {
+    const m = markers[id];
+    if (m && map.hasLayer(m)) map.removeLayer(m);
+    delete markers[id];
+  });
+  sauvegarderFavorisActifs();
+  modeCarte = prochainMode;
+  const zoneScroll = document.getElementById('sb-scroll');
+  if (zoneScroll) zoneScroll.scrollTop = 0;
+  gmfs = modeEtablissementsActif() ? secteursEtab : cliniques;
+  showAllClinics = false;
+  favOnly = false;
+  rlsFilter = '';
+  activiteFilters.clear();
+  searchQuery = '';
+  const recherche = document.getElementById('sb-search-input');
+  if (recherche) recherche.value = '';
+  document.getElementById('sb-search')?.classList.remove('has-text');
+  recalculerOrdre();
+  appliquerNotesActives();
+  chargerFavorisMode();
+  chargerOrdreFavorisMode();
+  calculerDecalagesMarqueurs();
+  buildMarkers();
+  buildFilters();
+  syncModeCarteUI();
+  renderSidebar();
+  updateMarkerVisibility();
+  refreshMarkerIcons();
+  synchroniserOverlaysRlsCentreOfficielle();
+  fitToData();
+  try { history.replaceState({}, '', urlEtat()); } catch (e) {}
+  annoncerA11y(gmfs.length + ' ' + libelleMode(true) + (modeEtablissementsActif() ? ' affichés.' : ' affichées.'));
+}
+function appliquerCibleUrl(paramsInit) {
+  if (!MODE_ETAB_UI) return false;
+  const modeUrl = paramsInit.get('mode') === 'etablissements';
+  if (modeUrl && modeCarte !== 'etablissements' && etabCoucheDisponible) {
+    activerModeCarte('etablissements');
+  }
+  const secteurParam = paramsInit.get('secteur');
+  if (secteurParam && secteursEtab.some(s => s.id === secteurParam)) {
+    const g = secteursEtab.find(s => s.id === secteurParam);
+    if (g && !recruteActuellement(g)) {
+      showAllClinics = true;
+      syncAllClinicsToggle();
+      renderSidebar();
+      updateMarkerVisibility();
+      refreshMarkerIcons();
+    }
+    openDetail(secteurParam);
+    return true;
+  }
+  const instParam = paramsInit.get('installation');
+  if (instParam && installationsEtab.some(i => i.id === instParam)) {
+    if (!modeEtablissementsActif() && etabCoucheDisponible) activerModeCarte('etablissements');
+    openInstallationSecteurs(instParam);
+    return true;
+  }
+  return false;
+}
+
 function toggleDetail(id) {
   if (id === activeId) { closeDetail(); }
   else { openDetail(id); }
@@ -2680,6 +3610,10 @@ function toggleDetail(id) {
 function openDetail(id) {
   const g = byId(id);
   if (!g) return;
+  if (modeEtablissementsActif() && g._secteurEtab) {
+    openFicheEtablissement(g.installationId, id);
+    return;
+  }
   if (activeId !== null && activeId !== id && notesDirty &&
       !confirm("Vos notes ne sont pas sauvegardées. Changer de clinique sans les sauvegarder ?")) return;
   notesDirty = false;
@@ -2859,11 +3793,6 @@ function openDetail(id) {
       <div class="staff-grid">${staffCells}</div>
     </div>
     <div class="vw-divider"></div>
-    ${g.infos ? `<div class="vw-sec">
-      <div class="vw-sec-title">Informations</div>
-      <p class="vw-infos">${esc(g.infos)}</p>
-    </div>
-    <div class="vw-divider"></div>` : ''}
     <div class="notes-sec">
       <div class="vw-sec-title">Mes notes</div>
       <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur cette clinique (sauvegardées dans votre navigateur)">${esc(g.notes || '')}</textarea>
@@ -2899,7 +3828,7 @@ function saveNotes(flash = true) {
   const ta = document.getElementById('notes-input');
   if (!ta) return;
   g.notes = ta.value;
-  SAFE.set(NOTE_KEY(activeId), g.notes);
+  SAFE.set(noteKeyForId(activeId), g.notes);
   notesDirty = false;
   if (flash) {
     const msg = document.getElementById('save-msg');
@@ -2911,8 +3840,13 @@ function saveNotes(flash = true) {
 
 function closeDetailUI() {
   // On retire le paramètre ?c= pour que l'URL reflète l'état réel de l'app.
-  if (location.search) { try { history.replaceState({}, '', location.pathname); } catch (e) {} }
-  if (activeId !== null && markers[activeId]) markers[activeId].setIcon(makeIcon(false, rankOf(activeId), couleurMilieu(byId(activeId)), activeId));
+  if (location.search) { try { history.replaceState({}, '', (typeof urlEtat === 'function' ? urlEtat() : location.pathname)); } catch (e) {} }
+  if (activeId !== null && markers[activeId]) markers[activeId].setIcon(makeIcon(false, badgeMarqueur(byId(activeId) || { id: activeId }), couleurMilieu(byId(activeId) || {}), activeId));
+  if (ficheInstallationId && markers[ficheInstallationId]) {
+    const inst = installationEtabById(ficheInstallationId);
+    if (inst) markers[ficheInstallationId].setIcon(makeIcon(false, badgeMarqueur(inst), couleurEpingle(inst), inst.id));
+  }
+  ficheInstallationId = null;
   activeId = null;
   document.querySelectorAll('.sb-item').forEach(e => e.classList.remove('active'));
   document.getElementById('detail').classList.remove('open');
@@ -2940,7 +3874,7 @@ window.addEventListener('popstate', function () {
   }
   notesDirty = false;
   detailHistoryActive = false;
-  if (activeId !== null) closeDetailUI();
+  if (activeId !== null || ficheInstallationId) closeDetailUI();
 });
 
 // Touche Échap : ferme la surcouche la plus « au-dessus » (comparatif/fiche
@@ -2952,7 +3886,7 @@ document.addEventListener('keydown', e => {
   if (infoTip && !infoTip.hidden) { closeAllClinicsInfo(); return; }
   const cp = document.getElementById('cmp-print');
   if (cp && cp.classList.contains('cmp-show')) { cmpClose(); return; }
-  if (activeId !== null) { closeDetail(); return; }
+  if (activeId !== null || ficheInstallationId) { closeDetail(); return; }
   if (sidebarEl && sidebarEl.classList.contains('open')) { closeDrawer(); return; }
 });
 
@@ -3053,6 +3987,26 @@ const favToggleBtn = document.getElementById('fav-toggle');
 if (favToggleBtn) favToggleBtn.addEventListener('click', toggleFavView);
 const allClinicsToggleBtn = document.getElementById('all-clinics-toggle');
 if (allClinicsToggleBtn) allClinicsToggleBtn.addEventListener('click', toggleAllClinics);
+const activiteResetBtn = document.getElementById('activite-reset');
+if (activiteResetBtn) activiteResetBtn.addEventListener('click', () => {
+  activiteFilters.clear();
+  appliquerFiltresEtab();
+});
+const careModeSwitch = document.getElementById('care-mode-switch');
+if (careModeSwitch) {
+  careModeSwitch.addEventListener('click', e => {
+    const b = e.target.closest('.care-mode-btn');
+    if (b && b.getAttribute('aria-disabled') !== 'true') activerModeCarte(b.dataset.mode);
+  });
+  careModeSwitch.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    const prochain = modeCarte === 'cliniques' ? 'etablissements' : 'cliniques';
+    if (prochain === 'etablissements' && !etabCoucheDisponible) return;
+    activerModeCarte(prochain);
+    careModeSwitch.querySelector('[data-mode="' + prochain + '"]')?.focus();
+  });
+}
 const establishmentsToggleBtn = document.getElementById('establishments-toggle');
 if (establishmentsToggleBtn) establishmentsToggleBtn.addEventListener('click', toggleEstablishments);
 const establishmentsControl = document.getElementById('establishments-control');
@@ -3169,7 +4123,7 @@ function showUpdateDate() {
   }
 }
 
-function initData(data) {
+function initData(data, lotsEtab) {
   const brut = Array.isArray(data) ? data : (data.cliniques || []);
   // Une fiche dont « visible » vaut false est conservée dans data.json mais
   // n'apparaît nulle part dans l'application : c'est le cas d'un milieu qui ne
@@ -3202,6 +4156,17 @@ function initData(data) {
   // de la page — carte, liste, recherche, favoris, comparatif PDF, menu RLS en découlent tous
   // automatiquement, sans rien pouvoir « réactiver » depuis l'interface.
   if (MODE_REGION) gmfs = gmfs.filter(g => g.region === REGION_PAGE);
+  cliniques = gmfs.slice();
+  preparerCoucheEtablissementsDepuisLots(lotsEtab || []);
+  const paramsInit = new URLSearchParams(location.search);
+  const modeUrl = paramsInit.get('mode') === 'etablissements';
+  if (modeUrl && !etabCoucheDisponible) {
+    if (typeof showToast === 'function') showToast('Couche établissements indisponible pour le moment.');
+    modeCarte = 'cliniques';
+  } else {
+    modeCarte = modeUrl ? 'etablissements' : 'cliniques';
+  }
+  gmfs = modeEtablissementsActif() ? secteursEtab : cliniques;
   calculerDecalagesMarqueurs();
   // 27 août 2026 : (ré)initialise la vue « Toutes les cliniques » à chaque chargement des
   // données — un rechargement de page ne doit jamais garder une vue élargie ouverte par accident.
@@ -3244,67 +4209,26 @@ function initData(data) {
     return true;
   });
 
-  // Notes personnelles sauvegardées
-  gmfs.forEach(g => { const n = SAFE.get(NOTE_KEY(g.id)); if (n !== null) g.notes = n; });
-
-  // Ordre de la liste principale : toujours l'ordre par défaut (RLS puis alphabétique), non réordonnable
-  const typeRank = { 'GMF-U': 0, 'GMF-R': 1, 'GMF': 2, 'GMF satellite': 3, 'CH': 4 };
-  const regRank = { 'Ouest': 0, 'Centre': 1, 'Est': 2 };
-  /* Sur la carte des trois territoires, le premier critère de tri est le TERRITOIRE : la liste
-     est donc déjà regroupée par couleur d'épingle. Sur une carte régionale, ce critère devient
-     inopérant puisque tout appartient au même territoire — la liste retombait sur le type de
-     milieu et les couleurs de RLS s'alternaient au fil de la liste et de la numérotation.
-     On remplace donc ce premier palier par le RLS sur ces pages. L'ordre des RLS est celui de
-     RLS_COLORS_REGION, donc exactement celui de la légende : la liste, la numérotation des
-     épingles et la légende racontent la même histoire. */
-  const rlsRank = MODE_REGION
-    ? Object.keys(RLS_COLORS_REGION).reduce((o, r, i) => (o[r] = i, o), {})
-    : null;
-  order = gmfs.slice().sort((a, b) => {
-    if (rlsRank) {
-      const rla = rlsRank[a.rls] ?? 99, rlb = rlsRank[b.rls] ?? 99;
-      if (rla !== rlb) return rla - rlb;
-    } else {
-      const rga = regRank[a.region] ?? 9, rgb = regRank[b.region] ?? 9;
-      if (rga !== rgb) return rga - rgb;
-    }
-    const ra = typeRank[a.type] ?? 99, rb = typeRank[b.type] ?? 99;
-    if (ra !== rb) return ra - rb;
-    return (a.nom || '').localeCompare(b.nom || '', 'fr', { sensitivity: 'base' });
-  }).map(g => g.id);
-
-  // Favoris (étoiles) sauvegardés
-  favoris = new Set();
-  try {
-    const f = JSON.parse(SAFE.get(FAV_KEY) || '[]');
-    if (Array.isArray(f)) favoris = new Set(f);
-  } catch(e) {}
-
-  // Ordre des favoris (sauvegardé). Migration : à défaut, on récupère l'ancien ordre de liste filtré aux favoris.
-  favOrder = [];
-  try {
-    const sf = JSON.parse(SAFE.get(FAVORDER_KEY) || 'null');
-    if (Array.isArray(sf)) favOrder = sf.filter(id => gmfs.some(g => g.id === id));
-  } catch(e) {}
-  if (favOrder.length === 0) {
-    try {
-      const old = JSON.parse(SAFE.get(ORDER_KEY) || 'null');
-      if (Array.isArray(old)) favOrder = old.filter(id => favoris.has(id));
-    } catch(e) {}
-  }
+  appliquerNotesActives();
+  recalculerOrdre();
+  chargerFavorisMode();
+  chargerOrdreFavorisMode();
 
   buildMarkers();
-  buildEtablissementMarkers();
+  if (!modeEtablissementsActif()) buildEtablissementMarkers();
   buildHopitalMarkers();
   buildFilters();
+  donneesPretes = true;
+  syncModeCarteUI();
   syncAllClinicsToggle();
   syncEstablishmentsToggle();
   renderSidebar();
   showUpdateDate();
   showBanner();
   fitToData();
+  if (appliquerCibleUrl(paramsInit)) return;
   // Lien direct : ?c=6 ouvre la fiche de la clinique 6.
-  const cibleBrute = new URLSearchParams(location.search).get('c');
+  const cibleBrute = paramsInit.get('c');
   const cible = Number(cibleBrute);
   if (cible && byId(cible)) {
     const cliniqueCible = byId(cible);
@@ -3333,11 +4257,31 @@ function initData(data) {
   // (fitToData ci-dessus).
 }
 
+function chargerJsonOptionnel(url) {
+  return fetch(url, { cache: 'no-cache' })
+    .then(r => (r.ok ? r.json() : null))
+    .catch(() => null);
+}
 fetch('../data.json', { cache: 'no-cache' })
   .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-  .then(initData)
+  .then(data => {
+    if (MODE_OUEST) return initData(data, []);
+    if (MODE_CENTRE) {
+      return chargerJsonOptionnel('../data-etablissements-centre.json')
+        .then(centre => initData(data, centre ? [{ data: centre, region: 'Centre' }] : []));
+    }
+    return Promise.all([
+      chargerJsonOptionnel('../data-etablissements.json'),
+      chargerJsonOptionnel('../data-etablissements-centre.json')
+    ]).then(([est, centre]) => {
+      const lots = [];
+      if (est) lots.push({ data: est, region: 'Est' });
+      if (centre) lots.push({ data: centre, region: 'Centre' });
+      return initData(data, lots);
+    });
+  })
   .catch(err => {
-    console.error('Chargement de data.json impossible :', err);
+    console.error('Chargement des données impossible :', err);
     const el = document.getElementById('maj-date');
     if (el) el.textContent = '\u26a0 Données indisponibles (vérifiez data.json)';
     // Sur téléphone, la liste latérale est un tiroir fermé : le message ci-dessus
@@ -3372,9 +4316,13 @@ fetch('../data.json', { cache: 'no-cache' })
     : 'Carte interactive des cliniques en recrutement dans la Montérégie. Installable sur téléphone.';
 
   btn.addEventListener('click', function () {
-    // 1er choix : le partage natif du système (téléphones, Safari, Edge)
+    var etab = typeof modeCarte !== 'undefined' && modeCarte === 'etablissements';
+    var url = URL_APP + (etab ? '?mode=etablissements' : '');
+    var texte = etab
+      ? 'Carte interactive des secteurs en établissement en recrutement en ' + regNom + '.'
+      : TEXTE;
     if (navigator.share) {
-      navigator.share({ title: TITRE, text: TEXTE, url: URL_APP })
+      navigator.share({ title: TITRE, text: texte, url: url })
         .catch(function (e) {
           // « AbortError » = la personne a fermé le panneau ; ce n'est pas un échec
           if (e && e.name !== 'AbortError') copier();

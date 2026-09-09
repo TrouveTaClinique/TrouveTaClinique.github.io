@@ -3979,11 +3979,6 @@ function openDetail(id) {
       <div class="staff-grid">${staffCells}</div>
     </div>
     <div class="vw-divider"></div>
-    ${g.infos ? `<div class="vw-sec">
-      <div class="vw-sec-title">Informations</div>
-      <p class="vw-infos">${esc(g.infos)}</p>
-    </div>
-    <div class="vw-divider"></div>` : ''}
     <div class="notes-sec">
       <div class="vw-sec-title">Mes notes</div>
       <textarea class="notes-textarea" id="notes-input" placeholder="Vos notes personnelles sur ce milieu (sauvegardées dans votre navigateur)">${esc(g.notes || '')}</textarea>

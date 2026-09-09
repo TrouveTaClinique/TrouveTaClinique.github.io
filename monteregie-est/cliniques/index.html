@@ -36,7 +36,7 @@
         "url": "https://trouvetaclinique.ca/monteregie-est/cliniques/",
         "name": "Cliniques en recrutement en Montérégie-Est",
         "inLanguage": "fr-CA",
-        "dateModified": "2026-09-06",
+        "dateModified": "2026-09-08",
         "isPartOf": {
           "@id": "https://trouvetaclinique.ca/#website"
         }
@@ -102,17 +102,31 @@
   </div>
 </div>
 <main id="contenu">
-  <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › Cliniques</nav>
-  <section class="hero">
-    <p class="eyebrow">Médecine familiale · Montérégie</p>
-    <h1>Cliniques en recrutement en Montérégie-Est</h1>
+  <nav class="breadcrumbs" aria-label="Fil d’Ariane"></nav>
+  <section class="video-hero" aria-labelledby="video-hero-titre">
+  <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
+    <img src="https://i.vimeocdn.com/video/1196920171-84d1dca608d530e599f54ffe3de4d56c6831f01730b8f381cbdcd7e5e2fff4fc-d_1280x720?region=us" alt="" width="1280" height="720">
+    <iframe src="https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Médecins en Montérégie-Est — Santé Québec Montérégie-Est"></iframe>
+  </div>
+  <div class="video-hero-voile" aria-hidden="true"></div>
+  <button type="button" class="video-hero-pause" aria-pressed="false" aria-controls="video-hero-media">Mettre en pause</button>
+  <nav class="breadcrumbs video-hero-crumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › Cliniques</nav>
+  <div class="video-hero-texte">
+    <p class="video-hero-eyebrow">Montérégie-Est</p>
+    <h1 id="video-hero-titre">Cliniques en recrutement en Montérégie-Est</h1>
+    <p class="video-hero-sous">Des médecins du territoire parlent de leur pratique.</p>
+    <p class="video-hero-liens">
+      <a href="/monteregie-est/">Explorer la carte</a>
+      <a href="/monteregie-est/ptem/">Guide PTEM</a>
+    </p>
+    <p class="video-hero-credit">Vidéo de Santé Québec Montérégie-Est.</p>
+  </div>
+</section>
+
+  <div class="video-hero-suite">
     <p class="lead"><strong>21 milieux en recrutement actif</strong> de médecins de famille, sur 33 milieux publiés au total dans le répertoire, répartis dans <strong>3 RLS</strong> et 15 municipalités — les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement. Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="/monteregie-est/">carte interactive</a> ajoute les filtres et la vue géographique.</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> 2026-09-06.</p>
-    <div class="cta-row">
-      <a class="button primary" href="/monteregie-est/">Explorer sur la carte interactive</a>
-      <a class="button secondary" href="/monteregie-est/ptem/">Guide PTEM</a>
-    </div>
-  </section>
+    <p class="updated"><strong>Données mises à jour le :</strong> 2026-09-08.</p>
+  </div>
 
   
 
@@ -277,6 +291,36 @@
   
 </main>
 <footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante — Trouve ta clinique</div></div></footer>
+<script>
+(function () {
+  var hero = document.querySelector('.video-hero');
+  if (!hero) return;
+  var iframe = hero.querySelector('iframe');
+  var btn = hero.querySelector('.video-hero-pause');
+  if (!iframe || !btn) return;
+  var cible = 'https://player.vimeo.com';
+  var enLecture = true;
+  function parler(methode) {
+    if (!iframe.contentWindow) return;
+    iframe.contentWindow.postMessage(JSON.stringify({ method: methode }), cible);
+  }
+  function afficher() {
+    btn.setAttribute('aria-pressed', enLecture ? 'false' : 'true');
+    btn.textContent = enLecture ? 'Mettre en pause' : 'Lire la vidéo';
+  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    enLecture = false;
+    iframe.addEventListener('load', function () { parler('pause'); });
+    parler('pause');
+  }
+  afficher();
+  btn.addEventListener('click', function () {
+    enLecture = !enLecture;
+    parler(enLecture ? 'play' : 'pause');
+    afficher();
+  });
+})();
+</script>
 <script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {

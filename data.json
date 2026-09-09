@@ -1,5 +1,5 @@
 {
-  "miseAJour": "2026-09-06",
+  "miseAJour": "2026-09-08",
   "annonce": {
     "titre": "Prochaine activité de recrutement",
     "texte": "JR Express — RLS Jardins-Roussillon\n**lundi 10 août 2026**\nTournée des cliniques de la région et visite de l'hôpital Anna-Laberge.\nDépart du stationnement du parc André-J.-Côté, à Candiac.",
@@ -475,7 +475,7 @@
       "frais": "Aucun frais",
       "pratiques": [
         "pec",
-        "Musculosquelettique et infiltrations — MSK"
+        "msk"
       ],
       "niveaux": {
         "gmf": "",
@@ -944,7 +944,7 @@
       "frais": "Frais fixe",
       "pratiques": [
         "pec",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "chir"
       ],
       "niveaux": {
@@ -1419,7 +1419,7 @@
         "pec",
         "sad",
         "peri",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "chir"
       ],
       "niveaux": {
@@ -2319,8 +2319,8 @@
       "lat": 45.30398,
       "lng": -73.237494,
       "site": "https://www.cmiberville.com/",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "camille.latreille.med@ssss.gouv.qc.ca",
+      "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 17h00",
         "Mardi": "8h00 – 17h00",
@@ -2331,17 +2331,20 @@
         "Dimanche": "Urgence sur RDV seulement"
       },
       "personnel": {
-        "medecins": "9",
-        "infirmieres": "2"
+        "medecins": "10",
+        "infirmieres": "3"
       },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié",
+      "frais": "Frais fixe",
       "pratiques": [
         "pec",
-        "peri"
+        "peri",
+        "chir",
+        "msk",
+        "sad"
       ],
       "niveaux": {
         "gmf": "",
@@ -2351,10 +2354,12 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 347-5548. Pour les deux sites du GMF : 3 travailleurs sociaux, 1 psychologue, 3 pharmaciens (2 jours/semaine), 1 physiothérapeute. Frais : loyer fixe par mois.",
       "gardeUrgence": "",
-      "gardeAutre": "",
-      "presentation": ""
+      "gardeAutre": "Gardes de soir et de fin de semaine partagées avec le GMF-U de Saint-Jean-sur-Richelieu.",
+      "presentation": "GMF à deux sites avec le GMF-U de Saint-Jean-sur-Richelieu. Prise en charge (rendez-vous et accès adapté) et mini-urgence. Cinq médecins font des suivis de grossesse; plusieurs font de la pédiatrie. Salle de mini-chirurgie et appareil à échographie sur place. Cliniques spécialisées : pédiatrie, périnatalité, locomoteur (infiltrations), soins partagés en santé mentale, gynécologie (stérilet, biopsie d’endomètre, Nexplanon). Soins à domicile assurés par les résidents et une IPSPL. Jeune équipe dynamique.",
+      "responsableNom": "Dre Camille Latreille",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 45,
@@ -2367,8 +2372,8 @@
       "lat": 45.34011,
       "lng": -73.283997,
       "site": "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "joannie.ponton.med@ssss.gouv.qc.ca",
+      "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
         "Mardi": "8h00 – 20h00",
@@ -2379,23 +2384,24 @@
         "Dimanche": "8h00 – 12h30"
       },
       "personnel": {
-        "medecins": "17",
+        "medecins": "16",
         "residents": "16",
-        "ipspl": "3",
+        "ipspl": "4",
         "infirmieres": "3",
-        "infauxiliaires": "3",
+        "infauxiliaires": "4",
         "psychologues": "1",
-        "travailleuresSociales": "2"
+        "travailleuresSociales": "2",
+        "pharmaciennes": "3"
       },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau partagé",
+      "frais": "Aucun frais",
       "pratiques": [
         "pec",
         "chir",
-        "Musculosquelettique et infiltrations — MSK",
+        "msk",
         "sad",
         "peri"
       ],
@@ -2407,10 +2413,12 @@
       "niveau": "",
       "porteOuverte": "Annuellement à l'automne",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 741-3346. Recrutement : Dre Joannie Ponton, 450 357-3075. Équipe aussi composée d’une agente à l’amélioration continue de la qualité et d’une gestionnaire. Pharmaciens présents 2 jours/semaine.",
       "gardeUrgence": "",
-      "gardeAutre": "",
-      "presentation": ""
+      "gardeAutre": "Gardes de soir et de fin de semaine partagées avec le Centre médical Iberville.",
+      "presentation": "Affilié à l’Université de Sherbrooke. Locaux récents (février 2016). Accès adapté bien implanté. Besoins en prise en charge et en enseignement. Site public, sans frais de bureau. Seize médecins superviseurs, 16 résidents (8 R1 et 8 R2), stagiaires IPSPL et externes.",
+      "responsableNom": "Dre Joannie Ponton",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 46,
@@ -2423,8 +2431,8 @@
       "lat": 45.362116,
       "lng": -73.306479,
       "site": "https://www.cliniquemedicaleducoteau.ca/",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "roxannegosselin1@gmail.com",
+      "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 21h00",
         "Mardi": "8h00 – 21h00",
@@ -2434,12 +2442,17 @@
         "Samedi": "8h00 – 13h00",
         "Dimanche": "8h00 – 12h00"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "15",
+        "infirmieres": "5",
+        "travailleuresSociales": "2",
+        "pharmaciennes": "1"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau partagé",
+      "frais": "Frais fixe",
       "pratiques": [
         "pec",
         "peri"
@@ -2452,10 +2465,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 359-6819. Gestionnaire du GMF : Mme Rafaëlle Dextraze. Inhalothérapeute une fois par mois. Pharmacien présent le mardi et le vendredi. Frais selon les activités, au mois.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Équipe de 15 médecins aux pratiques variées, dont 7 qui font du suivi obstétrical. Clinique complètement informatisée, DMÉ en site unique. Dîners de formation continue organisés à l’interne.",
+      "responsableNom": "Dre Roxanne Gosselin",
+      "medecinsRecherches": "1",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 47,
@@ -2468,17 +2484,27 @@
       "lat": 45.31035,
       "lng": -73.264862,
       "site": "https://www.medisoleil.com/",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "noemie.lacroix-faucher@usherbrooke.ca alexandre.prudhomme.delage@gmail.com",
+      "dme": "Medesync (Telus)",
       "horaire": {},
-      "personnel": {},
+      "personnel": {
+        "medecins": "15",
+        "ipspl": "2",
+        "infirmieres": "4,5",
+        "infauxiliaires": "1",
+        "travailleuresSociales": "3",
+        "physiotherapeutes": "1",
+        "pharmaciennes": "1"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Frais fixe",
       "pratiques": [
-        "pec"
+        "pec",
+        "chir",
+        "msk"
       ],
       "niveaux": {
         "gmf": "",
@@ -2488,10 +2514,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 349-5555. Recrutement : Dre Noémie Lacroix-Faucher, 450 347-7563 (bureau) ou 514 770-3990. Dans le même édifice : pharmacie, physiothérapie, dentiste, optométriste, audiologiste et centre d’apnée du sommeil. Spécialités sur place : chirurgie vasculaire, neurologie, urologie, néphrologie, pédiatrie et psychiatre répondant. Infirmière auxiliaire en triage et prises de sang. Frais selon les activités ou tarif fixe mensuel.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Équipe jeune et dynamique. Rénovation en cours pour des bureaux plus efficaces. Prise en charge avec clientèle variée : pédiatrie, adulte, gériatrie, santé de la femme (stérilet, biopsie d’endomètre, Nexplanon), mini-chirurgie, musculo-squelettique (infiltrations). Possibilité de faire beaucoup ou très peu de sans rendez-vous selon le projet de pratique. Triage efficace. Programme de formation continue.",
+      "responsableNom": "Dre Noémie Lacroix-Faucher et Dr Alexandre Prud’homme-Delage",
+      "medecinsRecherches": "1",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 48,
@@ -2504,8 +2533,8 @@
       "lat": 45.443408,
       "lng": -73.302981,
       "site": "https://www.lacliniquefortchambly.com/",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "veronique.montpetit@outlook.com",
+      "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 20h45",
         "Mardi": "8h00 – 20h45",
@@ -2516,21 +2545,22 @@
         "Dimanche": "8h00 – 12h00 (SRV)"
       },
       "personnel": {
-        "medecins": "7",
-        "specialistes": "17",
+        "medecins": "6",
+        "specialistes": "16",
         "ipspl": "3",
         "infirmieres": "4",
+        "infauxiliaires": "2",
         "pharmaciennes": "1",
-        "nutritionnistes": "1",
-        "travailleuresSociales": "1"
+        "travailleuresSociales": "2"
       },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié",
+      "frais": "Frais fixe",
       "pratiques": [
-        "pec"
+        "pec",
+        "chir"
       ],
       "niveaux": {
         "gmf": "",
@@ -2540,10 +2570,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 658-6020. Recrutement : Dre Véronique Montpetit, 438 497-1537. Infirmières cliniciennes : 2 en maladies chroniques, 1 en pédiatrie, 1 en santé mentale. Inhalothérapeute (spirométrie sur place). Spécialistes sur place notamment en cardiologie, chirurgie générale, dermatologie, gastro-entérologie, gynécologie, néphrologie, ORL, orthopédie, pédiatrie, pneumologie, psychiatrie, urologie et vasectomie. Dans le même édifice : acupuncture, chiropratique, audiologie, dentiste, ergothérapie, optométriste, orthésiste, ostéopathie, pharmacie et physiothérapie. Frais mensuel fixe, modulé en début de pratique.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Capacité pour 3 nouveaux médecins. Salle de mini-chirurgie. Salle de conférence avec activités de FMC accréditées chaque semaine. Le sans rendez-vous est stimulant grâce à une clinique de radiologie dans le même édifice. Comité social engagé.",
+      "responsableNom": "Dre Véronique Montpetit",
+      "medecinsRecherches": "3",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 49,
@@ -2556,8 +2589,8 @@
       "lat": 45.318722,
       "lng": -73.264207,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=34989",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "julie.robitaille.med@ssss.gouv.qc.ca catherine.gohier.med@ssss.gouv.qc.ca",
+      "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
         "Mardi": "8h00 – 17h00",
@@ -2567,14 +2600,17 @@
         "Samedi": "Fermé",
         "Dimanche": "9h00 – 13h00"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "9"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
       "bureau": "",
-      "frais": "",
+      "frais": "Frais fixe",
       "pratiques": [
-        "pec"
+        "pec",
+        "chir"
       ],
       "niveaux": {
         "gmf": "",
@@ -2584,10 +2620,12 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 348-9218. Frais modulables en début de pratique, avec équité entre les membres.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Neuf médecins aux pratiques variées. Expérience en chirurgie mineure, infiltrations et pose de stérilets. Accès adapté et sans rendez-vous ponctuel. Clinique rénovée à l’automne 2016, avec gestionnaire de clinique. Portail d’accès. Aucun bureau n’est indiqué comme disponible pour l’instant.",
+      "responsableNom": "Dre Julie Robitaille et Dre Catherine Gohier",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 50,
@@ -2600,8 +2638,8 @@
       "lat": 45.432177,
       "lng": -73.161912,
       "site": "https://cliniquemarieville.com/",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "sacha.lajoie.med@ssss.gouv.qc.ca",
+      "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
         "Mardi": "8h00 – 17h00",
@@ -2613,14 +2651,19 @@
       },
       "personnel": {
         "medecins": "8",
-        "specialistes": "2 (chirurgie, orthopédie)",
-        "ipspl": "4"
+        "specialistes": "2 (chirurgie générale, orthopédie)",
+        "ipspl": "5",
+        "infirmieres": "1",
+        "infauxiliaires": "1",
+        "pharmaciennes": "1",
+        "nutritionnistes": "1",
+        "travailleuresSociales": "1"
       },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Frais fixe",
       "pratiques": [
         "pec",
         "chir"
@@ -2633,10 +2676,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 708-2911. Recrutement : Dre Sacha Lajoie, 438 341-5410. Infirmière auxiliaire en tout temps pour le triage des rendez-vous et du sans rendez-vous. IVG médical offert. Frais fixe mensuel.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Clinique en pleine expansion, ouverte en 2015 par un organisme à but non lucratif pour la population locale. Esprit communautaire et équipe chaleureuse. Bureaux modernes, spacieux et bien équipés. Salle de chirurgie mineure et salle de conférence pour la formation continue. CHSLD Sainte-Croix à proximité. Capacité de 9 médecins et 5 IPS. Milieu de stage pour stagiaires IPS.",
+      "responsableNom": "Dre Sacha Lajoie",
+      "medecinsRecherches": "2",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 51,
@@ -2649,8 +2695,8 @@
       "lat": 45.436544,
       "lng": -73.24467,
       "site": "",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "isabelle.raymond.med@ssss.gouv.qc.ca",
+      "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h00 – 20h45",
         "Mardi": "8h00 – 20h45",
@@ -2660,14 +2706,24 @@
         "Samedi": "8h00 – 12h00",
         "Dimanche": "Fermé"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "13",
+        "ipspl": "3",
+        "infirmieres": "2",
+        "infauxiliaires": "1",
+        "pharmaciennes": "1",
+        "physiotherapeutes": "1",
+        "travailleuresSociales": "2"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Aucun frais",
       "pratiques": [
-        "pec"
+        "pec",
+        "sad",
+        "chir"
       ],
       "niveaux": {
         "gmf": "",
@@ -2677,10 +2733,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 658-7563. Recrutement : Dre Isabelle Raymond, 450 684-1989. Une des IPSPL est en soins à domicile. Pharmacienne 10,5 h/semaine.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "GMF mixte sur trois sites (CLSC du Richelieu, point de service Saint-Césaire, Clinique du Collège). Activités de prise en charge et sans rendez-vous, avec possibilité d’accès adapté. ECG et appareil d’échographie sur place, salle de mini-chirurgie, clinique de stérilet et Nexplanon. Possibilité de soins à domicile au CLSC Richelieu avec une équipe déjà implantée (4 à 8 heures par semaine à combler avec d’autres activités). Centre de prélèvements sur place. Aucun frais de bureau.",
+      "responsableNom": "Dre Isabelle Raymond",
+      "medecinsRecherches": "1",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 52,
@@ -2693,8 +2752,8 @@
       "lat": 45.408375,
       "lng": -73.002202,
       "site": "",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "isabelle.raymond.med@ssss.gouv.qc.ca",
+      "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h00 – 16h00",
         "Mardi": "8h00 – 16h00",
@@ -2704,12 +2763,15 @@
         "Samedi": "Fermé",
         "Dimanche": "Fermé"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "3",
+        "infirmieres": "1"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Aucun frais",
       "pratiques": [
         "pec"
       ],
@@ -2721,10 +2783,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone : 450 469-0269. Recrutement : Dre Isabelle Raymond, 450 684-1989, isabelle.raymond.med@ssss.gouv.qc.ca. Infirmière GMF 4 jours/semaine.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Point de service du GMF Richelieu – Saint-Césaire, rattaché au CLSC. Trois médecins sur place. Aucun frais de bureau.",
+      "responsableNom": "Dre Isabelle Raymond",
+      "medecinsRecherches": "1",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 53,
@@ -2737,8 +2802,8 @@
       "lat": 45.409078,
       "lng": -73.002991,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=116297",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "isabelle.raymond.med@ssss.gouv.qc.ca",
+      "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h00 – 17h00",
         "Mardi": "8h00 – 17h00",
@@ -2748,12 +2813,15 @@
         "Samedi": "Fermé",
         "Dimanche": "Fermé"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "3",
+        "infirmieres": "1"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Frais fixe",
       "pratiques": [
         "pec",
         "chir"
@@ -2766,10 +2834,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 469-0505. Contact sur place : Dr Nicolas Bouchard, 438 393-7363. Recrutement du GMF : Dre Isabelle Raymond, isabelle.raymond.med@ssss.gouv.qc.ca. Frais : montant fixe.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Troisième site du GMF Richelieu – Saint-Césaire. Trois médecins. Infirmière GMF un matin par semaine. Néphrologue et chirurgien une fois par mois.",
+      "responsableNom": "Dr Nicolas Bouchard",
+      "medecinsRecherches": "1",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 54,
@@ -2782,8 +2853,8 @@
       "lat": 45.277937,
       "lng": -73.256719,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47617",
-      "personneRessource": "",
-      "dme": "",
+      "personneRessource": "ferdais.hudon@sympatico.ca",
+      "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h00 – 20h30",
         "Mardi": "8h00 – 16h30",
@@ -2793,14 +2864,21 @@
         "Samedi": "Fermé",
         "Dimanche": "8h30 – 12h30 (1 dimanche sur 2)"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "5",
+        "ipspl": "2",
+        "infirmieres": "2",
+        "pharmaciennes": "1",
+        "travailleuresSociales": "1"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié",
+      "frais": "Frais fixe",
       "pratiques": [
-        "pec"
+        "pec",
+        "chir"
       ],
       "niveaux": {
         "gmf": "",
@@ -2810,10 +2888,13 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone de la clinique : 450 347-3748. Recrutement : Dre Éveline Hudon, 514 755-8948. Infirmières cliniciennes avec pratique autonome. Frais selon les activités, au mois.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "GMF à deux sites : 5 médecins sur place. Certains médecins vont à l’hôpital. Pratique variée, dont santé des femmes, pédiatrie et santé des jeunes. Deux médecins font des soins de longue durée et de la salle de chirurgie. Accès adapté pour les rendez-vous et le sans rendez-vous. Dans le même édifice : acupuncture, massothérapie, ostéopathie, physiothérapie et pharmacie.",
+      "responsableNom": "Dre Éveline Hudon",
+      "medecinsRecherches": "1",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
       "id": 55,
@@ -2825,9 +2906,9 @@
       "ville": "Saint-Jean-sur-Richelieu",
       "lat": 45.352316,
       "lng": -73.293606,
-      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50518",
-      "personneRessource": "",
-      "dme": "",
+      "site": "https://cliniquestluc.com/",
+      "personneRessource": "stephane.bastarache.med@ssss.gouv.qc.ca",
+      "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h30 – 17h00",
         "Mardi": "8h30 – 20h30",
@@ -2837,12 +2918,172 @@
         "Samedi": "Fermé",
         "Dimanche": "8h30 – 12h30 (1 dimanche sur 2)"
       },
-      "personnel": {},
+      "personnel": {
+        "medecins": "7",
+        "ipspl": "2",
+        "infirmieres": "3",
+        "infauxiliaires": "1",
+        "pharmaciennes": "1",
+        "travailleuresSociales": "1"
+      },
       "notes": "",
       "rls": "Haut-Richelieu–Rouville",
       "posApprox": false,
-      "bureau": "",
-      "frais": "",
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Frais fixe",
+      "pratiques": [
+        "pec",
+        "chir",
+        "msk",
+        "sad"
+      ],
+      "niveaux": {
+        "gmf": "",
+        "accesReseau": "",
+        "gmfu": ""
+      },
+      "niveau": "",
+      "porteOuverte": "",
+      "region": "Centre",
+      "infos": "Téléphone de la clinique : 450 348-6124. Recrutement : Dr Stéphane Bastarache, 514 893-0760. Quatre agentes administratives. Tarif mensuel fixe incluant la facturation, modulé pour la première année de pratique.",
+      "gardeUrgence": "",
+      "gardeAutre": "",
+      "presentation": "GMF à deux sites : 7 médecins à ce site. Jeune équipe dynamique. Déménagement depuis avril 2021 dans des locaux neufs, fonctionnels et bien éclairés, dont une salle équipée pour la mini-chirurgie et de l’équipement médical neuf. Accès adapté. Sans rendez-vous avec triage infirmier. Plusieurs médecins ont une pratique mixte. Clientèle variée : pédiatrie, santé de la femme, gériatrie, médecine musculo-squelettique. Possibilité de soins à domicile. Prise de rendez-vous en ligne et portail patient.",
+      "responsableNom": "Dr Stéphane Bastarache",
+      "medecinsRecherches": "2",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
+    },
+    {
+      "alias": "Henryville CLSC Vallée-des-Forts VDF",
+      "visible": true,
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-henryville",
+      "personneRessource": "emilie.gemme.med@ssss.gouv.qc.ca",
+      "dme": "Medesync (Telus)",
+      "horaire": {
+        "Lundi": "9h00 – 12h00 / 13h00 – 17h00",
+        "Mardi": "9h00 – 12h00 / 13h00 – 17h00",
+        "Mercredi": "9h00 – 12h00 / 13h00 – 17h00",
+        "Jeudi": "9h00 – 12h00 / 13h00 – 17h00",
+        "Vendredi": "9h00 – 12h00 / 13h00 – 17h00",
+        "Samedi": "Fermé",
+        "Dimanche": "Fermé"
+      },
+      "personnel": {
+        "medecins": "5",
+        "infirmieres": "1"
+      },
+      "notes": "",
+      "rls": "Haut-Richelieu–Rouville",
+      "posApprox": false,
+      "bureau": "Bureau partagé",
+      "frais": "Aucun frais",
+      "pratiques": [
+        "pec",
+        "sad"
+      ],
+      "niveaux": {
+        "gmf": "",
+        "accesReseau": "",
+        "gmfu": ""
+      },
+      "niveau": "",
+      "porteOuverte": "",
+      "region": "Centre",
+      "infos": "Téléphone : 450 299-2828. Recrutement : Dre Emilie Gemme, emilie.gemme.med@ssss.gouv.qc.ca. Un bureau partagé est indiqué comme disponible.",
+      "gardeUrgence": "",
+      "gardeAutre": "",
+      "presentation": "Cinq médecins. Possibilité de soins à domicile. Aucun frais de bureau.",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026",
+      "id": 132,
+      "nom": "CLSC de Henryville",
+      "type": "CLSC",
+      "adresse": "125, rue de l’Église, Henryville QC J0J 1E0",
+      "ville": "Henryville",
+      "lat": 45.1388669,
+      "lng": -73.1922366,
+      "responsableNom": "Dre Emilie Gemme",
+      "medecinsRecherches": "2"
+    },
+    {
+      "alias": "Coop santé Lac Champlain Venise-en-Québec Venise",
+      "visible": true,
+      "site": "https://coopsantelacchamplain.ca/",
+      "personneRessource": "stephanie.demers.med1@ssss.gouv.qc.ca marie-claude.duchesneau.med@ssss.gouv.qc.ca",
+      "dme": "",
+      "horaire": {
+        "Lundi": "8h00 – 16h30",
+        "Mardi": "8h00 – 16h30",
+        "Mercredi": "8h00 – 16h30",
+        "Jeudi": "8h00 – 16h30",
+        "Vendredi": "8h00 – 16h30",
+        "Samedi": "Fermé",
+        "Dimanche": "Fermé"
+      },
+      "personnel": {
+        "medecins": "2",
+        "specialistes": "2 (pédiatrie, phlébologie)",
+        "ipspl": "2",
+        "infirmieres": "3",
+        "psychologues": "1",
+        "physiotherapeutes": "1"
+      },
+      "notes": "",
+      "rls": "Haut-Richelieu–Rouville",
+      "posApprox": false,
+      "bureau": "Bureau dédié ou partagé",
+      "frais": "Frais fixe",
+      "pratiques": [
+        "pec",
+        "chir"
+      ],
+      "niveaux": {
+        "gmf": "",
+        "accesReseau": "",
+        "gmfu": ""
+      },
+      "niveau": "",
+      "porteOuverte": "",
+      "region": "Centre",
+      "infos": "Téléphone : 450 244-5350. Recrutement : Dre Stéphanie Demers, 514 293-8000, et Dre Marie-Claude Duchesneau. Ostéopathe et soins podologiques sur place. Prélèvements sanguins. Deux bureaux disponibles 5 jours/semaine. Frais très compétitifs (tarif journalier ou à la demi-journée), modulables en début de pratique.",
+      "gardeUrgence": "",
+      "gardeAutre": "",
+      "presentation": "Ni clinique privée ni GMF : financement par les membres et la communauté. En opération depuis 2007. Pratique en milieu rural, axée sur le suivi et l’accès adapté, avec une clientèle très diversifiée. Agrandissement 2025-2026 : 4 bureaux neufs et une nouvelle salle de mini-chirurgie. Présence infirmière pour le médecin chaque jour. Ouverture du lundi au vendredi.",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026",
+      "id": 133,
+      "nom": "Coopérative de santé Lac Champlain",
+      "type": "Coopérative",
+      "adresse": "211, 16e Avenue Ouest, suite 100, Venise-en-Québec QC J0J 2K0",
+      "ville": "Venise-en-Québec",
+      "lat": 45.0852784,
+      "lng": -73.1523568,
+      "responsableNom": "Dre Stéphanie Demers et Dre Marie-Claude Duchesneau",
+      "medecinsRecherches": "3"
+    },
+    {
+      "alias": "Coop Saint-Blaise St-Blaise santé",
+      "visible": true,
+      "site": "https://coopsantesaintblaise.com/",
+      "personneRessource": "josef.e.moser.med@ssss.gouv.qc.ca",
+      "dme": "Medesync (Telus)",
+      "horaire": {
+        "Lundi": "8h00 – 12h00 / 13h00 – 16h00",
+        "Mardi": "8h00 – 12h00 / 13h00 – 16h00",
+        "Mercredi": "8h00 – 12h00 / 13h00 – 16h00",
+        "Jeudi": "8h00 – 12h00 / 13h00 – 16h00",
+        "Vendredi": "Fermé",
+        "Samedi": "Fermé",
+        "Dimanche": "Fermé"
+      },
+      "personnel": {
+        "medecins": "1",
+        "ipspl": "1",
+        "infirmieres": "1"
+      },
+      "notes": "",
+      "rls": "Haut-Richelieu–Rouville",
+      "posApprox": false,
+      "bureau": "Bureau partagé",
+      "frais": "Frais fixe",
       "pratiques": [
         "pec"
       ],
@@ -2854,10 +3095,20 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "",
+      "infos": "Téléphone : 450 930-0777. Recrutement : Dr Josef Moser, 514 502-8128. Tarif fixe mensuel.",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "Clinique moderne ouverte depuis 2016. Horaires flexibles, sans restriction d’horaire. Pharmacie adjacente, personnel de bureau sur place. Bureaux modernes; matériel informatique et médical inclus. Clientèle multi-âges. Loyer compétitif.",
+      "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026",
+      "id": 134,
+      "nom": "Coopérative solidarité santé Saint-Blaise-sur-Richelieu",
+      "type": "Coopérative",
+      "adresse": "765, rue Principale, Saint-Blaise-sur-Richelieu QC J0J 1W0",
+      "ville": "Saint-Blaise-sur-Richelieu",
+      "lat": 45.2102978,
+      "lng": -73.28627,
+      "responsableNom": "Dr Josef Moser",
+      "medecinsRecherches": "1"
     },
     {
       "id": 59,
@@ -4535,7 +4786,6 @@
       "nom": "Centre Médical Fusion",
       "alias": "",
       "visible": true,
-      "statutRecrutement": "Ne recrute pas actuellement",
       "type": "GMF",
       "adresse": "2035, avenue Sainte-Anne suite 200, Saint-Hyacinthe, QC, J2S 5H3",
       "ville": "Saint-Hyacinthe",
@@ -6127,7 +6377,6 @@
       "nom": "GMF 3090 (Clinique Médicale Chemin Chambly)",
       "alias": "",
       "visible": true,
-      "statutRecrutement": "Ne recrute pas actuellement",
       "type": "GMF",
       "adresse": "3090, chemin Chambly, bureau 101, Longueuil, QC, J4L 4N5",
       "ville": "Longueuil",

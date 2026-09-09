@@ -9,15 +9,8 @@
   "scope": "/monteregie-est/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#FFFFFF",
+  "background_color": "#170A72",
   "theme_color": "#170A72",
-  "prefer_related_applications": false,
-  "related_applications": [
-    {
-      "platform": "webapp",
-      "url": "https://trouvetaclinique.ca/manifest-est.webmanifest"
-    }
-  ],
   "categories": [
     "medical",
     "health",
@@ -25,25 +18,25 @@
   ],
   "icons": [
     {
-      "src": "./icon-est-192.png?v=blanc",
+      "src": "./icon-est-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-est-192-maskable.png?v=blanc",
+      "src": "./icon-est-192-maskable.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./icon-est-512.png?v=blanc",
+      "src": "./icon-est-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-est-512-maskable.png?v=blanc",
+      "src": "./icon-est-512-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
