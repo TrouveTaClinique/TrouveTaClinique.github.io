@@ -1923,6 +1923,8 @@ function preparerCoucheEtablissements(donneesEtab) {
       termesRecherche: Array.isArray(sec.termesRecherche) ? sec.termesRecherche.slice() : [],
       ancre: sec.ancre || '',
       territoireSource: inst.missionRegionale ? null : (inst.rls || ''),
+      responsableNom: sec.responsableNom || '',
+      responsableCourriel: sec.responsableCourriel || '',
       _secteurEtab: true
     };
   }).filter(Boolean);
@@ -2763,11 +2765,24 @@ function basculerSecteurFiche(secteurId) {
 }
 /* Le statut est déjà porté par l'en-tête du secteur, déplié ou non : le répéter ici
    en ferait la première ligne de tout corps de secteur, pour rien. */
+function htmlContactSecteur(s) {
+  const pol = (dataEtabMeta && dataEtabMeta.politiqueAffichage) || {};
+  const nomOk = pol.afficherResponsableNom !== false && s.responsableNom;
+  const courrielOk = !!s.responsableCourriel;
+  if (nomOk && courrielOk) {
+    return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableNom)}</a>`;
+  }
+  if (nomOk) return esc(s.responsableNom);
+  if (pol.afficherResponsableCourriel !== false && courrielOk) {
+    return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`;
+  }
+  return 'À venir';
+}
 function htmlCorpsSecteur(s) {
   return `<div class="dp-sect-corps">
       ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
       ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
-      <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">À venir</span></div>
+      <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>
       <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
       <div class="notes-sec">
         <div class="vw-sec-title">Mes notes sur ce secteur</div>

@@ -10,7 +10,7 @@
       "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec la personne-ressource de Sante Quebec mais ne sortent jamais dans le HTML.",
       "besoinsDichotomiques": true,
       "afficherETC": false,
-      "afficherResponsableNom": false,
+      "afficherResponsableNom": true,
       "afficherResponsableCourriel": false,
       "contactAffiche": "À venir",
       "champsInternes": [
@@ -262,8 +262,8 @@
           "libelleAffichage": "Urgence",
           "etc": 3,
           "statut": "Actif",
-          "responsableNom": "MJ Arsenault",
-          "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
+          "responsableNom": "",
+          "responsableCourriel": "recrutementdmuhpg@gmail.com",
           "enseignement": null,
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
         },
@@ -273,8 +273,8 @@
           "libelleAffichage": "Hospitalisation",
           "etc": 2,
           "statut": "Actif",
-          "responsableNom": "UCDG - Mailan Pham",
-          "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
+          "responsableNom": "Katherine Buote",
+          "responsableCourriel": "katherine.buote.med@ssss.gouv.qc.ca",
           "enseignement": null,
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
         },
@@ -285,25 +285,25 @@
           "etc": 1,
           "statut": "Actif",
           "responsableNom": "Mailan Pham",
-          "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
+          "responsableCourriel": "mailan.pham.med.cisssme16@ssss.gouv.qc.ca",
           "enseignement": null,
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
         },
         {
-          "id": "SEC-004",
-          "secteur": "Soins intensifs (unité ≤ 6 lits)",
-          "libelleAffichage": "Soins intensifs",
-          "etc": 2,
+          "id": "SEC-032",
+          "secteur": "Obstétrique",
+          "libelleAffichage": "Obstétrique",
+          "etc": null,
           "statut": "Actif",
-          "responsableNom": "Marie-Christine Gélinas",
-          "responsableCourriel": "marie-christine.gelinas.med1@ssss.gouv.qc.ca",
+          "responsableNom": "Elizabeth Godin",
+          "responsableCourriel": "elizabeth.godin.med@ssss.gouv.qc.ca",
           "enseignement": null,
-          "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 5. Commentaire source : UCDG : DRE ML PHAM\nURG : MJ Arsenault\nGMF_U: Elise O'Carroll\nObs: Marie-Catherine Lamoureux\nSI: Marie-Christine Gélinas"
+          "notesInternes": "Ajout demandé par Nancy Langlois le 10 septembre 2026. ETC non fourni, à confirmer."
         }
       ],
       "sourceDonnees": "Identification-des-besoins-_-2027.xlsx (CISSS Monteregie-Est), transmis par Sante Quebec Monteregie-Est le 2 septembre 2026",
       "dateMaj": "2026-08-28",
-      "totalEtc": 8.0,
+      "totalEtc": 6.0,
       "decision": {
         "referenceExistante": {
           "collection": "hopitaux",
@@ -464,7 +464,7 @@
           "libelleAffichage": "Obstétrique",
           "etc": 1,
           "statut": "Actif",
-          "responsableNom": "G. Cadieux",
+          "responsableNom": "Geneviève Cadieux",
           "responsableCourriel": "genevieve.cadieux.med@ssss.gouv.qc.ca",
           "enseignement": null,
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 34. Commentaire source : Détention : Dr Haméon-Plante\nURG : MJ Arsenault\nOBS: G. Cadieux\nHospit : MC : 10-12 semaines / an chacun\nUCDG : MC : 10 jours aux 5 semaines\nSI: MC : 7 jours minimum par mois"
@@ -716,8 +716,8 @@
           "libelleAffichage": "Urgence",
           "etc": 2,
           "statut": "Actif",
-          "responsableNom": "MJ Arsenault",
-          "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
+          "responsableNom": "Gabrielle Dumas",
+          "responsableCourriel": "gabrielle.dumas.med@ssss.gouv.qc.ca",
           "enseignement": null,
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
         },
@@ -738,8 +738,8 @@
           "libelleAffichage": "UCDG",
           "etc": 2,
           "statut": "Actif",
-          "responsableNom": "Natacha Leblanc-Gagnon",
-          "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
+          "responsableNom": "Véronique Malenfant",
+          "responsableCourriel": "veronique.malenfant.med@ssss.gouv.qc.ca",
           "enseignement": null,
           "notesInternes": "Source : Identification-des-besoins-_-2027.xlsx, ligne 20. Commentaire source : Obstétrique : 0 besoin : Audrey Marion\nHospitalisation + UCDG (Natacha Leblanc-Gagnon)\nGMF_U Pierre Imbeault\nURG : MJ Arsenault\nSI: Timur Karimov"
         }

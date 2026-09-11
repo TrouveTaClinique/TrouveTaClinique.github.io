@@ -130,6 +130,8 @@ function construire() {
           dateInformation: (source.meta && source.meta.dateDonnees) || '2026-08-28'
         },
         enseignement: besoin.enseignement || null,
+        responsableNom: besoin.responsableNom || '',
+        responsableCourriel: besoin.responsableCourriel || '',
         regroupe: /SAD-SIAD-SP/i.test(besoin.secteur || besoin.libelleAffichage || ''),
         validation: { etat: 'a-valider', verifieLe: null }
       });
