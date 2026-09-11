@@ -1,5 +1,5 @@
 {
-  "miseAJour": "2026-09-08",
+  "miseAJour": "2026-09-11",
   "annonce": {
     "titre": "Prochaine activité de recrutement",
     "texte": "JR Express — RLS Jardins-Roussillon\n**lundi 10 août 2026**\nTournée des cliniques de la région et visite de l'hôpital Anna-Laberge.\nDépart du stationnement du parc André-J.-Côté, à Candiac.",
@@ -2359,6 +2359,7 @@
       "gardeAutre": "Gardes de soir et de fin de semaine partagées avec le GMF-U de Saint-Jean-sur-Richelieu.",
       "presentation": "GMF à deux sites avec le GMF-U de Saint-Jean-sur-Richelieu. Prise en charge (rendez-vous et accès adapté) et mini-urgence. Cinq médecins font des suivis de grossesse; plusieurs font de la pédiatrie. Salle de mini-chirurgie et appareil à échographie sur place. Cliniques spécialisées : pédiatrie, périnatalité, locomoteur (infiltrations), soins partagés en santé mentale, gynécologie (stérilet, biopsie d’endomètre, Nexplanon). Soins à domicile assurés par les résidents et une IPSPL. Jeune équipe dynamique.",
       "responsableNom": "Dre Camille Latreille",
+      "recrutementActif": false,
       "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
@@ -2367,7 +2368,7 @@
       "alias": "UMF Saint-Jean-sur-Richelieu St-Jean SJSR Douglas",
       "visible": true,
       "type": "GMF-U",
-      "adresse": "1225, rue Douglas, Saint-Jean-sur-Richelieu QC J2W 0J2",
+      "adresse": "1225, rue Douglas, Saint-Jean-sur-Richelieu QC J2W 1C7",
       "ville": "Saint-Jean-sur-Richelieu",
       "lat": 45.34011,
       "lng": -73.283997,
@@ -2416,8 +2417,9 @@
       "infos": "Téléphone de la clinique : 450 741-3346. Recrutement : Dre Joannie Ponton, 450 357-3075. Équipe aussi composée d’une agente à l’amélioration continue de la qualité et d’une gestionnaire. Pharmaciens présents 2 jours/semaine.",
       "gardeUrgence": "",
       "gardeAutre": "Gardes de soir et de fin de semaine partagées avec le Centre médical Iberville.",
-      "presentation": "Affilié à l’Université de Sherbrooke. Locaux récents (février 2016). Accès adapté bien implanté. Besoins en prise en charge et en enseignement. Site public, sans frais de bureau. Seize médecins superviseurs, 16 résidents (8 R1 et 8 R2), stagiaires IPSPL et externes.",
+      "presentation": "Affilié à l’Université de Sherbrooke. Locaux récents (février 2016). Accès adapté bien implanté. Site public, sans frais de bureau. Seize médecins superviseurs, 16 résidents (8 R1 et 8 R2), stagiaires IPSPL et externes.",
       "responsableNom": "Dre Joannie Ponton",
+      "recrutementActif": false,
       "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
@@ -2625,6 +2627,7 @@
       "gardeAutre": "",
       "presentation": "Neuf médecins aux pratiques variées. Expérience en chirurgie mineure, infiltrations et pose de stérilets. Accès adapté et sans rendez-vous ponctuel. Clinique rénovée à l’automne 2016, avec gestionnaire de clinique. Portail d’accès. Aucun bureau n’est indiqué comme disponible pour l’instant.",
       "responsableNom": "Dre Julie Robitaille et Dre Catherine Gohier",
+      "recrutementActif": false,
       "sourceRepertoire": "Document Recrutement HRR juin 2026 (Santé Québec Montérégie-Centre), reçu le 8 septembre 2026"
     },
     {
@@ -2902,7 +2905,7 @@
       "alias": "Saint-Luc St-Luc Saint-Eugène SJSR",
       "visible": true,
       "type": "GMF",
-      "adresse": "247, boulevard Saint-Luc, bureau 204, Saint-Jean-sur-Richelieu QC J2W 1C3",
+      "adresse": "247, boulevard Saint-Luc, Saint-Jean-sur-Richelieu QC J2W 0J3",
       "ville": "Saint-Jean-sur-Richelieu",
       "lat": 45.352316,
       "lng": -73.293606,

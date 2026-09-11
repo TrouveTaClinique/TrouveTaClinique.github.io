@@ -15,10 +15,10 @@
         "notesInternes"
       ]
     },
-    "statutValidation": "extrait HRR juin 2026",
+    "statutValidation": "extrait HRR, PDF du 10 septembre 2026 (contacts non relus)",
     "nbInstallations": 8,
     "nbSecteurs": 13,
-    "sourceDocument": "Recrutement-HRR-2026_2026-09-08.pdf",
+    "sourceDocument": "Recrutement-HRR-2026_2026-09-10.pdf",
     "categoriesActivite": [
       {
         "id": "urgence",
@@ -124,7 +124,7 @@
       },
       "adresse": "1225, rue Douglas",
       "ville": "Saint-Jean-sur-Richelieu",
-      "codePostal": "J2W 0J2",
+      "codePostal": "J2W 1C7",
       "telephone": "",
       "lat": 45.34011,
       "lng": -73.283997,
@@ -295,7 +295,7 @@
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-06-01",
-        "besoinDeclare": "4 à 5 collègues",
+        "besoinDeclare": "4 postes",
         "responsableNom": "Dre Julie Robitaille / Dr Frederic Benny",
         "responsableCourriel": null,
         "telephone": null,
@@ -415,9 +415,9 @@
       "ancre": "gmf-u",
       "dme": "Medesync (Telus)",
       "recrutement": {
-        "statutDeclare": "actif",
+        "statutDeclare": "inactif",
         "dateInformation": "2026-06-01",
-        "besoinDeclare": "Prise en charge et enseignement",
+        "besoinDeclare": "0 poste",
         "responsableNom": "Dre Joannie Ponton",
         "responsableCourriel": "joannie.ponton.med@ssss.gouv.qc.ca",
         "telephone": null,
@@ -540,7 +540,7 @@
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-06-01",
-        "besoinDeclare": null,
+        "besoinDeclare": "2 médecins",
         "responsableNom": "Mme Noemis Bélanger",
         "responsableCourriel": "nbelanger@chsldsainte-catherine.com",
         "telephone": null,
