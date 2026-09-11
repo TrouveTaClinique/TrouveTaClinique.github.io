@@ -7,7 +7,8 @@
 #   téléversement, ou par n'importe quel autre moyen), ce robot :
 #     1. régénère les fiches de cliniques publiables, les pages de RLS, les répertoires et sitemap.xml ;
 #     2. vérifie qu'aucune donnée privée n'a fui dans les pages produites ;
-#     3. publie le résultat directement sur le site.
+#     3. publie le résultat directement sur le site ;
+#     4. prévient Bing (IndexNow) après la régénération de sitemap.xml, uniquement depuis main.
 #   Dès que scripts/carte.template.html est modifié, ce robot refabrique aussi /monteregie/
 #   et les trois cartes régionales (avec
 #   le <head> — titre/description/canonical/Open Graph — et le nom du territoire adaptés ;
@@ -212,3 +213,10 @@ jobs:
           git commit -m "Régénération des pages du site depuis data.json [automatique]"
           git push
           echo "Pages publiées."
+
+      - name: Prévenir Bing (IndexNow)
+        # Après sitemap.xml, jamais avant. Uniquement le site public : l'aperçu
+        # (branche brouillon) ne doit pas être signalé aux moteurs.
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        run: node scripts/soumettre-indexnow.js
