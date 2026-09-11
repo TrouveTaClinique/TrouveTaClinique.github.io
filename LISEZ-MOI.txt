@@ -115,6 +115,7 @@ FICHIERS À NE PAS SUPPRIMER
 ---------------------------
 CNAME ...................... maintient le domaine trouvetaclinique.ca
 google0e6f553795bbb4a9.html . vérification Google Search Console
+f9da567f5af7e87955c390530581e9a6.txt . clé IndexNow (Bing, Yandex, DuckDuckGo)
 robots.txt / sitemap.xml ... référencement
 .github/ ................... génération et contrôles automatiques
 scripts/slugs.json .......... mémoire des adresses web existantes
