@@ -545,8 +545,19 @@ p, li { text-wrap: pretty; }
 .skip-link:hover, .skip-link:focus, .skip-link:focus-visible { color:#170a72; }
 
 /* ── Page d'accueil (mandat du 30 août 2026) — quelques compléments propres à cette page. ── */
-.fact-grid-3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:960px}
-@media(max-width:720px){.fact-grid-3{grid-template-columns:1fr}}
+.fact-grid.fact-grid-3{
+  display:grid;
+  width:100%;
+  max-width:none;
+  margin-left:0;
+  margin-right:0;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  justify-content:stretch;
+  align-items:stretch;
+}
+@media(max-width:720px){
+  .fact-grid.fact-grid-3{grid-template-columns:1fr}
+}
 
 .terr-priorite{display:block;text-decoration:none;color:inherit;background:#fff;
   border:1px solid var(--line);border-left:5px solid var(--sq-bleu);border-radius:16px;
