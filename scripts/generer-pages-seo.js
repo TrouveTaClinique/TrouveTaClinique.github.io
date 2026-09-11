@@ -1412,6 +1412,15 @@ const PTEM_STATUT = {
   placesProchainPublies: false   // le tableau des places, lui, ne l'est pas encore
 };
 
+/* Balises title/description des 5 pages principales (10 sept. 2026).
+   Pas de comptes de cliniques ni d'établissements : ces nombres changent. */
+const TITRE_AMP = 'AMP en médecine familiale — guide Montérégie';
+const DESC_ACCUEIL = 'Trouvez où pratiquer en Montérégie : carte interactive des cliniques et établissements qui recrutent, avec contacts directs pour votre PTEM (PREM) 2027.';
+const DESC_PTEM = 'PTEM 2027 (PREM) en médecine familiale : dates officielles, avis de conformité, règle du 55 % et cliniques qui recrutent en Montérégie.';
+const DESC_AMP = 'AMP en médecine familiale : qui doit adhérer, combien d\'heures, exemples d\'AMP exclusives et mixtes en Montérégie, et quand faire votre demande.';
+const DESC_CLINIQUES_EST = 'Parcourez les cliniques de la Montérégie-Est qui recrutent : GMF, GMF-U et cliniques médicales classés par RLS, avec coordonnées, DMÉ et contact direct.';
+const DESC_ETABLISSEMENTS_EST = 'Les établissements de la Montérégie-Est qui recrutent : urgence, hospitalisation, UCDG, soins à domicile, obstétrique et GMF-U, par RLS avec contacts.';
+
 function phrasePtemCourte() {
   const { enVigueur, finVigueur, prochain, cadreProchainOfficiel, placesProchainPublies } = PTEM_STATUT;
   if (placesProchainPublies) {
@@ -1460,10 +1469,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
 
   const url = `${SITE}/`;
   const titre = 'Cliniques qui recrutent en médecine familiale — Montérégie';
-  const description = limiterTexte(
-    'Carte des cliniques et établissements de la Montérégie : coordonnées, horaires et contacts pour préparer votre PTEM en médecine familiale.',
-    155
-  );
+  const description = DESC_ACCUEIL;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -1488,7 +1494,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
       },
       { '@type': 'Person', '@id': `${url}#auteur`, name: 'Olivier Laplante',
         jobTitle: 'Résident en médecine familiale', url },
-      { '@type': 'WebPage', '@id': `${url}#accueil`, url, name: titre,
+      { '@type': 'WebPage', '@id': `${url}#accueil`, url, name: titre, description,
         isPartOf: { '@id': `${url}#website` },
         about: { '@type': 'Place', name: 'Montérégie, Québec' },
         dateModified: majDonnees }
@@ -1632,6 +1638,7 @@ ${items}
       {
         '@type': 'CollectionPage', '@id': url + '#webpage', url,
         name: `Cliniques en recrutement en ${nomTerritoire}`,
+        ...(u && u.region === 'Est' ? { description: DESC_CLINIQUES_EST } : {}),
         inLanguage: 'fr-CA', dateModified: majDonnees,
         isPartOf: { '@id': SITE + '/#website' }
       },
@@ -1700,7 +1707,9 @@ ${sections}
 
   return page({
     titre: limiterTexte(`Cliniques en recrutement en ${nomTerritoire}`, 58),
-    description: limiterTexte(`Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement), classés par ${parRls.size} RLS.`, 155),
+    description: (u && u.region === 'Est')
+      ? DESC_CLINIQUES_EST
+      : limiterTexte(`Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement), classés par ${parRls.size} RLS.`, 155),
     url, profondeur: u ? 2 : 1, indexable: true, jsonLd, actif: 'cliniques', univers: u || UNIVERS_GENERAL,
     filDAriane: u && u.region === 'Est' ? '' : (u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`),
     corps
@@ -2569,6 +2578,7 @@ ${items}
       {
         '@type': 'CollectionPage', '@id': url + '#webpage', url,
         name: 'Secteurs en établissement en Montérégie-Est',
+        description: DESC_ETABLISSEMENTS_EST,
         inLanguage: 'fr-CA', dateModified: majPagesSeo,
         isPartOf: { '@id': SITE + '/#website' }
       },
@@ -2605,7 +2615,7 @@ ${sections}`;
   return {
     html: page({
       titre: limiterTexte('Secteurs en établissement en Montérégie-Est', 58),
-      description: limiterTexte('Installations de la Montérégie-Est dont un ou plusieurs secteurs recrutent des médecins de famille : hôpitaux, CHSLD, CLSC, GMF-U et missions régionales.', 155),
+      description: DESC_ETABLISSEMENTS_EST,
       url, profondeur: 2, indexable, jsonLd, actif: 'etablissements', univers: u,
       filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
       corps
@@ -3478,15 +3488,38 @@ function normaliserPageGuide(html, nom) {
   sortie = sortie.replace(/<meta name="google-site-verification"[^>]*>\s*/g, '');
 
   if (nom === 'amp') {
+    sortie = sortie.replace(/<title>[^<]*<\/title>/, `<title>${TITRE_AMP}</title>`);
     sortie = sortie.replace(
-      /<title>AMP en médecine familiale — règles et Montérégie \| Trouve ta clinique<\/title>/,
-      '<title>AMP en médecine familiale — Montérégie</title>'
+      /property="og:title" content="[^"]*"/,
+      `property="og:title" content="${TITRE_AMP}"`
     );
     sortie = sortie.replace(
-      /property="og:title" content="AMP en médecine familiale — règles et Montérégie \| Trouve ta clinique"/,
-      'property="og:title" content="AMP en médecine familiale — Montérégie"'
+      /"name": "AMP en médecine familiale[^"]*"/,
+      `"name": ${JSON.stringify(TITRE_AMP)}`
     );
   }
+
+  const descGuide = nom === 'amp' ? DESC_AMP : DESC_PTEM;
+  sortie = sortie.replace(
+    /<meta content="[^"]*" name="description"\s*\/>/,
+    `<meta content="${descGuide}" name="description"/>`
+  );
+  sortie = sortie.replace(
+    /content="[^"]*" property="og:description"/,
+    `content="${descGuide}" property="og:description"`
+  );
+  if (/name="twitter:description"/.test(sortie)) {
+    sortie = sortie.replace(
+      /<meta content="[^"]*" name="twitter:description"\s*\/>/,
+      `<meta content="${descGuide}" name="twitter:description"/>`
+    );
+  } else {
+    sortie = sortie.replace(
+      /<meta content="summary_large_image" name="twitter:card"\s*\/>/,
+      `<meta content="summary_large_image" name="twitter:card"/>\n<meta content="${descGuide}" name="twitter:description"/>`
+    );
+  }
+  sortie = sortie.replace(/("description": )"[^"]*"/, `$1${JSON.stringify(descGuide)}`);
 
   if (nom && !sortie.includes('"@type": "FAQPage"')) {
     const faq = nom === 'amp' ? FAQ_AMP : FAQ_PTEM;
