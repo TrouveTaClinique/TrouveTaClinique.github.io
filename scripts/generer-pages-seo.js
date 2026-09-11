@@ -1530,8 +1530,9 @@ function pageAccueil(toutesEntrees, majDonnees) {
 <h2>Explorer par territoire</h2>
 ${htmlBanniereSqb('/assets', { compact: true })}
 <h3 class="soustitre">Autres territoires de la Montérégie</h3>
-<p class="terr-autres-note">Les cartes Centre et Ouest sont publiées. La Montérégie-Est reste le territoire le plus complet (cliniques, établissements, PTEM et AMP).</p>
+<p class="terr-autres-note">Les cartes de la Montérégie, de la Montérégie-Centre et de la Montérégie-Ouest sont disponibles, mais demeurent en construction.</p>
 <div class="terr-autres">
+  <a class="button sarcelle" href="/monteregie/">Montérégie</a>
   <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
   <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
 </div>

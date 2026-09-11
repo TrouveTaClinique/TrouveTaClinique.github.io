@@ -276,6 +276,8 @@ h1{
 .button.primary:hover{background:#24118d}
 .button.secondary{color:var(--navy);background:#fff}
 .button.ghost{border-color:#9fd8d5;color:#067879;background:#f3fffe}
+.button.sarcelle{background:var(--sq-sarcelle);border-color:var(--sq-sarcelle);color:#fff}
+.button.sarcelle:hover,.button.sarcelle:focus-visible{background:var(--sq-sarcelle);border-color:var(--sq-sarcelle);color:#fff}
 
 .source-chip{
   color:#067878!important;
@@ -539,6 +541,7 @@ p, li { text-wrap: pretty; }
 .site-header .nav a[aria-current="page"]:hover,
 .site-header .nav a[aria-current="page"]:focus-visible { color:var(--sq-bleu); background:var(--sq-menthe); }
 .site-footer a:hover, .site-footer a:focus-visible { color:#90f1e9; }
+.button.sarcelle:hover, .button.sarcelle:focus-visible { color:#fff; }
 .skip-link:hover, .skip-link:focus, .skip-link:focus-visible { color:#170a72; }
 
 /* ── Page d'accueil (mandat du 30 août 2026) — quelques compléments propres à cette page. ── */
@@ -563,6 +566,7 @@ p, li { text-wrap: pretty; }
 .terr-autres-note{font-size:.9rem;color:var(--muted);margin:-.2rem 0 .85rem;max-width:62ch}
 .terr-autres{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.4rem}
 .terr-autres .button.ghost{opacity:.7}
+.terr-autres .button.sarcelle{opacity:1}
 
 .rls-liste{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.3rem}
 .rls-liste a{background:#fff;border:1px solid var(--line);border-radius:999px;
