@@ -2713,22 +2713,22 @@ const DESCRIPTIONS_ETABLISSEMENTS_CENTRE = {
   'INS-C-004': 'Clinique jeunesse à Chambly, complémentaire à un GMF. Ouverte lundi, mardi et mercredi.',
   'INS-C-005': 'Clinique jeunesse au 185, rue Champlain, pour les 12 à 25 ans, avec projet d’aire ouverte.',
   'INS-C-006': 'Pédiatrie sociale à Saint-Jean-sur-Richelieu, pour les 0 à 18 ans, avec clinique mobile.',
-  'INS-C-007': 'CHSLD en partenariat public-privé, rue Labrèche. Deux médecins sur place.',
+  'INS-C-007': 'CHSLD en partenariat public-privé, rue Labrèche.',
   'INS-C-008': 'CHSLD privé conventionné à Chambly. Approche Montessori Or.'
 };
 const SEO_RESUME_SECTEURS_CENTRE = {
   'SEC-C-001': ['Jusqu’à 6 ETC visés en 2027', 'Profil urgence de haute acuité (MU3 ou équivalent)'],
-  'SEC-C-002': ['4 à 5 collègues recherchés'],
+  'SEC-C-002': ['4 postes'],
   'SEC-C-003': ['1 poste en 2027', 'Environ 1400 naissances par année', 'Garde 24 heures', 'Cliniques associées : Coteau, GMF-U, Iberville'],
   'SEC-C-004': ['Recrutement 2027', 'Unité de courte durée gériatrique'],
   'SEC-C-005': ['Recrutement 2027'],
   'SEC-C-006': ['Complet pour 2027'],
-  'SEC-C-007': ['Besoins en prise en charge et en enseignement', '16 médecins superviseurs et 16 résidents', 'Site public, sans frais de bureau'],
+  'SEC-C-007': ['16 médecins superviseurs et 16 résidents', 'Site public, sans frais de bureau'],
   'SEC-C-008': ['2 postes', 'Pratique exclusive ou jumelée à une prise en charge / Henryville', 'Déménagement prévu'],
   'SEC-C-009': ['1 poste', 'Lundi, mardi et mercredi', 'Complémentaire à un GMF'],
   'SEC-C-010': ['1 poste, 5 jours par semaine', '12 à 25 ans', 'Projet d’aire ouverte'],
   'SEC-C-011': ['1 jour par semaine, 3 à 4 semaines par mois', '0 à 18 ans', 'Clinique mobile'],
-  'SEC-C-012': ['Deux médecins sur place', 'Partenariat public-privé'],
+  'SEC-C-012': ['2 médecins recherchés', 'Partenariat public-privé'],
   'SEC-C-013': ['1 médecin recherché', 'CHSLD privé conventionné', 'Approche Montessori Or']
 };
 const SEO_RESUME_CLINIQUES_HRR = {
@@ -2745,7 +2745,6 @@ const SEO_RESUME_CLINIQUES_HRR = {
   '45': {
     lead: 'GMF-U public affilié à l’Université de Sherbrooke.',
     points: [
-      'Besoins en prise en charge et en enseignement',
       '16 médecins superviseurs et 16 résidents',
       'Accès adapté ; locaux de 2016',
       'Aucun frais de bureau ; bureaux partagés',
@@ -2898,10 +2897,9 @@ function lienCarteInstallationCentre(id) {
 function htmlExtraSeoRlsHrr() {
   return `  <section id="etablissements-hrr">
     <h2>Secteurs en établissement</h2>
-    <p>Outre les cliniques, le RLS recrute aussi en hôpital, GMF-U, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale.</p>
+    <p>Outre les cliniques, le RLS recrute aussi en hôpital, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale.</p>
     ${htmlResumeListe([
       'Hôpital du Haut-Richelieu : urgence, hospitalisation, obstétrique, UCDG, hôpital de jour',
-      'GMF-U de Saint-Jean-sur-Richelieu',
       'Soutien à domicile du CLSC Vallée-des-Forts',
       'Cliniques jeunesse de Chambly et de Saint-Jean-sur-Richelieu',
       'Pédiatrie sociale L’Étoile',
