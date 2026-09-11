@@ -1452,6 +1452,20 @@ function pageAccueil(toutesEntrees, majDonnees) {
   );
   const totalGeneral = publiees.length;
   const totalEst = publiees.filter(c => c.region === 'Est').length;
+  /* Même règle que la carte Est, onglet Cliniques, sans « Toutes les cliniques » :
+     territoire Est, fiche visible, pas un établissement, recrutementActif différent de false
+     (champ absent = recrute), nom et coordonnées valides. */
+  const totalEstRecrutement = toutesEntrees.filter(c => {
+    if (c.region !== 'Est' || c.visible === false || c.categorie === 'etablissement' || !recrute(c)) {
+      return false;
+    }
+    const lat = (typeof c.lat === 'number' || typeof c.lat === 'string') ? Number(c.lat) : NaN;
+    const lng = (typeof c.lng === 'number' || typeof c.lng === 'string') ? Number(c.lng) : NaN;
+    const latOk = Number.isFinite(lat) && lat >= -90 && lat <= 90;
+    const lngOk = Number.isFinite(lng) && lng >= -180 && lng <= 180;
+    const nomOk = typeof c.nom === 'string' && c.nom.trim().length > 0;
+    return latOk && lngOk && nomOk;
+  }).length;
 
   const RLS_EST = ['Pierre-Boucher', 'Richelieu-Yamaska', 'Pierre-De Saurel'];
   const RLS_AUTRES = [
@@ -1514,7 +1528,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
   </div>
 </section>
 
-<div class="fact-grid fact-grid-2">
+<div class="fact-grid fact-grid-3">
   <div class="fact-card">
     <span class="fact-kicker">Au total</span>
     <strong>${totalGeneral}</strong>
@@ -1525,13 +1539,19 @@ function pageAccueil(toutesEntrees, majDonnees) {
     <strong>${totalEst}</strong>
     <span>milieux de pratique répertoriés</span>
   </div>
+  <div class="fact-card">
+    <span class="fact-kicker">Recrutent activement</span>
+    <strong>${totalEstRecrutement}</strong>
+    <span>cliniques en recrutement en Montérégie-Est</span>
+  </div>
 </div>
 
 <h2>Explorer par territoire</h2>
 ${htmlBanniereSqb('/assets', { compact: true })}
 <h3 class="soustitre">Autres territoires de la Montérégie</h3>
-<p class="terr-autres-note">Les cartes Centre et Ouest sont publiées. La Montérégie-Est reste le territoire le plus complet (cliniques, établissements, PTEM et AMP).</p>
+<p class="terr-autres-note">Les cartes de la Montérégie, de la Montérégie-Centre et de la Montérégie-Ouest sont disponibles, mais demeurent en construction.</p>
 <div class="terr-autres">
+  <a class="button sarcelle" href="/monteregie/">Montérégie</a>
   <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
   <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
 </div>
