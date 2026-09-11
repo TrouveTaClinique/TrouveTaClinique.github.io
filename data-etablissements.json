@@ -8,7 +8,7 @@
       "note": "Decisions d'Olivier du 2 septembre 2026. Ces regles gouvernent la projection publique ; les champs internes restent dans ce fichier pour la validation avec la personne-ressource de Sante Quebec mais ne sortent jamais dans le HTML.",
       "besoinsDichotomiques": true,
       "afficherETC": false,
-      "afficherResponsableNom": false,
+      "afficherResponsableNom": true,
       "afficherResponsableCourriel": false,
       "contactAffiche": "À venir",
       "champsInternes": [
@@ -566,6 +566,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mailan Pham",
+      "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -595,6 +597,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mailan Pham",
+      "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -628,6 +632,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Angela Leach Orts",
+      "responsableCourriel": "angela.leach.orts.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -661,6 +667,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Josée Mercier",
+      "responsableCourriel": "josee.mercier.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -694,6 +702,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Angela Leach Orts",
+      "responsableCourriel": "angela.leach.orts.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -723,6 +733,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": "oui",
+      "responsableNom": "Elise O'Carroll",
+      "responsableCourriel": "elise.ocarroll.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -749,6 +761,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "",
+      "responsableCourriel": "recrutementdmuhpg@gmail.com",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -775,6 +789,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Katherine Buote",
+      "responsableCourriel": "katherine.buote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -800,6 +816,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mailan Pham",
+      "responsableCourriel": "mailan.pham.med.cisssme16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -807,27 +825,28 @@
       }
     },
     {
-      "id": "SEC-004",
+      "id": "SEC-032",
       "installationId": "INS-001",
-      "libelle": "Soins intensifs",
-      "secteur": "Soins intensifs (unité ≤ 6 lits)",
-      "categorieActivite": "soins-intensifs",
-      "abbrActivite": "USI",
+      "libelle": "Obstétrique",
+      "secteur": "Obstétrique",
+      "categorieActivite": "obstetrique",
+      "abbrActivite": "OBST",
       "activites": [
-        "soins-intensifs"
+        "obstetrique"
       ],
       "termesRecherche": [
-        "soins intensifs",
-        "si",
-        "reanimation",
-        "réanimation"
+        "obstetrique",
+        "obstétrique",
+        "accouchement"
       ],
-      "ancre": "soins-intensifs",
+      "ancre": "obstetrique",
       "recrutement": {
         "statutDeclare": "actif",
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Elizabeth Godin",
+      "responsableCourriel": "elizabeth.godin.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -857,6 +876,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mylène Coté",
+      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -886,6 +907,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mylène Coté",
+      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -919,6 +942,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Dr Mathieu Galfard",
+      "responsableCourriel": "mathieu.galfard.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -945,6 +970,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "MJ Arsenault",
+      "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -971,6 +998,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mylène Coté",
+      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -996,6 +1025,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mylène Coté",
+      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1023,6 +1054,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Geneviève Cadieux",
+      "responsableCourriel": "genevieve.cadieux.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1051,6 +1084,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Mylène Coté",
+      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1080,6 +1115,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Natacha Leblanc-Gagnon",
+      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1109,6 +1146,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Natacha Leblanc-Gagnon",
+      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1138,6 +1177,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Natacha Leblanc-Gagnon",
+      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1171,6 +1212,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Julie Gagnon",
+      "responsableCourriel": "Julie.gagnon.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -1204,6 +1247,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Claire Wadoux",
+      "responsableCourriel": "claire.wadoux.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -1233,6 +1278,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": "oui",
+      "responsableNom": "Dr Philippe Imbeault",
+      "responsableCourriel": "philippe.imbeault.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1259,6 +1306,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Gabrielle Dumas",
+      "responsableCourriel": "gabrielle.dumas.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1285,6 +1334,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Natacha Leblanc-Gagnon",
+      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1310,6 +1361,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Véronique Malenfant",
+      "responsableCourriel": "veronique.malenfant.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1338,6 +1391,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Dr Haméon-Plante",
+      "responsableCourriel": "christophe.hameon-plante.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1369,6 +1424,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Marie-Eve Turgeon",
+      "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1400,6 +1457,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Marie-Eve Turgeon",
+      "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1431,6 +1490,8 @@
         "dateInformation": "2026-08-28"
       },
       "enseignement": null,
+      "responsableNom": "Marie-Eve Turgeon",
+      "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",

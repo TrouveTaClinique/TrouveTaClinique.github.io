@@ -1736,7 +1736,7 @@ const PREMIER_LOT_ETABLISSEMENTS = [
 ];
 const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir obtenu l’aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d’inscription de patients.';
 const NOTE_SOURCE_ETABLISSEMENTS = 'Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
-const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> adressez-vous au service de recrutement médical de Santé Québec Montérégie-Est. Les coordonnées nominatives des établissements ne sont pas publiées sur ces fiches.</div>';
+const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
 
 const TYPE_ETAB_SEO = {
   hopital: 'Hôpital',
@@ -1837,7 +1837,7 @@ const PARAGRAPHES_SECTEUR_PAR_INSTALLATION = {
     urgence: '<p>Le service d’urgence de l’Hôpital Pierre-Boucher est ouvert 24 heures sur 24. Le secteur est en recrutement.</p>',
     hospitalisation: '<p>L’Hôpital Pierre-Boucher accueille des usagers pour des séjours de courte durée en médecine, chirurgie, soins intensifs, natalité, santé mentale et gériatrie active. La prise en charge des patients hospitalisés est en recrutement.</p>',
     ucdg: '<p>L’unité de courte durée gériatrique accueille des personnes âgées en perte d’autonomie pour une évaluation et une réadaptation de courte durée. Le secteur est en recrutement.</p>',
-    'soins-intensifs': '<p>Les soins intensifs font partie des séjours de courte durée offerts par l’Hôpital Pierre-Boucher. Le secteur est en recrutement.</p>'
+    obstetrique: '<p>Le secteur d’obstétrique est en recrutement.</p>'
   },
   'INS-006': {
     urgence: '<p>Le service d’urgence de l’Hôpital Honoré-Mercier est ouvert 24 heures sur 24. Santé Québec Montérégie-Est le décrit comme reconnu pour le traitement des patients ayant des problèmes cardiaques et de ceux dont les problèmes de santé sont liés au vieillissement et à la santé mentale. Le secteur est en recrutement.</p>',
@@ -1970,7 +1970,19 @@ function chapeauEtablissement(inst, secteurs) {
   return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}. ${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}. Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
 }
 
-function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null) {
+function htmlLigneContactEst(s, politique) {
+  const pol = politique || {};
+  const nom = String(s.responsableNom || '').trim();
+  const courriel = String(s.responsableCourriel || '').trim();
+  const nomOk = pol.afficherResponsableNom !== false && nom;
+  if (nomOk && courriel) {
+    return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(nom)}</a>.</p>`;
+  }
+  if (nomOk) return `<p>Contact : ${esc(nom)}.</p>`;
+  return '';
+}
+
+function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null, politique = {}) {
   const u = UNIVERS_PAR_REGION.Est;
   const slug = slugEtablissement(inst);
   const url = `${SITE}${EST_PREFIXE}/etablissements/${slug}/`;
@@ -1988,8 +2000,15 @@ function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null) {
   const introSecteurs = n === 1
     ? '<p>Le secteur ci-dessous est déclaré en recrutement pour le cycle 2027. Les modalités — volume, garde, répartition entre plusieurs médecins — se discutent avec le milieu : elles ne sont pas fixées ici.</p>'
     : '<p>Chaque secteur ci-dessous est déclaré en recrutement pour le cycle 2027. Les modalités — volume, garde, répartition entre plusieurs médecins — se discutent avec le milieu : elles ne sont pas fixées ici.</p>';
-  const blocsSecteurs = secteurs.map(s => `    <h3 id="${esc(s.ancre)}">${esc(titreH3Secteur(s))}</h3>
-    ${paragraphesSecteur(s, inst)}`).join('\n\n');
+  const blocsSecteurs = secteurs.map(s => {
+    const contact = htmlLigneContactEst(s, politique);
+    const lignes = [
+      `    <h3 id="${esc(s.ancre)}">${esc(titreH3Secteur(s))}</h3>`,
+      `    ${paragraphesSecteur(s, inst)}`
+    ];
+    if (contact) lignes.push(`    ${contact}`);
+    return lignes.join('\n');
+  }).join('\n\n');
   const lienRls = (!inst.missionRegionale && inst.territoireSource)
     ? `${EST_PREFIXE}/rls/${slugifier(inst.territoireSource)}/`
     : null;
@@ -2305,10 +2324,10 @@ function htmlExplorezSecteurs() {
         { nom: "Hôpital Honoré-Mercier", ville: "Saint-Hyacinthe", rls: "Richelieu-Yamaska", type: "Hôpital", href: "${EST_PREFIXE}/etablissements/hopital-honore-mercier/" }
       ],
       "soins-intensifs": [
-        { nom: "Hôpital Pierre-Boucher", ville: "Longueuil", rls: "Pierre-Boucher", type: "Hôpital", href: "${EST_PREFIXE}/etablissements/hopital-pierre-boucher/" },
         { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "${EST_PREFIXE}/etablissements/hotel-dieu-de-sorel/" }
       ],
       obstetrique: [
+        { nom: "Hôpital Pierre-Boucher", ville: "Longueuil", rls: "Pierre-Boucher", type: "Hôpital", href: "${EST_PREFIXE}/etablissements/hopital-pierre-boucher/" },
         { nom: "Hôtel-Dieu de Sorel", ville: "Sorel-Tracy", rls: "Pierre-De Saurel", type: "Hôpital", href: "${EST_PREFIXE}/etablissements/hotel-dieu-de-sorel/" }
       ],
       "gmf-u": [
@@ -2343,7 +2362,7 @@ function htmlExplorezSecteurs() {
     var ES_HOSPITALIER = [
       { id: "urgence", nom: "Urgence", sous: "Accueil 24 h", dot: "var(--es-azur)" },
       { id: "hospitalisation", nom: "Hospitalisation", sous: "Courte durée", dot: "var(--es-sarcelle)" },
-      { id: "obstetrique", nom: "Obstétrique", sous: "Sorel seulement", dot: "var(--es-azur)" },
+      { id: "obstetrique", nom: "Obstétrique", sous: "Longueuil et Sorel", dot: "var(--es-azur)" },
       { id: "ucdg", nom: "UCDG", sous: "Gériatrie courte durée", dot: "var(--es-sarcelle)" },
       { id: "soins-intensifs", nom: "Soins intensifs", sous: "Unités ≤ 6 lits", dot: "var(--es-azur)" }
     ];
@@ -2580,8 +2599,8 @@ ${items}
 
 ${sections}`;
 
-  // Les 22 fiches sont publiées. Les coordonnées nominatives d’établissement ne sont
-  // pas affichées (pas de ligne « À venir »).
+  // Les 22 fiches sont publiées. Les noms de contact connus apparaissent sur chaque
+  // fiche ; les courriels ne sont jamais écrits en toutes lettres.
   const indexable = true;
   return {
     html: page({
@@ -2621,7 +2640,7 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo, cliniq
       && cliniquesById)
       ? cliniquesById.get(String(inst.referenceExistante.id))
       : null;
-    const p = pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee);
+    const p = pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee, (donnees.meta || {}).politiqueAffichage);
     ecrire(path.join('monteregie-est', 'etablissements', p.slug, 'index.html'), p.html);
     conserves.add(p.slug);
     if (p.indexable) {

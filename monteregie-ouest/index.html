@@ -3236,17 +3236,16 @@ function urlEtat(id) {
 }
 function htmlContactSecteur(s) {
   const pol = (s && s.politiqueAffichage) || politiqueAffichageEtab();
-  const bits = [];
-  if (pol.afficherResponsableNom !== false && s.responsableNom) bits.push(esc(s.responsableNom));
-  if (pol.afficherResponsableCourriel !== false && s.responsableCourriel) {
-    bits.push(`<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`);
+  const nomOk = pol.afficherResponsableNom !== false && s.responsableNom;
+  const courrielOk = !!s.responsableCourriel;
+  if (nomOk && courrielOk) {
+    return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableNom)}</a>`;
   }
-  if (s.responsableTelephone) {
-    const tel = String(s.responsableTelephone).replace(/[^\d+]/g, '');
-    bits.push(`<a href="tel:${esc(tel)}">${esc(s.responsableTelephone)}</a>`);
+  if (nomOk) return esc(s.responsableNom);
+  if (pol.afficherResponsableCourriel !== false && courrielOk) {
+    return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`;
   }
-  if (!bits.length) return 'À venir';
-  return bits.join('<br>');
+  return 'À venir';
 }
 function htmlCorpsSecteur(s) {
   const notes = (s.notesPubliques || []).map(n => `<div class="vw-row"><span class="vw-label">Précision</span><span class="vw-value">${esc(n)}</span></div>`).join('');
