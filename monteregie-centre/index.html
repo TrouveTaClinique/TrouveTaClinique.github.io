@@ -3236,8 +3236,11 @@ function htmlContactSecteur(s) {
     return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableNom)}</a>`;
   }
   if (nomOk) return esc(s.responsableNom);
-  if (pol.afficherResponsableCourriel !== false && courrielOk) {
-    return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`;
+  if (courrielOk) {
+    if (pol.afficherResponsableCourriel !== false) {
+      return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`;
+    }
+    return `<a href="mailto:${esc(s.responsableCourriel)}">Écrire au recrutement</a>`;
   }
   return 'À venir';
 }

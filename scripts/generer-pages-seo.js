@@ -1766,6 +1766,7 @@ const PREMIER_LOT_ETABLISSEMENTS = [
 const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir obtenu l’aval du directeur du département universitaire de médecine familiale de la faculté de médecine concernée. Le médecin devra avoir le profil attendu en termes de tâches liées à des fonctions académiques et en termes d’inscription de patients.';
 const NOTE_SOURCE_ETABLISSEMENTS = 'Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
+const LIBELLE_CONTACT_SANS_NOM = 'Écrire au recrutement';
 
 const TYPE_ETAB_SEO = {
   hopital: 'Hôpital',
@@ -2008,6 +2009,10 @@ function htmlLigneContactEst(s, politique) {
     return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(nom)}</a>.</p>`;
   }
   if (nomOk) return `<p>Contact : ${esc(nom)}.</p>`;
+  /* Courriel sans nom : lien cliquable, adresse jamais affichée en toutes lettres. */
+  if (courriel) {
+    return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(LIBELLE_CONTACT_SANS_NOM)}</a>.</p>`;
+  }
   return '';
 }
 
