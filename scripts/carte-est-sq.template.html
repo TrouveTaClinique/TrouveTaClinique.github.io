@@ -1496,7 +1496,7 @@ body.cmp-open { overflow:hidden; }
      par les lecteurs d'écran et par les moteurs de recherche, qui n'en trouvaient aucun
      jusqu'ici. Le texte décrit fidèlement ce que la page contient : pas de mots-clés
      ajoutés qui ne correspondraient à rien de visible. -->
-<h1 class="sr-only" id="page-h1">Trouve ta clinique — Cliniques en recrutement en Montérégie-Est</h1>
+<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie-Est</h1>
 <p class="sr-only" id="page-desc">
   Carte interactive des cliniques et points de service qui recrutent des médecins de famille
   en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu :
@@ -1577,13 +1577,13 @@ body.cmp-open { overflow:hidden; }
       </a>
       <hr>
       <a class="info-menu-link" role="menuitem" href="rls/pierre-boucher/">
-        <span class="info-menu-ic" style="background:#0080D7">📋</span> Cliniques — RLS Pierre-Boucher
+        <span class="info-menu-ic" style="background:#0080D7">📋</span> Cliniques : RLS Pierre-Boucher
       </a>
       <a class="info-menu-link" role="menuitem" href="rls/richelieu-yamaska/">
-        <span class="info-menu-ic" style="background:#08A0A0">📋</span> Cliniques — RLS Richelieu-Yamaska
+        <span class="info-menu-ic" style="background:#08A0A0">📋</span> Cliniques : RLS Richelieu-Yamaska
       </a>
       <a class="info-menu-link" role="menuitem" href="rls/pierre-de-saurel/">
-        <span class="info-menu-ic" style="background:#170A72">📋</span> Cliniques — RLS Pierre-De Saurel
+        <span class="info-menu-ic" style="background:#170A72">📋</span> Cliniques : RLS Pierre-De Saurel
       </a>
       <hr>
       <a class="info-menu-link" role="menuitem" href="ptem/">
@@ -1913,12 +1913,12 @@ function mettreAJourMetaPage() {
   const desc = document.getElementById('page-desc');
   const prefix = /^BROUILLON \| /.test(document.title) ? 'BROUILLON | ' : '';
   if (modeCarte === 'etablissements') {
-    document.title = prefix + 'Secteurs en recrutement — Montérégie-Est | Trouve ta clinique';
-    if (h1) h1.textContent = 'Trouve ta clinique — Secteurs en recrutement en Montérégie-Est';
+    document.title = prefix + 'Secteurs en recrutement : Montérégie-Est | Trouve ta clinique';
+    if (h1) h1.textContent = 'Trouve ta clinique · Secteurs en recrutement en Montérégie-Est';
     if (desc) desc.textContent = 'Carte interactive des secteurs en recrutement en établissement en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel, et en mission régionale.';
   } else {
-    document.title = prefix + 'Cliniques en recrutement — Montérégie-Est | Trouve ta clinique';
-    if (h1) h1.textContent = 'Trouve ta clinique — Cliniques en recrutement en Montérégie-Est';
+    document.title = prefix + 'Cliniques en recrutement : Montérégie-Est | Trouve ta clinique';
+    if (h1) h1.textContent = 'Trouve ta clinique · Cliniques en recrutement en Montérégie-Est';
     if (desc) desc.textContent = 'Carte interactive des cliniques et points de service qui recrutent des médecins de famille en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu : coordonnées, type de clinique, réseau local de services, pratiques offertes, horaires et personne-ressource pour le recrutement.';
   }
 }
@@ -2522,7 +2522,7 @@ function hopitalPopupHtml(h) {
       <span class="hosp-tag" style="background:#b8770f">Chantier en cours</span>
       <h4>${esc(h.nom)}</h4>
       <p>${esc(h.adresse)}${h.ville ? ', ' + esc(h.ville) : ''}</p>
-      <p><em>Pas encore ouvert${h.ouverturePrevue ? ' — ouverture prévue ' + esc(h.ouverturePrevue) : ''}. Ne pas s'y présenter en attendant.</em></p>
+      <p><em>Pas encore ouvert${h.ouverturePrevue ? ' : ouverture prévue ' + esc(h.ouverturePrevue) : ''}. Ne pas s'y présenter en attendant.</em></p>
       ${h.site ? `<p><a href="${esc(h.site)}" target="_blank" rel="noopener">Suivre le projet ↗</a></p>` : ''}
     </div>`;
   }
@@ -3140,6 +3140,22 @@ function datePassee(v) {
 
 const esc = s => (s == null ? '' : String(s)
   .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'));
+/* Mot de présentation : une ligne par phrase, sans écrire de code HTML dans les données. */
+function escPhrases(s) {
+  const t = s == null ? '' : String(s).trim();
+  if (!t) return '';
+  const phrases = [];
+  const re = /[.!?](?=\s+[A-ZÀ-ÖØ-ÞŒÆ])/g;
+  let last = 0;
+  let m;
+  while ((m = re.exec(t))) {
+    phrases.push(t.slice(last, m.index + 1));
+    last = m.index + 1;
+    while (last < t.length && /\s/.test(t.charAt(last))) last++;
+  }
+  if (last < t.length) phrases.push(t.slice(last));
+  return phrases.map(p => esc(p.trim())).filter(Boolean).join('<br>');
+}
 
 function siteLink(url) {
   if (!url) return 'À venir';
@@ -3352,7 +3368,7 @@ function cmpHor(v) {
   if (/ferm/i.test(v)) return '<span class="cmp-ferme">' + esc(v) + '</span>';
   return esc(v);
 }
-function cmpPers(v) { return (v && String(v).trim()) ? esc(v) : '<span class="cmp-dash">—</span>'; }
+function cmpPers(v) { return (v && String(v).trim()) ? esc(v) : '<span class="cmp-dash">Non indiqué</span>'; }
 function cmpNote(v) { return (v && String(v).trim()) ? esc(v).replace(/\n/g, '<br>') : '<span class="cmp-dash">Aucune note</span>'; }
 function cmpChips(codes) {
   if (!codes || !codes.length) return '<span class="cmp-tbd">À venir</span>';
@@ -3384,7 +3400,7 @@ function cmpPersonnelCompact(g) {
     if (!v || !String(v).trim()) return '';
     return sd.lbl + ' : ' + String(v).trim();
   }).filter(Boolean);
-  if (!lines.length) return '<span class="cmp-dash">—</span>';
+  if (!lines.length) return '<span class="cmp-dash">Non indiqué</span>';
   return lines.map(l => esc(l)).join('<br>');
 }
 function cmpMetaDateLine() {
@@ -3464,7 +3480,7 @@ function buildComparatif(favs, totalFavs) {
     <div class="cmp-header">
       <div class="cmp-eyebrow">COMPARATIF</div>
       <div class="cmp-title">${titreMilieux} FAVORIS</div>
-      <div class="cmp-subtitle">Trouve ta clinique · Recrutement médical — Montérégie-Est</div>
+      <div class="cmp-subtitle">Trouve ta clinique · Recrutement médical · Montérégie-Est</div>
       <div class="cmp-exp">Exporté le ${date}${metaDate ? ' · ' + metaDate : ''}</div>
     </div>
     ${notice}
@@ -3477,7 +3493,7 @@ function buildComparatif(favs, totalFavs) {
         <div class="cmp-qrurl">trouvetaclinique.ca/monteregie-est/</div>
       </td>
     </tr></table>
-    <div class="cmp-note">Trouve ta clinique — ${etab ? 'Établissements' : 'Cliniques'} en recrutement · Montérégie-Est${metaDate ? ' · ' + metaDate : ''}</div>`;
+    <div class="cmp-note">Trouve ta clinique · ${etab ? 'Établissements' : 'Cliniques'} en recrutement · Montérégie-Est${metaDate ? ' · ' + metaDate : ''}</div>`;
   document.getElementById('cmp-print').innerHTML = cmpBarHtml('Comparatif des favoris') + '<div class="cmp-inner">' + html + '</div>';
   return gs.length;
 }
@@ -3944,14 +3960,14 @@ function openDetail(id) {
   ]);
 
   const reportHref = 'mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject='
-    + encodeURIComponent('Correction \u2013 ' + g.nom + ' (Trouve ta clinique — carte interactive)')
+    + encodeURIComponent('Correction \u2013 ' + g.nom + ' (Trouve ta clinique, carte interactive)')
     + '&body=' + encodeURIComponent('Bonjour,\n\nJe souhaite signaler une correction concernant ce milieu : ' + g.nom + '.\n\nCorrection propos\u00e9e :\n');
 
   document.getElementById('dp-body').innerHTML = `
     <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(g.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(g.id) ? '★ Retirer des favoris' : '☆ Ajouter aux favoris'}</button><button type="button" class="dp-ic dp-ic-share" id="dp-share-btn" title="Partager cette fiche" aria-label="Partager cette fiche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg></button><button type="button" class="dp-ic dp-ic-pdf" id="export-pdf-btn" title="Exporter la fiche en PDF" aria-label="Exporter la fiche en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg></button></div>
     ${g.presentation && String(g.presentation).trim() ? `<div class="vw-sec">
       <div class="vw-pres-title">Mot de présentation</div>
-      <p class="vw-pres">${esc(g.presentation)}</p>
+      <p class="vw-pres">${escPhrases(g.presentation)}</p>
     </div>
     <div class="vw-divider"></div>` : ''}
     <div class="vw-sec">
@@ -4114,7 +4130,7 @@ function annoncerA11y(texte) {
 function partagerFiche() {
   const g = byId(activeId); if (!g) return;
   const url = location.origin + urlEtat(activeId);
-  const titre = g.nom + ' — Trouve ta clinique';
+  const titre = g.nom + ' · Trouve ta clinique';
   if (navigator.share) { navigator.share({ title: titre, url }).catch(() => {}); return; }
   const fini = () => annoncerA11y('Lien copié dans le presse-papiers');
   if (navigator.clipboard) navigator.clipboard.writeText(url).then(fini).catch(() => prompt('Lien vers cette fiche :', url));
@@ -4420,7 +4436,7 @@ fetch('../data.json', { cache: 'no-cache' })
   if (!btn) return;
   var regNom = 'Montérégie-Est';
   var URL_APP = location.origin + location.pathname;
-  var TITRE = 'Trouve ta clinique — Montérégie-Est';
+  var TITRE = 'Trouve ta clinique · Montérégie-Est';
 
   function contenuPartage() {
     var etab = typeof modeCarte !== 'undefined' && modeCarte === 'etablissements';

@@ -35,7 +35,7 @@ const TERRITOIRES = [
     banniere: {
       url: 'https://trouvetaclinique.ca/assets/og-image-accueil.png',
       largeur: '1200', hauteur: '630',
-      alt: 'Carte interactive Montérégie-Est — Trouve ta clinique.'
+      alt: 'Carte interactive Montérégie-Est · Trouve ta clinique.'
     }
   },
   {
@@ -73,7 +73,7 @@ function phraseRls(t) {
 function menuRls(t) {
   return t.rls.map(([nom, couleur, slug]) =>
     `      <a class="info-menu-link" role="menuitem" href="rls/${slug}/">\n` +
-    `        <span class="info-menu-ic" style="background:${couleur}">📋</span> Cliniques — RLS ${nom}\n` +
+    `        <span class="info-menu-ic" style="background:${couleur}">📋</span> Cliniques : RLS ${nom}\n` +
     '      </a>'
   ).join('\n');
 }
@@ -127,8 +127,8 @@ function appliquerIdentiteRegionale(source, t) {
   const etat = { html: source.replace(/\r\n/g, '\n').replace(BLOC_HORS_REGION, ''), manques: [] };
   const r = (ancien, nouveau, libelle) => remplacer(etat, ancien, nouveau, libelle);
 
-  r('<title>Carte complète de la Montérégie — Cliniques en recrutement</title>',
-    `<title>Cliniques en recrutement — ${t.nom}</title>`, 'titre');
+  r('<title>Carte complète de la Montérégie : Cliniques en recrutement</title>',
+    `<title>Cliniques en recrutement : ${t.nom}</title>`, 'titre');
   r('<meta name="description" content="Explorez la carte complète des cliniques en recrutement et des établissements de la Montérégie pour préparer votre PTEM en médecine familiale.">',
     `<meta name="description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}, pour préparer votre PTEM en médecine familiale.">`, 'description');
   r('<link rel="canonical" href="https://trouvetaclinique.ca/monteregie/">',
@@ -138,26 +138,26 @@ function appliquerIdentiteRegionale(source, t) {
   r('<meta property="og:url" content="https://trouvetaclinique.ca/monteregie/">',
     `<meta property="og:url" content="https://trouvetaclinique.ca/${t.dossier}/">`, 'og:url');
   r('<meta property="og:title" content="Carte complète de la Montérégie | Trouve ta clinique">',
-    `<meta property="og:title" content="Cliniques en recrutement — ${t.nom}">`, 'og:title');
+    `<meta property="og:title" content="Cliniques en recrutement : ${t.nom}">`, 'og:title');
   r('<meta property="og:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">',
     `<meta property="og:description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}.">`, 'og:description');
   r('<meta name="twitter:title" content="Carte complète de la Montérégie | Trouve ta clinique">',
-    `<meta name="twitter:title" content="Cliniques en recrutement — ${t.nom}">`, 'twitter:title');
+    `<meta name="twitter:title" content="Cliniques en recrutement : ${t.nom}">`, 'twitter:title');
   r('<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">',
     `<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}.">`, 'twitter:description');
 
   r('"@id": "https://trouvetaclinique.ca/monteregie/#webpage"',
     `"@id": "https://trouvetaclinique.ca/${t.dossier}/#webpage"`, 'JSON-LD @id');
-  r('"name": "Trouve ta clinique — Carte complète de la Montérégie"',
-    `"name": "Trouve ta clinique — ${t.nom}"`, 'JSON-LD name');
+  r('"name": "Trouve ta clinique · Carte complète de la Montérégie"',
+    `"name": "Trouve ta clinique · ${t.nom}"`, 'JSON-LD name');
   r('"url": "https://trouvetaclinique.ca/monteregie/"',
     `"url": "https://trouvetaclinique.ca/${t.dossier}/"`, 'JSON-LD url');
   r('"description": "Carte interactive des cliniques en recrutement médical et des établissements de la Montérégie (Est, Centre et Ouest)."',
     `"description": "Carte interactive des cliniques en recrutement médical et des établissements de la ${t.nom}."`, 'JSON-LD description');
   r('"name": "Montérégie",', `"name": "${t.nom}",`, 'JSON-LD territoire');
 
-  r('<h1 class="sr-only" id="page-h1">Trouve ta clinique — Cliniques en recrutement en Montérégie</h1>',
-    `<h1 class="sr-only" id="page-h1">Trouve ta clinique — Cliniques en recrutement en ${t.nom}</h1>`, 'h1');
+  r('<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie</h1>',
+    `<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en ${t.nom}</h1>`, 'h1');
   r('  Carte interactive des cliniques et points de service qui recrutent des médecins de famille\n  en Montérégie, sur les trois territoires : Montérégie-Est, Montérégie-Centre et\n  Montérégie-Ouest. Pour chaque milieu : coordonnées, type de clinique, réseau local de\n  services, pratiques offertes, horaires et personne-ressource pour le recrutement.',
     `  Carte interactive des cliniques, points de service et établissements de la ${t.nom}, dans\n  les réseaux locaux de services ${phraseRls(t)}. Pour chaque clinique : coordonnées, type de\n  milieu, pratiques offertes, horaires et personne-ressource pour le recrutement.`, 'description accessible');
 
@@ -193,11 +193,11 @@ function appliquerIdentiteRegionale(source, t) {
     `    <strong>Montérégie<span class="brand-tiret">-</span><span class="brand-mot">${t.mot}</span></strong>`, 'identité du header');
 
   if (t.banniere) {
-    r('<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique.">',
+    r('<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie · Trouve ta clinique.">',
       `<meta property="og:image:alt" content="${t.banniere.alt}">`, 'og:image:alt');
   } else {
-    r('<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie — Trouve ta clinique.">',
-      `<meta property="og:image:alt" content="Carte interactive ${t.nom} — Trouve ta clinique.">`, 'og:image:alt');
+    r('<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie · Trouve ta clinique.">',
+      `<meta property="og:image:alt" content="Carte interactive ${t.nom} · Trouve ta clinique.">`, 'og:image:alt');
   }
 
   if (t.app) {
