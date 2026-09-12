@@ -706,9 +706,10 @@ const CENTRE_PREFIXE = '/monteregie-centre';
 function estGmfu(valeur) {
   return String(valeur || '').toLowerCase() === 'gmf-u';
 }
-function lienSuitePtemU() {
-  return `<li><a href="${EST_PREFIXE}/ptem-u/">PTEM-U : recrutement en GMF-U</a></li>`;
-}
+/* Portes d'entrée vers /monteregie-est/ptem-u/ : la page n'est pas dans le menu (6 liens).
+   Le saut de ligne est dans la constante, pour qu'une fiche non GMF-U n'ait pas de ligne vide. */
+const LIEN_PTEM_U = `<a class="text-cta" href="${EST_PREFIXE}/ptem-u/">Comprendre le PTEM en GMF-U \u2192</a>`;
+const LI_PTEM_U = `\n      <li><a href="${EST_PREFIXE}/ptem-u/">PTEM en GMF-U : place réservée et recrutement universitaire</a></li>`;
 
 /* Bannière des pages web : même image que la page d’accueil
    (assets/banniere-cellulaire-monteregie-est.jpg, mockup téléphone).
@@ -1139,8 +1140,7 @@ ${lignes.join('\n')}
     <ul class="source-list">
       <li><a href="${lienPrefixe}/rls/${slugifier(c.rls || '')}/">Autres milieux du RLS ${esc(c.rls)}</a></li>
       ${String(c.id) === '45' ? `<li><a href="${CENTRE_PREFIXE}/etablissements/gmf-u-de-saint-jean-sur-richelieu/">Secteurs en établissement du GMF-U</a></li>` : ''}
-      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
-      ${estGmfu(c.type) ? lienSuitePtemU() : ''}
+      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>${estGmfu(c.type) ? LI_PTEM_U : ''}
       <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
       <li><a href="${u.accueil}?c=${c.id}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
@@ -1427,6 +1427,7 @@ const TITRE_AMP = 'AMP en médecine familiale : guide Montérégie';
 const DESC_ACCUEIL = 'Trouvez où pratiquer en Montérégie : carte interactive des cliniques et établissements qui recrutent, avec contacts directs pour votre PTEM (PREM) 2027.';
 const DESC_PTEM = 'PTEM 2027 (PREM) en médecine familiale : dates officielles, avis de conformité, règle du 55 % et cliniques qui recrutent en Montérégie.';
 const DESC_AMP = 'AMP en médecine familiale : qui doit adhérer, combien d\'heures, exemples d\'AMP exclusives et mixtes en Montérégie, et quand faire votre demande.';
+const DESC_PTEM_U = 'PTEM en GMF-U : place réservée aux besoins universitaires, recrutement en surplus de la cible, échéance du 15 décembre et ce qui s’applique à un résident finissant.';
 const DESC_CLINIQUES_EST = 'Parcourez les cliniques de la Montérégie-Est qui recrutent : GMF, GMF-U et cliniques médicales classés par RLS, avec coordonnées, DMÉ et contact direct.';
 const DESC_ETABLISSEMENTS_EST = 'Les établissements de la Montérégie-Est qui recrutent : urgence, hospitalisation, UCDG, soins à domicile, obstétrique et GMF-U, par RLS avec contacts.';
 
@@ -1776,7 +1777,7 @@ const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir ob
 function htmlGmfuConditionSeo() {
   const t = GMFU_CONDITION_SEO;
   const coupe = t.indexOf('. ');
-  return `${esc(t.slice(0, coupe + 1))}<br>${esc(t.slice(coupe + 2))}<br>Pour les conditions, l’échéance du 15 décembre et l’avis en surplus, voir le <a href="${EST_PREFIXE}/ptem-u/">guide PTEM-U</a>.`;
+  return `${esc(t.slice(0, coupe + 1))}<br>${esc(t.slice(coupe + 2))}`;
 }
 const NOTE_SOURCE_ETABLISSEMENTS = 'Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
@@ -1915,7 +1916,7 @@ function paragraphesSecteur(s, inst) {
   } else if (s.categorieActivite === 'detention') {
     extra.push('<p>Le secteur de médecine en établissement de détention est en recrutement pour le cycle 2027.<br>Les modalités d’exercice se précisent avec le milieu.</p>');
   } else if (s.categorieActivite === 'gmf-u') {
-    extra.push(`<p>Le secteur GMF-U est en recrutement.</p><p>${htmlGmfuConditionSeo()}</p>`);
+    extra.push(`<p>Le secteur GMF-U est en recrutement.</p><p>${htmlGmfuConditionSeo()}</p><p>${LIEN_PTEM_U}</p>`);
   } else {
     extra.push(`<p>Le secteur ${esc(s.libelle)} est en recrutement pour le cycle 2027.</p>`);
   }
@@ -2196,8 +2197,7 @@ ${lignesClinique}${ligneSite}    </dl>
     <ul class="source-list">
       <li><a href="${EST_PREFIXE}/etablissements/">Tous les secteurs en recrutement en établissement de la Montérégie-Est</a></li>
       ${lienRls ? `<li><a href="${lienRls}">Autres milieux du RLS ${esc(inst.territoireSource)}</a></li>` : '<li><a href="' + EST_PREFIXE + '/rls/">Réseaux locaux de services de la Montérégie-Est</a></li>'}
-      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
-      ${estGmfu(inst.type) ? lienSuitePtemU() : ''}
+      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>${estGmfu(inst.type) ? LI_PTEM_U : ''}
       <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
       <li><a href="${esc(lienCarteInstallation(inst.id))}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
@@ -2945,7 +2945,7 @@ function paragraphesSecteurCentre(s) {
     blocs.push('<p>Ce secteur n’est pas en recrutement pour 2027.</p>');
   }
   blocs.push(htmlResumeListe(points));
-  if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${htmlGmfuConditionSeo()}</p>`);
+  if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${htmlGmfuConditionSeo()}</p><p>${LIEN_PTEM_U}</p>`);
   const contact = htmlContactSecteurSeo(s);
   if (contact) blocs.push(`<p>Contact : ${contact}.</p>`);
   if (s.dme) blocs.push(`<p>Dossier médical électronique : ${esc(s.dme)}.</p>`);
@@ -3103,8 +3103,7 @@ ${ligneTel}${ligneSite}${liee.lignes}    </dl>
       <li><a href="${CENTRE_PREFIXE}/etablissements/">Tous les secteurs en recrutement en établissement de la Montérégie-Centre</a></li>
       ${lienRls ? `<li><a href="${lienRls}">Autres milieux du RLS ${esc(inst.territoireSource)}</a></li>` : ''}
       ${cliniqueLiee ? `<li><a href="${CENTRE_PREFIXE}/cliniques/gmf-u-de-saint-jean-sur-richelieu/">Fiche clinique du GMF-U</a></li>` : ''}
-      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
-      ${estGmfu(inst.type) ? lienSuitePtemU() : ''}
+      <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>${estGmfu(inst.type) ? LI_PTEM_U : ''}
       <li><a href="${esc(lienCarteInstallationCentre(inst.id))}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
   </section>`;
@@ -3217,7 +3216,7 @@ const PAGES_FIXES = [
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/ptem/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },
-  { loc: '/monteregie-est/ptem-u/', lastmod: '2026-09-12', changefreq: 'monthly', priority: '0.5' },
+  { loc: '/monteregie-est/ptem-u/', lastmod: '2026-09-12', changefreq: 'monthly', priority: '0.6' },
   /* /monteregie/ (carte des 3 territoires) reste en ligne pour les humains mais n’est plus
      dans le sitemap : elle concurrence l’accueil et /monteregie-est/. */
   { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
@@ -3270,7 +3269,7 @@ function construireIndexRecherche(cliniques, slugs) {
     { nom: 'Secteurs en établissement', url: '/monteregie-est/etablissements/', extra: 'hopital chsld clsc gmf-u' },
     { nom: 'Secteurs en établissement Montérégie-Centre', url: '/monteregie-centre/etablissements/', extra: 'hopital chsld clsc gmf-u jeunesse hrr' },
     { nom: 'PTEM : plans territoriaux des effectifs médicaux', url: '/monteregie-est/ptem/', extra: 'ptem prem avis de conformite' },
-    { nom: 'PTEM-U : PTEM en GMF-U', url: '/monteregie-est/ptem-u/', extra: 'ptem-u gmf-u universitaire 15 décembre avis surplus' },
+    { nom: 'PTEM en GMF-U (PTEM-U)', url: '/monteregie-est/ptem-u/', extra: 'ptem-u ptemu gmf-u gmfu universitaire umf place reservee besoins universitaires enseignement resident finissant nouveau facturant mir' },
     { nom: 'AMP : activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' }
   ];
   for (const p of pages) {
@@ -3466,6 +3465,37 @@ const FAQ_AMP = {
   ]
 };
 
+const FAQ_PTEM_U = {
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Qu’est-ce que le PTEM en GMF-U?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Le PTEM en GMF-U, souvent appelé PTEM-U, est le volet universitaire du plan territorial des effectifs médicaux. Il permet de recruter un médecin dans un groupe de médecine de famille universitaire, soit sur une place réservée aux besoins universitaires, soit en surplus de la cible régionale.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Un résident qui termine sa formation peut-il obtenir un poste en GMF-U?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Oui. Les places réservées aux besoins universitaires sont généralement destinées à des médecins détenant le statut de nouveau facturant (NF), soit le statut d’un finissant de résidence. Un médecin détenant le statut MIR peut également être recruté.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'À quoi servent les 600 jours de facturation?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Les trois années de pratique active, soit un minimum de 600 jours de facturation, sont exigées pour un recrutement en GMF-U en surplus de la cible régionale. Cette condition ne s’applique pas aux places réservées aux besoins universitaires.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Quelle est l’échéance pour une candidature en GMF-U?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Le directeur du département de médecine de famille confirme son choix à Santé Québec et au DTMF au plus tard le 15 décembre, à la fin de la période initiale de candidature. Une place réservée sans candidature confirmée retourne à la marge régionale.' }
+    }
+  ]
+};
+
+/* Métadonnées par page-guide : ajouter une entrée ici en même temps que scripts/sources/<nom>.html. */
+const DESC_GUIDE_PAR_NOM = { ptem: DESC_PTEM, amp: DESC_AMP, 'ptem-u': DESC_PTEM_U };
+const FAQ_GUIDE_PAR_NOM = { ptem: FAQ_PTEM, amp: FAQ_AMP, 'ptem-u': FAQ_PTEM_U };
+const LIBELLE_GUIDE_PAR_NOM = { ptem: 'La page PTEM', amp: 'La page AMP', 'ptem-u': 'La page PTEM en GMF-U' };
+
 /*
  * Les pages PTEM et AMP sont publiées depuis un instantané figé (scripts/sources/*.html)
  * pris avant le passage de la navigation mobile au menu hamburger : leur header n'a donc
@@ -3540,7 +3570,7 @@ function normaliserPageGuide(html, nom) {
     );
   }
 
-  const descGuide = nom === 'amp' ? DESC_AMP : DESC_PTEM;
+  const descGuide = DESC_GUIDE_PAR_NOM[nom] || DESC_PTEM;
   sortie = sortie.replace(
     /<meta content="[^"]*" name="description"\s*\/>/,
     `<meta content="${descGuide}" name="description"/>`
@@ -3563,7 +3593,7 @@ function normaliserPageGuide(html, nom) {
   sortie = sortie.replace(/("description": )"[^"]*"/, `$1${JSON.stringify(descGuide)}`);
 
   if (nom && !sortie.includes('"@type": "FAQPage"')) {
-    const faq = nom === 'amp' ? FAQ_AMP : FAQ_PTEM;
+    const faq = FAQ_GUIDE_PAR_NOM[nom] || FAQ_PTEM;
     const bloc = `<script type="application/ld+json">\n${JSON.stringify({ '@context': 'https://schema.org', ...faq }, null, 2)}\n</script>\n`;
     sortie = sortie.replace('</head>', bloc + '</head>');
   }
@@ -3572,7 +3602,7 @@ function normaliserPageGuide(html, nom) {
 }
 
 function publierPagesGuide() {
-  for (const nom of ['ptem', 'amp']) {
+  for (const nom of ['ptem', 'amp', 'ptem-u']) {
     const source = path.join(RACINE, 'scripts', 'sources', nom + '.html');
     if (!fs.existsSync(source)) {
       throw new Error(`Source manquante : scripts/sources/${nom}.html — exécuter node scripts/creer-modeles-guide.js une fois.`);
@@ -3582,30 +3612,13 @@ function publierPagesGuide() {
       nom
     );
     ecrire(path.join('monteregie-est', nom, 'index.html'), html);
-    const libelle = nom === 'ptem' ? 'La page PTEM' : 'La page AMP';
+    const libelle = LIBELLE_GUIDE_PAR_NOM[nom] || 'La page';
     const redirection = pageRedirectionStatique(`${SITE}/monteregie-est/${nom}/`, libelle);
     ecrire(path.join(nom, 'index.html'), redirection);
     for (const u of UNIVERS_REGIONS) {
       if (u.region === 'Est') continue;
       ecrire(path.join(u.dossier, nom, 'index.html'), redirection);
     }
-  }
-  publierPagePtemU();
-}
-
-function publierPagePtemU() {
-  /* Page autonome : ne pas passer par normaliserPageGuide (titres, FAQ PTEM/AMP, nav). */
-  const source = path.join(RACINE, 'scripts', 'sources', 'ptem-u.html');
-  if (!fs.existsSync(source)) {
-    throw new Error('Source manquante : scripts/sources/ptem-u.html');
-  }
-  const html = fs.readFileSync(source, 'utf8').replace(/\{\{ASSETS\}\}/g, '../../assets');
-  ecrire(path.join('monteregie-est', 'ptem-u', 'index.html'), html);
-  const redirection = pageRedirectionStatique(`${SITE}/monteregie-est/ptem-u/`, 'La page PTEM-U');
-  ecrire(path.join('ptem-u', 'index.html'), redirection);
-  for (const u of UNIVERS_REGIONS) {
-    if (u.region === 'Est') continue;
-    ecrire(path.join(u.dossier, 'ptem-u', 'index.html'), redirection);
   }
 }
 
@@ -3620,7 +3633,7 @@ function exporterRedirectionsCloudflare() {
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const p = path.join(dir, e.name);
       if (e.isDirectory()) {
-        if (['.git', 'node_modules', 'canvases', '.github'].includes(e.name)) continue;
+        if (['.git', 'node_modules', 'canvases', '.github'].includes(e.name) || e.name.startsWith('_')) continue;
         walk(p);
       } else if (e.name === 'index.html') {
         const html = fs.readFileSync(p, 'utf8');

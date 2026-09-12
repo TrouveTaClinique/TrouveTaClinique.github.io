@@ -53,7 +53,7 @@ function verifierSources() {
   ) && ok;
   if (fs.existsSync(source)) {
     const contenu = fs.readFileSync(source, 'utf8');
-    const nav = (contenu.match(/<nav class="ptemu-nav"[^>]*>[\s\S]*?<\/nav>/) || [])[0] || '';
+    const nav = (contenu.match(/<nav[^>]*aria-label="Navigation principale"[^>]*>[\s\S]*?<\/nav>/) || [])[0] || '';
     ok = exigence(
       nav && !/ptem-u/i.test(nav),
       'le menu de la page n’a pas de bouton PTEM-U',
@@ -88,8 +88,8 @@ function verifierSitemap() {
   }
   const bloc = xml.split('<url>').find(p => p.includes(URL_PAGE)) || '';
   const priorite = (bloc.match(/<priority>([^<]+)<\/priority>/) || [])[1];
-  if (priorite && priorite !== '0.5') {
-    console.warn('  ! priorité sitemap = ' + priorite + ' (attendu : 0.5, plus bas que PTEM/AMP).');
+  if (priorite && priorite !== '0.6') {
+    console.warn('  ! priorité sitemap = ' + priorite + ' (attendu : 0.6, plus bas que PTEM/AMP).');
   }
   console.log('  ✓ déjà présent, priorité ' + (priorite || '?') + '.');
   return true;
