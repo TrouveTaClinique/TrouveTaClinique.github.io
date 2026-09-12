@@ -162,14 +162,14 @@
       "territoireSource": "Haut-Richelieu–Rouville",
       "missionRegionale": false,
       "referenceExistante": null,
-      "adresse": "650, boulevard Sénécal",
+      "adresse": "650, rue Sénécal",
       "ville": "Chambly",
       "codePostal": "J3L 1N9",
       "telephone": "",
-      "lat": 45.4472,
-      "lng": -73.2878,
+      "lat": 45.450487,
+      "lng": -73.297753,
       "lienWeb": "https://www.santemonteregie.qc.ca/installations/clinique-des-jeunes-du-bassin-de-chambly",
-      "coordonneesApproximatives": true,
+      "coordonneesApproximatives": false,
       "mentionPublique": "",
       "publication": {
         "visible": true
@@ -246,10 +246,10 @@
       "ville": "Chambly",
       "codePostal": "J3L 1G7",
       "telephone": "450 658-4441",
-      "lat": 45.4605371,
-      "lng": -73.2992478,
+      "lat": 45.461533,
+      "lng": -73.296158,
       "lienWeb": "https://www.manoirsoleil.com/",
-      "coordonneesApproximatives": true,
+      "coordonneesApproximatives": false,
       "mentionPublique": "",
       "publication": {
         "visible": true
