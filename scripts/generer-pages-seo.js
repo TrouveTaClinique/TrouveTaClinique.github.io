@@ -703,6 +703,13 @@ const EST_PREFIXE = '/monteregie-est';
 const EST_ACCUEIL = EST_PREFIXE + '/';
 const CENTRE_PREFIXE = '/monteregie-centre';
 
+function estGmfu(valeur) {
+  return String(valeur || '').toLowerCase() === 'gmf-u';
+}
+function lienSuitePtemU() {
+  return `<li><a href="${EST_PREFIXE}/ptem-u/">PTEM-U : recrutement en GMF-U</a></li>`;
+}
+
 /* Bannière des pages web : même image que la page d’accueil
    (assets/banniere-cellulaire-monteregie-est.jpg, mockup téléphone).
    Distincte de l’en-tête des formulaires Google :
@@ -761,7 +768,8 @@ const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region
 
 /* Navigation : carte et cliniques suivent le territoire de la page. PTEM/AMP restent
    les guides canoniques de l’Est (les copies Centre/Ouest ne sont que des redirections).
-   Le répertoire établissements existe en Montérégie-Est et en Montérégie-Centre. */
+   Le répertoire établissements existe en Montérégie-Est et en Montérégie-Centre.
+   Ne pas ajouter PTEM-U ici : la page existe, mais elle n’est pas dans le menu (6 liens). */
 function liensNav(u) {
   const prefixe = (u && u.regional) ? u.prefixe : EST_PREFIXE;
   const carte = (u && u.regional) ? u.accueil : EST_ACCUEIL;
@@ -1132,6 +1140,7 @@ ${lignes.join('\n')}
       <li><a href="${lienPrefixe}/rls/${slugifier(c.rls || '')}/">Autres milieux du RLS ${esc(c.rls)}</a></li>
       ${String(c.id) === '45' ? `<li><a href="${CENTRE_PREFIXE}/etablissements/gmf-u-de-saint-jean-sur-richelieu/">Secteurs en établissement du GMF-U</a></li>` : ''}
       <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
+      ${estGmfu(c.type) ? lienSuitePtemU() : ''}
       <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
       <li><a href="${u.accueil}?c=${c.id}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
@@ -1767,7 +1776,7 @@ const GMFU_CONDITION_SEO = 'Recrutements en GMF-U : la candidature doit avoir ob
 function htmlGmfuConditionSeo() {
   const t = GMFU_CONDITION_SEO;
   const coupe = t.indexOf('. ');
-  return `${esc(t.slice(0, coupe + 1))}<br>${esc(t.slice(coupe + 2))}`;
+  return `${esc(t.slice(0, coupe + 1))}<br>${esc(t.slice(coupe + 2))}<br>Pour les conditions, l’échéance du 15 décembre et l’avis en surplus, voir le <a href="${EST_PREFIXE}/ptem-u/">guide PTEM-U</a>.`;
 }
 const NOTE_SOURCE_ETABLISSEMENTS = 'Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
@@ -2188,6 +2197,7 @@ ${lignesClinique}${ligneSite}    </dl>
       <li><a href="${EST_PREFIXE}/etablissements/">Tous les secteurs en recrutement en établissement de la Montérégie-Est</a></li>
       ${lienRls ? `<li><a href="${lienRls}">Autres milieux du RLS ${esc(inst.territoireSource)}</a></li>` : '<li><a href="' + EST_PREFIXE + '/rls/">Réseaux locaux de services de la Montérégie-Est</a></li>'}
       <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
+      ${estGmfu(inst.type) ? lienSuitePtemU() : ''}
       <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
       <li><a href="${esc(lienCarteInstallation(inst.id))}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
@@ -3094,6 +3104,7 @@ ${ligneTel}${ligneSite}${liee.lignes}    </dl>
       ${lienRls ? `<li><a href="${lienRls}">Autres milieux du RLS ${esc(inst.territoireSource)}</a></li>` : ''}
       ${cliniqueLiee ? `<li><a href="${CENTRE_PREFIXE}/cliniques/gmf-u-de-saint-jean-sur-richelieu/">Fiche clinique du GMF-U</a></li>` : ''}
       <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>
+      ${estGmfu(inst.type) ? lienSuitePtemU() : ''}
       <li><a href="${esc(lienCarteInstallationCentre(inst.id))}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
   </section>`;
@@ -3206,6 +3217,7 @@ const PAGES_FIXES = [
   { loc: '/monteregie-est/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/ptem/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },
+  { loc: '/monteregie-est/ptem-u/', lastmod: '2026-09-12', changefreq: 'monthly', priority: '0.5' },
   /* /monteregie/ (carte des 3 territoires) reste en ligne pour les humains mais n’est plus
      dans le sitemap : elle concurrence l’accueil et /monteregie-est/. */
   { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
@@ -3258,6 +3270,7 @@ function construireIndexRecherche(cliniques, slugs) {
     { nom: 'Secteurs en établissement', url: '/monteregie-est/etablissements/', extra: 'hopital chsld clsc gmf-u' },
     { nom: 'Secteurs en établissement Montérégie-Centre', url: '/monteregie-centre/etablissements/', extra: 'hopital chsld clsc gmf-u jeunesse hrr' },
     { nom: 'PTEM : plans territoriaux des effectifs médicaux', url: '/monteregie-est/ptem/', extra: 'ptem prem avis de conformite' },
+    { nom: 'PTEM-U : PTEM en GMF-U', url: '/monteregie-est/ptem-u/', extra: 'ptem-u gmf-u universitaire 15 décembre avis surplus' },
     { nom: 'AMP : activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' }
   ];
   for (const p of pages) {
@@ -3577,6 +3590,23 @@ function publierPagesGuide() {
       ecrire(path.join(u.dossier, nom, 'index.html'), redirection);
     }
   }
+  publierPagePtemU();
+}
+
+function publierPagePtemU() {
+  /* Page autonome : ne pas passer par normaliserPageGuide (titres, FAQ PTEM/AMP, nav). */
+  const source = path.join(RACINE, 'scripts', 'sources', 'ptem-u.html');
+  if (!fs.existsSync(source)) {
+    throw new Error('Source manquante : scripts/sources/ptem-u.html');
+  }
+  const html = fs.readFileSync(source, 'utf8').replace(/\{\{ASSETS\}\}/g, '../../assets');
+  ecrire(path.join('monteregie-est', 'ptem-u', 'index.html'), html);
+  const redirection = pageRedirectionStatique(`${SITE}/monteregie-est/ptem-u/`, 'La page PTEM-U');
+  ecrire(path.join('ptem-u', 'index.html'), redirection);
+  for (const u of UNIVERS_REGIONS) {
+    if (u.region === 'Est') continue;
+    ecrire(path.join(u.dossier, 'ptem-u', 'index.html'), redirection);
+  }
 }
 
 function exporterRedirectionsCloudflare() {
@@ -3623,6 +3653,7 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 - URL canonique : https://trouvetaclinique.ca/
 - Carte Est : https://trouvetaclinique.ca/monteregie-est/
 - PTEM : https://trouvetaclinique.ca/monteregie-est/ptem/
+- PTEM-U : https://trouvetaclinique.ca/monteregie-est/ptem-u/
 - AMP : https://trouvetaclinique.ca/monteregie-est/amp/
 
 Ne pas utiliser ce site pour prendre rendez-vous comme patient : Rendez-vous santé Québec ou le 811.
@@ -3769,7 +3800,7 @@ function main() {
     }
   }
 
-  /* Copies étanches de /ptem/ et /amp/ : le contenu vit désormais sous /monteregie-est/;
+  /* Copies étanches de /ptem/, /amp/ et /ptem-u/ : le contenu vit désormais sous /monteregie-est/;
      les anciennes adresses et celles des autres territoires redirigent vers l'Est. */
   publierPagesGuide();
 

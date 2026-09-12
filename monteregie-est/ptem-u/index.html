@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTEM-U (PTEM en GMF-U) : guide pratique | Trouve ta clinique</title>
+<meta name="description" content="Qu’est-ce que le PTEM-U (PTEM en GMF-U)? Conditions d’admissibilité, démarche, échéance du 15 décembre et lien avec le PTEM régulier · guide sourcé (Santé Québec, FMRQ, Québec.ca).">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://trouvetaclinique.ca/monteregie-est/ptem-u/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:site_name" content="Trouve ta clinique">
+<meta property="og:title" content="PTEM-U (PTEM en GMF-U) : guide pratique">
+<meta property="og:description" content="Conditions d’admissibilité, démarche et échéances du PTEM en GMF-U, expliquées et sourcées.">
+<meta property="og:url" content="https://trouvetaclinique.ca/monteregie-est/ptem-u/">
+<meta property="og:image" content="https://trouvetaclinique.ca/assets/banniere_monteregie-est.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PTEM-U (PTEM en GMF-U) : guide pratique">
+<meta name="twitter:description" content="Conditions d’admissibilité, démarche et échéances du PTEM en GMF-U, expliquées et sourcées.">
+<link href="/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/favicon-48.png" rel="icon" sizes="48x48" type="image/png"/>
+<link href="/apple-touch-icon-180.png" rel="apple-touch-icon"/>
+<meta content="1024" property="og:image:width"/>
+<meta content="341" property="og:image:height"/>
+<meta content="Carte interactive Montérégie-Est · Trouve ta clinique." property="og:image:alt"/>
+<meta content="https://trouvetaclinique.ca/assets/banniere_monteregie-est.jpg" name="twitter:image"/>
+<link rel="stylesheet" href="/assets/seo-pages.css">
+<style>
+  /* Habillage autonome de la page PTEM-U : repose sur l’identité Santé Québec du site
+     (mêmes variables que /ptem/ et /amp/). Fonctionne même si assets/seo-pages.css
+     n’est pas chargé (page ouverte seule / avant intégration au dépôt). */
+  :root{
+    --navy:#170A72;
+    --mint:#90F1E9;
+    --teal:#08A0A0;
+    --azure:#0080D7;
+    --ink:#161A2E;
+    --paper:#FFFFFF;
+    --paper-soft:#F5F7FC;
+    --line:#E1E6F2;
+  }
+  *{box-sizing:border-box;}
+  body.ptemu{
+    margin:0;
+    font-family:"Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+  }
+  .ptemu a{color:var(--azure);}
+  .ptemu a:hover{color:var(--navy);}
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--navy); color:#fff;
+    padding:.6em 1em; z-index:100; border-radius:0 0 6px 0;
+  }
+  .skip-link:focus{left:0;}
+
+  /* En-tête */
+  .ptemu-header{
+    position:sticky; top:0; z-index:20; background:var(--paper);
+    border-bottom:3px solid transparent;
+    border-image:linear-gradient(90deg,var(--navy),var(--azure),var(--teal),var(--mint)) 1;
+  }
+  .ptemu-header-inner{
+    max-width:1100px; margin:0 auto; padding:.7em 1.1em;
+    display:flex; align-items:center; gap:1.2em; flex-wrap:wrap;
+  }
+  .ptemu-logo{font-weight:700; color:var(--navy); text-decoration:none; font-size:1.05rem; white-space:nowrap;}
+  .ptemu-nav{display:flex; gap:1.1em; flex-wrap:wrap; font-size:.92rem; margin-left:auto;}
+  .ptemu-nav a{color:var(--ink); text-decoration:none; padding:.25em 0; border-bottom:2px solid transparent;}
+  .ptemu-nav a:hover, .ptemu-nav a[aria-current="page"]{color:var(--navy); border-bottom-color:var(--teal);}
+  .ptemu-breadcrumb{
+    max-width:1100px; margin:0 auto; padding:.5em 1.1em 0; font-size:.85rem; color:#555;
+  }
+  .ptemu-breadcrumb a{color:#555; text-decoration:underline;}
+
+  /* Bannière / hero */
+  .ptemu-hero{
+    background:
+      radial-gradient(1100px 420px at 12% -10%, rgba(144,241,233,.35), transparent 60%),
+      linear-gradient(120deg, var(--navy) 0%, #241093 55%, var(--azure) 100%);
+    color:#fff; padding:2.6em 1.1em 2.2em;
+  }
+  .ptemu-hero-inner{max-width:900px; margin:0 auto;}
+  .ptemu-eyebrow{
+    display:inline-block; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.4);
+    padding:.25em .8em; border-radius:999px; font-size:.78rem; letter-spacing:.04em;
+    text-transform:uppercase; margin-bottom:.9em;
+  }
+  .ptemu-hero h1{font-size:clamp(1.6rem,3.4vw,2.3rem); margin:0 0 .5em; line-height:1.2;}
+  .ptemu-hero p{font-size:1.05rem; max-width:62ch; opacity:.95; margin:0;}
+  .ptemu-hero-actions{margin-top:1.4em; display:flex; gap:.8em; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:.65em 1.2em; border-radius:8px; font-weight:600;
+    text-decoration:none; font-size:.92rem; border:2px solid transparent;
+  }
+  .btn-light{background:#fff; color:var(--navy);}
+  .btn-light:hover{background:var(--mint); color:var(--navy);}
+  .btn-outline{border-color:rgba(255,255,255,.7); color:#fff;}
+  .btn-outline:hover{background:rgba(255,255,255,.15); color:#fff;}
+
+  /* Alerte / avertissement annuel */
+  .ptemu-alert{
+    max-width:900px; margin:1.6em auto 0; padding:.9em 1.1em;
+    background:#FFF7E6; border:1px solid #F2C94C; border-left:5px solid #F2A93C;
+    border-radius:8px; font-size:.92rem;
+  }
+
+  /* Corps / mise en page en deux colonnes (contenu + sommaire) */
+  .ptemu-layout{
+    max-width:1100px; margin:0 auto; padding:2.2em 1.1em 3em;
+    display:grid; grid-template-columns:230px 1fr; gap:2.4em; align-items:start;
+  }
+  .ptemu-toc{
+    position:sticky; top:70px; background:var(--paper-soft); border:1px solid var(--line);
+    border-radius:10px; padding:1em 1.1em; font-size:.88rem;
+  }
+  .ptemu-toc h2{font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; color:var(--navy); margin:0 0 .6em;}
+  .ptemu-toc ol{margin:0; padding-left:1.1em;}
+  .ptemu-toc li{margin-bottom:.45em;}
+  .ptemu-toc a{color:var(--ink); text-decoration:none;}
+  .ptemu-toc a:hover{color:var(--navy); text-decoration:underline;}
+
+  .ptemu-content section{margin-bottom:2.6em; scroll-margin-top:80px;}
+  .ptemu-section-no{
+    display:inline-block; font-weight:700; color:var(--teal); font-size:.85rem;
+    letter-spacing:.06em; margin-bottom:.35em;
+  }
+  .ptemu-content h2{font-size:1.35rem; color:var(--navy); margin:.1em 0 .7em; line-height:1.3;}
+  .ptemu-briefly{
+    background:var(--paper-soft); border-left:4px solid var(--teal);
+    padding:.9em 1.1em; border-radius:0 8px 8px 0; margin:0 0 1em; font-size:1rem;
+  }
+  .ptemu-briefly strong{color:var(--navy);}
+  .ptemu-content p{margin:0 0 1em;}
+  .ptemu-content ul, .ptemu-content ol.steps{margin:0 0 1em; padding-left:1.3em;}
+  .ptemu-content li{margin-bottom:.4em;}
+
+  .fact-card{
+    background:#fff; border:1px solid var(--line); border-top:4px solid var(--azure);
+    border-radius:10px; padding:1em 1.2em; margin:1em 0;
+    box-shadow:0 1px 3px rgba(23,10,114,.06);
+  }
+  .fact-card h3{margin:0 0 .5em; font-size:1rem; color:var(--navy);}
+  .fact-card.teal{border-top-color:var(--teal);}
+  .fact-card.navy{border-top-color:var(--navy);}
+
+  .callout-confusion{
+    background:#FDECEC; border:1px solid #F3B8B8; border-left:5px solid #D64545;
+    border-radius:8px; padding:.9em 1.1em; margin:1em 0; font-size:.95rem;
+  }
+  .callout-confusion strong{color:#8C1F1F;}
+
+  .timeline{list-style:none; margin:1em 0; padding:0; border-left:3px solid var(--line);}
+  .timeline li{position:relative; padding:0 0 1.1em 1.3em;}
+  .timeline li::before{
+    content:""; position:absolute; left:-8px; top:.3em; width:12px; height:12px;
+    border-radius:50%; background:var(--azure); border:2px solid #fff; box-shadow:0 0 0 2px var(--azure);
+  }
+  .timeline .date{font-weight:700; color:var(--navy); display:block;}
+
+  .ptemu-sources ul{list-style:none; margin:0; padding:0;}
+  .ptemu-sources li{
+    padding:.7em 0; border-bottom:1px solid var(--line); font-size:.94rem;
+  }
+  .ptemu-sources li:last-child{border-bottom:none;}
+  .ptemu-sources .src-org{font-weight:600; color:var(--navy);}
+
+  .ptemu-cta-inline{
+    background:var(--paper-soft); border:1px dashed var(--teal); border-radius:10px;
+    padding:1em 1.2em; margin:1.4em 0; text-align:center;
+  }
+
+  .ptemu-footer{
+    background:var(--navy); color:#EDEFFB; margin-top:2em;
+    border-top:4px solid var(--mint);
+  }
+  .ptemu-footer-inner{max-width:1100px; margin:0 auto; padding:1.6em 1.1em; font-size:.85rem;}
+  .ptemu-footer a{color:var(--mint);}
+  .ptemu-footer p{margin:.35em 0;}
+  .ptemu-footer em{opacity:.85;}
+
+  @media (max-width:820px){
+    .ptemu-layout{grid-template-columns:1fr;}
+    .ptemu-toc{position:relative; top:0;}
+  }
+  @media (max-width:560px){
+    .ptemu-nav{gap:.7em; font-size:.85rem;}
+    .ptemu-hero{padding:2em .9em 1.8em;}
+  }
+  @media print{
+    .ptemu-header, .ptemu-toc, .ptemu-hero-actions, .ptemu-cta-inline{display:none;}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://trouvetaclinique.ca/monteregie-est/ptem-u/#webpage",
+      "url": "https://trouvetaclinique.ca/monteregie-est/ptem-u/",
+      "name": "PTEM-U (PTEM en GMF-U) : guide pratique | Trouve ta clinique",
+      "description": "Qu’est-ce que le PTEM-U (PTEM en GMF-U)? Conditions d’admissibilité, démarche, échéance du 15 décembre et lien avec le PTEM régulier.",
+      "inLanguage": "fr-CA",
+      "dateModified": "2026-09-12",
+      "isPartOf": { "@id": "https://trouvetaclinique.ca/#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://trouvetaclinique.ca/" },
+        { "@type": "ListItem", "position": 2, "name": "Montérégie-Est", "item": "https://trouvetaclinique.ca/monteregie-est/" },
+        { "@type": "ListItem", "position": 3, "name": "PTEM", "item": "https://trouvetaclinique.ca/monteregie-est/ptem/" },
+        { "@type": "ListItem", "position": 4, "name": "PTEM-U" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qu’est-ce que le PTEM-U?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le PTEM-U n’est pas un programme distinct du PTEM : c’est le volet réservé au recrutement de médecins de famille dans les GMF-U reconnus prioritaires."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "En quoi le PTEM-U diffère-t-il du PTEM régulier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le PTEM régulier attribue des places selon une cible régionale. Le PTEM-U ajoute une réservation nominative confirmée par la direction du programme universitaire de médecine familiale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qui est admissible à une place GMF-U prioritaire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quatre conditions cumulatives : une expérience minimale de pratique, la recommandation de la direction universitaire, un profil conforme aux orientations du COGEM, et l’inscription de toute sa patientèle au GMF-U visé."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que se passe-t-il si rien n’est confirmé au 15 décembre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Une place réservée pour un GMF-U sans candidature recommandée à cette date redevient disponible pour le recrutement général de la région."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="ptemu">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="ptemu-header">
+  <div class="ptemu-header-inner">
+    <a class="ptemu-logo" href="/">Trouve ta clinique</a>
+    <nav class="ptemu-nav" aria-label="Navigation principale">
+      <a href="/">Accueil</a>
+      <a href="/monteregie-est/">Carte interactive</a>
+      <a href="/monteregie-est/cliniques/">Cliniques</a>
+      <a href="/monteregie-est/etablissements/">Établissements</a>
+      <a href="/monteregie-est/ptem/">PTEM</a>
+      <a href="/monteregie-est/amp/">AMP</a>
+    </nav>
+  </div>
+</header>
+<!-- Volontairement absente du menu ci-dessus : cette page n’est pas promue en navigation
+     principale (comme /ptem/ et /amp/ le sont). Elle reste accessible par le moteur de
+     recherche (indexation Google normale) et par les liens contextuels déposés sur les
+     fiches des GMF-U concernés. Ne pas ajouter de lien ici sans décision explicite d’Olivier. -->
+<p class="ptemu-breadcrumb">
+  <a href="/monteregie-est/">Montérégie-Est</a> ›
+  <a href="/monteregie-est/ptem/">PTEM</a> ›
+  PTEM-U
+</p>
+
+<section class="ptemu-hero">
+  <div class="ptemu-hero-inner">
+    <span class="ptemu-eyebrow">Médecine de famille · GMF-U</span>
+    <h1>PTEM-U (PTEM en GMF-U) : guide pratique</h1>
+    <p>La voie prioritaire du PTEM réservée aux groupes de médecine de famille universitaires (GMF-U) : à qui elle s’adresse, ses conditions, et comment s’y prendre avant le 15 décembre.</p>
+    <div class="ptemu-hero-actions">
+      <a class="btn btn-light" href="/monteregie-est/ptem/">Lire le guide PTEM complet</a>
+      <a class="btn btn-outline" href="/monteregie-est/cliniques/">Voir les milieux publiés</a>
+    </div>
+  </div>
+</section>
+
+<div class="ptemu-alert">
+  <strong>À savoir avant de lire :</strong> les règles des PTEM (incluant le volet GMF-U) sont révisées chaque année par Santé Québec. Les seuils et échéances ci-dessous reflètent le cadre général en vigueur. Confirmez toujours les détails de votre cohorte auprès de votre direction de programme, du DTMF de votre région et de la <a href="https://fmrq.qc.ca/postes-pem-ptem/medecine-familiale/ptem-en-gmf-u/" target="_blank" rel="noopener">FMRQ</a>.
+</div>
+
+<main id="contenu" class="ptemu-layout">
+  <nav class="ptemu-toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#quest-ce-que">Qu’est-ce que le PTEM-U?</a></li>
+      <li><a href="#difference-ptem">En quoi diffère-t-il du PTEM régulier?</a></li>
+      <li><a href="#admissibilite">Qui est admissible?</a></li>
+      <li><a href="#demarche">Comment se déroule la démarche?</a></li>
+      <li><a href="#si-rien-confirme">Si rien n’est confirmé au 15 décembre</a></li>
+      <li><a href="#avantage">L’avantage : un avis en surplus de la cible</a></li>
+      <li><a href="#calendrier">À quel moment s’en préoccuper?</a></li>
+      <li><a href="#lien-amp">Lien avec le PTEM régulier et les AMP</a></li>
+      <li><a href="#sources">Sources vérifiées</a></li>
+    </ol>
+  </nav>
+
+  <div class="ptemu-content">
+
+    <section id="quest-ce-que">
+      <span class="ptemu-section-no">01</span>
+      <h2>Qu’est-ce que le PTEM-U (PTEM en GMF-U)?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> le « PTEM-U » n’est pas un programme distinct du PTEM : c’est le nom donné, dans le milieu, au volet du plan territorial des effectifs médicaux (PTEM) réservé au recrutement de médecins de famille dans les <strong>groupes de médecine de famille universitaires (GMF-U)</strong> reconnus prioritaires par le ministère.</p>
+      <p>Chaque année, un certain nombre de places PTEM peuvent être réservées à l’avance pour permettre à un GMF-U de recruter un médecin correspondant à son profil académique (supervision de résidents, enseignement, recherche), plutôt que de laisser cette place ouverte au recrutement général. C’est cette réservation, et le processus qui l’entoure, que la FMRQ documente sous l’appellation « PTEM en GMF-U ».</p>
+      <p>Ce dispositif est propre à la médecine de famille : il n’existe pas d’équivalent GMF-U pour les autres spécialités, dont les effectifs sont plutôt encadrés par les plans d’effectifs médicaux (PEM) spécialisés.</p>
+    </section>
+
+    <section id="difference-ptem">
+      <span class="ptemu-section-no">02</span>
+      <h2>En quoi diffère-t-il du PTEM régulier?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> le PTEM régulier attribue des places selon une cible par région et par sous-territoire, sur la base des candidatures individuelles. Le PTEM-U ajoute un mécanisme de <strong>réservation nominative</strong>, confirmée par la direction du programme universitaire de médecine familiale plutôt que par le seul choix du médecin.</p>
+      <p>Concrètement, une candidature GMF-U n’est pas déposée « au mérite » dans le bassin général des candidatures : elle doit être recommandée par le directeur du département de médecine familiale de la faculté concernée, qui confirme ce choix directement auprès de Santé Québec et du <a href="/monteregie-est/ptem/">DTMF</a> de la région.</p>
+      <div class="callout-confusion">
+        <strong>À ne pas confondre :</strong> qu’un GMF-U souhaite vous recruter ne garantit pas, à lui seul, un avis de conformité. Comme pour le PTEM régulier, l’offre d’un milieu ne remplace pas la démarche officielle : celle-ci passe par la recommandation de votre direction de programme et par la confirmation du DTMF.
+      </div>
+    </section>
+
+    <section id="admissibilite">
+      <span class="ptemu-section-no">03</span>
+      <h2>Qui est admissible à une place GMF-U prioritaire?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> quatre conditions cumulatives : une expérience minimale de pratique, la recommandation de la direction universitaire, un profil conforme aux orientations du COGEM, et l’inscription de la totalité de sa patientèle au GMF-U visé.</p>
+      <div class="fact-card">
+        <h3>Les 4 conditions</h3>
+        <ul>
+          <li><strong>Expérience minimale :</strong> au moins trois années de pratique active, correspondant à un minimum de 600 jours de facturation.</li>
+          <li><strong>Recommandation :</strong> être proposé par le directeur du département de médecine familiale de la faculté concernée.</li>
+          <li><strong>Profil attendu :</strong> correspondre au profil recherché selon les orientations du COGEM (comité de gestion des effectifs médicaux), tâches académiques (supervision, enseignement) incluses.</li>
+          <li><strong>Inscription des patients :</strong> inscrire la totalité de sa patientèle au sein du GMF-U visé, pas seulement une partie.</li>
+        </ul>
+      </div>
+      <p>Ces critères visent des médecins déjà en pratique (mobilité vers un GMF-U) autant que des finissants de résidence recommandés dès leur entrée en pratique. La condition d’expérience et de facturation s’applique alors à évaluer selon le dossier individuel auprès du DTMF et de la direction de programme.</p>
+    </section>
+
+    <section id="demarche">
+      <span class="ptemu-section-no">04</span>
+      <h2>Comment se déroule la démarche, étape par étape?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> la démarche est portée par la direction du programme universitaire, pas déposée directement par le médecin. Votre rôle est de vous entendre avec le GMF-U et votre direction, puis de confirmer votre disponibilité.</p>
+      <ol class="steps">
+        <li>Le médecin (ou le résident finissant) et le GMF-U s’entendent sur un projet de recrutement, en fonction des besoins académiques du milieu.</li>
+        <li>Le directeur du département de médecine familiale de la faculté évalue et confirme le choix.</li>
+        <li>La direction transmet la confirmation à Santé Québec et au DTMF de la région <strong>avant le 15 décembre</strong>.</li>
+        <li>Le DTMF traite la demande, en tenant compte des conditions d’admissibilité et, s’il y a lieu, de l’approbation du COGEM pour un avis en surplus de sa cible.</li>
+        <li>Un avis de conformité rattaché au GMF-U est délivré au médecin si tout est conforme.</li>
+      </ol>
+    </section>
+
+    <section id="si-rien-confirme">
+      <span class="ptemu-section-no">05</span>
+      <h2>Que se passe-t-il si rien n’est confirmé au 15 décembre?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> une place réservée pour un GMF-U qui n’a pas de candidature recommandée à cette date n’est pas perdue pour la région : elle redevient disponible pour le recrutement général.</p>
+      <p>C’est un point à retenir pour la planification : le 15 décembre agit comme un couperet pour le volet universitaire précisément parce que les places non confirmées sont redistribuées, afin de ne pas priver inutilement le reste de la région de capacité de recrutement.</p>
+    </section>
+
+    <section id="avantage">
+      <span class="ptemu-section-no">06</span>
+      <h2>L’avantage particulier : un avis en surplus de la cible régionale</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> sous certaines conditions et avec l’approbation du COGEM, un DTMF peut accorder un avis de conformité pour un GMF-U <strong>en plus</strong> de sa cible régionale habituelle, ce qui n’ampute pas les places destinées au recrutement général de la région.</p>
+      <div class="fact-card teal">
+        <h3>Pourquoi ça compte</h3>
+        <p style="margin:0;">Dans le PTEM régulier, chaque place accordée « consomme » la cible annuelle du sous-territoire. Le mécanisme GMF-U permet, à certaines conditions, d’éviter que le recrutement académique n’entre en concurrence directe avec les besoins cliniques généraux de la région : un avantage réel, mais qui reste soumis à l’approbation du COGEM et n’est donc pas automatique.</p>
+      </div>
+    </section>
+
+    <section id="calendrier">
+      <span class="ptemu-section-no">07</span>
+      <h2>À quel moment s’en préoccuper?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> le cycle PTEM court du 1er décembre au 30 novembre de l’année suivante; pour le volet GMF-U, l’échéance qui compte le plus est la confirmation par la direction de programme, due le <strong>15 décembre</strong>.</p>
+      <ul class="timeline">
+        <li><span class="date">Avant le 15 décembre</span> Discussions avec le GMF-U et la direction de programme; confirmation transmise à Santé Québec et au DTMF.</li>
+        <li><span class="date">16 décembre – fin février</span> Traitement des demandes par le DTMF; recrutements en surplus soumis au COGEM au besoin.</li>
+        <li><span class="date">Fin janvier</span> Période habituelle de notification des décisions pour le cycle général, à confirmer selon l’année auprès du DTMF.</li>
+        <li><span class="date">1er décembre – 30 novembre</span> Durée d’un cycle PTEM complet, GMF-U inclus.</li>
+      </ul>
+      <p>Pour un résident finissant qui vise un poste en GMF-U, le bon réflexe est d’entamer les discussions avec le milieu et la direction de programme bien avant l’automne précédant l’entrée en pratique visée. La confirmation du 15 décembre arrive vite une fois la dernière année de résidence commencée.</p>
+    </section>
+
+    <section id="lien-amp">
+      <span class="ptemu-section-no">08</span>
+      <h2>Quel est le lien avec le PTEM régulier et les AMP?</h2>
+      <p class="ptemu-briefly"><strong>En bref :</strong> obtenir un avis de conformité via le volet GMF-U remplace la démarche PTEM régulière pour ce poste, mais ne dispense pas des autres obligations qui s’appliquent à tout médecin de famille du régime public, notamment les <a href="/monteregie-est/amp/">activités médicales particulières (AMP)</a>.</p>
+      <p>Une fois installé en GMF-U, le médecin doit toujours respecter la règle des 55 % de jours de facturation dans le territoire visé par son avis, et s’inscrire au régime des AMP au cours de son premier trimestre complet de pratique. L’enseignement et la supervision en GMF-U peuvent compter dans ce cadre selon les ententes régionales, mais ne dispensent pas automatiquement de l’obligation.</p>
+      <div class="ptemu-cta-inline">
+        <p style="margin:0 0 .6em;">Vous préparez votre entrée en pratique en Montérégie-Est?</p>
+        <a class="btn" style="background:var(--navy); color:#fff;" href="/monteregie-est/ptem/">Voir le guide PTEM complet</a>
+        &nbsp;
+        <a class="btn" style="background:var(--teal); color:#fff;" href="/monteregie-est/amp/">Comprendre les AMP</a>
+      </div>
+    </section>
+
+    <section id="sources" class="ptemu-sources">
+      <span class="ptemu-section-no">09</span>
+      <h2>Sources vérifiées</h2>
+      <ul>
+        <li><span class="src-org">FMRQ</span> · <a href="https://fmrq.qc.ca/postes-pem-ptem/medecine-familiale/ptem-en-gmf-u/" target="_blank" rel="noopener">PTEM en GMF-U</a> (conditions d’admissibilité, échéance du 15 décembre, avis en surplus)</li>
+        <li><span class="src-org">FMRQ</span> · <a href="https://fmrq.qc.ca/postes-pem-ptem/medecine-familiale/lexique/" target="_blank" rel="noopener">Lexique PTEM / DTMF / RLS / AMP</a></li>
+        <li><span class="src-org">Gouvernement du Québec</span> · <a href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" target="_blank" rel="noopener">Plans territoriaux des effectifs en médecine de famille</a></li>
+        <li><span class="src-org">Santé Québec / MSSS</span> · <a href="https://publications.msss.gouv.qc.ca/msss/fichiers/sante-quebec/25-Guide_gestion_PTEM.pdf" target="_blank" rel="noopener">Guide de gestion des PTEM en médecine de famille</a> (PDF · cadre réglementaire complet, dont le volet GMF-U)</li>
+        <li><span class="src-org">Gouvernement du Québec</span> · <a href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-de-famille-au-quebec/places-autorisees-disponibles-plans-regionaux-effectifs-medicaux/repartition-provinciale-places-prem" target="_blank" rel="noopener">Répartition provinciale des places aux PTEM</a></li>
+        <li><span class="src-org">FMOQ</span> · <a href="https://www.fmoq.org/guide-pratique-fmoq/installation/ptem/" target="_blank" rel="noopener">Guide pratique · Les PTEM</a> (règle du 55 %, pénalités, avis de conformité)</li>
+      </ul>
+      <p style="margin-top:1em; font-size:.9rem; color:#555;">Une question précise sur votre dossier? La FMRQ répond au 514-282-0256 (ou 1-800-465-0215) et à <a href="mailto:info@fmrq.qc.ca">info@fmrq.qc.ca</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="ptemu-footer">
+  <div class="ptemu-footer-inner">
+    <p>© 2026 Olivier Laplante · Trouve ta clinique</p>
+    <p><em>Outil d’information indépendant du gouvernement du Québec et du DTMF. Les règles des PTEM évoluent chaque année; vérifiez toujours l’information auprès des sources officielles avant d’agir.</em></p>
+  </div>
+</footer>
+
+<script>
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    registrations.forEach(function (registration) {
+      try {
+        if (new URL(registration.scope).pathname === '/') registration.unregister();
+      } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
