@@ -3266,7 +3266,7 @@ function htmlCorpsSecteur(s) {
       ${s.besoinDeclare ? `<div class="vw-row"><span class="vw-label">Besoin déclaré</span><span class="vw-value">${esc(s.besoinDeclare)}</span></div>` : ''}
       ${s.dme ? `<div class="vw-row"><span class="vw-label">Dossier médical</span><span class="vw-value">${esc(s.dme)}</span></div>` : ''}
       ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
-      ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
+      ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)} <a href="/monteregie-est/ptem-u/">Guide PTEM-U</a></span></div>` : ''}
       ${notes}
       <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>
       <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
@@ -3771,6 +3771,7 @@ function openDetail(id) {
     <div class="vw-sec">
       <div class="vw-sec-title">Informations générales</div>
       <div class="vw-row"><span class="vw-label">Type</span><span class="vw-value">${g.type && g.type.trim() ? esc(g.type) : 'À venir'}</span></div>
+      ${String(g.type || '').toUpperCase() === 'GMF-U' ? `<div class="vw-row"><span class="vw-label">PTEM-U</span><span class="vw-value"><a href="/monteregie-est/ptem-u/">Guide du recrutement en GMF-U</a></span></div>` : ''}
       <div class="vw-row"><span class="vw-label">Région</span><span class="vw-value"><span class="rls-dot" style="background:${regionColor(g.region)}"></span>${REGION_LABELS[g.region] || 'À venir'}</span></div>
       <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${g.rls && g.rls.trim() ? esc(g.rls) : 'À venir'}</span></div>
       ${niveauRow}

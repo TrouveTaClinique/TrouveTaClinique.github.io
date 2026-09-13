@@ -87,7 +87,7 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.ok(fs.existsSync(path.join(destination, 'recherche/donnees.json')));
   assert.ok(fs.existsSync(path.join(destination, 'recherche/index.html')));
   assert.ok(fs.existsSync(path.join(destination, 'assets/recherche.js')));
-  for (const chemin of ['/', '/monteregie/', '/monteregie-est/', '/monteregie-centre/', '/monteregie-ouest/', '/ptem/', '/amp/', '/cliniques/']) {
+  for (const chemin of ['/', '/monteregie/', '/monteregie-est/', '/monteregie-centre/', '/monteregie-ouest/', '/ptem/', '/ptem-u/', '/amp/', '/cliniques/']) {
     assert.match(lire(chemin.slice(1) + 'index.html'), /ttc-version/);
   }
   const est = lire('monteregie-est/index.html');
@@ -103,6 +103,20 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.match(lire('ptem/index.html'), /location\.replace\(d\)/);
   assert.match(lire('ptem/index.html'), /location\.hash/);
   assert.match(lire('ptem/index.html'), /location\.search/);
+  assert.match(lire('monteregie-est/ptem-u/index.html'), /PTEM-U \(PREM-U\) : le PTEM en GMF-U/);
+  const navPtemU = lire('monteregie-est/ptem-u/index.html').match(/id="site-nav"[\s\S]*?<\/nav>/);
+  assert.ok(navPtemU);
+  assert.equal((navPtemU[0].match(/<a /g) || []).length, 6);
+  assert.doesNotMatch(navPtemU[0], /ptem-u/i);
+  assert.match(lire('monteregie-est/ptem-u/index.html'), /place réservée aux besoins universitaires/);
+  assert.match(fs.readFileSync(path.join(RACINE, 'monteregie-est', 'ptem-u', 'index.html'), 'utf8'), /href="https:\/\/trouvetaclinique\.ca\/monteregie-est\/ptem-u\/"[^>]*rel="canonical"|rel="canonical"[^>]*href="https:\/\/trouvetaclinique\.ca\/monteregie-est\/ptem-u\/"/);
+  assert.match(lire('ptem-u/index.html'), /url=\/monteregie-est\/ptem-u\//);
+  assert.match(lire('ptem-u/index.html'), /var b="\/monteregie-est\/ptem-u\/"/);
+  assert.match(lire('ptem-u/index.html'), /location\.replace\(d\)/);
+  const navAccueil = lire('index.html').match(/id="site-nav"[\s\S]*?<\/nav>/);
+  assert.ok(navAccueil);
+  assert.doesNotMatch(navAccueil[0], /ptem-u/);
+  assert.match(lire('monteregie-est/etablissements/gmf-u-des-monteregiennes/index.html'), /\/monteregie-est\/ptem-u\//);
   assert.throws(() => preparerApercu(RACINE, destination), /vide/);
 });
 
