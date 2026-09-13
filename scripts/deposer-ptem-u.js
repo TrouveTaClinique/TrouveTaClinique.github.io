@@ -1,4 +1,107 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+/*
+ * deposer-ptem-u.js
+ * Depot de la page « PTEM en GMF-U (PTEM-U / PREM-U) » sur trouvetaclinique.ca.
+ * Prepare le 13 septembre 2026. Script autonome : aucune dependance, aucun reseau.
+ *
+ * ---------------------------------------------------------------------------
+ * CONTEXTE (a lire si tu prends ce dossier sans historique)
+ * ---------------------------------------------------------------------------
+ * Depot        : TrouveTaClinique/TrouveTaClinique.github.io
+ * Branche      : `brouillon` UNIQUEMENT. Tout push sur `brouillon` se deploie sur
+ *                https://apercu.trouvetaclinique.ca via .github/workflows/apercu-brouillon.yml.
+ *                `main` est la PRODUCTION (trouvetaclinique.ca) : ce script refuse de s'y executer.
+ * Page visee   : /monteregie-est/ptem-u/ (guide du volet universitaire du PTEM, pour les
+ *                residents en medecine familiale).
+ *
+ * Comment les pages-guides fonctionnent ici, car ce n'est pas evident :
+ *   /monteregie-est/ptem/, /amp/ et /ptem-u/ ne sont PAS des fichiers statiques edites a la main.
+ *   Leur source vit dans scripts/sources/<nom>.html (avec un jeton {{ASSETS}}) et c'est
+ *   publierPagesGuide() dans scripts/generer-pages-seo.js qui les publie, apres passage par
+ *   normaliserPageGuide() : injection du bouton hamburger, de id="site-nav", du bouton et du
+ *   panneau de recherche, de assets/recherche.js, du lien « Etablissements », des metadonnees et
+ *   du FAQPage JSON-LD. Editer directement monteregie-est/ptem-u/index.html serait ecrase a la
+ *   prochaine generation : il faut passer par la source.
+ *
+ * Choix de conception a respecter :
+ *   - La page est VOLONTAIREMENT absente du menu principal (qui reste a 6 liens). On y arrive
+ *     par la recherche du bandeau (recherche/donnees.json), par les fiches des milieux GMF-U,
+ *     et par les moteurs de recherche (la page est indexable et dans le sitemap).
+ *   - Regles d'ecriture du site : aucun tiret cadratin (em dash), une phrase par ligne avec
+ *     <br> dans les paragraphes narratifs, « Nouveau facturant (NF) » et non l'inverse,
+ *     et « (PREM-U) » accole a chaque mention de PTEM-U.
+ *   - Ce script ECRASE le contenu PTEM-U deja present sur brouillon : c'est voulu.
+ *
+ * ---------------------------------------------------------------------------
+ * UTILISATION
+ * ---------------------------------------------------------------------------
+ *   git clone https://github.com/TrouveTaClinique/TrouveTaClinique.github.io.git
+ *   cd TrouveTaClinique.github.io
+ *   git fetch origin brouillon && git checkout brouillon
+ *   (deposer ce fichier dans scripts/)
+ *   node scripts/deposer-ptem-u.js                    # prepare et verifie, sans toucher a git
+ *   node scripts/deposer-ptem-u.js --commit           # + git add et git commit
+ *   node scripts/deposer-ptem-u.js --commit --push    # + git push  -> apercu.trouvetaclinique.ca
+ *
+ * ---------------------------------------------------------------------------
+ * CE QUE LE SCRIPT FAIT, de facon idempotente (relancable sans degat)
+ * ---------------------------------------------------------------------------
+ *   1.  Ecrit scripts/sources/ptem-u.html (contenu complet de la page).
+ *   1b. Pose dans scripts/sources/ptem.html un lien vers la page PTEM-U, ou complete le libelle
+ *       d'un lien deja present pour qu'il porte « PTEM-U (PREM-U) ».
+ *   2.  Applique a scripts/generer-pages-seo.js ce qui manque : description, FAQPage, entree
+ *       sitemap, entree dans l'index de recherche, publication de la 3e page-guide, liens
+ *       contextuels sur les milieux GMF-U. Si une partie du cablage existe deja sous une autre
+ *       forme, elle est RESPECTEE et non dupliquee (le script detecte les constantes deja
+ *       declarees et les entrees deja presentes).
+ *   3.  Lance node scripts/generer-pages-seo.js.
+ *   4.  Passe 13 controles sur le resultat reel et s'arrete si l'un echoue.
+ *   5.  Affiche les fichiers touches.
+ *   6.  Affiche les commandes git, ou les execute avec --commit / --push.
+ *
+ * CE QU'IL NE FAIT PAS : aucun ajout au menu de navigation, aucune ecriture sur main, aucun
+ * appel reseau, aucune suppression de fichier.
+ *
+ * En cas d'arret : rien n'est pousse, et le generateur n'est reecrit que si les 14 modifications
+ * ont pu etre resolues. Un `git diff` puis un `git checkout -- .` remet le depot en etat.
+ */
+
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const cp = require('child_process');
+
+const RACINE = process.cwd();
+const CHEMIN_SOURCE = path.join(RACINE, 'scripts', 'sources', 'ptem-u.html');
+const CHEMIN_GEN = path.join(RACINE, 'scripts', 'generer-pages-seo.js');
+const ARGS = process.argv.slice(2);
+const COMMIT = ARGS.includes('--commit');
+const PUSH = ARGS.includes('--push');
+const FORCE_MAIN = ARGS.includes('--force-main');
+
+function titre(t) { console.log('\n' + t + '\n' + '-'.repeat(t.length)); }
+function stop(msg) { console.error('\nARRÊT : ' + msg); process.exit(1); }
+
+/* ---------- Garde-fous ---------- */
+titre('0. Vérifications');
+if (!fs.existsSync(CHEMIN_GEN) || !fs.existsSync(path.join(RACINE, 'data.json'))) {
+  stop('lancer ce script depuis la racine du dépôt (data.json et scripts/generer-pages-seo.js introuvables).');
+}
+let branche = '';
+try { branche = cp.execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim(); } catch (e) { branche = '(inconnue)'; }
+console.log('  Branche courante : ' + branche);
+if (branche === 'main' && !FORCE_MAIN) {
+  stop('branche `main` = PRODUCTION (trouvetaclinique.ca).\n' +
+       '        Passer sur la branche d\'aperçu :\n' +
+       '          git fetch origin brouillon && git checkout brouillon\n' +
+       '        puis relancer. (--force-main existe, mais ne sert que si Olivier l\'a demandé.)');
+}
+if (branche !== 'brouillon' && branche !== 'main') {
+  console.log('  Attention : la branche attendue est `brouillon` (celle qui alimente apercu.trouvetaclinique.ca).');
+}
+
+/* ---------- 1. Source de la page ---------- */
+const PAGE_SOURCE = `<!DOCTYPE html>
 
 <html lang="fr-CA">
 <head>
@@ -254,3 +357,231 @@ if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
 <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
+`;
+
+/* Bloc ajouté dans scripts/sources/ptem.html, juste après le paragraphe sur le résident
+   finissant, pour que les deux pages se pointent l'une l'autre. */
+const PTEM_ANCRE = `<p>Pour un résident qui termine sa formation et commence sa pratique, la démarche PTEM doit donc être planifiée avec la recherche de milieu, mais les deux démarches restent distinctes.</p>`;
+const PTEM_AJOUT = `<p>Le recrutement dans un <strong>groupe de médecine de famille universitaire (GMF-U)</strong> suit des règles particulières : la candidature est sélectionnée par le directeur du département de médecine de famille, qui confirme son choix au plus tard le 15 décembre.</p>
+<p><a class="text-cta" href="/monteregie-est/ptem-u/">Voir le PTEM en GMF-U (PTEM-U / PREM-U) →</a></p>`;
+
+titre('1. scripts/sources/ptem-u.html');
+fs.mkdirSync(path.dirname(CHEMIN_SOURCE), { recursive: true });
+const dejaLa = fs.existsSync(CHEMIN_SOURCE) ? fs.readFileSync(CHEMIN_SOURCE, 'utf8') : null;
+if (dejaLa === PAGE_SOURCE) {
+  console.log('  identique, rien à écrire');
+} else {
+  fs.writeFileSync(CHEMIN_SOURCE, PAGE_SOURCE, 'utf8');
+  console.log('  ' + (dejaLa === null ? 'créée' : 'mise à jour') + ' (' + PAGE_SOURCE.length + ' caractères)');
+}
+
+/* ---------- 1b. Lien réciproque depuis la page PTEM ---------- */
+titre('1b. scripts/sources/ptem.html (lien vers la page PTEM-U)');
+const CHEMIN_PTEM = path.join(RACINE, 'scripts', 'sources', 'ptem.html');
+if (!fs.existsSync(CHEMIN_PTEM)) {
+  stop('scripts/sources/ptem.html introuvable.');
+}
+let ptem = fs.readFileSync(CHEMIN_PTEM, 'utf8');
+if (ptem.indexOf('/monteregie-est/ptem-u/') !== -1) {
+  /* Un lien existe deja (pose a la main ou par une version anterieure) : on le garde, mais on
+     applique la regle de denomination « PTEM-U (PREM-U) » a son libelle s'il ne l'a pas. */
+  const avantLibelle = ptem;
+  ptem = ptem.replace(/(<a[^>]*href="\/monteregie-est\/ptem-u\/"[^>]*>)([^<]*)(<\/a>)/g, function (tout, ouvre, texte, ferme) {
+    if (texte.indexOf('PREM-U') !== -1 || texte.indexOf('PTEM-U') === -1) return tout;
+    return ouvre + texte.replace('PTEM-U', 'PTEM-U (PREM-U)') + ferme;
+  });
+  if (ptem !== avantLibelle) {
+    fs.writeFileSync(CHEMIN_PTEM, ptem, 'utf8');
+    console.log('  lien déjà présent, libellé complété en « PTEM-U (PREM-U) »');
+  } else {
+    console.log('  lien déjà présent');
+  }
+} else {
+  const ancre = PTEM_ANCRE;
+  if (ptem.split(ancre).length - 1 !== 1) {
+    stop('ancre introuvable ou multiple dans scripts/sources/ptem.html : la page a changé, ne rien écrire.');
+  }
+  ptem = ptem.replace(ancre, ancre + '\n' + PTEM_AJOUT);
+  fs.writeFileSync(CHEMIN_PTEM, ptem, 'utf8');
+  console.log('  lien ajouté après le paragraphe sur le résident finissant');
+}
+
+/* ---------- 2. Générateur ---------- */
+const EDITS = [
+  { nom: "Constantes de lien vers la page", avant: "const GMFU_CONDITION_SEO =", apres: "/* Portes d'entrée vers /monteregie-est/ptem-u/ : la page n'est volontairement PAS dans la\n   navigation principale (décision d'Olivier, 12 sept. 2026). On y arrive par la recherche du\n   bandeau et par les milieux GMF-U. Ne retirer aucune de ces deux portes sans en ouvrir une autre. */\nconst LIEN_PTEM_U = '<a class=\"text-cta\" href=\"/monteregie-est/ptem-u/\">Comprendre le PTEM en GMF-U \\u2192</a>';\n/* Entrée de liste « Pour aller plus loin ». Le saut de ligne est porté par la constante, pour\n   qu'une fiche non GMF-U ne récolte pas une ligne vide. */\nconst LI_PTEM_U = '\\n      <li><a href=\"/monteregie-est/ptem-u/\">PTEM en GMF-U : place réservée et recrutement universitaire</a></li>';\nconst GMFU_CONDITION_SEO =" },
+  { nom: "Description de la page-guide", avant: "const DESC_CLINIQUES_EST = ", apres: "const DESC_PTEM_U = 'PTEM-U (PREM-U), le PTEM en GMF-U : place réservée aux besoins universitaires, recrutement en surplus, statut de nouveau facturant (NF), confirmation du 15 décembre et dépôt de la candidature.';\nconst DESC_CLINIQUES_EST = " },
+  { nom: "Description choisie par nom de page", avant: "  const descGuide = nom === 'amp' ? DESC_AMP : DESC_PTEM;", apres: "  const descGuide = DESC_GUIDE_PAR_NOM[nom] || DESC_PTEM;" },
+  { nom: "FAQ choisie par nom de page", avant: "    const faq = nom === 'amp' ? FAQ_AMP : FAQ_PTEM;", apres: "    const faq = FAQ_GUIDE_PAR_NOM[nom] || FAQ_PTEM;" },
+  { nom: "FAQPage de la page PTEM-U + tables par nom", avant: "      name: 'Qui doit adhérer aux AMP?',\n      acceptedAnswer: { '@type': 'Answer', text: 'Tous les médecins de famille qui exercent dans le régime public sont visés par l’engagement AMP.' }\n    }\n  ]\n};\n", apres: "      name: 'Qui doit adhérer aux AMP?',\n      acceptedAnswer: { '@type': 'Answer', text: 'Tous les médecins de famille qui exercent dans le régime public sont visés par l’engagement AMP.' }\n    }\n  ]\n};\n\nconst FAQ_PTEM_U = {\n  '@type': 'FAQPage',\n  mainEntity: [\n    {\n      '@type': 'Question',\n      name: 'Qu’est-ce que le PTEM-U (PREM-U)?',\n      acceptedAnswer: { '@type': 'Answer', text: 'Le PTEM-U (PREM-U) est le volet universitaire du plan territorial des effectifs médicaux. Les documents officiels parlent de PTEM en GMF-U et de besoins universitaires. Deux modes de recrutement sont prévus : une place réservée aux besoins universitaires et un recrutement en surplus de la cible régionale.' }\n    },\n    {\n      '@type': 'Question',\n      name: 'Un résident finissant peut-il obtenir une place en GMF-U?',\n      acceptedAnswer: { '@type': 'Answer', text: 'Oui. Un médecin qui commence à facturer détient normalement le statut de nouveau facturant (NF), soit moins de 200 jours facturés d’au moins 500 $ par jour. Les places réservées aux besoins universitaires sont généralement destinées aux médecins ayant ce statut. L’exigence de 600 jours de facturation s’applique au recrutement en surplus de la cible.' }\n    },\n    {\n      '@type': 'Question',\n      name: 'Comment postuler à une place en GMF-U?',\n      acceptedAnswer: { '@type': 'Answer', text: 'Le guide de gestion ne prévoit ni formulaire ni procédure distincts pour les places universitaires : le médecin dépose la demande d’avis de conformité habituelle durant la période initiale du 1er au 15 décembre. La particularité du volet universitaire est la sélection de la candidature par le directeur du département de médecine de famille de la faculté.' }\n    },\n    {\n      '@type': 'Question',\n      name: 'Quelle date est propre au volet universitaire?',\n      acceptedAnswer: { '@type': 'Answer', text: 'Le 15 décembre : le directeur du département de médecine de famille confirme son choix à Santé Québec et au DTMF au plus tard à cette date. Une place réservée sans candidature confirmée est retournée à la marge régionale. Le guide ne fixe aucune autre date propre aux places universitaires.' }\n    }\n  ]\n};\n\n/* Métadonnées par page-guide : ajouter une entrée ici en même temps que scripts/sources/<nom>.html. */\nconst DESC_GUIDE_PAR_NOM = { ptem: DESC_PTEM, amp: DESC_AMP, 'ptem-u': DESC_PTEM_U };\nconst FAQ_GUIDE_PAR_NOM = { ptem: FAQ_PTEM, amp: FAQ_AMP, 'ptem-u': FAQ_PTEM_U };\nconst LIBELLE_GUIDE_PAR_NOM = { ptem: 'La page PTEM', amp: 'La page AMP', 'ptem-u': 'La page PTEM en GMF-U' };\n" },
+  { nom: "Publication de la 3e page-guide", avant: "  for (const nom of ['ptem', 'amp']) {", apres: "  for (const nom of ['ptem', 'amp', 'ptem-u']) {" },
+  { nom: "Libellé de la page de redirection", avant: "    const libelle = nom === 'ptem' ? 'La page PTEM' : 'La page AMP';", apres: "    const libelle = LIBELLE_GUIDE_PAR_NOM[nom] || 'La page';" },
+  { nom: "Entrée sitemap|garde=loc: '/monteregie-est/ptem-u/'", avant: "  { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },", apres: "  { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },\n  /* PTEM en GMF-U : hors navigation principale, mais indexable et dans le sitemap — c'est par la\n     recherche et par les fiches GMF-U qu'on y arrive. Priorité plus basse que /ptem/ en conséquence. */\n  { loc: '/monteregie-est/ptem-u/', lastmod: null, changefreq: 'monthly', priority: '0.6' }," },
+  { nom: "Entrée dans l'index de la recherche du bandeau|garde=url: '/monteregie-est/ptem-u/'", avant: "    { nom: 'AMP : activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' }\n  ];", apres: "    { nom: 'AMP : activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' },\n    { nom: 'PTEM en GMF-U (PTEM-U / PREM-U)', url: '/monteregie-est/ptem-u/', extra: 'ptem-u ptemu prem-u premu prem en gmf-u gmf-u gmfu universitaire umf place reservee besoins universitaires enseignement resident finissant nouveau facturant mir' }\n  ];" },
+  { nom: "Lien dans le texte des secteurs GMF-U (Est)", avant: "    extra.push(`<p>Le secteur GMF-U est en recrutement.</p><p>${htmlGmfuConditionSeo()}</p>`);", apres: "    extra.push(`<p>Le secteur GMF-U est en recrutement.</p><p>${htmlGmfuConditionSeo()}</p><p>${LIEN_PTEM_U}</p>`);" },
+  { nom: "Lien dans le texte des secteurs GMF-U (Centre)", avant: "  if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${htmlGmfuConditionSeo()}</p>`);", apres: "  if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${htmlGmfuConditionSeo()}</p><p>${LIEN_PTEM_U}</p>`);" },
+  { nom: "« Pour aller plus loin » — fiches cliniques GMF-U", avant: "      ${String(c.id) === '45' ? `<li><a href=\"${CENTRE_PREFIXE}/etablissements/gmf-u-de-saint-jean-sur-richelieu/\">Secteurs en établissement du GMF-U</a></li>` : ''}\n      <li><a href=\"${EST_PREFIXE}/ptem/\">Comprendre le PTEM et l’avis de conformité</a></li>", apres: "      ${String(c.id) === '45' ? `<li><a href=\"${CENTRE_PREFIXE}/etablissements/gmf-u-de-saint-jean-sur-richelieu/\">Secteurs en établissement du GMF-U</a></li>` : ''}\n      <li><a href=\"${EST_PREFIXE}/ptem/\">Comprendre le PTEM et l’avis de conformité</a></li>${c.type === 'GMF-U' ? LI_PTEM_U : ''}" },
+  { nom: "« Pour aller plus loin » — fiches établissement GMF-U (Est)", avant: "      <li><a href=\"${EST_PREFIXE}/ptem/\">Comprendre le PTEM et l’avis de conformité</a></li>\n      <li><a href=\"${EST_PREFIXE}/amp/\">Comprendre les activités médicales particulières (AMP)</a></li>\n      <li><a href=\"${esc(lienCarteInstallation(inst.id))}\">", apres: "      <li><a href=\"${EST_PREFIXE}/ptem/\">Comprendre le PTEM et l’avis de conformité</a></li>${inst.type === 'gmf-u' ? LI_PTEM_U : ''}\n      <li><a href=\"${EST_PREFIXE}/amp/\">Comprendre les activités médicales particulières (AMP)</a></li>\n      <li><a href=\"${esc(lienCarteInstallation(inst.id))}\">" },
+  { nom: "« Pour aller plus loin » — fiches établissement GMF-U (Centre)", avant: "      <li><a href=\"${EST_PREFIXE}/ptem/\">Comprendre le PTEM et l’avis de conformité</a></li>\n      <li><a href=\"${esc(lienCarteInstallationCentre(inst.id))}\">", apres: "      <li><a href=\"${EST_PREFIXE}/ptem/\">Comprendre le PTEM et l’avis de conformité</a></li>${inst.type === 'gmf-u' ? LI_PTEM_U : ''}\n      <li><a href=\"${esc(lienCarteInstallationCentre(inst.id))}\">" }
+];
+
+titre('2. scripts/generer-pages-seo.js');
+let gen = fs.readFileSync(CHEMIN_GEN, 'utf8');
+const genAvant = gen;
+
+/* Mise à jour d'une version antérieure de la description et de la FAQ, s'il y en a une. */
+const DESC_LIGNE = EDITS.find(e => e.nom.indexOf('Description de la page-guide') === 0).apres.split('\n')[0];
+if (/^const DESC_PTEM_U = .*$/m.test(gen)) {
+  const actuelle = gen.match(/^const DESC_PTEM_U = .*$/m)[0];
+  if (actuelle !== DESC_LIGNE) { gen = gen.replace(actuelle, DESC_LIGNE); console.log('  description : mise à jour'); }
+}
+const FAQ_NOUVELLE = EDITS.find(e => e.nom.indexOf('FAQPage') === 0).apres.match(/const FAQ_PTEM_U = \{[\s\S]*?\n\};/)[0];
+const IDX_LIGNE = EDITS.find(e => e.nom.indexOf('Entrée dans l\'index') === 0).apres.split('\n')[1];
+if (/^ *\{ nom: '[^']*', url: '\/monteregie-est\/ptem-u\/'.*$/m.test(gen)) {
+  const actuelle = gen.match(/^ *\{ nom: '[^']*', url: '\/monteregie-est\/ptem-u\/'.*$/m)[0];
+  let rempl = IDX_LIGNE;
+  /* La ligne remplacee peut etre suivie d'autres entrees : conserver sa virgule finale, sinon
+     le tableau devient invalide (deux objets colles sans separateur). */
+  const virguleActuelle = actuelle.trimEnd().slice(-1) === ',';
+  const virguleRempl = rempl.trimEnd().slice(-1) === ',';
+  if (virguleActuelle && !virguleRempl) rempl = rempl.trimEnd() + ',';
+  if (!virguleActuelle && virguleRempl) rempl = rempl.trimEnd().slice(0, -1);
+  if (actuelle !== rempl) { gen = gen.replace(actuelle, rempl); console.log('  index de recherche : mis à jour'); }
+}
+if (/const FAQ_PTEM_U = \{[\s\S]*?\n\};/.test(gen)) {
+  const actuelle = gen.match(/const FAQ_PTEM_U = \{[\s\S]*?\n\};/)[0];
+  if (actuelle !== FAQ_NOUVELLE) { gen = gen.replace(actuelle, FAQ_NOUVELLE); console.log('  FAQPage : mis à jour'); }
+}
+
+let appliques = 0, sautes = 0, variantes = 0;
+/* Une constante deja declaree (par Cursor ou par une version anterieure) ne doit jamais etre
+   redeclaree : Node refuse le fichier avec « Identifier has already been declared ». */
+function constantesDejaDeclarees(source, e) {
+  const noms = [];
+  const re = /const ([A-Z][A-Z0-9_]+) =/g;
+  let m;
+  while ((m = re.exec(e.apres)) !== null) {
+    if (e.avant.indexOf('const ' + m[1] + ' =') === -1) noms.push(m[1]);
+  }
+  return noms.filter(function (nom) { return source.indexOf('const ' + nom + ' =') !== -1 || source.indexOf('const ' + nom + '=') !== -1; });
+}
+
+for (const e of EDITS) {
+  /* Garde explicite : une entree equivalente existe deja sous une autre forme (autre lastmod,
+     autres mots-cles). On ne la duplique pas; l'etape de mise a jour plus haut s'en est chargee. */
+  const sep = e.nom.indexOf('|garde=');
+  const garde = sep === -1 ? null : e.nom.slice(sep + 7);
+  const nomAffiche = sep === -1 ? e.nom : e.nom.slice(0, sep);
+  if (garde && gen.indexOf(garde) !== -1) {
+    console.log('  ~ ' + nomAffiche + ' : entrée déjà présente, non dupliquée');
+    variantes++;
+    continue;
+  }
+  if (gen.indexOf(e.apres) !== -1) { sautes++; continue; }
+  const dejaDeclarees = constantesDejaDeclarees(gen, e);
+  if (dejaDeclarees.length) {
+    console.log('  ~ ' + nomAffiche + ' : ' + dejaDeclarees.join(', ') + ' déjà déclarée(s), non modifiée(s)');
+    variantes++;
+    continue;
+  }
+  /* Le point d'insertion porte deja un lien PTEM-U sous une autre forme : ne pas en ajouter un 2e. */
+  const pos = gen.indexOf(e.avant);
+  if (pos !== -1 && gen.slice(pos + e.avant.length, pos + e.avant.length + 90).indexOf('PTEM_U') !== -1) {
+    console.log('  ~ ' + nomAffiche + ' : lien déjà posé à cet endroit, non modifié');
+    variantes++;
+    continue;
+  }
+  const n = gen.split(e.avant).length - 1;
+  if (n !== 1) {
+    /* Le cablage a pu etre pose autrement (par Cursor, ou par une version anterieure du lot).
+       Dans ce cas on ne force rien : on saute, et les controles de l'etape 4 verifient le
+       resultat reel plutot que la forme du code. */
+    if (gen.indexOf('/monteregie-est/ptem-u/') !== -1) {
+      console.log('  ~ ' + nomAffiche + ' : variante déjà en place, non modifiée');
+      variantes++;
+      continue;
+    }
+    stop('« ' + nomAffiche + ' » : ' + n + ' occurrence(s) de l\'ancre au lieu d\'une seule, et aucun câblage PTEM-U existant. Le générateur a changé; ne rien écrire.');
+  }
+  gen = gen.replace(e.avant, e.apres);
+  appliques++;
+  console.log('  + ' + nomAffiche);
+}
+if (gen !== genAvant) {
+  fs.writeFileSync(CHEMIN_GEN, gen, 'utf8');
+  cp.execSync('node --check "' + CHEMIN_GEN + '"');
+  console.log('  ' + appliques + ' appliquée(s), ' + sautes + ' déjà en place, ' + variantes + ' variante(s) respectée(s) · syntaxe vérifiée');
+} else {
+  console.log('  déjà à jour (' + sautes + ' en place, ' + variantes + ' variante(s) respectée(s))');
+}
+
+/* ---------- 3. Génération ---------- */
+titre('3. Génération des pages');
+const sortie = cp.execSync('node scripts/generer-pages-seo.js', { encoding: 'utf8', cwd: RACINE, maxBuffer: 32 * 1024 * 1024 });
+for (const l of sortie.split('\n')) {
+  if (/Pages de cliniques|Pages de RLS|Recherche |Sitemap |GMF-U canoniques/.test(l)) console.log('  ' + l.trim());
+}
+
+/* ---------- 4. Contrôles ---------- */
+titre('4. Contrôles');
+const pageGeneree = path.join(RACINE, 'monteregie-est', 'ptem-u', 'index.html');
+if (!fs.existsSync(pageGeneree)) stop('monteregie-est/ptem-u/index.html n\'a pas été produit.');
+const html = fs.readFileSync(pageGeneree, 'utf8');
+const nav = (html.match(/<nav aria-label="Navigation principale"[\s\S]*?<\/nav>/) || [''])[0];
+const controles = [
+  ['page générée', true],
+  ['pas de lien PTEM-U dans le menu', nav.indexOf('ptem-u') === -1],
+  ['indexable (robots index,follow)', /content="index,follow/.test(html)],
+  ['canonique présente', html.indexOf('rel="canonical"') !== -1],
+  ['recherche du bandeau injectée', html.indexOf('/assets/recherche.js') !== -1],
+  ['FAQPage présent', html.indexOf('"@type": "FAQPage"') !== -1],
+  ['jeton {{ASSETS}} résolu', html.indexOf('{{ASSETS}}') === -1],
+  ['présente dans le sitemap', fs.readFileSync(path.join(RACINE, 'sitemap.xml'), 'utf8').indexOf('/monteregie-est/ptem-u/') !== -1],
+  ['présente dans l\'index de recherche', fs.readFileSync(path.join(RACINE, 'recherche', 'donnees.json'), 'utf8').indexOf('/monteregie-est/ptem-u/') !== -1],
+  ['lien réciproque depuis la page PTEM', fs.readFileSync(path.join(RACINE, 'monteregie-est', 'ptem', 'index.html'), 'utf8').indexOf('/monteregie-est/ptem-u/') !== -1],
+  ['aucun tiret cadratin dans la page', html.indexOf('\u2014') === -1],
+  ['libellé PREM-U présent', html.indexOf('PREM-U') !== -1],
+  ['lien depuis les fiches GMF-U', (function () {
+    const cibles = ['monteregie-est/etablissements/gmf-u-des-monteregiennes/index.html',
+                    'monteregie-est/etablissements/gmf-u-richelieu-yamaska/index.html'];
+    return cibles.every(function (rel) {
+      const f = path.join(RACINE, rel);
+      return fs.existsSync(f) && fs.readFileSync(f, 'utf8').indexOf('/monteregie-est/ptem-u/') !== -1;
+    });
+  })()]
+];
+let echec = false;
+for (const [nom, ok] of controles) { console.log('  ' + (ok ? 'OK  ' : 'NON ') + nom); if (!ok) echec = true; }
+if (echec) stop('un contrôle a échoué — ne pas committer en l\'état.');
+
+const modifies = cp.execSync('git status --short', { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+titre('5. Fichiers touchés (' + modifies.length + ')');
+modifies.forEach(l => console.log('  ' + l));
+console.log('\n  Note : sitemap.xml porte aussi la mise à jour des dates `lastmod` que le générateur');
+console.log('  applique de lui-même à chaque exécution — ce n\'est pas propre à ce lot.');
+
+/* ---------- 6. Git ---------- */
+const MESSAGE = 'Ajout de la page PTEM en GMF-U (/monteregie-est/ptem-u/)\n\n' +
+  'Page-guide destinee aux residents en medecine familiale : deux modes de recrutement,\n' +
+  'statuts NF et MIR, depot de candidature et dates du cycle PTEM 2027.\n' +
+  'Hors navigation principale : accessible par la recherche du bandeau, par les fiches des\n' +
+  'milieux GMF-U et par les moteurs de recherche (indexable, sitemap 0.6).';
+
+if (COMMIT) {
+  titre('6. Git');
+  cp.execSync('git add -A', { stdio: 'inherit' });
+  cp.execSync('git commit -F -', { input: MESSAGE, stdio: ['pipe', 'inherit', 'inherit'] });
+  if (PUSH) {
+    cp.execSync('git push', { stdio: 'inherit' });
+    console.log('\n  Poussé. Le workflow apercu-brouillon.yml publie sur https://apercu.trouvetaclinique.ca/monteregie-est/ptem-u/');
+  } else {
+    console.log('\n  Commit fait. Pousser avec : git push');
+  }
+} else {
+  titre('6. Pour publier sur l\'aperçu');
+  console.log('  git checkout brouillon        # si ce n\'est pas déjà la branche courante');
+  console.log('  git add -A');
+  console.log('  git commit -m "Ajout de la page PTEM en GMF-U (/monteregie-est/ptem-u/)"');
+  console.log('  git push                      # -> apercu.trouvetaclinique.ca via apercu-brouillon.yml');
+  console.log('\n  ou relancer : node scripts/deposer-ptem-u.js --commit --push');
+}
+console.log('');

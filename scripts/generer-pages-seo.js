@@ -1427,7 +1427,7 @@ const TITRE_AMP = 'AMP en médecine familiale : guide Montérégie';
 const DESC_ACCUEIL = 'Trouvez où pratiquer en Montérégie : carte interactive des cliniques et établissements qui recrutent, avec contacts directs pour votre PTEM (PREM) 2027.';
 const DESC_PTEM = 'PTEM 2027 (PREM) en médecine familiale : dates officielles, avis de conformité, règle du 55 % et cliniques qui recrutent en Montérégie.';
 const DESC_AMP = 'AMP en médecine familiale : qui doit adhérer, combien d\'heures, exemples d\'AMP exclusives et mixtes en Montérégie, et quand faire votre demande.';
-const DESC_PTEM_U = 'PTEM en GMF-U : place réservée aux besoins universitaires, recrutement en surplus de la cible, échéance du 15 décembre et ce qui s’applique à un résident finissant.';
+const DESC_PTEM_U = 'PTEM-U (PREM-U), le PTEM en GMF-U : place réservée aux besoins universitaires, recrutement en surplus, statut de nouveau facturant (NF), confirmation du 15 décembre et dépôt de la candidature.';
 const DESC_CLINIQUES_EST = 'Parcourez les cliniques de la Montérégie-Est qui recrutent : GMF, GMF-U et cliniques médicales classés par RLS, avec coordonnées, DMÉ et contact direct.';
 const DESC_ETABLISSEMENTS_EST = 'Les établissements de la Montérégie-Est qui recrutent : urgence, hospitalisation, UCDG, soins à domicile, obstétrique et GMF-U, par RLS avec contacts.';
 
@@ -3269,7 +3269,7 @@ function construireIndexRecherche(cliniques, slugs) {
     { nom: 'Secteurs en établissement', url: '/monteregie-est/etablissements/', extra: 'hopital chsld clsc gmf-u' },
     { nom: 'Secteurs en établissement Montérégie-Centre', url: '/monteregie-centre/etablissements/', extra: 'hopital chsld clsc gmf-u jeunesse hrr' },
     { nom: 'PTEM : plans territoriaux des effectifs médicaux', url: '/monteregie-est/ptem/', extra: 'ptem prem avis de conformite' },
-    { nom: 'PTEM en GMF-U (PTEM-U)', url: '/monteregie-est/ptem-u/', extra: 'ptem-u ptemu gmf-u gmfu universitaire umf place reservee besoins universitaires enseignement resident finissant nouveau facturant mir' },
+    { nom: 'PTEM en GMF-U (PTEM-U / PREM-U)', url: '/monteregie-est/ptem-u/', extra: 'ptem-u ptemu prem-u premu prem en gmf-u gmf-u gmfu universitaire umf place reservee besoins universitaires enseignement resident finissant nouveau facturant mir' },
     { nom: 'AMP : activités médicales particulières', url: '/monteregie-est/amp/', extra: 'amp heures ramq' }
   ];
   for (const p of pages) {
@@ -3470,23 +3470,23 @@ const FAQ_PTEM_U = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Qu’est-ce que le PTEM en GMF-U?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Le PTEM en GMF-U, souvent appelé PTEM-U, est le volet universitaire du plan territorial des effectifs médicaux. Il permet de recruter un médecin dans un groupe de médecine de famille universitaire, soit sur une place réservée aux besoins universitaires, soit en surplus de la cible régionale.' }
+      name: 'Qu’est-ce que le PTEM-U (PREM-U)?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Le PTEM-U (PREM-U) est le volet universitaire du plan territorial des effectifs médicaux. Les documents officiels parlent de PTEM en GMF-U et de besoins universitaires. Deux modes de recrutement sont prévus : une place réservée aux besoins universitaires et un recrutement en surplus de la cible régionale.' }
     },
     {
       '@type': 'Question',
-      name: 'Un résident qui termine sa formation peut-il obtenir un poste en GMF-U?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Oui. Les places réservées aux besoins universitaires sont généralement destinées à des médecins détenant le statut de nouveau facturant (NF), soit le statut d’un finissant de résidence. Un médecin détenant le statut MIR peut également être recruté.' }
+      name: 'Un résident finissant peut-il obtenir une place en GMF-U?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Oui. Un médecin qui commence à facturer détient normalement le statut de nouveau facturant (NF), soit moins de 200 jours facturés d’au moins 500 $ par jour. Les places réservées aux besoins universitaires sont généralement destinées aux médecins ayant ce statut. L’exigence de 600 jours de facturation s’applique au recrutement en surplus de la cible.' }
     },
     {
       '@type': 'Question',
-      name: 'À quoi servent les 600 jours de facturation?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Les trois années de pratique active, soit un minimum de 600 jours de facturation, sont exigées pour un recrutement en GMF-U en surplus de la cible régionale. Cette condition ne s’applique pas aux places réservées aux besoins universitaires.' }
+      name: 'Comment postuler à une place en GMF-U?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Le guide de gestion ne prévoit ni formulaire ni procédure distincts pour les places universitaires : le médecin dépose la demande d’avis de conformité habituelle durant la période initiale du 1er au 15 décembre. La particularité du volet universitaire est la sélection de la candidature par le directeur du département de médecine de famille de la faculté.' }
     },
     {
       '@type': 'Question',
-      name: 'Quelle est l’échéance pour une candidature en GMF-U?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Le directeur du département de médecine de famille confirme son choix à Santé Québec et au DTMF au plus tard le 15 décembre, à la fin de la période initiale de candidature. Une place réservée sans candidature confirmée retourne à la marge régionale.' }
+      name: 'Quelle date est propre au volet universitaire?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Le 15 décembre : le directeur du département de médecine de famille confirme son choix à Santé Québec et au DTMF au plus tard à cette date. Une place réservée sans candidature confirmée est retournée à la marge régionale. Le guide ne fixe aucune autre date propre aux places universitaires.' }
     }
   ]
 };
