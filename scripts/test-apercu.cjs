@@ -103,7 +103,7 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.match(lire('ptem/index.html'), /location\.replace\(d\)/);
   assert.match(lire('ptem/index.html'), /location\.hash/);
   assert.match(lire('ptem/index.html'), /location\.search/);
-  assert.match(lire('monteregie-est/ptem-u/index.html'), /PTEM en GMF-U \(PTEM-U\)/);
+  assert.match(lire('monteregie-est/ptem-u/index.html'), /PTEM-U \(PREM-U\) : le PTEM en GMF-U/);
   const navPtemU = lire('monteregie-est/ptem-u/index.html').match(/id="site-nav"[\s\S]*?<\/nav>/);
   assert.ok(navPtemU);
   assert.equal((navPtemU[0].match(/<a /g) || []).length, 6);
