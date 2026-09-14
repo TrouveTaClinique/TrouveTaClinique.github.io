@@ -465,6 +465,15 @@ const OG_PARTAGE = {
   alt: 'Trouve ta clinique · cliniques et établissements en recrutement en Montérégie.'
 };
 
+const OG_PAGES = {
+  accueil:        { fichier: 'og-accueil.png',        largeur: '1200', hauteur: '630', alt: 'Trouve ta clinique · cliniques et établissements en recrutement en Montérégie.' },
+  est:            { fichier: 'og-est.png',            largeur: '1200', hauteur: '630', alt: 'Trouve ta clinique · carte des milieux en recrutement en Montérégie-Est.' },
+  ptem:           { fichier: 'og-ptem.png',           largeur: '1200', hauteur: '630', alt: 'Guide PTEM 2027 en médecine familiale · dates, avis de conformité et règle du 55 %.' },
+  amp:            { fichier: 'og-amp.png',            largeur: '1200', hauteur: '630', alt: 'Guide des AMP · activités médicales particulières en médecine familiale en Montérégie.' },
+  cliniques:      { fichier: 'og-cliniques.png',      largeur: '1200', hauteur: '630', alt: 'Cliniques en recrutement en Montérégie-Est · GMF, GMF-U et cliniques médicales.' },
+  etablissements: { fichier: 'og-etablissements.png', largeur: '1200', hauteur: '630', alt: 'Secteurs en établissement en Montérégie-Est · urgence, hospitalisation, UCDG, soins à domicile.' }
+};
+
 /* GMF-U qui ont aussi une fiche établissement : une seule URL indexable (l’établissement).
    Rempli dans main() avant la génération. Clé = id clinique (string) → slug établissement. */
 let HREF_GMFU_ETABLISSEMENT = {};
@@ -1157,6 +1166,7 @@ ${lignes.join('\n')}
       description: descriptionClinique(c),
       url, canonical, profondeur: 2, indexable, jsonLd, univers: u,
       actif: u.regional ? null : 'cliniques',
+      ogImageOverride: OG_PAGES.cliniques,
       filDAriane: u.regional
         ? `<a href="${u.accueil}">${esc(u.nom)}</a> › <a href="${u.prefixe}/rls/${slugifier(c.rls || '')}/">RLS ${esc(c.rls)}</a> › ${esc(c.nom)}`
         : `<a href="/">Accueil</a> › <a href="${EST_PREFIXE}/cliniques/">Cliniques</a> › ${esc(c.nom)}`,
@@ -1309,6 +1319,7 @@ ${(u.region === 'Centre' && rls === 'Haut-Richelieu–Rouville') ? htmlExtraSeoR
     ),
     url, canonical, profondeur: 2, indexable, jsonLd, univers: u,
     actif: u.regional ? null : 'cliniques',
+    ogImageOverride: OG_PAGES.cliniques,
     filDAriane: u.regional
       ? `<a href="${u.accueil}">${esc(u.nom)}</a> › RLS ${esc(rls)}`
       : `<a href="/">Accueil</a> › <a href="${EST_PREFIXE}/cliniques/">Cliniques</a> › RLS ${esc(rls)}`,
@@ -1392,6 +1403,7 @@ ${sections}`;
     /* Indexable seulement là où le territoire tient aussi ses pages de RLS (voir `canonique`) :
        sinon ce hub renverrait Google vers des pages qu'on a nous-mêmes mises en noindex. */
     url, profondeur: 1, indexable: u.canonique, jsonLd, univers: u, actif: null,
+    ogImageOverride: OG_PAGES.cliniques,
     filDAriane: `<a href="${u.accueil}">${esc(u.nom)}</a> › RLS`,
     corps
   });
@@ -1638,7 +1650,8 @@ ${rlsAutresHtml}
 
   const html = page({
     titre, description, url, profondeur: 0, indexable: true, canonical: url, jsonLd,
-    filDAriane: '', corps, actif: 'accueil', univers: UNIVERS_GENERAL, verification: true
+    filDAriane: '', corps, actif: 'accueil', univers: UNIVERS_GENERAL, verification: true,
+    ogImageOverride: OG_PAGES.accueil
   });
   return { html, indexable: true };
 }
@@ -1746,6 +1759,7 @@ ${sections}
       ? DESC_CLINIQUES_EST
       : limiterTexte(`Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement), classés par ${parRls.size} RLS.`, 155),
     url, profondeur: u ? 2 : 1, indexable: true, jsonLd, actif: 'cliniques', univers: u || UNIVERS_GENERAL,
+    ogImageOverride: OG_PAGES.cliniques,
     filDAriane: u && u.region === 'Est' ? '' : (u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`),
     corps
   });
@@ -2212,7 +2226,8 @@ ${lignesClinique}${ligneSite}    </dl>
     html: page({
       titre, description, url, profondeur: 3, indexable: true, jsonLd,
       filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › <a href="${EST_PREFIXE}/etablissements/">Secteurs en établissement</a> › ${esc(inst.nom)}`,
-      corps, actif: 'etablissements', univers: u
+      corps, actif: 'etablissements', univers: u,
+      ogImageOverride: OG_PAGES.etablissements
     }),
     indexable: true,
     slug, url
@@ -2662,6 +2677,7 @@ ${sections}`;
       titre: limiterTexte('Secteurs en établissement en Montérégie-Est', 58),
       description: DESC_ETABLISSEMENTS_EST,
       url, profondeur: 2, indexable, jsonLd, actif: 'etablissements', univers: u,
+      ogImageOverride: OG_PAGES.etablissements,
       filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
       corps
     }),
@@ -3116,7 +3132,8 @@ ${ligneTel}${ligneSite}${liee.lignes}    </dl>
     html: page({
       titre, description, url, profondeur: 3, indexable: true, jsonLd,
       filDAriane: `<a href="/monteregie-centre/">Montérégie-Centre</a> › <a href="${CENTRE_PREFIXE}/etablissements/">Secteurs en établissement</a> › ${esc(inst.nom)}`,
-      corps, actif: 'etablissements', univers: u
+      corps, actif: 'etablissements', univers: u,
+      ogImageOverride: OG_PAGES.etablissements
     }),
     indexable: true,
     slug, url
@@ -3172,6 +3189,7 @@ ${items}
       titre: limiterTexte('Secteurs en établissement en Montérégie-Centre', 58),
       description: limiterTexte('Hôpital, GMF-U, CHSLD, cliniques jeunesse et autres secteurs en établissement du RLS Haut-Richelieu–Rouville.', 155),
       url, profondeur: 2, indexable: true, jsonLd, actif: 'etablissements', univers: u,
+      ogImageOverride: OG_PAGES.etablissements,
       filDAriane: `<a href="/monteregie-centre/">Montérégie-Centre</a> › Secteurs en établissement`,
       corps
     }),
@@ -3557,9 +3575,20 @@ function normaliserPageGuide(html, nom) {
     );
   }
 
-  sortie = sortie.replace(/https:\/\/trouvetaclinique\.ca\/assets\/banniere_monteregie-est\.jpg/g, OG_PARTAGE.url);
-  sortie = sortie.replace(/property="og:image:width" content="1024"/g, `property="og:image:width" content="${OG_PARTAGE.largeur}"`);
-  sortie = sortie.replace(/property="og:image:height" content="341"/g, `property="og:image:height" content="${OG_PARTAGE.hauteur}"`);
+  const ogGuide = nom === 'amp' ? OG_PAGES.amp
+    : (nom === 'ptem' || nom === 'ptem-u') ? OG_PAGES.ptem
+    : null;
+  const ogGuideUrl = ogGuide ? `${SITE}/assets/${ogGuide.fichier}` : OG_PARTAGE.url;
+  const ogGuideW = ogGuide ? ogGuide.largeur : OG_PARTAGE.largeur;
+  const ogGuideH = ogGuide ? ogGuide.hauteur : OG_PARTAGE.hauteur;
+  const ogGuideAlt = ogGuide ? ogGuide.alt : OG_PARTAGE.alt;
+  sortie = sortie.replace(/https:\/\/trouvetaclinique\.ca\/assets\/banniere_monteregie-est\.jpg/g, ogGuideUrl);
+  sortie = sortie.replace(/content="1024" property="og:image:width"/g, `content="${ogGuideW}" property="og:image:width"`);
+  sortie = sortie.replace(/content="341" property="og:image:height"/g, `content="${ogGuideH}" property="og:image:height"`);
+  sortie = sortie.replace(/property="og:image:width" content="1024"/g, `property="og:image:width" content="${ogGuideW}"`);
+  sortie = sortie.replace(/property="og:image:height" content="341"/g, `property="og:image:height" content="${ogGuideH}"`);
+  sortie = sortie.replace(/content="[^"]*" property="og:image:alt"/g, `content="${ogGuideAlt}" property="og:image:alt"`);
+  sortie = sortie.replace(/property="og:image:alt" content="[^"]*"/g, `property="og:image:alt" content="${ogGuideAlt}"`);
   sortie = sortie.replace(/"dateModified": "[0-9]{4}-[0-9]{2}-[0-9]{2}"/g, '"dateModified": "2026-09-04"');
   sortie = sortie.replace(/<meta name="google-site-verification"[^>]*>\s*/g, '');
 
