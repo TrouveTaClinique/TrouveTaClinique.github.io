@@ -1,5 +1,5 @@
 {
-  "miseAJour": "2026-09-13",
+  "miseAJour": "2026-09-14",
   "annonce": {
     "titre": "Prochaine activité de recrutement",
     "texte": "JR Express : RLS Jardins-Roussillon\n**lundi 10 août 2026**\nTournée des cliniques de la région et visite de l'hôpital Anna-Laberge.\nDépart du stationnement du parc André-J.-Côté, à Candiac.",
@@ -6583,56 +6583,6 @@
       "gardeAutre": "",
       "presentation": "",
       "responsableNom": "Dre Emilie Boisvert"
-    },
-    {
-      "id": 131,
-      "nom": "La Source Bleue",
-      "alias": "",
-      "visible": false,
-      "type": "Maison de soins palliatifs",
-      "adresse": "1130, rue de Montbrun, Boucherville QC J4B 8W6",
-      "ville": "Boucherville",
-      "lat": 45.59605,
-      "lng": -73.411493,
-      "site": "",
-      "personneRessource": "",
-      "responsableNom": "Dre Dominique Lalonde",
-      "dme": "",
-      "horaire": {
-        "Lundi": "",
-        "Mardi": "",
-        "Mercredi": "",
-        "Jeudi": "",
-        "Vendredi": "",
-        "Samedi": "",
-        "Dimanche": ""
-      },
-      "personnel": {
-        "medecins": "",
-        "ipspl": "",
-        "infirmieres": "",
-        "physiotherapeutes": "",
-        "pharmaciennes": "",
-        "travailleuresSociales": ""
-      },
-      "notes": "",
-      "rls": "Pierre-Boucher",
-      "posApprox": false,
-      "bureau": "",
-      "frais": "",
-      "pratiques": [],
-      "niveaux": {
-        "gmf": "",
-        "accesReseau": "",
-        "gmfu": ""
-      },
-      "niveau": "",
-      "porteOuverte": "",
-      "region": "Est",
-      "infos": "",
-      "gardeUrgence": "",
-      "gardeAutre": "",
-      "presentation": ""
     }
   ]
 }
