@@ -365,12 +365,33 @@ function rempli(v) {
 
 /* Titles / meta : Google coupe vers 60 / 155–160 caractères. Le nom du site est déjà
    fourni par og:site_name — on ne le répète plus dans <title>. */
+function parenthesesOuvertes(s) {
+  return (String(s).match(/\(/g) || []).length - (String(s).match(/\)/g) || []).length;
+}
+
 function limiterTexte(s, max) {
   const t = String(s == null ? '' : s).replace(/\s+/g, ' ').trim();
   if (t.length <= max) return t;
   const coupe = t.slice(0, max - 1);
   const espace = coupe.lastIndexOf(' ');
-  return ((espace > max * 0.55 ? coupe.slice(0, espace) : coupe).replace(/[ ,;:–—-]+$/, '') + '…');
+  let base = (espace > max * 0.55 ? coupe.slice(0, espace) : coupe).replace(/[ ,;:–—-]+$/, '');
+  /* Ne jamais laisser une parenthèse ouvrante sans fermeture : reculer avant. */
+  while (parenthesesOuvertes(base) > 0) {
+    const idx = base.lastIndexOf('(');
+    if (idx < 0) break;
+    base = base.slice(0, idx).replace(/[ ,;:–—-]+$/, '');
+  }
+  return base + '…';
+}
+
+/* Titre d’une fiche milieu : le nom complet prime sur la ville, jamais l’inverse. */
+function titrePageMilieu(nom, ville) {
+  const n = String(nom || '').replace(/\s+/g, ' ').trim();
+  const v = String(ville || '').replace(/\s+/g, ' ').trim();
+  const avecVille = v ? `${n} : ${v}` : n;
+  if (avecVille.length <= 65) return avecVille;
+  if (n.length <= 70) return n;
+  return limiterTexte(n, 70);
 }
 
 function listeFr(items) {
@@ -431,8 +452,7 @@ function presentationDepuisDonnees(c) {
 }
 
 function titreClinique(c) {
-  const base = rempli(c.ville) ? `${c.nom} : ${c.ville}` : String(c.nom || '');
-  return limiterTexte(base, 58);
+  return titrePageMilieu(c.nom, rempli(c.ville) ? c.ville : '');
 }
 
 function descriptionClinique(c) {
@@ -1748,7 +1768,8 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
-
+${u ? `  <p class="rep-lien"><a href="${u.prefixe}/rls/">Parcourir par réseau local de services (RLS)</a></p>
+` : ''}
 ${sections}
 
   ${banniereEnBas ? banniere : ''}`;
@@ -2057,7 +2078,9 @@ function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null, pol
   const typeLib = typeEtablissementLibelle(inst.type);
   const n = secteurs.length;
   const liste = listeSecteursHumaine(secteurs);
-  const titre = limiterTexte(inst.ville ? `${inst.nom} : ${inst.ville}` : `${inst.nom} : ${typeLib}`, 58);
+  const titre = cliniqueLiee
+    ? titrePageMilieu(`${inst.nom} : secteurs en établissement`, '')
+    : titrePageMilieu(inst.nom, inst.ville || typeLib);
   const description = limiterTexte(
     inst.id === 'INS-012'
       ? 'Hôtel-Dieu de Sorel, hôpital de Sorel-Tracy (RLS Pierre-De Saurel) : cinq secteurs en recrutement : urgence, hospitalisation, UCDG, obstétrique et soins intensifs.'
@@ -3022,7 +3045,9 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee) {
   const typeLib = typeEtablissementLibelle(inst.type);
   const n = secteurs.filter(s => s.recrutement && s.recrutement.statutDeclare === 'actif').length;
   const liste = listeSecteursHumaine(secteurs.filter(s => s.recrutement && s.recrutement.statutDeclare === 'actif'));
-  const titre = limiterTexte(inst.ville ? `${inst.nom} : ${inst.ville}` : `${inst.nom} : ${typeLib}`, 58);
+  const titre = cliniqueLiee
+    ? titrePageMilieu(`${inst.nom} : secteurs en établissement`, '')
+    : titrePageMilieu(inst.nom, inst.ville || typeLib);
   const description = limiterTexte(
     `${inst.nom}, ${typeEnPhrase(typeLib)} à ${inst.ville} (RLS ${inst.territoireSource}) : ${n === 1 ? 'secteur en recrutement' : n + ' secteurs en recrutement'} : ${liste}.`,
     155
