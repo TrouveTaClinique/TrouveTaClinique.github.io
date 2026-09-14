@@ -2635,7 +2635,7 @@ ${items}
   const corps = `  <section class="hero">
     <p class="eyebrow">Médecine familiale · Montérégie-Est</p>
     <h1>Secteurs en recrutement en établissement</h1>
-    <p class="lead">Les secteurs d’activité en établissement se distinguent de la pratique en clinique : urgence, hospitalisation, unité de courte durée gériatrique (UCDG), longue durée (CHSLD), soins à domicile, réadaptation, détention, etc.<br>Les installations ci-dessous proviennent du relevé des besoins en effectifs médicaux 2027 de Santé Québec Montérégie-Est.</p>
+    <p class="lead">Beaucoup de médecins de famille partagent leur temps entre une clinique et un secteur en établissement. Urgence, hospitalisation, UCDG, longue durée (CHSLD), soins à domicile, réadaptation, détention : voici ceux qui recrutent en Montérégie-Est.<br>Les coordonnées de chaque responsable sont disponibles sur la carte interactive.</p>
     <p class="updated"><strong>Données déclarées par le milieu le :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
     <div class="cta-row">
       <a class="button primary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
