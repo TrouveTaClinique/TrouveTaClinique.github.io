@@ -400,7 +400,12 @@ function presentationDepuisDonnees(c) {
   const territoire = rempli(c.region) ? ` (Montérégie-${c.region})` : '';
   const phrases = [];
   if (recrute(c)) {
-    phrases.push(`${c.nom} est ${articleIndefini(type)} ${type} situé à ${ville}${rls}${territoire}. Le milieu recrute actuellement des médecins de famille.`);
+    // Est : liste validée avec la personne-ressource de Santé Québec Montérégie-Est -> affirmation au présent.
+    // Centre / Ouest : pas de validation régionale -> formulation prudente, datée sur le répertoire.
+    const phraseRecrutement = (c.region === 'Est')
+      ? 'Le milieu recrute actuellement des médecins de famille.'
+      : 'Ce milieu figurait en recrutement lors de la dernière mise à jour du répertoire.';
+    phrases.push(`${c.nom} est ${articleIndefini(type)} ${type} situé à ${ville}${rls}${territoire}. ${phraseRecrutement}`);
   } else {
     phrases.push(`${c.nom} est ${articleIndefini(type)} ${type} situé à ${ville}${rls}${territoire}. Il figure au répertoire à titre de référence et ne recrute pas de médecin de famille pour le moment.`);
   }
@@ -1955,7 +1960,7 @@ const DESCRIPTIONS_ETABLISSEMENTS = {
      Varennes, mais santemonteregie.qc.ca n'a pas de page sous ce nom (le lien de la fiche
      pointe vers le CLSC de Verchères). Tant que l'écart n'est pas tranché avec Santé Québec, la
      description reste sur ce que le relevé affirme, sans revendiquer de page officielle. */
-  'INS-005': 'Le CLSC des Seigneuries est une installation de première ligne du RLS Pierre-Boucher.<br>Le relevé des besoins de Santé Québec Montérégie-Est le situe au 2220, boulevard René-Gaultier, à Varennes.',
+  'INS-005': 'Le CLSC des Seigneuries est une installation de première ligne du RLS Pierre-Boucher.<br>Il est situé au 2220, boulevard René-Gaultier, à Varennes.',
   'INS-020': 'Le CLSC Simonne-Monet-Chartrand est une installation de première ligne du RLS Pierre-Boucher, à Longueuil.<br>Son offre comprend notamment le soutien à domicile, les soins de fin de vie et les soins palliatifs, les services psychosociaux et en santé mentale, les soins infirmiers et les services intégrés de dépistage et de prévention des ITSS (SIDEP).',
   'INS-022': 'Le GMF-U des Montérégiennes est un groupe de médecine de famille universitaire situé à Boucherville, dans le RLS Pierre-Boucher, anciennement le Centre Médical Longueuil.<br>Il a pour mission d’enseigner aux professionnels de la santé de première ligne tout en soignant des usagers et en favorisant la recherche en première ligne.<br>Il assure la prise en charge de clientèles de tous âges, le suivi de maladies chroniques, le suivi de grossesse, des chirurgies mineures et des visites à domicile.',
   // ── RLS Pierre-De Saurel ───────────────────────────────────────────────────
@@ -1983,18 +1988,18 @@ function phraseSecteursEnRecrutement(secteurs) {
   const liste = listeSecteursHumaine(secteurs);
   if (n === 0) return '';
   if (n === 1) {
-    return `<br>Le secteur d’activité en recrutement pour le cycle de besoins 2027 de Santé Québec Montérégie-Est : ${esc(liste)}.`;
+    return `<br>Le secteur d’activité en recrutement : ${esc(liste)}.`;
   }
   const nombre = nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase());
-  return `<br>${nombre} de ses secteurs d’activité sont en recrutement pour le cycle de besoins 2027 de Santé Québec Montérégie-Est : ${esc(liste)}.`;
+  return `<br>${nombre} de ses secteurs d’activité sont en recrutement : ${esc(liste)}.`;
 }
 
 function chapeauEtablissement(inst, secteurs) {
   if (inst.id === 'INS-012') {
-    return 'L’Hôtel-Dieu de Sorel est l’hôpital du réseau local de services Pierre-De Saurel, à Sorel-Tracy.<br>Cinq de ses secteurs d’activité recrutent actuellement des médecins de famille : l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, l’obstétrique et les soins intensifs.<br>Cette page présente chacun d’eux, tels que déclarés par Santé Québec Montérégie-Est pour le cycle de besoins 2027.';
+    return 'L’Hôtel-Dieu de Sorel est l’hôpital du réseau local de services Pierre-De Saurel, à Sorel-Tracy.<br>Cinq de ses secteurs d’activité recrutent actuellement des médecins de famille : l’urgence, l’hospitalisation, l’unité de courte durée gériatrique, l’obstétrique et les soins intensifs.';
   }
   if (inst.id === 'INS-003') {
-    return 'Le centre d’hébergement de Contrecoeur est un CHSLD du RLS Pierre-Boucher.<br>Son secteur de longue durée recrute actuellement des médecins de famille.<br>Cette page présente ce secteur, tel que déclaré par Santé Québec Montérégie-Est pour le cycle de besoins 2027.';
+    return 'Le centre d’hébergement de Contrecoeur est un CHSLD du RLS Pierre-Boucher.<br>Son secteur de longue durée recrute actuellement des médecins de famille.';
   }
   if (DESCRIPTIONS_ETABLISSEMENTS[inst.id]) {
     return DESCRIPTIONS_ETABLISSEMENTS[inst.id] + phraseSecteursEnRecrutement(secteurs);
@@ -2002,17 +2007,17 @@ function chapeauEtablissement(inst, secteurs) {
   const n = secteurs.length;
   const liste = listeSecteursHumaine(secteurs);
   if (inst.missionRegionale && inst.id === 'INS-018') {
-    return `Le centre de réadaptation en dépendance de Saint-Philippe est une mission régionale.<br>Le site se trouve à Saint-Philippe, en Montérégie-Ouest ; il est présenté ici parce que le relevé des besoins 2027 de Santé Québec Montérégie-Est l’inclut.<br>${n === 1 ? 'Son secteur' : 'Ses secteurs'} d’activité en recrutement : ${esc(liste)}.`;
+    return `Le centre de réadaptation en dépendance de Saint-Philippe est une mission régionale.<br>Le site se trouve à Saint-Philippe, en Montérégie-Ouest ; il est présenté ici parce qu’il dessert aussi la Montérégie-Est.<br>${n === 1 ? 'Son secteur' : 'Ses secteurs'} d’activité en recrutement : ${esc(liste)}.`;
   }
   if (inst.missionRegionale) {
-    return `${esc(inst.nom)} est une mission régionale.<br>${n === 1 ? 'Son secteur' : 'Ses secteurs'} en recrutement : ${esc(liste)}.<br>Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
+    return `${esc(inst.nom)} est une mission régionale.<br>${n === 1 ? 'Son secteur' : 'Ses secteurs'} en recrutement : ${esc(liste)}.`;
   }
   const type = typeEnPhrase(typeEtablissementLibelle(inst.type));
   const rls = inst.territoireSource || '';
   if (n === 1) {
-    return `Le ${type} ${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}.<br>Son secteur d’activité en recrutement est ${esc(liste)}.<br>Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
+    return `Le ${type} ${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}.<br>Son secteur d’activité en recrutement est ${esc(liste)}.`;
   }
-  return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}.<br>${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}.<br>Cette page reprend le relevé des besoins 2027 de Santé Québec Montérégie-Est.`;
+  return `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(rls)}.<br>${nombreEnLettresFr(n).replace(/^./, c => c.toUpperCase())} secteurs d’activité recrutent actuellement des médecins de famille : ${esc(liste)}.`;
 }
 
 function htmlLigneContactEst(s, politique) {
@@ -2162,7 +2167,7 @@ ${items}
     <p class="eyebrow">${esc(eyebrowEtablissement(inst))}</p>
     <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
     <p class="lead">${chapeauEtablissement(inst, secteurs)}</p>
-    <p class="updated"><strong>Données déclarées par le milieu le :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
     <div class="cta-row">
       <a class="button primary" href="${esc(lienCarteInstallation(inst.id))}">Voir sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/etablissements/">Tous les secteurs en établissement</a>
@@ -2636,7 +2641,7 @@ ${items}
     <p class="eyebrow">Médecine familiale · Montérégie-Est</p>
     <h1>Secteurs en recrutement en établissement</h1>
     <p class="lead">Beaucoup de médecins de famille partagent leur temps entre une clinique et un secteur en établissement. Urgence, hospitalisation, UCDG, longue durée (CHSLD), soins à domicile, réadaptation, détention : voici ceux qui recrutent en Montérégie-Est.<br>Les coordonnées de chaque responsable sont disponibles sur la carte interactive.</p>
-    <p class="updated"><strong>Données déclarées par le milieu le :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
     <div class="cta-row">
       <a class="button primary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/cliniques/">Cliniques de la Montérégie-Est</a>
@@ -3072,7 +3077,7 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee) {
     <p class="eyebrow">${esc(typeLib)} · RLS ${esc(inst.territoireSource || '')}</p>
     <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
     <p class="lead">${chapeau}</p>
-    <p class="updated"><strong>Données déclarées par le milieu :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
     <div class="cta-row">
       <a class="button primary" href="${esc(lienCarteInstallationCentre(inst.id))}">Voir sur la carte interactive</a>
       <a class="button secondary" href="${CENTRE_PREFIXE}/etablissements/">Tous les secteurs en établissement</a>
@@ -3143,7 +3148,7 @@ function pageRepertoireEtablissementsCentre(donnees, majPagesSeo) {
     <p class="eyebrow">Médecine familiale · RLS Haut-Richelieu–Rouville</p>
     <h1>Secteurs en recrutement en établissement</h1>
     <p class="lead">Hôpital, GMF-U, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale du RLS Haut-Richelieu–Rouville.</p>
-    <p class="updated"><strong>Données déclarées par le milieu :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
     <div class="cta-row">
       <a class="button primary" href="${CENTRE_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${CENTRE_PREFIXE}/cliniques/">Cliniques de la Montérégie-Centre</a>
