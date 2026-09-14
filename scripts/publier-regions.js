@@ -33,9 +33,9 @@ const TERRITOIRES = [
       ['Pierre-De Saurel', '#2f4a7a', 'pierre-de-saurel']
     ],
     banniere: {
-      url: 'https://trouvetaclinique.ca/assets/og-image-accueil.png',
+      url: 'https://trouvetaclinique.ca/assets/og-est.png',
       largeur: '1200', hauteur: '630',
-      alt: 'Carte interactive Montérégie-Est · Trouve ta clinique.'
+      alt: 'Trouve ta clinique · carte des milieux en recrutement en Montérégie-Est.'
     }
   },
   {
@@ -145,6 +145,10 @@ function appliquerIdentiteRegionale(source, t) {
     `<meta name="twitter:title" content="Cliniques en recrutement : ${t.nom}">`, 'twitter:title');
   r('<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">',
     `<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}.">`, 'twitter:description');
+  r('<meta property="og:image" content="https://trouvetaclinique.ca/assets/og-image-accueil.png">',
+    '<meta property="og:image" content="https://trouvetaclinique.ca/assets/og-est.png">', 'og:image');
+  r('<meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-image-accueil.png">',
+    '<meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-est.png">', 'twitter:image');
 
   r('"@id": "https://trouvetaclinique.ca/monteregie/#webpage"',
     `"@id": "https://trouvetaclinique.ca/${t.dossier}/#webpage"`, 'JSON-LD @id');
