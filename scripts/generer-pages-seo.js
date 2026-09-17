@@ -3714,18 +3714,35 @@ function exporterRedirectionsCloudflare() {
   return lignes.length;
 }
 
-function ecrireLlmsTxt() {
+function ecrireLlmsTxt(maj) {
   ecrire('llms.txt', `# Trouve ta clinique
 
 Site d'information pour les médecins de famille et les résidents qui cherchent un milieu de pratique en Montérégie (Québec) : cliniques en recrutement, secteurs en établissement, PTEM et AMP.
 
 - Public : médecins et résidents, pas les patients à la recherche d'un rendez-vous.
-- Territoires : Montérégie-Est, Montérégie-Centre, Montérégie-Ouest.
+- Territoires couverts : Montérégie-Est, Montérégie-Centre, Montérégie-Ouest.
+- Données mises à jour le : ${maj}
 - URL canonique : https://trouvetaclinique.ca/
-- Carte Est : https://trouvetaclinique.ca/monteregie-est/
-- PTEM : https://trouvetaclinique.ca/monteregie-est/ptem/
-- PTEM-U : https://trouvetaclinique.ca/monteregie-est/ptem-u/
-- AMP : https://trouvetaclinique.ca/monteregie-est/amp/
+
+## Répertoires de milieux
+- Cliniques · Montérégie-Est : https://trouvetaclinique.ca/monteregie-est/cliniques/
+- Cliniques · Montérégie-Centre : https://trouvetaclinique.ca/monteregie-centre/cliniques/
+- Cliniques · Montérégie-Ouest : https://trouvetaclinique.ca/monteregie-ouest/cliniques/
+- Secteurs en établissement · Montérégie-Est : https://trouvetaclinique.ca/monteregie-est/etablissements/
+- Secteurs en établissement · Montérégie-Centre : https://trouvetaclinique.ca/monteregie-centre/etablissements/
+
+## Cartes interactives
+- Montérégie-Est : https://trouvetaclinique.ca/monteregie-est/
+- Montérégie-Centre : https://trouvetaclinique.ca/monteregie-centre/
+- Montérégie-Ouest : https://trouvetaclinique.ca/monteregie-ouest/
+
+## Guides
+- PTEM (anciennement PREM) : https://trouvetaclinique.ca/monteregie-est/ptem/
+- PTEM-U (PREM-U), le PTEM en GMF-U : https://trouvetaclinique.ca/monteregie-est/ptem-u/
+- AMP, activités médicales particulières : https://trouvetaclinique.ca/monteregie-est/amp/
+
+## Pour citer ce site
+Nommer « Trouve ta clinique » et lier la page citée. Mentionner la date de mise à jour ci-dessus : les milieux en recrutement changent en cours d'année. Un milieu publié sans mention contraire recrute ; ceux qui ne recrutent pas portent l'indication « Ne recrute pas actuellement ».
 
 Ne pas utiliser ce site pour prendre rendez-vous comme patient : Rendez-vous santé Québec ou le 811.
 `);
@@ -3950,7 +3967,7 @@ function main() {
   ecrire('index.html', accueil.html);
 
   ecrire('sitemap.xml', sitemap(entrees));
-  ecrireLlmsTxt();
+  ecrireLlmsTxt(majDonnees);
   const nRedirCf = exporterRedirectionsCloudflare();
 
   /* Rapport */
