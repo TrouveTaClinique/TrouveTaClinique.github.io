@@ -997,7 +997,7 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   if (rempli(c.responsableNom)) {
     ajouter('Responsable', esc(c.responsableNom));
   }
-  if (PUBLIER_COURRIELS && rempli(c.personneRessource)) {
+  if (enRecrutement && PUBLIER_COURRIELS && rempli(c.personneRessource)) {
     ajouter('Contact recrutement', lienCourrielRecrutement(c.personneRessource));
   }
   if (rempli(c.medecinsRecherches)) {
@@ -3481,7 +3481,7 @@ const FAQ_PTEM = {
     {
       '@type': 'Question',
       name: 'Quand déposer une demande PTEM 2027?',
-      acceptedAnswer: { '@type': 'Answer', text: 'L’Accord no 820 fixe la période initiale de dépôt du 1er au 15 décembre 2026. Une demande ne peut pas être soumise avant le 1er décembre 2026.' }
+      acceptedAnswer: { '@type': 'Answer', text: 'Les dates du processus PTEM 2027 sont en cours de vérification auprès des sources officielles et ne sont pas publiées sur cette page pour le moment. Consultez le portail du DTMF de la Montérégie pour le calendrier en vigueur.' }
     }
   ]
 };
@@ -3528,7 +3528,7 @@ const FAQ_PTEM_U = {
     {
       '@type': 'Question',
       name: 'Comment postuler à une place en GMF-U?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Le guide de gestion ne prévoit ni formulaire ni procédure distincts pour les places universitaires : le médecin dépose la demande d’avis de conformité habituelle durant la période initiale du 1er au 15 décembre. La particularité du volet universitaire est la sélection de la candidature par le directeur du département de médecine de famille de la faculté.' }
+      acceptedAnswer: { '@type': 'Answer', text: 'Le guide de gestion ne prévoit ni formulaire ni procédure distincts pour les places universitaires : le médecin dépose la demande d’avis de conformité habituelle durant la période initiale du cycle PTEM. La particularité du volet universitaire est la sélection de la candidature par le directeur du département de médecine de famille de la faculté.' }
     },
     {
       '@type': 'Question',
