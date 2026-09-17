@@ -4,7 +4,7 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 
 - Public : médecins et résidents, pas les patients à la recherche d'un rendez-vous.
 - Territoires couverts : Montérégie-Est, Montérégie-Centre, Montérégie-Ouest.
-- Données mises à jour le : 2026-09-14
+- Données mises à jour le : 2026-09-17
 - URL canonique : https://trouvetaclinique.ca/
 
 ## Répertoires de milieux
