@@ -3449,7 +3449,6 @@ function pageRedirectionStatique(destination, libelle) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Page déplacée | Trouve ta clinique</title>
-<meta name="robots" content="noindex,follow">
 <link rel="canonical" href="${canonHtml}">
 <meta http-equiv="refresh" content="0; url=${urlHtml}">
 <script>(function(){var b=${destJs};var d=b;if(location.search)d+= (d.indexOf("?")>=0?"&":"?")+location.search.slice(1);if(location.hash)d+=location.hash;location.replace(d);})();</script>
