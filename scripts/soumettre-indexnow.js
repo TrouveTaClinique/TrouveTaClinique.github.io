@@ -3,8 +3,10 @@
 
 /*
  * Prévenir Bing (et les moteurs qui suivent IndexNow : Yandex, DuckDuckGo, Ecosia)
- * que le sitemap du site public a changé. Best-effort : une panne réseau ou un refus
- * de l'API n'arrête jamais la publication.
+ * que le sitemap du site public a changé.
+ *
+ * Soumission OBSERVABLE : le code HTTP et le corps de réponse sont journalisés.
+ * Toute réponse hors 200/202 fait échouer le processus (code de sortie 1).
  *
  * Ne soumet que les adresses https://trouvetaclinique.ca/… — jamais l'aperçu.
  */
@@ -17,6 +19,8 @@ const HOTE = 'trouvetaclinique.ca';
 const POINT_D_ENTREE = 'https://api.indexnow.org/indexnow';
 const TAILLE_LOT = 10000;
 const MOTIF_CLE = /^[a-f0-9]{32}\.txt$/i;
+const ATTENTE_DEPLOIEMENT_MS = 4 * 60 * 1000;
+const INTERVALLE_SONDE_MS = 10 * 1000;
 
 function trouverCle() {
   const fichiers = fs.readdirSync(RACINE).filter((nom) => MOTIF_CLE.test(nom));
@@ -60,51 +64,96 @@ function extraireUrls(xml) {
   return urls;
 }
 
-async function envoyerLot(cle, nomFichier, urlList) {
-  const corps = JSON.stringify({
-    host: HOTE,
-    key: cle,
-    keyLocation: 'https://' + HOTE + '/' + nomFichier,
-    urlList
-  });
-  const reponse = await fetch(POINT_D_ENTREE, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    body: corps
-  });
-  let extra = '';
-  try {
-    extra = (await reponse.text()).trim();
-  } catch (_erreur) {
-    extra = '';
+function messageErreurHttp(statut, corps) {
+  if (statut === 403) {
+    return (
+      'IndexNow 403 : la clé n’est pas autorisée pour ce domaine côté Bing ' +
+      '(UserForbiddenToAccessSite). Ce n’est pas un problème de fichier de clé ' +
+      'à la racine du site — vérifier l’association clé/domaine dans Bing Webmaster Tools. ' +
+      (corps ? 'Réponse : ' + corps : '')
+    );
   }
-  const accepte = reponse.status === 200 || reponse.status === 202;
-  console.log(
-    'IndexNow : lot de ' + urlList.length + ' URL — code ' + reponse.status +
-    (accepte ? ' (accepté)' : '') +
-    (extra ? ' — ' + extra.slice(0, 300) : '')
+  return (
+    'IndexNow : réponse HTTP ' + statut + ' hors 200/202.' +
+    (corps ? ' Corps : ' + corps : '')
   );
 }
 
-async function principal() {
+async function attendreDeploiementPublic(urlCle) {
+  const debut = Date.now();
+  console.log('IndexNow : attente du déploiement public de ' + urlCle + '…');
+  while (Date.now() - debut < ATTENTE_DEPLOIEMENT_MS) {
+    try {
+      const reponse = await fetch(urlCle, { method: 'GET', redirect: 'follow' });
+      const corps = (await reponse.text()).trim();
+      console.log(
+        'IndexNow : sonde déploiement — HTTP ' + reponse.status +
+        (corps ? ' — corps ' + corps.length + ' octet(s)' : '')
+      );
+      if (reponse.status === 200 && corps.length === 32) {
+        console.log('IndexNow : clé publique joignable, poursuite de la soumission.');
+        return;
+      }
+    } catch (erreur) {
+      console.log(
+        'IndexNow : sonde déploiement — erreur réseau : ' +
+        (erreur && erreur.message ? erreur.message : erreur)
+      );
+    }
+    await new Promise((r) => setTimeout(r, INTERVALLE_SONDE_MS));
+  }
+  throw new Error(
+    'IndexNow : la clé n’était pas servie en HTTP 200 sur le site public après ' +
+    (ATTENTE_DEPLOIEMENT_MS / 1000) +
+    ' s. Soumission annulée pour éviter un envoi avant déploiement.'
+  );
+}
+
+async function envoyerLot(cle, nomFichier, urlList) {
+  const keyLocation = 'https://' + HOTE + '/' + nomFichier;
+  const corpsJson = JSON.stringify({
+    host: HOTE,
+    key: cle,
+    keyLocation,
+    urlList
+  });
+  console.log('IndexNow : POST ' + POINT_D_ENTREE + ' — ' + urlList.length + ' URL');
+  const reponse = await fetch(POINT_D_ENTREE, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: corpsJson
+  });
+  let corps = '';
   try {
-    const { cle, nom } = trouverCle();
-    const sitemap = fs.readFileSync(path.join(RACINE, 'sitemap.xml'), 'utf8');
-    const urls = extraireUrls(sitemap);
-    if (urls.length === 0) {
-      console.log('IndexNow : aucune URL https://trouvetaclinique.ca dans sitemap.xml.');
-      return;
-    }
-    console.log('IndexNow : ' + urls.length + ' URL à soumettre (hôte ' + HOTE + ').');
-    for (let i = 0; i < urls.length; i += TAILLE_LOT) {
-      await envoyerLot(cle, nom, urls.slice(i, i + TAILLE_LOT));
-    }
-  } catch (erreur) {
-    console.error(
-      'IndexNow : soumission non bloquante — ' +
-      (erreur && erreur.message ? erreur.message : erreur)
-    );
+    corps = (await reponse.text()).trim();
+  } catch (_erreur) {
+    corps = '';
+  }
+  console.log('IndexNow : statut HTTP ' + reponse.status);
+  console.log('IndexNow : corps de réponse : ' + (corps || '(vide)'));
+  const accepte = reponse.status === 200 || reponse.status === 202;
+  if (!accepte) {
+    throw new Error(messageErreurHttp(reponse.status, corps));
+  }
+  console.log('IndexNow : lot accepté (' + reponse.status + ').');
+}
+
+async function principal() {
+  const { cle, nom } = trouverCle();
+  const sitemap = fs.readFileSync(path.join(RACINE, 'sitemap.xml'), 'utf8');
+  const urls = extraireUrls(sitemap);
+  if (urls.length === 0) {
+    console.log('IndexNow : aucune URL https://trouvetaclinique.ca dans sitemap.xml.');
+    return;
+  }
+  console.log('IndexNow : ' + urls.length + ' URL à soumettre (hôte ' + HOTE + ').');
+  await attendreDeploiementPublic('https://' + HOTE + '/' + nom);
+  for (let i = 0; i < urls.length; i += TAILLE_LOT) {
+    await envoyerLot(cle, nom, urls.slice(i, i + TAILLE_LOT));
   }
 }
 
-principal();
+principal().catch((erreur) => {
+  console.error(erreur && erreur.message ? erreur.message : erreur);
+  process.exit(1);
+});
