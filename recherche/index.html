@@ -55,7 +55,7 @@
       <a href="/monteregie-est/amp/">AMP</a>
   </nav>
   <div class="actions">
-    <a class="recherche" href="/recherche/">
+    <a class="recherche" id="search-toggle" href="/recherche/" aria-expanded="false" aria-controls="search-panel">
       <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
         <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
         <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
@@ -66,20 +66,71 @@
     </button>
   </div>
 </header>
+<section class="search-panel" id="search-panel" hidden>
+  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-panel-title">
+    <div class="search-panel__top">
+      <h2 id="search-panel-title">Rechercher un milieu</h2>
+      <button class="search-panel__close" id="search-close" type="button" aria-label="Fermer la recherche">×</button>
+    </div>
+    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
+      <label class="visually-hidden" for="search-input">Rechercher une clinique, un établissement, une ville ou un guide</label>
+      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+      <button type="submit">Rechercher</button>
+    </form>
+    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+    <ul class="search-hits" id="search-results"></ul>
+    <p class="search-panel__page-link"><a href="/recherche/">Ouvrir la page Recherche complète →</a></p>
+  </div>
+</section>
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Rechercher</nav>
 
-<section class="hero">
-  <p class="eyebrow">Montérégie</p>
+
+<div class="tete search-page-intro">
+  <p class="eyebrow">Recherche</p>
   <h1>Rechercher un milieu</h1>
-  <p class="lead">Tapez le nom d’une clinique, d’un hôpital, d’une ville ou d’un secteur (urgence, GMF-U, PTEM…).</p>
-  <form class="search-page-form" action="/recherche/" method="get" role="search">
+  <p class="lede">Une clinique, un établissement, une ville ou un guide&nbsp;: tapez au moins deux lettres.</p>
+  <form class="champ search-page-form" action="/recherche/" method="get" role="search">
     <label class="visually-hidden" for="search-page-input">Rechercher</label>
     <input id="search-page-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
     <button type="submit">Rechercher</button>
   </form>
   <p class="search-page-status" id="search-page-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
   <ul class="search-hits" id="search-page-results"></ul>
+  <p class="aide">La recherche couvre les 33 cliniques et les 22 établissements de la Montérégie-Est, ainsi que les guides PTEM et AMP.</p>
+</div>
+
+<section class="zone search-discovery" style="padding-top:var(--s-md)">
+  <h2>Recherches fréquentes</h2>
+  <div class="filtres search-suggestions">
+    <a href="/recherche/?q=Saint-Hyacinthe">Saint-Hyacinthe</a>
+    <a href="/recherche/?q=Longueuil">Longueuil</a>
+    <a href="/recherche/?q=Sorel-Tracy">Sorel-Tracy</a>
+    <a href="/recherche/?q=Boucherville">Boucherville</a>
+    <a href="/recherche/?q=Beloeil">Beloeil</a>
+    <a href="/recherche/?q=Varennes">Varennes</a>
+    <a href="/recherche/?q=GMF-U">GMF-U</a>
+    <a href="/recherche/?q=Myle">Myle</a>
+    <a href="/recherche/?q=Ofys">Ofys</a>
+    <a href="/recherche/?q=PTEM%202027">PTEM 2027</a>
+    <a href="/recherche/?q=AMP">AMP</a>
+  </div>
+
+  <h2 style="margin-top:var(--s-lg)">Ou parcourez directement</h2>
+  <div class="cartes">
+    <a class="carte reveal" href="/monteregie-est/cliniques/"><span class="chiffre">33</span>
+      <span class="nom">Cliniques</span><span class="det">GMF, GMF-U et cliniques médicales par RLS.</span>
+      <span class="go">Voir la liste →</span></a>
+    <a class="carte reveal d1" href="/monteregie-est/etablissements/"><span class="chiffre">22</span>
+      <span class="nom">Établissements</span><span class="det">Urgence, CHSLD, CLSC, réadaptation.</span>
+      <span class="go">Voir la liste →</span></a>
+    <a class="carte reveal d2" href="/monteregie-est/rls/"><span class="chiffre">3</span>
+      <span class="nom">Réseaux locaux</span><span class="det">Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel.</span>
+      <span class="go">Parcourir les RLS →</span></a>
+  </div>
+  <aside class="rappel appel reveal"><h3>Vous ne trouvez pas un milieu&nbsp;?</h3>
+    <p>Il n’est peut-être pas encore répertorié, ou il figure sous un autre nom. Signalez-le et il sera ajouté.</p>
+    <p><a class="btn teal" href="mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject=Signaler%20une%20clinique">Signaler une clinique</a></p></aside>
 </section>
 </main>
 <footer>

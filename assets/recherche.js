@@ -179,7 +179,8 @@
     var form = qs('search-form');
     if (form) {
       form.addEventListener('submit', function (e) {
-        if ((input.value || '').trim().length < 2) e.preventDefault();
+        e.preventDefault();
+        afficher(results, status, input.value, 8);
       });
     }
     chargerIndex();

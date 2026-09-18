@@ -227,7 +227,9 @@ footer a:hover{color:#fff;text-decoration:underline}
 .avis{font-size:.86rem;opacity:.78;line-height:1.6;max-width:none;
   border-top:1px solid rgba(255,255,255,.25);padding-top:1.1rem;margin-top:.6rem;
   text-wrap:pretty}
-@media(min-width:900px){.avis{columns:2;column-gap:2.6rem}.avis+.avis{columns:1}}
+/* Le texte légal reste un seul paragraphe : les colonnes automatiques le coupaient à des
+   endroits arbitraires et donnaient l'impression qu'il manquait des morceaux. */
+@media(min-width:900px){.avis{columns:1}}
 
 @media(min-width:640px){
   .cartes{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -286,6 +288,9 @@ footer a:hover{color:#fff;text-decoration:underline}
 
 /* Accueil : intro, faits, zones, étapes, duo, RLS */
 .intro{padding-top:var(--s-md)}
+.hook-stat{display:block}
+.home .intro .hook,.home .intro .lede,.home .zone>h2,.home .zone>.lede,
+.home .zone>.consigne,.home details.etape p,.home details.apropos p{max-width:none}
 .faits{display:grid;gap:.85rem;margin:var(--s-md) 0 0}
 .fait{
   background:var(--teal-pale);border:1px solid rgba(6,156,156,.28);border-radius:14px;
@@ -524,6 +529,7 @@ h1 .badge-verif{width:.62em;height:.62em;margin-left:.16em}h1 .badge-verif svg{w
   position:fixed;inset:0;z-index:80;display:flex;align-items:flex-start;justify-content:center;
   padding:6.4rem 1rem 2rem;background:rgba(18,6,114,.45);
 }
+body.search-open{overflow:hidden}
 .search-panel[hidden]{display:none}
 .search-panel__dialog{
   width:min(640px,100%);background:#fff;color:var(--navy);border-radius:18px;
@@ -546,6 +552,9 @@ h1 .badge-verif{width:.62em;height:.62em;margin-left:.16em}h1 .badge-verif svg{w
   padding:0 1.4rem;font:inherit;font-weight:650;cursor:pointer;
 }
 .search-panel__hint,.search-page-status{font-size:.93rem;opacity:.8;margin-top:.85rem}
+.search-panel__page-link{margin:.9rem 0 0;text-align:right;font-size:.9rem;font-weight:650}
+.search-page-intro{padding-bottom:var(--s-md)}
+.search-discovery .rappel{margin-top:var(--s-lg)}
 .search-hits{list-style:none;margin:.9rem 0 0;padding:0}
 .search-hits li{border-bottom:1px solid rgba(18,6,114,.12)}
 .search-hits a{display:block;padding:.75rem .15rem;text-decoration:none;color:var(--navy)}
@@ -572,4 +581,3 @@ footer .wordmark .l1, footer .wordmark .l2{color:#fff}
   .horaire th{width:7em}
   .step{grid-template-columns:34px minmax(0,1fr)}
 }
-

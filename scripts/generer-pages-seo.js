@@ -99,14 +99,31 @@ const NAV_TOGGLE_SCRIPT = `<script>
 })();
 </script>`;
 
-const RECHERCHE_LIEN = `<a class="recherche" href="/recherche/">
+/* Le lien reste un vrai href pour fonctionner sans JavaScript. Quand recherche.js est chargé,
+   il ouvre plutôt le panneau de recherche rapide sans quitter la page. */
+const RECHERCHE_LIEN = `<a class="recherche" id="search-toggle" href="/recherche/" aria-expanded="false" aria-controls="search-panel">
       <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
         <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
         <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
       <span class="lbl">Rechercher</span></a>`;
 
 const SEARCH_TOGGLE_BOUTON = RECHERCHE_LIEN;
-const SEARCH_PANEL = ``;
+const SEARCH_PANEL = `<section class="search-panel" id="search-panel" hidden>
+  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-panel-title">
+    <div class="search-panel__top">
+      <h2 id="search-panel-title">Rechercher un milieu</h2>
+      <button class="search-panel__close" id="search-close" type="button" aria-label="Fermer la recherche">×</button>
+    </div>
+    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
+      <label class="visually-hidden" for="search-input">Rechercher une clinique, un établissement, une ville ou un guide</label>
+      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+      <button type="submit">Rechercher</button>
+    </form>
+    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+    <ul class="search-hits" id="search-results"></ul>
+    <p class="search-panel__page-link"><a href="/recherche/">Ouvrir la page Recherche complète →</a></p>
+  </div>
+</section>`;
 const SEARCH_SCRIPT = `<script src="/assets/recherche.js" defer></script>`;
 const THEME_SCRIPT = `<script src="/assets/theme.js" defer></script>`;
 
@@ -949,7 +966,7 @@ ${cssExtra ? `  <link rel="stylesheet" href="${cssExtra}">\n` : ''}  <script typ
 ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
   </script>
 </head>
-<body>
+<body${modeAccueil ? ' class="home"' : ''}>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site">
   ${htmlBrand()}
@@ -961,11 +978,12 @@ ${nav}
     ${NAV_TOGGLE_BOUTON}
   </div>
 </header>
+${SEARCH_PANEL}
 ${modeAccueil
   ? `<span id="contenu"></span>
 ${corps}`
   : `<main id="contenu">
-  <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
+${filDAriane ? `  <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>\n` : ''}
 ${corps}
 </main>`}
 ${htmlFooterSite()}
@@ -1656,7 +1674,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
 </section>
 
 <div class="wrap intro">
-  <p class="hook"><strong>${totalGeneral} milieux de pratique répertoriés en Montérégie.</strong> ${totalEstRecrutement} recrutent activement en Montérégie-Est.</p>
+  <p class="hook"><span class="hook-stat"><strong>${totalGeneral} milieux de pratique répertoriés en Montérégie.</strong></span><span class="hook-stat">${totalEstRecrutement} recrutent activement en Montérégie-Est.</span></p>
   <p class="lede">Cliniques et établissements confondus, qu'ils recrutent actuellement ou non.</p>
   <p class="lede">Coordonnées, horaires, équipe et personne-ressource pour préparer votre ${esc(PTEM_STATUT.prochain)}, ou pour comparer les milieux avant de choisir.</p>
   <div class="faits">
@@ -1740,7 +1758,7 @@ ${rlsAutresTheme}
   </aside>
   <details class="apropos">
     <summary>D'où viennent ces informations</summary>
-    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
+    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la contribution de <strong>Nancy Langlois</strong>, du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
     <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche officielle.</p>
     <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
   </details>
@@ -1819,22 +1837,10 @@ ${items}
       <a class="button secondary" href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </div>
   </section>`;
-  const heroEst = htmlHeroVideoEst({
-    titre: titreRepertoire,
-    sousTitre: 'Des médecins du territoire parlent de leur pratique.',
-    accueil: accueilCarte,
-    filDAriane: u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`
-  });
-
   const banniere = htmlBanniereSqb(u ? '../../assets' : '../assets');
   const banniereEnBas = Boolean(u && u.region !== 'Est');
 
-  const corps = `  ${u && u.region === 'Est' ? heroEst : heroClassique}
-
-  ${u && u.region === 'Est' ? `<div class="video-hero-suite">
-    ${leadRepertoire}
-    ${majRepertoire}
-  </div>` : ''}
+  const corps = `  ${heroClassique}
 
   ${u ? '' : `<section id="territoires">
     <h2>Explorer par territoire</h2>
@@ -1861,7 +1867,7 @@ ${sections}
       : limiterTexte(`Répertoire des ${cliniques.length} milieux publiés en ${nomTerritoire} (dont ${enRecrutementTotal} en recrutement), classés par ${parRls.size} RLS.`, 155),
     url, profondeur: u ? 2 : 1, indexable: true, jsonLd, actif: 'cliniques', univers: u || UNIVERS_GENERAL,
     ogImageOverride: OG_PAGES.cliniques,
-    filDAriane: u && u.region === 'Est' ? '' : (u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`),
+    filDAriane: u ? `<a href="${u.accueil}">${esc(u.nom)}</a> › Cliniques` : `<a href="/">Accueil</a> › Cliniques`,
     corps
   });
 }
@@ -2770,16 +2776,25 @@ ${items}
     ]
   };
 
-  const corps = `  <section class="hero">
-    <p class="eyebrow">Médecine familiale · Montérégie-Est</p>
-    <h1>Secteurs en recrutement en établissement</h1>
-    <p class="lead">Beaucoup de médecins de famille partagent leur temps entre une clinique et un secteur en établissement. Urgence, hospitalisation, UCDG, longue durée (CHSLD), soins à domicile, réadaptation, détention : voici ceux qui recrutent en Montérégie-Est.<br>Les coordonnées de chaque responsable sont disponibles sur la carte interactive.</p>
+  const titreEtablissements = 'Secteurs en recrutement en établissement';
+  const leadEtablissements = `<p class="lead">Beaucoup de médecins de famille partagent leur temps entre une clinique et un secteur en établissement. Urgence, hospitalisation, UCDG, longue durée (CHSLD), soins à domicile, réadaptation, détention : voici ceux qui recrutent en Montérégie-Est.<br>Les coordonnées de chaque responsable sont disponibles sur la carte interactive.</p>`;
+  const heroEtablissements = htmlHeroVideoEst({
+    titre: titreEtablissements,
+    sousTitre: 'Des médecins du territoire parlent de leur pratique.',
+    accueil: `${EST_PREFIXE}/?mode=etablissements`,
+    filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`
+  });
+
+  const corps = `  ${heroEtablissements}
+
+  <div class="video-hero-suite">
+    ${leadEtablissements}
     <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
     <div class="cta-row">
       <a class="button primary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/cliniques/">Cliniques de la Montérégie-Est</a>
     </div>
-  </section>
+  </div>
 
   ${htmlExplorezSecteurs()}
 
@@ -2796,7 +2811,7 @@ ${sections}`;
       description: DESC_ETABLISSEMENTS_EST,
       url, profondeur: 2, indexable, jsonLd, actif: 'etablissements', univers: u,
       ogImageOverride: OG_PAGES.etablissements,
-      filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
+      filDAriane: '',
       corps
     }),
     indexable
@@ -3398,7 +3413,7 @@ const PAGES_FIXES = [
   { loc: '/monteregie-ouest/', lastmod: null, changefreq: 'monthly', priority: '0.6' }
 ];
 
-function pageRecherche() {
+function pageRecherche(cliniques) {
   const url = `${SITE}/recherche/`;
   const titre = 'Rechercher un milieu : Montérégie';
   const description = limiterTexte(
@@ -3411,18 +3426,56 @@ function pageRecherche() {
     name: titre,
     url
   };
+  const cliniquesEst = cliniques.filter(c =>
+    c.region === 'Est' && c.visible !== false && c.categorie !== 'etablissement'
+  ).length;
+  const etablissementsEst = PREMIER_LOT_ETABLISSEMENTS.length;
   const corps = `
-<section class="hero">
-  <p class="eyebrow">Montérégie</p>
+<div class="tete search-page-intro">
+  <p class="eyebrow">Recherche</p>
   <h1>Rechercher un milieu</h1>
-  <p class="lead">Tapez le nom d’une clinique, d’un hôpital, d’une ville ou d’un secteur (urgence, GMF-U, PTEM…).</p>
-  <form class="search-page-form" action="/recherche/" method="get" role="search">
+  <p class="lede">Une clinique, un établissement, une ville ou un guide&nbsp;: tapez au moins deux lettres.</p>
+  <form class="champ search-page-form" action="/recherche/" method="get" role="search">
     <label class="visually-hidden" for="search-page-input">Rechercher</label>
     <input id="search-page-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
     <button type="submit">Rechercher</button>
   </form>
   <p class="search-page-status" id="search-page-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
   <ul class="search-hits" id="search-page-results"></ul>
+  <p class="aide">La recherche couvre les ${cliniquesEst} cliniques et les ${etablissementsEst} établissements de la Montérégie-Est, ainsi que les guides PTEM et AMP.</p>
+</div>
+
+<section class="zone search-discovery" style="padding-top:var(--s-md)">
+  <h2>Recherches fréquentes</h2>
+  <div class="filtres search-suggestions">
+    <a href="/recherche/?q=Saint-Hyacinthe">Saint-Hyacinthe</a>
+    <a href="/recherche/?q=Longueuil">Longueuil</a>
+    <a href="/recherche/?q=Sorel-Tracy">Sorel-Tracy</a>
+    <a href="/recherche/?q=Boucherville">Boucherville</a>
+    <a href="/recherche/?q=Beloeil">Beloeil</a>
+    <a href="/recherche/?q=Varennes">Varennes</a>
+    <a href="/recherche/?q=GMF-U">GMF-U</a>
+    <a href="/recherche/?q=Myle">Myle</a>
+    <a href="/recherche/?q=Ofys">Ofys</a>
+    <a href="/recherche/?q=PTEM%202027">PTEM 2027</a>
+    <a href="/recherche/?q=AMP">AMP</a>
+  </div>
+
+  <h2 style="margin-top:var(--s-lg)">Ou parcourez directement</h2>
+  <div class="cartes">
+    <a class="carte reveal" href="${EST_PREFIXE}/cliniques/"><span class="chiffre">${cliniquesEst}</span>
+      <span class="nom">Cliniques</span><span class="det">GMF, GMF-U et cliniques médicales par RLS.</span>
+      <span class="go">Voir la liste →</span></a>
+    <a class="carte reveal d1" href="${EST_PREFIXE}/etablissements/"><span class="chiffre">${etablissementsEst}</span>
+      <span class="nom">Établissements</span><span class="det">Urgence, CHSLD, CLSC, réadaptation.</span>
+      <span class="go">Voir la liste →</span></a>
+    <a class="carte reveal d2" href="${EST_PREFIXE}/rls/"><span class="chiffre">3</span>
+      <span class="nom">Réseaux locaux</span><span class="det">Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel.</span>
+      <span class="go">Parcourir les RLS →</span></a>
+  </div>
+  <aside class="rappel appel reveal"><h3>Vous ne trouvez pas un milieu&nbsp;?</h3>
+    <p>Il n’est peut-être pas encore répertorié, ou il figure sous un autre nom. Signalez-le et il sera ajouté.</p>
+    <p><a class="btn teal" href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></p></aside>
 </section>`;
   return page({
     titre, description, url, profondeur: 1, indexable: true, jsonLd,
@@ -3520,7 +3573,7 @@ function construireIndexRecherche(cliniques, slugs) {
 function publierRecherche(cliniques, slugs) {
   const items = construireIndexRecherche(cliniques, slugs);
   ecrire(path.join('recherche', 'donnees.json'), JSON.stringify(items) + '\n');
-  ecrire(path.join('recherche', 'index.html'), pageRecherche());
+  ecrire(path.join('recherche', 'index.html'), pageRecherche(cliniques));
   return items.length;
 }
 

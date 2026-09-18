@@ -30,7 +30,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 /* 18 sept 2026 — thème aperçu (header/footer/héros, palette marque). */
 // v71-hero-guide-gutter (18 septembre 2026) : plus de double gutter sur .hero-guide
 // (main porte déjà le padding-inline).
-const CACHE = CACHE_PREFIX + 'v71-hero-guide-gutter';
+// v72-site-polish (18 septembre 2026) : logo haute définition, recherche rapide restaurée,
+// accueil repoli et vidéo déplacée du répertoire Cliniques vers Établissements.
+const CACHE = CACHE_PREFIX + 'v72-site-polish';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

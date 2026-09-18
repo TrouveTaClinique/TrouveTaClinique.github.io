@@ -83,7 +83,7 @@
   }
   </script>
 </head>
-<body>
+<body class="home">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site">
   <a class="brand" href="/">
@@ -103,7 +103,7 @@
       <a href="/monteregie-est/amp/">AMP</a>
   </nav>
   <div class="actions">
-    <a class="recherche" href="/recherche/">
+    <a class="recherche" id="search-toggle" href="/recherche/" aria-expanded="false" aria-controls="search-panel">
       <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
         <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
         <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
@@ -114,6 +114,22 @@
     </button>
   </div>
 </header>
+<section class="search-panel" id="search-panel" hidden>
+  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-panel-title">
+    <div class="search-panel__top">
+      <h2 id="search-panel-title">Rechercher un milieu</h2>
+      <button class="search-panel__close" id="search-close" type="button" aria-label="Fermer la recherche">×</button>
+    </div>
+    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
+      <label class="visually-hidden" for="search-input">Rechercher une clinique, un établissement, une ville ou un guide</label>
+      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
+      <button type="submit">Rechercher</button>
+    </form>
+    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
+    <ul class="search-hits" id="search-results"></ul>
+    <p class="search-panel__page-link"><a href="/recherche/">Ouvrir la page Recherche complète →</a></p>
+  </div>
+</section>
 <span id="contenu"></span>
 
 <section class="hero-b">
@@ -134,7 +150,7 @@
 </section>
 
 <div class="wrap intro">
-  <p class="hook"><strong>99 milieux de pratique répertoriés en Montérégie.</strong> 21 recrutent activement en Montérégie-Est.</p>
+  <p class="hook"><span class="hook-stat"><strong>99 milieux de pratique répertoriés en Montérégie.</strong></span><span class="hook-stat">21 recrutent activement en Montérégie-Est.</span></p>
   <p class="lede">Cliniques et établissements confondus, qu'ils recrutent actuellement ou non.</p>
   <p class="lede">Coordonnées, horaires, équipe et personne-ressource pour préparer votre PTEM 2027, ou pour comparer les milieux avant de choisir.</p>
   <div class="faits">
@@ -225,7 +241,7 @@
   </aside>
   <details class="apropos">
     <summary>D'où viennent ces informations</summary>
-    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
+    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la contribution de <strong>Nancy Langlois</strong>, du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
     <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche officielle.</p>
     <p class="maj">Données mises à jour le <time datetime="2026-09-17">17 septembre 2026</time>.</p>
   </details>
