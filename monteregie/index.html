@@ -4604,4 +4604,265 @@ fetch('../data.json', { cache: 'no-cache' })
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
+
+<style id="repertoire-territoire-css">
+/* Annuaire sous la carte : visible aux humains (défilement) et aux robots (HTML statique).
+   Annule position:fixed / overflow:hidden des gabarits carte pour que le document défile. */
+html, body {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.layout {
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100dvh;
+  flex-shrink: 0;
+}
+#repertoire-territoire {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  clip: auto !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 2;
+  box-sizing: border-box;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  border-top: 4px solid #0080d7;
+  line-height: 1.5;
+}
+#repertoire-territoire h2 { font-size: 1.15rem; margin: 1.6rem 0 .6rem; color: #170a72; }
+#repertoire-territoire > h2:first-of-type { margin-top: 0; }
+#repertoire-territoire p { margin: .55rem 0; }
+#repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
+#repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
+#repertoire-territoire a { color: #0080d7; }
+#repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
+#repertoire-territoire .repertoire-suite { margin-top: .75rem; }
+</style>
+<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+  <h2>Répertoire de la Montérégie</h2>
+  <p>La carte complète regroupe les 9 RLS des trois territoires de la Montérégie (Montérégie-Est, Montérégie-Centre et Montérégie-Ouest). On y trouve 92 cliniques de médecine familiale — 56 GMF, 7 GMF-U, 4 GMF-R et 25 cliniques médicales.</p>
+<p>77 d’entre elles recrutent actuellement des médecins de famille, notamment à Saint-Jean-sur-Richelieu, Longueuil, Sorel-Tracy, Châteauguay, Saint-Hyacinthe, Salaberry-de-Valleyfield, Vaudreuil-Dorion et Brossard.</p>
+<p>30 établissements (hôpitaux, CHSLD, GMF-U et autres) affichent aussi des secteurs en recrutement sur ce territoire.</p>
+  
+<section class="repertoire-section" id="repertoire-rls">
+  <h2>Réseaux locaux de services</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-est/rls/pierre-boucher/">Montérégie-Est · RLS Pierre-Boucher</a></li>
+  <li><a href="/monteregie-est/rls/richelieu-yamaska/">Montérégie-Est · RLS Richelieu-Yamaska</a></li>
+  <li><a href="/monteregie-est/rls/pierre-de-saurel/">Montérégie-Est · RLS Pierre-De Saurel</a></li>
+  <li><a href="/monteregie-centre/rls/champlain/">Montérégie-Centre · RLS Champlain</a></li>
+  <li><a href="/monteregie-centre/rls/haut-richelieu-rouville/">Montérégie-Centre · RLS Haut-Richelieu–Rouville</a></li>
+  <li><a href="/monteregie-ouest/rls/jardins-roussillon/">Montérégie-Ouest · RLS Jardins-Roussillon</a></li>
+  <li><a href="/monteregie-ouest/rls/vaudreuil-soulanges/">Montérégie-Ouest · RLS Vaudreuil-Soulanges</a></li>
+  <li><a href="/monteregie-ouest/rls/du-suroit/">Montérégie-Ouest · RLS du Suroît</a></li>
+  <li><a href="/monteregie-ouest/rls/du-haut-saint-laurent/">Montérégie-Ouest · RLS du Haut-Saint-Laurent</a></li>
+</ul>
+  <p class="repertoire-suite"><a href="/monteregie-est/rls/">RLS Montérégie-Est</a> · <a href="/monteregie-centre/rls/">Montérégie-Centre</a> · <a href="/monteregie-ouest/rls/">Montérégie-Ouest</a></p>
+</section>
+  
+<section class="repertoire-section" id="repertoire-cliniques-est-pierre-boucher">
+  <h2>Montérégie-Est · RLS Pierre-Boucher</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-est/cliniques/camu-longueuil-gmf-petit-bois/">CAMU Longueuil (GMF Petit-Bois)</a> <span class="repertoire-meta">Longueuil</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-la-releve-gmf-petit-bois/">Clinique La Relève (GMF Petit-Bois)</a> <span class="repertoire-meta">Varennes</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-le-medical/">Clinique le Médical</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-medicale-de-la-marine/">Clinique Médicale de la Marine</a> <span class="repertoire-meta">Varennes</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-medicale-sainte-helene/">Clinique Médicale Sainte-Hélène</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-3090-clinique-medicale-chemin-chambly/">GMF 3090 (Clinique Médicale Chemin Chambly)</a> <span class="repertoire-meta">Longueuil</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-contrecoeur-cooperative-sante-contrecoeur/">GMF Contrecœur (Coopérative Santé Contrecœur)</a> <span class="repertoire-meta">Contrecœur · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-des-iles-percees/">GMF des Îles-Percées</a> <span class="repertoire-meta">Boucherville</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-des-seigneuries/">GMF des Seigneuries</a> <span class="repertoire-meta">Varennes</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-l-autre-maison/">GMF L'Autre Maison</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-marguerite-d-youville/">GMF Marguerite d'Youville</a> <span class="repertoire-meta">Sainte-Julie · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-sainte-julie/">GMF Sainte-Julie</a> <span class="repertoire-meta">Sainte-Julie</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-r-pierre-boucher/">GMF-R Pierre-Boucher</a> <span class="repertoire-meta">Longueuil</span></li>
+  <li><a href="/monteregie-est/etablissements/gmf-u-des-monteregiennes/">GMF-U des Montérégiennes</a> <span class="repertoire-meta">Boucherville</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-est-richelieu-yamaska">
+  <h2>Montérégie-Est · RLS Richelieu-Yamaska</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-est/cliniques/centre-medical-fusion/">Centre Médical Fusion</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-medicale-les-2-chenes/">Clinique médicale Les 2 Chênes</a> <span class="repertoire-meta">Saint-Mathieu-de-Beloeil</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-3090-saint-basile/">GMF 3090 (Saint-Basile)</a> <span class="repertoire-meta">Saint-Basile-le-Grand</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-carrefour-de-la-vallee/">GMF Carrefour de la Vallée</a> <span class="repertoire-meta">Beloeil</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-cooperative-de-solidarite-de-sante-de-la-mrc-d-acton/">GMF Coopérative de Solidarité de Santé de la MRC d'Acton</a> <span class="repertoire-meta">Acton Vale</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-de-la-montagne-clinique-du-docteur-jean-charbonneau/">GMF de la Montagne (clinique du Docteur Jean Charbonneau)</a> <span class="repertoire-meta">Beloeil · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-de-la-rive-clinique-medicale-de-la-rive/">GMF de la Rive (Clinique Médicale de la Rive)</a> <span class="repertoire-meta">Otterburn Park · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-des-patriotes-horizon/">GMF des Patriotes - Horizon</a> <span class="repertoire-meta">Saint-Denis-sur-Richelieu</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-des-patriotes-pure-clinique-medicale/">GMF des Patriotes (Pure Clinique Médicale)</a> <span class="repertoire-meta">Mont-Saint-Hilaire · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-laframboise/">GMF Laframboise</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-le-sentier/">GMF Le Sentier</a> <span class="repertoire-meta">Saint-Bruno-de-Montarville</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-maska/">GMF Maska</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li><a href="/monteregie-est/etablissements/gmf-u-richelieu-yamaska/">GMF-U Richelieu-Yamaska</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-est-pierre-de-saurel">
+  <h2>Montérégie-Est · RLS Pierre-De Saurel</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-est/cliniques/clinique-de-medecine-familiale-sorel-tracy/">Clinique de Médecine Familiale Sorel-Tracy</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy/">Clinique des professionnels de la santé Sorel-Tracy (clinique A)</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-b/">Clinique des professionnels de la santé Sorel-Tracy (clinique B)</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-c-gmf-st-mathieu-de/">Clinique des professionnels de la santé Sorel-Tracy (clinique C – GMF St-Mathieu de Beloeil)</a> <span class="repertoire-meta">Sorel-Tracy</span></li>
+  <li><a href="/monteregie-est/cliniques/clinique-medicale-marie-victorin/">Clinique Médicale Marie-Victorin</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-est/cliniques/gmf-richelieu/">GMF Richelieu</a> <span class="repertoire-meta">Sorel-Tracy</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-centre-champlain">
+  <h2>Montérégie-Centre · RLS Champlain</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-centre/cliniques/gmf-centre-medical-st-hubert/">GMF Centre médical St-Hubert</a> <span class="repertoire-meta">Saint-Hubert</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-clsc-samuel-de-champlain/">GMF CLSC Samuel-De Champlain</a> <span class="repertoire-meta">Brossard</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-dix30/">GMF DIX30</a> <span class="repertoire-meta">Brossard</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-la-cigogne/">GMF La Cigogne</a> <span class="repertoire-meta">Greenfield Park</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-lapiniere/">GMF Lapinière</a> <span class="repertoire-meta">Brossard</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-r-clinique-azur/">GMF-R Clinique Azur</a> <span class="repertoire-meta">Greenfield Park</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-u-charles-le-moyne/">GMF-U Charles-Le Moyne</a> <span class="repertoire-meta">Saint-Lambert</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-u-saint-hubert/">GMF-U Saint-Hubert</a> <span class="repertoire-meta">Saint-Hubert</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-centre-haut-richelieu-rouville">
+  <h2>Montérégie-Centre · RLS Haut-Richelieu–Rouville</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-centre/cliniques/clinique-medicale-du-college-gmf-richelieu-saint-cesaire/">Clinique médicale du Collège (GMF Richelieu – Saint-Césaire)</a> <span class="repertoire-meta">Saint-Césaire</span></li>
+  <li><a href="/monteregie-centre/cliniques/clinique-medicale-saint-luc-gmf-saint-luc-saint-eugene/">Clinique médicale Saint-Luc (GMF Saint-Luc Saint-Eugène)</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="/monteregie-centre/cliniques/clsc-de-henryville/">CLSC de Henryville</a> <span class="repertoire-meta">Henryville</span></li>
+  <li><a href="/monteregie-centre/cliniques/cooperative-de-sante-lac-champlain/">Coopérative de santé Lac Champlain</a> <span class="repertoire-meta">Venise-en-Québec</span></li>
+  <li><a href="/monteregie-centre/cliniques/cooperative-solidarite-sante-saint-blaise-sur-richelieu/">Coopérative solidarité santé Saint-Blaise-sur-Richelieu</a> <span class="repertoire-meta">Saint-Blaise-sur-Richelieu</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-centre-medical-iberville/">GMF Centre médical Iberville</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-du-coteau/">GMF du Coteau</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-haut-richelieu/">GMF Haut-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-la-clinique-fort-chambly/">GMF La Clinique Fort Chambly</a> <span class="repertoire-meta">Chambly</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-medicentre-saint-jean/">GMF Médicentre Saint-Jean</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-pro-sante-marieville/">GMF Pro-Santé Marieville</a> <span class="repertoire-meta">Marieville</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-richelieu-saint-cesaire-clsc-du-richelieu/">GMF Richelieu – Saint-Césaire (CLSC du Richelieu)</a> <span class="repertoire-meta">Richelieu</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-saint-luc-saint-eugene-clinique-medicale-saint-eugene/">GMF Saint-Luc Saint-Eugène (Clinique médicale Saint-Eugène)</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="/monteregie-centre/cliniques/gmf-u-de-saint-jean-sur-richelieu/">GMF-U de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · ne recrute pas actuellement</span></li>
+  <li><a href="/monteregie-centre/cliniques/point-de-service-saint-cesaire-gmf-richelieu-saint-cesaire/">Point de service Saint-Césaire (GMF Richelieu – Saint-Césaire)</a> <span class="repertoire-meta">Saint-Césaire</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-jardins-roussillon">
+  <h2>Montérégie-Ouest · RLS Jardins-Roussillon</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-ouest/cliniques/ch-kateri-memorial/">CH Kateri Memorial</a> <span class="repertoire-meta">Kahnawake</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clinique-medicale-le-soleil/">Clinique médicale Le Soleil</a> <span class="repertoire-meta">Châteauguay</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clinique-medicale-napierville/">Clinique médicale Napierville</a> <span class="repertoire-meta">Napierville</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-chateauguay/">CLSC Châteauguay</a> <span class="repertoire-meta">Châteauguay</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-kateri/">CLSC Kateri</a> <span class="repertoire-meta">Candiac</span></li>
+  <li><a href="/monteregie-ouest/cliniques/cooperative-solidarite-sante-saint-isidore-gmf-roger-laberge/">Coopérative solidarité santé Saint-Isidore (GMF Roger Laberge)</a> <span class="repertoire-meta">Saint-Isidore</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-carrefour-sante-le-saint-laurent/">GMF Carrefour Santé Le Saint-Laurent</a> <span class="repertoire-meta">Sainte-Catherine</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-jardin-du-quebec-napierville/">GMF Jardin-du-Québec (Napierville)</a> <span class="repertoire-meta">Napierville</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-jardin-du-quebec-saint-remi/">GMF Jardin-du-Québec (Saint-Rémi)</a> <span class="repertoire-meta">Saint-Rémi</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-mercier/">GMF Mercier</a> <span class="repertoire-meta">Mercier</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-roger-laberge/">GMF Roger Laberge</a> <span class="repertoire-meta">Châteauguay</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-saint-constant-de-la-gare/">GMF Saint-Constant (de la gare)</a> <span class="repertoire-meta">Saint-Constant</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-saint-constant-monchamp/">GMF Saint-Constant (Monchamp)</a> <span class="repertoire-meta">Saint-Constant</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-r-le-trait-d-union/">GMF-R Le Trait-d'Union</a> <span class="repertoire-meta">Delson</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-u-jardins-roussillon/">GMF-U Jardins-Roussillon</a> <span class="repertoire-meta">Châteauguay</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-vaudreuil-soulanges">
+  <h2>Montérégie-Ouest · RLS Vaudreuil-Soulanges</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-ouest/cliniques/chsld-et-clsc-de-coteau-du-lac/">CLSC de Coteau-du-Lac</a> <span class="repertoire-meta">Coteau-du-Lac</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-de-rigaud/">CLSC de Rigaud</a> <span class="repertoire-meta">Rigaud</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-de-vaudreuil-dorion-centre-multiservices-de-sante-et-de-services-sociaux-de/">CLSC de Vaudreuil-Dorion</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-et-groupe-de-medecine-de-famille-universitaire-de-saint-polycarpe/">CLSC et GMF-U de Saint-Polycarpe</a> <span class="repertoire-meta">Saint-Polycarpe</span></li>
+  <li><a href="/monteregie-ouest/cliniques/centre-medical-des-trois-lacs-gmf-des-trois-lacs/">GMF des Trois Lacs</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-hudson-hudson-medicentre/">GMF Hudson</a> <span class="repertoire-meta">Hudson</span></li>
+  <li><a href="/monteregie-ouest/cliniques/centre-de-sante-medicentre-pincourt-gmf/">GMF Pincourt</a> <span class="repertoire-meta">Pincourt</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-rigaud-centre-de-sante-de-rigaud/">GMF Rigaud</a> <span class="repertoire-meta">Rigaud</span></li>
+  <li><a href="/monteregie-ouest/cliniques/groupe-de-medecine-familiale-sante-ste-angelique/">GMF Santé Ste-Angélique</a> <span class="repertoire-meta">Saint-Lazare</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-gmf-r-vaudreuil-dorion-polyclinique-medicale-vaudreuil/">GMF-R Vaudreuil-Dorion</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-u-de-vaudreuil-soulanges/">GMF-U de Vaudreuil-Soulanges</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-du-suroit">
+  <h2>Montérégie-Ouest · RLS du Suroît</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-ouest/cliniques/beauharnois-en-sante-cooperative-de-solidarite/">Beauharnois en Santé</a> <span class="repertoire-meta">Beauharnois</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-de-beauharnois/">CLSC de Beauharnois</a> <span class="repertoire-meta">Beauharnois</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-de-salaberry-de-valleyfield/">CLSC de Salaberry-de-Valleyfield</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clinique-medicale-des-batisseurs-gmf-des-batisseurs/">GMF des Bâtisseurs</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-du-lac-saint-francois-clinique-medicale-havre-sante/">GMF du Lac Saint-François</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-salaberry-clinique-medi-val/">GMF Salaberry</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-du-haut-saint-laurent">
+  <h2>Montérégie-Ouest · RLS du Haut-Saint-Laurent</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-ouest/cliniques/clsc-de-huntingdon/">CLSC de Huntingdon</a> <span class="repertoire-meta">Huntingdon</span></li>
+  <li><a href="/monteregie-ouest/cliniques/clsc-de-saint-chrysostome/">CLSC de Saint-Chrysostome</a> <span class="repertoire-meta">Saint-Chrysostome</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-du-haut-saint-laurent-centre-medical-huntingdon/">GMF du Haut-Saint-Laurent</a> <span class="repertoire-meta">Huntingdon</span></li>
+  <li><a href="/monteregie-ouest/cliniques/gmf-ormstown-clinique-medicale-ormstown/">GMF Ormstown</a> <span class="repertoire-meta">Ormstown</span></li>
+</ul>
+</section>
+<p class="repertoire-suite"><a href="/monteregie-est/cliniques/">Répertoire Montérégie-Est</a> · <a href="/monteregie-centre/cliniques/">Montérégie-Centre</a> · <a href="/monteregie-ouest/cliniques/">Montérégie-Ouest</a></p>
+  
+<section class="repertoire-section" id="repertoire-etablissements">
+  <h2>Établissements</h2>
+  <ul class="repertoire-liste">
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-de-contrecoeur/">Centre d'hébergement de Contrecoeur</a> <span class="repertoire-meta">Contrecoeur · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-de-l-hotel-dieu-de-saint-hyacinthe/">Centre d'hébergement de l'Hôtel-Dieu-de-Saint-Hyacinthe</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-de-montarville/">Centre d'hébergement de Montarville</a> <span class="repertoire-meta">Saint-Bruno-de-Montarville · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-elisabeth-lafrance/">Centre d'hébergement Élisabeth-Lafrance</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-j-arsene-parenteau/">Centre d'hébergement J.-Arsène-Parenteau</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-jeanne-crevier/">Centre d'hébergement Jeanne-Crevier</a> <span class="repertoire-meta">Boucherville · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-d-hebergement-marguerite-adam/">Centre d'hébergement Marguerite-Adam</a> <span class="repertoire-meta">Beloeil · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-de-detention/">Centre de détention</a> <span class="repertoire-meta">Sorel-Tracy · Mission régionale</span></li>
+  <li><a href="/monteregie-centre/etablissements/centre-de-pediatrie-sociale-l-etoile/">Centre de pédiatrie sociale L’Étoile</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-de-readaptation-en-dependance-longueuil/">Centre de réadaptation en dépendance Longueuil</a> <span class="repertoire-meta">Longueuil · Mission régionale</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/">Centre de réadaptation en dépendance Saint-Hyacinthe</a> <span class="repertoire-meta">Saint-Hyacinthe · Mission régionale</span></li>
+  <li><a href="/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-philippe/">Centre de réadaptation en dépendance Saint-Philippe</a> <span class="repertoire-meta">Saint-Philippe · Mission régionale</span></li>
+  <li><a href="/monteregie-centre/etablissements/chsld-de-saint-jean-sur-richelieu/">CHSLD de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-centre/etablissements/clinique-des-jeunes-du-bassin-de-chambly/">Clinique des jeunes du Bassin de Chambly</a> <span class="repertoire-meta">Chambly · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-centre/etablissements/clinique-jeunesse-de-saint-jean-sur-richelieu/">Clinique jeunesse de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-est/etablissements/clsc-de-longueuil-ouest/">CLSC de Longueuil-Ouest</a> <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-est/etablissements/clsc-des-maskoutains/">CLSC des Maskoutains</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-est/etablissements/clsc-des-patriotes/">CLSC des Patriotes</a> <span class="repertoire-meta">Beloeil · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-est/etablissements/clsc-des-seigneuries/">CLSC des Seigneuries</a> <span class="repertoire-meta">Varennes · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-est/etablissements/clsc-gaston-belanger/">CLSC Gaston-Bélanger</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li><a href="/monteregie-est/etablissements/clsc-simonne-monet-chartrand/">CLSC Simonne-Monet-Chartrand</a> <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-centre/etablissements/clsc-vallee-des-forts-soutien-a-domicile/">CLSC Vallée-des-Forts : soutien à domicile</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-centre/etablissements/gmf-u-de-saint-jean-sur-richelieu/">GMF-U de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-est/etablissements/gmf-u-des-monteregiennes/">GMF-U des Montérégiennes</a> <span class="repertoire-meta">Boucherville · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-est/etablissements/gmf-u-richelieu-yamaska/">GMF-U Richelieu-Yamaska</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-centre/etablissements/hopital-du-haut-richelieu/">Hôpital du Haut-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="/monteregie-est/etablissements/hopital-honore-mercier/">Hôpital Honoré-Mercier</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li><a href="/monteregie-est/etablissements/hopital-pierre-boucher/">Hôpital Pierre-Boucher</a> <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
+  <li><a href="/monteregie-est/etablissements/hotel-dieu-de-sorel/">Hôtel-Dieu de Sorel</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li><a href="/monteregie-centre/etablissements/manoir-soleil/">Manoir Soleil</a> <span class="repertoire-meta">Chambly · Haut-Richelieu–Rouville</span></li>
+</ul>
+  <p class="repertoire-suite"><a href="/monteregie-est/etablissements/">Établissements Montérégie-Est</a> · <a href="/monteregie-centre/etablissements/">Montérégie-Centre</a></p>
+</section>
+</nav>
 </body></html>

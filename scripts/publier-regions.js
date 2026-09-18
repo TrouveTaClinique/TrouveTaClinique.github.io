@@ -284,20 +284,440 @@ function ecrire(cible, contenu) {
   fs.writeFileSync(cible, contenu, 'utf8');
 }
 
+/* ------------------------------------------------------------------------------------------- */
+/* Index SEO statique sous la carte (lisible sans JavaScript)                                   */
+/* Même filtre de base que initData() dans le gabarit : visible, coords, hors catégorie        */
+/* établissement pour les cliniques ; données établissements JSON pour les fiches SEO.          */
+/* ------------------------------------------------------------------------------------------- */
+
+function escHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function slugifier(nom) {
+  return String(nom)
+    .replace(/\u0153/g, 'oe').replace(/\u0152/g, 'Oe').replace(/\u00e6/g, 'ae').replace(/\u00c6/g, 'Ae')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/['’]/g, ' ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-')
+    .slice(0, 80).replace(/-+$/, '');
+}
+
+function coordsValides(g) {
+  const lat = (typeof g.lat === 'number' || typeof g.lat === 'string') ? Number(g.lat) : NaN;
+  const lng = (typeof g.lng === 'number' || typeof g.lng === 'string') ? Number(g.lng) : NaN;
+  const latOk = Number.isFinite(lat) && lat >= -90 && lat <= 90;
+  const lngOk = Number.isFinite(lng) && lng >= -180 && lng <= 180;
+  const nomOk = typeof g.nom === 'string' && g.nom.trim().length > 0;
+  return latOk && lngOk && nomOk;
+}
+
+function chargerJson(relatif) {
+  return JSON.parse(fs.readFileSync(path.join(RACINE, relatif), 'utf8'));
+}
+
+function chargerSlugsCliniques() {
+  try {
+    return chargerJson(path.join('scripts', 'slugs.json'));
+  } catch (_e) {
+    return {};
+  }
+}
+
+function cliniquesCarte(region) {
+  const data = chargerJson('data.json');
+  const slugs = chargerSlugsCliniques();
+  return (data.cliniques || [])
+    .filter((g) => {
+      if (g.visible === false || g.categorie === 'etablissement') return false;
+      if (region && g.region !== region) return false;
+      return coordsValides(g);
+    })
+    .map((g) => ({
+      id: g.id,
+      nom: g.nom,
+      ville: g.ville || '',
+      rls: g.rls || '',
+      region: g.region || '',
+      type: g.type || '',
+      recrute: g.recrutementActif !== false,
+      slug: slugs[String(g.id)] || slugifier(g.nom)
+    }))
+    .filter((g) => g.slug)
+    .sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
+}
+
+function gmfuVersEtablissement() {
+  const map = new Map();
+  try {
+    const donnees = chargerJson('data-etablissements.json');
+    for (const inst of donnees.installations || []) {
+      if (inst.type !== 'gmf-u') continue;
+      const ref = inst.referenceExistante;
+      if (ref && ref.collection === 'cliniques' && ref.id != null) {
+        map.set(String(ref.id), slugifier(inst.nom));
+      }
+    }
+  } catch (_e) { /* pas de couche Est */ }
+  return map;
+}
+
+function dossiersEtablissementsPublies(dossierTerritoire) {
+  const dir = path.join(RACINE, dossierTerritoire, 'etablissements');
+  if (!fs.existsSync(dir)) return new Set();
+  return new Set(
+    fs.readdirSync(dir, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+  );
+}
+
+function etablissementsCarte(t) {
+  /* t = territoire TERRITOIRES ou null (carte complète). */
+  const lots = [];
+  if (!t || t.region === 'Est') {
+    try {
+      const donnees = chargerJson('data-etablissements.json');
+      const publies = dossiersEtablissementsPublies('monteregie-est');
+      const rlsNoms = t ? new Set(t.rls.map(([nom]) => nom)) : null;
+      for (const inst of donnees.installations || []) {
+        if (inst.publication && inst.publication.visible === false) continue;
+        const slug = slugifier(inst.nom);
+        if (!publies.has(slug)) continue;
+        if (t && !inst.missionRegionale && rlsNoms && !rlsNoms.has(inst.territoireSource)) continue;
+        lots.push({
+          nom: inst.nom,
+          ville: inst.ville || '',
+          type: inst.type || '',
+          rls: inst.missionRegionale ? 'Mission régionale' : (inst.territoireSource || ''),
+          region: 'Est',
+          dossier: 'monteregie-est',
+          slug
+        });
+      }
+    } catch (_e) { /* ignore */ }
+  }
+  if (!t || t.region === 'Centre') {
+    try {
+      const donnees = chargerJson('data-etablissements-centre.json');
+      const publies = dossiersEtablissementsPublies('monteregie-centre');
+      for (const inst of donnees.installations || []) {
+        if (inst.publication && inst.publication.visible === false) continue;
+        const slug = slugifier(inst.nom);
+        if (!publies.has(slug)) continue;
+        lots.push({
+          nom: inst.nom,
+          ville: inst.ville || '',
+          type: inst.type || '',
+          rls: inst.territoireSource || '',
+          region: 'Centre',
+          dossier: 'monteregie-centre',
+          slug
+        });
+      }
+    } catch (_e) { /* ignore */ }
+  }
+  return lots.sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
+}
+
+function villesPrincipales(cliniques, max = 8) {
+  const compte = new Map();
+  for (const c of cliniques) {
+    const v = (c.ville || '').trim();
+    if (!v) continue;
+    compte.set(v, (compte.get(v) || 0) + 1);
+  }
+  return [...compte.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr'))
+    .slice(0, max)
+    .map(([v]) => v);
+}
+
+function phraseVilles(villes) {
+  if (!villes.length) return '';
+  if (villes.length === 1) return villes[0];
+  const copie = villes.slice();
+  const dernier = copie.pop();
+  return copie.join(', ') + ' et ' + dernier;
+}
+
+function htmlListeLiens(items) {
+  if (!items.length) return '';
+  return '<ul class="repertoire-liste">\n' + items.map((it) =>
+    `  <li><a href="${escHtml(it.href)}">${escHtml(it.label)}</a>` +
+    (it.meta ? ` <span class="repertoire-meta">${escHtml(it.meta)}</span>` : '') +
+    '</li>'
+  ).join('\n') + '\n</ul>';
+}
+
+function compterTypesCliniques(cliniques) {
+  let gmf = 0;
+  let gmfu = 0;
+  let gmfr = 0;
+  let autres = 0;
+  for (const c of cliniques) {
+    const t = String(c.type || '').toLowerCase();
+    if (t === 'gmf-u' || t.includes('gmf-u')) gmfu++;
+    else if (t === 'gmf-r' || t.includes('gmf-r')) gmfr++;
+    else if (t === 'gmf' || /(^|\s)gmf(\s|$)/.test(t)) gmf++;
+    else autres++;
+  }
+  return { gmf, gmfu, gmfr, autres };
+}
+
+function phraseComposition(types) {
+  const bits = [];
+  if (types.gmf) bits.push(`${types.gmf} GMF`);
+  if (types.gmfu) bits.push(`${types.gmfu} GMF-U`);
+  if (types.gmfr) bits.push(`${types.gmfr} GMF-R`);
+  if (types.autres) bits.push(`${types.autres} clinique${types.autres > 1 ? 's' : ''} médicale${types.autres > 1 ? 's' : ''}`);
+  if (!bits.length) return '';
+  if (bits.length === 1) return bits[0];
+  const dernier = bits.pop();
+  return bits.join(', ') + ' et ' + dernier;
+}
+
+function htmlIntroTerritoire(t, cliniques, etablissements) {
+  const nRls = t ? t.rls.length : TERRITOIRES.reduce((n, x) => n + x.rls.length, 0);
+  const nRecrute = cliniques.filter((c) => c.recrute).length;
+  const nTotal = cliniques.length;
+  const villes = phraseVilles(villesPrincipales(cliniques, 8));
+  const nom = t ? t.nom : 'Montérégie';
+  const nomsRls = t
+    ? phraseVilles(t.rls.map(([n]) => n))
+    : phraseVilles(TERRITOIRES.flatMap((x) => x.rls.map(([n]) => n)));
+  const composition = phraseComposition(compterTypesCliniques(cliniques));
+
+  let p1 = t
+    ? `La ${nom} couvre ${nRls === 1 ? 'le' : 'les'} RLS ${nomsRls}.`
+    : `La carte complète regroupe les ${nRls} RLS des trois territoires de la Montérégie (${phraseVilles(TERRITOIRES.map((x) => x.nom))}).`;
+  if (nTotal) {
+    p1 += ` On y trouve ${nTotal} clinique${nTotal > 1 ? 's' : ''} de médecine familiale`;
+    if (composition) p1 += ` — ${composition}`;
+    p1 += '.';
+  }
+
+  let p2 = nRecrute
+    ? `${nRecrute} d’entre elles recrute${nRecrute > 1 ? 'nt' : ''} actuellement des médecins de famille`
+    : 'Aucune clinique n’est marquée en recrutement pour le moment';
+  if (villes) p2 += `, notamment à ${villes}`;
+  p2 += '.';
+
+  let p3 = '';
+  if (etablissements.length) {
+    p3 = `${etablissements.length} établissement${etablissements.length > 1 ? 's' : ''} (hôpitaux, CHSLD, GMF-U et autres) affichent aussi des secteurs en recrutement sur ce territoire.`;
+  } else if (nTotal > nRecrute) {
+    const hors = nTotal - nRecrute;
+    p3 = `${hors} autre${hors > 1 ? 's' : ''} milieu${hors > 1 ? 'x' : ''} ${hors > 1 ? 'sont publiés' : 'est publié'} à titre de référence, sans recrutement ouvert.`;
+  }
+
+  return `<p>${escHtml(p1)}</p>\n<p>${escHtml(p2)}</p>` + (p3 ? `\n<p>${escHtml(p3)}</p>` : '');
+}
+
+function htmlBlocRls(t) {
+  const lignes = [];
+  const territoires = t ? [t] : TERRITOIRES;
+  for (const ter of territoires) {
+    for (const [nom, , slug] of ter.rls) {
+      const href = t
+        ? `rls/${slug}/`
+        : `/${ter.dossier}/rls/${slug}/`;
+      lignes.push({
+        href,
+        label: t ? `RLS ${nom}` : `${ter.nom} · RLS ${nom}`
+      });
+    }
+  }
+  const more = t
+    ? `<p class="repertoire-suite"><a href="rls/">Parcourir les pages RLS de ${escHtml(t.nom)} →</a></p>`
+    : `<p class="repertoire-suite"><a href="/monteregie-est/rls/">RLS Montérégie-Est</a> · <a href="/monteregie-centre/rls/">Montérégie-Centre</a> · <a href="/monteregie-ouest/rls/">Montérégie-Ouest</a></p>`;
+  return `
+<section class="repertoire-section" id="repertoire-rls">
+  <h2>Réseaux locaux de services</h2>
+  ${htmlListeLiens(lignes)}
+  ${more}
+</section>`;
+}
+
+function htmlBlocCliniques(t, cliniques, gmfuMap) {
+  const territoires = t ? [t] : TERRITOIRES;
+  const sections = [];
+  for (const ter of territoires) {
+    const ordreRls = ter.rls.map(([nom]) => nom);
+    const parRls = new Map();
+    for (const c of cliniques) {
+      if (c.region !== ter.region) continue;
+      const cle = c.rls || 'Autre';
+      if (!parRls.has(cle)) parRls.set(cle, []);
+      parRls.get(cle).push(c);
+    }
+    const ordre = [...ordreRls.filter((n) => parRls.has(n)), ...[...parRls.keys()].filter((n) => !ordreRls.includes(n)).sort((a, b) => a.localeCompare(b, 'fr'))];
+    for (const rlsNom of ordre) {
+      const liste = parRls.get(rlsNom) || [];
+      const items = liste.map((c) => {
+        const slugEtab = gmfuMap.get(String(c.id));
+        let href;
+        if (slugEtab && (!t || t.region === 'Est')) {
+          /* Canonique GMF-U : fiche établissement Est (évite la page clinique qui redirige). */
+          href = t ? `etablissements/${slugEtab}/` : `/monteregie-est/etablissements/${slugEtab}/`;
+        } else if (t) {
+          href = `cliniques/${c.slug}/`;
+        } else {
+          const dos = TERRITOIRES.find((x) => x.region === c.region);
+          href = `/${dos ? dos.dossier : 'monteregie-est'}/cliniques/${c.slug}/`;
+        }
+        return {
+          href,
+          label: c.nom,
+          meta: [c.ville, c.recrute ? null : 'ne recrute pas actuellement'].filter(Boolean).join(' · ')
+        };
+      });
+      const titre = t
+        ? `Cliniques · RLS ${rlsNom}`
+        : `${ter.nom} · RLS ${rlsNom}`;
+      sections.push(`
+<section class="repertoire-section" id="repertoire-cliniques-${slugifier(ter.region + '-' + rlsNom)}">
+  <h2>${escHtml(titre)}</h2>
+  ${htmlListeLiens(items)}
+</section>`);
+    }
+  }
+  const more = t
+    ? `<p class="repertoire-suite"><a href="cliniques/">Répertoire des cliniques de ${escHtml(t.nom)} →</a></p>`
+    : `<p class="repertoire-suite"><a href="/monteregie-est/cliniques/">Répertoire Montérégie-Est</a> · <a href="/monteregie-centre/cliniques/">Montérégie-Centre</a> · <a href="/monteregie-ouest/cliniques/">Montérégie-Ouest</a></p>`;
+  return sections.join('\n') + '\n' + more;
+}
+
+function htmlBlocEtablissements(t, etablissements) {
+  if (!etablissements.length) return '';
+  const items = etablissements.map((e) => ({
+    href: t ? `etablissements/${e.slug}/` : `/${e.dossier}/etablissements/${e.slug}/`,
+    label: e.nom,
+    meta: [e.ville, e.rls].filter(Boolean).join(' · ')
+  }));
+  const more = t
+    ? (t.region === 'Ouest'
+      ? ''
+      : `<p class="repertoire-suite"><a href="etablissements/">Secteurs en établissement →</a></p>`)
+    : `<p class="repertoire-suite"><a href="/monteregie-est/etablissements/">Établissements Montérégie-Est</a> · <a href="/monteregie-centre/etablissements/">Montérégie-Centre</a></p>`;
+  return `
+<section class="repertoire-section" id="repertoire-etablissements">
+  <h2>Établissements</h2>
+  ${htmlListeLiens(items)}
+  ${more}
+</section>`;
+}
+
+function htmlIndexSeoTerritoire(t) {
+  const cliniques = cliniquesCarte(t ? t.region : null);
+  const etablissements = etablissementsCarte(t);
+  const gmfuMap = gmfuVersEtablissement();
+  const titre = t
+    ? `Répertoire de la ${t.nom}`
+    : 'Répertoire de la Montérégie';
+  const style = `
+<style id="repertoire-territoire-css">
+/* Annuaire sous la carte : visible aux humains (défilement) et aux robots (HTML statique).
+   Annule position:fixed / overflow:hidden des gabarits carte pour que le document défile. */
+html, body {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.layout {
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100dvh;
+  flex-shrink: 0;
+}
+#repertoire-territoire {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  clip: auto !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 2;
+  box-sizing: border-box;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  border-top: 4px solid #0080d7;
+  line-height: 1.5;
+}
+#repertoire-territoire h2 { font-size: 1.15rem; margin: 1.6rem 0 .6rem; color: #170a72; }
+#repertoire-territoire > h2:first-of-type { margin-top: 0; }
+#repertoire-territoire p { margin: .55rem 0; }
+#repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
+#repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
+#repertoire-territoire a { color: #0080d7; }
+#repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
+#repertoire-territoire .repertoire-suite { margin-top: .75rem; }
+</style>`;
+  return `${style}
+<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+  <h2>${escHtml(titre)}</h2>
+  ${htmlIntroTerritoire(t, cliniques, etablissements)}
+  ${htmlBlocRls(t)}
+  ${htmlBlocCliniques(t, cliniques, gmfuMap)}
+  ${htmlBlocEtablissements(t, etablissements)}
+</nav>`;
+}
+
+function injecterIndexSeo(html, t) {
+  const bloc = htmlIndexSeoTerritoire(t);
+  if (!html.includes('</body>')) {
+    throw new Error('Balise </body> introuvable pour injecter le répertoire territorial.');
+  }
+  /* Remplace un ancien bloc s’il existe (renommage index-seo → repertoire). */
+  let out = html
+    .replace(/<style id="(?:seo-index|repertoire)-territoire-css">[\s\S]*?<\/style>\s*/g, '')
+    .replace(/<nav id="(?:index-seo|repertoire)-territoire"[\s\S]*?<\/nav>\s*/g, '');
+  return out.replace('</body>', `${bloc}\n</body>`);
+}
+
 function main() {
   const source = fs.readFileSync(SOURCE, 'utf8');
   verifierCarteGenerale(source);
 
   // La carte complète n'est pas installable. Les commentaires de substitution sont inoffensifs
   // et facilitent le contrôle visuel du gabarit; aucune balise manifest ni aucun bouton n'existe.
-  ecrire(SORTIE_GENERALE, source.replace('<html lang="fr-CA">', '<html lang="fr-CA" data-etab-ui="1">'));
-  console.log('  monteregie/index.html régénéré (carte complète, non installable).');
+  const generale = injecterIndexSeo(
+    source.replace('<html lang="fr-CA">', '<html lang="fr-CA" data-etab-ui="1">'),
+    null
+  );
+  ecrire(SORTIE_GENERALE, generale);
+  console.log('  monteregie/index.html régénéré (carte complète, non installable + index SEO).');
 
   for (const t of TERRITOIRES) {
-    const sortie = appliquerIdentiteRegionale(source, t);
+    let sortie = appliquerIdentiteRegionale(source, t);
+    sortie = injecterIndexSeo(sortie, t);
     verifierIsolation(sortie, t);
     ecrire(path.join(RACINE, t.dossier, 'index.html'), sortie);
-    console.log(`  ${t.dossier}/index.html régénéré (${t.rls.length} RLS, ${t.app ? 'PWA' : 'carte seule'}).`);
+    console.log(`  ${t.dossier}/index.html régénéré (${t.rls.length} RLS, ${t.app ? 'PWA' : 'carte seule'} + index SEO).`);
   }
   console.log('4 cartes régénérées : gabarit partagé et prototype SQ conservé pour l’Est.');
 }
