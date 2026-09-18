@@ -8,7 +8,8 @@
 #     1. régénère les fiches de cliniques publiables, les pages de RLS, les répertoires et sitemap.xml ;
 #     2. vérifie qu'aucune donnée privée n'a fui dans les pages produites ;
 #     3. publie le résultat directement sur le site ;
-#     4. prévient Bing (IndexNow) après la régénération de sitemap.xml, uniquement depuis main.
+#     4. prévient Bing (IndexNow) APRÈS le push des pages, uniquement depuis main ;
+#        le job échoue si IndexNow répond hors 200/202 (plus de continue-on-error).
 #   Dès que scripts/carte.template.html est modifié, ce robot refabrique aussi /monteregie/
 #   et les trois cartes régionales (avec
 #   le <head> — titre/description/canonical/Open Graph — et le nom du territoire adaptés ;
@@ -215,8 +216,9 @@ jobs:
           echo "Pages publiées."
 
       - name: Prévenir Bing (IndexNow)
-        # Après sitemap.xml, jamais avant. Uniquement le site public : l'aperçu
-        # (branche brouillon) ne doit pas être signalé aux moteurs.
+        # Après le push des pages (étape précédente), jamais avant.
+        # Le script attend 30 s fixes, journalise statut + corps, et échoue hors 200/202.
+        # Soumission désactivée tant que INDEXNOW_ENABLED=false (403 Bing clé/domaine).
+        # Uniquement la branche main (site public) — jamais brouillon/aperçu.
         if: github.ref == 'refs/heads/main'
-        continue-on-error: true
         run: node scripts/soumettre-indexnow.js

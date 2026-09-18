@@ -129,8 +129,8 @@ function appliquerIdentiteRegionale(source, t) {
 
   r('<title>Carte complète de la Montérégie : Cliniques en recrutement</title>',
     `<title>Cliniques en recrutement : ${t.nom}</title>`, 'titre');
-  r('<meta name="description" content="Explorez la carte complète des cliniques en recrutement et des établissements de la Montérégie pour préparer votre PTEM en médecine familiale.">',
-    `<meta name="description" content="Carte interactive des cliniques en recrutement et des établissements de la ${t.nom}, pour préparer votre PTEM en médecine familiale.">`, 'description');
+  r('<meta name="description" content="Carte interactive des cliniques et établissements en recrutement en Montérégie, pour préparer votre PTEM 2027.">',
+    `<meta name="description" content="Carte interactive des cliniques et établissements en recrutement en ${t.nom}, pour préparer votre PTEM 2027.">`, 'description');
   r('<link rel="canonical" href="https://trouvetaclinique.ca/monteregie/">',
     `<link rel="canonical" href="https://trouvetaclinique.ca/${t.dossier}/">`, 'canonical');
   r('<meta name="robots" content="noindex,follow">',
