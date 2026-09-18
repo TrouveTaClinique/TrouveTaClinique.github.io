@@ -52,8 +52,7 @@ const CLOUDFLARE_ANALYTICS = `<!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->`;
 
-/* Rebond du logo au clic dans le header, identique à celui de index.html (--app-logo).
-   Ajouté le 30 août 2026 avec le thème Santé Québec — présent sur toutes les pages générées. */
+/* Rebond du logo au clic — conservé pour compatibilité. */
 const BRAND_TAP_SCRIPT = `<script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {
@@ -64,13 +63,16 @@ document.querySelectorAll('.brand').forEach(function (b) {
 });
 </script>`;
 
-/*
- * Bouton hamburger du header. Défini une seule fois pour que le gabarit page() et la
- * normalisation des pages guide (PTEM/AMP, publiées depuis un instantané figé dans
- * scripts/sources/) produisent exactement le même balisage — donc le même CSS.
- */
-const NAV_TOGGLE_BOUTON = `<button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
-      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+const WORDMARK_HTML = `<span class="wordmark" aria-hidden="true">
+      <span class="l1"><span class="lettres"><i>T</i><i>r</i><i>o</i><i>u</i><i>v</i><i>e</i><i class="sp"></i><i>t</i><i>a</i></span></span>
+      <span class="l2">Clinique</span>
+    </span>`;
+
+const SIGNALER_CLINIQUE_HREF = 'mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject=Signaler%20une%20clinique';
+
+const NAV_TOGGLE_BOUTON = `<button class="burger" type="button" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <svg viewBox="0 0 22 22" width="20" height="20" aria-hidden="true">
+        <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>`;
 
 const NAV_TOGGLE_SCRIPT = `<script>
@@ -97,29 +99,64 @@ const NAV_TOGGLE_SCRIPT = `<script>
 })();
 </script>`;
 
-/* Loupe du bandeau, même geste que sante.quebec : cercle + icône, panneau au clic.
-   Sans JavaScript, le lien ouvre /recherche/. */
-const SEARCH_TOGGLE_BOUTON = `<a href="/recherche/" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-haspopup="dialog" aria-label="Ouvrir la recherche">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="8.4" cy="8.4" r="5.3" stroke="currentColor" stroke-width="1.7"/><path d="M12.4 12.4 L16.6 16.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-    </a>`;
+const RECHERCHE_LIEN = `<a class="recherche" href="/recherche/">
+      <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
+        <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
+        <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <span class="lbl">Rechercher</span></a>`;
 
-const SEARCH_PANEL = `<div class="search-panel" id="search-panel" hidden>
-  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
-    <div class="search-panel__top">
-      <h2 id="search-title">Rechercher</h2>
-      <button type="button" class="search-panel__close" id="search-close" aria-label="Fermer la recherche">×</button>
-    </div>
-    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
-      <label class="visually-hidden" for="search-input">Rechercher un milieu ou une page</label>
-      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
-      <button type="submit">Rechercher</button>
-    </form>
-    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
-    <ul class="search-hits" id="search-results"></ul>
-  </div>
-</div>`;
-
+const SEARCH_TOGGLE_BOUTON = RECHERCHE_LIEN;
+const SEARCH_PANEL = ``;
 const SEARCH_SCRIPT = `<script src="/assets/recherche.js" defer></script>`;
+const THEME_SCRIPT = `<script src="/assets/theme.js" defer></script>`;
+
+function htmlBrand() {
+  return `<a class="brand" href="/">
+    <img src="/assets/logo-banniere.png" alt="">
+    <span class="vh">Trouve ta clinique</span>
+    ${WORDMARK_HTML}
+  </a>`;
+}
+
+function htmlFooterSite() {
+  return `<footer>
+  <div class="brandf">
+    <img src="/assets/logo-banniere.png" alt="">
+    <span class="vh">Trouve ta clinique</span>
+    ${WORDMARK_HTML}
+  </div>
+  <div class="fgrid">
+    <div><h4>Territoires</h4><ul>
+      <li><a href="/monteregie-est/">Montérégie-Est</a></li>
+      <li><a href="/monteregie/">Montérégie</a></li>
+      <li><a href="/monteregie-centre/">Montérégie-Centre</a></li>
+      <li><a href="/monteregie-ouest/">Montérégie-Ouest</a></li>
+    </ul></div>
+    <div><h4>Réseaux locaux (RLS)</h4><ul>
+      <li><a href="/monteregie-est/rls/pierre-boucher/">Pierre-Boucher</a></li>
+      <li><a href="/monteregie-est/rls/richelieu-yamaska/">Richelieu-Yamaska</a></li>
+      <li><a href="/monteregie-est/rls/pierre-de-saurel/">Pierre-De Saurel</a></li>
+      <li><a href="/monteregie-centre/rls/champlain/">Champlain</a></li>
+      <li><a href="/monteregie-centre/rls/haut-richelieu-rouville/">Haut-Richelieu–Rouville</a></li>
+      <li><a href="/monteregie-ouest/rls/jardins-roussillon/">Jardins-Roussillon</a></li>
+      <li><a href="/monteregie-ouest/rls/vaudreuil-soulanges/">Vaudreuil-Soulanges</a></li>
+      <li><a href="/monteregie-ouest/rls/du-suroit/">du Suroît</a></li>
+      <li><a href="/monteregie-ouest/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a></li>
+    </ul></div>
+    <div><h4>Guides et outils</h4><ul>
+      <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
+      <li><a href="/monteregie-est/amp/">AMP</a></li>
+      <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
+      <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
+      <li><a href="/recherche/">Recherche</a></li>
+      <li><a href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></li>
+    </ul></div>
+  </div>
+  <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
+  <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© ${new Date().getFullYear()} Olivier Laplante · Trouve ta clinique</p>
+</footer>`;
+}
+
 
 /* Bouton Pause / Lire du bandeau vidéo (page Cliniques Montérégie-Est).
    La lecture automatique est muette : les navigateurs bloquent le son sans clic.
@@ -856,7 +893,7 @@ function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane }) {
 
 function page({ titre, description, url, profondeur, indexable = true, canonical, jsonLd,
                 filDAriane, corps, actif, univers = UNIVERS_GENERAL, ogImageOverride = null,
-                verification = false }) {
+                verification = false, modeAccueil = false, cssExtra = null }) {
   description = controlerMetaDescription(description, url || titre);
   const u = univers;
   /* Feuille de style : chemin relatif dans l'univers général (comme avant), absolu dans
@@ -908,33 +945,33 @@ ${metaVerification}  <meta property="og:locale" content="fr_CA">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="${cssHref}">
-  <script type="application/ld+json">
+${cssExtra ? `  <link rel="stylesheet" href="${cssExtra}">\n` : ''}  <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2).split('\n').map(l => '  ' + l).join('\n')}
   </script>
 </head>
 <body>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
-<header class="site-header">
-  <div class="site-header__inner">
-    <a class="brand" href="/">
-      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
-      <span class="brand-name">Trouve ta clinique</span>
-    </a>
-    ${NAV_TOGGLE_BOUTON}
-    <nav class="nav" id="site-nav" aria-label="Navigation principale">
+<header class="site">
+  ${htmlBrand()}
+  <nav class="navdesk" id="site-nav" aria-label="Navigation principale">
 ${nav}
-    </nav>
-    ${SEARCH_TOGGLE_BOUTON}
+  </nav>
+  <div class="actions">
+    ${RECHERCHE_LIEN}
+    ${NAV_TOGGLE_BOUTON}
   </div>
 </header>
-${SEARCH_PANEL}
-<main id="contenu">
+${modeAccueil
+  ? `<span id="contenu"></span>
+${corps}`
+  : `<main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
 ${corps}
-</main>
-<footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF.<br>Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux.<br>Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© ${new Date().getFullYear()} Olivier Laplante · Trouve ta clinique</div></div></footer>
+</main>`}
+${htmlFooterSite()}
 ${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${corps.includes('video-hero') ? VIDEO_HERO_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
 ${NAV_TOGGLE_SCRIPT}
+${THEME_SCRIPT}
 ${SEARCH_SCRIPT}
 ${SERVICE_WORKER_CLEANUP}
 ${CLOUDFLARE_ANALYTICS}
@@ -1595,116 +1632,126 @@ function pageAccueil(toutesEntrees, majDonnees) {
     ]
   };
 
+  const rlsEstTheme = RLS_EST.map(nom =>
+    `    <a href="/monteregie-est/rls/${slugifier(nom)}/">${esc(nom)} <span class="fl">→</span></a>`).join('\n');
+  const rlsAutresTheme = RLS_AUTRES.map(([nom, href]) =>
+    `    <a href="${href}">${esc(nom)} <span class="fl">→</span></a>`).join('\n');
+
   const corps = `
-<section class="hero">
-  <p class="eyebrow">Médecine familiale</p>
-  <h1>Trouvez une clinique qui recrute en médecine familiale</h1>
-  <p class="lead">${totalGeneral} milieux de pratique répertoriés en Montérégie : cliniques et
-     établissements confondus, qu'ils recrutent actuellement ou non.<br>Coordonnées, horaires,
-     équipe et personne-ressource pour préparer votre ${esc(PTEM_STATUT.prochain)}, ou pour
-     comparer les milieux avant de choisir.</p>
-  <div class="cta-row">
-    <a class="button primary" href="/monteregie-est/">Explorer Montérégie-Est</a>
+<section class="hero-b">
+  <img src="/assets/hero-monteregie-1600.jpg"
+       srcset="/assets/hero-monteregie-800.webp 800w,
+               /assets/hero-monteregie-1200.webp 1200w,
+               /assets/hero-monteregie-1600.webp 1600w,
+               /assets/hero-monteregie-2400.webp 2400w"
+       sizes="100vw"
+       alt="Le fleuve Saint-Laurent bordant la Montérégie, vu du ciel"
+       width="1600" height="900" fetchpriority="high">
+  <p class="eyebrow hb-sur">Médecine familiale</p>
+  <h1 class="hb-titre">
+    <span class="hg">Trouvez une clinique</span>
+    <span class="bd">qui recrute en médecine familiale</span>
+  </h1>
+  <p class="hb-credit">Verchères, Qc</p>
+</section>
+
+<div class="wrap intro">
+  <p class="hook"><strong>${totalGeneral} milieux de pratique répertoriés en Montérégie.</strong> ${totalEstRecrutement} recrutent activement en Montérégie-Est.</p>
+  <p class="lede">Cliniques et établissements confondus, qu'ils recrutent actuellement ou non.</p>
+  <p class="lede">Coordonnées, horaires, équipe et personne-ressource pour préparer votre ${esc(PTEM_STATUT.prochain)}, ou pour comparer les milieux avant de choisir.</p>
+  <div class="faits">
+    <div class="fait reveal"><span class="kick">Au total</span><strong>${totalGeneral}</strong><span class="d">milieux de pratique répertoriés en Montérégie</span></div>
+    <div class="fait reveal d1"><span class="kick">Montérégie-Est</span><strong>${totalEst}</strong><span class="d">milieux de pratique répertoriés</span></div>
+    <div class="fait reveal d2"><span class="kick">Recrutent activement</span><strong>${totalEstRecrutement}</strong><span class="d">cliniques en recrutement en Montérégie-Est</span></div>
+  </div>
+</div>
+
+<section class="zone zone-action">
+  <h2>Où voulez-vous pratiquer&nbsp;?</h2>
+  <p class="consigne">Ouvrez la carte interactive de la Montérégie-Est&nbsp;: ${totalEst} milieux, leurs coordonnées et leur personne-ressource au recrutement.</p>
+  <a class="banniere reveal" href="/monteregie-est/" aria-label="Ouvrir la carte interactive Montérégie-Est">
+    <img src="/assets/banniere-cellulaire-monteregie-est.jpg" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="1774" height="887">
+  </a>
+  <h3 class="autres-note" style="font-size:1.05rem;font-weight:700;margin-bottom:.4rem">Autres territoires de la Montérégie</h3>
+  <p class="autres-note" style="margin-top:0">Les cartes de la Montérégie, de la Montérégie-Centre et de la Montérégie-Ouest sont disponibles, mais demeurent en construction.</p>
+  <div class="autres">
+    <a class="btn teal sm" href="/monteregie/">Montérégie</a>
+    <a class="btn ghost sm" href="/monteregie-centre/">Montérégie-Centre</a>
+    <a class="btn ghost sm" href="/monteregie-ouest/">Montérégie-Ouest</a>
   </div>
 </section>
 
-<div class="fact-grid fact-grid-3">
-  <div class="fact-card">
-    <span class="fact-kicker">Au total</span>
-    <strong>${totalGeneral}</strong>
-    <span>milieux de pratique répertoriés en Montérégie</span>
+<section class="zone">
+  <h2>Comment ça se passe&nbsp;?</h2>
+  <p class="lede">Que vous soyez résident en fin de formation ou déjà en pratique et à la recherche d'un nouveau milieu.</p>
+  <details class="etape reveal" open>
+    <summary><span><span class="num">1.</span>Explorer</span></summary>
+    <p>Filtrez par territoire, réseau local ou type de pratique. Chaque épingle mène à une fiche complète du milieu.</p>
+  </details>
+  <details class="etape reveal d1">
+    <summary><span><span class="num">2.</span>Comparer</span></summary>
+    <p>Mettez des milieux en favoris, ajoutez vos notes, exportez un tableau comparatif. Tout reste sur votre appareil.</p>
+  </details>
+  <details class="etape reveal d2">
+    <summary><span><span class="num">3.</span>Contacter</span></summary>
+    <p>Quand une clinique a transmis une personne-ressource au recrutement, elle figure sur sa fiche.</p>
+  </details>
+</section>
+
+<section class="zone" style="padding-top:0">
+  <h2>C'est quoi, un PTEM&nbsp;? Et une AMP&nbsp;?</h2>
+  <p class="lede">${phrasePtemCourte().replace(/<br>/g, ' ')}</p>
+  <div class="duo">
+    <article class="b reveal">
+      <h3>Le ${esc(PTEM_STATUT.prochain)}</h3>
+      <p>Le plan territorial d'effectifs médicaux (souvent encore appelé PREM) détermine où un médecin de famille peut s'installer et à quelles conditions.</p>
+      <a href="${EST_PREFIXE}/ptem/">Tout savoir sur le ${esc(PTEM_STATUT.prochain)} →</a>
+    </article>
+    <article class="t reveal d1">
+      <h3>Les AMP</h3>
+      <p>Les activités médicales particulières sont les obligations de pratique rattachées à votre territoire durant vos premières années.</p>
+      <a href="${EST_PREFIXE}/amp/">Comprendre les AMP →</a>
+    </article>
   </div>
-  <div class="fact-card">
-    <span class="fact-kicker">Montérégie-Est</span>
-    <strong>${totalEst}</strong>
-    <span>milieux de pratique répertoriés</span>
+</section>
+
+<section class="zone" style="padding-top:0">
+  <h2>Quel RLS vous intéresse&nbsp;?</h2>
+  <p class="rlslabel">Montérégie-Est</p>
+  <div class="rlsgrid reveal">
+${rlsEstTheme}
   </div>
-  <div class="fact-card">
-    <span class="fact-kicker">Recrutent activement</span>
-    <strong>${totalEstRecrutement}</strong>
-    <span>cliniques en recrutement en Montérégie-Est</span>
+  <p class="rlslabel">Autres RLS de la Montérégie</p>
+  <div class="rlsgrid reveal">
+${rlsAutresTheme}
   </div>
-</div>
+</section>
 
-<h2>Explorer par territoire</h2>
-${htmlBanniereSqb('/assets', { compact: true })}
-<h3 class="soustitre">Autres territoires de la Montérégie</h3>
-<p class="terr-autres-note">Les cartes de la Montérégie, de la Montérégie-Centre et de la Montérégie-Ouest sont disponibles, mais demeurent en construction.</p>
-<div class="terr-autres">
-  <a class="button sarcelle" href="/monteregie/">Montérégie</a>
-  <a class="button ghost" href="/monteregie-centre/">Montérégie-Centre</a>
-  <a class="button ghost" href="/monteregie-ouest/">Montérégie-Ouest</a>
-</div>
-
-<h2>Comment l'utiliser</h2>
-<p class="lead" style="font-size:1rem">Que vous soyez résident en fin de formation ou déjà en
-   pratique et à la recherche d'un nouveau milieu.</p>
-<div class="card-grid">
-  <div class="card accent-blue"><h3>1. Explorer</h3>
-    <p>Filtrez par territoire, réseau local ou type de pratique. Chaque épingle mène à une fiche
-       complète du milieu.</p></div>
-  <div class="card accent-teal"><h3>2. Comparer</h3>
-    <p>Mettez des milieux en favoris, ajoutez vos notes, exportez un tableau comparatif.<br>Tout
-       reste sur votre appareil.</p></div>
-  <div class="card accent-mint"><h3>3. Contacter</h3>
-    <p>Quand une clinique a transmis une personne-ressource au recrutement, elle figure sur sa
-       fiche.</p></div>
-</div>
-
-<h2>${esc(PTEM_STATUT.prochain)} et AMP</h2>
-<p class="lead" style="font-size:1rem">${phrasePtemCourte()}</p>
-<div class="card-grid two">
-  <div class="card accent-blue">
-    <h3>Le ${esc(PTEM_STATUT.prochain)}</h3>
-    <p>Le plan territorial d'effectifs médicaux (souvent encore appelé PREM) détermine où un
-       médecin de famille peut s'installer et à quelles conditions.</p>
-    <a class="text-cta" href="${EST_PREFIXE}/ptem/">Tout savoir sur le ${esc(PTEM_STATUT.prochain)} →</a>
-  </div>
-  <div class="card accent-teal">
-    <h3>Les AMP</h3>
-    <p>Les activités médicales particulières sont les obligations de pratique rattachées à votre
-       territoire durant vos premières années.</p>
-    <a class="text-cta" href="${EST_PREFIXE}/amp/">Comprendre les AMP →</a>
-  </div>
-</div>
-
-<h2>Parcourir par réseau local de services (RLS)</h2>
-<h3 class="soustitre">Montérégie-Est</h3>
-<div class="rls-liste rls-liste-est">
-${rlsEstHtml}
-</div>
-<h3 class="soustitre">Autres RLS de la Montérégie</h3>
-<div class="rls-liste rls-liste-autres">
-${rlsAutresHtml}
-</div>
-
-<div class="fact-card encart-gp">
-  <h2 style="margin-top:0">Vous cherchez une clinique comme patient ?</h2>
-  <p>Ce site s'adresse aux médecins et aux résidents qui cherchent un milieu où pratiquer.<br>Il ne
-     permet pas de prendre rendez-vous ni de s'inscrire auprès d'un médecin de famille.</p>
-  <p>Pour trouver une consultation, passez par
-     <a href="https://www.quebec.ca/sante/trouver-une-ressource/medecin-de-famille-prendre-rendez-vous-en-ligne" rel="noopener">Rendez-vous santé Québec</a>,
-     ou composez le <strong>811, option 1</strong> (Info-Santé) pour un avis infirmier.<br>Pour vous
-     inscrire auprès d'un médecin de famille, utilisez le
-     <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d'accès à un médecin de famille</a>.</p>
-</div>
-
-<details class="apropos-discret">
-  <summary>D'où viennent ces informations</summary>
-  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la
-     collaboration du Recrutement médical de Santé Québec - Montérégie-Est.<br>Les fiches
-     sont constituées à partir des renseignements transmis par les cliniques elles-mêmes,
-     complétés par des sources publiques et vérifiés manuellement.</p>
-  <p>Initiative bénévole, indépendante et sans but lucratif.<br>Elle ne remplace aucune démarche
-     officielle.<br>Une erreur ou une information à corriger ?<br>Les signalements sont bienvenus.</p>
-  <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
-</details>
+<section class="zone" style="padding-top:0">
+  <aside class="rappel appel reveal">
+    <h3>Une clinique manque à l'appel&nbsp;?</h3>
+    <p>La carte est mise à jour en continu avec le Recrutement médical de Santé Québec — Montérégie-Est et avec les milieux eux-mêmes. Une fiche incomplète, une erreur, une clinique absente&nbsp;: les signalements sont bienvenus.</p>
+    <p><a class="btn teal" href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></p>
+  </aside>
+  <aside class="rappel patient reveal">
+    <h3>Vous cherchez une clinique comme patient&nbsp;?</h3>
+    <p>Ce site s'adresse aux médecins et aux résidents qui cherchent un milieu où pratiquer. Il ne permet pas de prendre rendez-vous ni de s'inscrire auprès d'un médecin de famille.</p>
+    <p>Pour trouver une consultation, passez par <a href="https://www.quebec.ca/sante/trouver-une-ressource/medecin-de-famille-prendre-rendez-vous-en-ligne" rel="noopener">Rendez-vous santé Québec</a>, ou composez le <strong>811, option 1</strong> (Info-Santé) pour un avis infirmier. Pour vous inscrire auprès d'un médecin de famille, utilisez le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d'accès à un médecin de famille</a>.</p>
+  </aside>
+  <details class="apropos">
+    <summary>D'où viennent ces informations</summary>
+    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
+    <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche officielle.</p>
+    <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
+  </details>
+</section>
 `;
+
 
   const html = page({
     titre, description, url, profondeur: 0, indexable: true, canonical: url, jsonLd,
     filDAriane: '', corps, actif: 'accueil', univers: UNIVERS_GENERAL, verification: true,
-    ogImageOverride: OG_PAGES.accueil
+    ogImageOverride: OG_PAGES.accueil, modeAccueil: true
   });
   return { html, indexable: true };
 }
@@ -3634,6 +3681,44 @@ const LIBELLE_GUIDE_PAR_NOM = { ptem: 'La page PTEM', amp: 'La page AMP', 'ptem-
 function normaliserPageGuide(html, nom) {
   let sortie = html;
 
+  const uEst = UNIVERS_PAR_REGION.Est || UNIVERS_REGIONS.find(u => u.region === 'Est') || UNIVERS_GENERAL;
+  const liensGuide = liensNav(uEst);
+  const navGuide = liensGuide.map(([href, txt, cle]) => {
+    const courant = (nom === 'amp' && cle === 'amp')
+      || ((nom === 'ptem' || nom === 'ptem-u') && cle === 'ptem');
+    return `<a href="${href}"${courant ? ' aria-current="page"' : ''}>${txt}</a>`;
+  }).join('\n');
+  const headerTheme = `<header class="site">
+  ${htmlBrand()}
+  <nav class="navdesk" id="site-nav" aria-label="Navigation principale">
+${navGuide}
+  </nav>
+  <div class="actions">
+    ${RECHERCHE_LIEN}
+    ${NAV_TOGGLE_BOUTON}
+  </div>
+</header>`;
+  if (/<header class="site-header">[\s\S]*?<\/header>/.test(sortie)) {
+    sortie = sortie.replace(/<header class="site-header">[\s\S]*?<\/header>/, headerTheme);
+  } else if (/<header class="site">[\s\S]*?<\/header>/.test(sortie)) {
+    sortie = sortie.replace(/<header class="site">[\s\S]*?<\/header>/, headerTheme);
+  }
+  if (/<footer class="site-footer">[\s\S]*?<\/footer>/.test(sortie)) {
+    sortie = sortie.replace(/<footer class="site-footer">[\s\S]*?<\/footer>/, htmlFooterSite());
+  } else if (/<footer>[\s\S]*?<\/footer>/.test(sortie)) {
+    sortie = sortie.replace(/<footer>[\s\S]*?<\/footer>/, htmlFooterSite());
+  }
+  if (!sortie.includes('guides-ptem-amp.css')) {
+    sortie = sortie.replace(
+      /(<link[^>]*seo-pages\.css"[^>]*>)/,
+      '$1\n<link href="/assets/guides-ptem-amp.css" rel="stylesheet"/>'
+    );
+  }
+  if (!sortie.includes('/assets/theme.js')) {
+    sortie = sortie.replace('</body>', THEME_SCRIPT + '\n</body>');
+  }
+
+
   /* L'instantané embarque aussi l'ancien ménage de service worker (désinscription seule,
      sans purge ni rechargement). On le remplace par la version courante. */
   sortie = sortie.replace(
@@ -3641,32 +3726,9 @@ function normaliserPageGuide(html, nom) {
     () => SERVICE_WORKER_CLEANUP
   );
 
-  if (!/id="site-nav"/.test(sortie)) {
-    sortie = sortie.replace(
-      /<nav aria-label="Navigation principale" class="nav">/,
-      '<nav aria-label="Navigation principale" class="nav" id="site-nav">'
-    );
-  }
 
-  if (!/class="nav-toggle"/.test(sortie)) {
-    sortie = sortie.replace(
-      /(<nav aria-label="Navigation principale" class="nav"[^>]*>)/,
-      `${NAV_TOGGLE_BOUTON}\n$1`
-    );
-  }
-
-  if (!/getElementById\('nav-toggle'\)/.test(sortie)) {
+  if (!/getElementById('nav-toggle')/.test(sortie)) {
     sortie = sortie.replace('</body>', `${NAV_TOGGLE_SCRIPT}\n</body>`);
-  }
-
-  if (!/id="search-toggle"/.test(sortie)) {
-    sortie = sortie.replace(
-      /(<nav[^>]*id="site-nav"[^>]*>[\s\S]*?<\/nav>)/,
-      `$1\n    ${SEARCH_TOGGLE_BOUTON}`
-    );
-  }
-  if (!/id="search-panel"/.test(sortie)) {
-    sortie = sortie.replace('</header>', `</header>\n${SEARCH_PANEL}`);
   }
   if (!sortie.includes('/assets/recherche.js')) {
     sortie = sortie.replace('</body>', `${SEARCH_SCRIPT}\n</body>`);

@@ -64,43 +64,35 @@
 </head>
 <body>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
-<header class="site-header">
-  <div class="site-header__inner">
-    <a class="brand" href="/">
-      <span class="logo-img" role="img" aria-label="Logo Trouve ta clinique"></span>
-      <span class="brand-name">Trouve ta clinique</span>
-    </a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
-      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
-    </button>
-    <nav class="nav" id="site-nav" aria-label="Navigation principale">
+<header class="site">
+  <a class="brand" href="/">
+    <img src="/assets/logo-banniere.png" alt="">
+    <span class="vh">Trouve ta clinique</span>
+    <span class="wordmark" aria-hidden="true">
+      <span class="l1"><span class="lettres"><i>T</i><i>r</i><i>o</i><i>u</i><i>v</i><i>e</i><i class="sp"></i><i>t</i><i>a</i></span></span>
+      <span class="l2">Clinique</span>
+    </span>
+  </a>
+  <nav class="navdesk" id="site-nav" aria-label="Navigation principale">
       <a href="/">Accueil</a>
       <a href="/monteregie-centre/">Carte interactive</a>
       <a href="/monteregie-centre/cliniques/" aria-current="page">Cliniques</a>
       <a href="/monteregie-centre/etablissements/">Établissements</a>
       <a href="/monteregie-est/ptem/">PTEM</a>
       <a href="/monteregie-est/amp/">AMP</a>
-    </nav>
-    <a href="/recherche/" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-haspopup="dialog" aria-label="Ouvrir la recherche">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true"><circle cx="8.4" cy="8.4" r="5.3" stroke="currentColor" stroke-width="1.7"/><path d="M12.4 12.4 L16.6 16.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-    </a>
+  </nav>
+  <div class="actions">
+    <a class="recherche" href="/recherche/">
+      <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
+        <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
+        <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <span class="lbl">Rechercher</span></a>
+    <button class="burger" type="button" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+      <svg viewBox="0 0 22 22" width="20" height="20" aria-hidden="true">
+        <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
-<div class="search-panel" id="search-panel" hidden>
-  <div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
-    <div class="search-panel__top">
-      <h2 id="search-title">Rechercher</h2>
-      <button type="button" class="search-panel__close" id="search-close" aria-label="Fermer la recherche">×</button>
-    </div>
-    <form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">
-      <label class="visually-hidden" for="search-input">Rechercher un milieu ou une page</label>
-      <input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">
-      <button type="submit">Rechercher</button>
-    </form>
-    <p class="search-panel__hint" id="search-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
-    <ul class="search-hits" id="search-results"></ul>
-  </div>
-</div>
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/monteregie-centre/">Montérégie-Centre</a> › Cliniques</nav>
     <section class="hero">
@@ -232,7 +224,45 @@
 
   <figure class="sqb-wrap compact directory-banner"><a class="sqb-photo" href="/monteregie-est/" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="../../assets/banniere-cellulaire-monteregie-est.jpg" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="1774" height="887" decoding="sync" loading="lazy"></a></figure>
 </main>
-<footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF.<br>Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu’elles sont disponibles, des informations communiquées par les milieux.<br>Ces renseignements peuvent changer; pour toute décision officielle, validez l’information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante · Trouve ta clinique</div></div></footer>
+<footer>
+  <div class="brandf">
+    <img src="/assets/logo-banniere.png" alt="">
+    <span class="vh">Trouve ta clinique</span>
+    <span class="wordmark" aria-hidden="true">
+      <span class="l1"><span class="lettres"><i>T</i><i>r</i><i>o</i><i>u</i><i>v</i><i>e</i><i class="sp"></i><i>t</i><i>a</i></span></span>
+      <span class="l2">Clinique</span>
+    </span>
+  </div>
+  <div class="fgrid">
+    <div><h4>Territoires</h4><ul>
+      <li><a href="/monteregie-est/">Montérégie-Est</a></li>
+      <li><a href="/monteregie/">Montérégie</a></li>
+      <li><a href="/monteregie-centre/">Montérégie-Centre</a></li>
+      <li><a href="/monteregie-ouest/">Montérégie-Ouest</a></li>
+    </ul></div>
+    <div><h4>Réseaux locaux (RLS)</h4><ul>
+      <li><a href="/monteregie-est/rls/pierre-boucher/">Pierre-Boucher</a></li>
+      <li><a href="/monteregie-est/rls/richelieu-yamaska/">Richelieu-Yamaska</a></li>
+      <li><a href="/monteregie-est/rls/pierre-de-saurel/">Pierre-De Saurel</a></li>
+      <li><a href="/monteregie-centre/rls/champlain/">Champlain</a></li>
+      <li><a href="/monteregie-centre/rls/haut-richelieu-rouville/">Haut-Richelieu–Rouville</a></li>
+      <li><a href="/monteregie-ouest/rls/jardins-roussillon/">Jardins-Roussillon</a></li>
+      <li><a href="/monteregie-ouest/rls/vaudreuil-soulanges/">Vaudreuil-Soulanges</a></li>
+      <li><a href="/monteregie-ouest/rls/du-suroit/">du Suroît</a></li>
+      <li><a href="/monteregie-ouest/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a></li>
+    </ul></div>
+    <div><h4>Guides et outils</h4><ul>
+      <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
+      <li><a href="/monteregie-est/amp/">AMP</a></li>
+      <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
+      <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
+      <li><a href="/recherche/">Recherche</a></li>
+      <li><a href="mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject=Signaler%20une%20clinique">Signaler une clinique</a></li>
+    </ul></div>
+  </div>
+  <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
+  <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© 2026 Olivier Laplante · Trouve ta clinique</p>
+</footer>
 <script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {
@@ -265,6 +295,7 @@ document.querySelectorAll('.brand').forEach(function (b) {
   });
 })();
 </script>
+<script src="/assets/theme.js" defer></script>
 <script src="/assets/recherche.js" defer></script>
 <script>
 (function () {
