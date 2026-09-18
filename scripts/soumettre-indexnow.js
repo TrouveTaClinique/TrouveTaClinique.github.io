@@ -19,8 +19,16 @@ const HOTE = 'trouvetaclinique.ca';
 const POINT_D_ENTREE = 'https://api.indexnow.org/indexnow';
 const TAILLE_LOT = 10000;
 const MOTIF_CLE = /^[a-f0-9]{32}\.txt$/i;
-const ATTENTE_DEPLOIEMENT_MS = 4 * 60 * 1000;
-const INTERVALLE_SONDE_MS = 10 * 1000;
+/* Pause fixe après le push, avant le POST : GitHub Pages n’est pas synchrone. */
+const ATTENTE_DEPLOIEMENT_MS = 30 * 1000;
+
+/*
+ * INDEXNOW_ENABLED reste false tant que Bing répond 403 UserForbiddenToAccessSite
+ * malgré un fichier clé conforme à la racine (HTTP 200, 32 octets, sans BOM).
+ * Ce n’est pas un problème de fichier de clé : c’est l’autorisation clé/domaine
+ * côté Bing Webmaster Tools. Remettre à true seulement après correction Bing.
+ */
+const INDEXNOW_ENABLED = false;
 
 function trouverCle() {
   const fichiers = fs.readdirSync(RACINE).filter((nom) => MOTIF_CLE.test(nom));
@@ -79,34 +87,12 @@ function messageErreurHttp(statut, corps) {
   );
 }
 
-async function attendreDeploiementPublic(urlCle) {
-  const debut = Date.now();
-  console.log('IndexNow : attente du déploiement public de ' + urlCle + '…');
-  while (Date.now() - debut < ATTENTE_DEPLOIEMENT_MS) {
-    try {
-      const reponse = await fetch(urlCle, { method: 'GET', redirect: 'follow' });
-      const corps = (await reponse.text()).trim();
-      console.log(
-        'IndexNow : sonde déploiement — HTTP ' + reponse.status +
-        (corps ? ' — corps ' + corps.length + ' octet(s)' : '')
-      );
-      if (reponse.status === 200 && corps.length === 32) {
-        console.log('IndexNow : clé publique joignable, poursuite de la soumission.');
-        return;
-      }
-    } catch (erreur) {
-      console.log(
-        'IndexNow : sonde déploiement — erreur réseau : ' +
-        (erreur && erreur.message ? erreur.message : erreur)
-      );
-    }
-    await new Promise((r) => setTimeout(r, INTERVALLE_SONDE_MS));
-  }
-  throw new Error(
-    'IndexNow : la clé n’était pas servie en HTTP 200 sur le site public après ' +
-    (ATTENTE_DEPLOIEMENT_MS / 1000) +
-    ' s. Soumission annulée pour éviter un envoi avant déploiement.'
+async function attendreDeploiementPublic() {
+  console.log(
+    'IndexNow : pause fixe de ' + (ATTENTE_DEPLOIEMENT_MS / 1000) +
+    ' s avant le POST (déploiement GitHub Pages).'
   );
+  await new Promise((r) => setTimeout(r, ATTENTE_DEPLOIEMENT_MS));
 }
 
 async function envoyerLot(cle, nomFichier, urlList) {
@@ -139,6 +125,14 @@ async function envoyerLot(cle, nomFichier, urlList) {
 }
 
 async function principal() {
+  if (!INDEXNOW_ENABLED) {
+    console.log(
+      'IndexNow : désactivé (INDEXNOW_ENABLED=false). ' +
+      'Bing renvoie encore 403 UserForbiddenToAccessSite malgré une clé conforme ; ' +
+      'aucune soumission tant que l’autorisation clé/domaine n’est pas corrigée côté Bing.'
+    );
+    return;
+  }
   const { cle, nom } = trouverCle();
   const sitemap = fs.readFileSync(path.join(RACINE, 'sitemap.xml'), 'utf8');
   const urls = extraireUrls(sitemap);
@@ -147,7 +141,7 @@ async function principal() {
     return;
   }
   console.log('IndexNow : ' + urls.length + ' URL à soumettre (hôte ' + HOTE + ').');
-  await attendreDeploiementPublic('https://' + HOTE + '/' + nom);
+  await attendreDeploiementPublic();
   for (let i = 0; i < urls.length; i += TAILLE_LOT) {
     await envoyerLot(cle, nom, urls.slice(i, i + TAILLE_LOT));
   }
