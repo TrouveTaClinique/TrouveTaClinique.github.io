@@ -51,7 +51,8 @@
 .button.primary:hover{background:var(--navy-2)}
 .button.secondary{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .button.secondary:hover{background:var(--navy);color:#fff}
-.hero-guide{padding:var(--s-sm) var(--gutter) 0}
+/* Pas de gutter horizontal : main a déjà padding-inline:var(--gutter). */
+.hero-guide{padding:var(--s-sm) 0 0}
 .hero-guide .lead{font-size:1.06rem;max-width:52ch}
 .hero-guide .lead-small{font-size:1rem;opacity:.9}
 /* ── grilles et cartes des guides (n'étaient pas stylées : d'où le texte collé) ── */
