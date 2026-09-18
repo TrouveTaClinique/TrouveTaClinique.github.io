@@ -501,7 +501,7 @@ function htmlIntroTerritoire(t, cliniques, etablissements) {
   if (nTotal) {
     p1 += ` On y trouve ${nTotal} clinique${nTotal > 1 ? 's' : ''} de médecine familiale`;
     if (composition) p1 += ` — ${composition}`;
-    p1 += '.';
+    p1 += ', toutes listées ci-dessous.';
   }
 
   let p2 = nRecrute
