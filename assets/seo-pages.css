@@ -374,11 +374,7 @@ details.apropos p{font-size:.94rem;max-width:52ch;margin-top:.7rem}
   --sq-sarcelle:var(--teal);
   --sq-azur:var(--blue);
 }
-main{width:min(62rem,calc(100% - 2 * var(--gutter) + 2 * var(--gutter)));margin:0 auto;padding-inline:var(--gutter);max-width:none}
-main > .hero, main > section, main > .fact-grid, main > h2, main > .card-grid,
-main > .rls-liste, main > .fact-card, main > details, main > figure, main > .toc,
-main > .content-section, main > .callout, main > .data-note, main > .resident-note,
-main > .sqb-wrap, main > .video-hero-suite, main > .directory-banner{max-width:62rem}
+main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .breadcrumbs{padding:1.1rem 0 .25rem;font-size:.9rem;color:var(--ink-60)}
 .breadcrumbs a{text-decoration:none;font-weight:600;color:var(--navy)}
 .breadcrumbs a:hover{text-decoration:underline}

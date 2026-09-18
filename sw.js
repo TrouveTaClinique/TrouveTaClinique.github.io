@@ -28,7 +28,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // meta Search Console retirée des cartes (conservée sur l’accueil).
 // v67-icones-blanc (8 septembre 2026) : icônes d’installation fond blanc, depuis le pin 512.
 /* 18 sept 2026 — thème aperçu (header/footer/héros, palette marque). */
-const CACHE = CACHE_PREFIX + 'v69-theme-apercu';
+// v70-largeur-main (18 septembre 2026) : gutter une seule fois sur main pleine largeur ;
+// fermeture de section PTEM restaurée ; dates sources guides.
+const CACHE = CACHE_PREFIX + 'v70-largeur-main';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
