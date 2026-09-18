@@ -4568,4 +4568,137 @@ fetch('../data.json', { cache: 'no-cache' })
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
+
+<style id="repertoire-territoire-css">
+/* Annuaire sous la carte : visible aux humains (défilement) et aux robots (HTML statique).
+   Annule position:fixed / overflow:hidden des gabarits carte pour que le document défile. */
+html, body {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.layout {
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100dvh;
+  flex-shrink: 0;
+}
+#repertoire-territoire {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  clip: auto !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 2;
+  box-sizing: border-box;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  border-top: 4px solid #0080d7;
+  line-height: 1.5;
+}
+#repertoire-territoire h2 { font-size: 1.15rem; margin: 1.6rem 0 .6rem; color: #170a72; }
+#repertoire-territoire > h2:first-of-type { margin-top: 0; }
+#repertoire-territoire p { margin: .55rem 0; }
+#repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
+#repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
+#repertoire-territoire a { color: #0080d7; }
+#repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
+#repertoire-territoire .repertoire-suite { margin-top: .75rem; }
+</style>
+<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+  <h2>Répertoire de la Montérégie-Ouest</h2>
+  <p>La Montérégie-Ouest couvre les RLS Jardins-Roussillon, Vaudreuil-Soulanges, du Suroît et du Haut-Saint-Laurent. On y trouve 36 cliniques de médecine familiale — 17 GMF, 2 GMF-U, 2 GMF-R et 15 cliniques médicales.</p>
+<p>36 d’entre elles recrutent actuellement des médecins de famille, notamment à Châteauguay, Salaberry-de-Valleyfield, Vaudreuil-Dorion, Beauharnois, Huntingdon, Napierville, Rigaud et Saint-Constant.</p>
+  
+<section class="repertoire-section" id="repertoire-rls">
+  <h2>Réseaux locaux de services</h2>
+  <ul class="repertoire-liste">
+  <li><a href="rls/jardins-roussillon/">RLS Jardins-Roussillon</a></li>
+  <li><a href="rls/vaudreuil-soulanges/">RLS Vaudreuil-Soulanges</a></li>
+  <li><a href="rls/du-suroit/">RLS du Suroît</a></li>
+  <li><a href="rls/du-haut-saint-laurent/">RLS du Haut-Saint-Laurent</a></li>
+</ul>
+  <p class="repertoire-suite"><a href="rls/">Parcourir les pages RLS de Montérégie-Ouest →</a></p>
+</section>
+  
+<section class="repertoire-section" id="repertoire-cliniques-ouest-jardins-roussillon">
+  <h2>Cliniques · RLS Jardins-Roussillon</h2>
+  <ul class="repertoire-liste">
+  <li><a href="cliniques/ch-kateri-memorial/">CH Kateri Memorial</a> <span class="repertoire-meta">Kahnawake</span></li>
+  <li><a href="cliniques/clinique-medicale-le-soleil/">Clinique médicale Le Soleil</a> <span class="repertoire-meta">Châteauguay</span></li>
+  <li><a href="cliniques/clinique-medicale-napierville/">Clinique médicale Napierville</a> <span class="repertoire-meta">Napierville</span></li>
+  <li><a href="cliniques/clsc-chateauguay/">CLSC Châteauguay</a> <span class="repertoire-meta">Châteauguay</span></li>
+  <li><a href="cliniques/clsc-kateri/">CLSC Kateri</a> <span class="repertoire-meta">Candiac</span></li>
+  <li><a href="cliniques/cooperative-solidarite-sante-saint-isidore-gmf-roger-laberge/">Coopérative solidarité santé Saint-Isidore (GMF Roger Laberge)</a> <span class="repertoire-meta">Saint-Isidore</span></li>
+  <li><a href="cliniques/gmf-carrefour-sante-le-saint-laurent/">GMF Carrefour Santé Le Saint-Laurent</a> <span class="repertoire-meta">Sainte-Catherine</span></li>
+  <li><a href="cliniques/gmf-jardin-du-quebec-napierville/">GMF Jardin-du-Québec (Napierville)</a> <span class="repertoire-meta">Napierville</span></li>
+  <li><a href="cliniques/gmf-jardin-du-quebec-saint-remi/">GMF Jardin-du-Québec (Saint-Rémi)</a> <span class="repertoire-meta">Saint-Rémi</span></li>
+  <li><a href="cliniques/gmf-mercier/">GMF Mercier</a> <span class="repertoire-meta">Mercier</span></li>
+  <li><a href="cliniques/gmf-roger-laberge/">GMF Roger Laberge</a> <span class="repertoire-meta">Châteauguay</span></li>
+  <li><a href="cliniques/gmf-saint-constant-de-la-gare/">GMF Saint-Constant (de la gare)</a> <span class="repertoire-meta">Saint-Constant</span></li>
+  <li><a href="cliniques/gmf-saint-constant-monchamp/">GMF Saint-Constant (Monchamp)</a> <span class="repertoire-meta">Saint-Constant</span></li>
+  <li><a href="cliniques/gmf-r-le-trait-d-union/">GMF-R Le Trait-d'Union</a> <span class="repertoire-meta">Delson</span></li>
+  <li><a href="cliniques/gmf-u-jardins-roussillon/">GMF-U Jardins-Roussillon</a> <span class="repertoire-meta">Châteauguay</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-vaudreuil-soulanges">
+  <h2>Cliniques · RLS Vaudreuil-Soulanges</h2>
+  <ul class="repertoire-liste">
+  <li><a href="cliniques/chsld-et-clsc-de-coteau-du-lac/">CLSC de Coteau-du-Lac</a> <span class="repertoire-meta">Coteau-du-Lac</span></li>
+  <li><a href="cliniques/clsc-de-rigaud/">CLSC de Rigaud</a> <span class="repertoire-meta">Rigaud</span></li>
+  <li><a href="cliniques/clsc-de-vaudreuil-dorion-centre-multiservices-de-sante-et-de-services-sociaux-de/">CLSC de Vaudreuil-Dorion</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+  <li><a href="cliniques/clsc-et-groupe-de-medecine-de-famille-universitaire-de-saint-polycarpe/">CLSC et GMF-U de Saint-Polycarpe</a> <span class="repertoire-meta">Saint-Polycarpe</span></li>
+  <li><a href="cliniques/centre-medical-des-trois-lacs-gmf-des-trois-lacs/">GMF des Trois Lacs</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+  <li><a href="cliniques/gmf-hudson-hudson-medicentre/">GMF Hudson</a> <span class="repertoire-meta">Hudson</span></li>
+  <li><a href="cliniques/centre-de-sante-medicentre-pincourt-gmf/">GMF Pincourt</a> <span class="repertoire-meta">Pincourt</span></li>
+  <li><a href="cliniques/gmf-rigaud-centre-de-sante-de-rigaud/">GMF Rigaud</a> <span class="repertoire-meta">Rigaud</span></li>
+  <li><a href="cliniques/groupe-de-medecine-familiale-sante-ste-angelique/">GMF Santé Ste-Angélique</a> <span class="repertoire-meta">Saint-Lazare</span></li>
+  <li><a href="cliniques/gmf-gmf-r-vaudreuil-dorion-polyclinique-medicale-vaudreuil/">GMF-R Vaudreuil-Dorion</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+  <li><a href="cliniques/gmf-u-de-vaudreuil-soulanges/">GMF-U de Vaudreuil-Soulanges</a> <span class="repertoire-meta">Vaudreuil-Dorion</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-du-suroit">
+  <h2>Cliniques · RLS du Suroît</h2>
+  <ul class="repertoire-liste">
+  <li><a href="cliniques/beauharnois-en-sante-cooperative-de-solidarite/">Beauharnois en Santé</a> <span class="repertoire-meta">Beauharnois</span></li>
+  <li><a href="cliniques/clsc-de-beauharnois/">CLSC de Beauharnois</a> <span class="repertoire-meta">Beauharnois</span></li>
+  <li><a href="cliniques/clsc-de-salaberry-de-valleyfield/">CLSC de Salaberry-de-Valleyfield</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+  <li><a href="cliniques/clinique-medicale-des-batisseurs-gmf-des-batisseurs/">GMF des Bâtisseurs</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+  <li><a href="cliniques/gmf-du-lac-saint-francois-clinique-medicale-havre-sante/">GMF du Lac Saint-François</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+  <li><a href="cliniques/gmf-salaberry-clinique-medi-val/">GMF Salaberry</a> <span class="repertoire-meta">Salaberry-de-Valleyfield</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-ouest-du-haut-saint-laurent">
+  <h2>Cliniques · RLS du Haut-Saint-Laurent</h2>
+  <ul class="repertoire-liste">
+  <li><a href="cliniques/clsc-de-huntingdon/">CLSC de Huntingdon</a> <span class="repertoire-meta">Huntingdon</span></li>
+  <li><a href="cliniques/clsc-de-saint-chrysostome/">CLSC de Saint-Chrysostome</a> <span class="repertoire-meta">Saint-Chrysostome</span></li>
+  <li><a href="cliniques/gmf-du-haut-saint-laurent-centre-medical-huntingdon/">GMF du Haut-Saint-Laurent</a> <span class="repertoire-meta">Huntingdon</span></li>
+  <li><a href="cliniques/gmf-ormstown-clinique-medicale-ormstown/">GMF Ormstown</a> <span class="repertoire-meta">Ormstown</span></li>
+</ul>
+</section>
+<p class="repertoire-suite"><a href="cliniques/">Répertoire des cliniques de Montérégie-Ouest →</a></p>
+  
+</nav>
 </body></html>

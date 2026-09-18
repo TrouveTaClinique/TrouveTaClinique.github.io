@@ -4562,4 +4562,125 @@ fetch('../data.json', { cache: 'no-cache' })
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
+
+<style id="repertoire-territoire-css">
+/* Annuaire sous la carte : visible aux humains (défilement) et aux robots (HTML statique).
+   Annule position:fixed / overflow:hidden des gabarits carte pour que le document défile. */
+html, body {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.layout {
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100dvh;
+  flex-shrink: 0;
+}
+#repertoire-territoire {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  clip: auto !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 2;
+  box-sizing: border-box;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  border-top: 4px solid #0080d7;
+  line-height: 1.5;
+}
+#repertoire-territoire h2 { font-size: 1.15rem; margin: 1.6rem 0 .6rem; color: #170a72; }
+#repertoire-territoire > h2:first-of-type { margin-top: 0; }
+#repertoire-territoire p { margin: .55rem 0; }
+#repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
+#repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
+#repertoire-territoire a { color: #0080d7; }
+#repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
+#repertoire-territoire .repertoire-suite { margin-top: .75rem; }
+</style>
+<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+  <h2>Répertoire de la Montérégie-Centre</h2>
+  <p>La Montérégie-Centre couvre les RLS Champlain et Haut-Richelieu–Rouville. On y trouve 23 cliniques de médecine familiale — 16 GMF, 3 GMF-U, 1 GMF-R et 3 cliniques médicales.</p>
+<p>20 d’entre elles recrutent actuellement des médecins de famille, notamment à Saint-Jean-sur-Richelieu, Brossard, Greenfield Park, Saint-Césaire, Saint-Hubert, Chambly, Henryville et Marieville.</p>
+<p>8 établissements (hôpitaux, CHSLD, GMF-U et autres) affichent aussi des secteurs en recrutement sur ce territoire.</p>
+  
+<section class="repertoire-section" id="repertoire-rls">
+  <h2>Réseaux locaux de services</h2>
+  <ul class="repertoire-liste">
+  <li><a href="rls/champlain/">RLS Champlain</a></li>
+  <li><a href="rls/haut-richelieu-rouville/">RLS Haut-Richelieu–Rouville</a></li>
+</ul>
+  <p class="repertoire-suite"><a href="rls/">Parcourir les pages RLS de Montérégie-Centre →</a></p>
+</section>
+  
+<section class="repertoire-section" id="repertoire-cliniques-centre-champlain">
+  <h2>Cliniques · RLS Champlain</h2>
+  <ul class="repertoire-liste">
+  <li><a href="cliniques/gmf-centre-medical-st-hubert/">GMF Centre médical St-Hubert</a> <span class="repertoire-meta">Saint-Hubert</span></li>
+  <li><a href="cliniques/gmf-clsc-samuel-de-champlain/">GMF CLSC Samuel-De Champlain</a> <span class="repertoire-meta">Brossard</span></li>
+  <li><a href="cliniques/gmf-dix30/">GMF DIX30</a> <span class="repertoire-meta">Brossard</span></li>
+  <li><a href="cliniques/gmf-la-cigogne/">GMF La Cigogne</a> <span class="repertoire-meta">Greenfield Park</span></li>
+  <li><a href="cliniques/gmf-lapiniere/">GMF Lapinière</a> <span class="repertoire-meta">Brossard</span></li>
+  <li><a href="cliniques/gmf-r-clinique-azur/">GMF-R Clinique Azur</a> <span class="repertoire-meta">Greenfield Park</span></li>
+  <li><a href="cliniques/gmf-u-charles-le-moyne/">GMF-U Charles-Le Moyne</a> <span class="repertoire-meta">Saint-Lambert</span></li>
+  <li><a href="cliniques/gmf-u-saint-hubert/">GMF-U Saint-Hubert</a> <span class="repertoire-meta">Saint-Hubert</span></li>
+</ul>
+</section>
+
+<section class="repertoire-section" id="repertoire-cliniques-centre-haut-richelieu-rouville">
+  <h2>Cliniques · RLS Haut-Richelieu–Rouville</h2>
+  <ul class="repertoire-liste">
+  <li><a href="cliniques/clinique-medicale-du-college-gmf-richelieu-saint-cesaire/">Clinique médicale du Collège (GMF Richelieu – Saint-Césaire)</a> <span class="repertoire-meta">Saint-Césaire</span></li>
+  <li><a href="cliniques/clinique-medicale-saint-luc-gmf-saint-luc-saint-eugene/">Clinique médicale Saint-Luc (GMF Saint-Luc Saint-Eugène)</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="cliniques/clsc-de-henryville/">CLSC de Henryville</a> <span class="repertoire-meta">Henryville</span></li>
+  <li><a href="cliniques/cooperative-de-sante-lac-champlain/">Coopérative de santé Lac Champlain</a> <span class="repertoire-meta">Venise-en-Québec</span></li>
+  <li><a href="cliniques/cooperative-solidarite-sante-saint-blaise-sur-richelieu/">Coopérative solidarité santé Saint-Blaise-sur-Richelieu</a> <span class="repertoire-meta">Saint-Blaise-sur-Richelieu</span></li>
+  <li><a href="cliniques/gmf-centre-medical-iberville/">GMF Centre médical Iberville</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · ne recrute pas actuellement</span></li>
+  <li><a href="cliniques/gmf-du-coteau/">GMF du Coteau</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="cliniques/gmf-haut-richelieu/">GMF Haut-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="cliniques/gmf-la-clinique-fort-chambly/">GMF La Clinique Fort Chambly</a> <span class="repertoire-meta">Chambly</span></li>
+  <li><a href="cliniques/gmf-medicentre-saint-jean/">GMF Médicentre Saint-Jean</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · ne recrute pas actuellement</span></li>
+  <li><a href="cliniques/gmf-pro-sante-marieville/">GMF Pro-Santé Marieville</a> <span class="repertoire-meta">Marieville</span></li>
+  <li><a href="cliniques/gmf-richelieu-saint-cesaire-clsc-du-richelieu/">GMF Richelieu – Saint-Césaire (CLSC du Richelieu)</a> <span class="repertoire-meta">Richelieu</span></li>
+  <li><a href="cliniques/gmf-saint-luc-saint-eugene-clinique-medicale-saint-eugene/">GMF Saint-Luc Saint-Eugène (Clinique médicale Saint-Eugène)</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu</span></li>
+  <li><a href="cliniques/gmf-u-de-saint-jean-sur-richelieu/">GMF-U de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · ne recrute pas actuellement</span></li>
+  <li><a href="cliniques/point-de-service-saint-cesaire-gmf-richelieu-saint-cesaire/">Point de service Saint-Césaire (GMF Richelieu – Saint-Césaire)</a> <span class="repertoire-meta">Saint-Césaire</span></li>
+</ul>
+</section>
+<p class="repertoire-suite"><a href="cliniques/">Répertoire des cliniques de Montérégie-Centre →</a></p>
+  
+<section class="repertoire-section" id="repertoire-etablissements">
+  <h2>Établissements</h2>
+  <ul class="repertoire-liste">
+  <li><a href="etablissements/centre-de-pediatrie-sociale-l-etoile/">Centre de pédiatrie sociale L’Étoile</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/chsld-de-saint-jean-sur-richelieu/">CHSLD de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/clinique-des-jeunes-du-bassin-de-chambly/">Clinique des jeunes du Bassin de Chambly</a> <span class="repertoire-meta">Chambly · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/clinique-jeunesse-de-saint-jean-sur-richelieu/">Clinique jeunesse de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/clsc-vallee-des-forts-soutien-a-domicile/">CLSC Vallée-des-Forts : soutien à domicile</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/gmf-u-de-saint-jean-sur-richelieu/">GMF-U de Saint-Jean-sur-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/hopital-du-haut-richelieu/">Hôpital du Haut-Richelieu</a> <span class="repertoire-meta">Saint-Jean-sur-Richelieu · Haut-Richelieu–Rouville</span></li>
+  <li><a href="etablissements/manoir-soleil/">Manoir Soleil</a> <span class="repertoire-meta">Chambly · Haut-Richelieu–Rouville</span></li>
+</ul>
+  <p class="repertoire-suite"><a href="etablissements/">Secteurs en établissement →</a></p>
+</section>
+</nav>
 </body></html>
