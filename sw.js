@@ -37,7 +37,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v74-logo-source (18 septembre 2026) : nouvelle source logo officielle (fond noir → blanc).
 // v75-logo-footer-blanc (18 septembre 2026) : logo transparent + invert footer (silhouette blanche).
 // v76-largeur-sources (18 septembre 2026) : largeurs pages + boutons Source discrets.
-const CACHE = CACHE_PREFIX + 'v76-largeur-sources';
+// v77-colonne-elargie (18 septembre 2026) : colonne contenu ~72rem (gutter 36rem).
+const CACHE = CACHE_PREFIX + 'v77-colonne-elargie';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
