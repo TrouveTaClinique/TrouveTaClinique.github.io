@@ -1,7 +1,7 @@
 /* Habillage des guides PTEM et AMP — reprend les classes réelles des pages
    (content-section, source-row, source-chip, callout, card, fact-card…) */
 /* ── reprise des classes réelles des guides ── */
-.guide-corps{padding:var(--s-lg) var(--gutter) var(--s-xl);display:grid;gap:var(--s-md)}
+.guide-corps{padding:var(--s-lg) 0 var(--s-xl);display:grid;gap:var(--s-md)}
 @media(min-width:980px){.guide-corps{grid-template-columns:17rem minmax(0,1fr);gap:var(--s-lg);align-items:start}}
 .guide-corps > .corps-guide{min-width:0}
 .guide-corps > nav{background:var(--sky);border-radius:16px;padding:1.3rem 1.4rem}
@@ -14,23 +14,25 @@
 .guide-corps > nav a:hover{text-decoration:underline}
 
 .content-section{margin-bottom:var(--s-lg);scroll-margin-top:110px}
-.content-section h2{font-size:clamp(1.35rem,3.6vw,1.8rem);font-weight:700;margin:0 0 .8rem;max-width:28ch}
+.content-section h2{font-size:clamp(1.35rem,3.6vw,1.8rem);font-weight:700;margin:0 0 .8rem;max-width:min(36ch,100%)}
 .content-section h3{font-size:1.08rem;margin:1.3rem 0 .4rem}
-.content-section p{max-width:62ch;font-size:1.02rem}
+.content-section p{max-width:min(72ch,100%);font-size:1.02rem}
 .section-number{font-size:.72rem!important;font-weight:800;letter-spacing:.12em;color:var(--teal);
   margin:0 0 .25rem!important;max-width:none}
 
-/* sources après chaque affirmation */
-.source-row{margin:-.4rem 0 1.2rem!important;display:flex;flex-wrap:wrap;gap:.4rem;max-width:62ch}
-.source-chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);
-  border:1px solid rgba(6,156,156,.4);color:var(--teal);border-radius:999px;
-  padding:.28rem .75rem;font-size:.8rem;font-weight:650;text-decoration:none;line-height:1.35}
-.source-chip::after{content:"↗";font-size:.85em;opacity:.8}
+/* sources après chaque affirmation — une seule flèche, largeur au contenu */
+.source-row{margin:-.4rem 0 1.2rem!important;display:flex;flex-wrap:wrap;gap:.35rem;max-width:min(72ch,100%)}
+.source-chip{display:inline-flex;align-items:center;gap:.25rem;width:fit-content;max-width:100%;
+  background:var(--teal-pale);border:1px solid rgba(6,156,156,.32);color:var(--teal);border-radius:999px;
+  padding:.16rem .55rem;font-size:.74rem;font-weight:600;text-decoration:none;line-height:1.25}
+.source-chip::before{content:none}
+.source-chip::after{content:"↗";font-size:.72em;opacity:.75}
 .source-chip:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
-.inline-sources{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1.2rem;max-width:62ch}
+.inline-sources{display:flex;flex-wrap:wrap;gap:.35rem;margin:.6rem 0 1.2rem;max-width:min(72ch,100%)}
+.fact-card .source-chip,.card .source-chip{align-self:flex-start;width:fit-content}
 
 .callout{background:var(--teal-pale);border-left:4px solid var(--teal);border-radius:0 12px 12px 0;
-  padding:1.1rem 1.25rem;margin:1.1rem 0;max-width:62ch;font-size:.99rem}
+  padding:1.1rem 1.25rem;margin:1.1rem 0;max-width:min(72ch,100%);font-size:.99rem}
 .callout strong{display:block;margin-bottom:.25rem}
 .callout.official{background:var(--sky);border-left-color:var(--blue)}
 
@@ -43,7 +45,7 @@
   padding:1.1rem 1.2rem;margin:.6rem 0}
 .fact-kicker{display:block;font-size:.7rem;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;color:var(--teal);margin-bottom:.2rem}
-.step{margin:1rem 0;padding-left:1rem;border-left:3px solid var(--teal-zone);max-width:62ch}
+.step{margin:1rem 0;padding-left:1rem;border-left:3px solid var(--teal-zone);max-width:min(72ch,100%)}
 .cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.2rem 0}
 .button{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;text-decoration:none;
   font-weight:650;min-height:46px;padding:.8rem 1.6rem;font-size:.95rem}
@@ -53,7 +55,7 @@
 .button.secondary:hover{background:var(--navy);color:#fff}
 /* Pas de gutter horizontal : main a déjà padding-inline:var(--gutter). */
 .hero-guide{padding:var(--s-sm) 0 0}
-.hero-guide .lead{font-size:1.06rem;max-width:52ch}
+.hero-guide .lead{font-size:1.06rem;max-width:min(68ch,100%)}
 .hero-guide .lead-small{font-size:1rem;opacity:.9}
 /* ── grilles et cartes des guides (n'étaient pas stylées : d'où le texte collé) ── */
 .card-grid{display:grid;gap:1rem;margin:1.1rem 0 1.4rem}
@@ -79,7 +81,7 @@
 .fact-kicker{display:block;font-size:.7rem;font-weight:800;letter-spacing:.09em;
   text-transform:uppercase;color:var(--navy);opacity:.68;margin-bottom:.3rem}
 .callout{background:var(--cream);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;
-  padding:1.15rem 1.3rem;margin:1.2rem 0 1.4rem;max-width:62ch;font-size:.99rem;line-height:1.6}
+  padding:1.15rem 1.3rem;margin:1.2rem 0 1.4rem;max-width:min(72ch,100%);font-size:.99rem;line-height:1.6}
 .callout strong{display:block;margin-bottom:.35rem}
 .callout.official{background:var(--sky);border-left-color:var(--blue)}
 .callout.correction{background:#FFF6E3;border-left-color:#C98A12}
@@ -88,14 +90,14 @@
 .content-section p{line-height:1.66;margin-bottom:1.15rem}
 .content-section h3,.content-section h4{font-size:1.08rem;font-weight:700;
   margin:1.6rem 0 .5rem;line-height:1.3}
-.content-section ul,.content-section ol{max-width:62ch;margin:.5rem 0 1.2rem;padding-left:1.3rem}
+.content-section ul,.content-section ol{max-width:min(72ch,100%);margin:.5rem 0 1.2rem;padding-left:1.3rem}
 .content-section li{margin-bottom:.45rem;line-height:1.6}
 .feature-section{margin:1.4rem 0}
 .rich p{margin-bottom:1.15rem}
-.note{font-size:.93rem;opacity:.8;max-width:62ch}
+.note{font-size:.93rem;opacity:.8;max-width:min(72ch,100%)}
 .text-cta{display:inline-block;font-weight:700;text-decoration:none;
   border-bottom:2px solid var(--teal);margin-top:.3rem}
-.source-list{list-style:none;margin:.7rem 0 0;padding:0;max-width:62ch}
+.source-list{list-style:none;margin:.7rem 0 0;padding:0;max-width:min(72ch,100%)}
 .source-list li{padding:.7rem 0;border-bottom:1px solid rgba(18,6,114,.14);font-size:.95rem;line-height:1.55}
 .source-list li:last-child{border-bottom:0;padding-bottom:0}
 /* le titre du lien et sa description se touchaient : on passe le lien en bloc */
@@ -104,7 +106,7 @@
 .source-list li > a:hover{color:var(--teal)}
 .sources-panel{background:var(--sky);border-radius:16px;padding:1.4rem 1.5rem;margin-top:1rem}
 .sources-panel h3{font-size:1.05rem;margin-bottom:.8rem}
-.sources-panel{max-width:62ch}
+.sources-panel{max-width:min(72ch,100%)}
 .content-section a+*{margin-left:.15rem}
 .toc{list-style:none;margin:0;padding:0}
 .button.ghost{background:transparent;color:var(--navy);border:2px solid var(--navy)}

@@ -184,7 +184,7 @@ ul.sources a{font-weight:650}
 }
 
 /* ── recherche ── */
-.champ{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem;max-width:36rem}
+.champ{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem;max-width:min(44rem,100%)}
 .champ input{flex:1 1 17rem;min-height:54px;border-radius:999px;border:1.5px solid var(--rule);
   padding:0 1.3rem;font:inherit;color:var(--navy);background:#fff}
 .champ input:focus{outline:3px solid rgba(6,156,156,.35);border-color:var(--teal)}
@@ -384,11 +384,11 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .breadcrumbs a{text-decoration:none;font-weight:600;color:var(--navy)}
 .breadcrumbs a:hover{text-decoration:underline}
 .breadcrumbs:empty{display:none}
-.ariane{padding:1.1rem var(--gutter) 0;font-size:.9rem;color:var(--ink-60)}
+.ariane{padding:1.1rem 0 0;font-size:.9rem;color:var(--ink-60)}
 .ariane a{text-decoration:none;font-weight:600;color:var(--navy)}
 .hero{position:relative;margin-top:var(--s-sm);padding:var(--s-md) 0 var(--s-sm)}
 .hero.hero-guide{padding-top:var(--s-sm)}
-.lead{font-size:1.06rem;max-width:52ch;color:var(--navy);opacity:.92}
+.lead{font-size:1.06rem;max-width:min(68ch,100%);color:var(--navy);opacity:.92}
 .lead-small{font-size:1rem;opacity:.9}
 .updated,.status-note{color:var(--ink-60);font-size:.9rem}
 .status-line{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1.15rem}
@@ -405,13 +405,15 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .button.ghost:hover{background:var(--navy);color:#fff}
 .button.sarcelle{background:var(--teal);border-color:var(--teal);color:#fff}
 .button.sarcelle:hover{background:#048585;color:#fff}
-.inline-sources,.source-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0 0}
-.source-chip{display:inline-flex!important;align-items:center;gap:.3rem;border:1px solid rgba(6,156,156,.4);background:var(--teal-pale);color:var(--teal)!important;border-radius:999px;padding:.28rem .75rem;text-decoration:none!important;font-size:.8rem;font-weight:650;line-height:1.25}
-.source-chip::before{content:"↗";font-size:.76rem}
+.inline-sources,.source-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0 0}
+.source-chip{display:inline-flex!important;align-items:center;gap:.25rem;width:fit-content;max-width:100%;border:1px solid rgba(6,156,156,.32);background:var(--teal-pale);color:var(--teal)!important;border-radius:999px;padding:.16rem .55rem;text-decoration:none!important;font-size:.74rem;font-weight:600;line-height:1.25}
+.source-chip::after{content:"↗";font-size:.72rem;opacity:.75}
+.source-chip::before{content:none}
 .source-chip:hover{background:var(--teal);color:#fff!important;border-color:var(--teal)}
 .fact-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;margin:1.25rem 0 1.7rem}
 .fact-grid.fact-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.fact-card{position:relative;min-height:auto;padding:1.15rem 1.25rem;border:1px solid rgba(18,6,114,.14);border-left:4px solid var(--navy);border-radius:0 14px 14px 0;background:var(--cream);display:flex;flex-direction:column;gap:.35rem}
+.fact-card{position:relative;min-height:auto;padding:1.15rem 1.25rem;border:1px solid rgba(18,6,114,.14);border-left:4px solid var(--navy);border-radius:0 14px 14px 0;background:var(--cream);display:flex;flex-direction:column;gap:.35rem;align-items:flex-start}
+.fact-card .source-chip,.card .source-chip{align-self:flex-start;margin-top:.35rem}
 .fact-card::before{content:none}
 .fact-card strong{font-size:1.42rem;color:var(--navy);letter-spacing:-.03em}
 .fact-card>span:not(.fact-kicker){font-size:.89rem;opacity:.85}
@@ -455,9 +457,9 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .toc a{text-decoration:none}
 .toc a:hover{text-decoration:underline}
 .content-section{position:relative;margin:1.25rem 0;padding:0;background:transparent;border:0;box-shadow:none;scroll-margin-top:110px}
-.content-section>p{max-width:62ch}
-.content-section ul{max-width:62ch}
-.callout{margin:1.35rem 0;padding:1.1rem 1.25rem;background:var(--teal-pale);border:0;border-left:4px solid var(--teal);border-radius:0 12px 12px 0;max-width:62ch}
+.content-section>p{max-width:min(72ch,100%)}
+.content-section ul{max-width:min(72ch,100%)}
+.callout{margin:1.35rem 0;padding:1.1rem 1.25rem;background:var(--teal-pale);border:0;border-left:4px solid var(--teal);border-radius:0 12px 12px 0;max-width:min(72ch,100%)}
 .callout.official{background:var(--sky);border-left-color:var(--blue)}
 .callout.warning{background:var(--warning-bg);border-left-color:#d48b16;color:#66440d}
 .callout.correction{background:#FFF6E3;border-left-color:#C98A12}
@@ -554,7 +556,15 @@ body.search-open{overflow:hidden}
 .search-panel__hint,.search-page-status{font-size:.93rem;opacity:.8;margin-top:.85rem}
 .search-panel__page-link{margin:.9rem 0 0;text-align:right;font-size:.9rem;font-weight:650}
 .search-page-intro{padding-bottom:var(--s-md)}
+.search-page-intro .lede{max-width:min(60ch,100%)}
+.search-page-intro .champ,
+.champ.search-page-form,
+.search-page-form{max-width:min(44rem,100%);width:100%}
+.search-page-intro .aide,
+.search-page-status,
+.search-hits{max-width:min(44rem,100%)}
 .search-discovery .rappel{margin-top:var(--s-lg)}
+.search-discovery > h2{max-width:none}
 .search-hits{list-style:none;margin:.9rem 0 0;padding:0}
 .search-hits li{border-bottom:1px solid rgba(18,6,114,.12)}
 .search-hits a{display:block;padding:.75rem .15rem;text-decoration:none;color:var(--navy)}
@@ -565,7 +575,11 @@ body, h1, h2, h3, p, li, dd, dt, .fact-card, .card, .fiche{hyphens:none;overflow
 h1, h2, h3{text-wrap:balance}
 p, li{text-wrap:pretty}
 /* H1 des pages contenu : ne pas limiter à 19ch (noms de cliniques) */
-main h1, .hero h1, .hero-guide h1, .tete h1{max-width:min(40ch,100%)}
+main h1, .hero h1, .hero-guide h1, .tete h1{max-width:min(28rem,100%)}
+/* main porte déjà le gutter : pas de second padding-inline sur les blocs internes */
+main .tete,main .zone,main .guide,main .ariane,main .err{padding-inline:0}
+main .zone{padding-block:var(--s-xl)}
+.hero-guide .lead,.hero-guide .callout,.hero-guide .inline-sources{max-width:min(68ch,100%)}
 footer .wordmark{color:#fff}
 footer .wordmark .l1, footer .wordmark .l2{color:#fff}
 @media(max-width:900px){
