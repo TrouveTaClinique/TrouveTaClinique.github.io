@@ -8,7 +8,7 @@
   --navy:#120672; --navy-2:#2B1C8C; --blue:#0078CC; --teal:#069C9C;
   --teal-zone:#DEF4F2; --teal-pale:#EFFAF9; --cream:#F6F0EA; --sky:#E2EFFB;
   --rule:#D3CFE4; --ink-60:rgba(18,6,114,.62);
-  /* Colonne de contenu ~62rem (alignée sur l’en-tête). Le héros .hero-b reste en pleine largeur. */
+  /* Colonne de contenu ~62rem (en-tête, héros et texte alignés). */
   --gutter:max(1.25rem, calc(50vw - 31rem));
   --s-sm:clamp(1rem,3vw,1.5rem); --s-md:clamp(1.6rem,4.5vw,2.3rem);
   --s-lg:clamp(2.2rem,6vw,3.2rem); --s-xl:clamp(3rem,8vw,4.4rem);
@@ -244,9 +244,10 @@ footer a:hover{color:#fff;text-decoration:underline}
 .hero-b{
   position:relative;isolation:isolate;
   min-height:clamp(470px,68vw,680px);overflow:hidden;
+  /* Même largeur que l’en-tête et le contenu (plus de plein écran). */
+  margin-inline:var(--gutter);
 }
 .hero-b img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  /* Cadre la composition (navire + rives) même quand la photo dépasse la colonne de contenu. */
   object-position:46% 42%;z-index:-2}
 .hero-b::after{
   content:"";position:absolute;inset:0;z-index:-1;
@@ -255,11 +256,11 @@ footer a:hover{color:#fff;text-decoration:underline}
     linear-gradient(315deg,rgba(18,6,114,.58) 0%,rgba(18,6,114,.26) 30%,rgba(18,6,114,0) 52%);
 }
 .hero-b .hb-sur{
-  position:absolute;top:var(--s-lg);left:var(--gutter);
+  position:absolute;top:var(--s-lg);left:var(--s-lg);
   color:#9FEFE9;margin:0;z-index:1;
 }
 .hero-b .hb-credit{
-  position:absolute;right:var(--gutter);bottom:calc(var(--s-lg) * .42);
+  position:absolute;right:var(--s-lg);bottom:calc(var(--s-lg) * .42);
   margin:0;z-index:1;
   font-size:.72rem;font-weight:600;letter-spacing:.07em;
   color:rgba(255,255,255,.42);text-shadow:0 1px 8px rgba(18,6,114,.45);
@@ -267,7 +268,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 .hero-b .hb-titre{
   position:absolute;inset:0;margin:0;max-width:none;z-index:1;
   display:grid;grid-template-columns:.88fr 1.12fr;grid-template-rows:auto 1fr;
-  padding:calc(var(--s-lg) + 2.1rem) var(--gutter) calc(var(--s-lg) + 1.35rem);
+  padding:calc(var(--s-lg) + 2.1rem) var(--s-lg) calc(var(--s-lg) + 1.35rem);
   color:#fff;font-weight:400;
   font-size:clamp(2.35rem,6.2vw,4.2rem);
   text-shadow:0 2px 26px rgba(18,6,114,.5);
@@ -282,7 +283,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 @media(max-width:620px){
   .hero-b{min-height:clamp(460px,118vw,620px)}
   .hero-b img{object-position:42% 47%}
-  .hero-b .hb-titre{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;padding-inline:var(--gutter)}
+  .hero-b .hb-titre{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;padding-inline:var(--s-lg)}
   .hero-b .hb-titre .hg{grid-column:1;grid-row:1;max-width:9ch}
   .hero-b .hb-titre .bd{grid-column:1;grid-row:3;max-width:11ch}
 }

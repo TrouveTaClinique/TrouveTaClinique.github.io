@@ -40,7 +40,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v77-colonne-elargie (18 septembre 2026) : colonne contenu ~72rem (gutter 36rem).
 // v78-rappel-apropos (18 septembre 2026) : largeur encadrés accueil + texte À propos.
 // v79-colonne-62rem (18 septembre 2026) : colonne contenu ~62rem ; héros toujours plein écran.
-const CACHE = CACHE_PREFIX + 'v79-colonne-62rem';
+// v80-hero-colonne (18 septembre 2026) : héros aligné sur la même largeur que le reste du site.
+const CACHE = CACHE_PREFIX + 'v80-hero-colonne';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
