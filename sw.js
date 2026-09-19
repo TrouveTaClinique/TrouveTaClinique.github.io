@@ -34,7 +34,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // accueil repoli et vidéo déplacée du répertoire Cliniques vers Établissements.
 // v73-logo-officiel-hd (18 septembre 2026) : logo et icônes depuis la source officielle HD
 // sur fond blanc ; cache des assets marque à rafraîchir.
-const CACHE = CACHE_PREFIX + 'v73-logo-officiel-hd';
+// v74-logo-source (18 septembre 2026) : nouvelle source logo officielle (fond noir → blanc).
+const CACHE = CACHE_PREFIX + 'v74-logo-source';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
