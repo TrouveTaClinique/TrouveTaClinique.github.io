@@ -1758,8 +1758,9 @@ ${rlsAutresTheme}
   </aside>
   <details class="apropos">
     <summary>D'où viennent ces informations</summary>
-    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
-    <p>Initiative bénévole, indépendante et sans but lucratif. Elle ne remplace aucune démarche officielle.</p>
+    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration étroite de Nancy Langlois et du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
+    <p>Initiative bénévole, indépendante et sans but lucratif.</p>
+    <p>Elle ne remplace aucune démarche officielle.</p>
     <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
   </details>
 </section>

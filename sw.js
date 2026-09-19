@@ -38,7 +38,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v75-logo-footer-blanc (18 septembre 2026) : logo transparent + invert footer (silhouette blanche).
 // v76-largeur-sources (18 septembre 2026) : largeurs pages + boutons Source discrets.
 // v77-colonne-elargie (18 septembre 2026) : colonne contenu ~72rem (gutter 36rem).
-const CACHE = CACHE_PREFIX + 'v77-colonne-elargie';
+// v78-rappel-apropos (18 septembre 2026) : largeur encadrés accueil + texte À propos.
+const CACHE = CACHE_PREFIX + 'v78-rappel-apropos';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

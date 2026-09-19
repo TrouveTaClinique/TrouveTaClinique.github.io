@@ -210,7 +210,7 @@ ul.sources a{font-weight:650}
 .rappel.appel a{color:#fff}
 .rappel.doux{background:var(--cream);border:1px solid rgba(18,6,114,.14)}
 .rappel h3{font-size:1.25rem;margin-bottom:.55rem}
-.rappel p{font-size:.97rem;max-width:50ch;margin-bottom:.85rem}
+.rappel p{font-size:.97rem;max-width:none;margin-bottom:.85rem}
 .rappel p:last-child{margin:0}
 .maj{font-size:.86rem;opacity:.7;margin-top:var(--s-md)}
 
@@ -290,7 +290,8 @@ footer a:hover{color:#fff;text-decoration:underline}
 .intro{padding-top:var(--s-md)}
 .hook-stat{display:block}
 .home .intro .hook,.home .intro .lede,.home .zone>h2,.home .zone>.lede,
-.home .zone>.consigne,.home details.etape p,.home details.apropos p{max-width:none}
+.home .zone>.consigne,.home details.etape p,.home details.apropos p,
+.home .rappel p{max-width:none}
 .faits{display:grid;gap:.85rem;margin:var(--s-md) 0 0}
 .fait{
   background:var(--teal-pale);border:1px solid rgba(6,156,156,.28);border-radius:14px;
@@ -301,7 +302,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 .fait span.d{font-size:.93rem;opacity:.85}
 .zone-action{background:var(--teal-zone);margin-top:var(--s-xl)}
 .zone-action>h2{padding-bottom:1.2rem;border-bottom:2px solid var(--navy)}
-.autres-note{font-size:.95rem;max-width:46ch;margin-top:var(--s-md)}
+.autres-note{font-size:.95rem;max-width:min(60ch,100%);margin-top:var(--s-md)}
 .autres{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
 details.etape{border-top:1px solid rgba(18,6,114,.22)}
 details.etape:last-of-type{border-bottom:1px solid rgba(18,6,114,.22)}
@@ -336,7 +337,7 @@ details.apropos summary{cursor:pointer;font-weight:650;list-style:none;padding:.
 details.apropos summary::-webkit-details-marker{display:none}
 details.apropos summary::before{content:"▸ ";color:var(--teal)}
 details.apropos[open] summary::before{content:"▾ "}
-details.apropos p{font-size:.94rem;max-width:52ch;margin-top:.7rem}
+details.apropos p{font-size:.94rem;max-width:min(72ch,100%);margin-top:.7rem}
 @media(min-width:640px){
   .faits{grid-template-columns:repeat(3,minmax(0,1fr))}
   .rlsgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
