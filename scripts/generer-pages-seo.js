@@ -3506,6 +3506,13 @@ function construireIndexRecherche(cliniques, slugs) {
   }
 
   const rlsVus = new Set();
+  const dmeParSlugEtab = new Map();
+  for (const c of cliniques) {
+    const slugEtab = HREF_GMFU_ETABLISSEMENT[String(c.id)];
+    if (slugEtab && rempli(c.dme) && String(c.dme).trim() !== 'À compléter') {
+      dmeParSlugEtab.set(slugEtab, String(c.dme).trim());
+    }
+  }
   for (const c of cliniques) {
     if (HREF_GMFU_ETABLISSEMENT[String(c.id)]) continue;
     const slug = slugs[String(c.id)];
@@ -3519,7 +3526,11 @@ function construireIndexRecherche(cliniques, slugs) {
       ville: c.ville || '',
       rls: c.rls || '',
       type: c.type || 'Clinique',
-      extra: [c.type, c.region ? 'Montérégie-' + c.region : ''].filter(Boolean).join(' ')
+      extra: [
+        c.type,
+        rempli(c.dme) && String(c.dme).trim() !== 'À compléter' ? String(c.dme).trim() : '',
+        c.region ? 'Montérégie-' + c.region : ''
+      ].filter(Boolean).join(' ')
     });
     if (c.rls && uRegion) {
       const cle = uRegion.region + '|' + c.rls;
@@ -3542,15 +3553,17 @@ function construireIndexRecherche(cliniques, slugs) {
   const lot = new Set(PREMIER_LOT_ETABLISSEMENTS);
   for (const inst of donneesEtab.installations || []) {
     if (!lot.has(inst.id)) continue;
+    const slug = slugEtablissement(inst);
     const secteurs = secteursDe(donneesEtab, inst.id).map(s => s.libelle).join(' ');
+    const dme = dmeParSlugEtab.get(slug) || '';
     items.push({
       kind: 'etablissement',
       nom: inst.nom,
-      url: `${EST_PREFIXE}/etablissements/${slugEtablissement(inst)}/`,
+      url: `${EST_PREFIXE}/etablissements/${slug}/`,
       ville: inst.ville || '',
       rls: inst.territoireSource || '',
       type: typeEtablissementLibelle(inst.type),
-      extra: [typeEtablissementLibelle(inst.type), secteurs].filter(Boolean).join(' ')
+      extra: [typeEtablissementLibelle(inst.type), secteurs, dme].filter(Boolean).join(' ')
     });
   }
   const donneesEtabCentre = chargerDonneesEtablissementsCentre();
