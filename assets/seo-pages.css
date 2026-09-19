@@ -505,6 +505,10 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .repertoire a:hover strong{text-decoration:underline}
 .rep-meta{color:var(--ink-60);font-size:.9rem}
 .rep-lien{margin:.2rem 0 .7rem;font-size:.94rem}
+/* Espace après un bloc liste avant le titre RLS / section suivante */
+section:has(> ul.repertoire) + section{margin-top:clamp(2.4rem,5vw,3.4rem)}
+ul.repertoire + h2{margin-top:clamp(2.4rem,5vw,3.4rem)}
+ul.liste + .grpt{margin-top:clamp(2.2rem,4.5vw,3rem)}
 .compte{display:inline-block;background:var(--teal-pale);color:var(--teal);border:1px solid rgba(6,156,156,.35);border-radius:999px;font-size:.8rem;font-weight:800;padding:.08rem .58rem;vertical-align:middle}
 .badge-verif{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;padding:0;margin-left:.32em;vertical-align:-3px;background:none;border:none;color:var(--success);cursor:pointer;position:relative;flex:none;font-size:inherit}
 .badge-verif svg{width:17px;height:17px;display:block}
