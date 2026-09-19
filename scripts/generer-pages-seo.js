@@ -1736,7 +1736,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
 <section class="zone" style="padding-top:0">
   <h2>Quel RLS vous intéresse&nbsp;?</h2>
   <p class="rlslabel">Montérégie-Est</p>
-  <div class="rlsgrid reveal">
+  <div class="rlsgrid rlsgrid--est reveal">
 ${rlsEstTheme}
   </div>
   <p class="rlslabel">Autres RLS de la Montérégie</p>

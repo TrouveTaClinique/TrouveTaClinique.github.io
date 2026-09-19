@@ -42,7 +42,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v79-colonne-62rem (18 septembre 2026) : colonne contenu ~62rem ; héros toujours plein écran.
 // v80-hero-colonne (18 septembre 2026) : héros aligné sur la même largeur que le reste du site.
 // v81-recherche-ptem (18 septembre 2026) : puce PTEM → page guide ; libellé « Parcourez directement ».
-const CACHE = CACHE_PREFIX + 'v81-recherche-ptem';
+// v82-rls-est-vert (18 septembre 2026) : pastilles RLS Montérégie-Est en vert.
+const CACHE = CACHE_PREFIX + 'v82-rls-est-vert';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

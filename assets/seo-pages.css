@@ -334,6 +334,15 @@ details.etape p{padding:0 .1rem 1.15rem;margin:0;max-width:47ch}
 }
 .rlsgrid a:hover{border-color:var(--teal);background:var(--teal-pale)}
 .rlsgrid .fl{color:var(--teal);font-weight:700}
+/* Montérégie-Est : pastilles teintées pour les distinguer des autres RLS. */
+.rlsgrid--est a{
+  background:var(--teal-zone);
+  border-color:rgba(6,156,156,.35);
+}
+.rlsgrid--est a:hover{
+  background:color-mix(in srgb, var(--teal) 16%, #fff);
+  border-color:var(--teal);
+}
 .rappel.patient{background:var(--cream);border:1px solid rgba(18,6,114,.14)}
 details.apropos{margin-top:2.4rem;border-top:1px solid var(--rule);padding-top:1rem}
 details.apropos summary{cursor:pointer;font-weight:650;list-style:none;padding:.5rem 0}
