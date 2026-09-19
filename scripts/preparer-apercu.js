@@ -116,9 +116,6 @@ function preparerApercu(racine, destination, options = {}) {
   if (fs.existsSync(destination) && (fs.lstatSync(destination).isSymbolicLink() || fs.readdirSync(destination).length)) {
     throw new Error('La destination doit être un dossier vide.');
   }
-  if (options.nomObligatoire && !options.nomProtege?.trim()) {
-    throw new Error('Le secret NOM_PROTEGE_SANTE_QUEBEC est manquant. Publication annulée.');
-  }
   const fichiers = lister(racine);
   const contenus = [];
   const empreinte = createHash('sha256');
@@ -128,9 +125,6 @@ function preparerApercu(racine, destination, options = {}) {
     const extension = path.extname(fichier);
     if (TEXTE.has(extension)) {
       let texte = contenu.toString('utf8');
-      if (options.nomProtege && texte.normalize('NFC').toLowerCase().includes(options.nomProtege.trim().normalize('NFC').toLowerCase())) {
-        throw new Error('Nom protégé détecté. Publication annulée.');
-      }
       if (extension === '.html') texte = adapterHtml(texte);
       if (extension === '.webmanifest' || fichier === 'manifest.json') {
         const manifeste = JSON.parse(texte);
@@ -186,10 +180,8 @@ if (require.main === module) {
   (async () => {
     if (process.argv.includes('--verifier-pages')) return verifierPagesEnLigne();
     const destination = process.argv[2];
-    if (!destination || destination.startsWith('--')) throw new Error('Usage : node scripts/preparer-apercu.js DOSSIER_SORTIE [--nom-obligatoire]');
+    if (!destination || destination.startsWith('--')) throw new Error('Usage : node scripts/preparer-apercu.js DOSSIER_SORTIE');
     console.log(JSON.stringify(preparerApercu(RACINE, destination, {
-      nomProtege: process.env.NOM_PROTEGE,
-      nomObligatoire: process.argv.includes('--nom-obligatoire'),
       revision: process.env.GITHUB_SHA
     }), null, 2));
   })().catch(erreur => { console.error(erreur.message); process.exitCode = 1; });

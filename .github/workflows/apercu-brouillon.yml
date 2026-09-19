@@ -46,9 +46,7 @@ jobs:
         run: node --test scripts/test-apercu.cjs scripts/test-restauration-sq.cjs
 
       - name: Préparer le site (noindex, CNAME apercu, sans scripts internes)
-        env:
-          NOM_PROTEGE: ${{ secrets.NOM_PROTEGE_SANTE_QUEBEC }}
-        run: node scripts/preparer-apercu.js "$RUNNER_TEMP/site-brouillon" --nom-obligatoire
+        run: node scripts/preparer-apercu.js "$RUNNER_TEMP/site-brouillon"
 
       - name: Conserver l'artefact du site préparé
         uses: actions/upload-artifact@v4

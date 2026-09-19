@@ -120,12 +120,10 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.throws(() => preparerApercu(RACINE, destination), /vide/);
 });
 
-test('Une sortie dangereuse ou un secret manquant bloque avant toute écriture', t => {
+test('Une sortie dangereuse bloque avant toute écriture', t => {
   const temporaire = fs.mkdtempSync(path.join(os.tmpdir(), 'ttc-garde-test-'));
   t.after(() => fs.rmSync(temporaire, { recursive: true, force: true }));
   const destination = path.join(temporaire, 'site');
   assert.throws(() => preparerApercu(RACINE, RACINE), /sources/);
-  assert.throws(() => preparerApercu(RACINE, destination, { nomObligatoire: true }), /secret/);
-  assert.throws(() => preparerApercu(RACINE, destination, { nomProtege: 'Segoe UI' }), /Nom protégé/);
   assert.equal(fs.existsSync(destination), false);
 });

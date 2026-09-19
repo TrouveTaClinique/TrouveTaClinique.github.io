@@ -125,27 +125,9 @@ jobs:
           echo "Vérification polices (Kaushan hors Est, Segoe UI présent) : ok."
 
       - name: Vérifier l'absence du nom protégé
-        # Le nom de la personne-ressource de Santé Québec ne doit apparaître dans AUCUN fichier
-        # public du dépôt — ni dans les données, ni dans un commentaire de code. Le nom lui-même
-        # n'est PAS écrit ici : il vit uniquement dans le secret NOM_PROTEGE_SANTE_QUEBEC du
-        # dépôt (Settings → Secrets and variables → Actions), pour ne jamais apparaître en clair
-        # dans ce fichier de configuration public, conformément au mandat du 30 août 2026 (§9).
-        # SI CETTE ÉTAPE ÉCHOUE AVEC « secret manquant » : le secret n'a pas encore été créé —
-        # voir le README pour la marche à suivre. Elle ne doit alors PAS être ignorée : tant que
-        # le secret n'existe pas, cette vérification ne protège rien.
-        env:
-          NOM_PROTEGE: ${{ secrets.NOM_PROTEGE_SANTE_QUEBEC }}
-        run: |
-          set -e
-          if [ -z "$NOM_PROTEGE" ]; then
-            echo "::error::Le secret NOM_PROTEGE_SANTE_QUEBEC n'est pas configuré. Publication annulée par prudence — voir Settings > Secrets and variables > Actions."
-            exit 1
-          fi
-          if grep -riIl -F "$NOM_PROTEGE" . --exclude-dir=.git 2>/dev/null; then
-            echo "::error::Le nom protégé apparaît dans un fichier du dépôt. Publication annulée."
-            exit 1
-          fi
-          echo "Vérification du nom protégé : ok."
+        # 18 sept. 2026 — crédit public autorisé dans le bloc « D'où viennent ces informations »
+        # (collaboration étroite nommée). L'ancien garde-fou d'absence est retiré.
+        run: echo "Crédit public autorisé : vérification d'absence du nom désactivée."
 
       - name: Vérifier qu'aucune donnée privée n'a fui
         # Filet de sécurité : ce robot publie sans qu'un humain relise. Les courriels de

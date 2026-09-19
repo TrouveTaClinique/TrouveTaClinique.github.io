@@ -81,11 +81,13 @@ Le bouton (i) de la carte explique cette différence aux visiteurs.
 
 INFORMATIONS À NE PAS PUBLIER
 -----------------------------
-- courriels personnels ou de recrutement;
+- courriels personnels (les courriels de recrutement des fiches sont publiés volontairement);
 - montants négociés;
 - notes internes;
-- renseignements personnels non autorisés;
-- nom protégé Santé Québec configuré dans le secret NOM_PROTEGE_SANTE_QUEBEC.
+- renseignements personnels non autorisés.
+
+Le crédit public du bloc « D'où viennent ces informations » (collaboration nommée) est autorisé
+depuis le 18 septembre 2026.
 
 Le champ notes de data.json n'est pas un espace de publication.
 

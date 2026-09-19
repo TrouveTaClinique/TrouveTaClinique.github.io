@@ -82,8 +82,8 @@ page SEO de clinique. Dans le prototype Est restauré, elle apparaît dans l'ong
   SEO) depuis le 2 septembre 2026 (`PUBLIER_COURRIELS = true`).
 - Le champ `notes` de `data.json` ne doit contenir aucune information destinée au public.
 - Aucun montant négocié ni renseignement personnel non autorisé ne doit entrer dans le dépôt.
-- Le nom protégé configuré dans le secret GitHub `NOM_PROTEGE_SANTE_QUEBEC` ne doit apparaître
-  dans aucun fichier public, y compris les commentaires.
+- Le crédit public du bloc « D'où viennent ces informations » (collaboration nommée) est autorisé
+  depuis le 18 septembre 2026.
 
 ## Génération locale
 

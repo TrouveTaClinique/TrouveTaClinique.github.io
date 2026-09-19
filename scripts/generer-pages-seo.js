@@ -1889,8 +1889,8 @@ ${sections}
  * aucun ETC, aucun nom ni courriel de responsable.
  * JSON-LD : pas de contactPoint. JobPosting uniquement si PUBLIER_JOB_POSTING et une fiche
  * clinique liée recrute (éteint le 4 sept. 2026, générateur conservé).
- * Le nom de la personne-ressource SQ n'apparaît dans aucun fichier du dépôt
- * (garde-fou du secret NOM_PROTEGE_SANTE_QUEBEC).
+ * Le crédit public du bloc Accueil « D'où viennent ces informations » est autorisé
+ * (18 septembre 2026).
  */
 const DATE_SOURCE_ETABLISSEMENTS = '2026-08-28';
 /* Les 22 installations ont maintenant une description propre, rédigée à partir de leur page
