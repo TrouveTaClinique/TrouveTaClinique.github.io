@@ -32,7 +32,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // (main porte déjà le padding-inline).
 // v72-site-polish (18 septembre 2026) : logo haute définition, recherche rapide restaurée,
 // accueil repoli et vidéo déplacée du répertoire Cliniques vers Établissements.
-const CACHE = CACHE_PREFIX + 'v72-site-polish';
+// v73-logo-officiel-hd (18 septembre 2026) : logo et icônes depuis la source officielle HD
+// sur fond blanc ; cache des assets marque à rafraîchir.
+const CACHE = CACHE_PREFIX + 'v73-logo-officiel-hd';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

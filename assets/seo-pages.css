@@ -217,7 +217,7 @@ ul.sources a{font-weight:650}
 /* ── pied ── */
 footer{background:var(--navy);color:#fff;padding:var(--s-xl) var(--gutter);margin-top:var(--s-xl)}
 footer .brandf{--mark:46px;display:flex;align-items:center;gap:.7rem;margin-bottom:1.7rem;color:#fff}
-footer .brandf img{height:var(--mark);width:auto;filter:brightness(0) invert(1);flex:none}
+footer .brandf img{height:var(--mark);width:auto;flex:none}
 footer h4{font-size:.92rem;margin:0 0 .75rem;font-weight:700}
 footer ul{list-style:none;margin:0 0 1.8rem;padding:0}
 footer li{margin-bottom:.5rem}
