@@ -132,7 +132,8 @@ jobs:
       - name: Vérifier l'absence du nom protégé
         # 18 sept. 2026 — crédit public autorisé dans le bloc « D'où viennent ces informations »
         # (collaboration étroite nommée). L'ancien garde-fou d'absence est retiré.
-        run: echo "Crédit public autorisé : vérification d'absence du nom désactivée."
+        run: |
+          echo "Crédit public autorisé : vérification d'absence du nom désactivée."
 
       - name: Vérifier qu'aucune donnée privée n'a fui
         # Filet de sécurité : ce robot publie sans qu'un humain relise. Les courriels de
