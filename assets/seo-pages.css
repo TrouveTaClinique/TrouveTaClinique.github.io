@@ -67,8 +67,21 @@ header.site.scrolled{box-shadow:0 3px 16px rgba(18,6,114,.14)}
 .burger{width:46px;height:46px;border-radius:999px;display:grid;place-items:center;background:#fff;
   border:1.5px solid rgba(18,6,114,.25);color:var(--navy);cursor:pointer}
 .burger:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-@media(min-width:1040px){.navdesk{display:flex}.burger{display:none}
-  .recherche{padding:0 1.15rem}.recherche .lbl{display:inline}}
+@media(min-width:1040px){
+  header.site{gap:clamp(.55rem,1vw,1.4rem)}
+  .navdesk{
+    display:flex;flex:1 1 auto;justify-content:flex-end;align-items:center;flex-wrap:nowrap;
+    gap:clamp(.48rem,.3rem + .7vw,1.4rem);
+    font-size:clamp(1.0625rem,.7rem + .55vw,1.25rem);
+  }
+  .navdesk a{font-weight:600;padding:.35rem 0}
+  .burger{display:none}
+  .recherche{
+    height:auto;min-height:46px;padding:.45rem 1.15rem;
+    font-size:clamp(1.0625rem,.7rem + .55vw,1.25rem);font-weight:600;
+  }
+  .recherche .lbl{display:inline}
+}
 
 /* ── fil d'Ariane ── */
 .ariane{padding:1.1rem var(--gutter) 0;font-size:.9rem;color:var(--ink-60)}
@@ -657,17 +670,40 @@ footer .wordmark .l1, footer .wordmark .l2{color:#fff}
 }
 
 .cliniques-acces{padding:var(--s-sm) 0 0}
-main .cliniques-carte{
+main .cliniques-carte,main .carte-est{
   margin-inline:calc(-1 * var(--gutter));
-  padding-inline:var(--gutter);
+  padding:var(--s-md) var(--gutter);
   margin-top:var(--s-md);
 }
-.cliniques-carte>h1{color:var(--navy);max-width:22ch;padding-bottom:1.2rem;border-bottom:2px solid var(--navy)}
-.cliniques-carte .lead{max-width:min(72ch,100%)}
-.cliniques-carte .banniere{max-width:min(52rem,100%)}
+.cliniques-carte>h1,.carte-est>h2{
+  color:var(--navy);max-width:none;padding-bottom:1.1rem;border-bottom:2px solid var(--navy)
+}
+.cliniques-carte .lead,.cliniques-carte .consigne,.carte-est .consigne,.carte-est .lead{max-width:none}
+.cliniques-carte .banniere,.carte-est .banniere{max-width:none;width:100%}
 .bloc-rls{
   margin-inline:calc(-1 * var(--gutter));
   padding:var(--s-md) var(--gutter);
 }
 .bloc-rls--pale{background:var(--teal-pale)}
+
+/* Ordinateur : le cadre 1400 px n’est plus recouvert par d’anciens plafonds internes. */
+@media(min-width:1100px){
+  main h1,.hero h1,.hero-guide h1,.tete h1,.zone h2,.content-section h2,
+  .cliniques-carte>h1,.carte-est>h2,.video-hero h1{max-width:none}
+  .lead,.lede,.consigne,.hook,.corps p,.encadre,
+  .content-section>p,.content-section ul,.content-section ol,
+  .hero-guide .lead,.hero-guide .callout,.hero-guide .inline-sources,
+  .cliniques-carte .lead,.video-hero-sous,.video-hero-suite .lead{max-width:none;width:auto}
+  .hero-guide:has(> .callout),
+  .content-section:has(> .callout):not(.sources-panel){
+    display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);
+    column-gap:clamp(1.2rem,2.2vw,2.2rem);align-items:start;
+  }
+  .hero-guide:has(> .callout) > :not(.callout){grid-column:1}
+  .hero-guide:has(> .callout) > .callout{grid-column:2;grid-row:1 / span 12}
+  .content-section:has(> .callout):not(.sources-panel) > .section-number,
+  .content-section:has(> .callout):not(.sources-panel) > h2{grid-column:1 / -1}
+  .content-section:has(> .callout):not(.sources-panel) > :not(.callout):not(.section-number):not(h2){grid-column:1}
+  .content-section:has(> .callout):not(.sources-panel) > .callout{grid-column:2;grid-row:3 / span 20}
+}
 

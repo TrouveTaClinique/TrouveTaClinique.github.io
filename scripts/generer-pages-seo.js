@@ -902,6 +902,19 @@ function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
   return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" alt="${alt}" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy"></a></figure>`;
 }
 
+const INTRO_CARTE_EST = 'Ouvrez la carte interactive de la Montérégie-Est&nbsp;: milieux, coordonnées et personne-ressource au recrutement.';
+
+function htmlSectionCarteEst({ assetsChemin = '/assets', titre = 'Où voulez-vous pratiquer&nbsp;?', intro = INTRO_CARTE_EST } = {}) {
+  const racine = String(assetsChemin || '/assets').replace(/\/$/, '');
+  return `<section class="zone zone-action carte-est reveal">
+  <h2>${titre}</h2>
+  <p class="consigne">${intro}</p>
+  <a class="banniere" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est">
+    <img src="${racine}/${BANNIERE_EST_FICHIER}" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy">
+  </a>
+</section>`;
+}
+
 function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane, ancreListe = '', libelleAncre = '' }) {
   const src = 'https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1';
   return `<section class="video-hero reveal" aria-labelledby="video-hero-titre">
@@ -2851,9 +2864,9 @@ ${items}
 
   ${htmlExplorezSecteurs()}
 
-  ${htmlBanniereSqb('../../assets')}
+${sections}
 
-${sections}`;
+  ${htmlSectionCarteEst({ assetsChemin: '../../assets' })}`
 
   // Les 22 fiches sont publiées. Les noms de contact connus apparaissent sur chaque
   // fiche ; les courriels ne sont jamais écrits en toutes lettres.
@@ -3825,8 +3838,30 @@ function ajouterClasseSiAbsente(html, classeCible, classeAjout) {
 
 function marquerRevealGuide(html) {
   let sortie = html;
-  for (const classe of ['hero-guide', 'toc', 'content-section', 'sqb-wrap', 'fact-grid', 'card-grid', 'sources-panel']) {
+  for (const classe of ['hero-guide', 'toc', 'content-section', 'sqb-wrap', 'fact-grid', 'card-grid', 'sources-panel', 'carte-est', 'guide-bandeau']) {
     sortie = ajouterClasseSiAbsente(sortie, classe, 'reveal');
+  }
+  return sortie;
+}
+
+function alternerBandesGuide(html) {
+  let n = 0;
+  const segments = html.split(/(<!--[\s\S]*?-->)/);
+  return segments.map(segment => {
+    if (segment.startsWith('<!--')) return segment;
+    return segment.replace(/<section class="content-section([^"]*)"/g, (tout, rest) => {
+      if (/\bguide-bandeau\b/.test(rest)) return tout;
+      n += 1;
+      const pale = n % 2 === 0 ? ' guide-bandeau--pale' : '';
+      return `<section class="content-section guide-bandeau${pale}${rest}"`;
+    });
+  }).join('');
+}
+
+function placerSectionCarteGuide(html) {
+  let sortie = html.replace(/<figure class="sqb-wrap[^"]*">[\s\S]*?<\/figure>\s*/g, '');
+  if (!sortie.includes('carte-est')) {
+    sortie = sortie.replace('</main>', `${htmlSectionCarteEst({ assetsChemin: '/assets' })}\n</main>`);
   }
   return sortie;
 }
@@ -3877,6 +3912,8 @@ ${navGuide}
   if (!sortie.includes('/assets/theme.js')) {
     sortie = sortie.replace('</body>', THEME_SCRIPT + '\n</body>');
   }
+  sortie = placerSectionCarteGuide(sortie);
+  sortie = alternerBandesGuide(sortie);
   sortie = marquerRevealGuide(sortie);
 
 
