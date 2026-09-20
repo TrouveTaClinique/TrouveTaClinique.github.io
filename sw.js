@@ -43,7 +43,11 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v80-hero-colonne (18 septembre 2026) : héros aligné sur la même largeur que le reste du site.
 // v81-recherche-ptem (18 septembre 2026) : puce PTEM → page guide ; libellé « Parcourez directement ».
 // v82-rls-est-vert (18 septembre 2026) : pastilles RLS Montérégie-Est en vert.
-const CACHE = CACHE_PREFIX + 'v82-rls-est-vert';
+// v84-projection-etablissements (20 septembre 2026) : /data-etablissements.json ne sert plus
+// que la projection publique (courriels des responsables retirés selon la politique du fichier).
+// L'URL reste dans CORE : même chemin, mêmes champs publics, la carte est inchangée. Le cache
+// doit être renouvelé pour que les anciennes copies du JSON brut soient supprimées.
+const CACHE = CACHE_PREFIX + 'v84-projection-etablissements';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

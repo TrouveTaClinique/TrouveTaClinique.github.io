@@ -41,9 +41,14 @@ on:
       # pilotaient déjà le robot, plus le gabarit unique des quatre cartes. index.html est une
       # SORTIE générée : le surveiller relancerait le robot en boucle après son propre commit.
       - 'data.json'
+      - 'data-etablissements.json'
+      - 'data-etablissements-centre.json'
       - 'scripts/generer-pages-seo.js'
       - 'scripts/mettre-a-jour-date-donnees.js'
       - 'scripts/publier-regions.js'
+      - 'scripts/projeter-etablissements.js'
+      - 'scripts/verifier-fuites-etablissements.js'
+      - 'scripts/empreintes-courriels-interdits.json'
       - '.github/workflows/generer-pages-seo.yml'
       - 'scripts/carte.template.html'
       - 'scripts/carte-est-sq.template.html'
@@ -182,6 +187,11 @@ jobs:
           echo "Vérification du sitemap..."
           python3 -c "import xml.dom.minidom; xml.dom.minidom.parse('sitemap.xml')"
           echo "Toutes les vérifications sont passées."
+
+      - name: Vérifier les données d'établissements (politique d'affichage)
+        # Contrôle bloquant sur l'arbre qui sera publié. Doit précéder le commit/push.
+        # La CI n'a pas le fichier privé : le registre d'empreintes SHA-256 suffit.
+        run: node scripts/verifier-fuites-etablissements.js
 
       - name: Publier si quelque chose a changé
         run: |

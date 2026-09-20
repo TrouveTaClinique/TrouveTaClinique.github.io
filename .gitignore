@@ -1,1 +1,13 @@
 PROJECT_MEMORY.md
+
+# Données de travail des établissements : ne jamais committer.
+# La version publique est data-etablissements.json, produite par
+# scripts/projeter-etablissements.js.
+data-etablissements.prive.json
+data-etablissements-centre.prive.json
+*.prive.json
+trouvetaclinique-correctifs*.zip
+
+# Source de travail complète (courriels internes, notes, décisions).
+# Copie hors dépôt : %TEMP%\ttc-prive-hors-depot\donnees-etablissements-source.json
+scripts/donnees-etablissements-source.json

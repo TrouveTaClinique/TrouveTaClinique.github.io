@@ -48,6 +48,9 @@ jobs:
       - name: Préparer le site (noindex, CNAME apercu, sans scripts internes)
         run: node scripts/preparer-apercu.js "$RUNNER_TEMP/site-brouillon"
 
+      - name: Vérifier les données d'établissements sur l'artefact d'aperçu
+        run: node scripts/verifier-fuites-etablissements.js --sortie "$RUNNER_TEMP/site-brouillon"
+
       - name: Conserver l'artefact du site préparé
         uses: actions/upload-artifact@v4
         with:

@@ -84,6 +84,14 @@
         "libelle": "Réadaptation",
         "libelleComplet": "Réadaptation en dépendance"
       }
+    ],
+    "projectionPublique": true,
+    "champsRetires": [
+      "decision",
+      "etc",
+      "notesInternes",
+      "responsableCourriel",
+      "valeursSource"
     ]
   },
   "installations": [
@@ -567,7 +575,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mailan Pham",
-      "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -598,7 +605,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mailan Pham",
-      "responsableCourriel": "mailan.pham.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -633,7 +639,6 @@
       },
       "enseignement": null,
       "responsableNom": "Angela Leach Orts",
-      "responsableCourriel": "angela.leach.orts.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -668,7 +673,6 @@
       },
       "enseignement": null,
       "responsableNom": "Josée Mercier",
-      "responsableCourriel": "josee.mercier.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -703,7 +707,6 @@
       },
       "enseignement": null,
       "responsableNom": "Angela Leach Orts",
-      "responsableCourriel": "angela.leach.orts.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -734,7 +737,6 @@
       },
       "enseignement": "oui",
       "responsableNom": "Elise O'Carroll",
-      "responsableCourriel": "elise.ocarroll.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -762,7 +764,6 @@
       },
       "enseignement": null,
       "responsableNom": "",
-      "responsableCourriel": "recrutementdmuhpb@gmail.com",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -790,7 +791,6 @@
       },
       "enseignement": null,
       "responsableNom": "Katherine Buote",
-      "responsableCourriel": "katherine.buote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -817,7 +817,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mailan Pham",
-      "responsableCourriel": "mailan.pham.med.cisssme16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -846,7 +845,6 @@
       },
       "enseignement": null,
       "responsableNom": "Elizabeth Godin",
-      "responsableCourriel": "elizabeth.godin.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -877,7 +875,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mylène Coté",
-      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -908,7 +905,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mylène Coté",
-      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -943,7 +939,6 @@
       },
       "enseignement": null,
       "responsableNom": "Dr Mathieu Galfard",
-      "responsableCourriel": "mathieu.galfard.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -971,7 +966,6 @@
       },
       "enseignement": null,
       "responsableNom": "MJ Arsenault",
-      "responsableCourriel": "marie-josee.arsenault.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -999,7 +993,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mylène Coté",
-      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1026,7 +1019,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mylène Coté",
-      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1055,7 +1047,6 @@
       },
       "enseignement": null,
       "responsableNom": "Geneviève Cadieux",
-      "responsableCourriel": "genevieve.cadieux.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1085,7 +1076,6 @@
       },
       "enseignement": null,
       "responsableNom": "Mylène Coté",
-      "responsableCourriel": "mylene.cote.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1116,7 +1106,6 @@
       },
       "enseignement": null,
       "responsableNom": "Natacha Leblanc-Gagnon",
-      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1147,7 +1136,6 @@
       },
       "enseignement": null,
       "responsableNom": "Natacha Leblanc-Gagnon",
-      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1178,7 +1166,6 @@
       },
       "enseignement": null,
       "responsableNom": "Natacha Leblanc-Gagnon",
-      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1213,7 +1200,6 @@
       },
       "enseignement": null,
       "responsableNom": "Julie Gagnon",
-      "responsableCourriel": "Julie.gagnon.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -1248,7 +1234,6 @@
       },
       "enseignement": null,
       "responsableNom": "Claire Wadoux",
-      "responsableCourriel": "claire.wadoux.med@ssss.gouv.qc.ca",
       "regroupe": true,
       "validation": {
         "etat": "a-valider",
@@ -1279,7 +1264,6 @@
       },
       "enseignement": "oui",
       "responsableNom": "Dr Philippe Imbeault",
-      "responsableCourriel": "philippe.imbeault.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1307,7 +1291,6 @@
       },
       "enseignement": null,
       "responsableNom": "Gabrielle Dumas",
-      "responsableCourriel": "gabrielle.dumas.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1335,7 +1318,6 @@
       },
       "enseignement": null,
       "responsableNom": "Natacha Leblanc-Gagnon",
-      "responsableCourriel": "natacha.leblanc-gagnon.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1362,7 +1344,6 @@
       },
       "enseignement": null,
       "responsableNom": "Véronique Malenfant",
-      "responsableCourriel": "veronique.malenfant.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1392,7 +1373,6 @@
       },
       "enseignement": null,
       "responsableNom": "Dr Haméon-Plante",
-      "responsableCourriel": "christophe.hameon-plante.med@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1425,7 +1405,6 @@
       },
       "enseignement": null,
       "responsableNom": "Marie-Eve Turgeon",
-      "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1458,7 +1437,6 @@
       },
       "enseignement": null,
       "responsableNom": "Marie-Eve Turgeon",
-      "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",
@@ -1491,7 +1469,6 @@
       },
       "enseignement": null,
       "responsableNom": "Marie-Eve Turgeon",
-      "responsableCourriel": "marie-eve.turgeon.cisssmo16@ssss.gouv.qc.ca",
       "regroupe": false,
       "validation": {
         "etat": "a-valider",

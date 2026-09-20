@@ -6,9 +6,23 @@ const { GEO_ETABLISSEMENTS_EST } = require('./geo-etablissements-est.js');
 const { categorieActiviteDepuisSecteur } = require('./categories-activite-etablissements.js');
 
 const RACINE = path.resolve(__dirname, '..');
-const SOURCE = path.join(__dirname, 'donnees-etablissements-source.json');
 const DATA_JSON = path.join(RACINE, 'data.json');
 const SORTIE = path.join(RACINE, 'data-etablissements.json');
+
+function trouverSourceTravail() {
+  const candidats = [
+    process.env.TTC_SOURCE_ETABLISSEMENTS,
+    path.join(__dirname, 'donnees-etablissements-source.json'),
+    path.join(require('node:os').tmpdir(), 'ttc-prive-hors-depot', 'donnees-etablissements-source.json')
+  ].filter(Boolean);
+  for (const candidat of candidats) {
+    if (fs.existsSync(candidat)) return candidat;
+  }
+  throw new Error(
+    'Source de travail des établissements introuvable. ' +
+    'Placez-la hors du dépôt ou définissez TTC_SOURCE_ETABLISSEMENTS.'
+  );
+}
 
 /* Noms d'affichage — table explicite, pas un algorithme. Les 22 installations du
    relevé 2027 sont une liste close ; « détention / réadaptation / dépendance » restent
@@ -83,7 +97,7 @@ function coordsPour(etab, owner) {
 }
 
 function construire() {
-  const source = JSON.parse(fs.readFileSync(SOURCE, 'utf8'));
+  const source = JSON.parse(fs.readFileSync(trouverSourceTravail(), 'utf8'));
   const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
   const installations = [];
   const secteurs = [];

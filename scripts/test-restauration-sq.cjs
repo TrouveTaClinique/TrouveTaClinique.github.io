@@ -9,7 +9,8 @@ const { execFileSync } = require('node:child_process');
 const racine = path.join(__dirname, '..');
 const lire = p => fs.readFileSync(path.join(racine, p), 'utf8');
 const h = s => createHash('sha256').update(s).digest('hex');
-const est = lire('monteregie-est/index.html');
+const finsDeLigneUnix = s => String(s).replace(/\r\n/g, '\n');
+const est = finsDeLigneUnix(lire('monteregie-est/index.html'));
 
 test('Le bloc SQ historique est conservé intégralement, avec V4 et Segoe UI', () => {
   const debut = est.indexOf('/* ═══════════════════════════════════════════════════════════════════════════\n   PROTOTYPE SANTÉ QUÉBEC');
@@ -19,7 +20,7 @@ test('Le bloc SQ historique est conservé intégralement, avec V4 et Segoe UI', 
   assert.match(est, /<html lang="fr-CA" data-region="Est">/);
   assert.match(est, /linear-gradient\(100deg, var\(--sq-bleu\) 0%, var\(--sq-bleu\) 42%, var\(--sq-sarcelle\) 100%\)/);
   assert.match(est, /\.brand-mot[\s\S]*?font-family: var\(--sq-font\)/);
-  assert.equal(est.match(/--app-logo:.*$/m)[0], lire('scripts/carte.template.html').match(/--app-logo:.*$/m)[0]);
+  assert.equal(est.match(/--app-logo:.*$/m)[0], finsDeLigneUnix(lire('scripts/carte.template.html')).match(/--app-logo:.*$/m)[0]);
   for (const couleur of ['#0080D7', '#08A0A0', '#170A72', '#A8DCF4', '#A7DFDC', '#B8B1DF']) assert.ok(est.includes(couleur));
 });
 
@@ -74,13 +75,27 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
 test('La génération est stable et ne change ni données ni autres cartes', () => {
   const fichiers = ['data.json', 'monteregie/index.html', 'monteregie-est/index.html',
     'monteregie-centre/index.html', 'monteregie-ouest/index.html'];
-  const avant = fichiers.map(p => h(lire(p)));
+  const empreinte = p => h(finsDeLigneUnix(lire(p)));
+  const avant = fichiers.map(empreinte);
   execFileSync(process.execPath, [path.join(__dirname, 'publier-regions.js')], { cwd: racine });
-  assert.deepEqual(fichiers.map(p => h(lire(p))), avant);
+  assert.deepEqual(fichiers.map(empreinte), avant);
   assert.ok(lire('scripts/carte.template.html').includes('--cream: #f8f6f1'));
   for (const p of ['monteregie/index.html', 'monteregie-centre/index.html', 'monteregie-ouest/index.html']) {
     assert.ok(!lire(p).includes('PROTOTYPE SANTÉ QUÉBEC'));
   }
   assert.ok(lire('README.md').includes('[Voir le site](https://trouvetaclinique.ca/)'));
   assert.ok(lire('README.md').includes('apercu.trouvetaclinique.ca'));
+  const complete = finsDeLigneUnix(lire('monteregie/index.html'));
+  const estApres = finsDeLigneUnix(lire('monteregie-est/index.html'));
+  const centre = finsDeLigneUnix(lire('monteregie-centre/index.html'));
+  const ouest = finsDeLigneUnix(lire('monteregie-ouest/index.html'));
+  assert.match(complete, /id="repertoire-etablissements"/);
+  assert.match(estApres, /id="repertoire-etablissements"/);
+  assert.match(centre, /id="repertoire-etablissements"/);
+  assert.match(estApres, /etablissements\/hopital-pierre-boucher\//);
+  assert.match(centre, /etablissements\/hopital-du-haut-richelieu\//);
+  assert.match(ouest, /cliniques\/chsld-et-clsc-de-coteau-du-lac\//);
+  assert.doesNotMatch(ouest, /cliniques\/clsc-de-coteau-du-lac\//);
+  assert.doesNotMatch(complete, /\/cliniques\/gmf-hudson\//);
+  assert.match(complete, /\/cliniques\/gmf-hudson-hudson-medicentre\//);
 });

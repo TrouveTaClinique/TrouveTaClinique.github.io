@@ -440,7 +440,7 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 }
 .sqb-photo:hover,.banniere:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(18,6,114,.17)}
 .sqb-photo img,.banniere img{display:block;width:100%;height:auto}
-.video-hero{position:relative;width:100vw;max-width:100vw;margin:0 0 1.6rem;margin-left:calc(50% - 50vw);overflow:hidden;background:var(--navy);color:#fff;min-height:calc(100svh - 98px);height:calc(100svh - 98px);max-height:920px}
+.video-hero{position:relative;width:100vw;max-width:100vw;margin:0 0 1.6rem;margin-left:calc(50% - 50vw);overflow:hidden;background:var(--navy);color:#fff;min-height:min(72svh,680px);height:auto;max-height:none}
 .video-hero-media{position:absolute;inset:0;overflow:hidden}
 .video-hero-media img,.video-hero-media iframe{position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-width:177.78vh;min-height:100%;transform:translate(-50%,-50%);border:0;object-fit:cover;pointer-events:none}
 .video-hero-voile{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(18,6,114,.62) 0%,rgba(18,6,114,.28) 48%,rgba(18,6,114,.08) 100%),linear-gradient(0deg,rgba(18,6,114,.5) 0%,rgba(18,6,114,.08) 52%,rgba(18,6,114,.18) 100%);pointer-events:none}
@@ -458,7 +458,7 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .video-hero-credit{margin:0;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.82)}
 .video-hero-suite{margin:1.35rem 0 1.8rem}
 @media (max-width:700px){
-  .video-hero{height:min(78svh,640px);min-height:28rem;max-height:none}
+  .video-hero{height:auto;min-height:min(58svh,26rem);max-height:none}
   .video-hero-texte{padding:3.2rem 0 1.8rem}
 }
 @media (prefers-reduced-motion:reduce){.video-hero-media iframe{visibility:hidden}}
@@ -470,6 +470,7 @@ main{width:100%;margin:0;padding-inline:var(--gutter);max-width:none}
 .toc a{text-decoration:none}
 .toc a:hover{text-decoration:underline}
 .content-section{position:relative;margin:1.25rem 0;padding:0;background:transparent;border:0;box-shadow:none;scroll-margin-top:110px}
+main section[id]{scroll-margin-top:110px}
 .content-section>p{max-width:min(72ch,100%)}
 .content-section ul{max-width:min(72ch,100%)}
 .callout{margin:1.35rem 0;padding:1.1rem 1.25rem;background:var(--teal-pale);border:0;border-left:4px solid var(--teal);border-radius:0 12px 12px 0;max-width:min(72ch,100%)}

@@ -1,0 +1,75 @@
+# Production uniquement : trouvetaclinique.ca depuis la branche main.
+# Ne s'exécute jamais sur brouillon. L'aperçu a son propre dépôt
+# (TrouveTaClinique/apercu) et le workflow apercu-brouillon.yml.
+#
+# Ce fichier ne change aucun réglage GitHub à lui seul. Après un enregistrement
+# sur main, il reste à choisir une fois :
+#   Settings → Pages → Source : GitHub Actions
+# Tant que la source reste « Deploy from a branch », ce workflow ne publie pas.
+name: Pages production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+
+jobs:
+  preparer:
+    if: github.repository == 'TrouveTaClinique/TrouveTaClinique.github.io' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Lire main sans droit de push
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Préparer l'artefact public (sans scripts internes)
+        run: node scripts/preparer-pages-production.js "$RUNNER_TEMP/site-public"
+
+      - name: Vérifier les données d'établissements sur l'artefact
+        run: node scripts/verifier-fuites-etablissements.js --sortie "$RUNNER_TEMP/site-public"
+
+      - name: Confirmer l'absence de la source de travail
+        run: |
+          set -euo pipefail
+          if [ -e "$RUNNER_TEMP/site-public/scripts/donnees-etablissements-source.json" ]; then
+            echo "::error::Source de travail présente dans l'artefact Pages."
+            exit 1
+          fi
+          test -f "$RUNNER_TEMP/site-public/index.html"
+          test -f "$RUNNER_TEMP/site-public/data-etablissements.json"
+          test -f "$RUNNER_TEMP/site-public/sitemap.xml"
+          grep -qx 'trouvetaclinique.ca' "$RUNNER_TEMP/site-public/CNAME"
+
+      - name: Envoyer l'artefact à Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site-public
+
+  deployer:
+    if: github.repository == 'TrouveTaClinique/TrouveTaClinique.github.io' && github.ref == 'refs/heads/main'
+    needs: preparer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publier sur trouvetaclinique.ca
+        id: deployment
+        uses: actions/deploy-pages@v4

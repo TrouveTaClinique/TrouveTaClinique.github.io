@@ -281,7 +281,17 @@ function verifierIsolation(sortie, t) {
 
 function ecrire(cible, contenu) {
   fs.mkdirSync(path.dirname(cible), { recursive: true });
-  fs.writeFileSync(cible, contenu, 'utf8');
+  fs.writeFileSync(cible, String(contenu).replace(/\r\n/g, '\n'), 'utf8');
+}
+
+function pagePubliée(...segments) {
+  return fs.existsSync(path.join(RACINE, ...segments, 'index.html'));
+}
+
+function dossierDeRegion(region) {
+  const t = TERRITOIRES.find((x) => x.region === region);
+  if (!t) throw new Error('Territoire inconnu : ' + region);
+  return t.dossier;
 }
 
 /* ------------------------------------------------------------------------------------------- */
@@ -324,11 +334,19 @@ function chargerJson(relatif) {
 }
 
 function chargerSlugsCliniques() {
-  try {
-    return chargerJson(path.join('scripts', 'slugs.json'));
-  } catch (_e) {
-    return {};
+  const slugs = chargerJson(path.join('scripts', 'slugs.json'));
+  if (!slugs || typeof slugs !== 'object' || Array.isArray(slugs)) {
+    throw new Error('scripts/slugs.json est invalide.');
   }
+  return slugs;
+}
+
+function slugCliniqueCanonique(g, slugs) {
+  const slug = slugs[String(g.id)];
+  if (!slug || typeof slug !== 'string') {
+    throw new Error('Slug canonique manquant dans slugs.json pour la clinique ' + g.id + ' (' + g.nom + ').');
+  }
+  return slug;
 }
 
 function cliniquesCarte(region) {
@@ -348,24 +366,23 @@ function cliniquesCarte(region) {
       region: g.region || '',
       type: g.type || '',
       recrute: g.recrutementActif !== false,
-      slug: slugs[String(g.id)] || slugifier(g.nom)
+      slug: slugCliniqueCanonique(g, slugs)
     }))
-    .filter((g) => g.slug)
     .sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
 }
 
 function gmfuVersEtablissement() {
   const map = new Map();
-  try {
-    const donnees = chargerJson('data-etablissements.json');
-    for (const inst of donnees.installations || []) {
-      if (inst.type !== 'gmf-u') continue;
-      const ref = inst.referenceExistante;
-      if (ref && ref.collection === 'cliniques' && ref.id != null) {
-        map.set(String(ref.id), slugifier(inst.nom));
-      }
-    }
-  } catch (_e) { /* pas de couche Est */ }
+  const donnees = chargerJson('data-etablissements.json');
+  const publies = dossiersEtablissementsPublies('monteregie-est');
+  for (const inst of donnees.installations || []) {
+    if (inst.type !== 'gmf-u') continue;
+    const ref = inst.referenceExistante;
+    if (!ref || ref.collection !== 'cliniques' || ref.id == null) continue;
+    const slug = slugifier(inst.nom);
+    if (!publies.has(slug) || !pagePubliée('monteregie-est', 'etablissements', slug)) continue;
+    map.set(String(ref.id), slug);
+  }
   return map;
 }
 
@@ -379,50 +396,44 @@ function dossiersEtablissementsPublies(dossierTerritoire) {
   );
 }
 
+function lotEtablissements(fichierDonnees, dossierTerritoire, region, filtrerRls) {
+  const donnees = chargerJson(fichierDonnees);
+  const publies = dossiersEtablissementsPublies(dossierTerritoire);
+  const installations = donnees.installations || [];
+  if (installations.length && publies.size === 0) {
+    throw new Error('Aucun dossier établissements publié dans ' + dossierTerritoire + '.');
+  }
+  const lots = [];
+  for (const inst of installations) {
+    if (inst.publication && inst.publication.visible === false) continue;
+    if (filtrerRls && !inst.missionRegionale && !filtrerRls.has(inst.territoireSource)) continue;
+    const slug = slugifier(inst.nom);
+    if (!publies.has(slug) || !pagePubliée(dossierTerritoire, 'etablissements', slug)) continue;
+    lots.push({
+      nom: inst.nom,
+      ville: inst.ville || '',
+      type: inst.type || '',
+      rls: inst.missionRegionale ? 'Mission régionale' : (inst.territoireSource || ''),
+      region,
+      dossier: dossierTerritoire,
+      slug
+    });
+  }
+  if (installations.length && lots.length === 0) {
+    throw new Error('Aucun établissement de ' + fichierDonnees + ' ne correspond à une page publiée.');
+  }
+  return lots;
+}
+
 function etablissementsCarte(t) {
   /* t = territoire TERRITOIRES ou null (carte complète). */
   const lots = [];
   if (!t || t.region === 'Est') {
-    try {
-      const donnees = chargerJson('data-etablissements.json');
-      const publies = dossiersEtablissementsPublies('monteregie-est');
-      const rlsNoms = t ? new Set(t.rls.map(([nom]) => nom)) : null;
-      for (const inst of donnees.installations || []) {
-        if (inst.publication && inst.publication.visible === false) continue;
-        const slug = slugifier(inst.nom);
-        if (!publies.has(slug)) continue;
-        if (t && !inst.missionRegionale && rlsNoms && !rlsNoms.has(inst.territoireSource)) continue;
-        lots.push({
-          nom: inst.nom,
-          ville: inst.ville || '',
-          type: inst.type || '',
-          rls: inst.missionRegionale ? 'Mission régionale' : (inst.territoireSource || ''),
-          region: 'Est',
-          dossier: 'monteregie-est',
-          slug
-        });
-      }
-    } catch (_e) { /* ignore */ }
+    const rlsNoms = t ? new Set(t.rls.map(([nom]) => nom)) : null;
+    lots.push(...lotEtablissements('data-etablissements.json', 'monteregie-est', 'Est', rlsNoms));
   }
   if (!t || t.region === 'Centre') {
-    try {
-      const donnees = chargerJson('data-etablissements-centre.json');
-      const publies = dossiersEtablissementsPublies('monteregie-centre');
-      for (const inst of donnees.installations || []) {
-        if (inst.publication && inst.publication.visible === false) continue;
-        const slug = slugifier(inst.nom);
-        if (!publies.has(slug)) continue;
-        lots.push({
-          nom: inst.nom,
-          ville: inst.ville || '',
-          type: inst.type || '',
-          rls: inst.territoireSource || '',
-          region: 'Centre',
-          dossier: 'monteregie-centre',
-          slug
-        });
-      }
-    } catch (_e) { /* ignore */ }
+    lots.push(...lotEtablissements('data-etablissements-centre.json', 'monteregie-centre', 'Centre', null));
   }
   return lots.sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
 }
@@ -562,16 +573,17 @@ function htmlBlocCliniques(t, cliniques, gmfuMap) {
     for (const rlsNom of ordre) {
       const liste = parRls.get(rlsNom) || [];
       const items = liste.map((c) => {
+        const dossier = t ? t.dossier : dossierDeRegion(c.region);
         const slugEtab = gmfuMap.get(String(c.id));
         let href;
-        if (slugEtab && (!t || t.region === 'Est')) {
-          /* Canonique GMF-U : fiche établissement Est (évite la page clinique qui redirige). */
+        if (slugEtab && (!t || t.region === 'Est')
+          && pagePubliée('monteregie-est', 'etablissements', slugEtab)) {
+          /* Canonique GMF-U Est : fiche établissement déjà publiée. */
           href = t ? `etablissements/${slugEtab}/` : `/monteregie-est/etablissements/${slugEtab}/`;
-        } else if (t) {
-          href = `cliniques/${c.slug}/`;
+        } else if (pagePubliée(dossier, 'cliniques', c.slug)) {
+          href = t ? `cliniques/${c.slug}/` : `/${dossier}/cliniques/${c.slug}/`;
         } else {
-          const dos = TERRITOIRES.find((x) => x.region === c.region);
-          href = `/${dos ? dos.dossier : 'monteregie-est'}/cliniques/${c.slug}/`;
+          throw new Error('Page clinique introuvable pour « ' + c.nom + ' » (slug canonique ' + c.slug + ').');
         }
         return {
           href,
@@ -700,7 +712,7 @@ function injecterIndexSeo(html, t) {
 }
 
 function main() {
-  const source = fs.readFileSync(SOURCE, 'utf8');
+  const source = fs.readFileSync(SOURCE, 'utf8').replace(/\r\n/g, '\n');
   verifierCarteGenerale(source);
 
   // La carte complète n'est pas installable. Les commentaires de substitution sont inoffensifs

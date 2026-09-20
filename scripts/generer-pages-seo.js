@@ -638,6 +638,23 @@ function dateLisibleFr(iso) {
   const mois = MOIS_FR_SEO[parseInt(m[2], 10) - 1];
   return mois ? `${parseInt(m[3], 10)} ${mois} ${m[1]}` : '';
 }
+const datesInvalidesSignalees = new Set();
+function htmlDateFr(iso) {
+  const lisible = dateLisibleFr(iso);
+  if (!lisible) {
+    const brut = String(iso == null ? '' : iso);
+    if (!datesInvalidesSignalees.has(brut)) {
+      datesInvalidesSignalees.add(brut);
+      console.warn(`  Date absente ou invalide, laissée telle quelle : ${JSON.stringify(brut)}`);
+    }
+    return esc(brut);
+  }
+  return `<time datetime="${esc(iso)}">${esc(lisible)}</time>`;
+}
+function premiereAncreListe(sections) {
+  const m = /<section id="([^"]+)"/.exec(sections || '');
+  return m ? '#' + m[1] : '';
+}
 function estValide(c) { return !!(c && c.validation && c.validation.statut === 'valide'); }
 const SVG_BADGE_VERIF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>';
 function badgeVerif(c) {
@@ -885,7 +902,7 @@ function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
   return `<figure class="${wrap}"><a class="sqb-photo" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="${img}" alt="${alt}" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}" decoding="sync" loading="lazy"></a></figure>`;
 }
 
-function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane }) {
+function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane, ancreListe = '', libelleAncre = '' }) {
   const src = 'https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1';
   return `<section class="video-hero" aria-labelledby="video-hero-titre">
   <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
@@ -900,6 +917,7 @@ function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane }) {
     <h1 id="video-hero-titre">${esc(titre)}</h1>
     <p class="video-hero-sous">${esc(sousTitre)}</p>
     <p class="video-hero-liens">
+      ${ancreListe ? `<a href="${ancreListe}">${esc(libelleAncre || 'Voir la liste')}</a>` : ''}
       <a href="${accueil}">Explorer la carte</a>
       <a href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </p>
@@ -1209,7 +1227,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     <p class="eyebrow">${esc(c.type)}${rempli(c.rls) ? ' · RLS ' + esc(c.rls) : ''}${enRecrutement ? '' : ' · Ne recrute pas actuellement'}</p>
     <h1>${esc(c.nom)}${badgeVerif(c)}</h1>
     <p class="lead">${esc(textePresentation)}</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
+    <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${u.accueil}?c=${c.id}">Voir sur la carte interactive</a>
       ${rempli(c.rls)
@@ -1359,7 +1377,7 @@ function pageRls(rls, liste, slugs, majDonnees, u = UNIVERS_GENERAL, etablisseme
     <p class="eyebrow">Réseau local de services · Montérégie</p>
     <h1>Cliniques en recrutement : RLS ${esc(rls)}</h1>
     <p class="lead">${actifs.length} milieu${actifs.length > 1 ? 'x' : ''} du réseau local de services ${esc(rls)} recrute${actifs.length > 1 ? 'nt' : ''} actuellement des médecins de famille, réparti${actifs.length > 1 ? 's' : ''} dans ${villesActifs.length} municipalité${villesActifs.length > 1 ? 's' : ''} : ${esc(villesActifs.join(', '))}.${inactifs.length ? `<br>Le RLS compte aussi ${inactifs.length} autre${inactifs.length > 1 ? 's' : ''} milieu${inactifs.length > 1 ? 'x' : ''} publié${inactifs.length > 1 ? 's' : ''} à titre de référence, qui ${inactifs.length > 1 ? 'ne recrutent' : 'ne recrute'} pas actuellement.` : ''}</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
+    <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${u.accueil}">Voir ce RLS sur la carte</a>
       ${u.regional
@@ -1481,7 +1499,7 @@ function pageRlsHubRegion(u, parRls, majDonnees) {
     <p class="eyebrow">Réseaux locaux de services · ${esc(u.nom)}</p>
     <h1>Les RLS de la ${esc(u.nom)}</h1>
     <p class="lead">Le territoire de la ${esc(u.nom)} compte <strong>${rlsPresents.length} ${rlsPresents.length > 1 ? 'réseaux locaux' : 'réseau local'} de services</strong>, avec au total ${total} milieu${total > 1 ? 'x' : ''} actuellement en recrutement de médecins de famille.</p>
-    <p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>
+    <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${u.accueil}">Voir sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a>
@@ -1827,16 +1845,18 @@ ${items}
   const accueilCarte = u ? u.accueil : UNIVERS_GENERAL.accueil;
   const titreRepertoire = `Cliniques en recrutement en ${nomTerritoire}`;
   const leadRepertoire = `<p class="lead"><strong>${enRecrutementTotal} milieu${enRecrutementTotal > 1 ? 'x' : ''} en recrutement actif</strong> de médecins de famille, sur ${cliniques.length} milieux publiés au total dans le répertoire, répartis dans <strong>${parRls.size} RLS</strong> et ${villes.size} municipalités.${enRecrutementTotal < cliniques.length ? `<br>Les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement.` : ''}<br>Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="${accueilCarte}">carte interactive</a> ajoute les filtres et la vue géographique.</p>`;
-  const majRepertoire = `<p class="updated"><strong>Données mises à jour le :</strong> ${esc(majDonnees)}.</p>`;
+  const majRepertoire = `<p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>`;
+  const ancreListe = premiereAncreListe(sections);
   const heroClassique = `  <section class="hero">
     <p class="eyebrow">Médecine familiale · Montérégie</p>
     <h1>${esc(titreRepertoire)}</h1>
     ${leadRepertoire}
-    ${majRepertoire}
     <div class="cta-row">
-      <a class="button primary" href="${accueilCarte}">Explorer sur la carte interactive</a>
+      ${ancreListe ? `<a class="button primary" href="${ancreListe}">Voir les cliniques</a>` : ''}
+      <a class="button secondary" href="${accueilCarte}">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </div>
+    ${majRepertoire}
   </section>`;
   const banniere = htmlBanniereSqb(u ? '../../assets' : '../assets');
   const banniereEnBas = Boolean(u && u.region !== 'Est');
@@ -2165,15 +2185,22 @@ function chapeauEtablissement(inst, secteurs) {
 function htmlLigneContactEst(s, politique) {
   const pol = politique || {};
   const nom = String(s.responsableNom || '').trim();
-  const courriel = String(s.responsableCourriel || '').trim();
+  const courrielBrut = String(s.responsableCourriel || '').trim();
   const nomOk = pol.afficherResponsableNom !== false && nom;
+  const courriel = pol.afficherResponsableCourriel === true ? courrielBrut : '';
+  const remplacement = String(pol.contactAffiche || '').trim();
   if (nomOk && courriel) {
     return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(nom)}</a>.</p>`;
   }
+  if (nomOk && remplacement && remplacement !== 'source') {
+    return `<p>Contact : ${esc(nom)}. ${esc(remplacement)}.</p>`;
+  }
   if (nomOk) return `<p>Contact : ${esc(nom)}.</p>`;
-  /* Courriel sans nom : lien cliquable, adresse jamais affichée en toutes lettres. */
   if (courriel) {
     return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(LIBELLE_CONTACT_SANS_NOM)}</a>.</p>`;
+  }
+  if (remplacement && remplacement !== 'source') {
+    return `<p>Contact : ${esc(remplacement)}.</p>`;
   }
   return '';
 }
@@ -2305,7 +2332,7 @@ ${items}
     <p class="eyebrow">${esc(eyebrowEtablissement(inst))}</p>
     <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
     <p class="lead">${chapeauEtablissement(inst, secteurs)}</p>
-    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${esc(lienCarteInstallation(inst.id))}">Voir sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/etablissements/">Tous les secteurs en établissement</a>
@@ -2779,20 +2806,24 @@ ${items}
 
   const titreEtablissements = 'Secteurs en recrutement en établissement';
   const leadEtablissements = `<p class="lead">Beaucoup de médecins de famille partagent leur temps entre une clinique et un secteur en établissement. Urgence, hospitalisation, UCDG, longue durée (CHSLD), soins à domicile, réadaptation, détention : voici ceux qui recrutent en Montérégie-Est.<br>Les coordonnées de chaque responsable sont disponibles sur la carte interactive.</p>`;
+  const ancreListeEtab = premiereAncreListe(sections);
   const heroEtablissements = htmlHeroVideoEst({
     titre: titreEtablissements,
     sousTitre: 'Des médecins du territoire parlent de leur pratique.',
     accueil: `${EST_PREFIXE}/?mode=etablissements`,
-    filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`
+    filDAriane: `<a href="${EST_ACCUEIL}">Montérégie-Est</a> › Secteurs en établissement`,
+    ancreListe: ancreListeEtab,
+    libelleAncre: 'Voir les établissements'
   });
 
   const corps = `  ${heroEtablissements}
 
   <div class="video-hero-suite">
     ${leadEtablissements}
-    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS)}.</p>
     <div class="cta-row">
-      <a class="button primary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
+      ${ancreListeEtab ? `<a class="button primary" href="${ancreListeEtab}">Voir les établissements</a>` : ''}
+      <a class="button secondary" href="${EST_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/cliniques/">Cliniques de la Montérégie-Est</a>
     </div>
   </div>
@@ -3117,17 +3148,20 @@ function htmlExtraSeoRlsHrr() {
 `;
 }
 
-function htmlContactSecteurSeo(sec) {
+function htmlContactSecteurSeo(sec, politique) {
+  const pol = politique || {};
   const rec = sec.recrutement || {};
   const bits = [];
-  if (rec.responsableNom) bits.push(esc(rec.responsableNom));
-  if (rec.responsableCourriel) {
+  if (rec.responsableNom && pol.afficherResponsableNom !== false) bits.push(esc(rec.responsableNom));
+  if (rec.responsableCourriel && pol.afficherResponsableCourriel === true) {
     bits.push(`<a href="mailto:${esc(rec.responsableCourriel)}">${esc(rec.responsableCourriel)}</a>`);
   }
-  return bits.length ? bits.join(' · ') : '';
+  if (bits.length) return bits.join(' · ');
+  const remplacement = String(pol.contactAffiche || '').trim();
+  return remplacement && remplacement !== 'source' ? esc(remplacement) : '';
 }
 
-function paragraphesSecteurCentre(s) {
+function paragraphesSecteurCentre(s, politique) {
   const rec = s.recrutement || {};
   const points = (SEO_RESUME_SECTEURS_CENTRE[s.id] || []).slice();
   const blocs = [];
@@ -3136,7 +3170,7 @@ function paragraphesSecteurCentre(s) {
   }
   blocs.push(htmlResumeListe(points));
   if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${htmlGmfuConditionSeo()}</p><p>${LIEN_PTEM_U}</p>`);
-  const contact = htmlContactSecteurSeo(s);
+  const contact = htmlContactSecteurSeo(s, politique);
   if (contact) blocs.push(`<p>Contact : ${contact}.</p>`);
   if (s.dme) blocs.push(`<p>Dossier médical électronique : ${esc(s.dme)}.</p>`);
   return blocs.filter(Boolean).join('\n    ');
@@ -3184,7 +3218,7 @@ ${items}
   return { lignes, horaire, equipe };
 }
 
-function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee) {
+function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee, politique = {}) {
   const u = UNIVERS_PAR_REGION.Centre;
   const slug = slugEtablissement(inst);
   const url = `${SITE}${CENTRE_PREFIXE}/etablissements/${slug}/`;
@@ -3196,7 +3230,7 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee) {
   const description = descriptionEtablissementSeo(inst, typeLib, n, `établissement centre ${inst.id}`);
   const h2 = n <= 1 ? 'Le secteur en recrutement' : `Les ${nombreEnLettresFr(n)} secteurs en recrutement`;
   const blocsSecteurs = secteurs.map(s => `    <h3 id="${esc(s.ancre)}">${esc(titreH3Secteur(s))}</h3>
-    ${paragraphesSecteurCentre(s)}`).join('\n\n');
+    ${paragraphesSecteurCentre(s, politique)}`).join('\n\n');
   const lienRls = inst.territoireSource
     ? `${CENTRE_PREFIXE}/rls/${slugifier(inst.territoireSource)}/`
     : null;
@@ -3260,7 +3294,7 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee) {
     <p class="eyebrow">${esc(typeLib)} · RLS ${esc(inst.territoireSource || '')}</p>
     <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
     <p class="lead">${chapeau}</p>
-    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS_CENTRE)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${esc(lienCarteInstallationCentre(inst.id))}">Voir sur la carte interactive</a>
       <a class="button secondary" href="${CENTRE_PREFIXE}/etablissements/">Tous les secteurs en établissement</a>
@@ -3333,7 +3367,7 @@ function pageRepertoireEtablissementsCentre(donnees, majPagesSeo) {
     <p class="eyebrow">Médecine familiale · RLS Haut-Richelieu–Rouville</p>
     <h1>Secteurs en recrutement en établissement</h1>
     <p class="lead">Hôpital, GMF-U, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale du RLS Haut-Richelieu–Rouville.</p>
-    <p class="updated"><strong>Informations à jour au :</strong> ${DATE_SOURCE_ETABLISSEMENTS_CENTRE}.</p>
+    <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS_CENTRE)}.</p>
     <div class="cta-row">
       <a class="button primary" href="${CENTRE_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${CENTRE_PREFIXE}/cliniques/">Cliniques de la Montérégie-Centre</a>
@@ -3381,7 +3415,7 @@ function publierPagesEtablissementsCentre(entrees, majPagesSeo, cliniquesById) {
     const cliniqueLiee = (inst.referenceExistante && inst.referenceExistante.collection === 'cliniques' && cliniquesById)
       ? cliniquesById.get(String(inst.referenceExistante.id))
       : null;
-    const p = pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee);
+    const p = pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee, (donnees.meta || {}).politiqueAffichage);
     ecrire(path.join('monteregie-centre', 'etablissements', p.slug, 'index.html'), p.html);
     conserves.add(p.slug);
     if (p.indexable) {
@@ -3745,8 +3779,27 @@ const LIBELLE_GUIDE_PAR_NOM = { ptem: 'La page PTEM', amp: 'La page AMP', 'ptem-
  * normalise à la publication. La fonction est idempotente : si l'instantané est un jour
  * régénéré avec le bouton, rien n'est ajouté deux fois.
  */
+function renumeroterSectionsGuide(html) {
+  const MOTIF = /(<p class="section-number">)(\d+)(<\/p>)/g;
+  const segments = html.split(/(<!--[\s\S]*?-->)/);
+  let n = 0;
+  const sortie = segments.map(segment => {
+    if (segment.startsWith('<!--')) return segment;
+    return segment.replace(MOTIF, (_, avant, __, apres) => {
+      n += 1;
+      return avant + String(n).padStart(2, '0') + apres;
+    });
+  }).join('');
+  return { html: sortie, total: n };
+}
+
 function normaliserPageGuide(html, nom) {
   let sortie = html;
+  const renumerotation = renumeroterSectionsGuide(sortie);
+  sortie = renumerotation.html;
+  if (renumerotation.total) {
+    console.log(`  Guide ${nom} : ${renumerotation.total} sections visibles, numérotées 01 à ${String(renumerotation.total).padStart(2, '0')}.`);
+  }
 
   const uEst = UNIVERS_PAR_REGION.Est || UNIVERS_REGIONS.find(u => u.region === 'Est') || UNIVERS_GENERAL;
   const liensGuide = liensNav(uEst);

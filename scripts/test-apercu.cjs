@@ -71,7 +71,8 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   for (const fichier of [
     '.github', 'scripts', 'PTEM2027_v2.gs', '_apercu-accueil',
     'README.md', 'CHANGELOG.md', 'ETAT-DU-BROUILLON.md', 'sitemap.xml', 'google0e6f553795bbb4a9.html',
-    'DOCUMENT_MAITRE_PTEM2027_FUSION_CLAUDE_CHATGPT.md'
+    'DOCUMENT_MAITRE_PTEM2027_FUSION_CLAUDE_CHATGPT.md',
+    'scripts/donnees-etablissements-source.json'
   ]) assert.equal(fs.existsSync(path.join(destination, fichier)), false, fichier);
   const lire = fichier => fs.readFileSync(path.join(destination, fichier), 'utf8');
   assert.equal(lire('CNAME').trim(), CNAME_APERCU);
