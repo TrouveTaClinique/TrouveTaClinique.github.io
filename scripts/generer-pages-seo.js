@@ -136,20 +136,28 @@ function htmlBrand() {
 }
 
 function htmlFooterSite() {
-  return `<footer>
+  return `<footer class="pied-site">
   <div class="brandf">
     <img src="/assets/logo-banniere.png" alt="">
     <span class="vh">Trouve ta clinique</span>
     ${WORDMARK_HTML}
   </div>
   <div class="fgrid">
-    <div><h4>Territoires</h4><ul>
+    <div class="f-col f-territoires"><h4>Territoires</h4><ul>
       <li><a href="/monteregie-est/">Montérégie-Est</a></li>
       <li><a href="/monteregie/">Montérégie</a></li>
       <li><a href="/monteregie-centre/">Montérégie-Centre</a></li>
       <li><a href="/monteregie-ouest/">Montérégie-Ouest</a></li>
     </ul></div>
-    <div><h4>Réseaux locaux (RLS)</h4><ul>
+    <div class="f-col f-guides"><h4>Guides et outils</h4><ul>
+      <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
+      <li><a href="/monteregie-est/amp/">AMP</a></li>
+      <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
+      <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
+      <li><a href="/recherche/">Recherche</a></li>
+      <li><a href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></li>
+    </ul></div>
+    <div class="f-col f-rls"><h4>Réseaux locaux (RLS)</h4><ul>
       <li><a href="/monteregie-est/rls/pierre-boucher/">Pierre-Boucher</a></li>
       <li><a href="/monteregie-est/rls/richelieu-yamaska/">Richelieu-Yamaska</a></li>
       <li><a href="/monteregie-est/rls/pierre-de-saurel/">Pierre-De Saurel</a></li>
@@ -159,14 +167,6 @@ function htmlFooterSite() {
       <li><a href="/monteregie-ouest/rls/vaudreuil-soulanges/">Vaudreuil-Soulanges</a></li>
       <li><a href="/monteregie-ouest/rls/du-suroit/">du Suroît</a></li>
       <li><a href="/monteregie-ouest/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a></li>
-    </ul></div>
-    <div><h4>Guides et outils</h4><ul>
-      <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
-      <li><a href="/monteregie-est/amp/">AMP</a></li>
-      <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
-      <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
-      <li><a href="/recherche/">Recherche</a></li>
-      <li><a href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></li>
     </ul></div>
   </div>
   <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
@@ -904,15 +904,9 @@ function htmlBanniereSqb(assetsChemin, { compact = true } = {}) {
 
 function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane, ancreListe = '', libelleAncre = '' }) {
   const src = 'https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1';
-  return `<section class="video-hero" aria-labelledby="video-hero-titre">
-  <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
-    <img src="https://i.vimeocdn.com/video/1196920171-84d1dca608d530e599f54ffe3de4d56c6831f01730b8f381cbdcd7e5e2fff4fc-d_1280x720?region=us" alt="" width="1280" height="720">
-    <iframe src="${src}" allow="autoplay; fullscreen" tabindex="-1" title="Médecins en Montérégie-Est · Santé Québec Montérégie-Est"></iframe>
-  </div>
-  <div class="video-hero-voile" aria-hidden="true"></div>
-  <button type="button" class="video-hero-pause" aria-pressed="false" aria-controls="video-hero-media">Mettre en pause</button>
-  <nav class="breadcrumbs video-hero-crumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
+  return `<section class="video-hero reveal" aria-labelledby="video-hero-titre">
   <div class="video-hero-texte">
+    <nav class="breadcrumbs video-hero-crumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>
     <p class="video-hero-eyebrow">Montérégie-Est</p>
     <h1 id="video-hero-titre">${esc(titre)}</h1>
     <p class="video-hero-sous">${esc(sousTitre)}</p>
@@ -921,6 +915,14 @@ function htmlHeroVideoEst({ titre, sousTitre, accueil, filDAriane, ancreListe = 
       <a href="${accueil}">Explorer la carte</a>
       <a href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </p>
+  </div>
+  <div class="video-hero-lecteur">
+    <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
+      <img src="https://i.vimeocdn.com/video/1196920171-84d1dca608d530e599f54ffe3de4d56c6831f01730b8f381cbdcd7e5e2fff4fc-d_1280x720?region=us" alt="" width="1280" height="720">
+      <iframe src="${src}" allow="autoplay; fullscreen" tabindex="-1" title="Médecins en Montérégie-Est · Santé Québec Montérégie-Est"></iframe>
+    </div>
+    <div class="video-hero-voile" aria-hidden="true"></div>
+    <button type="button" class="video-hero-pause" aria-pressed="false" aria-controls="video-hero-media">Mettre en pause</button>
     <p class="video-hero-credit">Vidéo de Santé Québec Montérégie-Est.</p>
   </div>
 </section>`;
@@ -1802,13 +1804,14 @@ function pageRepertoire(cliniques, slugs, parRls, majDonnees, u = null) {
   const villes = new Set(cliniques.map(c => c.ville));
 
   const enRecrutementTotal = cliniques.filter(recrute).length;
-  const sections = [...parRls.keys()].sort((a, b) => a.localeCompare(b, 'fr')).map(rls => {
+  const sections = [...parRls.keys()].sort((a, b) => a.localeCompare(b, 'fr')).map((rls, i) => {
     const liste = parRls.get(rls);
     const items = liste.map(c => `      <li>
         <a href="${hrefFicheMilieu(c, slugs[String(c.id)], prefixe)}"><strong>${esc(c.nom)}</strong></a>${badgeVerif(c)}
         <span class="rep-meta">${esc(c.ville)} · ${esc(c.type)}${recrute(c) ? '' : ' · Ne recrute pas actuellement'}</span>
       </li>`).join('\n');
-    return `  <section id="rls-${slugifier(rls)}">
+    const ton = i % 2 ? ' bloc-rls--pale' : '';
+    return `  <section id="rls-${slugifier(rls)}" class="bloc-rls reveal${ton}">
     <h2>RLS ${esc(rls)} <span class="compte">${liste.length}</span></h2>
     <p class="rep-lien"><a href="${prefixe}/rls/${slugifier(rls)}/">Voir la page du RLS ${esc(rls)} →</a></p>
     <ul class="repertoire">
@@ -1858,10 +1861,27 @@ ${items}
     </div>
     ${majRepertoire}
   </section>`;
+  const heroEst = `  <div class="cliniques-acces">
+    <div class="cta-row">
+      ${ancreListe ? `<a class="button primary" href="${ancreListe}">Voir les cliniques</a>` : ''}
+      <a class="button secondary" href="${accueilCarte}">Explorer sur la carte interactive</a>
+      <a class="button secondary" href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
+    </div>
+    ${majRepertoire}
+  </div>
+  <section class="zone zone-action cliniques-carte reveal">
+    <p class="eyebrow">Médecine familiale · Montérégie</p>
+    <h1>${esc(titreRepertoire)}</h1>
+    ${leadRepertoire}
+    <a class="banniere" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est">
+      <img src="../../assets/${BANNIERE_EST_FICHIER}" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}">
+    </a>
+  </section>`;
+  const estVivant = Boolean(u && u.region === 'Est');
   const banniere = htmlBanniereSqb(u ? '../../assets' : '../assets');
   const banniereEnBas = Boolean(u && u.region !== 'Est');
 
-  const corps = `  ${heroClassique}
+  const corps = `  ${estVivant ? heroEst : heroClassique}
 
   ${u ? '' : `<section id="territoires">
     <h2>Explorer par territoire</h2>
@@ -1871,7 +1891,7 @@ ${UNIVERS_REGIONS.map(v => `      <li><a href="${v.accueil}"><strong>${esc(v.nom
     </ul>
   </section>`}
 
-  ${banniereEnBas ? '' : banniere}
+  ${estVivant || banniereEnBas ? '' : banniere}
 
   <div class="callout official"><strong>Comment choisir :</strong> le RLS peut être déterminant pour l’avis de conformité PTEM, qui exige au moins 55 % des jours de facturation dans le territoire visé. Le type de milieu (GMF, GMF-U, CLSC…), le DMÉ, les frais de bureau et les pratiques offertes aident ensuite à comparer le quotidien de pratique. <a class="source-chip" href="https://www.quebec.ca/gouvernement/travailler-gouvernement/sante-services-sociaux/travailler-comme-medecin-famille-quebec/plans-regionaux-effectifs-medicaux-medecine-famille" rel="noopener">Source officielle</a></div>
 
@@ -2391,7 +2411,7 @@ function htmlExplorezSecteurs() {
   const ICON_COMM = '<svg width="48" height="48" viewBox="0 0 56 56" fill="none"><circle cx="21" cy="21" r="6.2" stroke="currentColor" stroke-width="2.2"/><circle cx="36.5" cy="22.5" r="5.2" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 42c1.8-7.2 6.2-10.8 10.5-10.8S29.4 34.8 31.2 42M29 42c1.3-5.4 4.5-8.8 8.8-8.8S45.4 36.8 47 42" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
 
   return `
-  <section class="es-wrap" aria-labelledby="es-titre">
+  <section class="es-wrap reveal" aria-labelledby="es-titre">
     <h2 id="es-titre">Explorez par secteurs</h2>
     <p class="es-lead">Choisissez d’abord une famille de pratique, puis un secteur.<br>Le chiffre indique le nombre de milieux en recrutement pour le cycle 2027.</p>
 
@@ -2758,7 +2778,7 @@ function pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo) {
     { id: 'Pierre-De Saurel', titre: 'RLS Pierre-De Saurel', rls: true },
     { id: 'missions', titre: 'Missions régionales', rls: false }
   ];
-  const sections = groupes.map(g => {
+  const sections = groupes.map((g, i) => {
     const liste = installations.filter(i => g.id === 'missions' ? i.missionRegionale : (!i.missionRegionale && i.territoireSource === g.id));
     if (!liste.length) return '';
     const items = liste.map(inst => {
@@ -2775,7 +2795,8 @@ function pageRepertoireEtablissements(donnees, slugsCliniques, majPagesSeo) {
       </li>`;
     }).join('\n');
     const lienRls = g.rls ? `<p class="rep-lien"><a href="${EST_PREFIXE}/rls/${slugifier(g.id)}/">Voir la page du RLS ${esc(g.id)} →</a></p>` : '';
-    return `  <section id="${g.id === 'missions' ? 'missions-regionales' : 'rls-' + slugifier(g.id)}">
+    const ton = i % 2 ? ' bloc-rls--pale' : '';
+    return `  <section id="${g.id === 'missions' ? 'missions-regionales' : 'rls-' + slugifier(g.id)}" class="bloc-rls reveal${ton}">
     <h2>${esc(g.titre)} <span class="compte">${liste.length}</span></h2>
     ${lienRls}
     <ul class="repertoire">
@@ -3793,6 +3814,23 @@ function renumeroterSectionsGuide(html) {
   return { html: sortie, total: n };
 }
 
+function ajouterClasseSiAbsente(html, classeCible, classeAjout) {
+  const motif = new RegExp(`class="([^"]*\\b${classeCible}\\b[^"]*)"`, 'g');
+  return html.replace(motif, (tout, classes) => {
+    const jetons = classes.trim().split(/\s+/);
+    if (jetons.includes(classeAjout)) return tout;
+    return `class="${classes} ${classeAjout}"`;
+  });
+}
+
+function marquerRevealGuide(html) {
+  let sortie = html;
+  for (const classe of ['hero-guide', 'toc', 'content-section', 'sqb-wrap', 'fact-grid', 'card-grid', 'sources-panel']) {
+    sortie = ajouterClasseSiAbsente(sortie, classe, 'reveal');
+  }
+  return sortie;
+}
+
 function normaliserPageGuide(html, nom) {
   let sortie = html;
   const renumerotation = renumeroterSectionsGuide(sortie);
@@ -3825,6 +3863,8 @@ ${navGuide}
   }
   if (/<footer class="site-footer">[\s\S]*?<\/footer>/.test(sortie)) {
     sortie = sortie.replace(/<footer class="site-footer">[\s\S]*?<\/footer>/, htmlFooterSite());
+  } else if (/<footer class="pied-site">[\s\S]*?<\/footer>/.test(sortie)) {
+    sortie = sortie.replace(/<footer class="pied-site">[\s\S]*?<\/footer>/, htmlFooterSite());
   } else if (/<footer>[\s\S]*?<\/footer>/.test(sortie)) {
     sortie = sortie.replace(/<footer>[\s\S]*?<\/footer>/, htmlFooterSite());
   }
@@ -3837,6 +3877,7 @@ ${navGuide}
   if (!sortie.includes('/assets/theme.js')) {
     sortie = sortie.replace('</body>', THEME_SCRIPT + '\n</body>');
   }
+  sortie = marquerRevealGuide(sortie);
 
 
   /* L'instantané embarque aussi l'ancien ménage de service worker (désinscription seule,

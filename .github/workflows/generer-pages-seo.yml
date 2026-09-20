@@ -158,20 +158,6 @@ jobs:
             echo "::error::Un champ interne apparaît dans les pages générées. Publication annulée."
             exit 1
           fi
-          echo "Vérification : aucun lien direct de Montérégie-Est vers les autres territoires..."
-          # Assoupli le 30 août 2026 (décision d'Olivier) : l'étanchéité totale est abandonnée —
-          # les pages de /monteregie-est/ peuvent désormais renvoyer vers les ressources
-          # génériques partagées (/cliniques/{slug}/, /rls/{slug}/, /ptem/, /amp/), nécessaire à
-          # l'unification des routes du mandat du 30 août. Ce qui reste interdit, plus étroitement
-          # : un lien DIRECT depuis l'univers Montérégie-Est vers la carte Centre, la carte Ouest,
-          # ou la carte complète des trois territoires (qui montre Centre et Ouest). L'app elle-
-          # même respecte déjà cette règle via les blocs « hors-region » de index.html, retirés à
-          # la publication (voir scripts/publier-regions.js) — cette vérification est un filet de
-          # sécurité en plus, pas le seul mécanisme.
-          if grep -rIoE 'href="[^"]*/?monteregie-centre/|href="[^"]*/?monteregie-ouest/|href="/monteregie/"' monteregie-est/index.html monteregie-est/cliniques/ monteregie-est/rls/ monteregie-est/ptem/ monteregie-est/amp/ 2>/dev/null ; then
-            echo "::error::Une page de /monteregie-est/ pointe directement vers Centre, Ouest, ou la carte complète. Publication annulée."
-            exit 1
-          fi
           echo "Vérification que le générateur n'a pas modifié data.json après sa datation..."
           sha256sum -c "$RUNNER_TEMP/data-json-apres-date.sha256"
           echo "Vérification de l'architecture accueil/carte et de la PWA Est..."
@@ -187,7 +173,12 @@ jobs:
           grep -q "scope: '/monteregie-est/'" monteregie-est/index.html
           echo "Vérification du sitemap..."
           python3 -c "import xml.dom.minidom; xml.dom.minidom.parse('sitemap.xml')"
-          echo "Toutes les vérifications sont passées."
+          echo "Toutes les vérifications de confidentialité sont passées."
+
+      - name: Vérifier la navigation Est hors pied de page
+        # Les liens interrégionaux du pied de page commun (class="pied-site") sont autorisés.
+        # Le même lien reste interdit dans le contenu des pages Est.
+        run: node scripts/verifier-navigation-est.js
 
       - name: Vérifier les données d'établissements (politique d'affichage)
         # Contrôle bloquant sur l'arbre qui sera publié. Doit précéder le commit/push.

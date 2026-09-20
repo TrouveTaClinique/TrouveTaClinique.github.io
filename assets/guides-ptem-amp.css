@@ -54,7 +54,12 @@
 .button.secondary{background:transparent;color:var(--navy);border:2px solid var(--navy)}
 .button.secondary:hover{background:var(--navy);color:#fff}
 /* Pas de gutter horizontal : main a déjà padding-inline:var(--gutter). */
-.hero-guide{padding:var(--s-sm) 0 0}
+.hero-guide{
+  background:var(--teal-zone);
+  margin:0 calc(-1 * var(--gutter));
+  padding:var(--s-md) var(--gutter) var(--s-lg);
+}
+.hero-guide h1{color:var(--navy)}
 .hero-guide .lead{font-size:1.06rem;max-width:min(68ch,100%)}
 .hero-guide .lead-small{font-size:1rem;opacity:.9}
 /* ── grilles et cartes des guides (n'étaient pas stylées : d'où le texte collé) ── */
@@ -74,17 +79,20 @@
 .fact-grid{display:grid;gap:.85rem;margin:1.1rem 0 1.4rem}
 @media(min-width:720px){.fact-grid{grid-template-columns:repeat(2,1fr)}}
 
-/* ── plus d'encadrés verts : crème et bleu ciel ── */
-.fact-card{background:var(--cream);border:1px solid rgba(18,6,114,.14);border-left:4px solid var(--navy);
+.fact-card{background:var(--teal-pale);border:1px solid rgba(6,156,156,.28);border-left:4px solid var(--teal);
   border-radius:0 14px 14px 0;padding:1.15rem 1.25rem;margin:0}
+.fact-grid .fact-card:nth-child(even){background:var(--sky);border-color:rgba(0,120,204,.22);border-left-color:var(--blue)}
 .fact-card p{margin:0;font-size:.97rem;max-width:none}
 .fact-kicker{display:block;font-size:.7rem;font-weight:800;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--navy);opacity:.68;margin-bottom:.3rem}
-.callout{background:var(--cream);border-left:4px solid var(--navy);border-radius:0 12px 12px 0;
+  text-transform:uppercase;color:var(--teal);opacity:.9;margin-bottom:.3rem}
+.callout{background:var(--teal-pale);border-left:4px solid var(--teal);border-radius:0 12px 12px 0;
   padding:1.15rem 1.3rem;margin:1.2rem 0 1.4rem;max-width:min(72ch,100%);font-size:.99rem;line-height:1.6}
 .callout strong{display:block;margin-bottom:.35rem}
 .callout.official{background:var(--sky);border-left-color:var(--blue)}
 .callout.correction{background:#FFF6E3;border-left-color:#C98A12}
+.callout.warning{background:var(--warning-bg);border-left-color:#d48b16;color:#66440d}
+.card.accent-blue{background:var(--sky)}
+.card.accent-teal{background:var(--teal-pale)}
 
 /* ── respiration du texte courant ── */
 .content-section p{line-height:1.66;margin-bottom:1.15rem}

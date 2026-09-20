@@ -112,15 +112,9 @@
 </section>
 <main id="contenu">
 
-  <section class="video-hero" aria-labelledby="video-hero-titre">
-  <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
-    <img src="https://i.vimeocdn.com/video/1196920171-84d1dca608d530e599f54ffe3de4d56c6831f01730b8f381cbdcd7e5e2fff4fc-d_1280x720?region=us" alt="" width="1280" height="720">
-    <iframe src="https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Médecins en Montérégie-Est · Santé Québec Montérégie-Est"></iframe>
-  </div>
-  <div class="video-hero-voile" aria-hidden="true"></div>
-  <button type="button" class="video-hero-pause" aria-pressed="false" aria-controls="video-hero-media">Mettre en pause</button>
-  <nav class="breadcrumbs video-hero-crumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › Secteurs en établissement</nav>
+  <section class="video-hero reveal" aria-labelledby="video-hero-titre">
   <div class="video-hero-texte">
+    <nav class="breadcrumbs video-hero-crumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › Secteurs en établissement</nav>
     <p class="video-hero-eyebrow">Montérégie-Est</p>
     <h1 id="video-hero-titre">Secteurs en recrutement en établissement</h1>
     <p class="video-hero-sous">Des médecins du territoire parlent de leur pratique.</p>
@@ -129,6 +123,14 @@
       <a href="/monteregie-est/?mode=etablissements">Explorer la carte</a>
       <a href="/monteregie-est/ptem/">Guide PTEM</a>
     </p>
+  </div>
+  <div class="video-hero-lecteur">
+    <div class="video-hero-media" id="video-hero-media" aria-hidden="true">
+      <img src="https://i.vimeocdn.com/video/1196920171-84d1dca608d530e599f54ffe3de4d56c6831f01730b8f381cbdcd7e5e2fff4fc-d_1280x720?region=us" alt="" width="1280" height="720">
+      <iframe src="https://player.vimeo.com/video/485759050?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;dnt=1" allow="autoplay; fullscreen" tabindex="-1" title="Médecins en Montérégie-Est · Santé Québec Montérégie-Est"></iframe>
+    </div>
+    <div class="video-hero-voile" aria-hidden="true"></div>
+    <button type="button" class="video-hero-pause" aria-pressed="false" aria-controls="video-hero-media">Mettre en pause</button>
     <p class="video-hero-credit">Vidéo de Santé Québec Montérégie-Est.</p>
   </div>
 </section>
@@ -144,7 +146,7 @@
   </div>
 
   
-  <section class="es-wrap" aria-labelledby="es-titre">
+  <section class="es-wrap reveal" aria-labelledby="es-titre">
     <h2 id="es-titre">Explorez par secteurs</h2>
     <p class="es-lead">Choisissez d’abord une famille de pratique, puis un secteur.<br>Le chiffre indique le nombre de milieux en recrutement pour le cycle 2027.</p>
 
@@ -501,7 +503,7 @@
 
   <figure class="sqb-wrap compact directory-banner"><a class="sqb-photo" href="/monteregie-est/" aria-label="Ouvrir la carte interactive Montérégie-Est"><img src="../../assets/banniere-cellulaire-monteregie-est.jpg" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="1774" height="887" decoding="sync" loading="lazy"></a></figure>
 
-  <section id="rls-pierre-boucher">
+  <section id="rls-pierre-boucher" class="bloc-rls reveal">
     <h2>RLS Pierre-Boucher <span class="compte">7</span></h2>
     <p class="rep-lien"><a href="/monteregie-est/rls/pierre-boucher/">Voir la page du RLS Pierre-Boucher →</a></p>
     <ul class="repertoire">
@@ -536,7 +538,7 @@
     </ul>
   </section>
 
-  <section id="rls-richelieu-yamaska">
+  <section id="rls-richelieu-yamaska" class="bloc-rls reveal bloc-rls--pale">
     <h2>RLS Richelieu-Yamaska <span class="compte">7</span></h2>
     <p class="rep-lien"><a href="/monteregie-est/rls/richelieu-yamaska/">Voir la page du RLS Richelieu-Yamaska →</a></p>
     <ul class="repertoire">
@@ -571,7 +573,7 @@
     </ul>
   </section>
 
-  <section id="rls-pierre-de-saurel">
+  <section id="rls-pierre-de-saurel" class="bloc-rls reveal">
     <h2>RLS Pierre-De Saurel <span class="compte">4</span></h2>
     <p class="rep-lien"><a href="/monteregie-est/rls/pierre-de-saurel/">Voir la page du RLS Pierre-De Saurel →</a></p>
     <ul class="repertoire">
@@ -594,7 +596,7 @@
     </ul>
   </section>
 
-  <section id="missions-regionales">
+  <section id="missions-regionales" class="bloc-rls reveal bloc-rls--pale">
     <h2>Missions régionales <span class="compte">4</span></h2>
     
     <ul class="repertoire">
@@ -617,7 +619,7 @@
     </ul>
   </section>
 </main>
-<footer>
+<footer class="pied-site">
   <div class="brandf">
     <img src="/assets/logo-banniere.png" alt="">
     <span class="vh">Trouve ta clinique</span>
@@ -627,13 +629,21 @@
     </span>
   </div>
   <div class="fgrid">
-    <div><h4>Territoires</h4><ul>
+    <div class="f-col f-territoires"><h4>Territoires</h4><ul>
       <li><a href="/monteregie-est/">Montérégie-Est</a></li>
       <li><a href="/monteregie/">Montérégie</a></li>
       <li><a href="/monteregie-centre/">Montérégie-Centre</a></li>
       <li><a href="/monteregie-ouest/">Montérégie-Ouest</a></li>
     </ul></div>
-    <div><h4>Réseaux locaux (RLS)</h4><ul>
+    <div class="f-col f-guides"><h4>Guides et outils</h4><ul>
+      <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
+      <li><a href="/monteregie-est/amp/">AMP</a></li>
+      <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
+      <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
+      <li><a href="/recherche/">Recherche</a></li>
+      <li><a href="mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject=Signaler%20une%20clinique">Signaler une clinique</a></li>
+    </ul></div>
+    <div class="f-col f-rls"><h4>Réseaux locaux (RLS)</h4><ul>
       <li><a href="/monteregie-est/rls/pierre-boucher/">Pierre-Boucher</a></li>
       <li><a href="/monteregie-est/rls/richelieu-yamaska/">Richelieu-Yamaska</a></li>
       <li><a href="/monteregie-est/rls/pierre-de-saurel/">Pierre-De Saurel</a></li>
@@ -643,14 +653,6 @@
       <li><a href="/monteregie-ouest/rls/vaudreuil-soulanges/">Vaudreuil-Soulanges</a></li>
       <li><a href="/monteregie-ouest/rls/du-suroit/">du Suroît</a></li>
       <li><a href="/monteregie-ouest/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a></li>
-    </ul></div>
-    <div><h4>Guides et outils</h4><ul>
-      <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
-      <li><a href="/monteregie-est/amp/">AMP</a></li>
-      <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
-      <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
-      <li><a href="/recherche/">Recherche</a></li>
-      <li><a href="mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject=Signaler%20une%20clinique">Signaler une clinique</a></li>
     </ul></div>
   </div>
   <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>

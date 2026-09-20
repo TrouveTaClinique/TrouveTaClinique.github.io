@@ -47,7 +47,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // que la projection publique (courriels des responsables retirés selon la politique du fichier).
 // L'URL reste dans CORE : même chemin, mêmes champs publics, la carte est inchangée. Le cache
 // doit être renouvelé pour que les anciennes copies du JSON brut soient supprimées.
-const CACHE = CACHE_PREFIX + 'v84-projection-etablissements';
+// v85-theme-cadre (20 septembre 2026) : cadre 1400 px, pied compact, pages Cliniques / Établissements / guides.
+const CACHE = CACHE_PREFIX + 'v85-theme-cadre';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
