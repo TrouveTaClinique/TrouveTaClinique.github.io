@@ -128,12 +128,43 @@
 
   function initPanneau() {
     var toggle = qs('search-toggle');
+    if (!toggle) return;
     var panel = qs('search-panel');
+    // Les guides et certains anciens gabarits n'embarquent pas le panneau.
+    // Le composant commun le crée une seule fois, sans imposer une navigation.
+    if (!panel) {
+      panel = document.createElement('section');
+      panel.id = 'search-panel';
+      panel.className = 'search-panel';
+      panel.hidden = true;
+      panel.innerHTML = '<div class="search-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="search-panel-title">' +
+        '<div class="search-panel__top"><h2 id="search-panel-title">Rechercher un milieu</h2>' +
+        '<button class="search-panel__close" id="search-close" type="button" aria-label="Fermer la recherche">×</button></div>' +
+        '<form class="search-panel__form" id="search-form" action="/recherche/" method="get" role="search">' +
+        '<label class="visually-hidden" for="search-input">Rechercher une clinique, un établissement, une ville ou un guide</label>' +
+        '<input id="search-input" type="search" name="q" placeholder="Clinique, hôpital, ville…" autocomplete="off">' +
+        '<button type="submit">Rechercher</button></form>' +
+        '<p class="search-panel__hint" id="search-status" role="status" aria-live="polite"></p>' +
+        '<ul class="search-hits" id="search-results"></ul>' +
+        '<p class="search-panel__page-link"><a href="/recherche/">Ouvrir la recherche complète →</a></p></div>';
+      document.body.appendChild(panel);
+    }
     var input = qs('search-input');
     var results = qs('search-results');
     var status = qs('search-status');
     var closeBtn = qs('search-close');
     if (!toggle || !panel || !input) return;
+    var pageLinkBlock = panel.querySelector('.search-panel__page-link');
+    var pageLink = pageLinkBlock && pageLinkBlock.querySelector('a');
+    var searchForm = qs('search-form');
+    if (pageLinkBlock && searchForm) searchForm.parentNode.insertBefore(pageLinkBlock, searchForm);
+    if (status) { status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite'); }
+    toggle.setAttribute('aria-haspopup', 'dialog');
+    var inertElements = [];
+
+    function majLienComplet() {
+      if (pageLink) pageLink.href = '/recherche/' + (input.value.trim() ? '?q=' + encodeURIComponent(input.value.trim()) : '');
+    }
 
     function ouvert() {
       return !panel.hasAttribute('hidden');
@@ -142,10 +173,15 @@
     function ouvrir(e) {
       if (e) e.preventDefault();
       panel.removeAttribute('hidden');
+      inertElements = Array.from(document.body.children).filter(function (el) {
+        return el !== panel && !el.contains(panel) && !el.inert;
+      });
+      inertElements.forEach(function (el) { el.inert = true; });
       document.body.classList.add('search-open');
       toggle.setAttribute('aria-expanded', 'true');
       input.focus();
       input.select();
+      majLienComplet();
       chargerIndex().then(function () {
         afficher(results, status, input.value, 8);
       });
@@ -154,12 +190,15 @@
     function fermer() {
       if (!ouvert()) return;
       panel.setAttribute('hidden', '');
+      inertElements.forEach(function (el) { el.inert = false; });
+      inertElements = [];
       document.body.classList.remove('search-open');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.focus();
     }
 
     toggle.addEventListener('click', function (e) {
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
       if (ouvert()) { e.preventDefault(); fermer(); }
       else ouvrir(e);
     });
@@ -172,8 +211,17 @@
         e.preventDefault();
         fermer();
       }
+      if (e.key === 'Tab' && ouvert()) {
+        var controls = Array.from(panel.querySelectorAll('a[href],button,input')).filter(function (el) {
+          return !el.disabled && el.getClientRects().length;
+        });
+        var first = controls[0], last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
     input.addEventListener('input', function () {
+      majLienComplet();
       afficher(results, status, input.value, 8);
     });
     var form = qs('search-form');
@@ -183,7 +231,7 @@
         afficher(results, status, input.value, 8);
       });
     }
-    chargerIndex();
+    // Chargement à la première ouverture seulement.
   }
 
   function initPage() {

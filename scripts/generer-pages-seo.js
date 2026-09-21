@@ -990,9 +990,7 @@ ${metaVerification}  <meta property="og:locale" content="fr_CA">
   <meta name="twitter:title" content="${esc(titre)}">
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${ogImage}">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="/assets/logo-banniere.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="${cssHref}">
 ${cssExtra ? `  <link rel="stylesheet" href="${cssExtra}">\n` : ''}  <script type="application/ld+json">
@@ -3868,6 +3866,9 @@ function placerSectionCarteGuide(html) {
 
 function normaliserPageGuide(html, nom) {
   let sortie = html;
+  // Même PNG HD transparent que dans l'en-tête, sans réencoder le logo.
+  sortie = sortie.replace(/<link\b(?=[^>]*\brel="icon")[^>]*>\s*/g, '');
+  sortie = sortie.replace('</head>', '<link rel="icon" type="image/png" sizes="1024x1024" href="/assets/logo-banniere.png">\n</head>');
   const renumerotation = renumeroterSectionsGuide(sortie);
   sortie = renumerotation.html;
   if (renumerotation.total) {

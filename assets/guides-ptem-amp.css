@@ -221,7 +221,7 @@
 .fact-card p{font-size:1.08rem;line-height:1.58}
 .fact-kicker{font-size:.82rem}
 
-/* Sommaire : panneau blanc discret plutôt qu’un grand carré bleu. */
+/* Sommaire et repères : une bande verte entre le héros blanc et le premier chapitre. */
 .toc{
   background:#fff;
   border:1px solid rgba(6,156,156,.3);
@@ -289,3 +289,21 @@
   .toc a{font-size:1.04rem}
   .fact-grid{gap:.85rem}
 }
+
+main > .hero-guide ~ .fact-grid,
+main > .hero-guide ~ .toc{
+  background:var(--teal-zone);
+  margin:0 calc(-1 * var(--gutter));
+  padding:clamp(1.6rem,3vw,3rem) var(--gutter);
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  max-width:none;
+}
+main > .hero-guide ~ .fact-grid{padding-bottom:1rem}
+main > .fact-grid + .toc{padding-top:1.25rem}
+main > .hero-guide ~ .toc > strong{border-bottom-color:rgba(6,156,156,.28)}
+.fact-card > span:not(.fact-kicker){font-size:1.05rem;line-height:1.6;opacity:1}
+.fact-card .source-chip{margin-top:auto}
+.content-section.guide-bandeau:not(.guide-bandeau--pale) .callout:not(.warning){background:var(--teal-pale)}
+.content-section.guide-bandeau--pale .callout:not(.warning){background:#fff}
