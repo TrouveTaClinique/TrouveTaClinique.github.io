@@ -48,7 +48,7 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // L'URL reste dans CORE : même chemin, mêmes champs publics, la carte est inchangée. Le cache
 // doit être renouvelé pour que les anciennes copies du JSON brut soient supprimées.
 // v86-design-cadre (20 septembre 2026) : bandeau plus lisible, cadre 1400 px, section carte commune, guides PTEM/AMP.
-const CACHE = CACHE_PREFIX + 'v86-design-cadre';
+// v87-guides-animation (21 septembre 2026) : guides plus lisibles, alternance blanc/vert et animation réversible.\nconst CACHE = CACHE_PREFIX + 'v87-guides-animation';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

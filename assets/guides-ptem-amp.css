@@ -148,3 +148,144 @@
 .sqb-photo{display:block;border-radius:14px;overflow:hidden}
 .sqb-photo img{width:100%;height:auto;display:block}
 .carte-est .banniere img,.cliniques-carte .banniere img{width:100%;height:auto;display:block}
+
+/* Retouche visuelle des guides PTEM et AMP — 21 septembre 2026.
+   Palette Santé Québec conservée, contenu et structure inchangés. */
+
+/* Le guide commence par une zone blanche, puis alterne avec le vert pâle. */
+.hero-guide{
+  background:#fff;
+  border-top:1px solid var(--teal-zone);
+  border-bottom:1px solid var(--teal-zone);
+  padding-top:clamp(2rem,4vw,3.8rem);
+  padding-bottom:clamp(2.2rem,5vw,4.6rem);
+}
+.hero-guide h1{
+  font-size:clamp(2.2rem,4.2vw,4rem);
+  line-height:1.1;
+}
+.hero-guide .eyebrow{
+  font-size:.86rem;
+  letter-spacing:.1em;
+}
+.hero-guide .lead{
+  font-size:clamp(1.15rem,1vw + .9rem,1.4rem);
+  line-height:1.58;
+}
+.hero-guide .status-line{margin-bottom:1.35rem}
+.hero-guide .status-badge.status-ok{
+  background:var(--teal-pale);
+  color:#055f59;
+  border-color:#9de8e1;
+  font-size:.92rem;
+  padding:.42rem .9rem;
+}
+.hero-guide .status-note{font-size:.98rem}
+
+/* Sections pleines largeur, avec une alternance visible et institutionnelle. */
+.content-section.guide-bandeau,
+.guide-bandeau{
+  padding-top:clamp(2.1rem,4vw,4rem);
+  padding-bottom:clamp(2.1rem,4vw,4rem);
+  background:#fff;
+}
+.content-section.guide-bandeau--pale,
+.guide-bandeau.guide-bandeau--pale{
+  background:var(--teal-zone);
+}
+.content-section h2{
+  font-size:clamp(1.8rem,2vw + 1rem,2.65rem);
+  line-height:1.16;
+}
+.content-section p,
+.content-section li{
+  font-size:clamp(1.08rem,.55vw + .98rem,1.22rem);
+  line-height:1.68;
+}
+.content-section h3,.content-section h4{
+  font-size:clamp(1.2rem,.55vw + 1rem,1.45rem);
+}
+.section-number{font-size:1rem!important}
+
+/* Cartes de faits : blanches, aérées, sans effet carré lourd. */
+.fact-grid{gap:1.15rem;margin:clamp(1.5rem,3vw,2.4rem) 0}
+.fact-card{
+  min-height:100%;
+  background:#fff;
+  border:1px solid rgba(6,156,156,.3);
+  border-radius:16px;
+  padding:clamp(1.45rem,2.2vw,2.2rem);
+  box-shadow:0 8px 24px rgba(18,6,114,.07);
+}
+.fact-card strong{font-size:clamp(1.35rem,1vw + 1rem,1.7rem)}
+.fact-card p{font-size:1.08rem;line-height:1.58}
+.fact-kicker{font-size:.82rem}
+
+/* Sommaire : panneau blanc discret plutôt qu’un grand carré bleu. */
+.toc{
+  background:#fff;
+  border:1px solid rgba(6,156,156,.3);
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(18,6,114,.06);
+  padding:clamp(1.45rem,2.4vw,2.15rem);
+  margin:clamp(1.5rem,3vw,2.4rem) 0;
+}
+.toc-accent{box-shadow:inset 4px 0 0 var(--teal),0 8px 24px rgba(18,6,114,.06)}
+.toc > strong{font-size:1.25rem;padding-bottom:.9rem}
+.toc a{font-size:1.08rem;padding:.52rem 0}
+
+/* Les encadrés explicatifs suivent le même langage blanc/vert. */
+.callout{
+  background:#fff;
+  border:1px solid rgba(6,156,156,.3);
+  border-left:4px solid var(--teal);
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(18,6,114,.05);
+  padding:clamp(1.35rem,2.3vw,2rem);
+  font-size:1.08rem;
+}
+.callout.official{background:#fff;border-color:rgba(6,156,156,.3);box-shadow:inset 4px 0 0 var(--teal),0 6px 18px rgba(18,6,114,.05)}
+.callout.correction{
+  background:var(--teal-pale);
+  border-color:rgba(6,156,156,.3);
+  border-left-color:var(--teal);
+  color:var(--navy);
+}
+.callout.warning{
+  background:var(--warning-bg);
+  border-color:#e4c77b;
+  border-left-color:#d48b16;
+}
+
+/* Sources : vert pâle, au lieu de blocs bleu clair. */
+.sources-panel{
+  background:var(--teal-pale);
+  padding-top:clamp(2rem,4vw,3.5rem);
+  padding-bottom:clamp(2rem,4vw,3.5rem);
+}
+.source-list li{font-size:1.08rem}
+.source-chip{font-size:.84rem;padding:.24rem .62rem}
+
+/* Bannière Montérégie-Est commune, large et alignée sur le cadre du site. */
+.zone-action.carte-est{
+  background:var(--teal-zone);
+  padding-top:clamp(2rem,4vw,3.6rem);
+  padding-bottom:clamp(2.2rem,4vw,4rem);
+}
+.zone-action.carte-est .banniere{
+  width:100%;
+  max-width:none;
+}
+.zone-action.carte-est .banniere img{
+  width:100%;
+  height:auto;
+}
+
+/* À 320 px, on conserve une lecture simple et aucune ligne ne déborde. */
+@media(max-width:680px){
+  .hero-guide h1{font-size:clamp(2rem,8.5vw,2.8rem)}
+  .hero-guide .lead{font-size:1.12rem}
+  .content-section p,.content-section li{font-size:1.08rem}
+  .toc a{font-size:1.04rem}
+  .fact-grid{gap:.85rem}
+}
