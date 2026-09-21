@@ -3677,6 +3677,11 @@ ${urls}
 /* ------------------------------------------------------------------------------------------- */
 
 function ecrire(relatif, contenu) {
+  if (relatif.endsWith('.html')) {
+    // Une page neuve doit charger la même version du CSS et de la recherche,
+    // même si le navigateur conserve les fichiers de la publication précédente.
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=88-interface"');
+  }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });
   fs.writeFileSync(cible, contenu, 'utf8');
