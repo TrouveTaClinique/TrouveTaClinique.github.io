@@ -1,98 +1,322 @@
 [
   {
-    "title": "Guides et normes de l’INESSS",
+    "title": "Bronchite aiguë",
     "org": "INESSS",
-    "cat": "Guides cliniques",
-    "tags": "INESSS Québec recommandations guides normes médecine familiale",
-    "url": "https://www.inesss.qc.ca/publications.html",
-    "desc": "Guides, avis et outils d’aide à la décision produits ou évalués par l’Institut national d’excellence en santé et en services sociaux."
+    "cat": "Infections (INESSS)",
+    "tags": "toux respiratoire bronchite infection antibiotique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_BronchiteAigue_EN-WEB.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la bronchite aiguë."
   },
   {
-    "title": "Algorithmes et outils cliniques de l’INESSS",
+    "title": "Pneumonie chez l’enfant",
     "org": "INESSS",
-    "cat": "Algorithmes",
-    "tags": "algorithme arbre décisionnel inesss première ligne",
-    "url": "https://www.inesss.qc.ca/publications.html",
-    "desc": "Point d’entrée vers les algorithmes, outils et documents pratiques destinés aux professionnels de la santé."
+    "cat": "Infections (INESSS)",
+    "tags": "pédiatrie respiratoire pneumonie enfant infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Pneumo_Enfant_EN_WEB.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la pneumonie pédiatrique."
   },
   {
-    "title": "PEER Simplified Clinical Practice Guidelines",
-    "org": "PEER",
-    "cat": "Guides cliniques",
-    "tags": "PEER evidence based simplified guidelines médecine familiale soins primaires",
-    "url": "https://familymedicine.utoronto.ca/peer-simplified-guidelines",
-    "desc": "Guides de pratique clinique synthétiques fondés sur les données probantes pour les soins de première ligne."
+    "title": "Pneumonie chez l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "respiratoire pneumonie adulte infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Pneumo_Adulte_EN_Web.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la pneumonie chez l’adulte."
   },
   {
-    "title": "Choosing Wisely Canada — Recommandations",
-    "org": "Choisir avec soin",
-    "cat": "Pertinence clinique",
-    "tags": "choisir avec soin pertinence surdiagnostic surtraitement recommandations",
-    "url": "https://choosingwiselycanada.org/recommendations/",
-    "desc": "Recommandations de sociétés médicales pour réduire les examens et traitements inutiles."
+    "title": "Otite chez l’enfant",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "pédiatrie ORL otite oreille infection enfant",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Otite_Enfant_EN_WEB-VF.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur l’otite de l’enfant."
   },
   {
-    "title": "Choisir avec soin — Médecine familiale",
-    "org": "Choisir avec soin",
-    "cat": "Médecine familiale",
-    "tags": "choosing wisely médecine familiale première ligne tests examens",
-    "url": "https://choosingwiselycanada.org/recommendations/family-medicine/",
-    "desc": "Recommandations ciblées pour la pratique de la médecine familiale."
+    "title": "Pharyngite / amygdalite",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "gorge ORL pharyngite amygdalite streptocoque infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Pharyngite-Amygdalite_EN_WEB.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la pharyngite et l’amygdalite."
   },
   {
-    "title": "Publications et guides du Collège des médecins du Québec",
-    "org": "CMQ",
-    "cat": "Cadre professionnel",
-    "tags": "CMQ collège médecins guides normes obligations déontologie",
-    "url": "https://www.cmq.org/fr/publications",
-    "desc": "Guides, normes et documents de référence du Collège des médecins du Québec."
+    "title": "Rhinosinusite chez l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "sinus ORL rhinosinusite adulte infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Rhinosinusite_Adulte_EN_WEB.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la rhinosinusite chez l’adulte."
   },
   {
-    "title": "Guides de pratique et conseils de santé — Québec.ca",
-    "org": "Gouvernement du Québec",
-    "cat": "Guides cliniques",
-    "tags": "Québec guides santé protocole pratique clinique",
-    "url": "https://www.quebec.ca/sante/conseils-et-prevention",
-    "desc": "Portail gouvernemental regroupant des conseils, ressources et informations officielles en santé."
+    "title": "Rhinosinusite chez l’enfant",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "pédiatrie sinus ORL rhinosinusite enfant infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Rhinosinusite_Enfant_EN_WEB.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la rhinosinusite pédiatrique."
   },
   {
-    "title": "Guides et outils de la santé publique du Québec",
+    "title": "Cellulite chez l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "peau dermato infection cutanée cellulite adulte",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/cellulitis_adults.pdf",
+    "desc": "Guide d’usage optimal sur la cellulite chez l’adulte."
+  },
+  {
+    "title": "Cellulite chez l’enfant",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "pédiatrie peau dermato cellulite enfant infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/Cellulitis_children.pdf",
+    "desc": "Guide d’usage optimal sur la cellulite chez l’enfant."
+  },
+  {
+    "title": "C. difficile",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "diarrhée gastro colite infection C difficile",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Traitement/Guide_Cdifficile-EN.pdf",
+    "desc": "Guide de traitement de l’infection à C. difficile."
+  },
+  {
+    "title": "H. pylori",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "gastro ulcère estomac Helicobacter pylori infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/GUO_H_Pylori_INESSS.pdf",
+    "desc": "Guide d’usage optimal pour le dépistage et le traitement de H. pylori."
+  },
+  {
+    "title": "Infections intra-abdominales",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "abdomen chirurgie infection antibiothérapie intra-abdominale",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/GUO_IIA_Anglais_vf.pdf",
+    "desc": "Guide d’usage optimal sur les infections intra-abdominales."
+  },
+  {
+    "title": "Approche syndromique",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS approche syndromique infection sexuellement transmissible",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS_Approche_syndromique_Anglais.pdf",
+    "desc": "Guide d’approche syndromique des ITSS."
+  },
+  {
+    "title": "Chlamydia et gonorrhée",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS chlamydia gonorrhée dépistage traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS_Chlamydia-Gonorrhoeae_2024_Anglais.pdf",
+    "desc": "Guide de prise en charge de la chlamydia et de la gonorrhée."
+  },
+  {
+    "title": "Condylomes",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS VPH HPV condylomes verrues",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/condylomes_GUIDE_ITSS_EN.pdf",
+    "desc": "Guide de prise en charge des condylomes."
+  },
+  {
+    "title": "Herpès génital",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS HSV herpès génital infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Genital_Herpes_GUO_INESSS_EN.pdf",
+    "desc": "Guide d’usage optimal sur l’herpès génital."
+  },
+  {
+    "title": "Trichomonas",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS trichomonas vaginite infection",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_ITSS_Trichomonas_vaginalis_INESSS_Anglais.pdf",
+    "desc": "Guide de prise en charge de la trichomonase."
+  },
+  {
+    "title": "Mycoplasma genitalium",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS mycoplasma genitalium infection urétrite",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_ITSS_Mycoplasma_genitalium_Anglais.pdf",
+    "desc": "Guide de prise en charge de Mycoplasma genitalium."
+  },
+  {
+    "title": "Syphilis – Guide d’usage optimal",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS syphilis infection traitement dépistage",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/ITSS_Syphilis_WEB_EN.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la syphilis."
+  },
+  {
+    "title": "Syphilis – Outil de stadification et prise en charge (formulaire)",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "ITSS syphilis outil numérique stadification formulaire traitement",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/its-ss/outils-daide-a-la-stadification-et-prise-en-charge-de-la-syphilis.html",
+    "desc": "Outil de stadification et de prise en charge de la syphilis."
+  },
+  {
+    "title": "Guide d’usage optimal – Lyme (adulte)",
+    "org": "INESSS",
+    "cat": "Lyme",
+    "tags": "Lyme adulte tique infection diagnostic traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Guide_Lyme-adults_web_EN.pdf",
+    "desc": "Guide d’usage optimal sur la maladie de Lyme chez l’adulte."
+  },
+  {
+    "title": "Aide au diagnostic – Lyme",
+    "org": "INESSS",
+    "cat": "Lyme",
+    "tags": "Lyme tique diagnostic infection aide diagnostic",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Outil_diagnostic_EN.pdf",
+    "desc": "Outil d’aide au diagnostic de la maladie de Lyme."
+  },
+  {
+    "title": "Carte INSPQ – zones endémiques Lyme",
     "org": "INSPQ",
-    "cat": "Prévention et santé publique",
-    "tags": "INSPQ santé publique prévention dépistage vaccination guide",
-    "url": "https://www.inspq.qc.ca/publications",
-    "desc": "Publications, avis scientifiques et outils de prévention de l’Institut national de santé publique du Québec."
+    "cat": "Lyme",
+    "tags": "Lyme tique zones endémiques carte épidémiologie",
+    "url": "https://www.inspq.qc.ca/sites/default/files/2025-06/Carte_pdf_Lyme_INSPQ_MAJjuin2025_vf_20250610.pdf",
+    "desc": "Carte des zones endémiques de Lyme au Québec."
   },
   {
-    "title": "Guide canadien d’immunisation",
-    "org": "Agence de la santé publique du Canada",
-    "cat": "Prévention et vaccination",
-    "tags": "immunisation vaccination calendrier vaccin guide canadien",
-    "url": "https://www.canada.ca/fr/sante-publique/services/publications/vie-saine/guide-canadien-immunisation.html",
-    "desc": "Référence canadienne pour la vaccination et l’immunisation."
+    "title": "Fibrillation auriculaire (INESSS – warfarine)",
+    "org": "INESSS",
+    "cat": "Cardiologie",
+    "tags": "FA fibrillation auriculaire anticoagulation warfarine cardiologie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Guide_Fibrillation_web_EN.pdf",
+    "desc": "Guide sur la fibrillation auriculaire et l’anticoagulation par warfarine."
   },
   {
-    "title": "Guide alimentaire canadien",
-    "org": "Gouvernement du Canada",
-    "cat": "Prévention",
-    "tags": "nutrition alimentation prévention guide alimentaire",
-    "url": "https://guide-alimentaire.canada.ca/fr/",
-    "desc": "Ressource officielle pour conseiller les patients sur l’alimentation et les habitudes de vie."
+    "title": "Fibrillation auriculaire – CCS guidelines",
+    "org": "Société canadienne de cardiologie",
+    "cat": "Cardiologie",
+    "tags": "FA fibrillation auriculaire cardiologie CCS guidelines anticoagulation",
+    "url": "https://www.onlinecjc.ca/article/S0828-282X(20)30991-0/fulltext",
+    "desc": "Recommandations de la Société canadienne de cardiologie sur la fibrillation auriculaire."
   },
   {
-    "title": "Guidelines and protocols — Canadian Task Force",
-    "org": "Groupe d’étude canadien",
-    "cat": "Dépistage",
-    "tags": "dépistage prévention cancer recommandation canadien",
-    "url": "https://canadiantaskforce.ca/guidelines/",
-    "desc": "Recommandations canadiennes fondées sur les données probantes pour la prévention et le dépistage."
+    "title": "Insuffisance cardiaque – CCS",
+    "org": "Société canadienne de cardiologie",
+    "cat": "Cardiologie",
+    "tags": "insuffisance cardiaque cardiologie IC CCS guidelines",
+    "url": "https://onlinecjc.ca/article/S0828-282X(25)00640-3/fulltext",
+    "desc": "Recommandations de la Société canadienne de cardiologie sur l’insuffisance cardiaque."
   },
   {
-    "title": "Guides de pratique clinique de la Société canadienne de pédiatrie",
-    "org": "Société canadienne de pédiatrie",
-    "cat": "Pédiatrie",
-    "tags": "pédiatrie enfant nourrisson adolescent guide pratique",
-    "url": "https://cps.ca/fr/documents/position",
-    "desc": "Énoncés et ressources cliniques de référence en pédiatrie."
+    "title": "Thromboembolie veineuse",
+    "org": "INESSS",
+    "cat": "Cardiologie",
+    "tags": "TVP EP thromboembolie veineuse anticoagulation cardiologie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Guide_Thromboembolie_web_EN.pdf",
+    "desc": "Guide sur la thromboembolie veineuse et l’anticoagulation."
+  },
+  {
+    "title": "EAMPOC – Exacerbation aiguë de MPOC",
+    "org": "INESSS",
+    "cat": "Respiratoire",
+    "tags": "MPOC EAMPOC exacerbation aiguë respiratoire traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_EAMPOC-EN.pdf",
+    "desc": "Guide sur l’exacerbation aiguë de la MPOC."
+  },
+  {
+    "title": "MPOC – Guide d’usage optimal",
+    "org": "INESSS",
+    "cat": "Respiratoire",
+    "tags": "MPOC respiratoire guide usage optimal traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_MPOC_GUO_FR.pdf",
+    "desc": "Guide d’usage optimal sur la MPOC."
+  },
+  {
+    "title": "Blépharite",
+    "org": "INESSS",
+    "cat": "Ophtalmologie",
+    "tags": "œil paupière blépharite ophtalmologie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Blepharites/Guide_Blepharite_web_EN_VF.pdf",
+    "desc": "Guide d’usage optimal sur la blépharite."
+  },
+  {
+    "title": "Calculatrice CVD (decisionaid.ca)",
+    "org": "decisionaid.ca",
+    "cat": "Lipides",
+    "tags": "risque cardiovasculaire cholestérol lipides calculatrice CVD",
+    "url": "https://decisionaid.ca/cvd/",
+    "desc": "Calculatrice du risque cardiovasculaire."
+  },
+  {
+    "title": "Guideline PEER – lipides",
+    "org": "PEER",
+    "cat": "Lipides",
+    "tags": "lipides cholestérol prévention cardiovasculaire PEER EBM",
+    "url": "https://www.cfp.ca/content/cfp/69/10/675.full.pdf",
+    "desc": "Recommandation PEER sur la prise en charge des lipides."
+  },
+  {
+    "title": "Insomnie – Choisir avec soin (FR)",
+    "org": "Choisir avec soin",
+    "cat": "Insomnie",
+    "tags": "insomnie sommeil hypnotique benzodiazépine Choisir avec soin",
+    "url": "https://choisiravecsoinquebec.ca/wp-content/uploads/2024/03/Insomnie_FR_-FINAL.pdf",
+    "desc": "Guide de Choisir avec soin sur l’évaluation et le traitement de l’insomnie."
+  },
+  {
+    "title": "Insomnia – Choosing Wisely (EN)",
+    "org": "Choosing Wisely",
+    "cat": "Insomnie",
+    "tags": "insomnia sleep hypnotics Choosing Wisely",
+    "url": "https://choisiravecsoinquebec.ca/wp-content/uploads/2024/03/Insomnia_EN_FINAL.pdf",
+    "desc": "Version anglaise du guide sur l’insomnie."
+  },
+  {
+    "title": "PEER – Simplified guidelines (douleur)",
+    "org": "PEER",
+    "cat": "Douleur",
+    "tags": "douleur douleur chronique PEER simplified guidelines EBM",
+    "url": "https://peerevidence.ca/simplified-guidelines/",
+    "desc": "Guides PEER simplifiés fondés sur les données probantes pour la douleur."
+  },
+  {
+    "title": "PEER Pain Calculator",
+    "org": "PEER",
+    "cat": "Douleur",
+    "tags": "douleur calculatrice outil PEER pain",
+    "url": "https://pain-calculator.com/",
+    "desc": "Calculatrice PEER d’aide à la prise en charge de la douleur."
+  },
+  {
+    "title": "Guide de dermatologie en première ligne (Sherbrooke)",
+    "org": "Santé Estrie",
+    "cat": "Dermatologie",
+    "tags": "peau dermatologie algorithme première ligne Sherbrooke",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Dermatologie/Algorithmes_traitements_approche_premie%CC%80re_ligne_dermatologique2019.pdf",
+    "desc": "Algorithmes de traitement en dermatologie pour la première ligne."
+  },
+  {
+    "title": "Urgences pédiatriques et guides en pédiatrie de l’urgence (CHU Sainte-Justine)",
+    "org": "CHU Sainte-Justine",
+    "cat": "Urgence",
+    "tags": "pédiatrie urgence protocoles Sainte-Justine enfant",
+    "url": "https://www.urgencehsj.ca/protocoles/",
+    "desc": "Protocoles et guides de l’urgence du CHU Sainte-Justine."
+  },
+  {
+    "title": "Canadian Emergency Medicine Handbook (2025)",
+    "org": "CAEP",
+    "cat": "Urgence",
+    "tags": "urgence emergency handbook médecine d’urgence CAEP Canada",
+    "url": "https://www.canemhandbook.ca/canadian-em-handbook-2025.pdf",
+    "desc": "Manuel canadien de médecine d’urgence 2025."
+  },
+  {
+    "title": "Tools For Practice (CFPC)",
+    "org": "Collège des médecins de famille du Canada",
+    "cat": "Ressources générales",
+    "tags": "EBM evidence médecine familiale outils pratique CFPC",
+    "url": "https://cfpclearn.ca/tools-for-practice-library/",
+    "desc": "Bibliothèque d’outils de pratique fondés sur les données probantes."
   }
 ]
