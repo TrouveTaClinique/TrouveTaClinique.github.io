@@ -4312,9 +4312,7 @@ function main() {
      /monteregie/ au cours de la même génération : la bascule reste atomique. `toutes` (pas
      `cliniques`) parce que le compte inclut aussi la couche Établissements. */
   const accueil = pageAccueil(toutes, majDonnees);
-  // Conserver l'accès discret au catalogue à chaque reconstruction de l'accueil.
-  const lienGuides = '<p class="guide-footer-link" style="margin:.7rem 0 0;font-size:.78rem;opacity:.72"><a href="/guides/">Guides et ressources cliniques</a></p>\n';
-  ecrire('index.html', accueil.html.replace('</footer>', lienGuides + '</footer>'));
+  ecrire('index.html', accueil.html);
 
   // Réutilise le header/footer fraîchement généré, sans entrée dans la navigation.
   require('./generer-guides-cliniques.cjs').genererGuidesCliniques(RACINE);
