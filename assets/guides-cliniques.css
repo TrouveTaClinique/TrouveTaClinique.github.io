@@ -1,0 +1,44 @@
+/* Compléments du catalogue. Le header, le footer, la palette et le cadre
+   proviennent exclusivement de seo-pages.css, comme sur les autres pages. */
+.guides-page .guides-main{padding:0}
+.guides-band{padding:clamp(2.1rem,4vw,4rem) var(--gutter);background:#fff}
+.guides-band--green{background:var(--teal-zone)}
+.guides-intro{padding-top:clamp(2rem,4vw,3.8rem);padding-bottom:clamp(2.2rem,5vw,4.6rem)}
+.guides-intro .eyebrow{font-size:.86rem;letter-spacing:.1em}
+.guides-intro h1{font-size:clamp(2.2rem,4.2vw,4rem);line-height:1.1;max-width:none}
+.guides-intro .lead{font-size:clamp(1.15rem,1vw + .9rem,1.4rem);line-height:1.58;max-width:74ch;margin:0}
+.guides-band h2{font-size:clamp(1.8rem,2vw + 1rem,2.65rem);line-height:1.16;margin:0 0 1.2rem;font-weight:700}
+.guides-search-form.search-page-form{max-width:none;gap:.8rem;margin:1.45rem 0 0}
+.guides-search-form.search-page-form input[type="search"]{flex-basis:15rem;min-height:60px;border-color:rgba(6,156,156,.4);font-size:1.12rem;padding-inline:1.4rem}
+.guides-search-form.search-page-form button[type="submit"]{min-height:60px;padding-inline:2rem;font-size:1.08rem}
+.guides-search-hint{font-size:.95rem;margin:.65rem 0 1.75rem;color:var(--navy);opacity:.8}
+.guides-filter-area h3{font-size:1.08rem;margin:0 0 .8rem}
+.guides-filters{display:flex;flex-wrap:wrap;gap:.55rem}
+.guides-filter{padding:.6rem 1rem;min-height:44px;border:1px solid rgba(18,6,114,.22);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;text-align:left}
+.guides-filter[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.guides-filter:hover{border-color:var(--navy)}
+.guides-status{margin:1.25rem 0 0;font-size:.96rem;font-weight:600}
+.guides-category-heading{display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap;margin:0 0 1rem;padding-bottom:1rem;border-bottom:2px solid var(--navy)}
+.guides-category-heading h2{margin:0}
+.guides-resource-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(1.8rem,4vw,4rem)}
+.guides-resource{min-width:0;border-bottom:1px solid rgba(18,6,114,.18)}
+.guides-resource-link{position:relative;display:block;height:100%;padding:1.25rem 2.2rem 1.4rem .15rem;text-decoration:none;border-radius:4px}
+.guides-resource-source{display:block;font-size:.9rem;font-weight:650;color:var(--navy);opacity:.75;margin-bottom:.4rem}
+.guides-resource h3{font-size:clamp(1.16rem,.5vw + 1rem,1.38rem);line-height:1.35;margin:0 0 .6rem;text-wrap:pretty}
+.guides-keywords{display:block;font-size:.94rem;line-height:1.6;color:var(--navy);opacity:.7}
+.guides-resource-arrow{position:absolute;right:.25rem;top:1.2rem;font-size:1.5rem;color:var(--teal);line-height:1}
+.guides-resource-link:hover h3{text-decoration:underline;text-underline-offset:4px}
+.guides-resource-link:hover{background:var(--teal-pale)}
+.guides-band--green .guides-resource-link:hover{background:rgba(255,255,255,.55)}
+.guides-reset{border:0;font:inherit;font-weight:650;cursor:pointer}
+.guides-page :is(.guides-filter,.guides-resource-link,.guides-reset):focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+.guides-page [hidden]{display:none!important}
+.guides-page .pied-site{margin-top:0}
+@media(max-width:680px){
+  .guides-intro h1{font-size:clamp(2rem,8.5vw,2.8rem)}
+  .guides-intro .lead{font-size:1.12rem}
+  .guides-resource-list{grid-template-columns:minmax(0,1fr)}
+  .guides-search-form.search-page-form input[type="search"]{flex-basis:100%;min-height:52px}
+  .guides-search-form.search-page-form button[type="submit"]{min-height:48px;width:100%}
+  .guides-filter{font-size:.88rem;padding:.55rem .85rem;max-width:100%}
+}

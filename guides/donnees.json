@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Guides et normes de l’INESSS",
+    "org": "INESSS",
+    "cat": "Guides cliniques",
+    "tags": "INESSS Québec recommandations guides normes médecine familiale",
+    "url": "https://www.inesss.qc.ca/publications.html",
+    "desc": "Guides, avis et outils d’aide à la décision produits ou évalués par l’Institut national d’excellence en santé et en services sociaux."
+  },
+  {
+    "title": "Algorithmes et outils cliniques de l’INESSS",
+    "org": "INESSS",
+    "cat": "Algorithmes",
+    "tags": "algorithme arbre décisionnel inesss première ligne",
+    "url": "https://www.inesss.qc.ca/publications.html",
+    "desc": "Point d’entrée vers les algorithmes, outils et documents pratiques destinés aux professionnels de la santé."
+  },
+  {
+    "title": "PEER Simplified Clinical Practice Guidelines",
+    "org": "PEER",
+    "cat": "Guides cliniques",
+    "tags": "PEER evidence based simplified guidelines médecine familiale soins primaires",
+    "url": "https://familymedicine.utoronto.ca/peer-simplified-guidelines",
+    "desc": "Guides de pratique clinique synthétiques fondés sur les données probantes pour les soins de première ligne."
+  },
+  {
+    "title": "Choosing Wisely Canada — Recommandations",
+    "org": "Choisir avec soin",
+    "cat": "Pertinence clinique",
+    "tags": "choisir avec soin pertinence surdiagnostic surtraitement recommandations",
+    "url": "https://choosingwiselycanada.org/recommendations/",
+    "desc": "Recommandations de sociétés médicales pour réduire les examens et traitements inutiles."
+  },
+  {
+    "title": "Choisir avec soin — Médecine familiale",
+    "org": "Choisir avec soin",
+    "cat": "Médecine familiale",
+    "tags": "choosing wisely médecine familiale première ligne tests examens",
+    "url": "https://choosingwiselycanada.org/recommendations/family-medicine/",
+    "desc": "Recommandations ciblées pour la pratique de la médecine familiale."
+  },
+  {
+    "title": "Publications et guides du Collège des médecins du Québec",
+    "org": "CMQ",
+    "cat": "Cadre professionnel",
+    "tags": "CMQ collège médecins guides normes obligations déontologie",
+    "url": "https://www.cmq.org/fr/publications",
+    "desc": "Guides, normes et documents de référence du Collège des médecins du Québec."
+  },
+  {
+    "title": "Guides de pratique et conseils de santé — Québec.ca",
+    "org": "Gouvernement du Québec",
+    "cat": "Guides cliniques",
+    "tags": "Québec guides santé protocole pratique clinique",
+    "url": "https://www.quebec.ca/sante/conseils-et-prevention",
+    "desc": "Portail gouvernemental regroupant des conseils, ressources et informations officielles en santé."
+  },
+  {
+    "title": "Guides et outils de la santé publique du Québec",
+    "org": "INSPQ",
+    "cat": "Prévention et santé publique",
+    "tags": "INSPQ santé publique prévention dépistage vaccination guide",
+    "url": "https://www.inspq.qc.ca/publications",
+    "desc": "Publications, avis scientifiques et outils de prévention de l’Institut national de santé publique du Québec."
+  },
+  {
+    "title": "Guide canadien d’immunisation",
+    "org": "Agence de la santé publique du Canada",
+    "cat": "Prévention et vaccination",
+    "tags": "immunisation vaccination calendrier vaccin guide canadien",
+    "url": "https://www.canada.ca/fr/sante-publique/services/publications/vie-saine/guide-canadien-immunisation.html",
+    "desc": "Référence canadienne pour la vaccination et l’immunisation."
+  },
+  {
+    "title": "Guide alimentaire canadien",
+    "org": "Gouvernement du Canada",
+    "cat": "Prévention",
+    "tags": "nutrition alimentation prévention guide alimentaire",
+    "url": "https://guide-alimentaire.canada.ca/fr/",
+    "desc": "Ressource officielle pour conseiller les patients sur l’alimentation et les habitudes de vie."
+  },
+  {
+    "title": "Guidelines and protocols — Canadian Task Force",
+    "org": "Groupe d’étude canadien",
+    "cat": "Dépistage",
+    "tags": "dépistage prévention cancer recommandation canadien",
+    "url": "https://canadiantaskforce.ca/guidelines/",
+    "desc": "Recommandations canadiennes fondées sur les données probantes pour la prévention et le dépistage."
+  },
+  {
+    "title": "Guides de pratique clinique de la Société canadienne de pédiatrie",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "pédiatrie enfant nourrisson adolescent guide pratique",
+    "url": "https://cps.ca/fr/documents/position",
+    "desc": "Énoncés et ressources cliniques de référence en pédiatrie."
+  }
+]
