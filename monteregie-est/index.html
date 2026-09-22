@@ -428,6 +428,24 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
    au-dessus du tiroir (950) et de la fiche (960) — on les repasse dessous. */
 .leaflet-top, .leaflet-bottom { z-index: 800; }
 body.fiche-open .leaflet-control-attribution { display: none; }
+/* Bloc de crédits unique, variation B (22 sept. 2026). Fond blanc aussi en mode sombre. */
+.leaflet-container .leaflet-control-attribution.credits-carte,
+:root[data-theme="sombre"] .leaflet-control-attribution.credits-carte {
+  margin: 0 6px 6px 0; padding: 6px 10px 6px 12px; text-align: left;
+  background: #fff !important; color: #4a5670 !important;
+  border-left: 4px solid #08A0A0; border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(23,10,114,.18);
+  font: 400 10.5px/1.45 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif; }
+.credits-carte .credits-l1 { display: block; font-weight: 600; font-size: 11px; color: #170A72; }
+.credits-carte .credits-l2 { display: block; }
+.leaflet-control-attribution.credits-carte a,
+:root[data-theme="sombre"] .leaflet-control-attribution.credits-carte a { color: #0065A9 !important; }
+/* Carte étroite : on remonte la légende RLS pour qu'elle ne touche pas le bloc. */
+@media (max-width: 520px), (min-width: 861px) and (max-width: 1000px) {
+  .leaflet-container .leaflet-control-attribution.credits-carte { font-size: 10px; }
+  .credits-carte .credits-l1 { font-size: 10.5px; }
+  .rls-legend { margin-bottom: 72px !important; }
+}
 
 .rls-dot { display:inline-block; width:9px; height:9px; border-radius:50%;
   margin-right:6px; vertical-align:middle; flex-shrink:0; }
@@ -2046,6 +2064,15 @@ const rankOf = id => currentOrder().indexOf(id) + 1;
 const HOME = { center:[45.45,-73.15], zoom:9 };
 const map = L.map('map', { center:HOME.center, zoom:HOME.zoom, zoomControl:false });
 L.control.zoom({ position:'topright' }).addTo(map);
+/* Crédits (22 sept. 2026) : un seul bloc, dans cet ordre —
+   Santé Québec, réalisation du projet, puis Leaflet | OpenStreetMap | CartoDB. */
+if (map.attributionControl) {
+  map.attributionControl.getContainer().classList.add('credits-carte');
+  map.attributionControl.setPrefix(
+    '<span class="credits-l1">© Santé Québec – CISSS de la Montérégie-Est</span>'
+    + '<span class="credits-l2">Projet réalisé par Olivier Laplante et Nancy Langlois</span>'
+    + (map.attributionControl.options.prefix || ''));
+}
 
 /* Découpage et couleurs Santé Québec des trois RLS. */
 const COULEURS_RLS_EST_SQ = {
@@ -2154,7 +2181,7 @@ map.on('locationerror', function () {
   // Le fond raster avec clé (mis en place plus tôt le même jour, voir gabarit /rastertiles/ de
   // docs.carto.com/faqs/carto-basemaps) ne sert plus que de solution de secours pour les
   // navigateurs sans WebGL.
-  var ATTR = '© OpenStreetMap © CartoDB<span class="credit-perso"> | © Olivier Laplante</span>';
+  var ATTR = '© OpenStreetMap © CartoDB';
   // Clé API CARTO (exigée depuis le 27 août 2026). Même clé pour les
   // styles vectoriels et pour le repli raster.
   var CARTO_KEY = 'cb1_29ok_1_b602e4a604176e32ebdf7824';
