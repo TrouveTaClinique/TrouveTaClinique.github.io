@@ -4316,7 +4316,7 @@ function main() {
 
   // Réutilise le header/footer fraîchement généré, sans entrée dans la navigation.
   require('./generer-guides-cliniques.cjs').genererGuidesCliniques(RACINE);
-  entrees.push({ loc: '/guides/', lastmod: '2026-09-21', changefreq: 'monthly', priority: '0.7' });
+  entrees.push({ loc: '/guides/', lastmod: '2026-09-24', changefreq: 'monthly', priority: '0.7' });
 
   ecrire('sitemap.xml', sitemap(entrees));
   ecrireLlmsTxt(majDonnees);

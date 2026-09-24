@@ -318,5 +318,617 @@
     "tags": "EBM evidence médecine familiale outils pratique CFPC",
     "url": "https://cfpclearn.ca/tools-for-practice-library/",
     "desc": "Bibliothèque d’outils de pratique fondés sur les données probantes."
+  },
+  {
+    "title": "Guide québécois de dépistage des infections transmissibles sexuellement et par le sang",
+    "org": "MSSS",
+    "cat": "ITSS",
+    "tags": "ITSS ITS MTS dépistage chlamydia gonorrhée syphilis VIH hépatite Québec",
+    "url": "https://publications.msss.gouv.qc.ca/msss/document-000090/",
+    "desc": "Guide de référence du MSSS sur l’intervention de dépistage des ITSS (mise à jour 2019).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "ITSS à rechercher selon les facteurs de risque décelés – Intervention préventive relative aux ITSS",
+    "org": "MSSS",
+    "cat": "ITSS",
+    "tags": "ITSS ITS facteurs de risque dépistage outil aide-mémoire",
+    "url": "https://publications.msss.gouv.qc.ca/msss/document-000098/",
+    "desc": "Outil du MSSS pour choisir les infections à rechercher selon les facteurs de risque.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide québécois de dépistage des ITSS – Supplément : dépistage du VIH à l’aide de trousses de dépistage rapide",
+    "org": "MSSS",
+    "cat": "ITSS",
+    "tags": "VIH HIV test rapide TDR trousse dépistage point de service",
+    "url": "https://publications.msss.gouv.qc.ca/msss/document-000092/",
+    "desc": "Normes de pratique du MSSS pour le dépistage du VIH par trousses rapides.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole d’immunisation du Québec (PIQ)",
+    "org": "MSSS",
+    "cat": "Vaccination",
+    "tags": "PIQ vaccin vaccination immunisation calendrier vaccinal Québec",
+    "url": "https://msss.gouv.qc.ca/professionnels/vaccination/protocole-d-immunisation-du-quebec-piq/",
+    "desc": "Norme de pratique professionnelle en vaccination au Québec, mise à jour en continu.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide québécois de dépistage des ITSS – Espace ITSS",
+    "org": "INSPQ",
+    "cat": "ITSS",
+    "tags": "ITSS ITS dépistage outils avis aux partenaires INSPQ",
+    "url": "https://www.inspq.qc.ca/espace-itss/guide-quebecois-de-depistage-des-itss",
+    "desc": "Page de l’INSPQ regroupant le guide québécois de dépistage et ses outils d’aide à la pratique.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Les ordonnances individuelles faites par un médecin – Guide d’exercice",
+    "org": "Collège des médecins du Québec",
+    "cat": "Pratique professionnelle",
+    "tags": "ordonnance prescription individuelle CMQ règlement",
+    "url": "https://cms.cmq.org/files/documents/Guides/p-1-2016-10-03-fr-ordonnances-individuelles-faites-par-un-medecin.pdf",
+    "desc": "Guide d’exercice du CMQ sur la rédaction des ordonnances individuelles (2016).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Les ordonnances collectives – Guide d’exercice",
+    "org": "Collège des médecins du Québec",
+    "cat": "Pratique professionnelle",
+    "tags": "ordonnance collective OC protocole médical national INESSS CMQ",
+    "url": "https://cms.cmq.org/files/documents/Guides/p-1-2017-05-01-fr-ordonnances-collectives.pdf",
+    "desc": "Guide d’exercice du CMQ sur les ordonnances collectives (2017).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outils et ressources pour les ordonnances",
+    "org": "Collège des médecins du Québec",
+    "cat": "Pratique professionnelle",
+    "tags": "ordonnance ajustement fiche outils CMQ",
+    "url": "https://www.cmq.org/fr/pratiquer-la-medecine/informations-clinique/ordonannces-outils--ressources",
+    "desc": "Fiches et outils du CMQ sur les types d’ordonnances.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Hypertension Canada Guidelines (EN)",
+    "org": "Hypertension Canada",
+    "cat": "Cardiologie",
+    "tags": "HTA hypertension tension artérielle pression lignes directrices",
+    "url": "https://hypertension.ca/guidelines/",
+    "desc": "Page officielle des lignes directrices 2025 d’Hypertension Canada.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Hypertension Canada guideline for the diagnosis and treatment of hypertension in adults in primary care (EN)",
+    "org": "Hypertension Canada",
+    "cat": "Cardiologie",
+    "tags": "HTA hypertension 130/80 MAPA MPAD bithérapie première ligne",
+    "url": "https://hypertension.ca/wp-content/uploads/2025/05/Hypertension-guideline.pdf",
+    "desc": "Ligne directrice 2025 d’Hypertension Canada pour la première ligne.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2025 Primary Care Guideline – Responses to Frequent Questions (EN)",
+    "org": "Hypertension Canada",
+    "cat": "Cardiologie",
+    "tags": "HTA hypertension FAQ questions fréquentes seuil 130/80",
+    "url": "https://hypertension.ca/wp-content/uploads/2025/05/2025-Primary-Care-Guideline-Responses-to-Frequent-Questions.pdf",
+    "desc": "Réponses d’Hypertension Canada aux questions fréquentes sur la ligne directrice 2025.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Pharmacologic Glycemic Management of Type 2 Diabetes in Adults: 2024 Update (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "diabète type 2 DT2 DB2 metformine iSGLT2 SGLT2 GLP-1 insuline",
+    "url": "https://www.diabetes.ca/chapter-13-2024-update",
+    "desc": "Chapitre 13 des lignes directrices de Diabète Canada, mise à jour 2024.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Pharmacologic Glycemic Management of Type 2 Diabetes in Adults: 2024 Update – The User’s Guide (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "diabète type 2 DT2 algorithme intensification guide utilisateur",
+    "url": "https://www.diabetes.ca/chapter-13-2024-user-guide",
+    "desc": "Guide de l’utilisateur du chapitre 13 de Diabète Canada (2024).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Screening for Diabetes in Adults (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "dépistage diabète HbA1c glycémie prédiabète",
+    "url": "https://www.diabetes.ca/chapter-4",
+    "desc": "Chapitre de Diabète Canada sur le dépistage du diabète chez l’adulte.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Hypoglycemia in Adults – 2023 Update (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "hypoglycémie glucagon insuline sulfonylurée",
+    "url": "https://www.diabetes.ca/chapter-14-2023-update",
+    "desc": "Chapitre de Diabète Canada sur l’hypoglycémie chez l’adulte (2023).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Chronic Kidney Disease in Diabetes – 2025 Update (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "IRC insuffisance rénale néphropathie RAC albuminurie DFGe",
+    "url": "https://www.diabetes.ca/chapter-29-2025-update",
+    "desc": "Chapitre de Diabète Canada sur la maladie rénale chronique et le diabète (2025).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Foot Care (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "pied diabétique neuropathie ulcère soins des pieds",
+    "url": "https://www.diabetes.ca/chapter-32",
+    "desc": "Chapitre de Diabète Canada sur les soins des pieds.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Diabetes and Pregnancy (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "diabète gestationnel grossesse HGPO obstétrique",
+    "url": "https://www.diabetes.ca/chapter-36",
+    "desc": "Chapitre de Diabète Canada sur le diabète et la grossesse.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Diabetes in Older People (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "diabète personnes âgées gériatrie cibles hypoglycémie",
+    "url": "https://www.diabetes.ca/chapter-37",
+    "desc": "Chapitre de Diabète Canada sur le diabète chez les personnes âgées.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Diabetes and Metabolic Dysfunction-associated Steatotic Liver Disease in Adults (EN)",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "MASLD stéatose foie gras NAFLD NASH hépatique",
+    "url": "https://www.diabetes.ca/chapter-42",
+    "desc": "Chapitre de Diabète Canada sur le diabète et la stéatose hépatique (2025).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Ressources françaises pour les professionnels",
+    "org": "Diabète Canada",
+    "cat": "Diabète",
+    "tags": "diabète ressources français outils professionnels",
+    "url": "https://www.diabetes.ca/for-professionals/francaises/ressources-francaises",
+    "desc": "Ressources de Diabète Canada offertes en français.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La prise en charge de l’otite moyenne aiguë chez les enfants de six mois et plus",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "OMA otite oreille amoxicilline enfant pédiatrie infection",
+    "url": "https://cps.ca/fr/documents/position/otite-moyenne-aigue",
+    "desc": "Document de principes de la SCP sur l’otite moyenne aiguë.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "L’optimisation de la prise en charge des infections urinaires chez les enfants : l’importance d’une meilleure antibiogouvernance",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "IU IVU infection urinaire pyélonéphrite antibiotique enfant",
+    "url": "https://cps.ca/fr/documents/position/prise-en-charge-des-infections-urinaires",
+    "desc": "Document de principes de la SCP sur les infections urinaires de l’enfant (2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La prise en charge des infections bactériennes de la peau et des tissus mous d’origine communautaire et la prévention des récurrences chez les enfants",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "cellulite abcès impétigo SARM peau infection enfant",
+    "url": "https://cps.ca/fr/documents/position/infections-de-la-peau-et-des-tissus-mous",
+    "desc": "Document de principes de la SCP sur les infections de la peau et des tissus mous (2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La prise en charge des brefs incidents résolus inexpliqués chez les nourrissons",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "BRUE ALTE nourrisson apnée malaise",
+    "url": "https://cps.ca/fr/documents/position/brefs-incidents-resolus-inexpliques-chez-les-nourrissons",
+    "desc": "Point de pratique de la SCP sur les BRUE chez le nourrisson (2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Le Clostridioides difficile pendant l’enfance",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "C. difficile Clostridium diarrhée colite enfant",
+    "url": "https://cps.ca/fr/documents/position/clostridium-difficile-dans-les-populations-pediatrique",
+    "desc": "Document de principes de la SCP sur le C. difficile chez l’enfant (2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Les recommandations relatives aux vaccins antigrippaux administrés aux enfants et aux adolescents pour la saison 2026-2027",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Vaccination",
+    "tags": "influenza grippe vaccin antigrippal enfant adolescent",
+    "url": "https://cps.ca/fr/documents/position/vaccins-antigrippaux-enfants",
+    "desc": "Recommandations saisonnières de la SCP sur la vaccination antigrippale.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "L’évaluation des enfants et des adolescents ayant un retard global du développement et un trouble du développement intellectuel",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "RGD TDI retard développement déficience intellectuelle",
+    "url": "https://cps.ca/fr/documents/position/evaluation-RGD-TDI",
+    "desc": "Document de principes de la SCP sur l’évaluation du RGD et du TDI (2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Documents de principes et points de pratique – Recherche par sujet",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "SCP index asthme TDAH commotion pédiatrie",
+    "url": "https://cps.ca/fr/documents/recherche-par-sujet",
+    "desc": "Index des documents de principes de la SCP par sujet.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Soins de nos enfants",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "parents fiches patients information enfant",
+    "url": "https://soinsdenosenfants.cps.ca",
+    "desc": "Information de la SCP destinée aux parents.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Clinical Guides (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "thrombose TVP EP AOD anticoagulant guides cliniques",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides",
+    "desc": "Index des guides cliniques de Thrombose Canada.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Deep Vein Thrombosis (DVT): Treatment (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "TVP thrombose veineuse profonde DVT AOD anticoagulation",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=DEEPVEINTHROMBOSISTREATMENT",
+    "desc": "Guide clinique de Thrombose Canada sur le traitement de la TVP.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Pulmonary Embolism (PE): Treatment (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "EP embolie pulmonaire PE anticoagulation",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=44",
+    "desc": "Guide clinique de Thrombose Canada sur le traitement de l’embolie pulmonaire.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Pulmonary Embolism: High- and Intermediate-Risk (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "EP embolie pulmonaire massive thrombolyse risque élevé",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=132",
+    "desc": "Guide clinique de Thrombose Canada sur l’EP à risque élevé ou intermédiaire.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Superficial Thrombophlebitis (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "thrombophlébite superficielle TVS veine superficielle",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=90",
+    "desc": "Guide clinique de Thrombose Canada sur la thrombophlébite superficielle.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Anticoagulation in Patients Requiring Antiplatelet Therapy (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "FA fibrillation auriculaire SCA ICP antiplaquettaire double thérapie",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=93",
+    "desc": "Guide clinique de Thrombose Canada sur l’association anticoagulant et antiplaquettaire.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Duration of Dual Antiplatelet Therapy (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "DAPT double antiagrégation clopidogrel ASA aspirine",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=122",
+    "desc": "Guide clinique de Thrombose Canada sur la durée de la double antiagrégation.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Clinical Tools (EN)",
+    "org": "Thrombose Canada",
+    "cat": "Thrombose et anticoagulation",
+    "tags": "outils calculateur ordonnance thrombose",
+    "url": "https://thrombosiscanada.ca/tools/",
+    "desc": "Outils cliniques et ordonnances types de Thrombose Canada.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2023 Canadian Thoracic Society Guideline on Pharmacotherapy in Patients with Stable COPD (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "MPOC COPD BPCO LAMA LABA trithérapie bronchodilatateur",
+    "url": "https://cts-sct.ca/wp-content/uploads/2023/09/2023-CTS-COPD-Pharmacotherapy-Guideline-1.pdf",
+    "desc": "Ligne directrice 2023 de la SCT sur la pharmacothérapie de la MPOC stable.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2021 Guideline update: Diagnosis and management of asthma in preschoolers, children and adults (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "asthme CSI corticostéroïde inhalé enfant adulte spirométrie",
+    "url": "https://cts-sct.ca/wp-content/uploads/2022/01/Corrected-Ver_2021_CTS_CPG-DiagnosisManagement_Asthma.pdf",
+    "desc": "Mise à jour 2021 de la SCT sur le diagnostic et la prise en charge de l’asthme.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2021 Canadian Thoracic Society Guideline – A Focused Update on the Management of Very Mild and Mild Asthma (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "asthme léger budésonide formotérol PRN",
+    "url": "https://cts-sct.ca/wp-content/uploads/2021/03/2021-CTS-Guideline-very-mild-and-mild-asthma.pdf",
+    "desc": "Mise à jour ciblée 2021 de la SCT sur l’asthme très léger et léger.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "CTS Guideline for the Management of Severe Asthma in Children, Adolescents and Adults (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "asthme sévère biologique enfant adolescent adulte",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/24745332.2026.2704731",
+    "desc": "Ligne directrice de la SCT sur l’asthme sévère (septembre 2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Diagnosis & management of asthma in preschoolers (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "asthme préscolaire wheezing sifflements enfant pédiatrie",
+    "url": "https://cts-sct.ca/wp-content/uploads/2018/01/Asthma-in-Preschoolers_CTS_CPS_FINAL.pdf",
+    "desc": "Énoncé conjoint SCT-SCP sur l’asthme chez l’enfant d’âge préscolaire (2015).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "The Canadian Thoracic Society/Canadian Sleep Society Guideline on the diagnosis of obstructive sleep apnea in children (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "AOS apnée obstructive du sommeil ronflement enfant pédiatrie",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/24745332.2026.2629327",
+    "desc": "Ligne directrice SCT-SCS sur le diagnostic de l’apnée du sommeil chez l’enfant (2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Alpha-1-Antitrypsin Deficiency Targeted Testing and Augmentation Therapy (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "alpha-1 antitrypsine AATD MPOC emphysème dépistage",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/24745332.2024.2443178",
+    "desc": "Ligne directrice de la SCT sur le déficit en alpha-1-antitrypsine (2025).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Canadian Thoracic Society Position Statement on Climate Change and Choice of Inhalers for Patients with Respiratory Disease (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "inhalateur pompe climat empreinte carbone DPI aérosol",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/24745332.2023.2254283",
+    "desc": "Énoncé de la SCT sur les changements climatiques et le choix des inhalateurs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Canadian Tuberculosis Standards, 8th Edition (EN)",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "tuberculose TB ITL infection tuberculeuse latente TCT",
+    "url": "https://manuals.cts-sct.ca/documentation/preface/",
+    "desc": "Normes canadiennes pour la lutte antituberculeuse, 8e édition.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Collection des lignes directrices",
+    "org": "Société canadienne de thoracologie",
+    "cat": "Respiratoire",
+    "tags": "SCT index lignes directrices pneumologie",
+    "url": "https://cts-sct.ca/collection-des-lignes-directrices/?lang=fr",
+    "desc": "Bibliothèque des lignes directrices de la SCT, en français.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Menopause Care Continuum Interactive Tool (EN)",
+    "org": "SOGC",
+    "cat": "Santé des femmes",
+    "tags": "ménopause périménopause HTM hormonothérapie outil",
+    "url": "https://sogc.org/en/content/events/HUB-Pages/Menopause-Tool.aspx",
+    "desc": "Outil interactif de la SOGC sur le continuum de soins en ménopause.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guideline No. 422a: Menopause: Vasomotor Symptoms, Prescription Therapeutic Agents, Complementary and Alternative Medicine, Nutrition, and Lifestyle (EN)",
+    "org": "SOGC",
+    "cat": "Santé des femmes",
+    "tags": "ménopause bouffées de chaleur vasomoteur hormonothérapie HTM",
+    "url": "https://sogc.org/common/Uploaded%20files/CME-ON/gui422aCPG2110E.pdf",
+    "desc": "Directive clinique de la SOGC sur les symptômes vasomoteurs de la ménopause (2021).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guideline No. 422d: Menopause and Sexuality (EN)",
+    "org": "SOGC",
+    "cat": "Santé des femmes",
+    "tags": "ménopause sexualité libido SGUM syndrome génito-urinaire",
+    "url": "https://sogc.org/common/Uploaded%20files/CME-ON/gui422dCPG2111E.pdf",
+    "desc": "Directive clinique de la SOGC sur la ménopause et la sexualité (2021).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Menopause: identification and management – NG23 (EN)",
+    "org": "NICE (R.-U.)",
+    "cat": "Santé des femmes",
+    "tags": "ménopause HTM hormonothérapie NICE",
+    "url": "https://www.nice.org.uk/guidance/ng23",
+    "desc": "Ligne directrice britannique NICE sur la ménopause.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2023 Clinical Practice Guideline (EN)",
+    "org": "Ostéoporose Canada",
+    "cat": "Ostéoporose",
+    "tags": "ostéoporose DMO densitométrie FRAX CAROC bisphosphonate fracture",
+    "url": "https://osteoporosis.ca/2023-clinical-practice-guideline/",
+    "desc": "Page d’Ostéoporose Canada regroupant la ligne directrice 2023 et ses outils.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Clinical practice guideline for management of osteoporosis and fracture prevention in Canada: 2023 update (EN)",
+    "org": "Ostéoporose Canada",
+    "cat": "Ostéoporose",
+    "tags": "ostéoporose fracture de fragilité prévention CMAJ",
+    "url": "https://www.cmaj.ca/content/195/39/E1333",
+    "desc": "Ligne directrice 2023 d’Ostéoporose Canada publiée dans le CMAJ.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Pharmacotherapy for Obesity Management in Adults – 2025 update (EN)",
+    "org": "Obésité Canada",
+    "cat": "Obésité",
+    "tags": "obésité poids sémaglutide tirzépatide GLP-1 pharmacothérapie",
+    "url": "https://obesitycanada.ca/wp-content/uploads/2025/08/11-Canadian-Adult-Obesity-CPG-Pharmacotherapy-2025-update.pdf",
+    "desc": "Chapitre 2025 d’Obésité Canada sur la pharmacothérapie de l’obésité.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Recommandations canadiennes pour les pratiques optimales de soins de l’AVC – Prévention secondaire de l’AVC",
+    "org": "Cœur + AVC",
+    "cat": "Cardiologie",
+    "tags": "AVC ACV AIT ICT prévention secondaire accident vasculaire cérébral",
+    "url": "https://www.heartandstroke.ca/-/media/1-stroke-best-practices/secondary-prevention-of-stroke/csbpr7-spos-module-final-fr-2020.ashx?rev=-1",
+    "desc": "Module de prévention secondaire de l’AVC de Cœur + AVC (7e édition).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Recommandations canadiennes pour les pratiques optimales de soins de l’AVC, septième édition : l’acide acétylsalicylique pour la prévention d’événements vasculaires",
+    "org": "Cœur + AVC",
+    "cat": "Cardiologie",
+    "tags": "AAS aspirine ASA prévention primaire secondaire",
+    "url": "https://www.cmaj.ca/content/192/40/E1174",
+    "desc": "Recommandations de Cœur + AVC sur l’AAS publiées dans le CMAJ (2020).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "CANMAT 2023 Update on Clinical Guidelines for Management of Major Depressive Disorder in Adults (EN)",
+    "org": "CANMAT",
+    "cat": "Santé mentale",
+    "tags": "dépression TDM trouble dépressif majeur antidépresseur psychothérapie",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11351064/",
+    "desc": "Lignes directrices CANMAT 2023 sur la dépression chez l’adulte, texte intégral gratuit.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Canadian ADHD Practice Guidelines, 4.1 Edition (EN)",
+    "org": "CADDRA",
+    "cat": "Santé mentale",
+    "tags": "TDAH ADHD psychostimulant enfant adulte",
+    "url": "https://adhdlearn.caddra.ca/wp-content/uploads/2022/08/Canadian-ADHD-Practice-Guidelines-4.1-January-6-2021.pdf",
+    "desc": "Lignes directrices canadiennes de CADDRA sur le TDAH (version française existante).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Infections transmissibles sexuellement et par le sang : Guides à l’intention des professionnels de la santé",
+    "org": "Agence de la santé publique du Canada",
+    "cat": "ITSS",
+    "tags": "ITSS ITS chlamydia gonorrhée herpès VPH mycoplasma hépatite B",
+    "url": "https://www.canada.ca/fr/sante-publique/services/maladies-infectieuses/sante-sexuelle-infections-transmissibles-sexuellement/lignes-directrices-canadiennes.html",
+    "desc": "Guides fédéraux de dépistage, de diagnostic et de traitement des ITSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide sur la syphilis",
+    "org": "Agence de la santé publique du Canada",
+    "cat": "ITSS",
+    "tags": "syphilis pénicilline sérologie VDRL RPR",
+    "url": "https://www.canada.ca/fr/sante-publique/services/maladies-infectieuses/sante-sexuelle-infections-transmissibles-sexuellement/lignes-directrices-canadiennes/syphilis.html",
+    "desc": "Guide de l’ASPC sur le dépistage, le diagnostic et le traitement de la syphilis.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide canadien d’immunisation",
+    "org": "Agence de la santé publique du Canada",
+    "cat": "Vaccination",
+    "tags": "vaccin vaccination immunisation CCNI Canada",
+    "url": "https://www.canada.ca/fr/sante-publique/services/guide-canadien-immunisation.html",
+    "desc": "Référence fédérale sur l’immunisation, fondée sur les avis du CCNI.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide canadien d’immunisation : Partie 3. Vaccination de populations particulières",
+    "org": "Agence de la santé publique du Canada",
+    "cat": "Vaccination",
+    "tags": "vaccin grossesse immunodéprimé voyageur nouveaux arrivants maladie chronique",
+    "url": "https://www.canada.ca/fr/sante-publique/services/publications/vie-saine/guide-canadien-immunisation-partie-3-vaccination-populations-particulieres.html",
+    "desc": "Chapitres du Guide canadien d’immunisation sur les populations particulières.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Sore throat (acute): antimicrobial prescribing – NG84 (EN)",
+    "org": "NICE (R.-U.)",
+    "cat": "Infections (autres sources)",
+    "tags": "pharyngite amygdalite mal de gorge Centor FeverPAIN antibiotique",
+    "url": "https://www.nice.org.uk/guidance/ng84",
+    "desc": "Ligne directrice britannique NICE sur la prescription d’antibiotiques pour le mal de gorge.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2026 GOLD Report and Pocket Guide (EN)",
+    "org": "GOLD",
+    "cat": "Respiratoire",
+    "tags": "MPOC COPD BPCO GOLD guide de poche",
+    "url": "https://goldcopd.org/2026-gold-report-and-pocket-guide/",
+    "desc": "Rapport et guide de poche GOLD 2026 sur la MPOC (lien à renouveler chaque année).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "2026 GINA Strategy Report (EN)",
+    "org": "GINA",
+    "cat": "Respiratoire",
+    "tags": "asthme GINA stratégie",
+    "url": "https://ginasthma.org/2026-gina-strategy-report/",
+    "desc": "Rapport de stratégie GINA 2026 sur l’asthme (lien à renouveler chaque année).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Sexually Transmitted Infections Treatment Guidelines, 2021 (EN)",
+    "org": "CDC (É.-U.)",
+    "cat": "ITSS",
+    "tags": "ITS ITSS traitement gonorrhée chlamydia syphilis AIP PID",
+    "url": "https://www.cdc.gov/std/treatment-guidelines/default.htm",
+    "desc": "Lignes directrices américaines du CDC sur le traitement des ITS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Groupe d’étude canadien sur les soins de santé préventifs (site archivé)",
+    "org": "Groupe d’étude canadien sur les soins de santé préventifs",
+    "cat": "Prévention",
+    "tags": "dépistage prévention GECSSP archivé cancer",
+    "url": "https://canadiantaskforce.ca/",
+    "desc": "Site archivé : mandat terminé le 31 mars 2026, remplacé par le Comité consultatif national sur les services de santé préventifs.",
+    "verifie": "2026-09-24"
   }
 ]
