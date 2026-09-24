@@ -1,83 +1,93 @@
 [
   {
-    "title": "Bronchite aiguë",
+    "title": "Guide d’usage optimal : Bronchite aiguë",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "toux respiratoire bronchite infection antibiotique",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_BronchiteAigue_EN-WEB.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la bronchite aiguë."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_BronchiteAigue.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la bronchite aiguë.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Pneumonie chez l’enfant",
+    "title": "Guide d’usage optimal : Pneumonie acquise en communauté chez l’enfant de 3 mois et plus",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "pédiatrie respiratoire pneumonie enfant infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Pneumo_Enfant_EN_WEB.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la pneumonie pédiatrique."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-Pneumonie-Enfant.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la pneumonie pédiatrique.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Pneumonie chez l’adulte",
+    "title": "Guide d’usage optimal : Pneumonie acquise en communauté chez l’adulte",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "respiratoire pneumonie adulte infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Pneumo_Adulte_EN_Web.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la pneumonie chez l’adulte."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_Pneumo_Web.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la pneumonie chez l’adulte.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Otite chez l’enfant",
+    "title": "Guide d’usage optimal : Otite moyenne aiguë chez les enfants de 3 mois et plus",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "pédiatrie ORL otite oreille infection enfant",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Otite_Enfant_EN_WEB-VF.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur l’otite de l’enfant."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-Otite-Enfant.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur l’otite de l’enfant.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Pharyngite / amygdalite",
+    "title": "Guide d’usage optimal : Pharyngite – amygdalite",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "gorge ORL pharyngite amygdalite streptocoque infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Pharyngite-Amygdalite_EN_WEB.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la pharyngite et l’amygdalite."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-PharyngiteAmygdalite.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la pharyngite et l’amygdalite.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Rhinosinusite chez l’adulte",
+    "title": "Guide d’usage optimal : Rhinosinusite aiguë chez l’adulte",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "sinus ORL rhinosinusite adulte infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Rhinosinusite_Adulte_EN_WEB.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la rhinosinusite chez l’adulte."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-Rhinosinusite-Adulte.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la rhinosinusite chez l’adulte.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Rhinosinusite chez l’enfant",
+    "title": "Guide d’usage optimal : Rhinosinusite aiguë chez l’enfant",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "pédiatrie sinus ORL rhinosinusite enfant infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Anglo/Guide_Rhinosinusite_Enfant_EN_WEB.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la rhinosinusite pédiatrique."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-Rhinosinusite-Enfant.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la rhinosinusite pédiatrique.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Cellulite chez l’adulte",
+    "title": "Guide d’usage optimal : Cellulite chez l’adulte",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "peau dermato infection cutanée cellulite adulte",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/cellulitis_adults.pdf",
-    "desc": "Guide d’usage optimal sur la cellulite chez l’adulte."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Adulte1.pdf",
+    "desc": "Guide d’usage optimal sur la cellulite chez l’adulte.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Cellulite chez l’enfant",
+    "title": "Guide d’usage optimal : Cellulite chez l’enfant",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "pédiatrie peau dermato cellulite enfant infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/Cellulitis_children.pdf",
-    "desc": "Guide d’usage optimal sur la cellulite chez l’enfant."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Enfant.pdf",
+    "desc": "Guide d’usage optimal sur la cellulite chez l’enfant.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "C. difficile",
+    "title": "Guide d’usage optimal : Clostridium difficile",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "diarrhée gastro colite infection C difficile",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Traitement/Guide_Cdifficile-EN.pdf",
-    "desc": "Guide de traitement de l’infection à C. difficile."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Traitement/Guide_Cdifficile_FINAL.pdf",
+    "desc": "Guide de traitement de l’infection à C. difficile.",
+    "verifie": "2026-09-24"
   },
   {
     "title": "H. pylori",
@@ -88,68 +98,76 @@
     "desc": "Guide d’usage optimal pour le dépistage et le traitement de H. pylori."
   },
   {
-    "title": "Infections intra-abdominales",
+    "title": "Guide d’usage optimal : Infection intra-abdominale chez l’adulte",
     "org": "INESSS",
     "cat": "Infections (INESSS)",
     "tags": "abdomen chirurgie infection antibiothérapie intra-abdominale",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/GUO_IIA_Anglais_vf.pdf",
-    "desc": "Guide d’usage optimal sur les infections intra-abdominales."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/GUO_IIA.pdf",
+    "desc": "Guide d’usage optimal sur les infections intra-abdominales.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Approche syndromique",
+    "title": "Guide d’usage optimal : Approche syndromique (ITSS)",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS approche syndromique infection sexuellement transmissible",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS_Approche_syndromique_Anglais.pdf",
-    "desc": "Guide d’approche syndromique des ITSS."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS-Syndromes.pdf",
+    "desc": "Guide d’approche syndromique des ITSS.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Chlamydia et gonorrhée",
+    "title": "Guide d’usage optimal : Chlamydia et gonorrhoeae",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS chlamydia gonorrhée dépistage traitement",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS_Chlamydia-Gonorrhoeae_2024_Anglais.pdf",
-    "desc": "Guide de prise en charge de la chlamydia et de la gonorrhée."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS-Chlamydia_gonorrhoeae.pdf",
+    "desc": "Guide de prise en charge de la chlamydia et de la gonorrhée.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Condylomes",
+    "title": "Guide d’usage optimal : Condylomes",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS VPH HPV condylomes verrues",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/condylomes_GUIDE_ITSS_EN.pdf",
-    "desc": "Guide de prise en charge des condylomes."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS_Condylomes.pdf",
+    "desc": "Guide de prise en charge des condylomes.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Herpès génital",
+    "title": "Guide d’usage optimal : Herpès génital",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS HSV herpès génital infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Genital_Herpes_GUO_INESSS_EN.pdf",
-    "desc": "Guide d’usage optimal sur l’herpès génital."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/INESSS_GUIDE_ITSS_Herpes_genital_GUO.pdf",
+    "desc": "Guide d’usage optimal sur l’herpès génital.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Trichomonas",
+    "title": "Guide d’usage optimal : Trichomonas vaginalis",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS trichomonas vaginite infection",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_ITSS_Trichomonas_vaginalis_INESSS_Anglais.pdf",
-    "desc": "Guide de prise en charge de la trichomonase."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_ITSS_Trichomonas_vaginalis_INESSS.pdf",
+    "desc": "Guide de prise en charge de la trichomonase.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Mycoplasma genitalium",
+    "title": "Guide d’usage optimal : Mycoplasma genitalium",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS mycoplasma genitalium infection urétrite",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_ITSS_Mycoplasma_genitalium_Anglais.pdf",
-    "desc": "Guide de prise en charge de Mycoplasma genitalium."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_ITSS_Mycoplasma_genitalium.pdf",
+    "desc": "Guide de prise en charge de Mycoplasma genitalium.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Syphilis – Guide d’usage optimal",
+    "title": "Guide d’usage optimal : Syphilis",
     "org": "INESSS",
     "cat": "ITSS",
     "tags": "ITSS syphilis infection traitement dépistage",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/ITSS_Syphilis_WEB_EN.pdf",
-    "desc": "Guide d’usage optimal de l’INESSS sur la syphilis."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/ITSS_Syphilis_WEB_FR.pdf",
+    "desc": "Guide d’usage optimal de l’INESSS sur la syphilis.",
+    "verifie": "2026-09-24"
   },
   {
     "title": "Syphilis – Outil de stadification et prise en charge (formulaire)",
@@ -160,20 +178,22 @@
     "desc": "Outil de stadification et de prise en charge de la syphilis."
   },
   {
-    "title": "Guide d’usage optimal – Lyme (adulte)",
+    "title": "Guide d’usage optimal : Maladie de Lyme chez l’adulte",
     "org": "INESSS",
     "cat": "Lyme",
     "tags": "Lyme adulte tique infection diagnostic traitement",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Guide_Lyme-adults_web_EN.pdf",
-    "desc": "Guide d’usage optimal sur la maladie de Lyme chez l’adulte."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Guide_Lyme-adulte_web_FR.pdf",
+    "desc": "Guide d’usage optimal sur la maladie de Lyme chez l’adulte.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "Aide au diagnostic – Lyme",
+    "title": "Outil d’aide au diagnostic : Maladie de Lyme aux stades localisé et disséminés",
     "org": "INESSS",
     "cat": "Lyme",
     "tags": "Lyme tique diagnostic infection aide diagnostic",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Outil_diagnostic_EN.pdf",
-    "desc": "Outil d’aide au diagnostic de la maladie de Lyme."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Outil_diagnostic.pdf",
+    "desc": "Outil d’aide au diagnostic de la maladie de Lyme.",
+    "verifie": "2026-09-24"
   },
   {
     "title": "Carte INSPQ – zones endémiques Lyme",
@@ -184,12 +204,13 @@
     "desc": "Carte des zones endémiques de Lyme au Québec."
   },
   {
-    "title": "Fibrillation auriculaire (INESSS – warfarine)",
+    "title": "Guide d’usage optimal : Fibrillation auriculaire chez l’adulte",
     "org": "INESSS",
     "cat": "Cardiologie",
     "tags": "FA fibrillation auriculaire anticoagulation warfarine cardiologie",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Guide_Fibrillation_web_EN.pdf",
-    "desc": "Guide sur la fibrillation auriculaire et l’anticoagulation par warfarine."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/GUO_Fibrillation_FR.pdf",
+    "desc": "Guide sur la fibrillation auriculaire et l’anticoagulation par warfarine.",
+    "verifie": "2026-09-24"
   },
   {
     "title": "Fibrillation auriculaire – CCS guidelines",
@@ -208,20 +229,22 @@
     "desc": "Recommandations de la Société canadienne de cardiologie sur l’insuffisance cardiaque."
   },
   {
-    "title": "Thromboembolie veineuse",
+    "title": "Guide d’usage optimal : Thrombose veineuse et embolie pulmonaire",
     "org": "INESSS",
     "cat": "Cardiologie",
     "tags": "TVP EP thromboembolie veineuse anticoagulation cardiologie",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Guide_Thromboembolie_web_EN.pdf",
-    "desc": "Guide sur la thromboembolie veineuse et l’anticoagulation."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/GUO_Thromboembolie_FR.pdf",
+    "desc": "Guide sur la thromboembolie veineuse et l’anticoagulation.",
+    "verifie": "2026-09-24"
   },
   {
-    "title": "EAMPOC – Exacerbation aiguë de MPOC",
+    "title": "Guide d’usage optimal : Exacerbation aiguë de la maladie pulmonaire obstructive chronique (EAMPOC)",
     "org": "INESSS",
     "cat": "Respiratoire",
     "tags": "MPOC EAMPOC exacerbation aiguë respiratoire traitement",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_EAMPOC-EN.pdf",
-    "desc": "Guide sur l’exacerbation aiguë de la MPOC."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/INESSS_GUO_EAMPOC.pdf",
+    "desc": "Guide sur l’exacerbation aiguë de la MPOC.",
+    "verifie": "2026-09-24"
   },
   {
     "title": "MPOC – Guide d’usage optimal",
@@ -232,12 +255,13 @@
     "desc": "Guide d’usage optimal sur la MPOC."
   },
   {
-    "title": "Blépharite",
+    "title": "Guide d’usage optimal : Blépharites",
     "org": "INESSS",
     "cat": "Ophtalmologie",
     "tags": "œil paupière blépharite ophtalmologie",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Blepharites/Guide_Blepharite_web_EN_VF.pdf",
-    "desc": "Guide d’usage optimal sur la blépharite."
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Blepharites/Guide_Blepharite_web_FR_VF.pdf",
+    "desc": "Guide d’usage optimal sur la blépharite.",
+    "verifie": "2026-09-24"
   },
   {
     "title": "Calculatrice CVD (decisionaid.ca)",
@@ -929,6 +953,1068 @@
     "tags": "dépistage prévention GECSSP archivé cancer",
     "url": "https://canadiantaskforce.ca/",
     "desc": "Site archivé : mandat terminé le 31 mars 2026, remplacé par le Comité consultatif national sur les services de santé préventifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Sevrage d’alcool et prévention des rechutes",
+    "org": "INESSS",
+    "cat": "Santé mentale",
+    "tags": "alcool sevrage ROH benzodiazépine naltrexone acamprosate TUA dépendance",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_GUO_Sevrage_rechute_FR.pdf",
+    "desc": "Guide de l’INESSS sur le traitement pharmacologique du sevrage d’alcool et la prévention des rechutes.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Feuille de suivi : Traitement du sevrage d’alcool en milieu ambulatoire",
+    "org": "INESSS",
+    "cat": "Santé mentale",
+    "tags": "alcool sevrage ambulatoire suivi CIWA feuille",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_Sevrage_Feuille_suivi.pdf",
+    "desc": "Feuille de suivi de l’INESSS pour le sevrage d’alcool ambulatoire.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Ordonnance individuelle préimprimée : Sevrage d’alcool (milieu ambulatoire)",
+    "org": "INESSS",
+    "cat": "Santé mentale",
+    "tags": "alcool sevrage ordonnance OIPI ambulatoire",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_OIPI_milieu_externe.pdf",
+    "desc": "Modèle d’ordonnance de l’INESSS pour le sevrage d’alcool en ambulatoire.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Ordonnance individuelle préimprimée : Sevrage d’alcool (établissement)",
+    "org": "INESSS",
+    "cat": "Santé mentale",
+    "tags": "alcool sevrage ordonnance OIPI hospitalier établissement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_OIPI_milieu_hospitalier.pdf",
+    "desc": "Modèle d’ordonnance de l’INESSS pour le sevrage d’alcool en établissement.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Maladie d’Alzheimer et démence mixte",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer démence TNC troubles neurocognitifs inhibiteurs cholinestérase donépézil mémantine",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_GUO_Alzheimer.pdf",
+    "desc": "Guide de l’INESSS sur le traitement pharmacologique de la maladie d’Alzheimer et de la démence mixte.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Aide-mémoire : Choix d’un outil de repérage (troubles neurocognitifs)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC repérage MoCA MMSE outil",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_AideMemoire_MA_TNC.pdf",
+    "desc": "Aide-mémoire de l’INESSS pour choisir un outil de repérage des troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Recommandations pour la pratique : Maladie d’Alzheimer et autres troubles neurocognitifs (extrait)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC recommandations synthèse",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS-SyntheseRecommandations_MA_TNC.pdf",
+    "desc": "Synthèse des recommandations de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Liste de vérification : Repérage et processus menant au diagnostic (TNC)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC repérage diagnostic liste de vérification",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/Liste-verification_Reperage_Alz.pdf",
+    "desc": "Liste de vérification de l’INESSS pour le repérage des troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Liste de vérification : Suivi (TNC)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC suivi liste de vérification",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/Liste-verification_Suivi_Alz.pdf",
+    "desc": "Liste de vérification de l’INESSS pour le suivi des troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Repérage (fiche 1)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC repérage fiche",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_OutilAidePratique_Reperage_fiche1.pdf",
+    "desc": "Fiche 1 de l’outil de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Processus menant au diagnostic (fiche 2)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC diagnostic fiche",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_OutilAidePratique_Processus_menant_diagnostic_fiche2.pdf",
+    "desc": "Fiche 2 de l’outil de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Outil de repérage (fiche 3)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC repérage appréciation fiche",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_OutilAidePratique_Appreciation_fiche3.pdf",
+    "desc": "Fiche 3 de l’outil de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Annonce du diagnostic (fiche 4)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC annonce diagnostic fiche",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_OutilAidePratique_Annonce_diagnostic_fiche4.pdf",
+    "desc": "Fiche 4 de l’outil de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Suivi (fiche 5)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC suivi fiche",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_OutilAidePratique_Suivi_fiche5.pdf",
+    "desc": "Fiche 5 de l’outil de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Actions à accomplir (fiche 6)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC actions fiche",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_OutilAidePratique_Actions_a_accomplir_fiche6.pdf",
+    "desc": "Fiche 6 de l’outil de l’INESSS sur les troubles neurocognitifs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Synthèse : Repérage, diagnostic, annonce et suivi (6 fiches)",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "Alzheimer TNC synthèse repérage diagnostic suivi",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Geriatrie/INESSS_DocumentSynthese_Reperage_diagnostic_annonce_suivi.pdf",
+    "desc": "Les six fiches de l’INESSS sur les troubles neurocognitifs réunies.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Antibioprophylaxie lors de chirurgies et procédures gynécologiques et obstétricales",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "antibioprophylaxie chirurgie gynécologie obstétrique césarienne",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Antibioprophylaxie_Chirurgies_Gyneco_GUO_INESSS.pdf",
+    "desc": "Outil de l’INESSS (mars 2026).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Antibioprophylaxie lors de chirurgies du tractus digestif et de la paroi abdominale",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "antibioprophylaxie chirurgie digestive abdominale",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Antibioprophylaxie_Chirurgies_Digestif_GUO_INESSS.pdf",
+    "desc": "Outil de l’INESSS (novembre 2025).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Antibioprophylaxie de l’endocardite infectieuse chez l’enfant et l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "antibioprophylaxie endocardite dentaire valve amoxicilline",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_antibio_II/endocardite_web_FR.pdf",
+    "desc": "Outil de l’INESSS (octobre 2025).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Antibioprophylaxie lors des chirurgies orthopédiques propres chez l’enfant et l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "antibioprophylaxie chirurgie orthopédique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieII/chirurgies_orthopediques.pdf",
+    "desc": "Outil de l’INESSS (juin 2018).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Allergie présumée aux pénicillines – Évaluer les risques et optimiser l’usage des bêta-lactamines",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "allergie pénicilline bêta-lactamine céphalosporine test de provocation",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Medicaments/Outil_allergies_penicillines_vfinale.pdf",
+    "desc": "Outil clinique de l’INESSS avec algorithme décisionnel (2025).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Allergies aux bêta-lactamines – Outil clinique interactif : Allergies médicamenteuses",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "allergie pénicilline bêta-lactamine outil interactif médicamenteuse",
+    "url": "https://www.inesss.qc.ca/formations-et-outils-cliniques/outils-cliniques/outils-par-thematiques/outils/allergies-aux-beta-lactamines.html",
+    "desc": "Page de l’INESSS donnant accès à l’outil interactif sur les allergies médicamenteuses.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Coup d’œil : Usage des anticoagulants",
+    "org": "INESSS",
+    "cat": "Cardiologie",
+    "tags": "anticoagulant AOD warfarine coup d’œil",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Coupdoeil_warfarine.pdf",
+    "desc": "Résumé de l’INESSS sur l’usage des anticoagulants.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Interactions médicamenteuses (anticoagulants oraux directs)",
+    "org": "INESSS",
+    "cat": "Cardiologie",
+    "tags": "AOD anticoagulant interactions médicamenteuses apixaban rivaroxaban dabigatran",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Outil_interaction_medicamenteuse_AOD.pdf",
+    "desc": "Outil de l’INESSS sur les interactions des anticoagulants oraux directs.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Dialogue avec votre patient (autosurveillance et autogestion des AVK)",
+    "org": "INESSS",
+    "cat": "Cardiologie",
+    "tags": "warfarine AVK autosurveillance INR patient",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Warfarine/Outil_dialogue_autosurveilance-gestion_AVK.pdf",
+    "desc": "Outil de l’INESSS pour discuter de l’autosurveillance de la warfarine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Algorithme décisionnel : Chlamydia et gonorrhoeae",
+    "org": "INESSS",
+    "cat": "ITSS",
+    "tags": "chlamydia gonorrhée gonorrhoeae partenaires traitement épidémiologique algorithme",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/INESSS-Algorithme-traitement-ITSS.pdf",
+    "desc": "Algorithme de l’INESSS pour le traitement des infections à chlamydia et gonorrhée.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Zona ophtalmique",
+    "org": "INESSS",
+    "cat": "Ophtalmologie",
+    "tags": "zona ophtalmique herpès zoster œil antiviral",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Zona/Guide_ZonaOphtalmique_web_FR_VF.pdf",
+    "desc": "Guide de l’INESSS sur le zona ophtalmique.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Herpès simplex (soins oculaires)",
+    "org": "INESSS",
+    "cat": "Ophtalmologie",
+    "tags": "herpès simplex oculaire kératite œil",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Herpes/Guide_HerpesSimplex_web_FR_VF.pdf",
+    "desc": "Guide de l’INESSS sur l’herpès simplex oculaire.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Feuille de suivi : Soulagement des symptômes associés aux infections des voies respiratoires",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "rhume toux infection respiratoire symptômes patient feuille",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/InfectResp_Feuille-suivi-Interactive.pdf",
+    "desc": "Feuille de l’INESSS à remettre au patient pour le soulagement des symptômes.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Interprétation spirométrique en soutien au diagnostic de la MPOC",
+    "org": "INESSS",
+    "cat": "Respiratoire",
+    "tags": "MPOC COPD spirométrie VEMS diagnostic",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Outil_Spirometrie_MPOC_INESSS_vf.pdf",
+    "desc": "Outil de l’INESSS pour interpréter la spirométrie dans la MPOC.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Aide au choix du dispositif d’inhalation (MPOC)",
+    "org": "INESSS",
+    "cat": "Respiratoire",
+    "tags": "MPOC COPD inhalateur dispositif pompe",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_MPOC_Aide_choix_dispositif.pdf",
+    "desc": "Outil de l’INESSS pour choisir un dispositif d’inhalation.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Tableau résumé : Dispositifs et molécules évalués par l’INESSS et statut de remboursement (MPOC)",
+    "org": "INESSS",
+    "cat": "Respiratoire",
+    "tags": "MPOC COPD inhalateur remboursement RAMQ liste",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_MPOC_Dispositifs_molecules_evalues.pdf",
+    "desc": "Tableau de l’INESSS sur les inhalateurs et leur remboursement au régime public.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Chirurgie élective à faible risque chez les personnes de 16 ans et plus",
+    "org": "INESSS",
+    "cat": "Pratique professionnelle",
+    "tags": "préopératoire bilan tests préop consultation chirurgie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/INESSS_Pertinence_tests_preop_GUO.pdf",
+    "desc": "Guide de l’INESSS sur la pertinence des tests et consultations préopératoires.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Coup d’œil : Pertinence et encadrement de la chirurgie robotique pour trois indications oncologiques",
+    "org": "INESSS",
+    "cat": "Pratique professionnelle",
+    "tags": "chirurgie robotique oncologie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Technologies/CoupDoeil_Chirurgie_robotique_INESSS.pdf",
+    "desc": "Résumé de l’INESSS sur la chirurgie robotique.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Coup d’œil : Efficacité, innocuité et qualité de vie liées à la chirurgie robotique",
+    "org": "INESSS",
+    "cat": "Pratique professionnelle",
+    "tags": "chirurgie robotique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Technologies/Chirurgie_robotique2_Coup_doeil_INESSS_vf.pdf",
+    "desc": "Résumé de l’INESSS sur la chirurgie robotique.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : COVID-19",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "COVID SRAS-CoV-2 Paxlovid nirmatrelvir traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/COVID-19/2024-GUO_COVID-19_VF.pdf",
+    "desc": "Guide de l’INESSS sur les traitements de la COVID-19.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Ordonnance individuelle préimprimée : Nirmatrelvir/ritonavir (Paxlovid)",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "COVID Paxlovid nirmatrelvir ordonnance OIPI",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/COVID-19/INESSS_OIPI_Paxlovid_VF.pdf",
+    "desc": "Modèle d’ordonnance de l’INESSS pour le Paxlovid.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Traitement et prophylaxie de l’influenza chez l’enfant et l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "influenza grippe oseltamivir Tamiflu prophylaxie antiviral",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_Influenza_enfant_adulte_web_FR_01.pdf",
+    "desc": "Guide de l’INESSS sur les antiviraux contre l’influenza.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Infection du pied diabétique chez l’adulte",
+    "org": "INESSS",
+    "cat": "Diabète",
+    "tags": "pied diabétique ulcère infection ostéomyélite antibiotique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/GUO_pied_diabetique_INESSS_VF.pdf",
+    "desc": "Guide de l’INESSS sur l’antibiothérapie et la prévention des récidives.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Neurostimulateurs médullaires et pompes intrathécales",
+    "org": "INESSS",
+    "cat": "Douleur",
+    "tags": "douleur chronique neurostimulateur pompe intrathécale",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Traitement/GUO_Neurostimulateurs_PompesIntrathecales.pdf",
+    "desc": "Guide de l’INESSS sur la douleur chronique non cancéreuse.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Échographie cardiaque – souffle",
+    "org": "INESSS",
+    "cat": "Imagerie médicale",
+    "tags": "échographie cardiaque échocardiographie souffle",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Cardio/Echocardiogaphie_Souffle_VF.pdf",
+    "desc": "Outil de l’INESSS sur la pertinence de l’échographie cardiaque pour un souffle.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Échographie cardiaque – valves natives",
+    "org": "INESSS",
+    "cat": "Imagerie médicale",
+    "tags": "échographie cardiaque valve native valvulopathie suivi",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Cardio/Echocardiogaphie_Valves_natives_VF.pdf",
+    "desc": "Outil de l’INESSS sur le suivi échographique des valves natives.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Échographie cardiaque – valves prothétiques",
+    "org": "INESSS",
+    "cat": "Imagerie médicale",
+    "tags": "échographie cardiaque valve prothétique suivi",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Cardio/Echocardiogaphie_Valves_prothetiques_VF.pdf",
+    "desc": "Outil de l’INESSS sur le suivi échographique des valves prothétiques.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Surveillance par imagerie d’une dilatation dégénérative de l’aorte ascendante chez l’adulte",
+    "org": "INESSS",
+    "cat": "Imagerie médicale",
+    "tags": "aorte anévrisme dilatation surveillance imagerie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Cardio/Dilatation_aorte_outil_INESSS.pdf",
+    "desc": "Outil de l’INESSS sur la surveillance de l’aorte ascendante.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Prise en charge des découvertes fortuites en imagerie médicale – pancréas",
+    "org": "INESSS",
+    "cat": "Imagerie médicale",
+    "tags": "incidentalome pancréas kyste découverte fortuite",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Fortuites_pancreas_Outil_INESSS.pdf",
+    "desc": "Outil de l’INESSS sur les découvertes fortuites au pancréas.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Immunoglobulines intraveineuses et sous-cutanées",
+    "org": "INESSS",
+    "cat": "Ressources générales",
+    "tags": "immunoglobulines IgIV IgSC",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Immunoglobulines/GUIDE_Immunoglobulines_intraveineuses_sous-cutanees.pdf",
+    "desc": "Guide de l’INESSS sur l’usage des immunoglobulines.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Aide-mémoire : Antibiothérapie de l’infection intra-abdominale chez l’adulte",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "infection intra-abdominale antibiotique aide-mémoire",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Aide-Memoire_IIA.pdf",
+    "desc": "Aide-mémoire de l’INESSS sur les infections intra-abdominales.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Aide-mémoire : Antibiothérapie de la diverticulite",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "diverticulite antibiotique aide-mémoire",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Aide-Memoire_Diverticulite.pdf",
+    "desc": "Aide-mémoire de l’INESSS sur la diverticulite.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Infection urinaire chez les personnes de 14 ans et plus",
+    "org": "INESSS",
+    "cat": "Infections (INESSS)",
+    "tags": "IU IVU infection urinaire cystite pyélonéphrite nitrofurantoïne",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_InfectionUrinaire.pdf",
+    "desc": "Guide de l’INESSS sur les infections urinaires (décembre 2023).",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Feuille de suivi : Personne piquée par une tique ou ayant reçu un diagnostic de maladie de Lyme",
+    "org": "INESSS",
+    "cat": "Lyme",
+    "tags": "Lyme tique piqûre suivi feuille patient",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Lyme_Feuille-de-suivi.pdf",
+    "desc": "Feuille de suivi de l’INESSS à remettre au patient.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Maladie de Lyme chez l’enfant",
+    "org": "INESSS",
+    "cat": "Lyme",
+    "tags": "Lyme enfant pédiatrie érythème migrant doxycycline amoxicilline",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Guide_Lyme-enfant_web_FR.pdf",
+    "desc": "Guide de l’INESSS sur la maladie de Lyme chez l’enfant.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil clinique : Dialogue avec votre patient (maladie de Lyme)",
+    "org": "INESSS",
+    "cat": "Lyme",
+    "tags": "Lyme tique patient discussion prophylaxie",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_PPE/Lyme_dialogue_FR_FINAL.pdf",
+    "desc": "Outil de l’INESSS pour discuter avec le patient.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Prophylaxie post-exposition (maladie de Lyme)",
+    "org": "INESSS",
+    "cat": "Lyme",
+    "tags": "Lyme PPE prophylaxie doxycycline tique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_PPE/Outil_aide_decision_PPE.pdf",
+    "desc": "Outil de l’INESSS sur la prophylaxie après une piqûre de tique.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Aide-mémoire : Niveaux de soins, DMA et autres",
+    "org": "INESSS",
+    "cat": "Pratique professionnelle",
+    "tags": "niveaux de soins NIM DMA directives médicales anticipées RCR",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/OrganisationsSoins/INESSS_Aide-memoire_NiveaudeSoin_FR.pdf",
+    "desc": "Aide-mémoire de l’INESSS sur les niveaux de soins.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Dépliant : Niveaux de soins – Prenez part à la discussion",
+    "org": "INESSS",
+    "cat": "Pratique professionnelle",
+    "tags": "niveaux de soins patient dépliant",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/OrganisationsSoins/Depliant_niveaux-de-soins_FR_20170111.pdf",
+    "desc": "Dépliant de l’INESSS pour les patients et leurs proches.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Formulaire : Niveaux de soins et RCR",
+    "org": "INESSS",
+    "cat": "Pratique professionnelle",
+    "tags": "niveaux de soins RCR réanimation formulaire",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/OrganisationsSoins/Formulaire_NiveauxdeSoins_RCR.pdf",
+    "desc": "Formulaire normalisé de l’INESSS sur les niveaux de soins.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil : Grille d’analyse des besoins des familles (SIPPE)",
+    "org": "INESSS",
+    "cat": "Santé des femmes",
+    "tags": "SIPPE périnatalité famille vulnérabilité grille",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/ServicesSociaux/INESSS_SIPPE_Grille_analyse_besoins_familles.pdf",
+    "desc": "Outil de l’INESSS pour les Services intégrés en périnatalité et petite enfance.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil : Informations sur la famille (SIPPE)",
+    "org": "INESSS",
+    "cat": "Santé des femmes",
+    "tags": "SIPPE périnatalité famille",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/ServicesSociaux/INESSS_SIPPE_Informations_sur_famille.pdf",
+    "desc": "Outil SIPPE de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil : Manuel d’utilisation (SIPPE)",
+    "org": "INESSS",
+    "cat": "Santé des femmes",
+    "tags": "SIPPE périnatalité manuel",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/ServicesSociaux/INESSS_SIPPE_Manuel_utilisation.pdf",
+    "desc": "Manuel d’utilisation des outils SIPPE de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil : Pour aller plus loin (SIPPE)",
+    "org": "INESSS",
+    "cat": "Santé des femmes",
+    "tags": "SIPPE périnatalité ressources",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/ServicesSociaux/INESSS_SIPPE_Pour_aller_plus_loin.pdf",
+    "desc": "Complément aux outils SIPPE de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Outil d’aide à la décision : Trouble dépressif caractérisé pendant la grossesse",
+    "org": "INESSS",
+    "cat": "Santé des femmes",
+    "tags": "dépression grossesse antidépresseur périnatalité",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_Depression_grossesse_Outil_Aide_decision_VF.pdf",
+    "desc": "Outil de l’INESSS sur le traitement de la dépression pendant la grossesse.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Fiche-conseil : Trouble dépressif pendant la grossesse – Vos options pour un choix de traitement éclairé",
+    "org": "INESSS",
+    "cat": "Santé des femmes",
+    "tags": "dépression grossesse patiente fiche décision partagée",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_Depression_Grossesse_Fiche_conseil_VF.pdf",
+    "desc": "Fiche de l’INESSS à remettre à la patiente.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Guide d’usage optimal : Thérapie par pression négative (TPN)",
+    "org": "INESSS",
+    "cat": "Dermatologie",
+    "tags": "plaie complexe TPN pression négative VAC",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Traitement/INESSS_GUO_Therapie_pression_negative.pdf",
+    "desc": "Guide de l’INESSS sur la thérapie par pression négative.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Aide médicale à mourir",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC AMM aide médicale à mourir soins de fin de vie",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/aide-medicale-a-mourir.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Aide-mémoire – Dépistages (cancer et maladies chroniques)",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC dépistage cancer maladies chroniques prévention aide-mémoire",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/aide-memoire-depistages-cancer-et-maladies-chroniques.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Anticoagulothérapie",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC warfarine AVK INR ajustement anticoagulant",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/anticoagulotherapie.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Antidépresseurs",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC antidépresseur dépression ajustement ISRS",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/antidepresseurs.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Antidiabétique",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC diabète antidiabétique insuline ajustement",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/antidiabetique.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Bilirubine sérique totale chez un nouveau-né",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC ictère néonatal bilirubine nouveau-né jaunisse",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/bilirubine-serique-totale-chez-un-nouveau-ne.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Candidose buccale chez l’adulte",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC candidose muguet buccale nystatine",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/candidose-buccale-chez-ladulte.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Chlamydia et Gonorrhoeae",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC chlamydia gonorrhée ITSS traitement",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/chlamydia-et-gonorrhoeae.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : DAVC",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC DAVC dispositif d’accès veineux central cathéter",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/davc.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Dépistage du cancer colorectal",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC cancer colorectal RSOSi FIT coloscopie dépistage",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/depistage-du-cancer-colorectal.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Dépistage du cancer du col de l’utérus",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC cancer col utérus cytologie Pap VPH dépistage",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/depistage-du-cancer-du-col-de-luterus.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Dépistage du cancer du poumon",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC cancer poumon TDM faible dose dépistage tabagisme",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/depistage-du-cancer-du-poumon.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Dépistage du diabète de type 2 et risque CV",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC dépistage diabète risque cardiovasculaire HbA1c bilan lipidique",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/depistage-du-diabete-de-type-2-et-risque-cv.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : MPOC-EAMPOC",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC MPOC COPD EAMPOC exacerbation",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/eampoc.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Écoulement urétral",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC écoulement urétral urétrite ITSS",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/ecoulement-uretral.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Élimination fécale",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC constipation fécalome élimination",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/elimination-fecale.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Hydroxychloroquine et chloroquine",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC hydroxychloroquine Plaquenil examen ophtalmologique",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/hydroxychloroquine-et-chloroquine.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Hypertension artérielle",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC HTA hypertension ajustement antihypertenseur",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/hypertension-arterielle.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Hypolipémiants",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC statine cholestérol dyslipidémie hypolipémiant ajustement",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/hypolipemiants.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Infections urinaires",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC infection urinaire cystite pyélonéphrite ordonnance collective",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/infections-urinaires.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Inhibiteurs de la pompe à protons (IPP)",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC IPP pantoprazole oméprazole déprescription RGO",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/inhibiteurs-de-la-pompe-a-protons-ipp.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Maladie de Lyme – PPE",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC Lyme tique prophylaxie doxycycline",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/maladie-de-lyme-ppe.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Mucosite oropharyngée",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC mucosite oncologie bouche",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/mucosite-oropharyngee.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Ostéodensitométrie",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC ostéodensitométrie DMO ostéoporose",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/osteodensitometrie.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Pertes vaginales inhabituelles",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC vaginose vaginite candidose trichomonas pertes vaginales",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/pertes-vaginales-inhabituelles.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Pharyngite-amygdalite bactérienne",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC pharyngite amygdalite streptocoque test rapide",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/pharyngite-amygdalite-bacterienne.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Premarin",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC Premarin œstrogènes conjugués saignement",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/premarin.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Rétention urinaire aiguë",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC rétention urinaire sonde cathétérisme",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/retention-urinaire-aiguee.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Rougeole",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC rougeole RRO vaccin exposition",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/rougeole.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Sédation palliative continue",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC sédation palliative soins palliatifs fin de vie",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/sedation-palliative-continue.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Soins palliatifs – Détresse",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC soins palliatifs détresse fin de vie",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/soins-palliatifs-detresse.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Soins palliatifs – Fièvre",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC soins palliatifs fièvre",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/soins-palliatifs-fievre.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Soins palliatifs – Nausées",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC soins palliatifs nausées vomissements",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/soins-palliatifs-nausees.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Traitement au fer intraveineux chez l’adulte",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC fer intraveineux carence martiale anémie",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/traitement-au-fer-intraveineux-chez-ladulte.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Trouble lié à l’usage d’alcool",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC alcool TUA naltrexone acamprosate",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/protocoles-medicaux-nationaux-et-ordonnances-associees/trouble-lie-a-lusage-dalcool.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Protocole médical national : Troubles neurocognitifs",
+    "org": "INESSS",
+    "cat": "Protocoles médicaux nationaux (INESSS)",
+    "tags": "PMN protocole médical national ordonnance collective OC TNC Alzheimer démence inhibiteur cholinestérase",
+    "url": "https://www.inesss.qc.ca/thematiques/medicaments/protocoles-medicaux-nationaux-et-ordonnances-associees/troubles-neurocognitifs.html",
+    "desc": "Protocole médical national et ordonnances associées de l’INESSS.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Cahier d’activités : L’été, c’est fait pour jouer. En sécurité !",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ prévention blessures sécurité été traumatisme enfant cahier",
+    "url": "https://chusj.org/getmedia/804d5e6f-be6e-42f4-910b-15b0e5b7f4fd/depliant_CahierActivites_TRAUMA_ETE_8-5X11_VF_2022.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Réduire les maux de tête",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ céphalée migraine maux de tête enfant",
+    "url": "https://chusj.org/getmedia/cc7719fd-9fd2-4c3e-92a8-960e6e79d641/depliant_F-1550_Reduire-les-maux-de-tete.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La fièvre et l’anémie falciforme",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ anémie falciforme drépanocytose fièvre",
+    "url": "https://chusj.org/getmedia/9ff3605b-fb57-4745-b1d5-bc224946d9d9/depliant_F-1642_La-fievre-et-l-anemie-falciforme.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Votre enfant a subi une lacération de la peau",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ lacération plaie points de suture colle soins",
+    "url": "https://chusj.org/getmedia/8503a164-a694-4919-b23a-4101961a4390/depliant_F-1737_Votre-enfant-a-subit-une-laceration-de-la-peau_Web.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La bronchiolite",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ bronchiolite VRS nourrisson respiratoire",
+    "url": "https://chusj.org/getmedia/54dd3d0d-50f7-49dc-9adb-1ad97bc581c2/depliant_F-2038_Bronchiolite.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Analgésiques opioïdes à courte action",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ opioïde morphine hydromorphone douleur analgésie",
+    "url": "https://chusj.org/getmedia/bab6d4ad-42d2-41d6-8f9a-4559718451ab/depliant_F-848_Analgesiques-opioides-a-courte-action.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Les convulsions fébriles",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ convulsion fébrile épilepsie fièvre",
+    "url": "https://chusj.org/getmedia/9689835d-7086-48f8-9d3d-78c022db88a0/depliant_F-849_les-convulsions-febriles_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Infection des voies respiratoires supérieures",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ IVRS rhume infection respiratoire toux",
+    "url": "https://chusj.org/getmedia/64254569-a5af-4f31-a695-692add89cfed/depliant_F-851_infection-voies-respiratoires-superieures_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La fièvre",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ fièvre acétaminophène ibuprofène température",
+    "url": "https://chusj.org/getmedia/b5a9f7d7-9983-4d91-92fa-d7f6d79ddeff/depliant_F-853_la-fievre_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Qu’est-ce que la laryngite ?",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ laryngite croup toux aboyante stridor",
+    "url": "https://chusj.org/getmedia/24c5f255-02bd-43f8-a8c3-6098bc9cee69/depliant_F-854_la-laryngite_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Mon plâtre, j’en prends soin",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ plâtre fracture immobilisation soins",
+    "url": "https://chusj.org/getmedia/109d0142-a5bc-4752-86d3-4bf6b3e330f3/depliant_F-856_mon-platre_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "La gastro-entérite",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ gastro-entérite gastro diarrhée vomissements déshydratation réhydratation",
+    "url": "https://chusj.org/getmedia/2d0c8d02-fb3c-4a3e-b424-acffcef2bc81/depliant_F-858_la-gastro-enterite_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Pénurie de médicaments contre la fièvre : explications et alternatives pour les parents",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ pénurie acétaminophène ibuprofène fièvre rupture",
+    "url": "https://chusj.org/getmedia/2c3e5eca-b194-4fb5-92cd-e5c1309c3f5c/depliant_Rupture_medicaments.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Soutenir votre enfant lors d’une procédure médicale courante",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ procédure douleur anxiété distraction ponction",
+    "url": "https://chusj.org/getmedia/66290a5a-2b56-49f7-a0ec-38d62a27ec43/depliant-F-4270-Soutenir-votre-enfant-lors-d-une-procedure-medicale-courante.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Problèmes de comportements ou détresse psychologique chez votre enfant ou votre adolescent ?",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ santé mentale détresse comportement adolescent psychiatrie",
+    "url": "https://chusj.org/getmedia/18db2136-1c2e-43b6-9b99-5163ea43c232/F4300_psycho-urgence.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Application de la crème anesthésiante",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ crème anesthésiante EMLA lidocaïne ponction",
+    "url": "https://chusj.org/getmedia/d2f8a5da-7bc8-4f65-92d6-ad6ef7556c5e/F-7075_Application-de-la-creme-anesthesiante_web_2.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Drain thoracique",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ drain thoracique pneumothorax",
+    "url": "https://chusj.org/getmedia/adc872b4-91d2-4e39-9c0f-200700b0d995/F-7144_Drain-thoracique_final.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Cahier d’activités : L’hiver, c’est fait pour jouer... En sécurité !",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ prévention blessures sécurité hiver traumatisme enfant cahier",
+    "url": "https://chusj.org/getmedia/b6a2f513-c1e8-4417-963c-84cf56da05f1/depliant_CHUSJ_CAHIER_TRAUMA_HIVER-opt.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
+    "verifie": "2026-09-24"
+  },
+  {
+    "title": "Traumatisme craniocérébral léger (commotion cérébrale), une guérison étape par étape",
+    "org": "CHU Sainte-Justine",
+    "cat": "Dépliants patients – CHU Sainte-Justine",
+    "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ TCCL commotion cérébrale traumatisme crânien retour école sport",
+    "url": "https://chusj.org/getmedia/c70401ac-31c9-484b-96a2-8993ae8ae0c1/INESSS_Depliant_TCCL_INESSS.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant de l’INESSS pour les parents, offert par l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-24"
   }
 ]
