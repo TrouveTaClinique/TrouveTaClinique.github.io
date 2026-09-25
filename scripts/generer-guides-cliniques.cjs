@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 /* Adresse du service d'aiguillage IA (Worker Cloudflare, dossier workers/aiguillage).
    Vide : la boîte « Demander à l'IA » n'est pas affichée et son script n'est pas chargé. */
-const URL_AIGUILLAGE = '';
+const URL_AIGUILLAGE = 'https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/';
 
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 

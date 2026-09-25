@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/assets/guides-cliniques.css?v=92-guides-aiguillage">
   <script src="/assets/guides-recherche.js?v=92-guides-aiguillage" defer></script>
   <script src="/assets/guides-cliniques.js?v=92-guides-aiguillage" defer></script>
+  <script src="/assets/guides-aiguillage.js?v=92-guides-aiguillage" defer></script>
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -80,6 +81,17 @@
     </div>
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">360 ressources dans le catalogue</p>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
+  </section>
+  <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/" hidden>
+    <h2 id="guides-ia-titre">Demander à l’IA quel guide consulter</h2>
+    <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
+    <form class="guides-ia-form">
+      <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
+      <textarea id="guides-ia-question" name="question" rows="2" maxlength="400" placeholder="Ex. : toux depuis 4 semaines chez un fumeur de 60 ans" required></textarea>
+      <button type="submit">Suggérer des guides</button>
+    </form>
+    <p class="guides-ia-avis"><strong>Confidentialité :</strong> votre question est transmise à un service d’IA (Anthropic) pour être traitée, puis n’est pas conservée par ce site. N’y inscrivez aucun renseignement permettant d’identifier un patient.</p>
+    <div class="guides-ia-resultat" aria-live="polite"></div>
   </section>
   <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>
     <div class="guides-category-heading"><h2 id="guides-favoris-titre">Mes favoris</h2><span class="compte"></span></div>
