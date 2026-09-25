@@ -1,0 +1,13 @@
+{
+  "name": "trouvetaclinique-aiguillage",
+  "private": true,
+  "type": "module",
+  "description": "Aiguillage IA de la page Guides de trouvetaclinique.ca (Cloudflare Worker).",
+  "scripts": {
+    "test": "node --test test/logique.test.js test/sdk.test.js",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0"
+  }
+}

@@ -1,0 +1,31 @@
+# Worker d'aiguillage IA de la page /guides/ de trouvetaclinique.ca.
+# Déploiement : Cloudflare Workers Builds, répertoire racine « workers/aiguillage ».
+# Secret à ajouter dans Cloudflare (jamais ici) : ANTHROPIC_API_KEY.
+name = "trouvetaclinique-aiguillage"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Modèle Claude utilisé. Claude Sonnet 5 : environ 1 ¢ US par question en mode hybride.
+MODELE = "claude-sonnet-5"
+# Sites autorisés à interroger le service.
+ORIGINES = "https://trouvetaclinique.ca,https://apercu.trouvetaclinique.ca"
+
+# 5 questions par minute par visiteur.
+[[ratelimits]]
+name = "LIMITE_VISITEUR"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60
+
+# 20 questions par minute pour l'ensemble du site.
+[[ratelimits]]
+name = "LIMITE_GLOBALE"
+namespace_id = "1002"
+
+  [ratelimits.simple]
+  limit = 20
+  period = 60

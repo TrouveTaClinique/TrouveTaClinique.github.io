@@ -1,0 +1,119 @@
+// Logique de l'aiguillage : aucune dépendance, aucun réseau.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  traiter, indexerCatalogue, retenirCandidats, construireRequete, interpreterReponse,
+  CANDIDATS_MAX, GUIDES_MAX, SCHEMA
+} from '../src/logique.js';
+
+const CATALOGUE = Array.from({ length: 60 }, (_, i) => ({
+  title: `Guide ${i}`, org: i % 2 ? 'INESSS' : 'CHU Sainte-Justine', cat: 'Catégorie', tags: 'otite enfant', url: `https://exemple.ca/g${i}`
+}));
+const PAR_URL = indexerCatalogue(CATALOGUE);
+const ORIGINE = 'https://trouvetaclinique.ca';
+const reponseModele = obj => ({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(obj) }] });
+
+function requete(corps, { origine = ORIGINE, methode = 'POST' } = {}) {
+  return new Request('https://aiguillage.exemple.workers.dev/', {
+    method: methode,
+    headers: { Origin: origine, 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.7' },
+    body: methode === 'POST' ? JSON.stringify(corps) : undefined
+  });
+}
+function deps(extra = {}) {
+  const appels = [];
+  return {
+    appels,
+    chargerCatalogue: async () => PAR_URL,
+    appelerModele: async params => { appels.push(params); return reponseModele({ guides: [{ numero: 1, raison: 'Couvre le sujet.' }], message: '' }); },
+    limiter: async () => true,
+    classerErreur: () => ({ statut: 502, message: 'Erreur du service.' }),
+    ...extra
+  };
+}
+
+test('candidats : adresses inconnues, doublons et excédent écartés', () => {
+  const urls = ['https://ailleurs.com/x', ...CATALOGUE.map(r => r.url), CATALOGUE[0].url];
+  const retenus = retenirCandidats(urls, PAR_URL);
+  assert.equal(retenus.length, CANDIDATS_MAX);
+  assert.equal(retenus[0].url, CATALOGUE[0].url);
+  assert.equal(new Set(retenus.map(g => g.url)).size, retenus.length);
+  assert.deepEqual(retenirCandidats('pas une liste', PAR_URL), []);
+});
+
+test('requête Sonnet 5 : sortie JSON, effort bas, sans repli ni cache', () => {
+  const r = construireRequete({ modele: 'claude-sonnet-5', candidats: retenirCandidats([CATALOGUE[3].url], PAR_URL), question: 'otite' });
+  assert.equal(r.model, 'claude-sonnet-5');
+  assert.deepEqual(r.output_config, { format: { type: 'json_schema', schema: SCHEMA }, effort: 'low' });
+  assert.equal(r.fallbacks, undefined);
+  assert.equal(r.betas, undefined);
+  assert.match(r.messages[0].content, /^Guides proposés.*\n0 \| Guide 3 \| INESSS \| Catégorie \| otite enfant/s);
+  assert.match(r.messages[0].content, /<question>otite<\/question>$/);
+});
+
+test('requête Opus 5 : repli automatique ; Haiku 4.5 : sans effort', () => {
+  const opus = construireRequete({ modele: 'claude-opus-5', candidats: [], question: 'x' });
+  assert.deepEqual(opus.betas, ['server-side-fallback-2026-07-01']);
+  assert.equal(opus.fallbacks, 'default');
+  const haiku = construireRequete({ modele: 'claude-haiku-4-5', candidats: [], question: 'x' });
+  assert.equal(haiku.output_config.effort, undefined);
+});
+
+test('réponse : seuls les numéros valides, sans doublon, au plus 5', () => {
+  const candidats = retenirCandidats(CATALOGUE.slice(0, 10).map(r => r.url), PAR_URL);
+  const guides = [99, -1, 1.5, 2, 2, 3, 4, 5, 6, 7].map(numero => ({ numero, raison: ' Raison. ' }));
+  const res = interpreterReponse(reponseModele({ guides, message: '' }), candidats);
+  assert.equal(res.guides.length, GUIDES_MAX);
+  assert.deepEqual(res.guides.map(g => g.titre), ['Guide 2', 'Guide 3', 'Guide 4', 'Guide 5', 'Guide 6']);
+  assert.equal(res.guides[0].raison, 'Raison.');
+  assert.equal(res.guides[0].url, 'https://exemple.ca/g2');
+});
+
+test('réponse : refus, JSON illisible, aucun guide', () => {
+  assert.equal(interpreterReponse({ stop_reason: 'refusal', content: [] }, []).guides.length, 0);
+  assert.throws(() => interpreterReponse({ stop_reason: 'end_turn', content: [{ type: 'text', text: 'pas du JSON' }] }, []), /illisible/);
+  assert.throws(() => interpreterReponse({ stop_reason: 'max_tokens', content: [] }, []), /incomplète/);
+  assert.match(interpreterReponse(reponseModele({ guides: [], message: '' }), []).message, /Aucun guide/);
+});
+
+test('HTTP : origine inconnue refusée, préflight accepté, GET refusé', async () => {
+  assert.equal((await traiter(requete({}, { origine: 'https://pirate.exemple' }), {}, deps())).status, 403);
+  const pre = await traiter(requete({}, { methode: 'OPTIONS' }), {}, deps());
+  assert.equal(pre.status, 204);
+  assert.equal(pre.headers.get('Access-Control-Allow-Origin'), ORIGINE);
+  assert.equal((await traiter(requete({}, { methode: 'GET' }), {}, deps())).status, 405);
+});
+
+test('HTTP : question trop courte ou trop longue', async () => {
+  assert.equal((await traiter(requete({ question: 'a' }), {}, deps())).status, 400);
+  assert.equal((await traiter(requete({ question: 'x'.repeat(401) }), {}, deps())).status, 400);
+});
+
+test('HTTP : limite de requêtes atteinte', async () => {
+  const r = await traiter(requete({ question: 'otite enfant', candidats: [CATALOGUE[0].url] }), {}, deps({ limiter: async () => false }));
+  assert.equal(r.status, 429);
+});
+
+test('HTTP : aucun candidat valide, donc aucun appel au modèle', async () => {
+  const d = deps();
+  const r = await traiter(requete({ question: 'otite enfant', candidats: ['https://ailleurs.com/x'] }), {}, d);
+  assert.equal(r.status, 200);
+  assert.equal(d.appels.length, 0);
+  assert.equal((await r.json()).guides.length, 0);
+});
+
+test('HTTP : parcours complet, titres et liens tirés du catalogue', async () => {
+  const d = deps();
+  const r = await traiter(requete({ question: '  otite   chez un enfant ', candidats: [CATALOGUE[0].url, CATALOGUE[7].url] }), { MODELE: 'claude-sonnet-5' }, d);
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get('Access-Control-Allow-Origin'), ORIGINE);
+  const corps = await r.json();
+  assert.deepEqual(corps.guides.map(g => [g.titre, g.url]), [['Guide 7', 'https://exemple.ca/g7']]);
+  assert.match(d.appels[0].messages[0].content, /<question>otite chez un enfant<\/question>/);
+});
+
+test('HTTP : erreur du service transmise proprement', async () => {
+  const r = await traiter(requete({ question: 'otite enfant', candidats: [CATALOGUE[0].url] }), {}, deps({ appelerModele: async () => { throw new Error('panne'); } }));
+  assert.equal(r.status, 502);
+  assert.equal((await r.json()).erreur, 'Erreur du service.');
+});
