@@ -20,7 +20,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     const cards = entries.map(r => {
       if (new URL(r.url).protocol !== 'https:') throw new Error('Lien de ressource non HTTPS.');
       titres.push(r.title);
-      return `<li class="guides-resource" data-category="${esc(cat)}" data-search="${esc([r.title,r.org,r.cat,r.tags,r.desc].join(' '))}">
+      return `<li class="guides-resource" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-category="${esc(cat)}" data-search="${esc([r.title,r.org,r.cat,r.tags,r.desc].join(' '))}">
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">${esc(r.org)}</span>
           <h3>${esc(r.title)}</h3>
@@ -68,8 +68,8 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" href="/assets/logo-banniere.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=89-guides-theme">
-  <script src="/assets/guides-cliniques.js?v=89-guides-theme" defer></script>
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=90-guides-favoris">
+  <script src="/assets/guides-cliniques.js?v=90-guides-favoris" defer></script>
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -94,6 +94,11 @@ ${header.replace(/ aria-current="page"/g, '')}
     </div>
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${ressources.length} ressources dans le catalogue</p>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
+  </section>
+  <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>
+    <div class="guides-category-heading"><h2 id="guides-favoris-titre">Mes favoris</h2><span class="compte"></span></div>
+    <p class="guides-favoris-note">Vos favoris sont gardés dans ce navigateur seulement : ils ne se synchronisent pas entre votre cellulaire et votre ordinateur.</p>
+    <ul class="guides-resource-list"></ul>
   </section>
   <div id="guides-catalogue">${sections}</div>
   <section class="guides-band guides-empty" hidden>

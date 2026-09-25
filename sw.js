@@ -50,7 +50,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v86-design-cadre (20 septembre 2026) : bandeau plus lisible, cadre 1400 px, section carte commune, guides PTEM/AMP.
 // v88-interface : sommaires, pied de page, recherche et favicon transparent.
 // v89-guides-theme : catalogue clinique raccordé au thème et aux composants communs.
-const CACHE = CACHE_PREFIX + 'v89-guides-theme';
+// v90-guides-favoris : favoris du catalogue clinique (étoile, section « Mes favoris »).
+const CACHE = CACHE_PREFIX + 'v90-guides-favoris';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

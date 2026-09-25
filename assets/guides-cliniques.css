@@ -31,7 +31,18 @@
 .guides-resource-link:hover{background:var(--teal-pale)}
 .guides-band--green .guides-resource-link:hover{background:rgba(255,255,255,.55)}
 .guides-reset{border:0;font:inherit;font-weight:650;cursor:pointer}
-.guides-page :is(.guides-filter,.guides-resource-link,.guides-reset):focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+/* Favoris : étoile blanche, jaune une fois ajoutée. Le bouton est à côté du lien, pas dedans. */
+.guides-resource{position:relative}
+.guides-page .guides-resource-link{padding-right:5rem}
+.guides-page .guides-resource-arrow{right:3rem}
+.guides-fav{position:absolute;right:0;top:.85rem;width:44px;height:44px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;color:var(--navy)}
+.guides-fav svg{fill:#fff;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;transition:fill .15s,transform .15s}
+.guides-fav:hover svg{transform:scale(1.12)}
+.guides-fav[aria-pressed="true"]{color:#b07d00}
+.guides-fav[aria-pressed="true"] svg{fill:#FFC61A}
+.guides-favoris{background:#fffbea;border-top:4px solid #FFC61A}
+.guides-favoris-note{margin:-.2rem 0 .6rem;font-size:.92rem;color:var(--navy);opacity:.75}
+.guides-page :is(.guides-filter,.guides-resource-link,.guides-reset,.guides-fav):focus-visible{outline:3px solid var(--teal);outline-offset:4px}
 .guides-page [hidden]{display:none!important}
 .guides-page .pied-site{margin-top:0}
 @media(max-width:680px){
