@@ -12,8 +12,9 @@ const URL_AIGUILLAGE = 'https://trouvetaclinique-aiguillage.o-laplante27.workers
    de cette liste s'affiche à la fin : l'ajouter ici pour choisir sa place. */
 const ORDRE_SUJETS = [
   'Infections et ITSS', 'Respiratoire', 'Cardiovasculaire et métabolique', 'Thrombose et anticoagulation',
-  'Santé mentale, dépendances et sommeil', 'Santé des femmes et grossesse', 'Pédiatrie',
+  'Digestif et foie', 'Santé mentale, dépendances et sommeil', 'Santé des femmes et grossesse', 'Pédiatrie',
   'Gériatrie et troubles neurocognitifs', 'Os, articulations et douleur', 'Peau et yeux',
+  'ORL (oreilles, nez, gorge)', 'Hématologie et oncologie',
   'Prévention et vaccination', 'Urgence et traumatologie', 'Soins palliatifs et niveaux de soins',
   'Imagerie médicale', 'Pratique professionnelle et protocoles', 'Documents pour les patients',
   'Ressources communautaires'

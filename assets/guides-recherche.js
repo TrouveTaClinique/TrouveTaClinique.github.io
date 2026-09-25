@@ -60,6 +60,12 @@
     ['dka', 'acidocetose'],
     ['epipen', 'anaphylaxie', 'epinephrine', 'adrenaline'],
     ['benzodiazepine', 'benzo', 'sedatif hypnotique', 'somnifere', 'hypnotique', 'bzra', 'z drug', 'lorazepam', 'ativan', 'clonazepam', 'rivotril', 'alprazolam', 'xanax', 'oxazepam', 'zopiclone', 'imovane'],
+    ['lombalgie', 'mal de dos', 'douleur lombaire', 'lumbago', 'sciatique', 'lombosciatalgie'],
+    ['gonalgie', 'douleur au genou', 'mal au genou', 'genou'],
+    ['epaule douloureuse', 'douleur a l epaule', 'mal a l epaule', 'epaule'],
+    ['ipp', 'inhibiteur de la pompe a protons', 'inhibiteurs de la pompe a protons', 'omeprazole', 'pantoprazole', 'esomeprazole', 'rabeprazole', 'lansoprazole', 'dexlansoprazole'],
+    ['rgo', 'reflux', 'reflux gastro-oesophagien', 'brulure d estomac', 'pyrosis'],
+    ['vertige', 'vppb', 'vertige positionnel'],
     ['deprescription', 'deprescrire', 'sevrage medicament', 'cessation medicament'],
     /* Ressources communautaires (sans mots vides : « aide », « de »… sont retirés de la requête). */
     ['banque alimentaire', 'aide alimentaire', 'depannage alimentaire', 'comptoir alimentaire', 'distribution alimentaire', 'nourriture', 'epicerie', 'panier noel', 'paniers de noel'],

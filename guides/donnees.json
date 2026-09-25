@@ -8253,5 +8253,482 @@
     "url": "https://fmpe.org/wp-content/uploads/2023/03/Syndrome-du-colon-irritable-SCI.pdf",
     "desc": "Feuillet pour le patient : symptômes, examens, alimentation (FODMAP) et traitements du SCI.",
     "verifie": "2026-09-25"
+  },
+  {
+    "title": "Épaule : douleur, tendinite, accrochage et bursite (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "épaule coiffe des rotateurs tendinopathie bursite calcification accrochage algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_douleur_tendinite_etc.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Étourdissements chroniques (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "étourdissement vertige déséquilibre chronique algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Etourdissements_chroniques.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Acouphènes (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "acouphène tinnitus audiogramme algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Acouphene.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Apnée du sommeil (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "apnée du sommeil ronflement SAOS enfant adulte algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Apnee_du_sommeil.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Cheville : arthrose (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "cheville arthrose algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Cheville_arthrose.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Genou : arthrose (gonarthrose, algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "genou arthrose gonarthrose algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_arthrose.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Dépistage du cancer colorectal (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Prévention et vaccination",
+    "tags": "dépistage cancer colorectal RSOSi FIT coloscopie algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Depistage_cancer_colorectal.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Épaule : capsulite, raideur et ankylose (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "épaule capsulite capsulite rétractile raideur algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_capsulite.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Cirrhose (F4) : prise en charge en première ligne",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_un_diagnostic_de_cirrhose_F4_2024.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Constipation chronique (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "constipation chronique laxatif algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Constipation_chronique.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Déprescription des benzodiazépines et des « Z-drugs » (algorithme)",
+    "org": "Réseau canadien pour la déprescription",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "benzodiazépine BZRA zopiclone sevrage déprescription insomnie algorithme prise en charge référence",
+    "url": "https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithm-benzodiazepines-2018-fr-1.pdf",
+    "desc": "Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org).",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Diarrhée chronique (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "diarrhée chronique calprotectine MII maladie cœliaque algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_diarhee_chronique_2025.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Doigt gâchette (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "doigt gâchette ténosynovite sténosante doigt en ressort main algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Doigt_gachette.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Douleurs abdominales (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "douleur abdominale algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Douleurs_abdominales.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Maladie de Dupuytren (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "Dupuytren fibromatose palmaire main algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Maladie_de_Dupuytren.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Dyspepsie (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "dyspepsie H. pylori IPP algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_dusypepsie_2025.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Dysphagie haute chronique (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "dysphagie déglutition oropharyngée algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Dysphagie_haute_chronique.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Élévation des enzymes hépatiques (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "enzymes hépatiques transaminases ALT AST bilan hépatique hépatite algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Elevation_enzymes_hepatiques.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Épicondylites externe et interne (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "épicondylite tennis elbow golf elbow épitrochléite coude algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epicondylites_externes_internes.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Fasciite plantaire (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "fasciite plantaire talon pied algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Fasciite_plantaire.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Fibromyalgie (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "fibromyalgie douleur chronique diffuse algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Physiatrie/Fibromyalgie2019.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Genou : syndrome fémoro-patellaire (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_syndrome_femoro-rotulien.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Hallux rigidus (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "hallux rigidus gros orteil pied arthrose algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Rigidus.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Hallux valgus (oignon, algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "hallux valgus oignon pied algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Valgus.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Hanche : coxarthrose (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "hanche coxarthrose arthrose algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Hanche_coxarthrose.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Kyste de Baker (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "kyste de Baker poplité genou algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_kyste_de_Baker.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Genou : entorse et traumatisme aigu (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "genou entorse LCA ligament croisé traumatisme algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_entorse_ligamentaire.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Leucémie lymphoïde chronique (LLC) : diagnostic et suivi (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Hématologie et oncologie",
+    "tags": "LLC leucémie lymphocytose hématologie algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Hematologie/Leucemie_lymphoide_chronique_LLC.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Lombalgie à horaire inflammatoire (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "lombalgie inflammatoire spondylarthrite spondylarthropathie algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_a_horaire_inflammatoire.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Lombalgie avec drapeaux rouges (pathologie grave suspectée, algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "lombalgie drapeaux rouges red flags syndrome de la queue de cheval algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_avec__pathologie_rachidienne_grave_suspectee.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Lombalgie aiguë (0 à 4 semaines, algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "lombalgie aiguë lombosciatalgie sciatique mal de dos algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_aigue_0-4_semaines.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Lombalgie subaiguë et chronique (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "lombalgie chronique subaiguë lombosciatalgie mal de dos algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_sub-aigue_chronique.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Épaule : luxation gléno-humérale (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "épaule luxation dislocation algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_luxation_dislocation.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Genou : instabilité et luxation de la rotule (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "rotule patella luxation subluxation instabilité genou algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_rotule_subluxation.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Genou : déchirure méniscale (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "ménisque déchirure méniscale genou algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_dechirure_meciscale.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Masse cervicale (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "masse cervicale cou adénopathie parotide algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Masse_cervicale.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Métatarsalgies (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "métatarsalgie avant-pied pied algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Metatarsalgies.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Névrome de Morton (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "névrome de Morton pied algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Nevrome_de_Morton.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Nausées et vomissements (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "nausée vomissement algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Nausees_et_vomissements.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Obstruction nasale chronique (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "obstruction nasale congestion rhinite corticostéroïde intranasal algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Obstruction_nasale_chronique.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Orteil en marteau (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "orteil marteau pied algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_orteil_marteau.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Ostéoporose : aide-mémoire pour le dépistage et le traitement",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "ostéoporose ostéodensitométrie bisphosphonate fracture algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Aide-memoire_Depistage_Traitement__Osteoporose.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Perte de poids d’étiologie indéterminée (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "perte de poids involontaire amaigrissement algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Perte_poids_etiologie_indeterminee.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Pouce : rhizarthrose (arthrose carpométacarpienne, algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "rhizarthrose pouce arthrose main algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pouce_arthrose_carpometacarpienne.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Prolapsus génital : consultation et prise en charge (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "prolapsus vaginal génital pessaire périnée algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/menopause/consultation_pour_prolapsus.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Reflux gastro-œsophagien (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "RGO reflux pyrosis IPP algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/1_Algorithme_de_prise_en_charge_Reflux_gastro-oesophagien_2026-05-12.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Scoliose idiopathique (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Pédiatrie",
+    "tags": "scoliose colonne adolescent algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Pediatrie/Scoliose_idiopathique.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Déprescription des inhibiteurs de la pompe à protons (IPP, algorithme)",
+    "org": "Réseau canadien pour la déprescription",
+    "cat": "Digestif et foie",
+    "tags": "IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole algorithme prise en charge référence",
+    "url": "https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithms-2018_Fr.pdf",
+    "desc": "Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org).",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Stéatose hépatique (MASLD) : prise en charge en première ligne",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Digestif et foie",
+    "tags": "stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_une_maladie_steatosique_du_foie_liee_a_une_dysfonction_metabolique_2026-03-13.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Surdité (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "surdité hypoacousie audiogramme otite algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Surdite.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Ténosynovite de De Quervain (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "De Quervain ténosynovite poignet pouce algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tenosynovite_De_Quervain.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Syndrome du tunnel carpien (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Os, articulations et douleur",
+    "tags": "tunnel carpien nerf médian main poignet algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tunnel_carpien.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Vertiges rotatoires aigus (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "ORL (oreilles, nez, gorge)",
+    "tags": "vertige VPPB Dix-Hallpike Epley algorithme prise en charge référence",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Vertiges_rotatoires_aigus.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
   }
 ]

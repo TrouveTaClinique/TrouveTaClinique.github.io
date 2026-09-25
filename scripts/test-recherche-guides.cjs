@@ -151,3 +151,9 @@ test('documents pour les patients : benzodiazépines et côlon irritable', () =>
   assert.ok(contient(parType('sevrage benzodiazépine', 3).map(r => r.title), /somniferes/), parType('sevrage benzodiazépine', 3).map(r => r.title).join(' | '));
   assert.ok(contient(parType('côlon irritable', 2).map(r => r.title), /colon irritable/));
 });
+
+test('algorithmes : mal de dos, tennis elbow, déprescription des IPP', () => {
+  assert.ok(contient(parType('mal de dos aigu', 3).map(r => r.title), /lombalgie aigue/), parType('mal de dos aigu', 3).map(r => r.title).join(' | '));
+  assert.ok(contient(parType('tennis elbow', 2).map(r => r.title), /epicondylite/));
+  assert.ok(contient(parType('arrêter pantoprazole', 3).map(r => r.title), /pompe a protons/), parType('arrêter pantoprazole', 3).map(r => r.title).join(' | '));
+});
