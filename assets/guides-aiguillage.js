@@ -55,6 +55,9 @@
     }
   }
 
+  /* Question sur une ressource communautaire : même encadré 211 que la recherche. */
+  const noteCommunautaire = () => { const n = catalogue.noteCommunautaire(); n.hidden = false; return n; };
+
   const erreur = texte => { zone.replaceChildren(paragraphe('guides-ia-erreur', texte)); };
 
   form.addEventListener('submit', async event => {
@@ -62,8 +65,10 @@
     const question = champ.value.replace(/\s+/g, ' ').trim();
     if (question.length < 3) { erreur('Décrivez la situation en quelques mots.'); champ.focus(); return; }
     const candidats = catalogue.candidats(question, CANDIDATS);
+    const communautaire = catalogue.estCommunautaire && catalogue.estCommunautaire(question);
     if (!candidats.length) {
-      afficher({ guides: [], message: 'Aucun guide du catalogue ne correspond à ces mots. Essayez de décrire la situation autrement.' });
+      afficher({ guides: [], message: communautaire ? '' : 'Aucun guide du catalogue ne correspond à ces mots. Essayez de décrire la situation autrement.' });
+      if (communautaire) zone.append(noteCommunautaire());
       return;
     }
     bouton.disabled = true;
@@ -81,6 +86,7 @@
       clearTimeout(minuterie);
       const donnees = await reponse.json().catch(() => ({}));
       if (reponse.ok) afficher(donnees);
+      if (reponse.ok && communautaire) zone.prepend(noteCommunautaire());
       else erreur(donnees.erreur || 'Le service est indisponible pour le moment. La recherche ci-dessus fonctionne toujours.');
     } catch (e) {
       erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
