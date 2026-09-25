@@ -1,11 +1,12 @@
 {
   "miseAJour": "2026-09-24",
   "annonce": {
-    "titre": "Prochaine activité de recrutement",
-    "texte": "JR Express : RLS Jardins-Roussillon\n**lundi 10 août 2026**\nTournée des cliniques de la région et visite de l'hôpital Anna-Laberge.\nDépart du stationnement du parc André-J.-Côté, à Candiac.",
-    "lien": "",
-    "lienCarte": "https://www.google.com/maps/dir/?api=1&destination=Parc%20Andr%C3%A9%20J.%20C%C3%B4t%C3%A9%2C%20116%20boulevard%20Marie-Victorin%2C%20Candiac%2C%20QC%20J5R%201C1",
-    "dateFin": "2026-08-12"
+    "titre": "Portes ouvertes · GMF-U des Montérégiennes",
+    "texte": "**Jeudi 1er octobre 2026, de 18 h à 20 h**\nLes résidents sont invités à découvrir le milieu clinique et à discuter avec l’équipe.\n20-N, boulevard de Mortagne, Boucherville.",
+    "lien": "mailto:gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca?subject=Inscription%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20du%20jeudi%201er%20octobre%202026&body=Bonjour%2C%0A%0AJe%20souhaite%20m%E2%80%99inscrire%20%C3%A0%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20(GMF-U%20des%20Mont%C3%A9r%C3%A9giennes).%0A%0ANom%20%3A%20%0AAnn%C3%A9e%20de%20r%C3%A9sidence%20et%20programme%20%3A%20%0ACourriel%20ou%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%20!",
+    "lienCarte": "https://www.google.com/maps/dir/?api=1&destination=20-N%2C%20boulevard%20de%20Mortagne%2C%20Boucherville%20(Qu%C3%A9bec)%20J4B%205K6",
+    "dateFin": "2026-10-01",
+    "region": "Est"
   },
   "hopitaux": [
     {

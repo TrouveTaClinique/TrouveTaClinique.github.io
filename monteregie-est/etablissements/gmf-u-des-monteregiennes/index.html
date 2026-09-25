@@ -161,33 +161,33 @@
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/monteregie-est/">Montérégie-Est</a> › <a href="/monteregie-est/etablissements/">Secteurs en établissement</a> › GMF-U des Montérégiennes</nav>
 
-  <style>
-  .evenement{position:relative;margin:var(--s-sm) 0 0;padding:1.4rem 1.5rem 1.5rem;border-radius:18px;background:linear-gradient(135deg,#170A72 0%,#2B1C8C 55%,#08A0A0 140%);color:#fff;box-shadow:0 12px 28px rgba(23,10,114,.18)}
-  .evenement .evenement-etiquette{display:inline-block;margin:0 0 .6rem;padding:.2rem .75rem;border-radius:999px;background:#90F1E9;color:#170A72;font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-  .evenement h2{margin:0 0 .5rem;color:#fff;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.2}
-  .evenement-quand{display:block;margin-top:.25rem;color:#90F1E9;font-size:clamp(1.1rem,1.6vw,1.3rem)}
-  .evenement p{margin:0 0 .8rem;max-width:68ch;line-height:1.55;color:#fff}
-  .evenement-infos{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;margin:0 0 1.1rem;font-size:.98rem}
-  .evenement-infos dt{font-weight:700;color:#90F1E9}
-  .evenement-infos dd{margin:0;color:#fff;overflow-wrap:anywhere}
-  .evenement a:not(.button){color:#fff;text-decoration:underline;text-underline-offset:3px}
-  .evenement .evenement-bouton{background:#90F1E9;color:#170A72;border-color:#90F1E9;font-weight:800}
-  .evenement .evenement-bouton:hover{background:#fff;border-color:#fff;color:#170A72}
-  .evenement a:focus-visible{outline:3px solid #90F1E9;outline-offset:3px}
-  @media(max-width:560px){.evenement-infos{grid-template-columns:1fr}.evenement-infos dd{margin-bottom:.4rem}.evenement .evenement-bouton{width:100%}}
+  <style data-evenement>
+  .evenement{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.9rem 1.6rem;margin:var(--s-sm) 0 0;padding:1.1rem 1.4rem;background:#fff;border:2px solid var(--teal);border-radius:16px}
+  .evenement p{margin:0}
+  .evenement .evenement-etiquette{display:inline-block;margin:0 0 .45rem;padding:.15rem .7rem;border-radius:999px;background:var(--teal-zone);color:var(--teal-texte);font-size:.85rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+  .evenement h2{margin:0 0 .35rem;color:var(--navy);font-size:clamp(1.4rem,2.2vw,1.85rem);line-height:1.25}
+  .evenement-quand{display:block;margin-top:.15rem;color:var(--teal-texte);font-size:.82em}
+  .evenement-message{font-size:1.1rem;line-height:1.5;color:var(--navy)}
+  .evenement-infos{list-style:none;margin:.5rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 1.4rem;font-size:1.02rem;line-height:1.5;color:var(--navy)}
+  .evenement-infos a{color:var(--teal-texte);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+  .evenement .evenement-bouton{font-size:1.02rem;white-space:nowrap}
+  .evenement a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+  @media(max-width:700px){.evenement{grid-template-columns:1fr;padding:1rem 1.1rem}.evenement-infos{flex-direction:column}.evenement .evenement-bouton{width:100%;white-space:normal}}
   </style>
   <section class="evenement" aria-labelledby="evenement-titre" data-fin="2026-10-01">
-    <p class="evenement-etiquette">Invitation aux résidents</p>
-    <h2 id="evenement-titre">Soirée portes ouvertes<span class="evenement-quand">jeudi 1<sup>er</sup> octobre 2026, de 18 h à 20 h</span></h2>
-    <p>L’équipe du GMF-U des Montérégiennes invite les résidents à venir découvrir son milieu clinique et à discuter avec l’équipe.</p>
-    <dl class="evenement-infos">
-      <dt>Lieu</dt><dd>20-N, boulevard de Mortagne, Boucherville (Québec) J4B 5K6 · <a href="https://www.google.com/maps/dir/?api=1&amp;destination=20-N%2C%20boulevard%20de%20Mortagne%2C%20Boucherville%20(Qu%C3%A9bec)%20J4B%205K6" rel="noopener" target="_blank">Itinéraire</a></dd>
-      <dt>Téléphone</dt><dd><a href="tel:+14504685511">450 468-5511</a></dd>
-      <dt>Réservation et informations</dt><dd><a href="mailto:gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca?subject=Inscription%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20du%20jeudi%201er%20octobre%202026&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20m%E2%80%99inscrire%20%C3%A0%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20(GMF-U%20des%20Mont%C3%A9r%C3%A9giennes).%0A%0ANom%20%3A%20%0AAnn%C3%A9e%20de%20r%C3%A9sidence%20et%20programme%20%3A%20%0ACourriel%20ou%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%20!">gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca</a></dd>
-    </dl>
+    <div>
+      <p class="evenement-etiquette">Invitation aux résidents</p>
+      <h2 id="evenement-titre">Soirée portes ouvertes<span class="evenement-quand">Jeudi 1<sup>er</sup> octobre 2026, de 18 h à 20 h</span></h2>
+      <p class="evenement-message">L’équipe du GMF-U des Montérégiennes invite les résidents à venir découvrir son milieu clinique et à discuter avec l’équipe.</p>
+      <ul class="evenement-infos">
+        <li><strong>Lieu :</strong> 20-N, boulevard de Mortagne, Boucherville (Québec) J4B 5K6 · <a href="https://www.google.com/maps/dir/?api=1&amp;destination=20-N%2C%20boulevard%20de%20Mortagne%2C%20Boucherville%20(Qu%C3%A9bec)%20J4B%205K6" rel="noopener" target="_blank">Itinéraire</a></li>
+        <li><strong>Téléphone :</strong> <a href="tel:+14504685511">450 468-5511</a></li>
+        <li><strong>Réservation et informations :</strong> <a href="mailto:gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca?subject=Inscription%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20du%20jeudi%201er%20octobre%202026&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20m%E2%80%99inscrire%20%C3%A0%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20(GMF-U%20des%20Mont%C3%A9r%C3%A9giennes).%0A%0ANom%20%3A%20%0AAnn%C3%A9e%20de%20r%C3%A9sidence%20et%20programme%20%3A%20%0ACourriel%20ou%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%20!">gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca</a></li>
+      </ul>
+    </div>
     <a class="button primary evenement-bouton" href="mailto:gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca?subject=Inscription%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20du%20jeudi%201er%20octobre%202026&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20m%E2%80%99inscrire%20%C3%A0%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20(GMF-U%20des%20Mont%C3%A9r%C3%A9giennes).%0A%0ANom%20%3A%20%0AAnn%C3%A9e%20de%20r%C3%A9sidence%20et%20programme%20%3A%20%0ACourriel%20ou%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%20!">S’inscrire par courriel</a>
   </section>
-  <script>(function(){var s=document.querySelector('.evenement[data-fin]');if(!s)return;var d=new Date(),a=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);if(a>s.getAttribute('data-fin'))s.remove();})();</script>
+  <script>(function(){var s=document.querySelector('.evenement[data-fin]');if(!s)return;var d=new Date(),a=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);if(a>s.getAttribute('data-fin')){s.remove();var t=document.querySelector('style[data-evenement]');if(t)t.remove();}})();</script>
   <section class="hero">
     <p class="eyebrow">GMF-U · RLS Pierre-Boucher</p>
     <h1>GMF-U des Montérégiennes : secteurs en recrutement</h1>

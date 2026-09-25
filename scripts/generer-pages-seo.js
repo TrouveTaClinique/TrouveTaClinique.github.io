@@ -1996,36 +1996,38 @@ function blocEvenement(c) {
   const itineraire = rempli(e.lieu)
     ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(e.lieu)}`
     : '';
-  const lignes = [
-    rempli(e.lieu) ? `<dt>Lieu</dt><dd>${esc(e.lieu)} · <a href="${esc(itineraire)}" rel="noopener" target="_blank">Itinéraire</a></dd>` : '',
-    rempli(e.telephone) ? `<dt>Téléphone</dt><dd><a href="tel:+1${esc(String(e.telephone).replace(/\D/g, '').replace(/^1(?=\d{10}$)/, ''))}">${esc(e.telephone)}</a></dd>` : '',
-    rempli(e.courriel) ? `<dt>Réservation et informations</dt><dd><a href="${esc(inscription)}">${esc(e.courriel)}</a></dd>` : ''
-  ].filter(Boolean).join('\n      ');
-  return `  <style>
-  .evenement{position:relative;margin:var(--s-sm) 0 0;padding:1.4rem 1.5rem 1.5rem;border-radius:18px;background:linear-gradient(135deg,#170A72 0%,#2B1C8C 55%,#08A0A0 140%);color:#fff;box-shadow:0 12px 28px rgba(23,10,114,.18)}
-  .evenement .evenement-etiquette{display:inline-block;margin:0 0 .6rem;padding:.2rem .75rem;border-radius:999px;background:#90F1E9;color:#170A72;font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-  .evenement h2{margin:0 0 .5rem;color:#fff;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.2}
-  .evenement-quand{display:block;margin-top:.25rem;color:#90F1E9;font-size:clamp(1.1rem,1.6vw,1.3rem)}
-  .evenement p{margin:0 0 .8rem;max-width:68ch;line-height:1.55;color:#fff}
-  .evenement-infos{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;margin:0 0 1.1rem;font-size:.98rem}
-  .evenement-infos dt{font-weight:700;color:#90F1E9}
-  .evenement-infos dd{margin:0;color:#fff;overflow-wrap:anywhere}
-  .evenement a:not(.button){color:#fff;text-decoration:underline;text-underline-offset:3px}
-  .evenement .evenement-bouton{background:#90F1E9;color:#170A72;border-color:#90F1E9;font-weight:800}
-  .evenement .evenement-bouton:hover{background:#fff;border-color:#fff;color:#170A72}
-  .evenement a:focus-visible{outline:3px solid #90F1E9;outline-offset:3px}
-  @media(max-width:560px){.evenement-infos{grid-template-columns:1fr}.evenement-infos dd{margin-bottom:.4rem}.evenement .evenement-bouton{width:100%}}
+  const infos = [
+    rempli(e.lieu) ? `<li><strong>Lieu :</strong> ${esc(e.lieu)} · <a href="${esc(itineraire)}" rel="noopener" target="_blank">Itinéraire</a></li>` : '',
+    rempli(e.telephone) ? `<li><strong>Téléphone :</strong> <a href="tel:+1${esc(String(e.telephone).replace(/\D/g, '').replace(/^1(?=\d{10}$)/, ''))}">${esc(e.telephone)}</a></li>` : '',
+    rempli(e.courriel) ? `<li><strong>Réservation et informations :</strong> <a href="${esc(inscription)}">${esc(e.courriel)}</a></li>` : ''
+  ].filter(Boolean).join('\n        ');
+  /* Carte blanche au contour sarcelle, aux couleurs du site ; styles propres au bloc pour ne pas
+     changer la feuille commune (et son cache) pour une annonce temporaire. */
+  return `  <style data-evenement>
+  .evenement{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.9rem 1.6rem;margin:var(--s-sm) 0 0;padding:1.1rem 1.4rem;background:#fff;border:2px solid var(--teal);border-radius:16px}
+  .evenement p{margin:0}
+  .evenement .evenement-etiquette{display:inline-block;margin:0 0 .45rem;padding:.15rem .7rem;border-radius:999px;background:var(--teal-zone);color:var(--teal-texte);font-size:.85rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+  .evenement h2{margin:0 0 .35rem;color:var(--navy);font-size:clamp(1.4rem,2.2vw,1.85rem);line-height:1.25}
+  .evenement-quand{display:block;margin-top:.15rem;color:var(--teal-texte);font-size:.82em}
+  .evenement-message{font-size:1.1rem;line-height:1.5;color:var(--navy)}
+  .evenement-infos{list-style:none;margin:.5rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 1.4rem;font-size:1.02rem;line-height:1.5;color:var(--navy)}
+  .evenement-infos a{color:var(--teal-texte);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+  .evenement .evenement-bouton{font-size:1.02rem;white-space:nowrap}
+  .evenement a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+  @media(max-width:700px){.evenement{grid-template-columns:1fr;padding:1rem 1.1rem}.evenement-infos{flex-direction:column}.evenement .evenement-bouton{width:100%;white-space:normal}}
   </style>
   <section class="evenement" aria-labelledby="evenement-titre" data-fin="${esc(e.date)}">
-    <p class="evenement-etiquette">Invitation aux résidents</p>
-    <h2 id="evenement-titre">${esc(e.titre || 'Événement')}<span class="evenement-quand">${quand}</span></h2>
-    ${rempli(e.texte) ? `<p>${esc(e.texte)}</p>` : ''}
-    <dl class="evenement-infos">
-      ${lignes}
-    </dl>
+    <div>
+      <p class="evenement-etiquette">Invitation aux résidents</p>
+      <h2 id="evenement-titre">${esc(e.titre || 'Événement')}<span class="evenement-quand">${quand.charAt(0).toUpperCase() + quand.slice(1)}</span></h2>
+      ${rempli(e.texte) ? `<p class="evenement-message">${esc(e.texte)}</p>` : ''}
+      <ul class="evenement-infos">
+        ${infos}
+      </ul>
+    </div>
     ${inscription ? `<a class="button primary evenement-bouton" href="${esc(inscription)}">S’inscrire par courriel</a>` : ''}
   </section>
-  <script>(function(){var s=document.querySelector('.evenement[data-fin]');if(!s)return;var d=new Date(),a=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);if(a>s.getAttribute('data-fin'))s.remove();})();</script>
+  <script>(function(){var s=document.querySelector('.evenement[data-fin]');if(!s)return;var d=new Date(),a=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);if(a>s.getAttribute('data-fin')){s.remove();var t=document.querySelector('style[data-evenement]');if(t)t.remove();}})();</script>
 `;
 }
 /* Balise schema.org Event de l'annonce, pour les moteurs de recherche. */
