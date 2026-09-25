@@ -13,10 +13,12 @@
 .guides-search-form.search-page-form button[type="submit"]{min-height:60px;padding-inline:2rem;font-size:1.08rem}
 .guides-search-hint{font-size:.95rem;margin:.65rem 0 1.75rem;color:var(--navy);opacity:.8}
 .guides-filter-area h3{font-size:1.08rem;margin:0 0 .8rem}
-.guides-filters{display:flex;flex-wrap:wrap;gap:.55rem}
-.guides-filter{padding:.6rem 1rem;min-height:44px;border:1px solid rgba(18,6,114,.22);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;text-align:left}
-.guides-filter[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
-.guides-filter:hover{border-color:var(--navy)}
+.guides-filters{display:flex;flex-wrap:wrap;gap:.8rem 1rem;align-items:flex-end}
+.guides-select{display:flex;flex-direction:column;gap:.3rem;flex:1 1 16rem;min-width:0;font-size:.9rem;font-weight:650;color:var(--navy)}
+.guides-select select{min-height:48px;width:100%;padding:.55rem 2.4rem .55rem .9rem;border:1px solid rgba(18,6,114,.3);border-radius:10px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23120672' stroke-width='2'/%3E%3C/svg%3E") no-repeat right .9rem center;appearance:none;-webkit-appearance:none;color:var(--navy);font:inherit;font-size:1rem;font-weight:500;cursor:pointer}
+.guides-select select:hover{border-color:var(--navy)}
+.guides-filtres-reset{min-height:48px;padding:.55rem 1rem;border:0;background:transparent;color:var(--navy);font:inherit;font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.guides-resultats{border-top:4px solid var(--teal)}
 .guides-status{margin:1.25rem 0 0;font-size:.96rem;font-weight:600}
 .guides-category-heading{display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap;margin:0 0 1rem;padding-bottom:1rem;border-bottom:2px solid var(--navy)}
 .guides-category-heading h2{margin:0}
@@ -42,7 +44,7 @@
 .guides-fav[aria-pressed="true"] svg{fill:#FFC61A}
 .guides-favoris{background:#fffbea;border-top:4px solid #FFC61A}
 .guides-favoris-note{margin:-.2rem 0 .6rem;font-size:.92rem;color:var(--navy);opacity:.75}
-.guides-page :is(.guides-filter,.guides-resource-link,.guides-reset,.guides-fav):focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+.guides-page :is(.guides-select select,.guides-filtres-reset,.guides-resource-link,.guides-reset,.guides-fav):focus-visible{outline:3px solid var(--teal);outline-offset:4px}
 .guides-page [hidden]{display:none!important}
 .guides-page .pied-site{margin-top:0}
 @media(max-width:680px){
@@ -51,5 +53,5 @@
   .guides-resource-list{grid-template-columns:minmax(0,1fr)}
   .guides-search-form.search-page-form input[type="search"]{flex-basis:100%;min-height:52px}
   .guides-search-form.search-page-form button[type="submit"]{min-height:48px;width:100%}
-  .guides-filter{font-size:.88rem;padding:.55rem .85rem;max-width:100%}
+  .guides-select{flex-basis:100%}
 }

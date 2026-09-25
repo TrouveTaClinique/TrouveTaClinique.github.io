@@ -4,13 +4,23 @@
   const input = document.getElementById('guide-search');
   if (!input) return;
   const form = document.querySelector('.guides-search-form');
-  const filters = Array.from(document.querySelectorAll('.guides-filter'));
+  const moteur = window.GuidesRecherche;
   const sections = Array.from(document.querySelectorAll('.guides-category'));
   const status = document.getElementById('guide-status');
   const empty = document.querySelector('.guides-empty');
-  const norm = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/œ/g, 'oe').toLowerCase();
-  const resources = Array.from(document.querySelectorAll('.guides-resource')).map(el => ({el, category:el.dataset.category, text:norm(el.dataset.search)}));
-  let category = 'Toutes';
+  const selSujet = document.getElementById('guides-filtre-sujet');
+  const selOrganisme = document.getElementById('guides-filtre-organisme');
+  const effacerFiltres = document.querySelector('.guides-filtres-reset');
+  const resSection = document.querySelector('.guides-resultats');
+  const resList = resSection.querySelector('.guides-resource-list');
+  const resources = Array.from(document.querySelectorAll('#guides-catalogue .guides-resource')).map(el => ({
+    el, id: el.dataset.id, category: el.dataset.category, org: el.dataset.org
+  }));
+  if (!moteur || !selSujet) return; // la liste complète reste affichée
+  const index = resources.map(r => moteur.preparer({
+    titre: r.el.dataset.title, organisme: r.org, categorie: r.category,
+    motsCles: r.el.querySelector('.guides-keywords').textContent, description: r.el.dataset.desc
+  }));
   document.querySelector('.guides-filter-area').hidden = false;
 
   /* Favoris : gardés dans ce navigateur seulement (localStorage), sans compte ni
@@ -51,15 +61,16 @@
     construireFavoris();
     render();
   }
+  function cloner(id) {
+    const clone = parId.get(id).el.cloneNode(true);
+    clone.hidden = false;
+    clone.querySelector('.guides-fav').remove();
+    ajouterEtoile(clone);
+    return clone;
+  }
   function construireFavoris() {
-    favList.replaceChildren(...favoris.map(id => {
-      const clone = parId.get(id).el.cloneNode(true);
-      clone.hidden = false;
-      clone.querySelector('.guides-fav').remove();
-      ajouterEtoile(clone);
-      return clone;
-    }));
-    document.querySelectorAll('#guides-catalogue .guides-fav').forEach(b => majEtoile(b, b.parentElement.dataset.id));
+    favList.replaceChildren(...favoris.map(cloner));
+    document.querySelectorAll('.guides-fav').forEach(b => majEtoile(b, b.parentElement.dataset.id));
   }
   resources.forEach(r => ajouterEtoile(r.el));
   construireFavoris();
@@ -68,48 +79,56 @@
     favoris = lireFavoris(); construireFavoris(); render();
   });
 
+  const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', n + ' ' + mot + (n > 1 ? 's' : '')); };
+
   function render() {
-    const words = norm(input.value.trim()).split(/\s+/).filter(Boolean);
-    let count = 0;
-    resources.forEach(r => {
-      const match = (category === 'Toutes' || r.category === category) && words.every(word => r.text.includes(word));
-      r.el.hidden = !match;
-      if (match) count++;
+    const requete = input.value.trim();
+    const sujet = selSujet.value, organisme = selOrganisme.value;
+    const retenus = new Map(); // id -> score
+    moteur.rechercher(index, requete).forEach(({ i, score }) => {
+      const r = resources[i];
+      if ((!sujet || r.category === sujet) && (!organisme || r.org === organisme)) retenus.set(r.id, score);
     });
-    /* Les favoris suivent la même recherche et le même filtre que le catalogue. */
+    const count = retenus.size;
+    resources.forEach(r => { r.el.hidden = !retenus.has(r.id); });
+
+    /* Favoris : mêmes critères que le catalogue. */
     let favVisibles = 0;
-    favList.querySelectorAll('.guides-resource').forEach(li => {
-      li.hidden = parId.get(li.dataset.id).el.hidden;
-      if (!li.hidden) favVisibles++;
-    });
+    favList.querySelectorAll('.guides-resource').forEach(li => { li.hidden = !retenus.has(li.dataset.id); if (!li.hidden) favVisibles++; });
     favSection.hidden = favVisibles === 0;
-    const badgeFav = favSection.querySelector('.compte');
-    badgeFav.textContent = favVisibles;
-    badgeFav.setAttribute('aria-label', favVisibles + ' favori' + (favVisibles > 1 ? 's' : ''));
+    badge(favSection.querySelector('.compte'), favVisibles, 'favori');
+
+    /* Avec une recherche : une seule liste classée par pertinence. Sans recherche : les catégories. */
+    const enRecherche = requete !== '' && count > 0;
+    resSection.hidden = !enRecherche;
+    if (enRecherche) {
+      resList.replaceChildren(...[...retenus.keys()].map(cloner));
+      badge(resSection.querySelector('.compte'), count, 'ressource');
+    } else {
+      resList.replaceChildren();
+    }
     let visible = favVisibles ? 1 : 0;
+    if (enRecherche) visible++;
     sections.forEach(section => {
-      const n = section.querySelectorAll('.guides-resource:not([hidden])').length;
+      const n = enRecherche ? 0 : section.querySelectorAll('.guides-resource:not([hidden])').length;
       section.hidden = n === 0;
       if (n) {
         section.classList.toggle('guides-band--green', visible++ % 2 === 1);
-        const badge = section.querySelector('.compte');
-        badge.textContent = n;
-        badge.setAttribute('aria-label', n + ' ressource' + (n > 1 ? 's' : ''));
+        badge(section.querySelector('.compte'), n, 'ressource');
       }
     });
     empty.hidden = count !== 0;
-    status.textContent = count + ' ressource' + (count > 1 ? 's' : '') + (category !== 'Toutes' ? ' · ' + category : '') + (input.value.trim() ? ' pour « ' + input.value.trim() + ' »' : ' dans le catalogue');
+    effacerFiltres.hidden = !sujet && !organisme;
+    const filtres = [sujet, organisme].filter(Boolean).join(' · ');
+    status.textContent = count + ' ressource' + (count > 1 ? 's' : '') + (filtres ? ' · ' + filtres : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue');
   }
-  filters.forEach(button => button.addEventListener('click', () => {
-    category = button.dataset.category;
-    filters.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
-    render();
-  }));
-  input.addEventListener('input', render);
-  form.addEventListener('submit', event => { event.preventDefault(); render(); });
+  let minuterie = null;
+  input.addEventListener('input', () => { clearTimeout(minuterie); minuterie = setTimeout(render, 120); });
+  form.addEventListener('submit', event => { event.preventDefault(); clearTimeout(minuterie); render(); });
+  [selSujet, selOrganisme].forEach(sel => sel.addEventListener('change', render));
+  effacerFiltres.addEventListener('click', () => { selSujet.value = ''; selOrganisme.value = ''; render(); selSujet.focus(); });
   document.querySelector('.guides-reset').addEventListener('click', () => {
-    input.value = ''; category = 'Toutes';
-    filters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.category === 'Toutes')));
+    input.value = ''; selSujet.value = ''; selOrganisme.value = '';
     render(); input.focus();
   });
   input.value = new URLSearchParams(location.search).get('q') || '';

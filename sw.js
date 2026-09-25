@@ -51,7 +51,8 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v88-interface : sommaires, pied de page, recherche et favicon transparent.
 // v89-guides-theme : catalogue clinique raccordé au thème et aux composants communs.
 // v90-guides-favoris : favoris du catalogue clinique (étoile, section « Mes favoris »).
-const CACHE = CACHE_PREFIX + 'v90-guides-favoris';
+// v91-guides-recherche : moteur de recherche du catalogue (synonymes, fautes, pertinence) et filtres Sujet/Organisme.
+const CACHE = CACHE_PREFIX + 'v91-guides-recherche';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
