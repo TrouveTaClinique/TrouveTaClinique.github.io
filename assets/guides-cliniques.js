@@ -1,48 +1,73 @@
-/* La liste et les liens sont présents dans le HTML, même sans JavaScript. */
+/* La liste et les liens sont présents dans le HTML, même sans JavaScript.
+   Deux pages utilisent ce script : /guides/ (guides cliniques) et
+   /guides/ressources-communautaires/ (organismes) ; body[data-page] les distingue. */
 (function () {
   'use strict';
+  const page = document.body.dataset.page || 'guides';
+  /* Anciens liens vers la section communautaire de /guides/ : elle a sa propre page. */
+  const versAutrePage = () => {
+    if (page !== 'guides' || location.hash !== '#sujet-ressources-communautaires' || !document.body.dataset.autrePage) return false;
+    location.replace(document.body.dataset.autrePage);
+    return true;
+  };
+  if (versAutrePage()) return;
+  window.addEventListener('hashchange', versAutrePage);
   const input = document.getElementById('guide-search');
   if (!input) return;
+  const MOT = document.body.dataset.mot || 'ressource';
+  const pluriel = (n, mot) => n + ' ' + mot + (n > 1 ? 's' : '');
   const form = document.querySelector('.guides-search-form');
   const moteur = window.GuidesRecherche;
   const sections = Array.from(document.querySelectorAll('.guides-category'));
   const status = document.getElementById('guide-status');
   const empty = document.querySelector('.guides-empty');
   const communautaire = document.querySelector('.guides-communautaire');
-  const selSujet = document.getElementById('guides-filtre-sujet');
-  const selOrganisme = document.getElementById('guides-filtre-organisme');
+  /* Filtres : chaque liste déroulante porte data-filtre, le nom de l'attribut data-* des fiches
+     (category, org, rubriques, ville). La case « hors territoire » masque par défaut les
+     organismes situés hors de la Montérégie-Est. */
+  const filtres = Array.from(document.querySelectorAll('select[data-filtre]'));
+  const caseHors = document.getElementById('guides-hors');
+  const SANS_ADRESSE = '(sans adresse)';
   const effacerFiltres = document.querySelector('.guides-filtres-reset');
   const resSection = document.querySelector('.guides-resultats');
   const resList = resSection.querySelector('.guides-resource-list');
   const resources = Array.from(document.querySelectorAll('#guides-catalogue .guides-resource')).map(el => ({
-    el, id: el.dataset.id, category: el.dataset.category, org: el.dataset.org, comm: el.dataset.type === 'communautaire'
+    el, id: el.dataset.id, category: el.dataset.category, org: el.dataset.org, comm: el.dataset.type === 'communautaire',
+    ville: el.dataset.ville || '', hors: el.dataset.hors === '1', rubriques: (el.dataset.rubriques || '').split('|')
   }));
-  if (!moteur || !selSujet) return; // la liste complète reste affichée
+  if (!moteur || !filtres.length) return; // la liste complète reste affichée
   /* Organismes communautaires : leur source commune (le bottin) n'est pas cherchée, leur ville
-     compte comme le nom et leur rubrique comme une catégorie. */
-  const index = resources.map(r => moteur.preparer({
-    titre: r.comm ? r.el.dataset.title + ' ' + r.el.dataset.ville : r.el.dataset.title, organisme: r.comm ? '' : r.org,
-    categorie: r.comm ? r.category + ' ' + r.el.dataset.rubriques : r.category,
-    motsCles: r.el.dataset.tags, description: r.el.dataset.desc
+     compte comme le nom et leur rubrique comme une catégorie. Même préparation pour les fiches
+     de l'autre page, lues dans guides/donnees.json. */
+  const preparer = f => moteur.preparer(f.comm
+    ? { titre: f.titre + ' ' + f.ville, organisme: '', categorie: 'Ressources communautaires ' + f.rubriques, motsCles: f.tags, description: f.desc }
+    : { titre: f.titre, organisme: f.org, categorie: f.cat, motsCles: f.tags, description: f.desc });
+  const index = resources.map(r => preparer({
+    comm: r.comm, titre: r.el.dataset.title, ville: r.ville, org: r.org, cat: r.category,
+    rubriques: r.el.dataset.rubriquesDetail || '', tags: r.el.dataset.tags, desc: r.el.dataset.desc
   }));
   const communautaires = resources.map(r => r.comm);
   const classer = (requete, seuil) => moteur.rechercherParType(index, communautaires, requete, { seuil });
   document.querySelector('.guides-filter-area').hidden = false;
 
   /* Favoris : gardés dans ce navigateur seulement (localStorage), sans compte ni
-     synchronisation. La clé contient les URL des ressources, dans l'ordre d'ajout. */
+     synchronisation. La clé contient les URL des ressources, dans l'ordre d'ajout ; elle est
+     commune aux deux pages, qui n'affichent chacune que leurs propres fiches. */
   const CLE_FAVORIS = 'ttc-guides-favoris';
   const favSection = document.querySelector('.guides-favoris');
   const favList = favSection.querySelector('.guides-resource-list');
   const parId = new Map(resources.map(r => [r.el.dataset.id, r]));
+  let tousFavoris = [];   // y compris ceux de l'autre page, à conserver tels quels
+  let favoris = [];       // ceux de cette page
   const lireFavoris = () => {
     try {
       const v = JSON.parse(localStorage.getItem(CLE_FAVORIS) || '[]');
-      return Array.isArray(v) ? v.filter(id => parId.has(id)) : [];
-    } catch (e) { return []; }
+      tousFavoris = Array.isArray(v) ? v.filter(id => typeof id === 'string') : [];
+    } catch (e) { /* stockage illisible : on garde la liste en mémoire */ }
+    favoris = tousFavoris.filter(id => parId.has(id));
   };
-  let favoris = lireFavoris();
-  const enregistrer = () => { try { localStorage.setItem(CLE_FAVORIS, JSON.stringify(favoris)); } catch (e) { /* stockage bloqué : favoris pour cette visite seulement */ } };
+  lireFavoris();
+  const enregistrer = () => { try { localStorage.setItem(CLE_FAVORIS, JSON.stringify(tousFavoris)); } catch (e) { /* stockage bloqué : favoris pour cette visite seulement */ } };
   const ETOILE = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>';
   function majEtoile(bouton, id) {
     const actif = favoris.includes(id);
@@ -62,7 +87,8 @@
     li.appendChild(bouton);
   }
   function basculer(id) {
-    favoris = favoris.includes(id) ? favoris.filter(f => f !== id) : [id, ...favoris];
+    tousFavoris = tousFavoris.includes(id) ? tousFavoris.filter(f => f !== id) : [id, ...tousFavoris];
+    favoris = tousFavoris.filter(f => parId.has(f));
     enregistrer();
     construireFavoris();
     render();
@@ -82,7 +108,7 @@
   construireFavoris();
   window.addEventListener('storage', event => {
     if (event.key !== CLE_FAVORIS) return;
-    favoris = lireFavoris(); construireFavoris(); render();
+    lireFavoris(); construireFavoris(); render();
   });
 
   /* Sans recherche ni filtre, les sujets sont fermés : leur titre est un bouton qui ouvre la
@@ -118,15 +144,28 @@
   }
   window.addEventListener('hashchange', ouvrirDepuisAncre);
 
-  const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', n + ' ' + mot + (n > 1 ? 's' : '')); };
+  const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', pluriel(n, mot)); };
+
+  const correspond = (r, cle, valeur) => {
+    if (!valeur) return true;
+    if (cle === 'rubriques') return r.rubriques.includes(valeur);
+    if (cle === 'ville') return valeur === SANS_ADRESSE ? !r.ville : r.ville === valeur;
+    return r.el.dataset[cle] === valeur;
+  };
+  const selVille = filtres.find(s => s.dataset.filtre === 'ville');
+  /* Hors territoire : visible si la case est cochée ou si sa ville est choisie dans le filtre. */
+  const horsVisible = r => !r.hors || (caseHors && caseHors.checked) || (selVille && selVille.value === r.ville);
 
   function render() {
     const requete = input.value.trim();
-    const sujet = selSujet.value, organisme = selOrganisme.value;
+    const actifs = filtres.filter(s => s.value);
     const retenus = new Map(); // id -> score
+    let horsMasques = 0;
     classer(requete, 0.25).forEach(({ i, score }) => {
       const r = resources[i];
-      if ((!sujet || r.category === sujet) && (!organisme || r.org === organisme)) retenus.set(r.id, score);
+      if (!filtres.every(s => correspond(r, s.dataset.filtre, s.value))) return;
+      if (!horsVisible(r)) { horsMasques++; return; }
+      retenus.set(r.id, score);
     });
     const count = retenus.size;
     resources.forEach(r => { r.el.hidden = !retenus.has(r.id); });
@@ -146,7 +185,7 @@
     } else {
       resList.replaceChildren();
     }
-    replier = !requete && !sujet && !organisme;
+    replier = !requete && !actifs.length;
     titreCatalogue.hidden = enRecherche;
     let visible = favVisibles ? 1 : 0;
     if (enRecherche) visible++;
@@ -166,10 +205,46 @@
       }
     });
     empty.hidden = count !== 0;
-    communautaire.hidden = !moteur.estCommunautaire(requete);
-    effacerFiltres.hidden = !sujet && !organisme;
-    const filtres = [sujet, organisme].filter(Boolean).join(' · ');
-    status.textContent = count + ' ressource' + (count > 1 ? 's' : '') + (filtres ? ' · ' + filtres : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue');
+    if (communautaire) communautaire.hidden = !moteur.estCommunautaire(requete);
+    effacerFiltres.hidden = !actifs.length;
+    const libelles = actifs.map(s => s.value === SANS_ADRESSE ? 'lignes d’aide et services à distance' : s.value).join(' · ');
+    status.textContent = pluriel(count, MOT) + (libelles ? ' · ' + libelles : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue')
+      + (horsMasques ? ' (' + horsMasques + ' hors territoire masqué' + (horsMasques > 1 ? 's' : '') + ')' : '');
+    signalerAutrePage(requete);
+  }
+
+  /* Lien vers l'autre page quand la recherche y trouve aussi des fiches (ex. « dépendance »
+     donne des guides et des organismes). Le catalogue complet n'est chargé qu'à la première
+     recherche ; le classement mêle les deux types, comme avant la séparation des pages. */
+  const autre = document.querySelector('.guides-autre');
+  const autreLien = autre && autre.querySelector('a');
+  let autreIndex = null;
+  const chargerAutre = () => autreIndex || (autreIndex = fetch('/guides/donnees.json')
+    .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then(liste => {
+      /* Organismes hors territoire exclus du compte : l'autre page les masque par défaut. */
+      const fiches = liste.filter(f => (f.type === 'communautaire') !== (page === 'communautaire') && !/\(hors territoire\)$/.test(f.ville || ''));
+      return fiches.map(f => preparer({
+        comm: f.type === 'communautaire', titre: f.title, ville: (f.ville || '').replace(/ \(hors territoire\)$/, ''), org: f.org, cat: f.cat,
+        rubriques: (f.rubriques || []).join(' '), tags: f.tags, desc: f.desc || ''
+      }));
+    })
+    .catch(() => { autreIndex = null; return []; }));
+  function signalerAutrePage(requete) {
+    if (!autre) return;
+    if (!requete) { autre.hidden = true; return; }
+    chargerAutre().then(fiches => {
+      if (input.value.trim() !== requete || !fiches.length) return;
+      const tous = index.concat(fiches);
+      const types = communautaires.concat(fiches.map(() => page !== 'communautaire'));
+      const n = moteur.rechercherParType(tous, types, requete, { seuil: 0.25 }).filter(x => x.i >= index.length).length;
+      autre.hidden = n === 0;
+      if (!n) return;
+      const s = n > 1 ? 's' : '';
+      const quoi = page === 'communautaire' ? `${n} guide${s} clinique${s}` : `${n} organisme${s} communautaire${s}`;
+      autreLien.textContent = `${quoi} correspond${n > 1 ? 'ent' : ''} aussi à « ${requete} » →`;
+      autreLien.href = document.body.dataset.autrePage + '?q=' + encodeURIComponent(requete);
+    });
   }
   /* La recherche en cours est gardée dans l'adresse (?q=) : on peut la partager, la mettre en
      favori du navigateur ou revenir en arrière sans la perdre. */
@@ -193,10 +268,12 @@
     input.select();
   });
   form.addEventListener('submit', event => { event.preventDefault(); clearTimeout(minuterie); render(); majAdresse(); });
-  [selSujet, selOrganisme].forEach(sel => sel.addEventListener('change', render));
-  effacerFiltres.addEventListener('click', () => { selSujet.value = ''; selOrganisme.value = ''; render(); selSujet.focus(); });
+  filtres.forEach(sel => sel.addEventListener('change', render));
+  if (caseHors) caseHors.addEventListener('change', render);
+  effacerFiltres.addEventListener('click', () => { filtres.forEach(s => { s.value = ''; }); render(); filtres[0].focus(); });
   document.querySelector('.guides-reset').addEventListener('click', () => {
-    input.value = ''; selSujet.value = ''; selOrganisme.value = '';
+    input.value = ''; filtres.forEach(s => { s.value = ''; });
+    if (caseHors) caseHors.checked = true;
     render(); majAdresse(); input.focus();
   });
   /* Pour l'aiguillage IA (guides-aiguillage.js) : présélection par le moteur du site et
@@ -206,7 +283,8 @@
     candidats: (question, n) => classer(question, 0).slice(0, n).map(({ i }) => resources[i].id),
     carte: id => (parId.has(id) ? cloner(id) : null),
     estCommunautaire: question => moteur.estCommunautaire(question),
-    noteCommunautaire: () => communautaire.cloneNode(true)
+    noteCommunautaire: () => (communautaire ? communautaire.cloneNode(true) : null),
+    page
   };
   input.value = new URLSearchParams(location.search).get('q') || '';
   render();

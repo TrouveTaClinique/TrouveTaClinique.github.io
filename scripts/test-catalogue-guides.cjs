@@ -36,3 +36,18 @@ test('organismes communautaires : sujet, rubrique et moyen de contact', () => {
   assert.deepEqual(fautifs.map(r => r.title), []);
   assert.ok(ressources.filter(r => r.cat === 'Ressources communautaires').every(r => r.type === 'communautaire'));
 });
+
+test('pages générées : guides et organismes séparés, onglets et filtres propres à chaque page', () => {
+  const fs = require('node:fs');
+  const lire = chemin => fs.readFileSync(path.join(__dirname, '..', chemin), 'utf8');
+  const guides = lire('guides/index.html');
+  const comm = lire('guides/ressources-communautaires/index.html');
+  const nComm = ressources.filter(r => r.type === 'communautaire').length;
+  const fiches = html => (html.match(/<li class="guides-resource[" ]/g) || []).length;
+  assert.equal(fiches(guides), ressources.length - nComm);
+  assert.equal(fiches(comm), nComm);
+  assert.ok(!guides.includes('data-type="communautaire"'));
+  assert.ok(guides.includes('data-filtre="category"') && comm.includes('data-filtre="ville"') && comm.includes('id="guides-hors"'));
+  assert.ok(guides.includes('<a href="/guides/" aria-current="page">') && comm.includes('<a href="/guides/ressources-communautaires/" aria-current="page">'));
+  assert.ok(comm.includes('data-page="communautaire"') && guides.includes('data-page="guides"'));
+});

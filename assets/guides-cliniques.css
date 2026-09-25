@@ -171,3 +171,24 @@
   .guides-ia-barre::after{width:100%;animation:guides-ia-lueur 1.4s ease-in-out infinite}
   .guides-ia-etape{animation:none}
 }
+/* Onglets entre les deux pages du catalogue (guides cliniques, ressources communautaires). */
+.guides-onglets{display:flex;flex-wrap:wrap;gap:.6rem;padding-top:1.2rem;padding-bottom:0}
+.guides-onglets a{display:inline-flex;align-items:center;gap:.55rem;min-height:48px;padding:.55rem 1.2rem;border:2px solid var(--navy);border-radius:999px;color:var(--navy);font-weight:700;text-decoration:none;background:#fff}
+.guides-onglets a:hover{background:var(--teal-pale)}
+.guides-onglets a[aria-current="page"]{background:var(--navy);color:#fff}
+.guides-onglet-compte{display:inline-block;min-width:2.2em;padding:.1rem .5rem;border-radius:999px;background:var(--teal-zone);color:var(--navy);font-size:.85rem;text-align:center}
+.guides-onglets a[aria-current="page"] .guides-onglet-compte{background:#fff}
+.guides-page .guides-onglets a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+/* Case « hors territoire » et lien vers l'autre page. */
+.guides-case{display:flex;align-items:center;gap:.55rem;min-height:48px;flex:1 1 100%;font-size:.98rem;font-weight:600;color:var(--navy);cursor:pointer}
+.guides-case input{width:22px;height:22px;accent-color:var(--navy);margin:0;cursor:pointer}
+.guides-page .guides-case input:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.guides-autre{margin:.6rem 0 0;font-size:1rem;font-weight:650}
+.guides-autre a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+.guides-page .guides-autre a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.guides-page[data-page="communautaire"] .guides-avis a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:680px){
+  .guides-onglets{flex-wrap:nowrap;gap:.5rem}
+  .guides-onglets a{flex:1 1 0;min-width:0;justify-content:center;flex-wrap:wrap;gap:.2rem .4rem;padding:.45rem .6rem;border-radius:16px;font-size:.92rem;line-height:1.2;text-align:center}
+  .guides-onglet-compte{font-size:.78rem}
+}

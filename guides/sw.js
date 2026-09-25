@@ -1,13 +1,15 @@
 // Service worker de l'application « Guides » (portée /guides/ seulement).
-// Indépendant de /sw.js (PWA Montérégie-Est) : il ne répond qu'aux requêtes de la page des guides
-// et de ses propres fichiers. Page : réseau d'abord, copie hors ligne en secours.
+// Indépendant de /sw.js (PWA Montérégie-Est) : il ne répond qu'aux requêtes des pages de l'app
+// (guides cliniques et ressources communautaires) et de leurs fichiers.
+// Pages : réseau d'abord, copie hors ligne en secours (une copie par page).
 // Fichiers statiques : cache d'abord, rafraîchi en arrière-plan.
 'use strict';
 
-const CACHE = 'ttc-guides-v5';
+const CACHE = 'ttc-guides-v6';
 const PAGE = '/guides/';
+const PAGES = ['/guides/', '/guides/ressources-communautaires/'];
 const PRECHARGE = [
-  '/guides/',
+  ...PAGES,
   '/guides/manifest.webmanifest',
   '/guides/icon-192.png',
   '/guides/icon-512.png'
@@ -42,16 +44,18 @@ self.addEventListener('fetch', event => {
 
   if (requete.mode === 'navigate') {
     if (!url.pathname.startsWith(PAGE)) return;
+    /* Copie rangée sous l'adresse de la page, sans ?q= ni #ancre ; page inconnue : les guides. */
+    const cle = PAGES.find(p => p === url.pathname || p === url.pathname + '/') || PAGE;
     event.respondWith(
       fetch(requete, { cache: 'no-store' })
         .then(reponse => {
-          if (reponse && reponse.ok) {
+          if (reponse && reponse.ok && !reponse.redirected) {
             const copie = reponse.clone();
-            caches.open(CACHE).then(cache => cache.put(PAGE, copie)).catch(() => {});
+            caches.open(CACHE).then(cache => cache.put(cle, copie)).catch(() => {});
           }
           return reponse;
         })
-        .catch(() => caches.match(PAGE))
+        .catch(() => caches.match(cle).then(r => r || caches.match(PAGE)))
     );
     return;
   }

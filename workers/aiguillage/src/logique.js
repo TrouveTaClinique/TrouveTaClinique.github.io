@@ -91,10 +91,17 @@ export function listerCatalogue(liste) {
 const accepteRepli = modele => /^claude-(opus-5|fable-5)/.test(modele);
 const accepteEffort = modele => !/^claude-haiku/.test(modele);
 
-export function construireRequete({ modele, catalogue, indices = [], question }) {
-  const indice = indices.length
+/* Page d'où vient la question : oriente l'ordre des types proposés, sans rien exclure.
+   Placé dans le message et non dans les consignes, pour garder le cache du catalogue commun. */
+const PAGES = {
+  guides: 'La question vient de la page des guides cliniques : propose d\'abord des guides, algorithmes ou documents pour les patients ; un organisme communautaire seulement si la question porte sur un besoin de soutien.\n\n',
+  communautaire: 'La question vient de la page des ressources communautaires : propose d\'abord des organismes communautaires ou des lignes d\'aide ; un guide clinique seulement si la question est surtout clinique.\n\n'
+};
+
+export function construireRequete({ modele, catalogue, indices = [], question, page = '' }) {
+  const indice = (PAGES[page] || '') + (indices.length
     ? `Présélection du moteur de mots-clés (indice seulement) : ${indices.join(', ')}\n\n`
-    : 'Le moteur de mots-clés n\'a rien présélectionné : cherche dans tout le catalogue.\n\n';
+    : 'Le moteur de mots-clés n\'a rien présélectionné : cherche dans tout le catalogue.\n\n');
   const requete = {
     model: modele,
     max_tokens: 8000,
@@ -189,7 +196,7 @@ export async function traiter(requete, env, deps) {
     const catalogue = [...parUrl.values()];
     const numeros = new Map(catalogue.map((g, i) => [g.url, i]));
     const indices = retenirCandidats(corps.candidats, parUrl).slice(0, INDICES_MAX).map(g => numeros.get(g.url));
-    const reponse = await deps.appelerModele(construireRequete({ modele: env.MODELE || MODELE_PAR_DEFAUT, catalogue, indices, question }));
+    const reponse = await deps.appelerModele(construireRequete({ modele: env.MODELE || MODELE_PAR_DEFAUT, catalogue, indices, question, page: String(corps.page || '') }));
     return json(interpreterReponse(reponse, catalogue), 200, cors);
   } catch (e) {
     const { statut, message } = e instanceof ErreurAiguillage ? { statut: e.statut, message: e.message } : deps.classerErreur(e);
