@@ -730,3 +730,16 @@ main .cliniques-carte,main .carte-est{
   .content-section:has(> .callout):not(.sources-panel) > .callout{grid-column:2;grid-row:3 / span 20}
 }
 
+
+/* Héros de l'accueil · 25 septembre 2026
+   Verbe agrandi, territoire d'un seul tenant. Le trait d'union de
+   « Montérégie‑Est » est insécable dans le HTML (U+2011) : le nom ne se
+   coupe plus en fin de ligne. La largeur du bloc de droite passe de 16 à
+   19 caractères pour que « Montérégie‑Est » tienne sur une seule ligne. */
+.hero-b .hb-titre{line-height:1.06}
+.hero-b .hb-titre .hg{font-size:clamp(3.05rem,6.3vw,5.1rem);max-width:12ch}
+.hero-b .hb-titre .bd{font-size:clamp(2.7rem,5.5vw,4.4rem);max-width:19ch}
+@media(max-width:620px){
+  .hero-b .hb-titre .hg{font-size:2.25rem;max-width:11ch}
+  .hero-b .hb-titre .bd{font-size:1.6rem;max-width:15ch}
+}
