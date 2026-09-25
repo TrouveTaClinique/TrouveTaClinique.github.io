@@ -140,12 +140,19 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     mainEntity: { '@type': 'ItemList', numberOfItems: ressources.length }
   }).replace(/</g, '\\u003c')}</script>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
+  <link rel="apple-touch-icon" href="/guides/apple-touch-icon.png">
+  <link rel="manifest" href="/guides/manifest.webmanifest">
+  <meta name="theme-color" content="#08A0A0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Guides">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=98-sujets-fermes">
-  <script src="/assets/guides-recherche.js?v=98-sujets-fermes" defer></script>
-  <script src="/assets/guides-cliniques.js?v=98-sujets-fermes" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=98-sujets-fermes" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=99-app-guides">
+  <script src="/assets/guides-recherche.js?v=99-app-guides" defer></script>
+  <script src="/assets/guides-cliniques.js?v=99-app-guides" defer></script>
+  <script src="/assets/guides-installer.js?v=99-app-guides" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=99-app-guides" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -156,6 +163,11 @@ ${header.replace(/ aria-current="page"/g, '')}
     <h1>Guides pratiques et ressources cliniques</h1>
     <p class="lead">Retrouvez les guides de pratique, algorithmes et ressources utiles à la médecine familiale, ainsi que des organismes communautaires vers qui diriger vos patients.</p>
     <p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.${dateVerif ? ` Liens vérifiés le ${dateVerif}.` : ''} Ce catalogue ne remplace pas le jugement clinique.</p>
+    <div class="guides-app" id="guides-app" hidden>
+      <button type="button" class="guides-app-bouton" id="guides-app-installer"><img src="/guides/icon-192.png" width="28" height="28" alt=""> Installer l’app Guides</button>
+      <span class="guides-app-note">Accès direct depuis l’écran d’accueil, même hors connexion.</span>
+      <p class="guides-app-aide" id="guides-app-aide" role="status" hidden></p>
+    </div>
   </section>
   <section class="guides-band guides-band--green guides-search" aria-labelledby="guides-search-title">
     <h2 id="guides-search-title">Quelle ressource cherchez-vous&nbsp;?</h2>

@@ -43,7 +43,8 @@
     ['sca', 'syndrome coronarien aigu', 'syndrome coronarien', 'infarctus', 'iam', 'idm'],
     ['pac', 'pneumonie acquise en communaute', 'pneumonie'],
     ['grossesse', 'enceinte', 'prenatal', 'pregnancy', 'obstetrique'],
-    ['pediatrie', 'pediatrique', 'enfant', 'nourrisson', 'bebe'],
+    ['pediatrie', 'pediatrique', 'enfant', 'nourrisson', 'bebe', 'nouveau ne', 'neonatal', 'neonatale'],
+    ['c difficile', 'c diff', 'cdiff', 'clostridium difficile', 'clostridioides difficile'],
     ['vaccin', 'vaccination', 'immunisation', 'piq'],
     ['lipides', 'cholesterol', 'dyslipidemie', 'statine', 'hypolipemiant'],
     ['depression', 'trouble depressif', 'depressif'],
@@ -58,7 +59,9 @@
     ['brue', 'alte', 'malaise grave du nourrisson'],
     ['tsv', 'tachycardie supraventriculaire'],
     ['dka', 'acidocetose'],
-    ['epipen', 'anaphylaxie', 'epinephrine', 'adrenaline'],
+    ['epipen', 'anaphylaxie', 'anaphylactique', 'choc anaphylactique', 'reaction anaphylactique', 'epinephrine', 'adrenaline'],
+    ['oeil rouge', 'yeux rouges', 'oeil rouge douloureux', 'conjonctivite', 'red eye'],
+    ['epistaxis', 'saignement de nez', 'saignement nasal', 'saignements de nez', 'nez qui saigne'],
     ['benzodiazepine', 'benzo', 'sedatif hypnotique', 'somnifere', 'hypnotique', 'bzra', 'z drug', 'lorazepam', 'ativan', 'clonazepam', 'rivotril', 'alprazolam', 'xanax', 'oxazepam', 'zopiclone', 'imovane'],
     ['tsa', 'autisme', 'trouble du spectre de l autisme', 'asd'],
     ['aaa', 'anevrisme de l aorte abdominale', 'anevrisme aortique', 'anevrisme aorte'],
@@ -71,9 +74,27 @@
     ['lombalgie', 'mal de dos', 'douleur lombaire', 'lumbago', 'sciatique', 'lombosciatalgie'],
     ['gonalgie', 'douleur au genou', 'mal au genou', 'genou'],
     ['epaule douloureuse', 'douleur a l epaule', 'mal a l epaule', 'epaule'],
-    ['ipp', 'inhibiteur de la pompe a protons', 'inhibiteurs de la pompe a protons', 'omeprazole', 'pantoprazole', 'esomeprazole', 'rabeprazole', 'lansoprazole', 'dexlansoprazole'],
+    ['ipp', 'inhibiteur de la pompe a protons', 'inhibiteurs de la pompe a protons', 'pompe a protons', 'pompe a proton', 'pompeproton', 'omeprazole', 'pantoprazole', 'esomeprazole', 'rabeprazole', 'lansoprazole', 'dexlansoprazole'],
     ['rgo', 'reflux', 'reflux gastro-oesophagien', 'brulure d estomac', 'pyrosis'],
     ['vertige', 'vppb', 'vertige positionnel'],
+    ['hepatite b', 'vhb', 'hbv'],
+    ['hepatite c', 'vhc', 'hcv'],
+    ['hepatite a', 'vha', 'hav'],
+    ['irc', 'insuffisance renale', 'insuffisance renale chronique', 'maladie renale chronique', 'maladie renale', 'mrc', 'ckd', 'chronic kidney disease', 'nephropathie', 'dfg', 'dfge'],
+    ['hbp', 'hypertrophie benigne de la prostate', 'hyperplasie benigne de la prostate', 'prostatisme'],
+    ['prep', 'prophylaxie pre exposition', 'prophylaxie preexposition'],
+    ['ppe', 'prophylaxie post exposition', 'prophylaxie postexposition'],
+    ['cancer du col', 'cancer du col de l uterus', 'col de l uterus', 'col uterin', 'cytologie cervicale', 'test pap', 'pap test', 'papanicolaou'],
+    ['cancer du sein', 'mammographie', 'depistage du sein'],
+    ['trouble alimentaire', 'troubles alimentaires', 'tca', 'trouble des conduites alimentaires', 'anorexie', 'boulimie'],
+    ['inhalateur', 'pompe', 'aerosol doseur', 'dispositif d inhalation', 'chambre d espacement', 'aerochamber'],
+    ['urticaire', 'hives'],
+    ['ictere', 'jaunisse', 'hyperbilirubinemie', 'bilirubine'],
+    ['vaginite', 'vaginose', 'vaginose bacterienne', 'vulvovaginite', 'pertes vaginales', 'candidose vaginale'],
+    ['cessation tabagique', 'arret tabagique', 'arret du tabac', 'renoncement au tabac', 'abandon du tabac'],
+    ['hypothyroidie', 'thyroide', 'tsh', 'levothyroxine', 'synthroid'],
+    ['preeclampsie', 'pre eclampsie', 'hypertension gestationnelle'],
+    ['hemorroide', 'hemorroides'],
     ['deprescription', 'deprescrire', 'sevrage medicament', 'cessation medicament'],
     /* Ressources communautaires (sans mots vides : « aide », « de »… sont retirés de la requête). */
     ['banque alimentaire', 'aide alimentaire', 'depannage alimentaire', 'comptoir alimentaire', 'distribution alimentaire', 'nourriture', 'epicerie', 'panier noel', 'paniers de noel'],
@@ -122,8 +143,26 @@
     [['morsure', 'chauve souris'], ['rage']],
     [['suicide', 'suicidaire', 'idees suicidaires'], ['sante mentale', 'detresse']],
     [['alcool', 'alcoolisme'], ['alcool', 'sevrage']],
-    [['entorse', 'cheville'], ['entorse', 'traumatisme musculosquelettique']]
+    [['entorse', 'cheville'], ['entorse', 'traumatisme musculosquelettique']],
+    [['salbutamol', 'ventolin', 'airomir', 'bricanyl', 'terbutaline', 'fluticasone', 'flovent', 'budesonide', 'pulmicort', 'symbicort', 'advair', 'breo', 'trelegy', 'spiriva', 'tiotropium', 'montelukast', 'singulair', 'corticosteroide inhale', 'csi', 'bronchodilatateur'], ['asthme', 'mpoc', 'inhalation']],
+    [['urticaire', 'hives'], ['allergie', 'anaphylaxie']],
+    [['tetanos', 'dcat', 'dcat polio'], ['vaccin', 'laceration', 'plaie']],
+    [['cancer du sein', 'mammographie', 'depistage du sein', 'cancer du col', 'test pap', 'cytologie cervicale'], ['depistage des cancers']],
+    [['suboxone', 'buprenorphine', 'methadone', 'tuo', 'trouble lie a l usage des opioides'], ['opioide', 'naloxone']],
+    [['cessation tabagique', 'arret tabagique', 'tabagique', 'nicotine', 'champix', 'varenicline', 'zyban', 'bupropion'], ['mpoc', 'depistage du cancer du poumon', 'tabac']],
+    [['ictere', 'jaunisse', 'bilirubine'], ['bilirubine', 'nouveau ne']],
+    [['vaginite', 'vaginose', 'candidose vaginale', 'pertes vaginales'], ['trichomonas', 'pertes vaginales']],
+    [['prep', 'prophylaxie pre exposition'], ['vih']],
+    [['hepatite b', 'vhb', 'hepatite c', 'vhc', 'hepatite a', 'vha'], ['hepatite']],
+    [['hbp', 'prostatisme'], ['prostate']],
+    [['irc', 'insuffisance renale', 'maladie renale chronique', 'dfg'], ['kidney', 'renale']]
   ];
+
+  /* Mots génériques : utiles pour départager, mais ils ne suffisent jamais seuls à retenir un
+     guide quand la question contient aussi un mot précis (« toux chronique » ne doit pas ramener
+     « constipation chronique » ; « insuffisance rénale » pas « insuffisance cardiaque »). */
+  const MOTS_GENERIQUES_TEXTE = 'chronique aigu aigue subaigu recidivant recurrent severe grave leger moderee insuffisance douleur mal cancer infection trouble syndrome maladie traitement prise charge guide enfant adulte bebe nourrisson adolescent ado jeune homme femme age agee aine status choc nouveau ne neonatal neonatale arret test examen bilan suivi evaluation diagnostic prevention signe symptome complication';
+  const POIDS_GENERIQUE = 0.5;
 
   function normaliser(texte) {
     return String(texte || '')
@@ -158,6 +197,7 @@
   }));
   const LONGUEUR_MAX_TOUT = Math.max(LONGUEUR_MAX, ...[...EXPANSIONS.keys()].map(p => p.split(' ').length));
   mots(MOTS_QUESTION).forEach(m => MOTS_VIDES.add(m));
+  const GENERIQUES = new Set(mots(MOTS_GENERIQUES_TEXTE));
 
   /* Distance d'édition (Damerau restreinte), arrêtée tôt au-delà du maximum utile. */
   function distance(a, b, max) {
@@ -179,22 +219,24 @@
   }
 
   /* Qualité de correspondance d'un mot de requête avec un mot du document (0 = aucune). */
-  function qualiteMot(q, m, dernier, flou) {
+  function qualiteMot(q, m, dernier, flou, strict) {
     if (q === m) return 1;
-    if (q.length <= 3) return 0;                       // abréviation courte : mot entier seulement
+    if (strict || q.length <= 3) return 0;             // terme reconnu ou abréviation courte : mot entier
     if (m.startsWith(q)) return dernier ? 0.9 : 0.8;   // saisie en cours ou mot tronqué
     /* Mots courts : la première lettre doit correspondre (« deuil » n'est pas « seuil »). */
-    const max = !flou ? 0 : q.length >= 8 ? 2 : q.length >= 5 && q[0] === m[0] ? 1 : 0;
+    /* Distance 2 seulement sur les mots longs dont le début concorde : « fibrilation » trouve
+       « fibrillation », mais « urticaire » ne devient pas « urinaire », ni « jaunisse » « jeunesse ». */
+    const max = !flou ? 0 : q.length >= 8 && q.slice(0, 3) === m.slice(0, 3) ? 2 : q.length >= 5 && q[0] === m[0] ? 1 : 0;
     if (max && distance(q, m, max) <= max) return 0.6;
     return 0;
   }
 
   /* Une phrase (suite de mots) se trouve-t-elle dans la liste de mots du champ ? */
-  function qualitePhrase(phrase, champ, dernier, flou) {
+  function qualitePhrase(phrase, champ, dernier, flou, strict) {
     let meilleure = 0;
     for (let i = 0; i + phrase.length <= champ.length; i++) {
       let q = 1;
-      for (let k = 0; k < phrase.length && q > 0; k++) q = Math.min(q, qualiteMot(phrase[k], champ[i + k], dernier && k === phrase.length - 1, flou));
+      for (let k = 0; k < phrase.length && q > 0; k++) q = Math.min(q, qualiteMot(phrase[k], champ[i + k], dernier && k === phrase.length - 1, flou, strict));
       if (q > meilleure) meilleure = q;
       if (meilleure === 1) break;
     }
@@ -216,7 +258,7 @@
         const seg = tokens.slice(i, i + n);
         const phrase = seg.join(' ');
         if (seg.some(t => MOTS_VIDES.has(t)) && PHRASES.has(phrase)) {
-          termes.push({ alternatives: ALTERNATIVES[PHRASES.get(phrase)], expansions: [], saisie: seg, dernier: i + n === tokens.length });
+          termes.push({ alternatives: ALTERNATIVES[PHRASES.get(phrase)], expansions: EXPANSIONS.get(utilesSeulement(seg).join(' ')) || [], saisie: seg, dernier: i + n === tokens.length, connu: true, generique: seg.every(t => GENERIQUES.has(t) || MOTS_VIDES.has(t)) });
           pris = n;
         }
       }
@@ -232,12 +274,17 @@
           termes.push({
             alternatives: PHRASES.has(phrase) ? ALTERNATIVES[PHRASES.get(phrase)] : [liste.slice(i, i + n)],
             expansions: EXPANSIONS.get(phrase) || [],
-            saisie: liste.slice(i, i + n), dernier: i + n === liste.length
+            saisie: liste.slice(i, i + n), dernier: i + n === liste.length,
+            /* Terme du dictionnaire (« PrEP », « IRC ») : correspondance exacte, sans préfixe
+               (« prep » ne doit pas trouver « prépubère »). */
+            connu: PHRASES.has(phrase) && (n > 1 || liste[i].length <= 4),
+            generique: liste.slice(i, i + n).every(t => GENERIQUES.has(t))
           });
           i += n; trouve = true;
         }
       }
-      if (!trouve) { termes.push({ alternatives: [[liste[i]]], expansions: [], saisie: [liste[i]], dernier: i === liste.length - 1 }); i++; }
+      if (!trouve && liste[i].length === 1 && liste.length > 1) { i++; continue; }
+      if (!trouve) { termes.push({ alternatives: [[liste[i]]], expansions: [], saisie: [liste[i]], dernier: i === liste.length - 1, generique: GENERIQUES.has(liste[i]) }); i++; }
     }
     return termes;
   }
@@ -246,7 +293,9 @@
 
   function preparer(ressource) {
     const champs = {};
-    Object.keys(POIDS).forEach(c => { champs[c] = mots(ressource[c]); });
+    /* « pompe à protons » devient un seul mot dans les guides : « pompe » seul (inhalateur)
+       ne ramène donc plus les guides sur les IPP. */
+    Object.keys(POIDS).forEach(c => { champs[c] = mots(normaliser(ressource[c]).replace(/\bpompes? a protons?\b/g, 'pompeproton')); });
     return champs;
   }
 
@@ -258,11 +307,11 @@
       for (const [nom, poids] of Object.entries(POIDS)) {
         for (const alt of terme.alternatives) {
           const exact = alt.join(' ') === terme.saisie.join(' ');
-          const q = qualitePhrase(alt, champs[nom], terme.dernier && exact, terme.flou) * (exact ? 1 : 0.9);
+          const q = qualitePhrase(alt, champs[nom], terme.dernier && exact && !terme.connu, terme.flou, terme.connu) * (exact ? 1 : 0.9);
           if (q * poids > meilleur) meilleur = q * poids;
         }
         /* Mots tapés tels quels, même quand un synonyme a été reconnu (ex. « ste-justine »). */
-        const q2 = qualitePhrase(terme.saisie, champs[nom], terme.dernier, terme.flou);
+        const q2 = qualitePhrase(terme.saisie, champs[nom], terme.dernier && !terme.connu, terme.flou, terme.connu);
         if (q2 * poids > meilleur) meilleur = q2 * poids;
         /* Sujets liés par le dictionnaire de concepts : comptent un peu moins. */
         for (const sujet of terme.expansions || []) {
@@ -290,7 +339,7 @@
       let scores = index.map(champs => score(champs, [t]));
       let df = scores.filter(s => s > 0).length;
       if (!df) { t.flou = true; scores = index.map(champs => score(champs, [t])); df = scores.filter(s => s > 0).length; }
-      return { scores, df, inconnu: t.flou };
+      return { scores, df, inconnu: t.flou, generique: !!t.generique };
     });
     /* Question en bonne partie hors catalogue (au moins la moitié des mots introuvables tels
        quels, ex. « banque alimentaire », « hébergement femme violence ») : mode prudent, seules
@@ -305,10 +354,22 @@
     const distinctifs = stats.filter(s => s.df <= N * 2 / 3);
     const retenus = distinctifs.length ? distinctifs : stats;
     if (!retenus.length) return [];
+    /* Mots génériques : si la question contient un mot précis, un guide doit couvrir au moins
+       un mot précis. Si tous les mots précis sont introuvables (« cancer du sein » sans guide sur
+       le sein), on ne propose rien plutôt qu'un guide sans rapport. */
+    const precisDemandes = termes.some(t => !t.generique);
+    const precis = retenus.filter(s => !s.generique);
+    if (precisDemandes && !precis.length && termes.length > 1) return [];
     const resultats = [];
     for (let i = 0; i < N; i++) {
       let total = 0, couverts = 0;
-      for (const s of retenus) if (s.scores[i] > 0) { total += s.scores[i] * Math.log(1 + N / s.df); couverts++; }
+      let precisCouverts = 0;
+      for (const s of retenus) if (s.scores[i] > 0) {
+        total += s.scores[i] * Math.log(1 + N / s.df) * (s.generique ? POIDS_GENERIQUE : 1);
+        couverts++;
+        if (!s.generique) precisCouverts++;
+      }
+      if (precis.length && !precisCouverts) continue;
       if (total > 0) resultats.push({ i, score: total * Math.sqrt(couverts / retenus.length) });
     }
     resultats.sort((a, b) => b.score - a.score || a.i - b.i);
