@@ -43,7 +43,7 @@ jobs:
           sha256sum -c "$RUNNER_TEMP/donnees-avant-apercu.sha256"
 
       - name: Tester l'isolation du brouillon et la conservation des fonctions
-        run: node --test scripts/test-apercu.cjs scripts/test-restauration-sq.cjs scripts/test-navigation-est.cjs scripts/test-recherche-guides.cjs
+        run: node --test scripts/test-apercu.cjs scripts/test-restauration-sq.cjs scripts/test-navigation-est.cjs scripts/test-recherche-guides.cjs workers/aiguillage/test/logique.test.js
 
       - name: Préparer le site (noindex, CNAME apercu, sans scripts internes)
         run: node scripts/preparer-apercu.js "$RUNNER_TEMP/site-brouillon"

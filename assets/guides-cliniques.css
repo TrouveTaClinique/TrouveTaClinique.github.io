@@ -19,6 +19,23 @@
 .guides-select select:hover{border-color:var(--navy)}
 .guides-filtres-reset{min-height:48px;padding:.55rem 1rem;border:0;background:transparent;color:var(--navy);font:inherit;font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .guides-resultats{border-top:4px solid var(--teal)}
+/* Boîte d'aiguillage IA (affichée seulement quand le service est configuré). */
+.guides-ia{border-top:4px solid var(--navy);background:#f5f4fc}
+.guides-ia-intro{font-size:1.05rem;line-height:1.6;max-width:74ch;margin:0 0 1rem}
+.guides-ia-form{display:flex;flex-wrap:wrap;gap:.8rem;align-items:stretch}
+.guides-ia-form textarea{flex:1 1 22rem;min-height:60px;padding:.9rem 1.2rem;border:2px solid rgba(18,6,114,.3);border-radius:16px;font:inherit;font-size:1.05rem;color:var(--navy);background:#fff;resize:vertical}
+.guides-ia-form button{min-height:60px;padding:0 1.8rem;border:0;border-radius:999px;background:var(--navy);color:#fff;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer}
+.guides-ia-form button[disabled]{opacity:.6;cursor:progress}
+.guides-ia-avis{font-size:.9rem;margin:.75rem 0 0;color:var(--navy);opacity:.85;max-width:80ch}
+.guides-ia-resultat:not(:empty){margin-top:1.4rem}
+.guides-ia-compte{font-weight:700;margin:0 0 .4rem}
+.guides-ia-message,.guides-ia-attente,.guides-ia-erreur{margin:0 0 .8rem;padding:.8rem 1rem;border-radius:10px;background:#fff;max-width:80ch}
+.guides-ia-erreur{border-left:4px solid #b3261e}
+.guides-ia .guides-resource-link{height:auto;padding-bottom:.5rem}
+.guides-ia-raison{margin:0 0 1.2rem;padding:0 4.6rem 0 .15rem;font-size:.97rem;line-height:1.55}
+.guides-ia-raison strong{color:var(--teal)}
+.guides-ia-pied{font-size:.88rem;opacity:.75;margin:.8rem 0 0}
+.guides-page .guides-ia-form :is(textarea,button):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .guides-status{margin:1.25rem 0 0;font-size:.96rem;font-weight:600}
 .guides-category-heading{display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap;margin:0 0 1rem;padding-bottom:1rem;border-bottom:2px solid var(--navy)}
 .guides-category-heading h2{margin:0}
@@ -54,4 +71,6 @@
   .guides-search-form.search-page-form input[type="search"]{flex-basis:100%;min-height:52px}
   .guides-search-form.search-page-form button[type="submit"]{min-height:48px;width:100%}
   .guides-select{flex-basis:100%}
+  .guides-ia-form button{width:100%;min-height:52px}
+  .guides-ia-raison{padding-right:.15rem}
 }

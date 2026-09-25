@@ -69,3 +69,36 @@ test('saisie partielle : « pneumo » trouve la pneumonie', () => {
 test('requête sans résultat', () => {
   assert.equal(titres('zzzzqqq').length, 0);
 });
+
+// Questions en phrase complète (moteur optimisé : correspondance partielle, rareté, concepts).
+const premiers = (requete, n) => titres(requete).slice(0, n);
+
+test('phrase : otite + allergie à la pénicilline trouve les deux sujets', () => {
+  const res = premiers('otite chez un enfant allergique à la pénicilline', 5);
+  assert.ok(contient(res, /otite/), res.join(' | '));
+  assert.ok(contient(res, /penicilline/), res.join(' | '));
+});
+
+test('phrase : bouffées de chaleur mène à la ménopause', () => {
+  assert.ok(contient(premiers('bouffées de chaleur à la ménopause, quelles options?', 3), /menopause/));
+  assert.ok(contient(premiers('bouffées de chaleur', 3), /menopause/));
+});
+
+test('phrase : les chiffres et mots de question sont ignorés', () => {
+  assert.match(R.normaliser(premiers('bébé de 3 semaines avec de la fièvre', 1)[0]), /fievre nourrisson/);
+});
+
+test('concept : apixaban mène aux guides sur les anticoagulants', () => {
+  assert.ok(contient(premiers('patient sous apixaban avant une coloscopie', 3), /anticoag/));
+});
+
+test('concept : toux chez un fumeur mène à la MPOC et au dépistage du cancer du poumon', () => {
+  const res = premiers('toux depuis 4 semaines chez un fumeur de 60 ans', 6);
+  assert.ok(contient(res, /mpoc/), res.join(' | '));
+  assert.ok(contient(res, /poumon/), res.join(' | '));
+});
+
+test('deux mots-clés sans guide commun : chacun garde ses résultats', () => {
+  const res = titres('otite pénicilline');
+  assert.ok(contient(res, /otite/) && contient(res, /penicilline/), res.join(' | '));
+});

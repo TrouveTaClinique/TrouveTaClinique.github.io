@@ -4,6 +4,10 @@
 // Appelé après sa génération, pour suivre automatiquement les composants communs.
 const fs = require('node:fs');
 const path = require('node:path');
+/* Adresse du service d'aiguillage IA (Worker Cloudflare, dossier workers/aiguillage).
+   Vide : la boîte « Demander à l'IA » n'est pas affichée et son script n'est pas chargé. */
+const URL_AIGUILLAGE = '';
+
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 
 function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
@@ -73,9 +77,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" href="/assets/logo-banniere.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=91-guides-recherche">
-  <script src="/assets/guides-recherche.js?v=91-guides-recherche" defer></script>
-  <script src="/assets/guides-cliniques.js?v=91-guides-recherche" defer></script>
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=92-guides-aiguillage">
+  <script src="/assets/guides-recherche.js?v=92-guides-aiguillage" defer></script>
+  <script src="/assets/guides-cliniques.js?v=92-guides-aiguillage" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=92-guides-aiguillage" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -93,7 +98,7 @@ ${header.replace(/ aria-current="page"/g, '')}
       <input id="guide-search" name="q" type="search" placeholder="Sujet, organisme ou mot-clé…" autocomplete="off" aria-controls="guides-catalogue">
       <button type="submit">Rechercher</button>
     </form>
-    <p class="guides-search-hint">Par exemple : MPOC, FA, otite, Sainte-Justine. Les abréviations, synonymes et fautes de frappe courantes sont reconnus.</p>
+    <p class="guides-search-hint">Mots-clés ou phrase complète, par exemple : MPOC, otite chez un enfant allergique, patient sous apixaban. Les abréviations, synonymes et fautes de frappe courantes sont reconnus.</p>
     <div class="guides-filter-area" hidden>
       <h3 id="guides-filter-title">Filtrer</h3>
       <div class="guides-filters" role="group" aria-labelledby="guides-filter-title">
@@ -105,7 +110,18 @@ ${header.replace(/ aria-current="page"/g, '')}
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${ressources.length} ressources dans le catalogue</p>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
   </section>
-  <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>
+${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="${esc(URL_AIGUILLAGE)}" hidden>
+    <h2 id="guides-ia-titre">Demander à l’IA quel guide consulter</h2>
+    <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
+    <form class="guides-ia-form">
+      <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
+      <textarea id="guides-ia-question" name="question" rows="2" maxlength="400" placeholder="Ex. : toux depuis 4 semaines chez un fumeur de 60 ans" required></textarea>
+      <button type="submit">Suggérer des guides</button>
+    </form>
+    <p class="guides-ia-avis"><strong>Confidentialité :</strong> votre question est transmise à un service d’IA (Anthropic) pour être traitée, puis n’est pas conservée par ce site. N’y inscrivez aucun renseignement permettant d’identifier un patient.</p>
+    <div class="guides-ia-resultat" aria-live="polite"></div>
+  </section>
+` : ''}  <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>
     <div class="guides-category-heading"><h2 id="guides-favoris-titre">Mes favoris</h2><span class="compte"></span></div>
     <p class="guides-favoris-note">Vos favoris sont gardés dans ce navigateur seulement : ils ne se synchronisent pas entre votre cellulaire et votre ordinateur.</p>
     <ul class="guides-resource-list"></ul>

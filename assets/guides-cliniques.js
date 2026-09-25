@@ -131,6 +131,13 @@
     input.value = ''; selSujet.value = ''; selOrganisme.value = '';
     render(); input.focus();
   });
+  /* Pour l'aiguillage IA (guides-aiguillage.js) : présélection par le moteur du site et
+     cartes identiques à celles du catalogue, avec leur étoile de favori. */
+  window.GuidesCatalogue = {
+    /* Sans seuil de pertinence : l'IA gagne à voir large, jusqu'à n guides. */
+    candidats: (question, n) => moteur.rechercher(index, question, { seuil: 0 }).slice(0, n).map(({ i }) => resources[i].id),
+    carte: id => (parId.has(id) ? cloner(id) : null)
+  };
   input.value = new URLSearchParams(location.search).get('q') || '';
   render();
 })();

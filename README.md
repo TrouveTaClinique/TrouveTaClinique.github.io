@@ -151,11 +151,30 @@ relit sur `brouillon` (relecture sur `apercu.trouvetaclinique.ca`) avant d'être
 (notes, alias), Kaushan Script dans le thème Est SQ, une PWA hors de Montérégie-Est ou le nom
 protégé lorsqu'il est configuré.
 
+## Guides cliniques (`/guides/`)
+
+- Catalogue : `guides/donnees.json`, page générée par `scripts/generer-guides-cliniques.cjs`.
+- Recherche : `assets/guides-recherche.js`, testée par `scripts/test-recherche-guides.cjs`.
+  Elle accepte les mots-clés et les phrases complètes, reconnaît abréviations, synonymes
+  (`GROUPES`) et fautes de frappe, et classe les guides par pertinence.
+- Dictionnaire de concepts (`CONCEPTS` dans `assets/guides-recherche.js`) : relie un mot de
+  question à un sujet du catalogue (apixaban -> anticoagulant). À enrichir quand une recherche
+  réelle ne trouve pas le bon guide, puis ajouter un cas dans le test.
+- Favoris : gardés dans le navigateur (`localStorage`, clé `ttc-guides-favoris`).
+- Aiguillage IA : boîte « Demander à l'IA quel guide consulter », servie par le Worker
+  `workers/aiguillage` (voir son README : coûts, plafond de crédits, mise en place). La boîte
+  n'apparaît que si `URL_AIGUILLAGE` est renseignée dans le générateur.
+
 ## Vie privée et services externes
 
 Les notes et favoris restent sur l'appareil. Le fond de carte peut contacter CARTO et
 OpenStreetMap. Cloudflare Web Analytics mesure la fréquentation agrégée des cartes et des pages
 de contenu. L'application elle-même ne crée aucun compte et ne dépose aucun cookie utilisateur.
+
+La boîte d'aiguillage IA de `/guides/`, quand elle est activée, transmet la question tapée et
+les adresses des guides présélectionnés à un Worker Cloudflare, puis à l'API d'Anthropic. Le
+Worker ne journalise ni ne conserve les questions ; un avis demande de n'y inscrire aucun
+renseignement permettant d'identifier un patient.
 
 ## Changement de cycle PTEM
 
