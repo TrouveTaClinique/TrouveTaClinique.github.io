@@ -272,17 +272,17 @@ const PAGE_SOURCE = `<!DOCTYPE html>
 <section class="content-section" id="dates">
 <p class="section-number">07</p><h2>Quelles dates s’appliquent à une candidature en GMF-U?</h2>
 <p>Une seule date est <strong>propre au volet universitaire</strong> : le <strong>15 décembre</strong>, échéance de confirmation du choix par le directeur du département.<br>Le guide de gestion ne fixe <strong>aucune autre date propre aux places universitaires</strong>, et ne précise ni le nombre de places réservées ni leur répartition.</p>
-<p>Les dates ci-dessous sont celles du <strong>cycle PTEM 2027</strong>.<br>Elles s’appliquent à une candidature en GMF-U parce que la demande d’avis de conformité suit le processus habituel.</p>
+<p>Les dates ci-dessous sont celles de la <strong>période initiale PTEM 2027</strong>, publiées par le DTMF de la Montérégie.<br>Elles s’appliquent à une candidature en GMF-U parce que la demande d’avis de conformité suit le processus habituel.<br>Ce calendrier est sous réserve de la signature finale de l’accord par le ministre.</p>
 <div class="steps">
-<div class="step"><span>1</span><div><strong>1<sup>er</sup> décembre 2026 au 30 novembre 2027</strong><p>Période d’application de l’Accord no 820.</p></div></div>
-<div class="step"><span>2</span><div><strong>1<sup>er</sup> au 15 décembre 2026</strong><p>Période initiale de dépôt des demandes.<br>Une demande déposée avant le 1<sup>er</sup> décembre 2026 est irrecevable.</p></div></div>
-<div class="step"><span>3</span><div><strong>15 décembre 2026 : date propre au volet universitaire</strong><p>Date limite de confirmation du choix par le directeur du département de médecine de famille, auprès de Santé Québec et du DTMF.</p></div></div>
-<div class="step"><span>4</span><div><strong>29 janvier 2027</strong><p>Date à laquelle les DTMF doivent répondre aux demandes reçues durant la période initiale.</p></div></div>
-<div class="step"><span>5</span><div><strong>29 janvier au 26 février 2027</strong><p>Période pour confirmer par écrit l’acceptation d’un avis de conformité obtenu lors du processus initial.</p></div></div>
-<div class="step"><span>6</span><div><strong>À compter du 26 février 2027</strong><p>Traitement des demandes reçues après le 15 décembre 2026, selon le principe du premier arrivé, premier servi.</p></div></div>
+<div class="step"><span>1</span><div><strong>1<sup>er</sup> au 15 décembre</strong><p>Période initiale de dépôt des candidatures.<br>Toutes les demandes reçues durant cette période sont considérées comme reçues le 15 décembre.</p></div></div>
+<div class="step"><span>2</span><div><strong>15 décembre : date propre au volet universitaire</strong><p>Date limite de confirmation du choix par le directeur du département de médecine de famille, auprès de Santé Québec et du DTMF.</p></div></div>
+<div class="step"><span>3</span><div><strong>Entre le 16 et le 26 décembre</strong><p>Santé Québec transmet aux DTMF les candidatures reçues.</p></div></div>
+<div class="step"><span>4</span><div><strong>5 au 30 janvier</strong><p>Période d’entrevues des candidats.</p></div></div>
+<div class="step"><span>5</span><div><strong>30 janvier</strong><p>Réponse à tous les candidats à la suite des entrevues.</p></div></div>
+<div class="step"><span>6</span><div><strong>27 février</strong><p>Fin de la période initiale de candidature.<br>Les demandes reçues après le 15 décembre sont traitées à compter du 28 février, selon le principe du premier arrivé, premier servi.</p></div></div>
 </div>
 <div class="callout official"><strong>Place réservée non pourvue :</strong> une place réservée aux besoins universitaires pour laquelle aucune candidature n’est confirmée à la date limite est <strong>retournée à la marge régionale</strong> et sert au recrutement général.</div>
-<p class="source-row"><a class="source-chip" href="https://www.ramq.gouv.qc.ca/fr/professionnels/actualites/2026-07-24/modifications-temporaires-a-ep-prem" rel="noopener">RAMQ · modalités du PTEM 2027</a><a class="source-chip" href="https://publications.msss.gouv.qc.ca/msss/fichiers/sante-quebec/25-Guide_gestion_PTEM.pdf" rel="noopener">Santé Québec · besoins universitaires</a></p>
+<p class="source-row"><a class="source-chip" href="https://www.santemonteregie.qc.ca/plans-territoriaux-deffectifs-medicaux-ptem" rel="noopener">DTMF Montérégie · calendrier PTEM 2027</a><a class="source-chip" href="https://www.ramq.gouv.qc.ca/fr/professionnels/actualites/2026-07-24/modifications-temporaires-a-ep-prem" rel="noopener">RAMQ · Accord no 820</a><a class="source-chip" href="https://publications.msss.gouv.qc.ca/msss/fichiers/sante-quebec/25-Guide_gestion_PTEM.pdf" rel="noopener">Santé Québec · besoins universitaires</a></p>
 <p><a class="text-cta" href="/monteregie-est/ptem/">Voir le calendrier PTEM complet →</a></p>
 </section>
 <section class="content-section" id="traitement">
@@ -299,7 +299,7 @@ const PAGE_SOURCE = `<!DOCTYPE html>
 <p class="section-number">09</p><h2>Quels délais s’appliquent après la réponse du DTMF?</h2>
 <p>Ces délais sont ceux du cycle PTEM général.<br>Le guide de gestion n’en fixe <strong>aucun de propre au volet universitaire</strong>.</p>
 <div class="card-grid two">
-<article class="card accent-blue"><h3>Accepter l’avis</h3><p>Processus initial : confirmation écrite <strong>du 29 janvier au 26 février 2027</strong>. À défaut, l’avis est révoqué et attribué à un autre candidat, qui dispose alors de <strong>5 jours</strong> pour confirmer.<br>Demandes traitées à compter du 26 février 2027 : <strong>10 jours</strong> pour confirmer.</p><a class="source-chip" href="https://www.ramq.gouv.qc.ca/fr/professionnels/actualites/2026-07-24/modifications-temporaires-a-ep-prem" rel="noopener">RAMQ</a></article>
+<article class="card accent-blue"><h3>Accepter l’avis</h3><p>Lorsqu’un avis de conformité vous est offert, vous disposez de <strong>5 jours</strong> pour répondre durant la période initiale.<br>À partir du 28 février et pour le reste de l’année, ce délai est de <strong>10 jours</strong>.</p><a class="source-chip" href="https://www.santemonteregie.qc.ca/plans-territoriaux-deffectifs-medicaux-ptem" rel="noopener">DTMF Montérégie</a></article>
 <article class="card accent-teal"><h3>Commencer sa pratique</h3><p>Le médecin doit s’engager à commencer sa pratique dans un délai de <strong>12 mois</strong> suivant la date de réception de sa demande.<br>La FMRQ indique qu’un <strong>report additionnel maximal de 6 mois</strong> peut être demandé au DTMF.</p><a class="source-chip" href="https://fmrq.qc.ca/postes-pem-ptem/medecine-familiale/processus-ptem/vos-obligations/" rel="noopener">FMRQ · obligations</a></article>
 </div>
 <p class="note">L’absence de réponse dans le délai prescrit équivaut à un refus.</p>

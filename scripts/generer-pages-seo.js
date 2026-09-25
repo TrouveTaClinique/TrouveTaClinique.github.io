@@ -3741,12 +3741,12 @@ const FAQ_PTEM = {
     {
       '@type': 'Question',
       name: 'Qu’est-ce que la règle du 55 %?',
-      acceptedAnswer: { '@type': 'Answer', text: 'L’avis de conformité PTEM précise la région ou le sous-territoire où le médecin doit réaliser au moins 55 % de ses jours de facturation.' }
+      acceptedAnswer: { '@type': 'Answer', text: 'L’obtention d’un avis de conformité implique un engagement à exercer au moins 55 % de son activité clinique dans le territoire (RLS) indiqué à l’avis. À l’intérieur de ce territoire, le médecin demeure libre de choisir son milieu de pratique.' }
     },
     {
       '@type': 'Question',
       name: 'Quand déposer une demande PTEM 2027?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Les dates du processus PTEM 2027 sont en cours de vérification auprès des sources officielles et ne sont pas publiées sur cette page pour le moment. Consultez le portail du DTMF de la Montérégie pour le calendrier en vigueur.' }
+      acceptedAnswer: { '@type': 'Answer', text: 'La période initiale de dépôt des candidatures se déroule du 1er au 15 décembre, sous réserve de la signature finale de l’accord par le ministre. Les entrevues ont lieu du 5 au 30 janvier, tous les candidats reçoivent une réponse le 30 janvier et la période initiale prend fin le 27 février. Les demandes reçues après le 15 décembre sont traitées à compter du 28 février, selon le principe du premier arrivé, premier servi.' }
     }
   ]
 };
