@@ -353,7 +353,10 @@ const CHAMPS_PUBLICS = [
   /* responsableNom → nom du médecin responsable du recrutement. */
   'responsableNom',
   /* personneRessource → courriel(s) de recrutement, publiés depuis le 2 sept. 2026. */
-  'personneRessource'
+  'personneRessource',
+  /* evenement → activité ouverte aux résidents (ex. soirée portes ouvertes), annoncée tout en
+     haut de la fiche jusqu'à sa date (voir blocEvenement()). Ajouté le 26 sept. 2026. */
+  'evenement'
 ];
 
 /*
@@ -1241,7 +1244,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     : `
   <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> les coordonnées de la personne-ressource sont affichées dans la fiche de la clinique sur la carte interactive. <a href="${u.accueil}?c=${c.id}">Ouvrir la fiche de ${esc(c.nom)} sur la carte →</a></div>`;
 
-  const corps = `  <section class="hero">
+  const corps = `${blocEvenement(c)}  <section class="hero">
     <p class="eyebrow">${esc(c.type)}${rempli(c.rls) ? ' · RLS ' + esc(c.rls) : ''}${enRecrutement ? '' : ' · Ne recrute pas actuellement'}</p>
     <h1>${esc(c.nom)}${badgeVerif(c)}</h1>
     <p class="lead">${esc(textePresentation)}</p>
@@ -1963,6 +1966,88 @@ function htmlGmfuConditionSeo() {
   return `${esc(t.slice(0, coupe + 1))}<br>${esc(t.slice(coupe + 2))}`;
 }
 const NOTE_SOURCE_ETABLISSEMENTS = 'Ces renseignements peuvent évoluer; pour le PTEM et les AMP, les sources officielles et le DTMF priment.';
+/* Annonce d'événement en tête de fiche (data.json → clinique.evenement).
+   Champs : titre, date (AAAA-MM-JJ), heures, texte, lieu, telephone, courriel (inscription).
+   Absente de la page générée après la date ; un court script la masque aussi dans le
+   navigateur dès le lendemain, au cas où la page ne serait pas régénérée entre-temps. */
+const JOURS_SEMAINE = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+function aujourdhuiQuebec() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).format(new Date());
+}
+function dateEvenementFr(iso) {
+  const [a, m, j] = iso.split('-').map(Number);
+  const jour = JOURS_SEMAINE[new Date(Date.UTC(a, m - 1, j)).getUTCDay()];
+  const mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][m - 1];
+  return `${jour} ${j === 1 ? '1<sup>er</sup>' : j} ${mois} ${a}`;
+}
+function evenementActif(c) {
+  const e = c && c.evenement;
+  return !!(e && /^\d{4}-\d{2}-\d{2}$/.test(e.date || '') && e.date >= aujourdhuiQuebec());
+}
+function blocEvenement(c) {
+  if (!evenementActif(c)) return '';
+  const e = c.evenement;
+  const quand = dateEvenementFr(e.date) + (rempli(e.heures) ? `, ${esc(e.heures)}` : '');
+  const sujet = `Inscription : ${e.titre || 'événement'} du ${dateEvenementFr(e.date).replace(/<\/?sup>/g, '')}`;
+  const corpsCourriel = `Bonjour,\n\nJe souhaite m’inscrire à : ${e.titre || 'l’événement'} (${c.nom}).\n\nNom : \nAnnée de résidence et programme : \nCourriel ou téléphone : \n\nMerci !`;
+  const inscription = rempli(e.courriel)
+    ? `mailto:${e.courriel}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corpsCourriel)}`
+    : '';
+  const itineraire = rempli(e.lieu)
+    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(e.lieu)}`
+    : '';
+  const lignes = [
+    rempli(e.lieu) ? `<dt>Lieu</dt><dd>${esc(e.lieu)} · <a href="${esc(itineraire)}" rel="noopener" target="_blank">Itinéraire</a></dd>` : '',
+    rempli(e.telephone) ? `<dt>Téléphone</dt><dd><a href="tel:+1${esc(String(e.telephone).replace(/\D/g, '').replace(/^1(?=\d{10}$)/, ''))}">${esc(e.telephone)}</a></dd>` : '',
+    rempli(e.courriel) ? `<dt>Réservation et informations</dt><dd><a href="${esc(inscription)}">${esc(e.courriel)}</a></dd>` : ''
+  ].filter(Boolean).join('\n      ');
+  return `  <style>
+  .evenement{position:relative;margin:var(--s-sm) 0 0;padding:1.4rem 1.5rem 1.5rem;border-radius:18px;background:linear-gradient(135deg,#170A72 0%,#2B1C8C 55%,#08A0A0 140%);color:#fff;box-shadow:0 12px 28px rgba(23,10,114,.18)}
+  .evenement .evenement-etiquette{display:inline-block;margin:0 0 .6rem;padding:.2rem .75rem;border-radius:999px;background:#90F1E9;color:#170A72;font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .evenement h2{margin:0 0 .5rem;color:#fff;font-size:clamp(1.45rem,2.4vw,2rem);line-height:1.2}
+  .evenement-quand{display:block;margin-top:.25rem;color:#90F1E9;font-size:clamp(1.1rem,1.6vw,1.3rem)}
+  .evenement p{margin:0 0 .8rem;max-width:68ch;line-height:1.55;color:#fff}
+  .evenement-infos{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;margin:0 0 1.1rem;font-size:.98rem}
+  .evenement-infos dt{font-weight:700;color:#90F1E9}
+  .evenement-infos dd{margin:0;color:#fff;overflow-wrap:anywhere}
+  .evenement a:not(.button){color:#fff;text-decoration:underline;text-underline-offset:3px}
+  .evenement .evenement-bouton{background:#90F1E9;color:#170A72;border-color:#90F1E9;font-weight:800}
+  .evenement .evenement-bouton:hover{background:#fff;border-color:#fff;color:#170A72}
+  .evenement a:focus-visible{outline:3px solid #90F1E9;outline-offset:3px}
+  @media(max-width:560px){.evenement-infos{grid-template-columns:1fr}.evenement-infos dd{margin-bottom:.4rem}.evenement .evenement-bouton{width:100%}}
+  </style>
+  <section class="evenement" aria-labelledby="evenement-titre" data-fin="${esc(e.date)}">
+    <p class="evenement-etiquette">Invitation aux résidents</p>
+    <h2 id="evenement-titre">${esc(e.titre || 'Événement')}<span class="evenement-quand">${quand}</span></h2>
+    ${rempli(e.texte) ? `<p>${esc(e.texte)}</p>` : ''}
+    <dl class="evenement-infos">
+      ${lignes}
+    </dl>
+    ${inscription ? `<a class="button primary evenement-bouton" href="${esc(inscription)}">S’inscrire par courriel</a>` : ''}
+  </section>
+  <script>(function(){var s=document.querySelector('.evenement[data-fin]');if(!s)return;var d=new Date(),a=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);if(a>s.getAttribute('data-fin'))s.remove();})();</script>
+`;
+}
+/* Balise schema.org Event de l'annonce, pour les moteurs de recherche. */
+function jsonLdEvenement(c, url) {
+  if (!evenementActif(c)) return null;
+  const e = c.evenement;
+  const heures = String(e.heures || '').match(/(\d{1,2})\s*h\s*(\d{2})?\D+(\d{1,2})\s*h\s*(\d{2})?/);
+  const t = (h, m) => `T${String(h).padStart(2, '0')}:${m || '00'}:00-04:00`;
+  return {
+    '@type': 'Event',
+    name: `${e.titre} · ${c.nom}`,
+    ...(rempli(e.texte) ? { description: e.texte } : {}),
+    startDate: e.date + (heures ? t(heures[1], heures[2]) : ''),
+    ...(heures ? { endDate: e.date + t(heures[3], heures[4]) } : {}),
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+    location: { '@type': 'Place', name: c.nom, address: e.lieu || c.adresse || '' },
+    organizer: { '@type': 'Organization', name: c.nom, url },
+    url: url + '#evenement-titre'
+  };
+}
+
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
 const LIBELLE_CONTACT_SANS_NOM = 'Écrire au recrutement';
 
@@ -2306,6 +2391,7 @@ function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null, pol
           : {})
       },
       ...(job ? [job] : []),
+      ...(cliniqueLiee && evenementActif(cliniqueLiee) ? [jsonLdEvenement(cliniqueLiee, url)] : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -2364,7 +2450,7 @@ ${items}
   const ligneSite = siteOfficiel
     ? `      <dt>Site officiel</dt><dd>${siteOfficiel}</dd>\n`
     : '';
-  const corps = `  <section class="hero">
+  const corps = `${cliniqueLiee ? blocEvenement(cliniqueLiee) : ''}  <section class="hero">
     <p class="eyebrow">${esc(eyebrowEtablissement(inst))}</p>
     <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
     <p class="lead">${chapeauEtablissement(inst, secteurs)}</p>
@@ -3327,7 +3413,7 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee, poli
     || `${esc(inst.nom)} se trouve à ${esc(inst.ville)}, dans le RLS ${esc(inst.territoireSource || '')}.`;
   const ligneSite = siteOfficiel ? `      <dt>Site officiel</dt><dd>${siteOfficiel}</dd>\n` : '';
   const ligneTel = inst.telephone ? `      <dt>Téléphone</dt><dd>${esc(inst.telephone)}</dd>\n` : '';
-  const corps = `  <section class="hero">
+  const corps = `${cliniqueLiee ? blocEvenement(cliniqueLiee) : ''}  <section class="hero">
     <p class="eyebrow">${esc(typeLib)} · RLS ${esc(inst.territoireSource || '')}</p>
     <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
     <p class="lead">${chapeau}</p>

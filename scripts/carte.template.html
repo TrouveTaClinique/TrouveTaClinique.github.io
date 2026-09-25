@@ -2686,7 +2686,7 @@ function dateDuTexte(v) {
   const t = String(v == null ? '' : v).toLowerCase();
   let m = t.match(/(\d{4})-(\d{2})-(\d{2})/);
   if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
-  m = t.match(/(\d{1,2})\s+([a-zéûô]+)\s+(\d{4})/);
+  m = t.match(/(\d{1,2})(?:er)?\s+([a-zéûô]+)\s+(\d{4})/);
   if (m) { const i = MOIS_FR.indexOf(m[2]); if (i >= 0) return new Date(+m[3], i, +m[1]); }
   return null;
 }
