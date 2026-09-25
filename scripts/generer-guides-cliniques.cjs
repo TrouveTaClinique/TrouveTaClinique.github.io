@@ -97,10 +97,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=93-guides-sujets">
-  <script src="/assets/guides-recherche.js?v=93-guides-sujets" defer></script>
-  <script src="/assets/guides-cliniques.js?v=93-guides-sujets" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=93-guides-sujets" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=94-guides-menage">
+  <script src="/assets/guides-recherche.js?v=94-guides-menage" defer></script>
+  <script src="/assets/guides-cliniques.js?v=94-guides-menage" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=94-guides-menage" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

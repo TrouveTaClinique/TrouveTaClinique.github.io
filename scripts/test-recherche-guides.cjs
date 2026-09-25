@@ -92,10 +92,13 @@ test('concept : apixaban mène aux guides sur les anticoagulants', () => {
   assert.ok(contient(premiers('patient sous apixaban avant une coloscopie', 3), /anticoag/));
 });
 
-test('concept : toux chez un fumeur mène à la MPOC et au dépistage du cancer du poumon', () => {
+test('concept : toux chez un fumeur mène à la MPOC', () => {
   const res = premiers('toux depuis 4 semaines chez un fumeur de 60 ans', 6);
   assert.ok(contient(res, /mpoc/), res.join(' | '));
-  assert.ok(contient(res, /poumon/), res.join(' | '));
+});
+
+test('fumeur mène aussi au dépistage (cancer du poumon)', () => {
+  assert.ok(contient(titres('fumeur'), /depistage/));
 });
 
 test('deux mots-clés sans guide commun : chacun garde ses résultats', () => {

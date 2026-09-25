@@ -246,8 +246,10 @@
       if (!df) { t.flou = true; scores = index.map(champs => score(champs, [t])); df = scores.filter(s => s > 0).length; }
       return { scores, df };
     }).filter(s => s.df > 0);
-    /* Un terme présent dans plus de la moitié du catalogue ne départage rien : ignoré s'il en reste d'autres. */
-    const distinctifs = stats.filter(s => s.df <= N / 2);
+    /* Un terme présent dans plus des deux tiers du catalogue ne départage rien : ignoré s'il en
+       reste d'autres. Entre la moitié et les deux tiers (ex. « bébé », relié à tous les guides
+       pédiatriques), il compte encore, mais peu : sa rareté (IDF) est faible. */
+    const distinctifs = stats.filter(s => s.df <= N * 2 / 3);
     const retenus = distinctifs.length ? distinctifs : stats;
     if (!retenus.length) return [];
     const resultats = [];
