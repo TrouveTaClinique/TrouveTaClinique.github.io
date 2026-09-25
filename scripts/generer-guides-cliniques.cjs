@@ -105,10 +105,6 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   const compter = cle => ressources.reduce((m, r) => m.set(r[cle], (m.get(r[cle]) || 0) + 1), new Map());
   const parCategorie = compter('cat');
   const parOrganisme = compter('org');
-  const sommaire = `<nav class="guides-band guides-sommaire" aria-labelledby="guides-sommaire-titre">
-    <h2 id="guides-sommaire-titre">Parcourir par sujet</h2>
-    <ul>${categories.map(cat => `<li><a href="#${ancre(cat)}">${esc(cat)} <span class="compte" aria-label="${parCategorie.get(cat)} ressources">${parCategorie.get(cat)}</span></a></li>`).join('')}</ul>
-  </nav>`;
   const optionsSujet = categories.map(cat => `<option value="${esc(cat)}">${esc(cat)} (${parCategorie.get(cat)})</option>`).join('');
   const organismes = [...parOrganisme.keys()].sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
   const optionsOrganisme = organismes.map(org => `<option value="${esc(org)}">${esc(org)} (${parOrganisme.get(org)})</option>`).join('');
@@ -144,10 +140,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=97-ressources-communautaires">
-  <script src="/assets/guides-recherche.js?v=97-ressources-communautaires" defer></script>
-  <script src="/assets/guides-cliniques.js?v=97-ressources-communautaires" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=97-ressources-communautaires" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=98-sujets-fermes">
+  <script src="/assets/guides-recherche.js?v=98-sujets-fermes" defer></script>
+  <script src="/assets/guides-cliniques.js?v=98-sujets-fermes" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=98-sujets-fermes" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -183,7 +179,8 @@ ${header.replace(/ aria-current="page"/g, '')}
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
   </section>
 ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="${esc(URL_AIGUILLAGE)}" hidden>
-    <h2 id="guides-ia-titre">Demander à l’IA quel guide ou quelle ressource consulter</h2>
+    <p class="guides-ia-pastille"><span aria-hidden="true">✦</span> Nouveau : recherche assistée par IA</p>
+    <h2 id="guides-ia-titre">Demandez à l’IA quel guide ou quelle ressource consulter</h2>
     <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides ou organismes communautaires du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
     <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
@@ -202,7 +199,8 @@ ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="gu
     <div class="guides-category-heading"><h2 id="guides-resultats-titre">Résultats les plus pertinents</h2><span class="compte"></span></div>
     <ul class="guides-resource-list"></ul>
   </section>
-  <div id="guides-catalogue">${sommaire}
+  <div id="guides-catalogue">
+    <h2 class="guides-catalogue-titre" id="guides-catalogue-titre">Parcourir par sujet</h2>
 ${sections}</div>
   <section class="guides-band guides-empty" hidden>
     <h2>Aucune ressource trouvée</h2>

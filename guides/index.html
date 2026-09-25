@@ -21,10 +21,10 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=97-ressources-communautaires">
-  <script src="/assets/guides-recherche.js?v=97-ressources-communautaires" defer></script>
-  <script src="/assets/guides-cliniques.js?v=97-ressources-communautaires" defer></script>
-  <script src="/assets/guides-aiguillage.js?v=97-ressources-communautaires" defer></script>
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=98-sujets-fermes">
+  <script src="/assets/guides-recherche.js?v=98-sujets-fermes" defer></script>
+  <script src="/assets/guides-cliniques.js?v=98-sujets-fermes" defer></script>
+  <script src="/assets/guides-aiguillage.js?v=98-sujets-fermes" defer></script>
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -88,7 +88,8 @@
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
   </section>
   <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/" hidden>
-    <h2 id="guides-ia-titre">Demander à l’IA quel guide ou quelle ressource consulter</h2>
+    <p class="guides-ia-pastille"><span aria-hidden="true">✦</span> Nouveau : recherche assistée par IA</p>
+    <h2 id="guides-ia-titre">Demandez à l’IA quel guide ou quelle ressource consulter</h2>
     <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides ou organismes communautaires du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
     <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
@@ -107,10 +108,8 @@
     <div class="guides-category-heading"><h2 id="guides-resultats-titre">Résultats les plus pertinents</h2><span class="compte"></span></div>
     <ul class="guides-resource-list"></ul>
   </section>
-  <div id="guides-catalogue"><nav class="guides-band guides-sommaire" aria-labelledby="guides-sommaire-titre">
-    <h2 id="guides-sommaire-titre">Parcourir par sujet</h2>
-    <ul><li><a href="#sujet-infections-et-itss">Infections et ITSS <span class="compte" aria-label="64 ressources">64</span></a></li><li><a href="#sujet-respiratoire">Respiratoire <span class="compte" aria-label="16 ressources">16</span></a></li><li><a href="#sujet-cardiovasculaire-et-metabolique">Cardiovasculaire et métabolique <span class="compte" aria-label="29 ressources">29</span></a></li><li><a href="#sujet-thrombose-et-anticoagulation">Thrombose et anticoagulation <span class="compte" aria-label="10 ressources">10</span></a></li><li><a href="#sujet-digestif-et-foie">Digestif et foie <span class="compte" aria-label="12 ressources">12</span></a></li><li><a href="#sujet-sante-mentale-dependances-et-sommeil">Santé mentale, dépendances et sommeil <span class="compte" aria-label="14 ressources">14</span></a></li><li><a href="#sujet-sante-des-femmes-et-grossesse">Santé des femmes et grossesse <span class="compte" aria-label="8 ressources">8</span></a></li><li><a href="#sujet-pediatrie">Pédiatrie <span class="compte" aria-label="21 ressources">21</span></a></li><li><a href="#sujet-geriatrie-et-troubles-neurocognitifs">Gériatrie et troubles neurocognitifs <span class="compte" aria-label="12 ressources">12</span></a></li><li><a href="#sujet-os-articulations-et-douleur">Os, articulations et douleur <span class="compte" aria-label="35 ressources">35</span></a></li><li><a href="#sujet-peau-et-yeux">Peau et yeux <span class="compte" aria-label="6 ressources">6</span></a></li><li><a href="#sujet-orl-oreilles-nez-gorge">ORL (oreilles, nez, gorge) <span class="compte" aria-label="8 ressources">8</span></a></li><li><a href="#sujet-hematologie-et-oncologie">Hématologie et oncologie <span class="compte" aria-label="2 ressources">2</span></a></li><li><a href="#sujet-prevention-et-vaccination">Prévention et vaccination <span class="compte" aria-label="12 ressources">12</span></a></li><li><a href="#sujet-urgence-et-traumatologie">Urgence et traumatologie <span class="compte" aria-label="47 ressources">47</span></a></li><li><a href="#sujet-soins-palliatifs-et-niveaux-de-soins">Soins palliatifs et niveaux de soins <span class="compte" aria-label="4 ressources">4</span></a></li><li><a href="#sujet-imagerie-medicale">Imagerie médicale <span class="compte" aria-label="2 ressources">2</span></a></li><li><a href="#sujet-pratique-professionnelle-et-protocoles">Pratique professionnelle et protocoles <span class="compte" aria-label="3 ressources">3</span></a></li><li><a href="#sujet-documents-pour-les-patients">Documents pour les patients <span class="compte" aria-label="42 ressources">42</span></a></li><li><a href="#sujet-ressources-communautaires">Ressources communautaires <span class="compte" aria-label="247 ressources">247</span></a></li></ul>
-  </nav>
+  <div id="guides-catalogue">
+    <h2 class="guides-catalogue-titre" id="guides-catalogue-titre">Parcourir par sujet</h2>
 <section class="guides-band guides-category guides-band--green" id="sujet-infections-et-itss" aria-labelledby="guides-category-0">
       <div class="guides-category-heading"><h2 id="guides-category-0">Infections et ITSS</h2><span class="compte" aria-label="64 ressources">64</span></div>
       
@@ -1201,101 +1200,101 @@
 <section class="guides-band guides-category guides-band--green" id="sujet-digestif-et-foie" aria-labelledby="guides-category-4">
       <div class="guides-category-heading"><h2 id="guides-category-4">Digestif et foie</h2><span class="compte" aria-label="12 ressources">12</span></div>
       
-      <ul class="guides-resource-list"><li class="guides-resource" data-tags="cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_un_diagnostic_de_cirrhose_F4_2024.pdf" data-title="Cirrhose (F4) : prise en charge en première ligne" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Cirrhose (F4) : prise en charge en première ligne CIUSSS de l’Estrie–CHUS Digestif et foie cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+      <ul class="guides-resource-list"><li class="guides-resource" data-tags="cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_un_diagnostic_de_cirrhose_F4_2024.pdf" data-title="Cirrhose (F4) : prise en charge en première ligne" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Cirrhose (F4) : prise en charge en première ligne CIUSSS de l’Estrie–CHUS Digestif et foie cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_un_diagnostic_de_cirrhose_F4_2024.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Cirrhose (F4) : prise en charge en première ligne</h3>
-          <span class="guides-keywords">cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices algorithme prise en charge référence</span>
+          <span class="guides-keywords">cirrhose foie hépatologie F4 suivi carcinome hépatocellulaire varices</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="constipation chronique laxatif algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Constipation_chronique.pdf" data-title="Constipation chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Constipation chronique (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie constipation chronique laxatif algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="constipation chronique laxatif" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Constipation_chronique.pdf" data-title="Constipation chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Constipation chronique (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie constipation chronique laxatif Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Constipation_chronique.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Constipation chronique (algorithme)</h3>
-          <span class="guides-keywords">constipation chronique laxatif algorithme prise en charge référence</span>
+          <span class="guides-keywords">constipation chronique laxatif</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="diarrhée chronique calprotectine MII maladie cœliaque algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_diarhee_chronique_2025.pdf" data-title="Diarrhée chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Diarrhée chronique (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie diarrhée chronique calprotectine MII maladie cœliaque algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="diarrhée chronique calprotectine MII maladie cœliaque" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_diarhee_chronique_2025.pdf" data-title="Diarrhée chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Diarrhée chronique (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie diarrhée chronique calprotectine MII maladie cœliaque Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_diarhee_chronique_2025.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Diarrhée chronique (algorithme)</h3>
-          <span class="guides-keywords">diarrhée chronique calprotectine MII maladie cœliaque algorithme prise en charge référence</span>
+          <span class="guides-keywords">diarrhée chronique calprotectine MII maladie cœliaque</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="douleur abdominale algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Douleurs_abdominales.pdf" data-title="Douleurs abdominales (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Douleurs abdominales (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie douleur abdominale algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="douleur abdominale" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Douleurs_abdominales.pdf" data-title="Douleurs abdominales (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Douleurs abdominales (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie douleur abdominale Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Douleurs_abdominales.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Douleurs abdominales (algorithme)</h3>
-          <span class="guides-keywords">douleur abdominale algorithme prise en charge référence</span>
+          <span class="guides-keywords">douleur abdominale</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="dyspepsie H. pylori IPP algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_dusypepsie_2025.pdf" data-title="Dyspepsie (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Dyspepsie (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie dyspepsie H. pylori IPP algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="dyspepsie H. pylori IPP" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_dusypepsie_2025.pdf" data-title="Dyspepsie (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Dyspepsie (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie dyspepsie H. pylori IPP Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Algorithme_de_prise_en_charge_pour_la_dusypepsie_2025.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Dyspepsie (algorithme)</h3>
-          <span class="guides-keywords">dyspepsie H. pylori IPP algorithme prise en charge référence</span>
+          <span class="guides-keywords">dyspepsie H. pylori IPP</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="enzymes hépatiques transaminases ALT AST bilan hépatique hépatite algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Elevation_enzymes_hepatiques.pdf" data-title="Élévation des enzymes hépatiques (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Élévation des enzymes hépatiques (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie enzymes hépatiques transaminases ALT AST bilan hépatique hépatite algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="enzymes hépatiques transaminases ALT AST bilan hépatique hépatite" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Elevation_enzymes_hepatiques.pdf" data-title="Élévation des enzymes hépatiques (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Élévation des enzymes hépatiques (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie enzymes hépatiques transaminases ALT AST bilan hépatique hépatite Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Elevation_enzymes_hepatiques.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Élévation des enzymes hépatiques (algorithme)</h3>
-          <span class="guides-keywords">enzymes hépatiques transaminases ALT AST bilan hépatique hépatite algorithme prise en charge référence</span>
+          <span class="guides-keywords">enzymes hépatiques transaminases ALT AST bilan hépatique hépatite</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="nausée vomissement algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Nausees_et_vomissements.pdf" data-title="Nausées et vomissements (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Nausées et vomissements (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie nausée vomissement algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="nausée vomissement" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Nausees_et_vomissements.pdf" data-title="Nausées et vomissements (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Nausées et vomissements (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie nausée vomissement Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Nausees_et_vomissements.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Nausées et vomissements (algorithme)</h3>
-          <span class="guides-keywords">nausée vomissement algorithme prise en charge référence</span>
+          <span class="guides-keywords">nausée vomissement</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="perte de poids involontaire amaigrissement algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Perte_poids_etiologie_indeterminee.pdf" data-title="Perte de poids d’étiologie indéterminée (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Perte de poids d’étiologie indéterminée (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie perte de poids involontaire amaigrissement algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="perte de poids involontaire amaigrissement" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Perte_poids_etiologie_indeterminee.pdf" data-title="Perte de poids d’étiologie indéterminée (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Perte de poids d’étiologie indéterminée (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie perte de poids involontaire amaigrissement Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Perte_poids_etiologie_indeterminee.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Perte de poids d’étiologie indéterminée (algorithme)</h3>
-          <span class="guides-keywords">perte de poids involontaire amaigrissement algorithme prise en charge référence</span>
+          <span class="guides-keywords">perte de poids involontaire amaigrissement</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="RGO reflux pyrosis IPP algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/1_Algorithme_de_prise_en_charge_Reflux_gastro-oesophagien_2026-05-12.pdf" data-title="Reflux gastro-œsophagien (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Reflux gastro-œsophagien (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie RGO reflux pyrosis IPP algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="RGO reflux pyrosis IPP" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/1_Algorithme_de_prise_en_charge_Reflux_gastro-oesophagien_2026-05-12.pdf" data-title="Reflux gastro-œsophagien (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Reflux gastro-œsophagien (algorithme) CIUSSS de l’Estrie–CHUS Digestif et foie RGO reflux pyrosis IPP Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/1_Algorithme_de_prise_en_charge_Reflux_gastro-oesophagien_2026-05-12.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Reflux gastro-œsophagien (algorithme)</h3>
-          <span class="guides-keywords">RGO reflux pyrosis IPP algorithme prise en charge référence</span>
+          <span class="guides-keywords">RGO reflux pyrosis IPP</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole algorithme prise en charge référence" data-id="https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithms-2018_Fr.pdf" data-title="Déprescription des inhibiteurs de la pompe à protons (IPP, algorithme)" data-org="Réseau canadien pour la déprescription" data-desc="Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org)." data-category="Digestif et foie" data-search="Déprescription des inhibiteurs de la pompe à protons (IPP, algorithme) Réseau canadien pour la déprescription Digestif et foie IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole algorithme prise en charge référence Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org).">
+<li class="guides-resource" data-tags="IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole" data-id="https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithms-2018_Fr.pdf" data-title="Déprescription des inhibiteurs de la pompe à protons (IPP, algorithme)" data-org="Réseau canadien pour la déprescription" data-desc="Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org)." data-category="Digestif et foie" data-search="Déprescription des inhibiteurs de la pompe à protons (IPP, algorithme) Réseau canadien pour la déprescription Digestif et foie IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org).">
         <a class="guides-resource-link" href="https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithms-2018_Fr.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">Réseau canadien pour la déprescription</span>
           <h3>Déprescription des inhibiteurs de la pompe à protons (IPP, algorithme)</h3>
-          <span class="guides-keywords">IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole algorithme prise en charge référence</span>
+          <span class="guides-keywords">IPP inhibiteur de la pompe à protons déprescription sevrage oméprazole pantoprazole</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_une_maladie_steatosique_du_foie_liee_a_une_dysfonction_metabolique_2026-03-13.pdf" data-title="Stéatose hépatique (MASLD) : prise en charge en première ligne" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Stéatose hépatique (MASLD) : prise en charge en première ligne CIUSSS de l’Estrie–CHUS Digestif et foie stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_une_maladie_steatosique_du_foie_liee_a_une_dysfonction_metabolique_2026-03-13.pdf" data-title="Stéatose hépatique (MASLD) : prise en charge en première ligne" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Digestif et foie" data-search="Stéatose hépatique (MASLD) : prise en charge en première ligne CIUSSS de l’Estrie–CHUS Digestif et foie stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/gastroenterologie/Votre_patient_a_une_maladie_steatosique_du_foie_liee_a_une_dysfonction_metabolique_2026-03-13.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Stéatose hépatique (MASLD) : prise en charge en première ligne</h3>
-          <span class="guides-keywords">stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose algorithme prise en charge référence</span>
+          <span class="guides-keywords">stéatose hépatique MASLD NAFLD foie gras FIB-4 fibrose</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -1412,11 +1411,11 @@
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="benzodiazépine BZRA zopiclone sevrage déprescription insomnie algorithme prise en charge référence" data-id="https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithm-benzodiazepines-2018-fr-1.pdf" data-title="Déprescription des benzodiazépines et des « Z-drugs » (algorithme)" data-org="Réseau canadien pour la déprescription" data-desc="Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org)." data-category="Santé mentale, dépendances et sommeil" data-search="Déprescription des benzodiazépines et des « Z-drugs » (algorithme) Réseau canadien pour la déprescription Santé mentale, dépendances et sommeil benzodiazépine BZRA zopiclone sevrage déprescription insomnie algorithme prise en charge référence Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org).">
+<li class="guides-resource" data-tags="benzodiazépine BZRA zopiclone sevrage déprescription insomnie" data-id="https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithm-benzodiazepines-2018-fr-1.pdf" data-title="Déprescription des benzodiazépines et des « Z-drugs » (algorithme)" data-org="Réseau canadien pour la déprescription" data-desc="Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org)." data-category="Santé mentale, dépendances et sommeil" data-search="Déprescription des benzodiazépines et des « Z-drugs » (algorithme) Réseau canadien pour la déprescription Santé mentale, dépendances et sommeil benzodiazépine BZRA zopiclone sevrage déprescription insomnie Algorithme de déprescription fondé sur les lignes directrices canadiennes (deprescribing.org).">
         <a class="guides-resource-link" href="https://deprescribing.org/wp-content/uploads/2019/04/deprescribing-algorithm-benzodiazepines-2018-fr-1.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">Réseau canadien pour la déprescription</span>
           <h3>Déprescription des benzodiazépines et des « Z-drugs » (algorithme)</h3>
-          <span class="guides-keywords">benzodiazépine BZRA zopiclone sevrage déprescription insomnie algorithme prise en charge référence</span>
+          <span class="guides-keywords">benzodiazépine BZRA zopiclone sevrage déprescription insomnie</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -1488,11 +1487,11 @@
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="prolapsus vaginal génital pessaire périnée algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/menopause/consultation_pour_prolapsus.pdf" data-title="Prolapsus génital : consultation et prise en charge (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Santé des femmes et grossesse" data-search="Prolapsus génital : consultation et prise en charge (algorithme) CIUSSS de l’Estrie–CHUS Santé des femmes et grossesse prolapsus vaginal génital pessaire périnée algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="prolapsus vaginal génital pessaire périnée" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/menopause/consultation_pour_prolapsus.pdf" data-title="Prolapsus génital : consultation et prise en charge (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Santé des femmes et grossesse" data-search="Prolapsus génital : consultation et prise en charge (algorithme) CIUSSS de l’Estrie–CHUS Santé des femmes et grossesse prolapsus vaginal génital pessaire périnée Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/menopause/consultation_pour_prolapsus.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Prolapsus génital : consultation et prise en charge (algorithme)</h3>
-          <span class="guides-keywords">prolapsus vaginal génital pessaire périnée algorithme prise en charge référence</span>
+          <span class="guides-keywords">prolapsus vaginal génital pessaire périnée</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -1690,11 +1689,11 @@
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="scoliose colonne adolescent algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Pediatrie/Scoliose_idiopathique.pdf" data-title="Scoliose idiopathique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Pédiatrie" data-search="Scoliose idiopathique (algorithme) CIUSSS de l’Estrie–CHUS Pédiatrie scoliose colonne adolescent algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="scoliose colonne adolescent" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Pediatrie/Scoliose_idiopathique.pdf" data-title="Scoliose idiopathique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Pédiatrie" data-search="Scoliose idiopathique (algorithme) CIUSSS de l’Estrie–CHUS Pédiatrie scoliose colonne adolescent Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Pediatrie/Scoliose_idiopathique.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Scoliose idiopathique (algorithme)</h3>
-          <span class="guides-keywords">scoliose colonne adolescent algorithme prise en charge référence</span>
+          <span class="guides-keywords">scoliose colonne adolescent</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -1860,263 +1859,263 @@
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="épaule coiffe des rotateurs tendinopathie bursite calcification accrochage algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_douleur_tendinite_etc.pdf" data-title="Épaule : douleur, tendinite, accrochage et bursite (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épaule : douleur, tendinite, accrochage et bursite (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épaule coiffe des rotateurs tendinopathie bursite calcification accrochage algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="épaule coiffe des rotateurs tendinopathie bursite calcification accrochage" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_douleur_tendinite_etc.pdf" data-title="Épaule : douleur, tendinite, accrochage et bursite (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épaule : douleur, tendinite, accrochage et bursite (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épaule coiffe des rotateurs tendinopathie bursite calcification accrochage Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_douleur_tendinite_etc.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Épaule : douleur, tendinite, accrochage et bursite (algorithme)</h3>
-          <span class="guides-keywords">épaule coiffe des rotateurs tendinopathie bursite calcification accrochage algorithme prise en charge référence</span>
+          <span class="guides-keywords">épaule coiffe des rotateurs tendinopathie bursite calcification accrochage</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="cheville arthrose algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Cheville_arthrose.pdf" data-title="Cheville : arthrose (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Cheville : arthrose (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur cheville arthrose algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="cheville arthrose" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Cheville_arthrose.pdf" data-title="Cheville : arthrose (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Cheville : arthrose (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur cheville arthrose Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Cheville_arthrose.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Cheville : arthrose (algorithme)</h3>
-          <span class="guides-keywords">cheville arthrose algorithme prise en charge référence</span>
+          <span class="guides-keywords">cheville arthrose</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="genou arthrose gonarthrose algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_arthrose.pdf" data-title="Genou : arthrose (gonarthrose, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : arthrose (gonarthrose, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur genou arthrose gonarthrose algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="genou arthrose gonarthrose" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_arthrose.pdf" data-title="Genou : arthrose (gonarthrose, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : arthrose (gonarthrose, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur genou arthrose gonarthrose Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_arthrose.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Genou : arthrose (gonarthrose, algorithme)</h3>
-          <span class="guides-keywords">genou arthrose gonarthrose algorithme prise en charge référence</span>
+          <span class="guides-keywords">genou arthrose gonarthrose</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="épaule capsulite capsulite rétractile raideur algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_capsulite.pdf" data-title="Épaule : capsulite, raideur et ankylose (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épaule : capsulite, raideur et ankylose (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épaule capsulite capsulite rétractile raideur algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="épaule capsulite capsulite rétractile raideur" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_capsulite.pdf" data-title="Épaule : capsulite, raideur et ankylose (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épaule : capsulite, raideur et ankylose (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épaule capsulite capsulite rétractile raideur Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_capsulite.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Épaule : capsulite, raideur et ankylose (algorithme)</h3>
-          <span class="guides-keywords">épaule capsulite capsulite rétractile raideur algorithme prise en charge référence</span>
+          <span class="guides-keywords">épaule capsulite capsulite rétractile raideur</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="doigt gâchette ténosynovite sténosante doigt en ressort main algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Doigt_gachette.pdf" data-title="Doigt gâchette (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Doigt gâchette (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur doigt gâchette ténosynovite sténosante doigt en ressort main algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="doigt gâchette ténosynovite sténosante doigt en ressort main" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Doigt_gachette.pdf" data-title="Doigt gâchette (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Doigt gâchette (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur doigt gâchette ténosynovite sténosante doigt en ressort main Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Doigt_gachette.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Doigt gâchette (algorithme)</h3>
-          <span class="guides-keywords">doigt gâchette ténosynovite sténosante doigt en ressort main algorithme prise en charge référence</span>
+          <span class="guides-keywords">doigt gâchette ténosynovite sténosante doigt en ressort main</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="Dupuytren fibromatose palmaire main algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Maladie_de_Dupuytren.pdf" data-title="Maladie de Dupuytren (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Maladie de Dupuytren (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur Dupuytren fibromatose palmaire main algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="Dupuytren fibromatose palmaire main" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Maladie_de_Dupuytren.pdf" data-title="Maladie de Dupuytren (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Maladie de Dupuytren (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur Dupuytren fibromatose palmaire main Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Maladie_de_Dupuytren.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Maladie de Dupuytren (algorithme)</h3>
-          <span class="guides-keywords">Dupuytren fibromatose palmaire main algorithme prise en charge référence</span>
+          <span class="guides-keywords">Dupuytren fibromatose palmaire main</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="épicondylite tennis elbow golf elbow épitrochléite coude algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epicondylites_externes_internes.pdf" data-title="Épicondylites externe et interne (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épicondylites externe et interne (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épicondylite tennis elbow golf elbow épitrochléite coude algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="épicondylite tennis elbow golf elbow épitrochléite coude" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epicondylites_externes_internes.pdf" data-title="Épicondylites externe et interne (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épicondylites externe et interne (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épicondylite tennis elbow golf elbow épitrochléite coude Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epicondylites_externes_internes.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Épicondylites externe et interne (algorithme)</h3>
-          <span class="guides-keywords">épicondylite tennis elbow golf elbow épitrochléite coude algorithme prise en charge référence</span>
+          <span class="guides-keywords">épicondylite tennis elbow golf elbow épitrochléite coude</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="fasciite plantaire talon pied algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Fasciite_plantaire.pdf" data-title="Fasciite plantaire (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Fasciite plantaire (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur fasciite plantaire talon pied algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="fasciite plantaire talon pied" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Fasciite_plantaire.pdf" data-title="Fasciite plantaire (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Fasciite plantaire (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur fasciite plantaire talon pied Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Fasciite_plantaire.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Fasciite plantaire (algorithme)</h3>
-          <span class="guides-keywords">fasciite plantaire talon pied algorithme prise en charge référence</span>
+          <span class="guides-keywords">fasciite plantaire talon pied</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="fibromyalgie douleur chronique diffuse algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Physiatrie/Fibromyalgie2019.pdf" data-title="Fibromyalgie (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Fibromyalgie (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur fibromyalgie douleur chronique diffuse algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="fibromyalgie douleur chronique diffuse" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Physiatrie/Fibromyalgie2019.pdf" data-title="Fibromyalgie (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Fibromyalgie (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur fibromyalgie douleur chronique diffuse Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Physiatrie/Fibromyalgie2019.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Fibromyalgie (algorithme)</h3>
-          <span class="guides-keywords">fibromyalgie douleur chronique diffuse algorithme prise en charge référence</span>
+          <span class="guides-keywords">fibromyalgie douleur chronique diffuse</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_syndrome_femoro-rotulien.pdf" data-title="Genou : syndrome fémoro-patellaire (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : syndrome fémoro-patellaire (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_syndrome_femoro-rotulien.pdf" data-title="Genou : syndrome fémoro-patellaire (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : syndrome fémoro-patellaire (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_syndrome_femoro-rotulien.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Genou : syndrome fémoro-patellaire (algorithme)</h3>
-          <span class="guides-keywords">genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure algorithme prise en charge référence</span>
+          <span class="guides-keywords">genou syndrome fémoro-rotulien fémoro-patellaire douleur antérieure</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="hallux rigidus gros orteil pied arthrose algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Rigidus.pdf" data-title="Hallux rigidus (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Hallux rigidus (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur hallux rigidus gros orteil pied arthrose algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="hallux rigidus gros orteil pied arthrose" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Rigidus.pdf" data-title="Hallux rigidus (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Hallux rigidus (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur hallux rigidus gros orteil pied arthrose Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Rigidus.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Hallux rigidus (algorithme)</h3>
-          <span class="guides-keywords">hallux rigidus gros orteil pied arthrose algorithme prise en charge référence</span>
+          <span class="guides-keywords">hallux rigidus gros orteil pied arthrose</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="hallux valgus oignon pied algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Valgus.pdf" data-title="Hallux valgus (oignon, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Hallux valgus (oignon, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur hallux valgus oignon pied algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="hallux valgus oignon pied" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Valgus.pdf" data-title="Hallux valgus (oignon, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Hallux valgus (oignon, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur hallux valgus oignon pied Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_Hallux_Valgus.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Hallux valgus (oignon, algorithme)</h3>
-          <span class="guides-keywords">hallux valgus oignon pied algorithme prise en charge référence</span>
+          <span class="guides-keywords">hallux valgus oignon pied</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="hanche coxarthrose arthrose algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Hanche_coxarthrose.pdf" data-title="Hanche : coxarthrose (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Hanche : coxarthrose (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur hanche coxarthrose arthrose algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="hanche coxarthrose arthrose" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Hanche_coxarthrose.pdf" data-title="Hanche : coxarthrose (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Hanche : coxarthrose (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur hanche coxarthrose arthrose Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Hanche_coxarthrose.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Hanche : coxarthrose (algorithme)</h3>
-          <span class="guides-keywords">hanche coxarthrose arthrose algorithme prise en charge référence</span>
+          <span class="guides-keywords">hanche coxarthrose arthrose</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="kyste de Baker poplité genou algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_kyste_de_Baker.pdf" data-title="Kyste de Baker (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Kyste de Baker (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur kyste de Baker poplité genou algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="kyste de Baker poplité genou" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_kyste_de_Baker.pdf" data-title="Kyste de Baker (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Kyste de Baker (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur kyste de Baker poplité genou Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_kyste_de_Baker.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Kyste de Baker (algorithme)</h3>
-          <span class="guides-keywords">kyste de Baker poplité genou algorithme prise en charge référence</span>
+          <span class="guides-keywords">kyste de Baker poplité genou</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="genou entorse LCA ligament croisé traumatisme algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_entorse_ligamentaire.pdf" data-title="Genou : entorse et traumatisme aigu (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : entorse et traumatisme aigu (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur genou entorse LCA ligament croisé traumatisme algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="genou entorse LCA ligament croisé traumatisme" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_entorse_ligamentaire.pdf" data-title="Genou : entorse et traumatisme aigu (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : entorse et traumatisme aigu (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur genou entorse LCA ligament croisé traumatisme Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_entorse_ligamentaire.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Genou : entorse et traumatisme aigu (algorithme)</h3>
-          <span class="guides-keywords">genou entorse LCA ligament croisé traumatisme algorithme prise en charge référence</span>
+          <span class="guides-keywords">genou entorse LCA ligament croisé traumatisme</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="lombalgie inflammatoire spondylarthrite spondylarthropathie algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_a_horaire_inflammatoire.pdf" data-title="Lombalgie à horaire inflammatoire (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie à horaire inflammatoire (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie inflammatoire spondylarthrite spondylarthropathie algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="lombalgie inflammatoire spondylarthrite spondylarthropathie" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_a_horaire_inflammatoire.pdf" data-title="Lombalgie à horaire inflammatoire (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie à horaire inflammatoire (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie inflammatoire spondylarthrite spondylarthropathie Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_a_horaire_inflammatoire.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Lombalgie à horaire inflammatoire (algorithme)</h3>
-          <span class="guides-keywords">lombalgie inflammatoire spondylarthrite spondylarthropathie algorithme prise en charge référence</span>
+          <span class="guides-keywords">lombalgie inflammatoire spondylarthrite spondylarthropathie</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="lombalgie drapeaux rouges red flags syndrome de la queue de cheval algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_avec__pathologie_rachidienne_grave_suspectee.pdf" data-title="Lombalgie avec drapeaux rouges (pathologie grave suspectée, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie avec drapeaux rouges (pathologie grave suspectée, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie drapeaux rouges red flags syndrome de la queue de cheval algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="lombalgie drapeaux rouges red flags syndrome de la queue de cheval" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_avec__pathologie_rachidienne_grave_suspectee.pdf" data-title="Lombalgie avec drapeaux rouges (pathologie grave suspectée, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie avec drapeaux rouges (pathologie grave suspectée, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie drapeaux rouges red flags syndrome de la queue de cheval Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_avec__pathologie_rachidienne_grave_suspectee.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Lombalgie avec drapeaux rouges (pathologie grave suspectée, algorithme)</h3>
-          <span class="guides-keywords">lombalgie drapeaux rouges red flags syndrome de la queue de cheval algorithme prise en charge référence</span>
+          <span class="guides-keywords">lombalgie drapeaux rouges red flags syndrome de la queue de cheval</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="lombalgie aiguë lombosciatalgie sciatique mal de dos algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_aigue_0-4_semaines.pdf" data-title="Lombalgie aiguë (0 à 4 semaines, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie aiguë (0 à 4 semaines, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie aiguë lombosciatalgie sciatique mal de dos algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="lombalgie aiguë lombosciatalgie sciatique mal de dos" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_aigue_0-4_semaines.pdf" data-title="Lombalgie aiguë (0 à 4 semaines, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie aiguë (0 à 4 semaines, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie aiguë lombosciatalgie sciatique mal de dos Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_aigue_0-4_semaines.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Lombalgie aiguë (0 à 4 semaines, algorithme)</h3>
-          <span class="guides-keywords">lombalgie aiguë lombosciatalgie sciatique mal de dos algorithme prise en charge référence</span>
+          <span class="guides-keywords">lombalgie aiguë lombosciatalgie sciatique mal de dos</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="lombalgie chronique subaiguë lombosciatalgie mal de dos algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_sub-aigue_chronique.pdf" data-title="Lombalgie subaiguë et chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie subaiguë et chronique (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie chronique subaiguë lombosciatalgie mal de dos algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="lombalgie chronique subaiguë lombosciatalgie mal de dos" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_sub-aigue_chronique.pdf" data-title="Lombalgie subaiguë et chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Lombalgie subaiguë et chronique (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur lombalgie chronique subaiguë lombosciatalgie mal de dos Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Colonne_Lombalgie_sub-aigue_chronique.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Lombalgie subaiguë et chronique (algorithme)</h3>
-          <span class="guides-keywords">lombalgie chronique subaiguë lombosciatalgie mal de dos algorithme prise en charge référence</span>
+          <span class="guides-keywords">lombalgie chronique subaiguë lombosciatalgie mal de dos</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="épaule luxation dislocation algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_luxation_dislocation.pdf" data-title="Épaule : luxation gléno-humérale (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épaule : luxation gléno-humérale (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épaule luxation dislocation algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="épaule luxation dislocation" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_luxation_dislocation.pdf" data-title="Épaule : luxation gléno-humérale (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Épaule : luxation gléno-humérale (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur épaule luxation dislocation Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Epaule_luxation_dislocation.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Épaule : luxation gléno-humérale (algorithme)</h3>
-          <span class="guides-keywords">épaule luxation dislocation algorithme prise en charge référence</span>
+          <span class="guides-keywords">épaule luxation dislocation</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="rotule patella luxation subluxation instabilité genou algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_rotule_subluxation.pdf" data-title="Genou : instabilité et luxation de la rotule (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : instabilité et luxation de la rotule (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur rotule patella luxation subluxation instabilité genou algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="rotule patella luxation subluxation instabilité genou" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_rotule_subluxation.pdf" data-title="Genou : instabilité et luxation de la rotule (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : instabilité et luxation de la rotule (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur rotule patella luxation subluxation instabilité genou Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_rotule_subluxation.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Genou : instabilité et luxation de la rotule (algorithme)</h3>
-          <span class="guides-keywords">rotule patella luxation subluxation instabilité genou algorithme prise en charge référence</span>
+          <span class="guides-keywords">rotule patella luxation subluxation instabilité genou</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="ménisque déchirure méniscale genou algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_dechirure_meciscale.pdf" data-title="Genou : déchirure méniscale (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : déchirure méniscale (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur ménisque déchirure méniscale genou algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="ménisque déchirure méniscale genou" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_dechirure_meciscale.pdf" data-title="Genou : déchirure méniscale (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Genou : déchirure méniscale (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur ménisque déchirure méniscale genou Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Genou_dechirure_meciscale.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Genou : déchirure méniscale (algorithme)</h3>
-          <span class="guides-keywords">ménisque déchirure méniscale genou algorithme prise en charge référence</span>
+          <span class="guides-keywords">ménisque déchirure méniscale genou</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="métatarsalgie avant-pied pied algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Metatarsalgies.pdf" data-title="Métatarsalgies (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Métatarsalgies (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur métatarsalgie avant-pied pied algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="métatarsalgie avant-pied pied" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Metatarsalgies.pdf" data-title="Métatarsalgies (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Métatarsalgies (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur métatarsalgie avant-pied pied Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Metatarsalgies.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Métatarsalgies (algorithme)</h3>
-          <span class="guides-keywords">métatarsalgie avant-pied pied algorithme prise en charge référence</span>
+          <span class="guides-keywords">métatarsalgie avant-pied pied</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="névrome de Morton pied algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Nevrome_de_Morton.pdf" data-title="Névrome de Morton (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Névrome de Morton (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur névrome de Morton pied algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="névrome de Morton pied" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Nevrome_de_Morton.pdf" data-title="Névrome de Morton (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Névrome de Morton (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur névrome de Morton pied Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Nevrome_de_Morton.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Névrome de Morton (algorithme)</h3>
-          <span class="guides-keywords">névrome de Morton pied algorithme prise en charge référence</span>
+          <span class="guides-keywords">névrome de Morton pied</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="orteil marteau pied algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_orteil_marteau.pdf" data-title="Orteil en marteau (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Orteil en marteau (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur orteil marteau pied algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="orteil marteau pied" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_orteil_marteau.pdf" data-title="Orteil en marteau (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Orteil en marteau (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur orteil marteau pied Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pied_orteil_marteau.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Orteil en marteau (algorithme)</h3>
-          <span class="guides-keywords">orteil marteau pied algorithme prise en charge référence</span>
+          <span class="guides-keywords">orteil marteau pied</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="ostéoporose ostéodensitométrie bisphosphonate fracture algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Aide-memoire_Depistage_Traitement__Osteoporose.pdf" data-title="Ostéoporose : aide-mémoire pour le dépistage et le traitement" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Ostéoporose : aide-mémoire pour le dépistage et le traitement CIUSSS de l’Estrie–CHUS Os, articulations et douleur ostéoporose ostéodensitométrie bisphosphonate fracture algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="ostéoporose ostéodensitométrie bisphosphonate fracture" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Aide-memoire_Depistage_Traitement__Osteoporose.pdf" data-title="Ostéoporose : aide-mémoire pour le dépistage et le traitement" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Ostéoporose : aide-mémoire pour le dépistage et le traitement CIUSSS de l’Estrie–CHUS Os, articulations et douleur ostéoporose ostéodensitométrie bisphosphonate fracture Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Aide-memoire_Depistage_Traitement__Osteoporose.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Ostéoporose : aide-mémoire pour le dépistage et le traitement</h3>
-          <span class="guides-keywords">ostéoporose ostéodensitométrie bisphosphonate fracture algorithme prise en charge référence</span>
+          <span class="guides-keywords">ostéoporose ostéodensitométrie bisphosphonate fracture</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="rhizarthrose pouce arthrose main algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pouce_arthrose_carpometacarpienne.pdf" data-title="Pouce : rhizarthrose (arthrose carpométacarpienne, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Pouce : rhizarthrose (arthrose carpométacarpienne, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur rhizarthrose pouce arthrose main algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="rhizarthrose pouce arthrose main" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pouce_arthrose_carpometacarpienne.pdf" data-title="Pouce : rhizarthrose (arthrose carpométacarpienne, algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Pouce : rhizarthrose (arthrose carpométacarpienne, algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur rhizarthrose pouce arthrose main Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Pouce_arthrose_carpometacarpienne.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Pouce : rhizarthrose (arthrose carpométacarpienne, algorithme)</h3>
-          <span class="guides-keywords">rhizarthrose pouce arthrose main algorithme prise en charge référence</span>
+          <span class="guides-keywords">rhizarthrose pouce arthrose main</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="De Quervain ténosynovite poignet pouce algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tenosynovite_De_Quervain.pdf" data-title="Ténosynovite de De Quervain (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Ténosynovite de De Quervain (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur De Quervain ténosynovite poignet pouce algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="De Quervain ténosynovite poignet pouce" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tenosynovite_De_Quervain.pdf" data-title="Ténosynovite de De Quervain (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Ténosynovite de De Quervain (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur De Quervain ténosynovite poignet pouce Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tenosynovite_De_Quervain.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Ténosynovite de De Quervain (algorithme)</h3>
-          <span class="guides-keywords">De Quervain ténosynovite poignet pouce algorithme prise en charge référence</span>
+          <span class="guides-keywords">De Quervain ténosynovite poignet pouce</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="tunnel carpien nerf médian main poignet algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tunnel_carpien.pdf" data-title="Syndrome du tunnel carpien (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Syndrome du tunnel carpien (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur tunnel carpien nerf médian main poignet algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="tunnel carpien nerf médian main poignet" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tunnel_carpien.pdf" data-title="Syndrome du tunnel carpien (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Os, articulations et douleur" data-search="Syndrome du tunnel carpien (algorithme) CIUSSS de l’Estrie–CHUS Os, articulations et douleur tunnel carpien nerf médian main poignet Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Orthopedie/Tunnel_carpien.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Syndrome du tunnel carpien (algorithme)</h3>
-          <span class="guides-keywords">tunnel carpien nerf médian main poignet algorithme prise en charge référence</span>
+          <span class="guides-keywords">tunnel carpien nerf médian main poignet</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -2201,74 +2200,74 @@
 <section class="guides-band guides-category" id="sujet-orl-oreilles-nez-gorge" aria-labelledby="guides-category-11">
       <div class="guides-category-heading"><h2 id="guides-category-11">ORL (oreilles, nez, gorge)</h2><span class="compte" aria-label="8 ressources">8</span></div>
       
-      <ul class="guides-resource-list"><li class="guides-resource" data-tags="étourdissement vertige déséquilibre chronique algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Etourdissements_chroniques.pdf" data-title="Étourdissements chroniques (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Étourdissements chroniques (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) étourdissement vertige déséquilibre chronique algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+      <ul class="guides-resource-list"><li class="guides-resource" data-tags="étourdissement vertige déséquilibre chronique" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Etourdissements_chroniques.pdf" data-title="Étourdissements chroniques (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Étourdissements chroniques (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) étourdissement vertige déséquilibre chronique Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Etourdissements_chroniques.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Étourdissements chroniques (algorithme)</h3>
-          <span class="guides-keywords">étourdissement vertige déséquilibre chronique algorithme prise en charge référence</span>
+          <span class="guides-keywords">étourdissement vertige déséquilibre chronique</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="acouphène tinnitus audiogramme algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Acouphene.pdf" data-title="Acouphènes (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Acouphènes (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) acouphène tinnitus audiogramme algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="acouphène tinnitus audiogramme" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Acouphene.pdf" data-title="Acouphènes (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Acouphènes (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) acouphène tinnitus audiogramme Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Acouphene.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Acouphènes (algorithme)</h3>
-          <span class="guides-keywords">acouphène tinnitus audiogramme algorithme prise en charge référence</span>
+          <span class="guides-keywords">acouphène tinnitus audiogramme</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="apnée du sommeil ronflement SAOS enfant adulte algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Apnee_du_sommeil.pdf" data-title="Apnée du sommeil (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Apnée du sommeil (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) apnée du sommeil ronflement SAOS enfant adulte algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="apnée du sommeil ronflement SAOS enfant adulte" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Apnee_du_sommeil.pdf" data-title="Apnée du sommeil (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Apnée du sommeil (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) apnée du sommeil ronflement SAOS enfant adulte Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Apnee_du_sommeil.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Apnée du sommeil (algorithme)</h3>
-          <span class="guides-keywords">apnée du sommeil ronflement SAOS enfant adulte algorithme prise en charge référence</span>
+          <span class="guides-keywords">apnée du sommeil ronflement SAOS enfant adulte</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="dysphagie déglutition oropharyngée algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Dysphagie_haute_chronique.pdf" data-title="Dysphagie haute chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Dysphagie haute chronique (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) dysphagie déglutition oropharyngée algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="dysphagie déglutition oropharyngée" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Dysphagie_haute_chronique.pdf" data-title="Dysphagie haute chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Dysphagie haute chronique (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) dysphagie déglutition oropharyngée Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Dysphagie_haute_chronique.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Dysphagie haute chronique (algorithme)</h3>
-          <span class="guides-keywords">dysphagie déglutition oropharyngée algorithme prise en charge référence</span>
+          <span class="guides-keywords">dysphagie déglutition oropharyngée</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="masse cervicale cou adénopathie parotide algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Masse_cervicale.pdf" data-title="Masse cervicale (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Masse cervicale (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) masse cervicale cou adénopathie parotide algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="masse cervicale cou adénopathie parotide" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Masse_cervicale.pdf" data-title="Masse cervicale (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Masse cervicale (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) masse cervicale cou adénopathie parotide Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Masse_cervicale.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Masse cervicale (algorithme)</h3>
-          <span class="guides-keywords">masse cervicale cou adénopathie parotide algorithme prise en charge référence</span>
+          <span class="guides-keywords">masse cervicale cou adénopathie parotide</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="obstruction nasale congestion rhinite corticostéroïde intranasal algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Obstruction_nasale_chronique.pdf" data-title="Obstruction nasale chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Obstruction nasale chronique (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) obstruction nasale congestion rhinite corticostéroïde intranasal algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="obstruction nasale congestion rhinite corticostéroïde intranasal" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Obstruction_nasale_chronique.pdf" data-title="Obstruction nasale chronique (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Obstruction nasale chronique (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) obstruction nasale congestion rhinite corticostéroïde intranasal Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Obstruction_nasale_chronique.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Obstruction nasale chronique (algorithme)</h3>
-          <span class="guides-keywords">obstruction nasale congestion rhinite corticostéroïde intranasal algorithme prise en charge référence</span>
+          <span class="guides-keywords">obstruction nasale congestion rhinite corticostéroïde intranasal</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="surdité hypoacousie audiogramme otite algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Surdite.pdf" data-title="Surdité (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Surdité (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) surdité hypoacousie audiogramme otite algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="surdité hypoacousie audiogramme otite" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Surdite.pdf" data-title="Surdité (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Surdité (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) surdité hypoacousie audiogramme otite Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Surdite.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Surdité (algorithme)</h3>
-          <span class="guides-keywords">surdité hypoacousie audiogramme otite algorithme prise en charge référence</span>
+          <span class="guides-keywords">surdité hypoacousie audiogramme otite</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="vertige VPPB Dix-Hallpike Epley algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Vertiges_rotatoires_aigus.pdf" data-title="Vertiges rotatoires aigus (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Vertiges rotatoires aigus (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) vertige VPPB Dix-Hallpike Epley algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="vertige VPPB Dix-Hallpike Epley" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Vertiges_rotatoires_aigus.pdf" data-title="Vertiges rotatoires aigus (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="ORL (oreilles, nez, gorge)" data-search="Vertiges rotatoires aigus (algorithme) CIUSSS de l’Estrie–CHUS ORL (oreilles, nez, gorge) vertige VPPB Dix-Hallpike Epley Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Vertiges_rotatoires_aigus.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Vertiges rotatoires aigus (algorithme)</h3>
-          <span class="guides-keywords">vertige VPPB Dix-Hallpike Epley algorithme prise en charge référence</span>
+          <span class="guides-keywords">vertige VPPB Dix-Hallpike Epley</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -2277,11 +2276,11 @@
 <section class="guides-band guides-category guides-band--green" id="sujet-hematologie-et-oncologie" aria-labelledby="guides-category-12">
       <div class="guides-category-heading"><h2 id="guides-category-12">Hématologie et oncologie</h2><span class="compte" aria-label="2 ressources">2</span></div>
       
-      <ul class="guides-resource-list"><li class="guides-resource" data-tags="LLC leucémie lymphocytose hématologie algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Hematologie/Leucemie_lymphoide_chronique_LLC.pdf" data-title="Leucémie lymphoïde chronique (LLC) : diagnostic et suivi (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Hématologie et oncologie" data-search="Leucémie lymphoïde chronique (LLC) : diagnostic et suivi (algorithme) CIUSSS de l’Estrie–CHUS Hématologie et oncologie LLC leucémie lymphocytose hématologie algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+      <ul class="guides-resource-list"><li class="guides-resource" data-tags="LLC leucémie lymphocytose hématologie" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Hematologie/Leucemie_lymphoide_chronique_LLC.pdf" data-title="Leucémie lymphoïde chronique (LLC) : diagnostic et suivi (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Hématologie et oncologie" data-search="Leucémie lymphoïde chronique (LLC) : diagnostic et suivi (algorithme) CIUSSS de l’Estrie–CHUS Hématologie et oncologie LLC leucémie lymphocytose hématologie Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Hematologie/Leucemie_lymphoide_chronique_LLC.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Leucémie lymphoïde chronique (LLC) : diagnostic et suivi (algorithme)</h3>
-          <span class="guides-keywords">LLC leucémie lymphocytose hématologie algorithme prise en charge référence</span>
+          <span class="guides-keywords">LLC leucémie lymphocytose hématologie</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -2362,11 +2361,11 @@
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
       </li>
-<li class="guides-resource" data-tags="dépistage cancer colorectal RSOSi FIT coloscopie algorithme prise en charge référence" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Depistage_cancer_colorectal.pdf" data-title="Dépistage du cancer colorectal (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Prévention et vaccination" data-search="Dépistage du cancer colorectal (algorithme) CIUSSS de l’Estrie–CHUS Prévention et vaccination dépistage cancer colorectal RSOSi FIT coloscopie algorithme prise en charge référence Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
+<li class="guides-resource" data-tags="dépistage cancer colorectal RSOSi FIT coloscopie" data-id="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Depistage_cancer_colorectal.pdf" data-title="Dépistage du cancer colorectal (algorithme)" data-org="CIUSSS de l’Estrie–CHUS" data-desc="Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS." data-category="Prévention et vaccination" data-search="Dépistage du cancer colorectal (algorithme) CIUSSS de l’Estrie–CHUS Prévention et vaccination dépistage cancer colorectal RSOSi FIT coloscopie Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.">
         <a class="guides-resource-link" href="https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Depistage_cancer_colorectal.pdf" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">CIUSSS de l’Estrie–CHUS</span>
           <h3>Dépistage du cancer colorectal (algorithme)</h3>
-          <span class="guides-keywords">dépistage cancer colorectal RSOSi FIT coloscopie algorithme prise en charge référence</span>
+          <span class="guides-keywords">dépistage cancer colorectal RSOSi FIT coloscopie</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>

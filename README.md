@@ -161,8 +161,12 @@ protégé lorsqu'il est configuré.
   question à un sujet du catalogue (apixaban -> anticoagulant). À enrichir quand une recherche
   réelle ne trouve pas le bon guide, puis ajouter un cas dans le test.
 - Classement par sujet clinique (liste et ordre dans `ORDRE_SUJETS` du générateur). Sans
-  recherche ni filtre, la page montre un sommaire des sujets et 6 ressources par sujet, avec un
-  bouton pour afficher les autres ; sans JavaScript, tout est affiché.
+  recherche ni filtre, les sujets sont fermés (sauf « Mes favoris ») : un clic sur le titre ouvre
+  la liste ; une recherche ou un filtre affiche directement les résultats ; une adresse
+  `/guides/#sujet-…` ouvre le sujet. Sans JavaScript, tout est affiché.
+- Liens directs seulement : chaque fiche mène au guide, à l'algorithme ou au document lui-même
+  (PDF de préférence), jamais à une page qui liste d'autres documents ni à un document interne
+  d'établissement. Sources québécoises et canadiennes seulement.
 - Vérification des liens chaque lundi (`.github/workflows/verifier-liens-guides.yml`) : ticket
   « Liens du catalogue de guides à corriger » ouvert ou mis à jour si un lien est brisé,
   suspect ou redirigé, puis fermé automatiquement quand tout est corrigé.
