@@ -279,10 +279,10 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Insomnie – Choisir avec soin",
-    "org": "Choisir avec soin",
-    "cat": "Santé mentale, dépendances et sommeil",
-    "tags": "insomnie sommeil hypnotique benzodiazépine Choisir avec soin",
+    "title": "Insomnie : ordonnance non pharmacologique",
+    "org": "Choisir avec soin Québec",
+    "cat": "Documents pour les patients",
+    "tags": "insomnie sommeil hypnotique benzodiazépine Choisir avec soin Insomnie – Choisir avec soin ordonnance sans médicament hygiène du sommeil dépliant patient feuillet document pour les patients",
     "url": "https://choisiravecsoinquebec.ca/wp-content/uploads/2024/03/Insomnie_FR_-FINAL.pdf",
     "desc": "Guide de Choisir avec soin sur l’évaluation et le traitement de l’insomnie.",
     "verifie": "2026-09-25"
@@ -1289,7 +1289,7 @@
   {
     "title": "Réduire les maux de tête",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ céphalée migraine maux de tête enfant",
     "url": "https://www.chusj.org/getmedia/cc7719fd-9fd2-4c3e-92a8-960e6e79d641/depliant_F-1550_Reduire-les-maux-de-tete.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1298,7 +1298,7 @@
   {
     "title": "Votre enfant a subi une lacération de la peau",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ lacération plaie points de suture colle soins",
     "url": "https://www.chusj.org/getmedia/8503a164-a694-4919-b23a-4101961a4390/depliant_F-1737_Votre-enfant-a-subit-une-laceration-de-la-peau_Web.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1307,7 +1307,7 @@
   {
     "title": "La bronchiolite",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ bronchiolite VRS nourrisson respiratoire",
     "url": "https://www.chusj.org/getmedia/54dd3d0d-50f7-49dc-9adb-1ad97bc581c2/depliant_F-2038_Bronchiolite.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1316,7 +1316,7 @@
   {
     "title": "Analgésiques opioïdes à courte action",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ opioïde morphine hydromorphone douleur analgésie",
     "url": "https://www.chusj.org/getmedia/bab6d4ad-42d2-41d6-8f9a-4559718451ab/depliant_F-848_Analgesiques-opioides-a-courte-action.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1325,7 +1325,7 @@
   {
     "title": "Les convulsions fébriles",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ convulsion fébrile épilepsie fièvre",
     "url": "https://www.chusj.org/getmedia/9689835d-7086-48f8-9d3d-78c022db88a0/depliant_F-849_les-convulsions-febriles_FR.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1334,7 +1334,7 @@
   {
     "title": "Infection des voies respiratoires supérieures",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ IVRS rhume infection respiratoire toux",
     "url": "https://www.chusj.org/getmedia/64254569-a5af-4f31-a695-692add89cfed/depliant_F-851_infection-voies-respiratoires-superieures_FR.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1343,7 +1343,7 @@
   {
     "title": "La fièvre",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ fièvre acétaminophène ibuprofène température",
     "url": "https://www.chusj.org/getmedia/b5a9f7d7-9983-4d91-92fa-d7f6d79ddeff/depliant_F-853_la-fievre_FR.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1352,7 +1352,7 @@
   {
     "title": "Qu’est-ce que la laryngite ?",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ laryngite croup toux aboyante stridor",
     "url": "https://www.chusj.org/getmedia/24c5f255-02bd-43f8-a8c3-6098bc9cee69/depliant_F-854_la-laryngite_FR.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1361,7 +1361,7 @@
   {
     "title": "Mon plâtre, j’en prends soin",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ plâtre fracture immobilisation soins",
     "url": "https://www.chusj.org/getmedia/109d0142-a5bc-4752-86d3-4bf6b3e330f3/depliant_F-856_mon-platre_FR.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1370,7 +1370,7 @@
   {
     "title": "La gastro-entérite",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ gastro-entérite gastro diarrhée vomissements déshydratation réhydratation",
     "url": "https://www.chusj.org/getmedia/2d0c8d02-fb3c-4a3e-b424-acffcef2bc81/depliant_F-858_la-gastro-enterite_FR.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1379,7 +1379,7 @@
   {
     "title": "Soutenir votre enfant lors d’une procédure médicale courante",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ procédure douleur anxiété distraction ponction",
     "url": "https://www.chusj.org/getmedia/66290a5a-2b56-49f7-a0ec-38d62a27ec43/depliant-F-4270-Soutenir-votre-enfant-lors-d-une-procedure-medicale-courante.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1388,7 +1388,7 @@
   {
     "title": "Problèmes de comportements ou détresse psychologique chez votre enfant ou votre adolescent ?",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ santé mentale détresse comportement adolescent psychiatrie",
     "url": "https://www.chusj.org/getmedia/18db2136-1c2e-43b6-9b99-5163ea43c232/F4300_psycho-urgence.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1397,7 +1397,7 @@
   {
     "title": "Application de la crème anesthésiante",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ crème anesthésiante EMLA lidocaïne ponction",
     "url": "https://www.chusj.org/getmedia/d2f8a5da-7bc8-4f65-92d6-ad6ef7556c5e/F-7075_Application-de-la-creme-anesthesiante_web_2.pdf.aspx?ext=.pdf",
     "desc": "Dépliant d’information pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -1406,7 +1406,7 @@
   {
     "title": "Traumatisme craniocérébral léger (commotion cérébrale), une guérison étape par étape",
     "org": "CHU Sainte-Justine",
-    "cat": "Dépliants pour les patients",
+    "cat": "Documents pour les patients",
     "tags": "dépliant parents patients pédiatrie urgence Sainte-Justine Ste-Justine CHUSJ TCCL commotion cérébrale traumatisme crânien retour école sport",
     "url": "https://www.chusj.org/getmedia/c70401ac-31c9-484b-96a2-8993ae8ae0c1/INESSS_Depliant_TCCL_INESSS.pdf.aspx?ext=.pdf",
     "desc": "Dépliant de l’INESSS pour les parents, offert par l’urgence du CHU Sainte-Justine.",
@@ -8046,5 +8046,212 @@
     "tags": "suicide idées suicidaires prévention du suicide crise détresse ligne d’écoute 988 texto",
     "desc": "Ligne pancanadienne de prévention du suicide, 24 h sur 24, par téléphone ou texto. Au Québec, les appels sont dirigés vers les centres de prévention du suicide.",
     "sourcePage": "https://988.ca/fr"
+  },
+  {
+    "title": "Alcool : réduire sa consommation et faire face aux envies de boire",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "alcool consommation sevrage envie de boire trouble lié à l’usage d’alcool dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2025/06/Reduire-sa-consommation-dalcool-et-faire-face-aux-fortes-envies-ou-aux-besoins-irrepressibles-de-boire.pdf",
+    "desc": "Feuillet pour le patient : stratégies pour réduire sa consommation d’alcool et gérer les envies de boire.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Apnée obstructive du sommeil et VPPC : conseils pour les problèmes courants",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "apnée du sommeil SAOS CPAP VPPC masque sommeil dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2024/03/Apnee-du-sommeil-dorigine-obstructive-et-ventilation-en-pression-positive-continue-VPPC.pdf",
+    "desc": "Feuillet pour le patient : solutions aux problèmes courants avec l’appareil de ventilation en pression positive continue.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Infection urinaire non compliquée : fiche pour la personne atteinte",
+    "org": "INESSS",
+    "cat": "Documents pour les patients",
+    "tags": "infection urinaire cystite antibiotique conseils dépliant patient feuillet document pour les patients",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Conseils_Infection_urinaireVF_QR.pdf",
+    "desc": "Fiche de l’INESSS pour la personne atteinte d’une cystite : traitement, symptômes à surveiller, prévention.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Constipation fonctionnelle et encoprésie chez l’enfant (dépliant pour les parents)",
+    "org": "CHU Sainte-Justine",
+    "cat": "Documents pour les patients",
+    "tags": "constipation encoprésie enfant pédiatrie laxatif PEG parents dépliant patient feuillet document pour les patients",
+    "url": "https://www.chusj.org/getmedia/375d5d68-d82b-43da-ad0b-576adb8ae4d2/depliant_F-4624_Constipation-fonctionnelle-et-encopresie.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant de la clinique externe de pédiatrie du CHU Sainte-Justine pour les parents.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Diabète de type 2 : guide pratique pour la gestion du diabète",
+    "org": "Diabète Québec",
+    "cat": "Documents pour les patients",
+    "tags": "diabète type 2 glycémie alimentation hypoglycémie autosoins dépliant patient feuillet document pour les patients",
+    "url": "https://www.diabete.qc.ca/wp-content/uploads/2024/06/116016-DQC25-GuidePratique-FR-MAJ-WEB.pdf",
+    "desc": "Guide de Diabète Québec pour les personnes qui viennent de recevoir un diagnostic de diabète de type 2.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Démangeaisons cutanées (prurit)",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "prurit démangeaisons peau dermatologie dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Demangeaisons-cutanees-prurit.pdf",
+    "desc": "Feuillet pour le patient : causes, soins de la peau et signes qui doivent amener à consulter.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Dépression : traitements et conseils",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "dépression antidépresseur psychothérapie santé mentale dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Depression.pdf",
+    "desc": "Feuillet pour le patient : consultations, activité physique, antidépresseurs et effets secondaires.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Hygiène nasale (dépliant pour les parents)",
+    "org": "CHU Sainte-Justine",
+    "cat": "Documents pour les patients",
+    "tags": "hygiène nasale lavage de nez rhume congestion nourrisson enfant pédiatrie parents dépliant patient feuillet document pour les patients",
+    "url": "https://www.chusj.org/getmedia/f8ae8adc-774d-4c98-9a33-11d3d3a56e12/F-886_Hygiene-nasale_2024_web.pdf",
+    "desc": "Dépliant du CHU Sainte-Justine (2024) : quand et comment faire l’hygiène nasale de l’enfant.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Maladies inflammatoires de l’intestin : effets sur d’autres parties du corps",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "MII maladie de Crohn colite ulcéreuse manifestations extra-intestinales dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Effets-des-maladies-inflammatoires-de-lintestin-sur-dautres-parties-de-votre-corps.pdf",
+    "desc": "Feuillet pour le patient : manifestations extra-intestinales des MII et ce qu’on peut faire.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Œdème des jambes (enflure des jambes)",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "œdème enflure jambes bas de contention dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2024/03/OEdeme-des-jambes-enflure-des-jambes.pdf",
+    "desc": "Feuillet pour le patient : causes de l’enflure des jambes, bas de contention et conseils.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Fertilité : mythes, faits et incertitudes",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "fertilité infertilité grossesse conception DIU dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2024/09/Fertilite-Mythes-faits-et-incertitudes.pdf",
+    "desc": "Feuillet pour le patient : idées reçues et données probantes sur la fertilité.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Fibrillation auriculaire nouvellement diagnostiquée",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "FA fibrillation auriculaire arythmie anticoagulant AVC dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Fibrillation-auriculaire-nouvellement-diagnostiquee.pdf",
+    "desc": "Feuillet pour le patient : comprendre la FA, le risque d’AVC et les traitements.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Hématurie microscopique (présence de sang dans l’urine)",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "hématurie sang urine urologie dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2024/01/Hematurie-microscopique-presence-de-sang-dans-lurine.pdf",
+    "desc": "Feuillet pour le patient : ce que signifie l’hématurie microscopique et les examens possibles.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Infection virale : ordonnance de mesures sans antibiotique (adultes)",
+    "org": "Choisir avec soin",
+    "cat": "Documents pour les patients",
+    "tags": "infection virale rhume IVRS bronchite pharyngite sinusite antibiotique ordonnance virale dépliant patient feuillet document pour les patients",
+    "url": "https://choosingwiselycanada.org/wp-content/uploads/dlm_uploads/2025/03/Adult_Prescription_FR_2.pdf",
+    "desc": "Ordonnance de Choisir avec soin à remettre au patient : durée prévue des symptômes, soulagement, quand reconsulter.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Ménopause : à quoi s’attendre",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "ménopause bouffées de chaleur symptômes vasomoteurs dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/A-quoi-sattendre-pendant-la-menopause.pdf",
+    "desc": "Feuillet pour la patiente : symptômes de la ménopause, mode de vie et options de traitement.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Maladie artérielle périphérique : conseils d’activité physique",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "maladie artérielle périphérique MAP claudication marche exercice dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Maladie-arterielle-peripherique.pdf",
+    "desc": "Feuillet pour le patient : programme de marche et activité physique en cas de maladie artérielle périphérique.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Maladie de Parkinson",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "Parkinson tremblement neurologie dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2025/06/Maladie-de-Parkinson-FEUILLET-DINFORMATION-DESTINE-AUX-PATIENTS.pdf",
+    "desc": "Feuillet pour le patient (2025) : symptômes, traitements et vie au quotidien avec la maladie de Parkinson.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Cholestérol : prendre en charge son taux de cholestérol",
+    "org": "Cœur + AVC",
+    "cat": "Documents pour les patients",
+    "tags": "cholestérol lipides dyslipidémie statine alimentation dépliant patient feuillet document pour les patients",
+    "url": "https://www.coeuretavc.ca/-/media/pdf-files/canada/heart/how-to-manage-your-cholesterol-fr.pdf",
+    "desc": "Brochure de Cœur + AVC : comprendre le cholestérol, habitudes de vie et médicaments.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Activité physique : ordonnance d’exercice",
+    "org": "RxFiles",
+    "cat": "Documents pour les patients",
+    "tags": "activité physique exercice ordonnance prescription d’exercice dépliant patient feuillet document pour les patients",
+    "url": "https://www.rxfiles.ca/RxFiles/uploads/documents/Exercise-RxFiles-French.pdf",
+    "desc": "Ordonnance d’activité physique à remplir avec le patient : objectifs graduels et idées pour bouger au quotidien.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Lombalgie : ordonnance non pharmacologique (exercices)",
+    "org": "Choisir avec soin Québec",
+    "cat": "Documents pour les patients",
+    "tags": "lombalgie mal de dos douleur lombaire exercices physiothérapie ordonnance dépliant patient feuillet document pour les patients",
+    "url": "https://choisiravecsoinquebec.ca/wp-content/uploads/2024/09/Prescription-non-pharmacologique-lombalgie.pdf",
+    "desc": "Ordonnance non pharmacologique de Choisir avec soin Québec : exercices selon le type de douleur au bas du dos.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Somnifères et médicaments contre l’anxiété : brochure de déprescription",
+    "org": "CRIUGM",
+    "cat": "Documents pour les patients",
+    "tags": "benzodiazépine sédatif hypnotique somnifère zopiclone déprescription sevrage insomnie anxiété dépliant patient feuillet document pour les patients",
+    "url": "https://criugm.qc.ca/wp-content/uploads/2021/08/Somnife%CC%80resetme%CC%81dscontrelanxie%CC%81te%CC%81_VF.pdf",
+    "desc": "Brochure pour le patient (Réseau canadien pour la déprescription) : risques des sédatifs-hypnotiques et comment diminuer la dose.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Stéatose hépatique non alcoolique (foie gras)",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "stéatose hépatique NAFLD MASLD foie gras dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Steatose-hepatique-non-alcoolique-NAFLD.pdf",
+    "desc": "Feuillet pour le patient : comprendre la stéatose hépatique et les changements d’habitudes de vie.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Syndrome du côlon irritable (SCI)",
+    "org": "FMPE (Fondation pour l’éducation médicale continue)",
+    "cat": "Documents pour les patients",
+    "tags": "SCI côlon irritable FODMAP intestin dépliant patient feuillet document pour les patients",
+    "url": "https://fmpe.org/wp-content/uploads/2023/03/Syndrome-du-colon-irritable-SCI.pdf",
+    "desc": "Feuillet pour le patient : symptômes, examens, alimentation (FODMAP) et traitements du SCI.",
+    "verifie": "2026-09-25"
   }
 ]

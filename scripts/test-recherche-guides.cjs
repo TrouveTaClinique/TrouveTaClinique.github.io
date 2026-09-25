@@ -146,3 +146,8 @@ test('clinique : les guides passent devant les organismes (sevrage alcool)', () 
   const res = parType('sevrage alcool', 3);
   assert.ok(res.every(r => r.type !== 'communautaire'), res.map(r => r.title).join(' | '));
 });
+
+test('documents pour les patients : benzodiazépines et côlon irritable', () => {
+  assert.ok(contient(parType('sevrage benzodiazépine', 3).map(r => r.title), /somniferes/), parType('sevrage benzodiazépine', 3).map(r => r.title).join(' | '));
+  assert.ok(contient(parType('côlon irritable', 2).map(r => r.title), /colon irritable/));
+});

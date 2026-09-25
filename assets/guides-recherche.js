@@ -59,6 +59,8 @@
     ['tsv', 'tachycardie supraventriculaire'],
     ['dka', 'acidocetose'],
     ['epipen', 'anaphylaxie', 'epinephrine', 'adrenaline'],
+    ['benzodiazepine', 'benzo', 'sedatif hypnotique', 'somnifere', 'hypnotique', 'bzra', 'z drug', 'lorazepam', 'ativan', 'clonazepam', 'rivotril', 'alprazolam', 'xanax', 'oxazepam', 'zopiclone', 'imovane'],
+    ['deprescription', 'deprescrire', 'sevrage medicament', 'cessation medicament'],
     /* Ressources communautaires (sans mots vides : « aide », « de »… sont retirés de la requête). */
     ['banque alimentaire', 'aide alimentaire', 'depannage alimentaire', 'comptoir alimentaire', 'distribution alimentaire', 'nourriture', 'epicerie', 'panier noel', 'paniers de noel'],
     ['hebergement', 'refuge', 'gite', 'sans abri', 'sans-abri', 'itinerance', 'itinerant', 'maison hebergement', 'maison d hebergement'],

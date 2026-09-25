@@ -15,7 +15,7 @@ const ORDRE_SUJETS = [
   'Santé mentale, dépendances et sommeil', 'Santé des femmes et grossesse', 'Pédiatrie',
   'Gériatrie et troubles neurocognitifs', 'Os, articulations et douleur', 'Peau et yeux',
   'Prévention et vaccination', 'Urgence et traumatologie', 'Soins palliatifs et niveaux de soins',
-  'Imagerie médicale', 'Pratique professionnelle et protocoles', 'Dépliants pour les patients',
+  'Imagerie médicale', 'Pratique professionnelle et protocoles', 'Documents pour les patients',
   'Ressources communautaires'
 ];
 /* Sujet des organismes communautaires (fiches « type: communautaire » de guides/donnees.json). */
