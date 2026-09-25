@@ -483,7 +483,16 @@
         "gmfu": "2"
       },
       "niveau": "GMF-U 2",
-      "porteOuverte": "1 septembre 2026",
+      "porteOuverte": "1er octobre 2026, 18 h à 20 h",
+      "evenement": {
+        "titre": "Soirée portes ouvertes",
+        "date": "2026-10-01",
+        "heures": "de 18 h à 20 h",
+        "texte": "L’équipe du GMF-U des Montérégiennes invite les résidents à venir découvrir son milieu clinique et à discuter avec l’équipe.",
+        "lieu": "20-N, boulevard de Mortagne, Boucherville (Québec) J4B 5K6",
+        "telephone": "450 468-5511",
+        "courriel": "gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca"
+      },
       "region": "Est",
       "infos": "",
       "gardeUrgence": "",
