@@ -19,6 +19,12 @@ const ORDRE_SUJETS = [
 ];
 const ancre = texte => 'sujet-' + texte.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+/* Bouton « Proposer un guide ou une ressource » : courriel prérempli, même adresse que
+   « Signaler une clinique » (scripts/generer-pages-seo.js). */
+const COURRIEL_PROPOSITION = 'olivier.laplante.med@ssss.gouv.qc.ca';
+const PROPOSITION_HREF = 'mailto:' + COURRIEL_PROPOSITION + '?subject=' + encodeURIComponent('Proposition pour le catalogue de guides')
+  + '&body=' + encodeURIComponent('Bonjour,\n\nJe propose d’ajouter au catalogue /guides/ :\n\nTitre : \nOrganisme : \nLien : \nPourquoi c’est utile en première ligne : \n\nMerci !');
+
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 
 function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
@@ -97,10 +103,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=94-guides-menage">
-  <script src="/assets/guides-recherche.js?v=94-guides-menage" defer></script>
-  <script src="/assets/guides-cliniques.js?v=94-guides-menage" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=94-guides-menage" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=95-guides-proposer">
+  <script src="/assets/guides-recherche.js?v=95-guides-proposer" defer></script>
+  <script src="/assets/guides-cliniques.js?v=95-guides-proposer" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=95-guides-proposer" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -157,6 +163,11 @@ ${sections}</div>
     <h2>Aucune ressource trouvée</h2>
     <p>Essayez un autre mot-clé ou consultez l’ensemble du catalogue.</p>
     <button class="btn guides-reset" type="button">Afficher toutes les ressources</button>
+  </section>
+  <section class="guides-band guides-proposer" aria-labelledby="guides-proposer-titre">
+    <h2 id="guides-proposer-titre">Il manque un guide ou une ressource&nbsp;?</h2>
+    <p>Proposez un guide de pratique, un outil clinique ou une ressource utile en première ligne : il sera vérifié avant d’être ajouté au catalogue.</p>
+    <a class="guides-proposer-bouton" href="${esc(PROPOSITION_HREF)}">Proposer un guide ou une ressource</a>
   </section>
 </main>
 ${footer}

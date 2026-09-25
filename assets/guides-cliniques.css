@@ -84,3 +84,10 @@
 .guides-voir-plus{margin-top:1.2rem;min-height:48px;padding:.6rem 1.4rem;border:2px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
 .guides-voir-plus:hover{background:var(--navy);color:#fff}
 .guides-page :is(.guides-sommaire a,.guides-voir-plus):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+/* Proposer un guide ou une ressource (courriel prérempli). */
+.guides-proposer{border-top:4px solid var(--navy);background:#f5f4fc}
+.guides-proposer h2{font-size:clamp(1.4rem,1vw + 1rem,1.8rem);margin:0 0 .6rem}
+.guides-proposer p{margin:0 0 1.2rem;max-width:70ch;line-height:1.6}
+.guides-proposer-bouton{display:inline-flex;align-items:center;min-height:52px;padding:.7rem 1.6rem;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;text-decoration:none}
+.guides-proposer-bouton:hover{text-decoration:underline;text-underline-offset:3px}
+.guides-page .guides-proposer-bouton:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
