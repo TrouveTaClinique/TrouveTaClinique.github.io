@@ -18,5 +18,9 @@
     { "src": "/guides/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "/guides/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
+  "shortcuts": [
+    { "name": "Guides cliniques", "short_name": "Guides", "url": "/guides/", "icons": [{ "src": "/guides/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Ressources communautaires", "short_name": "Ressources", "url": "/guides/ressources-communautaires/", "icons": [{ "src": "/guides/icon-192.png", "sizes": "192x192", "type": "image/png" }] }
+  ],
   "launch_handler": { "client_mode": "navigate-existing" }
 }

@@ -153,6 +153,7 @@ function htmlFooterSite() {
       <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
       <li><a href="/monteregie-est/amp/">AMP</a></li>
       <li><a href="/guides/">Guides cliniques</a></li>
+      <li><a href="/guides/ressources-communautaires/">Ressources communautaires</a></li>
       <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
       <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
       <li><a href="/recherche/">Recherche</a></li>
@@ -4116,6 +4117,7 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 - PTEM-U (PREM-U), le PTEM en GMF-U : https://trouvetaclinique.ca/monteregie-est/ptem-u/
 - AMP, activités médicales particulières : https://trouvetaclinique.ca/monteregie-est/amp/
 - Guides cliniques, catalogue de guides de pratique, algorithmes et outils pour la médecine familiale en première ligne (liens vers les sources originales) : https://trouvetaclinique.ca/guides/
+- Ressources communautaires, organismes et lignes d'aide vers qui diriger les patients en Montérégie-Est (par ville et par type d'aide) : https://trouvetaclinique.ca/guides/ressources-communautaires/
 
 ## Pour citer ce site
 Nommer « Trouve ta clinique » et lier la page citée. Mentionner la date de mise à jour ci-dessus : les milieux en recrutement changent en cours d'année. Un milieu publié sans mention contraire recrute ; ceux qui ne recrutent pas portent l'indication « Ne recrute pas actuellement ».
@@ -4347,6 +4349,7 @@ function main() {
   // Réutilise le header/footer fraîchement généré, sans entrée dans la navigation.
   require('./generer-guides-cliniques.cjs').genererGuidesCliniques(RACINE);
   entrees.push({ loc: '/guides/', lastmod: '2026-09-24', changefreq: 'monthly', priority: '0.7' });
+  entrees.push({ loc: '/guides/ressources-communautaires/', lastmod: '2026-09-26', changefreq: 'monthly', priority: '0.6' });
 
   ecrire('sitemap.xml', sitemap(datesReelles(entrees)));
   ecrireLlmsTxt(majDonnees);

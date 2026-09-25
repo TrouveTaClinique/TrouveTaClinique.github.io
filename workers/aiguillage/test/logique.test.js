@@ -64,6 +64,16 @@ test('requête : le catalogue ne dépend pas de la question (cache stable)', () 
   assert.match(b.messages[0].content, /rien présélectionné/);
 });
 
+test('requête : la page d’origine oriente les types sans toucher au cache', () => {
+  const comm = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [], question: 'faim', page: 'communautaire' });
+  const guides = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [], question: 'faim', page: 'guides' });
+  const inconnue = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [], question: 'faim', page: 'autre' });
+  assert.match(comm.messages[0].content, /^La question vient de la page des ressources communautaires/);
+  assert.match(guides.messages[0].content, /^La question vient de la page des guides cliniques/);
+  assert.match(inconnue.messages[0].content, /^Le moteur de mots-clés/);
+  assert.deepEqual(comm.system, guides.system);
+});
+
 test('catalogue : ligne propre aux ressources communautaires', () => {
   const liste = [...indexerCatalogue([{ title: 'Abri', url: 'https://a.ca', cat: 'Ressources communautaires', type: 'communautaire', rubriques: ['Hébergement · Femmes'], ville: 'Longueuil', pourQui: '18 ans et plus' }]).values()];
   assert.equal(listerCatalogue(liste), '0 | Abri | Ressource communautaire : Hébergement · Femmes | Longueuil | 18 ans et plus');

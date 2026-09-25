@@ -1,4 +1,6 @@
-/* Boîte « Demander à l'IA quel guide consulter » de /guides/.
+/* Boîte « Demander à l'IA » de /guides/ et de /guides/ressources-communautaires/.
+   L'IA parcourt tout le catalogue ; la page d'où vient la question (data-page) oriente
+   seulement l'ordre des types proposés.
    Le service d'aiguillage parcourt tout le catalogue ; le moteur du site lui envoie en indice
    ses 15 meilleurs résultats (window.GuidesCatalogue, dans guides-cliniques.js) ;
    le service d'aiguillage (workers/aiguillage) en choisit au plus 5 et explique chaque choix.
@@ -25,14 +27,20 @@
 
   function carte(guide) {
     const li = catalogue.carte(guide.url) || (() => {
-      /* Guide absent de cette version de la page (catalogue mis à jour entre-temps) : lien simple. */
+      /* Ressource de l'autre page (guide ou organisme), ou ajoutée au catalogue entre-temps :
+         lien simple, avec le nom de la page où la retrouver. */
+      const comm = guide.categorie === 'Ressources communautaires';
       const el = document.createElement('li');
       el.className = 'guides-resource';
       const a = document.createElement('a');
       a.className = 'guides-resource-link';
       a.href = guide.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      a.append(paragraphe('guides-resource-source', guide.organisme));
+      a.append(paragraphe('guides-resource-source', (comm ? 'Ressource communautaire' : 'Guide clinique') + (guide.organisme && !comm ? ' · ' + guide.organisme : '')));
       const h3 = document.createElement('h3'); h3.textContent = guide.titre; a.append(h3);
+      const nouvelOnglet = document.createElement('span');
+      nouvelOnglet.className = 'visually-hidden';
+      nouvelOnglet.textContent = ' (nouvel onglet)';
+      a.append(nouvelOnglet);
       el.append(a);
       return el;
     })();
@@ -58,7 +66,7 @@
   }
 
   /* Question sur une ressource communautaire : même encadré 211 que la recherche. */
-  const noteCommunautaire = () => { const n = catalogue.noteCommunautaire(); n.hidden = false; return n; };
+  const noteCommunautaire = () => { const n = catalogue.noteCommunautaire(); if (n) n.hidden = false; return n; };
 
   /* Attente animée : points qui rebondissent et étapes qui défilent. Le lecteur d'écran
      n'annonce qu'une phrase ; les étapes visibles lui sont masquées. */
@@ -125,7 +133,7 @@
       const reponse = await fetch(section.dataset.url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question, candidats }),
+        body: JSON.stringify({ question, candidats, page: section.dataset.page || '' }),
         signal: controleur.signal
       });
       const donnees = await reponse.json().catch(e => { if (controleur.signal.aborted) throw e; return {}; });
@@ -133,7 +141,8 @@
         erreur(donnees.erreur || 'Le service est indisponible pour le moment. La recherche ci-dessus fonctionne toujours.');
       } else {
         afficher(donnees);
-        if (communautaire) zone.prepend(noteCommunautaire());
+        const note = communautaire && noteCommunautaire();
+        if (note) zone.prepend(note);
       }
     } catch (e) {
       erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
