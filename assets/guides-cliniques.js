@@ -85,28 +85,38 @@
     favoris = lireFavoris(); construireFavoris(); render();
   });
 
-  /* Sans recherche ni filtre, chaque sujet montre ses 6 premières ressources et un bouton
-     pour le reste. Sans JavaScript, tout reste affiché. */
-  const APERCU = 6;
-  const sommaire = document.querySelector('.guides-sommaire');
-  const ouverts = new Set();
+  /* Sans recherche ni filtre, les sujets sont fermés : leur titre est un bouton qui ouvre la
+     liste. Une recherche ou un filtre les ouvre tous. Sans JavaScript, tout reste affiché. */
+  const titreCatalogue = document.querySelector('.guides-catalogue-titre');
+  const ouverts = new Set();   // sujets ouverts à la main (catalogue complet)
+  const fermes = new Set();    // sujets refermés à la main (recherche ou filtre en cours)
+  let replier = true;
   sections.forEach((section, n) => {
     const liste = section.querySelector('.guides-resource-list');
     liste.id = liste.id || 'guides-liste-' + n;
+    const h2 = section.querySelector('.guides-category-heading h2');
     const bouton = document.createElement('button');
     bouton.type = 'button';
-    bouton.className = 'guides-voir-plus';
+    bouton.className = 'guides-toggle';
     bouton.setAttribute('aria-controls', liste.id);
-    bouton.hidden = true;
+    const chevron = document.createElement('span');
+    chevron.className = 'guides-chevron';
+    chevron.setAttribute('aria-hidden', 'true');
+    bouton.append(...h2.childNodes, ' ', section.querySelector('.guides-category-heading .compte'), chevron);
+    h2.replaceChildren(bouton);
     bouton.addEventListener('click', () => {
-      const ouvrir = !ouverts.has(section);
-      if (ouvrir) ouverts.add(section); else ouverts.delete(section);
+      const ensemble = replier ? ouverts : fermes;
+      if (ensemble.has(section)) ensemble.delete(section); else ensemble.add(section);
       render();
-      if (!ouvrir && section.getBoundingClientRect().top < 0) section.scrollIntoView();
-      bouton.focus();
     });
-    liste.after(bouton);
   });
+  function ouvrirDepuisAncre() {
+    const cible = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!cible || !sections.includes(cible)) return;
+    ouverts.add(cible); fermes.delete(cible); render();
+    cible.scrollIntoView();
+  }
+  window.addEventListener('hashchange', ouvrirDepuisAncre);
 
   const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', n + ' ' + mot + (n > 1 ? 's' : '')); };
 
@@ -136,24 +146,20 @@
     } else {
       resList.replaceChildren();
     }
-    const replier = !requete && !sujet && !organisme;
-    sommaire.hidden = !replier;
+    replier = !requete && !sujet && !organisme;
+    titreCatalogue.hidden = enRecherche;
     let visible = favVisibles ? 1 : 0;
     if (enRecherche) visible++;
-    if (replier) visible++;
     sections.forEach(section => {
       const items = enRecherche ? [] : Array.from(section.querySelectorAll('.guides-resource:not([hidden])'));
       const n = items.length;
       section.hidden = n === 0;
-      const bouton = section.querySelector('.guides-voir-plus');
-      const repliable = replier && n > APERCU;
-      bouton.hidden = !repliable;
-      if (repliable) {
-        const ouvert = ouverts.has(section);
-        if (!ouvert) items.slice(APERCU).forEach(el => { el.hidden = true; });
-        bouton.setAttribute('aria-expanded', String(ouvert));
-        bouton.textContent = ouvert ? 'Afficher moins' : 'Voir les ' + (n - APERCU) + ' autres ressources';
-      }
+      const ouvert = replier ? ouverts.has(section) : !fermes.has(section);
+      section.classList.toggle('guides-category--fermee', !ouvert);
+      section.querySelector('.guides-resource-list').hidden = !ouvert;
+      const note = section.querySelector('.guides-comm-note');
+      if (note) note.hidden = !ouvert;
+      section.querySelector('.guides-toggle').setAttribute('aria-expanded', String(ouvert));
       if (n) {
         section.classList.toggle('guides-band--green', visible++ % 2 === 1);
         badge(section.querySelector('.compte'), n, 'ressource');
@@ -185,4 +191,5 @@
   };
   input.value = new URLSearchParams(location.search).get('q') || '';
   render();
+  ouvrirDepuisAncre();
 })();

@@ -21,7 +21,6 @@
 .guides-filtres-reset{min-height:48px;padding:.55rem 1rem;border:0;background:transparent;color:var(--navy);font:inherit;font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .guides-resultats{border-top:4px solid var(--teal)}
 /* Boîte d'aiguillage IA (affichée seulement quand le service est configuré). */
-.guides-ia{border-top:4px solid var(--navy);background:#f5f4fc}
 .guides-ia-intro{font-size:1.05rem;line-height:1.6;max-width:74ch;margin:0 0 1rem}
 .guides-ia-form{display:flex;flex-wrap:wrap;gap:.8rem;align-items:stretch}
 .guides-ia-form textarea{flex:1 1 22rem;min-height:60px;padding:.9rem 1.2rem;border:2px solid rgba(18,6,114,.3);border-radius:16px;font:inherit;font-size:1.05rem;color:var(--navy);background:#fff;resize:vertical}
@@ -75,15 +74,6 @@
   .guides-ia-form button{width:100%;min-height:52px}
   .guides-ia-raison{padding-right:.15rem}
 }
-/* Sommaire des sujets et bouton « Voir les autres » (catalogue replié sans recherche ni filtre). */
-.guides-sommaire{border-top:4px solid var(--teal)}
-.guides-sommaire h2{font-size:clamp(1.4rem,1vw + 1rem,1.8rem);margin:0 0 1rem}
-.guides-sommaire ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem}
-.guides-sommaire a{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.45rem .6rem .45rem 1rem;border:1px solid rgba(18,6,114,.3);border-radius:999px;background:#fff;color:var(--navy);font-weight:600;text-decoration:none}
-.guides-sommaire a:hover{border-color:var(--navy);background:var(--teal-pale)}
-.guides-voir-plus{margin-top:1.2rem;min-height:48px;padding:.6rem 1.4rem;border:2px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
-.guides-voir-plus:hover{background:var(--navy);color:#fff}
-.guides-page :is(.guides-sommaire a,.guides-voir-plus):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 /* Proposer un guide ou une ressource (courriel prérempli). */
 .guides-proposer{border-top:4px solid var(--navy);background:#f5f4fc}
 .guides-proposer h2{font-size:clamp(1.4rem,1vw + 1rem,1.8rem);margin:0 0 .6rem}
@@ -113,3 +103,32 @@
 .guides-page :is(.guides-comm-infos a,.guides-comm-infos summary,.guides-comm-note a):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 @media(max-width:680px){.guides-comm-infos dl{grid-template-columns:1fr}.guides-comm-infos dt{margin-top:.3rem}}
 .guides-page a[href^="tel:"]{white-space:nowrap}
+
+/* Sujets repliables : fermés au chargement (sauf les favoris), ouverts par une recherche. */
+.guides-catalogue-titre{margin:0;padding:clamp(1.8rem,3vw,2.6rem) var(--gutter) .6rem;font-size:clamp(1.5rem,1vw + 1.1rem,2rem)}
+.guides-toggle{display:flex;align-items:center;gap:.8rem;width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.guides-toggle .compte{flex:none}
+.guides-chevron{margin-left:auto;flex:none;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--navy);position:relative;transition:transform .2s}
+.guides-chevron::before{content:"";position:absolute;left:50%;top:44%;width:.6rem;height:.6rem;border:solid #fff;border-width:0 3px 3px 0;transform:translate(-50%,-50%) rotate(45deg)}
+.guides-toggle[aria-expanded="true"] .guides-chevron{transform:rotate(180deg)}
+.guides-toggle:hover .guides-chevron{background:var(--teal-texte)}
+.guides-category--fermee{padding-top:.85rem;padding-bottom:.85rem}
+.guides-category--fermee .guides-category-heading{margin:0;padding-bottom:0;border-bottom:0}
+.guides-category--fermee h2{font-size:clamp(1.2rem,.6vw + 1rem,1.5rem)}
+.guides-category:not(.guides-category--fermee) + .guides-category--fermee{border-top:1px solid rgba(18,6,114,.12)}
+.guides-page .guides-toggle:focus-visible{outline:3px solid var(--teal);outline-offset:4px;border-radius:6px}
+/* Recherche assistée par IA : mise en valeur. */
+.guides-ia{position:relative;overflow:hidden;background:linear-gradient(135deg,#120672 0%,#2B1C8C 55%,#0B5E7A 100%);color:#fff;border-top:0}
+.guides-ia::after{content:"";position:absolute;right:-6rem;top:-6rem;width:18rem;height:18rem;border-radius:50%;background:radial-gradient(circle,rgba(255,198,26,.28),rgba(255,198,26,0) 70%);pointer-events:none}
+.guides-ia > *{position:relative;z-index:1}
+.guides-ia h2{color:#fff}
+.guides-ia-pastille{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .8rem;padding:.3rem .8rem;border-radius:999px;background:#FFC61A;color:#120672;font-size:.85rem;font-weight:800;letter-spacing:.02em}
+.guides-ia-intro{color:#fff}
+.guides-ia-form textarea{border-color:rgba(255,255,255,.6);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.guides-ia-form button{background:#FFC61A;color:#120672;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.guides-ia-form button:hover{background:#ffd54d}
+.guides-ia-avis{color:#fff;opacity:.92}
+.guides-ia-avis strong{color:#fff}
+.guides-ia .guides-ia-resultat:not(:empty){background:#fff;color:var(--navy);border-radius:16px;padding:1.1rem 1.2rem}
+.guides-page .guides-ia-form :is(textarea,button):focus-visible{outline:3px solid #FFC61A;outline-offset:3px}
+.guides-category-heading h2{flex:1 1 auto;min-width:0}
