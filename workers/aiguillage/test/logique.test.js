@@ -47,7 +47,7 @@ test('requête Sonnet 5 : sortie JSON, effort bas, sans repli ni cache', () => {
   assert.deepEqual(r.output_config, { format: { type: 'json_schema', schema: SCHEMA }, effort: 'low' });
   assert.equal(r.fallbacks, undefined);
   assert.equal(r.betas, undefined);
-  assert.match(r.messages[0].content, /^Guides proposés.*\n0 \| Guide 3 \| INESSS \| Catégorie \| otite enfant/s);
+  assert.match(r.messages[0].content, /^Ressources proposées.*\n0 \| Guide 3 \| INESSS \| Catégorie \| otite enfant/s);
   assert.match(r.messages[0].content, /<question>otite<\/question>$/);
 });
 
@@ -73,7 +73,7 @@ test('réponse : refus, JSON illisible, aucun guide', () => {
   assert.equal(interpreterReponse({ stop_reason: 'refusal', content: [] }, []).guides.length, 0);
   assert.throws(() => interpreterReponse({ stop_reason: 'end_turn', content: [{ type: 'text', text: 'pas du JSON' }] }, []), /illisible/);
   assert.throws(() => interpreterReponse({ stop_reason: 'max_tokens', content: [] }, []), /incomplète/);
-  assert.match(interpreterReponse(reponseModele({ guides: [], message: '' }), []).message, /Aucun guide/);
+  assert.match(interpreterReponse(reponseModele({ guides: [], message: '' }), []).message, /Aucune ressource/);
 });
 
 test('HTTP : origine inconnue refusée, préflight accepté, GET refusé', async () => {

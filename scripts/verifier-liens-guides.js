@@ -60,20 +60,32 @@ async function lire(url) {
   return { code: reponse.status, finale: reponse.url || url, titre };
 }
 
-async function verifier(r) {
-  let res;
-  for (let essai = 0; essai < 2; essai++) {
-    try {
-      res = await lire(r.url);
-      if (res.code < 500) break;
-    } catch (e) {
-      const code = e.cause?.code || '';
-      res = { erreur: e.name === 'TimeoutError' ? 'délai dépassé'
-        : /CERT|SIGNATURE|SSL|TLS/.test(code) ? 'certificat du site incomplet (s’ouvre souvent quand même dans un navigateur)'
-        : code || e.message };
+/* Une seule visite par adresse (sans le #fragment) : les fiches qui pointent vers une page
+   du même PDF, comme celles du bottin communautaire, partagent le résultat. */
+const visites = new Map();
+function visiter(url) {
+  const cle = url.split('#')[0];
+  if (!visites.has(cle)) visites.set(cle, (async () => {
+    let res;
+    for (let essai = 0; essai < 2; essai++) {
+      try {
+        res = await lire(cle);
+        if (res.code < 500) break;
+      } catch (e) {
+        const code = e.cause?.code || '';
+        res = { erreur: e.name === 'TimeoutError' ? 'délai dépassé'
+          : /CERT|SIGNATURE|SSL|TLS/.test(code) ? 'certificat du site incomplet (s’ouvre souvent quand même dans un navigateur)'
+          : code || e.message };
+      }
+      await new Promise(ok => setTimeout(ok, 5000));
     }
-    await new Promise(ok => setTimeout(ok, 5000));
-  }
+    return res;
+  })());
+  return visites.get(cle);
+}
+
+async function verifier(r) {
+  const res = await visiter(r.url);
   const base = { titre: r.title, org: r.org, url: r.url };
   if (res.erreur) return { ...base, etat: 'injoignable', detail: res.erreur };
   const { code, finale, titre } = res;
