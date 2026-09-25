@@ -28,3 +28,11 @@ test('titres : pas de trait d’union collé servant de séparateur, pas de tire
   const fautifs = ressources.map(r => r.title).filter(t => /\S- |—/.test(t));
   assert.deepEqual(fautifs, []);
 });
+
+test('organismes communautaires : sujet, rubrique et moyen de contact', () => {
+  const comm = ressources.filter(r => r.type === 'communautaire');
+  assert.ok(comm.length > 200);
+  const fautifs = comm.filter(r => r.cat !== 'Ressources communautaires' || !r.rubrique || !Array.isArray(r.rubriques) || !(r.telephone || r.url) || /^[*(]/.test(r.title));
+  assert.deepEqual(fautifs.map(r => r.title), []);
+  assert.ok(ressources.filter(r => r.cat === 'Ressources communautaires').every(r => r.type === 'communautaire'));
+});

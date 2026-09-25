@@ -8,7 +8,10 @@ const path = require('node:path');
 const R = require('../assets/guides-recherche.js');
 
 const ressources = require(path.join(__dirname, '..', 'guides', 'donnees.json'));
-const index = ressources.map(r => R.preparer({ titre: r.title, organisme: r.org, categorie: r.cat, motsCles: r.tags, description: r.desc }));
+// Même indexation que la page (assets/guides-cliniques.js) : pour un organisme, la ville compte comme le nom.
+const index = ressources.map(r => r.type === 'communautaire'
+  ? R.preparer({ titre: r.title + ' ' + r.ville, organisme: '', categorie: r.cat + ' ' + r.rubriques.join(' '), motsCles: r.tags, description: r.desc })
+  : R.preparer({ titre: r.title, organisme: r.org, categorie: r.cat, motsCles: r.tags, description: r.desc }));
 const titres = requete => R.rechercher(index, requete).map(x => ressources[x.i].title);
 const contient = (liste, motif) => liste.some(t => motif.test(R.normaliser(t)));
 
@@ -106,14 +109,40 @@ test('deux mots-clés sans guide commun : chacun garde ses résultats', () => {
   assert.ok(contient(res, /otite/) && contient(res, /penicilline/), res.join(' | '));
 });
 
-// Questions hors catalogue : aucun résultat plutôt que des guides sans rapport.
+// Questions hors catalogue : aucun résultat plutôt que des ressources sans rapport.
 test('hors catalogue : pas de faux résultat', () => {
-  for (const q of ['banque alimentaire', 'hébergement femme violence', 'proche aidant épuisé', 'organisme deuil', 'aide à domicile personne âgée']) {
+  for (const q of ['réparation de voiture', 'billet d’avion pour Cuba', 'recette de gâteau']) {
     assert.deepEqual(titres(q), [], q);
   }
 });
 
 test('questions communautaires reconnues, questions cliniques non', () => {
   for (const q of ['banque alimentaire', 'répit pour proche aidant', 'maison d’hébergement', 'centre d’action bénévole', '211']) assert.ok(R.estCommunautaire(q), q);
-  for (const q of ['otite', 'sevrage alcool', 'fibrillation auriculaire']) assert.ok(!R.estCommunautaire(q), q);
+  for (const q of ['otite', 'sevrage alcool', 'fibrillation auriculaire', 'transport de patients']) assert.ok(!R.estCommunautaire(q), q);
+});
+
+// Organismes communautaires (bottin) : classement selon le type de question.
+const communautaires = ressources.map(r => r.type === 'communautaire');
+const parType = (q, n = 5) => R.rechercherParType(index, communautaires, q).slice(0, n).map(x => ressources[x.i]);
+
+test('communautaire : banque alimentaire mène aux organismes d’aide alimentaire', () => {
+  const res = parType('banque alimentaire');
+  assert.ok(res.length >= 3);
+  assert.ok(res.every(r => r.type === 'communautaire' && /alimentaire|repas/i.test(r.rubriques.join(' '))), res.map(r => r.title).join(' | '));
+});
+
+test('communautaire : hébergement pour femme victime de violence', () => {
+  const res = parType('hébergement femme violence conjugale');
+  assert.ok(res.length && res.every(r => r.type === 'communautaire'), res.map(r => r.title).join(' | '));
+  assert.ok(res.slice(0, 3).some(r => /Femmes/.test(r.rubrique)), res.map(r => r.title).join(' | '));
+});
+
+test('communautaire : la ville départage (aide alimentaire à Saint-Amable)', () => {
+  const res = parType('aide alimentaire Saint-Amable', 3);
+  assert.equal(res[0].title, 'Centre d’Entraide Bénévole', res.map(r => r.title).join(' | '));
+});
+
+test('clinique : les guides passent devant les organismes (sevrage alcool)', () => {
+  const res = parType('sevrage alcool', 3);
+  assert.ok(res.every(r => r.type !== 'communautaire'), res.map(r => r.title).join(' | '));
 });

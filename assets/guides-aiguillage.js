@@ -47,11 +47,11 @@
     if (donnees.message) zone.append(paragraphe('guides-ia-message', donnees.message));
     if (donnees.guides && donnees.guides.length) {
       const n = donnees.guides.length;
-      zone.append(paragraphe('guides-ia-compte', n + ' guide' + (n > 1 ? 's' : '') + ' suggéré' + (n > 1 ? 's' : '')));
+      zone.append(paragraphe('guides-ia-compte', n + ' suggestion' + (n > 1 ? 's' : '')));
       const ul = document.createElement('ul');
       ul.className = 'guides-resource-list';
       donnees.guides.forEach(g => ul.append(carte(g)));
-      zone.append(ul, paragraphe('guides-ia-pied', 'Suggestions générées par IA à partir du catalogue. Consultez toujours le guide lui-même.'));
+      zone.append(ul, paragraphe('guides-ia-pied', 'Suggestions générées par IA à partir du catalogue. Consultez toujours la source elle-même.'));
     }
   }
 
@@ -67,7 +67,7 @@
     const candidats = catalogue.candidats(question, CANDIDATS);
     const communautaire = catalogue.estCommunautaire && catalogue.estCommunautaire(question);
     if (!candidats.length) {
-      afficher({ guides: [], message: communautaire ? '' : 'Aucun guide du catalogue ne correspond à ces mots. Essayez de décrire la situation autrement.' });
+      afficher({ guides: [], message: communautaire ? '' : 'Aucune ressource du catalogue ne correspond à ces mots. Essayez de décrire la situation autrement.' });
       if (communautaire) zone.append(noteCommunautaire());
       return;
     }

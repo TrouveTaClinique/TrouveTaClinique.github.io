@@ -96,3 +96,20 @@
 .guides-communautaire p{margin:0 0 .5rem;line-height:1.6}
 .guides-communautaire p:last-child{margin:0}
 .guides-ia-resultat .guides-communautaire{margin:0 0 1rem}
+/* Cartes d'organismes communautaires : téléphone et adresse sous le lien, détails repliés. */
+.guides-comm-note{margin:-.2rem 0 1rem;max-width:80ch;font-size:.95rem;line-height:1.6}
+.guides-comm-services{display:block;font-size:.95rem;line-height:1.55;color:var(--navy);opacity:.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.guides-resource--comm .guides-resource-link{height:auto;padding-bottom:.6rem}
+.guides-comm-infos{padding:0 1rem 1.2rem .15rem;font-size:.95rem;line-height:1.5}
+.guides-comm-infos p{margin:0 0 .3rem}
+.guides-comm-tel{font-weight:700}
+.guides-comm-tel a,.guides-comm-infos dd a{color:var(--teal-texte);text-decoration:underline;text-underline-offset:3px}
+.guides-comm-adresse{color:var(--navy);opacity:.8}
+.guides-comm-infos details{margin-top:.4rem}
+.guides-comm-infos summary{cursor:pointer;font-weight:650;color:var(--navy);min-height:32px;display:flex;align-items:center}
+.guides-comm-infos dl{margin:.4rem 0 0;display:grid;grid-template-columns:max-content 1fr;gap:.3rem .8rem}
+.guides-comm-infos dt{font-weight:700}
+.guides-comm-infos dd{margin:0}
+.guides-page :is(.guides-comm-infos a,.guides-comm-infos summary,.guides-comm-note a):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+@media(max-width:680px){.guides-comm-infos dl{grid-template-columns:1fr}.guides-comm-infos dt{margin-top:.3rem}}
+.guides-page a[href^="tel:"]{white-space:nowrap}

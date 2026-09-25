@@ -58,11 +58,18 @@ dates du sitemap selon le contenu réel des pages).
   va dans `tags` pour rester trouvable.
 - Liens vérifiés chaque lundi par `.github/workflows/verifier-liens-guides.yml`
   (`scripts/verifier-liens-guides.js`), qui ouvre un ticket s'il y a lieu.
+- Ressources communautaires : fiches `type: "communautaire"` de `guides/donnees.json`, sujet
+  « Ressources communautaires » (bottin 2023 du Réseau d'habitations chez soi, agglomération de
+  Longueuil, plus 211, Info-aidant, Info-Social 811 et 9-8-8). Champs propres : `rubrique`,
+  `rubriques`, `ville`, `adresse`, `telephone`, `pourQui`, `heures`, `acces`, `services`,
+  `sourcePage`. Lien : site de l'organisme vérifié, sinon la page du bottin PDF.
+  La recherche fait passer les organismes devant pour une question communautaire
+  (`estCommunautaire`), les guides devant pour une question clinique (`rechercherParType`).
 - Recherche : `assets/guides-recherche.js` (synonymes `GROUPES`, concepts `CONCEPTS`), testée
   par `scripts/test-recherche-guides.cjs`.
 - Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5, crédits prépayés de
-  20 $ sans recharge). L'IA suggère des guides du catalogue, elle ne répond jamais à la question
-  clinique (décision du propriétaire).
+  20 $ sans recharge). L'IA suggère des guides ou des organismes du catalogue, elle ne répond jamais
+  à la question clinique (décision du propriétaire).
 
 ## Divers
 

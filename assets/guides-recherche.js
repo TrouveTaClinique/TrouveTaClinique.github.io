@@ -58,7 +58,21 @@
     ['brue', 'alte', 'malaise grave du nourrisson'],
     ['tsv', 'tachycardie supraventriculaire'],
     ['dka', 'acidocetose'],
-    ['epipen', 'anaphylaxie', 'epinephrine', 'adrenaline']
+    ['epipen', 'anaphylaxie', 'epinephrine', 'adrenaline'],
+    /* Ressources communautaires (sans mots vides : « aide », « de »… sont retirés de la requête). */
+    ['banque alimentaire', 'aide alimentaire', 'depannage alimentaire', 'comptoir alimentaire', 'distribution alimentaire', 'nourriture', 'epicerie', 'panier noel', 'paniers de noel'],
+    ['hebergement', 'refuge', 'gite', 'sans abri', 'sans-abri', 'itinerance', 'itinerant', 'maison hebergement', 'maison d hebergement'],
+    ['popote roulante', 'repas livre', 'repas bas prix', 'repas a bas prix', 'soupe populaire'],
+    ['violence conjugale', 'violence familiale', 'femme violentee'],
+    ['proche aidant', 'aidant naturel', 'repit', 'aide naturel'],
+    ['ligne ecoute', 'ligne d ecoute', 'ecoute telephonique', 'tel-aide'],
+    ['toxicomanie', 'dependance', 'drogue'],
+    ['logement', 'appartement', 'loyer', 'hlm'],
+    ['friperie', 'vetement', 'meuble', 'comptoir familial'],
+    ['impot', 'declaration revenu', 'rapport impot', 'rapport d impot', 'declaration de revenus'],
+    ['juridique', 'avocat', 'aide juridique'],
+    ['emploi', 'recherche emploi', 'recherche d emploi', 'insertion professionnelle'],
+    ['alphabetisation', 'francisation']
   ];
 
   /* Concepts : un mot de la question (à gauche) mène aussi aux sujets du catalogue (à droite).
@@ -176,9 +190,24 @@
      « 60 ans ») et les mots de question sont ignorés, sauf s'il ne reste rien d'autre. */
   function analyserRequete(requete) {
     const tokens = mots(requete);
-    const utiles = tokens.filter(t => !MOTS_VIDES.has(t) && !/^\d+$/.test(t));
-    const liste = utiles.length ? utiles : tokens;
     const termes = [];
+    /* D'abord les expressions de GROUPES qui contiennent un mot vide (« aide alimentaire »,
+       « sans abri », « ligne d'écoute ») : elles disparaîtraient une fois les mots vides retirés. */
+    const reste = [];
+    for (let i = 0; i < tokens.length;) {
+      let pris = 0;
+      for (let n = Math.min(LONGUEUR_MAX, tokens.length - i); n >= 2 && !pris; n--) {
+        const seg = tokens.slice(i, i + n);
+        const phrase = seg.join(' ');
+        if (seg.some(t => MOTS_VIDES.has(t)) && PHRASES.has(phrase)) {
+          termes.push({ alternatives: ALTERNATIVES[PHRASES.get(phrase)], expansions: [], saisie: seg, dernier: i + n === tokens.length });
+          pris = n;
+        }
+      }
+      if (pris) i += pris; else reste.push(tokens[i++]);
+    }
+    const utiles = reste.filter(t => !MOTS_VIDES.has(t) && !/^\d+$/.test(t));
+    const liste = utiles.length || termes.length ? utiles : reste;
     for (let i = 0; i < liste.length;) {
       let trouve = false;
       for (let n = Math.min(LONGUEUR_MAX_TOUT, liste.length - i); n >= 1 && !trouve; n--) {
@@ -272,10 +301,23 @@
   }
 
   /* Questions qui visent une ressource communautaire plutôt qu'un guide clinique. */
-  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|logements?|itinerance|itinerant|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport|accompagnement|juridique|impots?|friperies?|centre d action)\b/;
+  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|alimentaires?|nourriture|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|gites?|sans abri|logements?|loyers?|hlm|itinerance|itinerants?|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport adapte|juridique|avocat|impots?|friperies?|vetements?|meubles?|centre d action|emploi|alphabetisation|francisation|lignes? d ecoute|lignes? ecoute|ecoute telephonique|toxicomanie|groupes? de soutien|suicid\w*|9 ?8 ?8)\b/;
   const estCommunautaire = requete => COMMUNAUTAIRE.test(normaliser(requete));
 
-  const api = { estCommunautaire, normaliser, mots, analyserRequete, preparer, score, rechercher, distance, GROUPES };
+  /* Classement selon le type de question : une question communautaire fait passer les
+     organismes (communautaires[i] vrai) devant ; une question clinique, les guides. L'autre
+     type reste possible, mais il doit être nettement plus pertinent pour atteindre le seuil. */
+  const DECOTE_TYPE = 0.35;
+  function rechercherParType(index, communautaires, requete, options = {}) {
+    const visee = estCommunautaire(requete);
+    const res = rechercher(index, requete, { seuil: 0 })
+      .map(x => ({ i: x.i, score: !!communautaires[x.i] === visee ? x.score : x.score * DECOTE_TYPE }))
+      .sort((a, b) => b.score - a.score || a.i - b.i);
+    const min = res.length ? res[0].score * (options.seuil ?? 0.25) : 0;
+    return res.filter(x => x.score >= min);
+  }
+
+  const api = { estCommunautaire, rechercherParType, normaliser, mots, analyserRequete, preparer, score, rechercher, distance, GROUPES };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else racine.GuidesRecherche = api;
 })(typeof window !== 'undefined' ? window : globalThis);

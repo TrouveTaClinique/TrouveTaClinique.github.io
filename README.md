@@ -166,6 +166,10 @@ protégé lorsqu'il est configuré.
 - Vérification des liens chaque lundi (`.github/workflows/verifier-liens-guides.yml`) : ticket
   « Liens du catalogue de guides à corriger » ouvert ou mis à jour si un lien est brisé,
   suspect ou redirigé, puis fermé automatiquement quand tout est corrigé.
+- Ressources communautaires : 247 organismes tirés du bottin 2023 du Réseau d'habitations chez
+  soi (agglomération de Longueuil), plus 211, Info-aidant, Info-Social 811 et 9-8-8, avec
+  téléphone cliquable, adresse et détails (pour qui, heures, accès). Une question comme
+  « aide alimentaire Saint-Amable » les fait passer devant les guides cliniques.
 - Favoris : gardés dans le navigateur (`localStorage`, clé `ttc-guides-favoris`).
 - Aiguillage IA : boîte « Demander à l'IA quel guide consulter », servie par le Worker
   `workers/aiguillage` (voir son README : coûts, plafond de crédits, mise en place). La boîte

@@ -15,8 +15,46 @@ const ORDRE_SUJETS = [
   'Santé mentale, dépendances et sommeil', 'Santé des femmes et grossesse', 'Pédiatrie',
   'Gériatrie et troubles neurocognitifs', 'Os, articulations et douleur', 'Peau et yeux',
   'Prévention et vaccination', 'Urgence et traumatologie', 'Soins palliatifs et niveaux de soins',
-  'Imagerie médicale', 'Pratique professionnelle et protocoles', 'Dépliants pour les patients'
+  'Imagerie médicale', 'Pratique professionnelle et protocoles', 'Dépliants pour les patients',
+  'Ressources communautaires'
 ];
+/* Sujet des organismes communautaires (fiches « type: communautaire » de guides/donnees.json). */
+const SUJET_COMMUNAUTAIRE = 'Ressources communautaires';
+const SOURCE_COMMUNAUTAIRE = 'https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf';
+
+/* Numéros de téléphone d'un texte libre changés en liens tel: (le reste du texte est échappé). */
+function lierTelephones(texte) {
+  const motif = /(?:1[\s-])?\(?\d{3}\)?[\s.-]*\d{3}[\s.-]*\d{4}/g;
+  let html = '', dernier = 0, m;
+  while ((m = motif.exec(texte))) {
+    const chiffres = m[0].replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+    html += esc(texte.slice(dernier, m.index)) + `<a href="tel:+1${chiffres}">${esc(m[0].trim())}</a>`;
+    dernier = m.index + m[0].length;
+  }
+  return html + esc(texte.slice(dernier));
+}
+
+function carteCommunautaire(r) {
+  /* Rubrique principale et ses sous-rubriques (ex. « Hébergement · Femmes, Hommes »). */
+  const [section] = r.rubrique.split(' · ');
+  const sous = (r.rubriques || []).filter(x => x.startsWith(section + ' · ')).map(x => x.split(' · ')[1]);
+  const lieu = [section + (sous.length ? ' · ' + sous.join(', ') : ''), r.ville].filter(Boolean).join(' · ');
+  const details = [['Pour qui', r.pourQui], ['Heures', r.heures], ['Accès', r.acces]].filter(([, v]) => v);
+  return `<li class="guides-resource guides-resource--comm" data-id="${esc(r.url)}" data-type="communautaire" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-rubriques="${esc((r.rubriques || []).join(' '))}" data-ville="${esc(r.ville || '')}" data-tags="${esc(r.tags)}">
+        <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
+          <span class="guides-resource-source">${esc(lieu)}</span>
+          <h3>${esc(r.title)}</h3>
+          ${r.services ? `<span class="guides-comm-services">${esc(r.services)}</span>` : ''}
+          <span class="guides-resource-arrow" aria-hidden="true">↗</span>
+          <span class="visually-hidden"> (nouvel onglet)</span>
+        </a>
+        <div class="guides-comm-infos">
+          ${r.telephone ? `<p class="guides-comm-tel"><span class="visually-hidden">Téléphone : </span>${lierTelephones(r.telephone)}</p>` : ''}
+          ${r.adresse ? `<p class="guides-comm-adresse">${esc(r.adresse)}</p>` : ''}
+          ${details.length ? `<details><summary>Détails : ${esc(details.map(([k]) => k.toLowerCase()).join(', '))}</summary><dl>${details.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${lierTelephones(v)}</dd>`).join('')}</dl></details>` : ''}
+        </div>
+      </li>`;
+}
 const ancre = texte => 'sujet-' + texte.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /* Bouton « Proposer un guide ou une ressource » : courriel prérempli, même adresse que
@@ -46,7 +84,8 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     const cards = entries.map(r => {
       if (new URL(r.url).protocol !== 'https:') throw new Error('Lien de ressource non HTTPS.');
       titres.push(r.title);
-      return `<li class="guides-resource" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(cat)}" data-search="${esc([r.title,r.org,r.cat,r.tags,r.desc].join(' '))}">
+      if (r.type === 'communautaire') return carteCommunautaire(r);
+      return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(cat)}" data-search="${esc([r.title,r.org,r.cat,r.tags,r.desc].join(' '))}">
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">${esc(r.org)}</span>
           <h3>${esc(r.title)}</h3>
@@ -58,6 +97,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     }).join('\n');
     return `<section class="guides-band guides-category${index % 2 ? '' : ' guides-band--green'}" id="${ancre(cat)}" aria-labelledby="guides-category-${index}">
       <div class="guides-category-heading"><h2 id="guides-category-${index}">${esc(cat)}</h2><span class="compte" aria-label="${entries.length} ressource${entries.length > 1 ? 's' : ''}">${entries.length}</span></div>
+      ${cat === SUJET_COMMUNAUTAIRE ? `<p class="guides-comm-note">Organismes surtout de l’agglomération de Longueuil, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a>. Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>).</p>` : ''}
       <ul class="guides-resource-list">${cards}</ul>
     </section>`;
   }).join('\n');
@@ -77,7 +117,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Guides de pratique pour la première ligne | Trouve ta clinique</title>
-  <meta name="description" content="Retrouvez les guides de pratique, algorithmes et ressources pour la médecine familiale. Recherchez par sujet ou organisme et consultez les sources originales.">
+  <meta name="description" content="Guides de pratique, algorithmes et ressources communautaires pour la médecine familiale en Montérégie. Recherchez par sujet ou organisme et consultez les sources originales.">
   <link rel="canonical" href="https://trouvetaclinique.ca/guides/">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:locale" content="fr_CA">
@@ -103,10 +143,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=96-guides-communautaire">
-  <script src="/assets/guides-recherche.js?v=96-guides-communautaire" defer></script>
-  <script src="/assets/guides-cliniques.js?v=96-guides-communautaire" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=96-guides-communautaire" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=97-ressources-communautaires">
+  <script src="/assets/guides-recherche.js?v=97-ressources-communautaires" defer></script>
+  <script src="/assets/guides-cliniques.js?v=97-ressources-communautaires" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=97-ressources-communautaires" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -115,7 +155,7 @@ ${header.replace(/ aria-current="page"/g, '')}
   <section class="guides-band guides-intro">
     <p class="eyebrow">Médecine familiale · Première ligne</p>
     <h1>Guides pratiques et ressources cliniques</h1>
-    <p class="lead">Retrouvez les guides de pratique, algorithmes et ressources utiles à la médecine familiale, puis consultez directement leur site d’origine.</p>
+    <p class="lead">Retrouvez les guides de pratique, algorithmes et ressources utiles à la médecine familiale, ainsi que des organismes communautaires vers qui diriger vos patients.</p>
     <p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.${dateVerif ? ` Liens vérifiés le ${dateVerif}.` : ''} Ce catalogue ne remplace pas le jugement clinique.</p>
   </section>
   <section class="guides-band guides-band--green guides-search" aria-labelledby="guides-search-title">
@@ -136,18 +176,18 @@ ${header.replace(/ aria-current="page"/g, '')}
     </div>
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${ressources.length} ressources dans le catalogue</p>
     <div class="guides-communautaire" hidden>
-      <p><strong>Vous cherchez une ressource communautaire&nbsp;?</strong> Le catalogue ne contient pas encore les organismes communautaires.</p>
-      <p>Le 211 répertorie les organismes près de chez vous (aide alimentaire, répit, hébergement, proches aidants, transport, deuil…) : composez le <a href="tel:211">2-1-1</a> ou consultez <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211qc.ca<span class="visually-hidden"> (nouvel onglet)</span></a>.<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.</p>
+      <p><strong>Ressources communautaires :</strong> les organismes du catalogue viennent surtout de l’agglomération de Longueuil (bottin 2023). Téléphonez avant de diriger quelqu’un.</p>
+      <p>Ailleurs en Montérégie, le 211 répertorie les organismes près de chez vous : composez le <a href="tel:211">2-1-1</a> ou consultez <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211qc.ca<span class="visually-hidden"> (nouvel onglet)</span></a>.<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.</p>
     </div>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
   </section>
 ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="${esc(URL_AIGUILLAGE)}" hidden>
-    <h2 id="guides-ia-titre">Demander à l’IA quel guide consulter</h2>
-    <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
+    <h2 id="guides-ia-titre">Demander à l’IA quel guide ou quelle ressource consulter</h2>
+    <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides ou organismes communautaires du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
     <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
       <textarea id="guides-ia-question" name="question" rows="2" maxlength="400" placeholder="Ex. : toux depuis 4 semaines chez un fumeur de 60 ans" required></textarea>
-      <button type="submit">Suggérer des guides</button>
+      <button type="submit">Obtenir des suggestions</button>
     </form>
     <p class="guides-ia-avis"><strong>Confidentialité :</strong> votre question est transmise à un service d’IA (Anthropic) pour être traitée, puis n’est pas conservée par ce site. N’y inscrivez aucun renseignement permettant d’identifier un patient.</p>
     <div class="guides-ia-resultat" aria-live="polite"></div>

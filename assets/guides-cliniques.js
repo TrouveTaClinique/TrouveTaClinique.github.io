@@ -15,13 +15,18 @@
   const resSection = document.querySelector('.guides-resultats');
   const resList = resSection.querySelector('.guides-resource-list');
   const resources = Array.from(document.querySelectorAll('#guides-catalogue .guides-resource')).map(el => ({
-    el, id: el.dataset.id, category: el.dataset.category, org: el.dataset.org
+    el, id: el.dataset.id, category: el.dataset.category, org: el.dataset.org, comm: el.dataset.type === 'communautaire'
   }));
   if (!moteur || !selSujet) return; // la liste complète reste affichée
+  /* Organismes communautaires : leur source commune (le bottin) n'est pas cherchée, leur ville
+     compte comme le nom et leur rubrique comme une catégorie. */
   const index = resources.map(r => moteur.preparer({
-    titre: r.el.dataset.title, organisme: r.org, categorie: r.category,
-    motsCles: r.el.querySelector('.guides-keywords').textContent, description: r.el.dataset.desc
+    titre: r.comm ? r.el.dataset.title + ' ' + r.el.dataset.ville : r.el.dataset.title, organisme: r.comm ? '' : r.org,
+    categorie: r.comm ? r.category + ' ' + r.el.dataset.rubriques : r.category,
+    motsCles: r.el.dataset.tags, description: r.el.dataset.desc
   }));
+  const communautaires = resources.map(r => r.comm);
+  const classer = (requete, seuil) => moteur.rechercherParType(index, communautaires, requete, { seuil });
   document.querySelector('.guides-filter-area').hidden = false;
 
   /* Favoris : gardés dans ce navigateur seulement (localStorage), sans compte ni
@@ -109,7 +114,7 @@
     const requete = input.value.trim();
     const sujet = selSujet.value, organisme = selOrganisme.value;
     const retenus = new Map(); // id -> score
-    moteur.rechercher(index, requete).forEach(({ i, score }) => {
+    classer(requete, 0.25).forEach(({ i, score }) => {
       const r = resources[i];
       if ((!sujet || r.category === sujet) && (!organisme || r.org === organisme)) retenus.set(r.id, score);
     });
@@ -173,7 +178,7 @@
      cartes identiques à celles du catalogue, avec leur étoile de favori. */
   window.GuidesCatalogue = {
     /* Sans seuil de pertinence : l'IA gagne à voir large, jusqu'à n guides. */
-    candidats: (question, n) => moteur.rechercher(index, question, { seuil: 0 }).slice(0, n).map(({ i }) => resources[i].id),
+    candidats: (question, n) => classer(question, 0).slice(0, n).map(({ i }) => resources[i].id),
     carte: id => (parId.has(id) ? cloner(id) : null),
     estCommunautaire: question => moteur.estCommunautaire(question),
     noteCommunautaire: () => communautaire.cloneNode(true)
