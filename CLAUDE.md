@@ -77,7 +77,8 @@ dates du sitemap selon le contenu réel des pages).
 
 - Ce qui est publié est défini par la liste blanche de `scripts/preparer-apercu.js` (dossiers,
   fichiers, extensions, exclusions).
-- La PWA et le service worker sont réservés à `/monteregie-est/` ; augmenter la version du cache
-  dans `sw.js` quand une ressource mise en cache change.
+- Deux PWA indépendantes : `/monteregie-est/` (`sw.js` à la racine) et l'app « Guides »
+  (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
+  cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
 - Les courriels de recrutement sont publiés volontairement (`PUBLIER_COURRIELS = true`) ; le
   champ `notes` de `data.json` ne doit jamais être public.

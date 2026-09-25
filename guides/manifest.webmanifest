@@ -1,0 +1,22 @@
+{
+  "id": "/guides/",
+  "name": "Guides cliniques · Trouve ta clinique",
+  "short_name": "Guides",
+  "description": "Guides de pratique, algorithmes et ressources communautaires pour la médecine familiale en première ligne, avec un lien direct vers la source officielle.",
+  "lang": "fr-CA",
+  "dir": "ltr",
+  "start_url": "/guides/",
+  "scope": "/guides/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFFFFF",
+  "theme_color": "#08A0A0",
+  "categories": ["medical", "health", "education"],
+  "icons": [
+    { "src": "/guides/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/guides/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/guides/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/guides/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "launch_handler": { "client_mode": "navigate-existing" }
+}

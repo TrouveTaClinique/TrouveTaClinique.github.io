@@ -118,17 +118,27 @@
 .guides-category:not(.guides-category--fermee) + .guides-category--fermee{border-top:1px solid rgba(18,6,114,.12)}
 .guides-page .guides-toggle:focus-visible{outline:3px solid var(--teal);outline-offset:4px;border-radius:6px}
 /* Recherche assistée par IA : mise en valeur. */
-.guides-ia{position:relative;overflow:hidden;background:linear-gradient(135deg,#120672 0%,#2B1C8C 55%,#0B5E7A 100%);color:#fff;border-top:0}
-.guides-ia::after{content:"";position:absolute;right:-6rem;top:-6rem;width:18rem;height:18rem;border-radius:50%;background:radial-gradient(circle,rgba(255,198,26,.28),rgba(255,198,26,0) 70%);pointer-events:none}
+.guides-ia{position:relative;overflow:hidden;background:#170A72;color:#fff;border-top:6px solid #90F1E9;border-radius:20px;box-shadow:0 12px 32px rgba(23,10,114,.28);margin:clamp(1.2rem,3vw,2.2rem) var(--gutter);padding:clamp(1.6rem,3vw,2.6rem) clamp(1.2rem,3vw,2.6rem)}
 .guides-ia > *{position:relative;z-index:1}
-.guides-ia h2{color:#fff}
-.guides-ia-pastille{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .8rem;padding:.3rem .8rem;border-radius:999px;background:#FFC61A;color:#120672;font-size:.85rem;font-weight:800;letter-spacing:.02em}
+.guides-ia h2{color:#fff;font-size:clamp(1.7rem,2.4vw + 1rem,2.6rem)}
+.guides-ia .guides-ia-raison strong{color:var(--teal-texte)}
+.guides-ia-pastille{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .8rem;padding:.3rem .8rem;border-radius:999px;background:#90F1E9;color:#170A72;font-size:.85rem;font-weight:700;letter-spacing:.02em}
 .guides-ia-intro{color:#fff}
-.guides-ia-form textarea{border-color:rgba(255,255,255,.6);box-shadow:0 8px 24px rgba(0,0,0,.18)}
-.guides-ia-form button{background:#FFC61A;color:#120672;box-shadow:0 6px 18px rgba(0,0,0,.2)}
-.guides-ia-form button:hover{background:#ffd54d}
+.guides-ia-form textarea{border:2px solid #90F1E9;box-shadow:none}
+.guides-ia-form button{background:#90F1E9;color:#170A72;box-shadow:none}
+.guides-ia-form button:hover{background:#fff}
 .guides-ia-avis{color:#fff;opacity:.92}
 .guides-ia-avis strong{color:#fff}
 .guides-ia .guides-ia-resultat:not(:empty){background:#fff;color:var(--navy);border-radius:16px;padding:1.1rem 1.2rem}
-.guides-page .guides-ia-form :is(textarea,button):focus-visible{outline:3px solid #FFC61A;outline-offset:3px}
+.guides-page .guides-ia-form :is(textarea,button):focus-visible{outline:3px solid #90F1E9;outline-offset:3px}
 .guides-category-heading h2{flex:1 1 auto;min-width:0}
+/* Application « Guides » : bouton d’installation (visible seulement si l’app peut être installée). */
+.guides-app{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin:1.2rem 0 0}
+.guides-app[hidden]{display:none}
+.guides-app-bouton{display:inline-flex;align-items:center;gap:.6rem;min-height:48px;padding:.45rem 1.2rem .45rem .5rem;border:2px solid #08A0A0;border-radius:999px;background:#fff;color:#170A72;font:inherit;font-weight:600;font-size:1rem;cursor:pointer}
+.guides-app-bouton img{border-radius:8px}
+.guides-app-bouton:hover{background:#EFFAF9}
+.guides-page .guides-app-bouton:focus-visible{outline:3px solid #08A0A0;outline-offset:3px}
+.guides-app-note{font-size:.92rem;color:#170A72;opacity:.85}
+.guides-app-aide{flex-basis:100%;margin:.2rem 0 0;padding:.7rem .9rem;border-left:3px solid #08A0A0;background:#EFFAF9;border-radius:8px;font-size:.95rem;color:#170A72;max-width:60ch}
+@media (max-width:640px){.guides-ia{margin-inline:.6rem;padding:1.4rem 1.1rem;border-radius:16px}}

@@ -171,14 +171,33 @@
     const filtres = [sujet, organisme].filter(Boolean).join(' · ');
     status.textContent = count + ' ressource' + (count > 1 ? 's' : '') + (filtres ? ' · ' + filtres : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue');
   }
+  /* La recherche en cours est gardée dans l'adresse (?q=) : on peut la partager, la mettre en
+     favori du navigateur ou revenir en arrière sans la perdre. */
+  const majAdresse = () => {
+    try {
+      const url = new URL(location.href);
+      const q = input.value.trim();
+      if (q) url.searchParams.set('q', q); else url.searchParams.delete('q');
+      if (url.href !== location.href) history.replaceState(history.state, '', url);
+    } catch (e) { /* adresse non modifiable : sans effet sur la recherche */ }
+  };
   let minuterie = null;
-  input.addEventListener('input', () => { clearTimeout(minuterie); minuterie = setTimeout(render, 120); });
-  form.addEventListener('submit', event => { event.preventDefault(); clearTimeout(minuterie); render(); });
+  input.addEventListener('input', () => { clearTimeout(minuterie); minuterie = setTimeout(() => { render(); majAdresse(); }, 120); });
+  /* Touche « / » : place le curseur dans la recherche (sauf pendant une saisie ailleurs). */
+  document.addEventListener('keydown', event => {
+    if (event.key !== '/' || event.ctrlKey || event.metaKey || event.altKey) return;
+    const cible = event.target;
+    if (cible && (cible.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(cible.tagName))) return;
+    event.preventDefault();
+    input.focus();
+    input.select();
+  });
+  form.addEventListener('submit', event => { event.preventDefault(); clearTimeout(minuterie); render(); majAdresse(); });
   [selSujet, selOrganisme].forEach(sel => sel.addEventListener('change', render));
   effacerFiltres.addEventListener('click', () => { selSujet.value = ''; selOrganisme.value = ''; render(); selSujet.focus(); });
   document.querySelector('.guides-reset').addEventListener('click', () => {
     input.value = ''; selSujet.value = ''; selOrganisme.value = '';
-    render(); input.focus();
+    render(); majAdresse(); input.focus();
   });
   /* Pour l'aiguillage IA (guides-aiguillage.js) : présélection par le moteur du site et
      cartes identiques à celles du catalogue, avec leur étoile de favori. */

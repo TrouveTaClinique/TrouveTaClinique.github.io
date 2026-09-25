@@ -85,9 +85,12 @@
       });
       clearTimeout(minuterie);
       const donnees = await reponse.json().catch(() => ({}));
-      if (reponse.ok) afficher(donnees);
-      if (reponse.ok && communautaire) zone.prepend(noteCommunautaire());
-      else erreur(donnees.erreur || 'Le service est indisponible pour le moment. La recherche ci-dessus fonctionne toujours.');
+      if (!reponse.ok) {
+        erreur(donnees.erreur || 'Le service est indisponible pour le moment. La recherche ci-dessus fonctionne toujours.');
+      } else {
+        afficher(donnees);
+        if (communautaire) zone.prepend(noteCommunautaire());
+      }
     } catch (e) {
       erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
     } finally {

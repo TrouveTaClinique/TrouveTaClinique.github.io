@@ -157,3 +157,34 @@ test('algorithmes : mal de dos, tennis elbow, déprescription des IPP', () => {
   assert.ok(contient(parType('tennis elbow', 2).map(r => r.title), /epicondylite/));
   assert.ok(contient(parType('arrêter pantoprazole', 3).map(r => r.title), /pompe a protons/), parType('arrêter pantoprazole', 3).map(r => r.title).join(' | '));
 });
+
+/* Revue du moteur (25 septembre 2026) : faux positifs corrigés. */
+test('fautes : « urticaire » ne devient pas « urinaire », ni « jaunisse » « jeunesse »', () => {
+  assert.ok(!contient(titres('urticaire'), /urinaire/), titres('urticaire').join(' | '));
+  assert.ok(!contient(titres('jaunisse nouveau-né'), /jeunesse|immunisation/), titres('jaunisse nouveau-né').join(' | '));
+});
+
+test('mot générique seul : « toux chronique » ne ramène pas la constipation', () => {
+  assert.ok(!contient(titres('toux chronique'), /constipation|diarrhee/), titres('toux chronique').join(' | '));
+  assert.ok(!contient(titres('insuffisance rénale'), /insuffisance cardiaque/), titres('insuffisance rénale').join(' | '));
+  assert.ok(!contient(titres('choc anaphylactique'), /septique/), titres('choc anaphylactique').join(' | '));
+});
+
+test('abréviation reconnue : mot entier seulement (« PrEP » n’est pas « prépubère »)', () => {
+  assert.ok(!contient(titres('PrEP'), /prepubere/), titres('PrEP').join(' | '));
+  assert.ok(!contient(titres('C diff'), /intubation/), titres('C diff').join(' | '));
+});
+
+test('« pompe » (inhalateur) ne ramène pas les IPP en premier', () => {
+  assert.match(R.normaliser(premiers('pompe asthme', 1)[0]), /asthme/);
+  assert.ok(contient(titres('pompe à protons'), /pompe a protons/));
+});
+
+test('« œil rouge » ne trouve pas « Coup d’œil » ; hépatite B ne trouve pas un organisme au hasard', () => {
+  assert.ok(!contient(titres('oeil rouge'), /coup d oeil|drapeaux rouges/), titres('oeil rouge').join(' | '));
+  assert.ok(!contient(titres('hépatite B'), /old brewery/), titres('hépatite B').join(' | '));
+});
+
+test('noms de médicaments : Ventolin et Flovent mènent à l’asthme ou à la MPOC', () => {
+  for (const q of ['ventolin', 'flovent']) assert.ok(contient(premiers(q, 3), /asthme|mpoc/), q);
+});
