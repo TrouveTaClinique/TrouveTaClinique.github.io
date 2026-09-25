@@ -50,6 +50,21 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta property="og:site_name" content="Trouve ta clinique">
   <meta property="og:title" content="Guides pratiques et ressources cliniques">
   <meta property="og:url" content="https://trouvetaclinique.ca/guides/">
+  <meta property="og:description" content="Guides de pratique, algorithmes et ressources pour la médecine familiale, classés par sujet et par organisme, avec un lien direct vers la source originale.">
+  <meta property="og:image" content="https://trouvetaclinique.ca/assets/og-accueil.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Guides pratiques et ressources cliniques',
+    description: 'Catalogue de guides de pratique, algorithmes et ressources pour la médecine familiale en première ligne.',
+    url: 'https://trouvetaclinique.ca/guides/',
+    inLanguage: 'fr-CA',
+    isPartOf: { '@type': 'WebSite', name: 'Trouve ta clinique', url: 'https://trouvetaclinique.ca/' },
+    mainEntity: { '@type': 'ItemList', numberOfItems: ressources.length }
+  }).replace(/</g, '\\u003c')}</script>
   <link rel="icon" type="image/png" href="/assets/logo-banniere.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">

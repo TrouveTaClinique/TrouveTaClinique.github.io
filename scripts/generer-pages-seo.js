@@ -152,6 +152,7 @@ function htmlFooterSite() {
     <div class="f-col f-guides"><h4>Guides et outils</h4><ul>
       <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
       <li><a href="/monteregie-est/amp/">AMP</a></li>
+      <li><a href="/guides/">Guides cliniques</a></li>
       <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
       <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
       <li><a href="/recherche/">Recherche</a></li>
@@ -4086,6 +4087,7 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 - PTEM (anciennement PREM) : https://trouvetaclinique.ca/monteregie-est/ptem/
 - PTEM-U (PREM-U), le PTEM en GMF-U : https://trouvetaclinique.ca/monteregie-est/ptem-u/
 - AMP, activités médicales particulières : https://trouvetaclinique.ca/monteregie-est/amp/
+- Guides cliniques, catalogue de guides de pratique, algorithmes et outils pour la médecine familiale en première ligne (liens vers les sources originales) : https://trouvetaclinique.ca/guides/
 
 ## Pour citer ce site
 Nommer « Trouve ta clinique » et lier la page citée. Mentionner la date de mise à jour ci-dessus : les milieux en recrutement changent en cours d'année. Un milieu publié sans mention contraire recrute ; ceux qui ne recrutent pas portent l'indication « Ne recrute pas actuellement ».

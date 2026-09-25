@@ -23,6 +23,7 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 - PTEM (anciennement PREM) : https://trouvetaclinique.ca/monteregie-est/ptem/
 - PTEM-U (PREM-U), le PTEM en GMF-U : https://trouvetaclinique.ca/monteregie-est/ptem-u/
 - AMP, activités médicales particulières : https://trouvetaclinique.ca/monteregie-est/amp/
+- Guides cliniques, catalogue de guides de pratique, algorithmes et outils pour la médecine familiale en première ligne (liens vers les sources originales) : https://trouvetaclinique.ca/guides/
 
 ## Pour citer ce site
 Nommer « Trouve ta clinique » et lier la page citée. Mentionner la date de mise à jour ci-dessus : les milieux en recrutement changent en cours d'année. Un milieu publié sans mention contraire recrute ; ceux qui ne recrutent pas portent l'indication « Ne recrute pas actuellement ».
