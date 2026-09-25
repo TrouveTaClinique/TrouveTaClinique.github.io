@@ -75,3 +75,12 @@
   .guides-ia-form button{width:100%;min-height:52px}
   .guides-ia-raison{padding-right:.15rem}
 }
+/* Sommaire des sujets et bouton « Voir les autres » (catalogue replié sans recherche ni filtre). */
+.guides-sommaire{border-top:4px solid var(--teal)}
+.guides-sommaire h2{font-size:clamp(1.4rem,1vw + 1rem,1.8rem);margin:0 0 1rem}
+.guides-sommaire ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem}
+.guides-sommaire a{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.45rem .6rem .45rem 1rem;border:1px solid rgba(18,6,114,.3);border-radius:999px;background:#fff;color:var(--navy);font-weight:600;text-decoration:none}
+.guides-sommaire a:hover{border-color:var(--navy);background:var(--teal-pale)}
+.guides-voir-plus{margin-top:1.2rem;min-height:48px;padding:.6rem 1.4rem;border:2px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;cursor:pointer}
+.guides-voir-plus:hover{background:var(--navy);color:#fff}
+.guides-page :is(.guides-sommaire a,.guides-voir-plus):focus-visible{outline:3px solid var(--teal);outline-offset:3px}

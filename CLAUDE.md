@@ -51,6 +51,13 @@ dates du sitemap selon le contenu réel des pages).
 - Seulement ce qui sert à un médecin de famille (pas de documents internes d'établissement).
 - Vérifier chaque lien ajouté (réponse directe, bon document, sans redirection vers une page
   générale).
+- Champ `cat` = sujet clinique, jamais l'organisme (l'organisme a son propre filtre). Les sujets
+  et leur ordre sont dans `ORDRE_SUJETS` (`scripts/generer-guides-cliniques.cjs`) ; un nouveau
+  sujet doit y être ajouté (vérifié par `scripts/test-catalogue-guides.cjs`).
+- Titres : « Sujet : précision », sans trait d'union collé comme séparateur ; l'ancien titre
+  va dans `tags` pour rester trouvable.
+- Liens vérifiés chaque lundi par `.github/workflows/verifier-liens-guides.yml`
+  (`scripts/verifier-liens-guides.js`), qui ouvre un ticket s'il y a lieu.
 - Recherche : `assets/guides-recherche.js` (synonymes `GROUPES`, concepts `CONCEPTS`), testée
   par `scripts/test-recherche-guides.cjs`.
 - Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5, crédits prépayés de

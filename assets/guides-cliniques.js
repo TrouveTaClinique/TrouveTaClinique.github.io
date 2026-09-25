@@ -79,6 +79,29 @@
     favoris = lireFavoris(); construireFavoris(); render();
   });
 
+  /* Sans recherche ni filtre, chaque sujet montre ses 6 premières ressources et un bouton
+     pour le reste. Sans JavaScript, tout reste affiché. */
+  const APERCU = 6;
+  const sommaire = document.querySelector('.guides-sommaire');
+  const ouverts = new Set();
+  sections.forEach((section, n) => {
+    const liste = section.querySelector('.guides-resource-list');
+    liste.id = liste.id || 'guides-liste-' + n;
+    const bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'guides-voir-plus';
+    bouton.setAttribute('aria-controls', liste.id);
+    bouton.hidden = true;
+    bouton.addEventListener('click', () => {
+      const ouvrir = !ouverts.has(section);
+      if (ouvrir) ouverts.add(section); else ouverts.delete(section);
+      render();
+      if (!ouvrir && section.getBoundingClientRect().top < 0) section.scrollIntoView();
+      bouton.focus();
+    });
+    liste.after(bouton);
+  });
+
   const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', n + ' ' + mot + (n > 1 ? 's' : '')); };
 
   function render() {
@@ -107,11 +130,24 @@
     } else {
       resList.replaceChildren();
     }
+    const replier = !requete && !sujet && !organisme;
+    sommaire.hidden = !replier;
     let visible = favVisibles ? 1 : 0;
     if (enRecherche) visible++;
+    if (replier) visible++;
     sections.forEach(section => {
-      const n = enRecherche ? 0 : section.querySelectorAll('.guides-resource:not([hidden])').length;
+      const items = enRecherche ? [] : Array.from(section.querySelectorAll('.guides-resource:not([hidden])'));
+      const n = items.length;
       section.hidden = n === 0;
+      const bouton = section.querySelector('.guides-voir-plus');
+      const repliable = replier && n > APERCU;
+      bouton.hidden = !repliable;
+      if (repliable) {
+        const ouvert = ouverts.has(section);
+        if (!ouvert) items.slice(APERCU).forEach(el => { el.hidden = true; });
+        bouton.setAttribute('aria-expanded', String(ouvert));
+        bouton.textContent = ouvert ? 'Afficher moins' : 'Voir les ' + (n - APERCU) + ' autres ressources';
+      }
       if (n) {
         section.classList.toggle('guides-band--green', visible++ % 2 === 1);
         badge(section.querySelector('.compte'), n, 'ressource');

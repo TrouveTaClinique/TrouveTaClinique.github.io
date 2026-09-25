@@ -1,0 +1,59 @@
+# Vérification hebdomadaire des liens du catalogue /guides/
+# =========================================================
+# Chaque lundi matin, ce robot visite les 360 liens de guides/donnees.json
+# (scripts/verifier-liens-guides.js) et :
+#   - s'il trouve un lien brisé, suspect (page d'erreur, renvoi vers l'accueil) ou redirigé,
+#     il ouvre un ticket « Liens du catalogue de guides à corriger », ou met à jour celui
+#     qui est déjà ouvert, avec la liste des liens à corriger ;
+#   - si tout est en ordre et qu'un ticket est ouvert, il le ferme avec un commentaire.
+# Il ne modifie jamais le site ni les données : la correction reste une décision humaine.
+#
+# POUR LE LANCER À LA MAIN
+#   Onglet « Actions » du dépôt → « Vérifier les liens des guides » → « Run workflow ».
+
+name: Vérifier les liens des guides
+
+on:
+  schedule:
+    - cron: '17 11 * * 1'   # lundi, 7 h 17 (heure de l'Est, été) / 6 h 17 (hiver)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: verifier-liens-guides
+  cancel-in-progress: true
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Vérifier les liens
+        id: liens
+        run: node scripts/verifier-liens-guides.js --rapport rapport-liens.md
+      - name: Ouvrir, mettre à jour ou fermer le ticket
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROBLEMES: ${{ steps.liens.outputs.problemes }}
+        run: |
+          TITRE="Liens du catalogue de guides à corriger"
+          NUMERO=$(gh issue list --state open --search "in:title \"$TITRE\"" --json number,title \
+            --jq "map(select(.title == \"$TITRE\")) | .[0].number // empty")
+          if [ "${PROBLEMES:-0}" -gt 0 ]; then
+            if [ -n "$NUMERO" ]; then
+              gh issue edit "$NUMERO" --body-file rapport-liens.md
+              gh issue comment "$NUMERO" --body "Rapport mis à jour : $PROBLEMES lien(s) à corriger."
+            else
+              gh issue create --title "$TITRE" --body-file rapport-liens.md
+            fi
+          elif [ -n "$NUMERO" ]; then
+            gh issue close "$NUMERO" --comment "Tous les liens répondent correctement à la vérification de cette semaine."
+          fi
+          cat rapport-liens.md >> "$GITHUB_STEP_SUMMARY"

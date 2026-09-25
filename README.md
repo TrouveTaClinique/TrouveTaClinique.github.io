@@ -160,6 +160,12 @@ protégé lorsqu'il est configuré.
 - Dictionnaire de concepts (`CONCEPTS` dans `assets/guides-recherche.js`) : relie un mot de
   question à un sujet du catalogue (apixaban -> anticoagulant). À enrichir quand une recherche
   réelle ne trouve pas le bon guide, puis ajouter un cas dans le test.
+- Classement par sujet clinique (liste et ordre dans `ORDRE_SUJETS` du générateur). Sans
+  recherche ni filtre, la page montre un sommaire des sujets et 6 ressources par sujet, avec un
+  bouton pour afficher les autres ; sans JavaScript, tout est affiché.
+- Vérification des liens chaque lundi (`.github/workflows/verifier-liens-guides.yml`) : ticket
+  « Liens du catalogue de guides à corriger » ouvert ou mis à jour si un lien est brisé,
+  suspect ou redirigé, puis fermé automatiquement quand tout est corrigé.
 - Favoris : gardés dans le navigateur (`localStorage`, clé `ttc-guides-favoris`).
 - Aiguillage IA : boîte « Demander à l'IA quel guide consulter », servie par le Worker
   `workers/aiguillage` (voir son README : coûts, plafond de crédits, mise en place). La boîte

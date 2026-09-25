@@ -8,6 +8,17 @@ const path = require('node:path');
    Vide : la boîte « Demander à l'IA » n'est pas affichée et son script n'est pas chargé. */
 const URL_AIGUILLAGE = 'https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/';
 
+/* Ordre d'affichage des sujets (le champ « cat » de guides/donnees.json). Un sujet absent
+   de cette liste s'affiche à la fin : l'ajouter ici pour choisir sa place. */
+const ORDRE_SUJETS = [
+  'Infections et ITSS', 'Respiratoire', 'Cardiovasculaire et métabolique', 'Thrombose et anticoagulation',
+  'Santé mentale, dépendances et sommeil', 'Santé des femmes et grossesse', 'Pédiatrie',
+  'Gériatrie et troubles neurocognitifs', 'Os, articulations et douleur', 'Peau et yeux',
+  'Prévention et vaccination', 'Urgence et traumatologie', 'Soins palliatifs et niveaux de soins',
+  'Imagerie médicale', 'Pratique professionnelle et protocoles', 'Dépliants pour les patients'
+];
+const ancre = texte => 'sujet-' + texte.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 
 function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
@@ -17,7 +28,8 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   const footer = accueil.match(/<footer class="pied-site">[\s\S]*?<\/footer>/)?.[0];
   if (!header || !footer) throw new Error('Composants communs de l’accueil introuvables.');
   const scriptsCommuns = accueil.slice(accueil.indexOf('</footer>') + '</footer>'.length, accueil.lastIndexOf('</body>'));
-  const categories = [...new Set(ressources.map(r => r.cat))];
+  const rang = cat => (ORDRE_SUJETS.includes(cat) ? ORDRE_SUJETS.indexOf(cat) : ORDRE_SUJETS.length);
+  const categories = [...new Set(ressources.map(r => r.cat))].sort((a, b) => rang(a) - rang(b));
   /* Date de la vérification de liens la plus récente, affichée dans l'avertissement. */
   const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
   const derniere = ressources.map(r => r.verifie).filter(Boolean).sort().pop();
@@ -38,7 +50,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
         </a>
       </li>`;
     }).join('\n');
-    return `<section class="guides-band guides-category${index % 2 ? ' guides-band--green' : ''}" aria-labelledby="guides-category-${index}">
+    return `<section class="guides-band guides-category${index % 2 ? '' : ' guides-band--green'}" id="${ancre(cat)}" aria-labelledby="guides-category-${index}">
       <div class="guides-category-heading"><h2 id="guides-category-${index}">${esc(cat)}</h2><span class="compte" aria-label="${entries.length} ressource${entries.length > 1 ? 's' : ''}">${entries.length}</span></div>
       <ul class="guides-resource-list">${cards}</ul>
     </section>`;
@@ -46,6 +58,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   const compter = cle => ressources.reduce((m, r) => m.set(r[cle], (m.get(r[cle]) || 0) + 1), new Map());
   const parCategorie = compter('cat');
   const parOrganisme = compter('org');
+  const sommaire = `<nav class="guides-band guides-sommaire" aria-labelledby="guides-sommaire-titre">
+    <h2 id="guides-sommaire-titre">Parcourir par sujet</h2>
+    <ul>${categories.map(cat => `<li><a href="#${ancre(cat)}">${esc(cat)} <span class="compte" aria-label="${parCategorie.get(cat)} ressources">${parCategorie.get(cat)}</span></a></li>`).join('')}</ul>
+  </nav>`;
   const optionsSujet = categories.map(cat => `<option value="${esc(cat)}">${esc(cat)} (${parCategorie.get(cat)})</option>`).join('');
   const organismes = [...parOrganisme.keys()].sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
   const optionsOrganisme = organismes.map(org => `<option value="${esc(org)}">${esc(org)} (${parOrganisme.get(org)})</option>`).join('');
@@ -81,10 +97,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=92-guides-aiguillage">
-  <script src="/assets/guides-recherche.js?v=92-guides-aiguillage" defer></script>
-  <script src="/assets/guides-cliniques.js?v=92-guides-aiguillage" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=92-guides-aiguillage" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=93-guides-sujets">
+  <script src="/assets/guides-recherche.js?v=93-guides-sujets" defer></script>
+  <script src="/assets/guides-cliniques.js?v=93-guides-sujets" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=93-guides-sujets" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -135,7 +151,8 @@ ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="gu
     <div class="guides-category-heading"><h2 id="guides-resultats-titre">Résultats les plus pertinents</h2><span class="compte"></span></div>
     <ul class="guides-resource-list"></ul>
   </section>
-  <div id="guides-catalogue">${sections}</div>
+  <div id="guides-catalogue">${sommaire}
+${sections}</div>
   <section class="guides-band guides-empty" hidden>
     <h2>Aucune ressource trouvée</h2>
     <p>Essayez un autre mot-clé ou consultez l’ensemble du catalogue.</p>
@@ -151,5 +168,5 @@ ${scriptsCommuns}
   return {ressources:ressources.length, categories:categories.length};
 }
 
-module.exports = { genererGuidesCliniques };
+module.exports = { genererGuidesCliniques, ORDRE_SUJETS };
 if (require.main === module) console.log(genererGuidesCliniques());
