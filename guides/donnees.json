@@ -2115,12 +2115,12 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Sinus pilonidal (dépliant)",
+    "title": "Sinus pilonidal : retour à domicile après la cure chirurgicale (dépliant)",
     "org": "CHU Sainte-Justine",
     "cat": "Documents pour les patients",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Sinus pilonidal dépliant patient parents document pour les patients",
-    "url": "https://www.chusj.org/getmedia/bad33807-bf7c-4e4c-83e4-68b073c0840c/F-7225-Sinus-pilonidal_final.pdf.aspx?ext=.pdf",
-    "desc": "Dépliant du CHU Sainte-Justine pour les patients et les parents.",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Sinus pilonidal dépliant patient parents document pour les patients Sinus pilonidal (dépliant) postopératoire soins de plaie",
+    "url": "https://www.chusj.org/getmedia/93531078-81c8-4287-bc05-8066a8721f2b/depliant_F-1765_cure-sinus-pilonidal_retour-domicile_fr.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant du CHU Sainte-Justine pour les familles : conseils de retour à domicile après la cure d’un sinus pilonidal (pansements, thérapie par pression négative, personnes-ressources).",
     "verifie": "2026-09-25"
   },
   {
@@ -9125,7 +9125,7 @@
     "org": "CDC de l’agglomération de Longueuil (répertoire)",
     "cat": "Ressources communautaires",
     "tags": "Aide et soutien à domicile accompagnement fin de vie soins palliatifs bénévoles Longueuil ressource communautaire organisme",
-    "url": "https://albatrosenmonteregie.org/",
+    "url": "https://www.albatrosenmonteregie.org/fr/",
     "desc": "Organisme communautaire de Longueuil · Aide et soutien à domicile.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -9235,7 +9235,7 @@
     "org": "CDC de l’agglomération de Longueuil (répertoire)",
     "cat": "Ressources communautaires",
     "tags": "Groupe d’entraide et de soutien périnatalité grossesse bébé parents allaitement Longueuil ressource communautaire organisme",
-    "url": "https://www.lautremaison.ca",
+    "url": "https://lautremaison.ca/2020/",
     "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -9675,7 +9675,7 @@
     "org": "CDC de l’agglomération de Longueuil (répertoire)",
     "cat": "Ressources communautaires",
     "tags": "Aide alimentaire aide alimentaire Longueuil ressource communautaire organisme",
-    "url": "https://ssvp.qc.ca",
+    "url": "https://www.ssvp-quebec.ca/",
     "desc": "Organisme communautaire de Longueuil · Aide alimentaire.",
     "verifie": "2026-09-25",
     "type": "communautaire",
