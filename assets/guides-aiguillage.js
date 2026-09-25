@@ -13,6 +13,7 @@
   const bouton = form.querySelector('button[type="submit"]');
   const zone = section.querySelector('.guides-ia-resultat');
   const CANDIDATS = 15;
+  const DELAI_MAX = 60000;
   section.hidden = false;
 
   const paragraphe = (classe, texte) => {
@@ -111,17 +112,23 @@
     bouton.disabled = true;
     section.setAttribute('aria-busy', 'true');
     attendre();
+    /* Délai maximal pour toute la réponse (en-têtes et contenu). Un téléphone en veille ou un
+       onglet en arrière-plan gèle les minuteries : au retour sur la page, on vérifie aussi
+       l'heure pour ne jamais laisser l'attente tourner indéfiniment. */
+    const controleur = new AbortController();
+    const debut = Date.now();
+    const minuterie = setTimeout(() => controleur.abort(), DELAI_MAX);
+    const auRetour = () => { if (Date.now() - debut > DELAI_MAX) controleur.abort(); };
+    document.addEventListener('visibilitychange', auRetour);
+    window.addEventListener('focus', auRetour);
     try {
-      const controleur = new AbortController();
-      const minuterie = setTimeout(() => controleur.abort(), 45000);
       const reponse = await fetch(section.dataset.url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question, candidats }),
         signal: controleur.signal
       });
-      clearTimeout(minuterie);
-      const donnees = await reponse.json().catch(() => ({}));
+      const donnees = await reponse.json().catch(e => { if (controleur.signal.aborted) throw e; return {}; });
       if (!reponse.ok) {
         erreur(donnees.erreur || 'Le service est indisponible pour le moment. La recherche ci-dessus fonctionne toujours.');
       } else {
@@ -131,6 +138,9 @@
     } catch (e) {
       erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
     } finally {
+      clearTimeout(minuterie);
+      document.removeEventListener('visibilitychange', auRetour);
+      window.removeEventListener('focus', auRetour);
       clearInterval(minuterieEtapes);
       bouton.disabled = false;
       section.removeAttribute('aria-busy');

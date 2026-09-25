@@ -44,7 +44,7 @@ function classerErreur(e) {
 
 export default {
   async fetch(requete, env) {
-    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 40000 });
+    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 25000 });
     return traiter(requete, env, {
       chargerCatalogue,
       appelerModele: params => (params.betas ? client.beta.messages.create(params) : client.messages.create(params)),
