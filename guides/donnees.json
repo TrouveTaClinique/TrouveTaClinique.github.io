@@ -213,15 +213,16 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Fibrillation auriculaire – CCS guidelines",
+    "title": "Guide de poche : Fibrillation auriculaire (SCC/SCRC 2020)",
     "org": "Société canadienne de cardiologie",
     "cat": "Cardiologie",
     "tags": "FA fibrillation auriculaire cardiologie CCS guidelines anticoagulation",
-    "url": "https://www.onlinecjc.ca/article/S0828-282X(20)30991-0/fulltext",
-    "desc": "Recommandations de la Société canadienne de cardiologie sur la fibrillation auriculaire."
+    "url": "https://ccs.ca/wp-content/uploads/2021/11/AF-Gui-Pocket-Guide-2021-FR1.pdf",
+    "desc": "Recommandations de la Société canadienne de cardiologie sur la fibrillation auriculaire.",
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Insuffisance cardiaque – CCS",
+    "title": "Insuffisance cardiaque – lignes directrices de la SCC (EN)",
     "org": "Société canadienne de cardiologie",
     "cat": "Cardiologie",
     "tags": "insuffisance cardiaque cardiologie IC CCS guidelines",
@@ -272,15 +273,16 @@
     "desc": "Calculatrice du risque cardiovasculaire."
   },
   {
-    "title": "Guideline PEER – lipides",
+    "title": "Lignes directrices simplifiées de PEER sur les lipides : actualisation 2023",
     "org": "PEER",
     "cat": "Lipides",
     "tags": "lipides cholestérol prévention cardiovasculaire PEER EBM",
-    "url": "https://www.cfp.ca/content/cfp/69/10/675.full.pdf",
-    "desc": "Recommandation PEER sur la prise en charge des lipides."
+    "url": "https://www.cfp.ca/content/69/10/e189",
+    "desc": "Recommandation PEER sur la prise en charge des lipides.",
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Insomnie – Choisir avec soin (FR)",
+    "title": "Insomnie – Choisir avec soin",
     "org": "Choisir avec soin",
     "cat": "Insomnie",
     "tags": "insomnie sommeil hypnotique benzodiazépine Choisir avec soin",
@@ -288,23 +290,16 @@
     "desc": "Guide de Choisir avec soin sur l’évaluation et le traitement de l’insomnie."
   },
   {
-    "title": "Insomnia – Choosing Wisely (EN)",
-    "org": "Choosing Wisely",
-    "cat": "Insomnie",
-    "tags": "insomnia sleep hypnotics Choosing Wisely",
-    "url": "https://choisiravecsoinquebec.ca/wp-content/uploads/2024/03/Insomnia_EN_FINAL.pdf",
-    "desc": "Version anglaise du guide sur l’insomnie."
-  },
-  {
-    "title": "PEER – Simplified guidelines (douleur)",
+    "title": "Lignes directrices simplifiées de PEER sur la douleur chronique",
     "org": "PEER",
     "cat": "Douleur",
     "tags": "douleur douleur chronique PEER simplified guidelines EBM",
-    "url": "https://peerevidence.ca/simplified-guidelines/",
-    "desc": "Guides PEER simplifiés fondés sur les données probantes pour la douleur."
+    "url": "https://www.cfp.ca/content/68/3/e63",
+    "desc": "Guides PEER simplifiés fondés sur les données probantes pour la douleur.",
+    "verifie": "2026-09-25"
   },
   {
-    "title": "PEER Pain Calculator",
+    "title": "PEER Pain Calculator (EN)",
     "org": "PEER",
     "cat": "Douleur",
     "tags": "douleur calculatrice outil PEER pain",
@@ -328,7 +323,7 @@
     "desc": "Protocoles et guides de l’urgence du CHU Sainte-Justine."
   },
   {
-    "title": "Canadian Emergency Medicine Handbook (2025)",
+    "title": "Canadian Emergency Medicine Handbook (2025) (EN)",
     "org": "CAEP",
     "cat": "Urgence",
     "tags": "urgence emergency handbook médecine d’urgence CAEP Canada",
@@ -336,7 +331,7 @@
     "desc": "Manuel canadien de médecine d’urgence 2025."
   },
   {
-    "title": "Tools For Practice (CFPC)",
+    "title": "Tools For Practice (CFPC) (EN)",
     "org": "Collège des médecins de famille du Canada",
     "cat": "Ressources générales",
     "tags": "EBM evidence médecine familiale outils pratique CFPC",
@@ -416,22 +411,22 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Hypertension Canada Guidelines (EN)",
+    "title": "Lignes directrices d’Hypertension Canada",
     "org": "Hypertension Canada",
     "cat": "Cardiologie",
     "tags": "HTA hypertension tension artérielle pression lignes directrices",
-    "url": "https://hypertension.ca/guidelines/",
+    "url": "https://hypertension.ca/fr/lignes-directrices/",
     "desc": "Page officielle des lignes directrices 2025 d’Hypertension Canada.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Hypertension Canada guideline for the diagnosis and treatment of hypertension in adults in primary care (EN)",
+    "title": "Guide de pratique clinique en soins de première ligne d’Hypertension Canada pour le diagnostic et le traitement de l’hypertension artérielle chez les adultes (2025)",
     "org": "Hypertension Canada",
     "cat": "Cardiologie",
     "tags": "HTA hypertension 130/80 MAPA MPAD bithérapie première ligne",
-    "url": "https://hypertension.ca/wp-content/uploads/2025/05/Hypertension-guideline.pdf",
+    "url": "https://hypertension.ca/wp-content/uploads/2025/06/Ligne-Directrice-CMAJ.pdf",
     "desc": "Ligne directrice 2025 d’Hypertension Canada pour la première ligne.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "2025 Primary Care Guideline – Responses to Frequent Questions (EN)",
@@ -443,31 +438,31 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Pharmacologic Glycemic Management of Type 2 Diabetes in Adults: 2024 Update (EN)",
+    "title": "Gestion pharmacologique de la glycémie du diabète de type 2 chez les adultes : mise à jour 2024",
     "org": "Diabète Canada",
     "cat": "Diabète",
     "tags": "diabète type 2 DT2 DB2 metformine iSGLT2 SGLT2 GLP-1 insuline",
-    "url": "https://www.diabetes.ca/chapter-13-2024-update",
+    "url": "https://guidelines.diabetes.ca/getContentAsset/f86abe9f-94e3-413a-bf87-f7a5730b267b/0f6cf596-933c-4f74-b36a-77091c512445/Pharm-Type-2-Chapter-French-2024.pdf?language=en",
     "desc": "Chapitre 13 des lignes directrices de Diabète Canada, mise à jour 2024.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Pharmacologic Glycemic Management of Type 2 Diabetes in Adults: 2024 Update – The User’s Guide (EN)",
+    "title": "Guide de l’utilisateur : gestion pharmacologique du diabète de type 2 chez les adultes (mise à jour 2024)",
     "org": "Diabète Canada",
     "cat": "Diabète",
     "tags": "diabète type 2 DT2 algorithme intensification guide utilisateur",
-    "url": "https://www.diabetes.ca/chapter-13-2024-user-guide",
+    "url": "https://guidelines.diabetes.ca/getContentAsset/f4c8c369-25b5-4f97-9704-e460fc16e692/0f6cf596-933c-4f74-b36a-77091c512445/Pharm-Type-2-User-Guide-French-2024.pdf?language=en",
     "desc": "Guide de l’utilisateur du chapitre 13 de Diabète Canada (2024).",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Screening for Diabetes in Adults (EN)",
+    "title": "Dépistage du diabète chez les adultes (chapitre 4)",
     "org": "Diabète Canada",
     "cat": "Diabète",
     "tags": "dépistage diabète HbA1c glycémie prédiabète",
-    "url": "https://www.diabetes.ca/chapter-4",
+    "url": "https://guidelines.diabetes.ca/getContentAsset/025a68d1-8de5-4342-886c-0c01a8ff502a/0f6cf596-933c-4f74-b36a-77091c512445/04-Screening-for-Diabetes-FR.pdf?language=en",
     "desc": "Chapitre de Diabète Canada sur le dépistage du diabète chez l’adulte.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Hypoglycemia in Adults – 2023 Update (EN)",
@@ -488,31 +483,31 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Foot Care (EN)",
+    "title": "Soins des pieds (chapitre 32)",
     "org": "Diabète Canada",
     "cat": "Diabète",
     "tags": "pied diabétique neuropathie ulcère soins des pieds",
-    "url": "https://www.diabetes.ca/chapter-32",
+    "url": "https://guidelines.diabetes.ca/getContentAsset/9a60fcce-e5a9-4ad5-ab96-7c2a507e7e4b/0f6cf596-933c-4f74-b36a-77091c512445/32-Foot-Care-FR.pdf?language=en",
     "desc": "Chapitre de Diabète Canada sur les soins des pieds.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Diabetes and Pregnancy (EN)",
+    "title": "Diabète et grossesse (chapitre 36)",
     "org": "Diabète Canada",
     "cat": "Diabète",
     "tags": "diabète gestationnel grossesse HGPO obstétrique",
-    "url": "https://www.diabetes.ca/chapter-36",
+    "url": "https://guidelines.diabetes.ca/GuideLines/media/Docs/french/36-Pregnancy-FR.pdf",
     "desc": "Chapitre de Diabète Canada sur le diabète et la grossesse.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Diabetes in Older People (EN)",
+    "title": "Le diabète chez les personnes âgées (chapitre 37)",
     "org": "Diabète Canada",
     "cat": "Diabète",
     "tags": "diabète personnes âgées gériatrie cibles hypoglycémie",
-    "url": "https://www.diabetes.ca/chapter-37",
+    "url": "https://guidelines.diabetes.ca/getContentAsset/89ee84be-edf4-426d-ac72-7a09094a5ce5/0f6cf596-933c-4f74-b36a-77091c512445/37-Diabetes-in-Older-People-fr.pdf?language=en",
     "desc": "Chapitre de Diabète Canada sur le diabète chez les personnes âgées.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Diabetes and Metabolic Dysfunction-associated Steatotic Liver Disease in Adults (EN)",
@@ -614,67 +609,67 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Clinical Guides (EN)",
+    "title": "Guides cliniques",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "thrombose TVP EP AOD anticoagulant guides cliniques",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca",
     "desc": "Index des guides cliniques de Thrombose Canada.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Deep Vein Thrombosis (DVT): Treatment (EN)",
+    "title": "Thrombose veineuse profonde : Traitement",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "TVP thrombose veineuse profonde DVT AOD anticoagulation",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=DEEPVEINTHROMBOSISTREATMENT",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=FR_THROMBOSEVEINEUSEPROFONDETRAIT",
     "desc": "Guide clinique de Thrombose Canada sur le traitement de la TVP.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Pulmonary Embolism (PE): Treatment (EN)",
+    "title": "Embolie pulmonaire (EP) : Traitement",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "EP embolie pulmonaire PE anticoagulation",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=44",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=101",
     "desc": "Guide clinique de Thrombose Canada sur le traitement de l’embolie pulmonaire.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Pulmonary Embolism: High- and Intermediate-Risk (EN)",
+    "title": "Embolie pulmonaire : risque élevé ou intermédiaire",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "EP embolie pulmonaire massive thrombolyse risque élevé",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=132",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=133",
     "desc": "Guide clinique de Thrombose Canada sur l’EP à risque élevé ou intermédiaire.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Superficial Thrombophlebitis (EN)",
+    "title": "Thrombophlébite superficielle et thrombose veineuse superficielle",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "thrombophlébite superficielle TVS veine superficielle",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=90",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=110",
     "desc": "Guide clinique de Thrombose Canada sur la thrombophlébite superficielle.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Anticoagulation in Patients Requiring Antiplatelet Therapy (EN)",
+    "title": "Anticoagulation chez les patients ayant besoin d’un traitement antiplaquettaire",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "FA fibrillation auriculaire SCA ICP antiplaquettaire double thérapie",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=93",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=121",
     "desc": "Guide clinique de Thrombose Canada sur l’association anticoagulant et antiplaquettaire.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Duration of Dual Antiplatelet Therapy (EN)",
+    "title": "Durée de la bithérapie antiplaquettaire chez les patients atteints d’une coronaropathie",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
     "tags": "DAPT double antiagrégation clopidogrel ASA aspirine",
-    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=en-ca&guideID=122",
+    "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=123",
     "desc": "Guide clinique de Thrombose Canada sur la durée de la double antiagrégation.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Clinical Tools (EN)",
@@ -722,13 +717,13 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Diagnosis & management of asthma in preschoolers (EN)",
+    "title": "Le diagnostic et la prise en charge de l’asthme chez les enfants d’âge préscolaire (SCT et SCP)",
     "org": "Société canadienne de thoracologie",
     "cat": "Respiratoire",
     "tags": "asthme préscolaire wheezing sifflements enfant pédiatrie",
-    "url": "https://cts-sct.ca/wp-content/uploads/2018/01/Asthma-in-Preschoolers_CTS_CPS_FINAL.pdf",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4614089/",
     "desc": "Énoncé conjoint SCT-SCP sur l’asthme chez l’enfant d’âge préscolaire (2015).",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "The Canadian Thoracic Society/Canadian Sleep Society Guideline on the diagnosis of obstructive sleep apnea in children (EN)",
@@ -758,13 +753,13 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Canadian Tuberculosis Standards, 8th Edition (EN)",
+    "title": "Normes canadiennes pour la lutte antituberculeuse, 8e édition",
     "org": "Société canadienne de thoracologie",
     "cat": "Respiratoire",
     "tags": "tuberculose TB ITL infection tuberculeuse latente TCT",
-    "url": "https://manuals.cts-sct.ca/documentation/preface/",
+    "url": "https://www.canada.ca/fr/sante-publique/services/maladies/tuberculose/professionnels-sante/normes-canadiennes-antituberculeuse.html",
     "desc": "Normes canadiennes pour la lutte antituberculeuse, 8e édition.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Collection des lignes directrices",
@@ -776,31 +771,31 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Menopause Care Continuum Interactive Tool (EN)",
+    "title": "Outil interactif sur le continuum de soins de la ménopause",
     "org": "SOGC",
     "cat": "Santé des femmes",
     "tags": "ménopause périménopause HTM hormonothérapie outil",
-    "url": "https://sogc.org/en/content/events/HUB-Pages/Menopause-Tool.aspx",
+    "url": "https://sogc.org/fr/content/events/HUB-Pages/Menopause-Tool.aspx",
     "desc": "Outil interactif de la SOGC sur le continuum de soins en ménopause.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Guideline No. 422a: Menopause: Vasomotor Symptoms, Prescription Therapeutic Agents, Complementary and Alternative Medicine, Nutrition, and Lifestyle (EN)",
+    "title": "Directive clinique no 422a : Ménopause : symptômes vasomoteurs, agents thérapeutiques d’ordonnance, médecines douces et complémentaires, nutrition et mode de vie",
     "org": "SOGC",
     "cat": "Santé des femmes",
     "tags": "ménopause bouffées de chaleur vasomoteur hormonothérapie HTM",
-    "url": "https://sogc.org/common/Uploaded%20files/CME-ON/gui422aCPG2110E.pdf",
+    "url": "https://www.jogc.com/article/S1701-2163(21)00678-2/fulltext",
     "desc": "Directive clinique de la SOGC sur les symptômes vasomoteurs de la ménopause (2021).",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Guideline No. 422d: Menopause and Sexuality (EN)",
+    "title": "Directive clinique no 422d : Ménopause et sexualité",
     "org": "SOGC",
     "cat": "Santé des femmes",
     "tags": "ménopause sexualité libido SGUM syndrome génito-urinaire",
-    "url": "https://sogc.org/common/Uploaded%20files/CME-ON/gui422dCPG2111E.pdf",
+    "url": "https://www.jogc.com/article/S1701-2163(21)00700-3/fulltext",
     "desc": "Directive clinique de la SOGC sur la ménopause et la sexualité (2021).",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Menopause: identification and management – NG23 (EN)",
@@ -812,31 +807,31 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "2023 Clinical Practice Guideline (EN)",
+    "title": "Ligne directrice de pratique clinique 2023",
     "org": "Ostéoporose Canada",
     "cat": "Ostéoporose",
     "tags": "ostéoporose DMO densitométrie FRAX CAROC bisphosphonate fracture",
-    "url": "https://osteoporosis.ca/2023-clinical-practice-guideline/",
+    "url": "https://osteoporose.ca/ligne-directrice-de-pratique-clinique-2023/",
     "desc": "Page d’Ostéoporose Canada regroupant la ligne directrice 2023 et ses outils.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Clinical practice guideline for management of osteoporosis and fracture prevention in Canada: 2023 update (EN)",
+    "title": "Actualisation 2023 des lignes directrices de pratique clinique pour la prise en charge de l’ostéoporose et la prévention des fractures au Canada",
     "org": "Ostéoporose Canada",
     "cat": "Ostéoporose",
     "tags": "ostéoporose fracture de fragilité prévention CMAJ",
-    "url": "https://www.cmaj.ca/content/195/39/E1333",
+    "url": "https://www.cmaj.ca/content/195/46/E1585",
     "desc": "Ligne directrice 2023 d’Ostéoporose Canada publiée dans le CMAJ.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
-    "title": "Pharmacotherapy for Obesity Management in Adults – 2025 update (EN)",
+    "title": "La pharmacothérapie dans la prise en charge de l’obésité chez l’adulte : mise à jour 2025 du guide de pratique clinique",
     "org": "Obésité Canada",
     "cat": "Obésité",
     "tags": "obésité poids sémaglutide tirzépatide GLP-1 pharmacothérapie",
-    "url": "https://obesitycanada.ca/wp-content/uploads/2025/08/11-Canadian-Adult-Obesity-CPG-Pharmacotherapy-2025-update.pdf",
+    "url": "https://www.cmaj.ca/content/197/32/E1043",
     "desc": "Chapitre 2025 d’Obésité Canada sur la pharmacothérapie de l’obésité.",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Recommandations canadiennes pour les pratiques optimales de soins de l’AVC – Prévention secondaire de l’AVC",
@@ -866,13 +861,13 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Canadian ADHD Practice Guidelines, 4.1 Edition (EN)",
+    "title": "Lignes directrices canadiennes sur le TDAH, 4.1 édition",
     "org": "CADDRA",
     "cat": "Santé mentale",
     "tags": "TDAH ADHD psychostimulant enfant adulte",
-    "url": "https://adhdlearn.caddra.ca/wp-content/uploads/2022/08/Canadian-ADHD-Practice-Guidelines-4.1-January-6-2021.pdf",
+    "url": "https://adhdlearn.caddra.ca/wp-content/uploads/2022/08/Canadian-ADHD-Practice-Guidelines-French-4.1_Final_6_1_21.pdf",
     "desc": "Lignes directrices canadiennes de CADDRA sur le TDAH (version française existante).",
-    "verifie": "2026-09-24"
+    "verifie": "2026-09-25"
   },
   {
     "title": "Infections transmissibles sexuellement et par le sang : Guides à l’intention des professionnels de la santé",
