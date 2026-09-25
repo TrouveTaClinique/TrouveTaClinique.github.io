@@ -1,5 +1,6 @@
 /* Boîte « Demander à l'IA quel guide consulter » de /guides/.
-   Le moteur du site présélectionne 40 guides (window.GuidesCatalogue, dans guides-cliniques.js) ;
+   Le service d'aiguillage parcourt tout le catalogue ; le moteur du site lui envoie en indice
+   ses 15 meilleurs résultats (window.GuidesCatalogue, dans guides-cliniques.js) ;
    le service d'aiguillage (workers/aiguillage) en choisit au plus 5 et explique chaque choix.
    Titres et liens viennent du catalogue, jamais de l'IA. */
 (function () {
@@ -11,7 +12,7 @@
   const champ = section.querySelector('#guides-ia-question');
   const bouton = form.querySelector('button[type="submit"]');
   const zone = section.querySelector('.guides-ia-resultat');
-  const CANDIDATS = 40;
+  const CANDIDATS = 15;
   section.hidden = false;
 
   const paragraphe = (classe, texte) => {
@@ -64,16 +65,13 @@
     event.preventDefault();
     const question = champ.value.replace(/\s+/g, ' ').trim();
     if (question.length < 3) { erreur('Décrivez la situation en quelques mots.'); champ.focus(); return; }
+    /* L'IA parcourt tout le catalogue ; la présélection du moteur de mots-clés, même vide,
+       ne lui sert que d'indice. */
     const candidats = catalogue.candidats(question, CANDIDATS);
     const communautaire = catalogue.estCommunautaire && catalogue.estCommunautaire(question);
-    if (!candidats.length) {
-      afficher({ guides: [], message: communautaire ? '' : 'Aucune ressource du catalogue ne correspond à ces mots. Essayez de décrire la situation autrement.' });
-      if (communautaire) zone.append(noteCommunautaire());
-      return;
-    }
     bouton.disabled = true;
     section.setAttribute('aria-busy', 'true');
-    zone.replaceChildren(paragraphe('guides-ia-attente', 'Recherche des guides pertinents…'));
+    zone.replaceChildren(paragraphe('guides-ia-attente', 'L’IA parcourt tout le catalogue…'));
     try {
       const controleur = new AbortController();
       const minuterie = setTimeout(() => controleur.abort(), 45000);
