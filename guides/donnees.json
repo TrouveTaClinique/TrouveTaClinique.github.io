@@ -261,15 +261,6 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Calculatrice CVD (decisionaid.ca)",
-    "org": "decisionaid.ca",
-    "cat": "Cardiovasculaire et métabolique",
-    "tags": "risque cardiovasculaire cholestérol lipides calculatrice CVD",
-    "url": "https://decisionaid.ca/cvd/",
-    "desc": "Calculatrice du risque cardiovasculaire.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Lignes directrices simplifiées de PEER sur les lipides : actualisation 2023",
     "org": "PEER",
     "cat": "Cardiovasculaire et métabolique",
@@ -297,17 +288,8 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "PEER Pain Calculator (EN)",
-    "org": "PEER",
-    "cat": "Os, articulations et douleur",
-    "tags": "douleur calculatrice outil PEER pain",
-    "url": "https://pain-calculator.com/",
-    "desc": "Calculatrice PEER d’aide à la prise en charge de la douleur.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Guide de dermatologie en première ligne (Sherbrooke)",
-    "org": "Santé Estrie",
+    "org": "CIUSSS de l’Estrie–CHUS",
     "cat": "Peau et yeux",
     "tags": "peau dermatologie algorithme première ligne Sherbrooke",
     "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Dermatologie/Algorithmes_traitements_approche_premie%CC%80re_ligne_dermatologique2019.pdf",
@@ -328,7 +310,7 @@
     "org": "MSSS",
     "cat": "Infections et ITSS",
     "tags": "ITSS ITS MTS dépistage chlamydia gonorrhée syphilis VIH hépatite Québec",
-    "url": "https://publications.msss.gouv.qc.ca/msss/document-000090/",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2019/19-308-13W.pdf",
     "desc": "Guide de référence du MSSS sur l’intervention de dépistage des ITSS (mise à jour 2019).",
     "verifie": "2026-09-24"
   },
@@ -337,7 +319,7 @@
     "org": "MSSS",
     "cat": "Infections et ITSS",
     "tags": "ITSS ITS facteurs de risque dépistage outil aide-mémoire",
-    "url": "https://publications.msss.gouv.qc.ca/msss/document-000098/",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2019/19-308-03W.pdf",
     "desc": "Outil du MSSS pour choisir les infections à rechercher selon les facteurs de risque.",
     "verifie": "2026-09-24"
   },
@@ -346,7 +328,7 @@
     "org": "MSSS",
     "cat": "Infections et ITSS",
     "tags": "VIH HIV test rapide TDR trousse dépistage point de service",
-    "url": "https://publications.msss.gouv.qc.ca/msss/document-000092/",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2019/19-308-12W.pdf",
     "desc": "Normes de pratique du MSSS pour le dépistage du VIH par trousses rapides.",
     "verifie": "2026-09-24"
   },
@@ -357,15 +339,6 @@
     "tags": "PIQ vaccin vaccination immunisation calendrier vaccinal Québec",
     "url": "https://msss.gouv.qc.ca/professionnels/vaccination/protocole-d-immunisation-du-quebec-piq/",
     "desc": "Norme de pratique professionnelle en vaccination au Québec, mise à jour en continu.",
-    "verifie": "2026-09-24"
-  },
-  {
-    "title": "Guide québécois de dépistage des ITSS – Espace ITSS",
-    "org": "INSPQ",
-    "cat": "Infections et ITSS",
-    "tags": "ITSS ITS dépistage outils avis aux partenaires INSPQ",
-    "url": "https://www.inspq.qc.ca/espace-itss/guide-quebecois-de-depistage-des-itss",
-    "desc": "Page de l’INSPQ regroupant le guide québécois de dépistage et ses outils d’aide à la pratique.",
     "verifie": "2026-09-24"
   },
   {
@@ -549,15 +522,6 @@
     "verifie": "2026-09-24"
   },
   {
-    "title": "Soins de nos enfants",
-    "org": "Société canadienne de pédiatrie",
-    "cat": "Pédiatrie",
-    "tags": "parents fiches patients information enfant",
-    "url": "https://soinsdenosenfants.cps.ca/",
-    "desc": "Information de la SCP destinée aux parents.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Thrombose veineuse profonde : Traitement",
     "org": "Thrombose Canada",
     "cat": "Thrombose et anticoagulation",
@@ -684,15 +648,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Menopause Care Continuum Interactive Tool (EN)",
-    "org": "SOGC",
-    "cat": "Santé des femmes et grossesse",
-    "tags": "ménopause périménopause HTM hormonothérapie outil",
-    "url": "https://sogc.org/en/content/events/HUB-Pages/Menopause-Tool.aspx",
-    "desc": "Outil interactif de la SOGC sur le continuum de soins en ménopause.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Directive clinique no 422a : Ménopause : symptômes vasomoteurs, agents thérapeutiques d’ordonnance, médecines douces et complémentaires, nutrition et mode de vie",
     "org": "SOGC",
     "cat": "Santé des femmes et grossesse",
@@ -709,15 +664,6 @@
     "url": "https://www.jogc.com/article/S1701-2163(21)00700-3/fulltext",
     "desc": "Directive clinique de la SOGC sur la ménopause et la sexualité (2021).",
     "verifie": "2026-09-25"
-  },
-  {
-    "title": "Menopause: identification and management – NG23 (EN)",
-    "org": "NICE (R.-U.)",
-    "cat": "Santé des femmes et grossesse",
-    "tags": "ménopause HTM hormonothérapie NICE",
-    "url": "https://www.nice.org.uk/guidance/ng23",
-    "desc": "Ligne directrice britannique NICE sur la ménopause.",
-    "verifie": "2026-09-24"
   },
   {
     "title": "Actualisation 2023 des lignes directrices de pratique clinique pour la prise en charge de l’ostéoporose et la prévention des fractures au Canada",
@@ -798,42 +744,6 @@
     "tags": "vaccin grossesse immunodéprimé voyageur nouveaux arrivants maladie chronique",
     "url": "https://www.canada.ca/fr/sante-publique/services/publications/vie-saine/guide-canadien-immunisation-partie-3-vaccination-populations-particulieres.html",
     "desc": "Chapitres du Guide canadien d’immunisation sur les populations particulières.",
-    "verifie": "2026-09-24"
-  },
-  {
-    "title": "Sore throat (acute): antimicrobial prescribing – NG84 (EN)",
-    "org": "NICE (R.-U.)",
-    "cat": "Infections et ITSS",
-    "tags": "pharyngite amygdalite mal de gorge Centor FeverPAIN antibiotique",
-    "url": "https://www.nice.org.uk/guidance/ng84",
-    "desc": "Ligne directrice britannique NICE sur la prescription d’antibiotiques pour le mal de gorge.",
-    "verifie": "2026-09-24"
-  },
-  {
-    "title": "2026 GOLD Report and Pocket Guide (EN)",
-    "org": "GOLD",
-    "cat": "Respiratoire",
-    "tags": "MPOC COPD BPCO GOLD guide de poche",
-    "url": "https://goldcopd.org/2026-gold-report-and-pocket-guide/",
-    "desc": "Rapport et guide de poche GOLD 2026 sur la MPOC (lien à renouveler chaque année).",
-    "verifie": "2026-09-24"
-  },
-  {
-    "title": "2026 GINA Strategy Report (EN)",
-    "org": "GINA",
-    "cat": "Respiratoire",
-    "tags": "asthme GINA stratégie",
-    "url": "https://ginasthma.org/2026-gina-strategy-report/",
-    "desc": "Rapport de stratégie GINA 2026 sur l’asthme (lien à renouveler chaque année).",
-    "verifie": "2026-09-24"
-  },
-  {
-    "title": "Sexually Transmitted Infections Treatment Guidelines, 2021 (EN)",
-    "org": "CDC (É.-U.)",
-    "cat": "Infections et ITSS",
-    "tags": "ITS ITSS traitement gonorrhée chlamydia syphilis AIP PID",
-    "url": "https://www.cdc.gov/std/treatment-guidelines/default.htm",
-    "desc": "Lignes directrices américaines du CDC sur le traitement des ITS.",
     "verifie": "2026-09-24"
   },
   {
@@ -1413,15 +1323,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Abcès : drainage",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Abcès- drainage",
-    "url": "https://www.urgencehsj.ca/protocoles/abces-drainage/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Agitation : patient agité",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
@@ -1440,15 +1341,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Allergie à la pénicilline : test de provocation à l’amoxicilline",
-    "org": "CHU Sainte-Justine",
-    "cat": "Infections et ITSS",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Allergie pénicilline- challenge amoxil",
-    "url": "https://www.urgencehsj.ca/protocoles/allergie-penicilline-challenge-amoxil/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Allergie : anaphylaxie",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
@@ -1458,20 +1350,11 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Allergies saisonnières",
+    "title": "Corticostéroïdes nasaux (allergies saisonnières, ORL)",
     "org": "CHU Sainte-Justine",
     "cat": "Respiratoire",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/allergies-saisonnieres/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Anorexie",
-    "org": "CHU Sainte-Justine",
-    "cat": "Pédiatrie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ trouble alimentaire",
-    "url": "https://www.urgencehsj.ca/protocoles/anorexie/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Allergies saisonnières",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Corticosteroides-nasaux-ORL-HSJ-D%C3%A9c-2020.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1494,15 +1377,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Arythmie",
-    "org": "CHU Sainte-Justine",
-    "cat": "Cardiovasculaire et métabolique",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ tachycardie TSV",
-    "url": "https://www.urgencehsj.ca/protocoles/arythmie/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Asthme aigu",
     "org": "CHU Sainte-Justine",
     "cat": "Respiratoire",
@@ -1515,8 +1389,8 @@
     "title": "Asthme : algorithme du status asthmaticus",
     "org": "CHU Sainte-Justine",
     "cat": "Respiratoire",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ bronchospasme salbutamol Asthme: Algorithme status asthmaticus",
-    "url": "https://www.urgencehsj.ca/protocoles/asthme-algorythme-status-asthmaticus/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ bronchospasme salbutamol Asthme: Algorithme status asthmaticus Asthme : algorithme du status asthmaticus",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Asthme-Status-Algorithme-20191206-EDT.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1526,15 +1400,6 @@
     "cat": "Pédiatrie",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
     "url": "https://www.urgencehsj.ca/protocoles/balanoposthite/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Blessures inexpliquées",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/blessures-inexpliquees/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1650,8 +1515,8 @@
     "title": "Convulsions fébriles",
     "org": "CHU Sainte-Justine",
     "cat": "Pédiatrie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ crise épileptique épilepsie",
-    "url": "https://www.urgencehsj.ca/protocoles/convulsions-febriles/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ crise épileptique épilepsie Convulsions fébriles",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/CONVULSIONS-FEBRILES-1.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1683,15 +1548,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Dermatologie : molluscum contagiosum",
-    "org": "CHU Sainte-Justine",
-    "cat": "Peau et yeux",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ dermatologie dermatologie Dermato-Molluscum contagiosum",
-    "url": "https://www.urgencehsj.ca/protocoles/dermato-molluscum/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Dermite atopique (eczéma)",
     "org": "CHU Sainte-Justine",
     "cat": "Peau et yeux",
@@ -1701,21 +1557,21 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Dermite : gale",
+    "title": "La gale (dépliant pour les parents)",
     "org": "CHU Sainte-Justine",
-    "cat": "Peau et yeux",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ dermatologie Dermite- Gale",
-    "url": "https://www.urgencehsj.ca/protocoles/dermites-gale/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
+    "cat": "Documents pour les patients",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ dermatologie Dermite- Gale Dermite : gale dépliant patient parents document pour les patients",
+    "url": "https://www.chusj.org/getmedia/08471b5c-5d66-48d1-864c-b82f0f7a507e/depliant_F-4703_la-gale_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant du CHU Sainte-Justine pour les patients et les parents.",
     "verifie": "2026-09-25"
   },
   {
-    "title": "Dermite : mycose",
+    "title": "La teigne : un champignon sur la tête (dépliant pour les parents)",
     "org": "CHU Sainte-Justine",
-    "cat": "Peau et yeux",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ dermatologie Dermite- Mycose",
-    "url": "https://www.urgencehsj.ca/protocoles/dermite-mycose/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
+    "cat": "Documents pour les patients",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ dermatologie Dermite- Mycose Dermite : mycose dépliant patient parents document pour les patients",
+    "url": "https://www.chusj.org/getmedia/e508add7-8ae2-4615-b386-5bc10c412f9b/depliant_F-4704_la-teigne_FR.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant du CHU Sainte-Justine pour les patients et les parents.",
     "verifie": "2026-09-25"
   },
   {
@@ -1767,8 +1623,8 @@
     "title": "Échographie au département d’urgence (EDU)",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ échographie POCUS EDU: Echographie au département d’urgence",
-    "url": "https://www.urgencehsj.ca/protocoles/edu-echographie-au-departement-durgence/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ échographie POCUS EDU: Echographie au département d’urgence Échographie au département d’urgence (EDU)",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/EDU-CARNET-FINAL-2026.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1776,8 +1632,8 @@
     "title": "Électrisation",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ électrocution",
-    "url": "https://www.urgencehsj.ca/protocoles/electrisation/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ électrocution Électrisation",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/%C3%89lectrisation.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1785,8 +1641,8 @@
     "title": "Entérites bactériennes et parasitaires",
     "org": "CHU Sainte-Justine",
     "cat": "Infections et ITSS",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/enterites-bacteriennes-parasitaires/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Entérites bactériennes et parasitaires",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Traitement-des-infections-ent%C3%A9riques-4-octobre-revue-ST-EV-CR-PO.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1863,11 +1719,11 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Gynécologie : contraception",
-    "org": "CHU Sainte-Justine",
+    "title": "Contraception : contraceptifs hormonaux combinés (fiche 6)",
+    "org": "INSPQ",
     "cat": "Santé des femmes et grossesse",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ gynécologie contraception d’urgence Gynéco- Contraception",
-    "url": "https://www.urgencehsj.ca/protocoles/gyneco-contraception/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ gynécologie contraception d’urgence Gynéco- Contraception Gynécologie : contraception",
+    "url": "https://www.inspq.qc.ca/sites/default/files/publications/3466-contraceptifs-hormonaux-combines-fiche-6.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1881,29 +1737,11 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Gynécologie : ménométrorragie",
-    "org": "CHU Sainte-Justine",
-    "cat": "Santé des femmes et grossesse",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ gynécologie Gynécologie- Ménométrorragie",
-    "url": "https://www.urgencehsj.ca/protocoles/gynecologie-menometrorragie/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Gynécologie : urgences",
     "org": "CHU Sainte-Justine",
     "cat": "Santé des femmes et grossesse",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ gynécologie Gynécologie- Urgences",
     "url": "https://www.urgencehsj.ca/protocoles/gynecologie-urgence/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Hémorragie digestive haute",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/hemorragiedigestivehaute/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1929,8 +1767,8 @@
     "title": "HTA sévère",
     "org": "CHU Sainte-Justine",
     "cat": "Cardiovasculaire et métabolique",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ hypertension artérielle",
-    "url": "https://www.urgencehsj.ca/protocoles/hta-severe/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ hypertension artérielle HTA sévère",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Hypertension-Art%C3%A9rielle-S%C3%A9v%C3%A8re.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -1962,15 +1800,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Hypokaliémie et hypophosphorémie : traitement",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ potassium phosphore Hypokaliémie et Hypophosphorémie – Traitement",
-    "url": "https://www.urgencehsj.ca/protocoles/hypokaliemie-hypophosphoremie-traitement/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Infarctus aigu du myocarde suspecté chez l’adulte",
     "org": "CHU Sainte-Justine",
     "cat": "Cardiovasculaire et métabolique",
@@ -1998,38 +1827,11 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Intoxication à l’acétaminophène",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ toxicologie empoisonnement Intoxication Acétaminophène",
-    "url": "https://www.urgencehsj.ca/protocoles/intoxication-acetaminophene/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Intoxication aux anesthésiques locaux",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ toxicologie empoisonnement Intoxication anesthésiant local",
-    "url": "https://www.urgencehsj.ca/protocoles/intoxication-anesthesiant-local/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Intoxication à la digoxine",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ toxicologie empoisonnement Intoxication Digoxine",
-    "url": "https://www.urgencehsj.ca/protocoles/intoxication-digoxine/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Intoxication : exposition cutanée aux produits dangereux",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ toxicologie empoisonnement Intoxication- Exposition cutanée aux produits dangereux",
-    "url": "https://www.urgencehsj.ca/protocoles/intoxication-exposition-cutanee-aux-produits-dangereux-2/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ toxicologie empoisonnement Intoxication- Exposition cutanée aux produits dangereux Intoxication : exposition cutanée aux produits dangereux",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Produits-Dangereux-Exposition-Cutan%C3%A9e.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2046,8 +1848,8 @@
     "title": "Intubation (IET) : choix des tubes",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ intubation endotrachéale voies aériennes Intubation- IET choix de tubes",
-    "url": "https://www.urgencehsj.ca/protocoles/intubation-iet-choix-de-tubes/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ intubation endotrachéale voies aériennes Intubation- IET choix de tubes Intubation (IET) : choix des tubes",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/TET-version-finale.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2097,15 +1899,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Maladie inflammatoire de l’intestin",
-    "org": "CHU Sainte-Justine",
-    "cat": "Pédiatrie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/maladie-inflammatoire-de-lintestin/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Maladie tropicale : malaria",
     "org": "CHU Sainte-Justine",
     "cat": "Infections et ITSS",
@@ -2147,15 +1940,6 @@
     "cat": "Os, articulations et douleur",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
     "url": "https://www.urgencehsj.ca/protocoles/migraine-cephalee-type-migraineuse/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Molluscum contagiosum",
-    "org": "CHU Sainte-Justine",
-    "cat": "Peau et yeux",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ dermatologie",
-    "url": "https://www.urgencehsj.ca/protocoles/molluscum-contagiosum/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2241,12 +2025,12 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Pleurs nourrisson",
+    "title": "Pleurs et coliques du nourrisson (dépliant pour les parents)",
     "org": "CHU Sainte-Justine",
-    "cat": "Pédiatrie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ nourrisson coliques",
-    "url": "https://www.urgencehsj.ca/protocoles/pleurs-nourrisson/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
+    "cat": "Documents pour les patients",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ nourrisson coliques Pleurs nourrisson dépliant patient parents document pour les patients",
+    "url": "https://enseignement.chusj.org/ENSEIGNEMENT/files/0d/0dbe460d-d29b-41a7-8212-5ddcd91fbc52.pdf",
+    "desc": "Dépliant du CHU Sainte-Justine pour les patients et les parents.",
     "verifie": "2026-09-25"
   },
   {
@@ -2295,24 +2079,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Réanimation",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ arrêt cardiaque RCR",
-    "url": "https://www.urgencehsj.ca/protocoles/reanimation/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Reflux gastro-œsophagien et pleurs",
-    "org": "CHU Sainte-Justine",
-    "cat": "Pédiatrie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ diarrhée vomissements déshydratation nourrisson coliques RGO Reflux Gastro-Oesophagien et pleurs",
-    "url": "https://www.urgencehsj.ca/protocoles/reflux-gastro-oesophagien-pleurs/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Saignement après une amygdalectomie",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
@@ -2325,8 +2091,8 @@
     "title": "Sédation et jeûne",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ analgésie procédurale",
-    "url": "https://www.urgencehsj.ca/protocoles/sedation-et-jeune/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ analgésie procédurale Sédation et jeûne",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/tableau_jeune_sedation_CHUSJ_post-revision-urgence-5-mai-2026-FINAL.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2349,12 +2115,12 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Sinus pilonidal",
+    "title": "Sinus pilonidal (dépliant)",
     "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/sinus-pilonidal/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
+    "cat": "Documents pour les patients",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Sinus pilonidal dépliant patient parents document pour les patients",
+    "url": "https://www.chusj.org/getmedia/bad33807-bf7c-4e4c-83e4-68b073c0840c/F-7225-Sinus-pilonidal_final.pdf.aspx?ext=.pdf",
+    "desc": "Dépliant du CHU Sainte-Justine pour les patients et les parents.",
     "verifie": "2026-09-25"
   },
   {
@@ -2403,33 +2169,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Syndrome coronarien adulte (DRS)",
-    "org": "CHU Sainte-Justine",
-    "cat": "Cardiovasculaire et métabolique",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ douleur rétrosternale syndrome coronarien infarctus",
-    "url": "https://www.urgencehsj.ca/protocoles/syndrome-coronarien-aigue-adulte-drs/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Tamiflu",
-    "org": "CHU Sainte-Justine",
-    "cat": "Infections et ITSS",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ oseltamivir influenza grippe",
-    "url": "https://www.urgencehsj.ca/protocoles/tamiflu/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Thrombose",
-    "org": "CHU Sainte-Justine",
-    "cat": "Thrombose et anticoagulation",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ TVP embolie anticoagulation",
-    "url": "https://www.urgencehsj.ca/protocoles/thrombose/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Transfusion de produits sanguins",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
@@ -2439,11 +2178,11 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Transport de patients",
+    "title": "Transport de patients : liste de vérification avant le départ du centre référent",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/transport-de-patients/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ Transport de patients",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Listes-de-ve%C3%ACrifications-avant-le-de%C3%ACpart-du-centre-re%C3%ACfe%C3%ACrent-version-finale-CPTIP-17-09-2019.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2484,15 +2223,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Traumatisme musculosquelettique",
-    "org": "CHU Sainte-Justine",
-    "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ trauma",
-    "url": "https://www.urgencehsj.ca/protocoles/traumatisme-musculosquelettique/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Traumatismes : blessures inexpliquées",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
@@ -2514,8 +2244,8 @@
     "title": "Traumatologie pédiatrique : arrêt cardiaque traumatique",
     "org": "CHU Sainte-Justine",
     "cat": "Urgence et traumatologie",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ trauma Traumatologie pédiatrique- Arrêt cardiaque traumatique",
-    "url": "https://www.urgencehsj.ca/protocoles/traumatologie-pediatrique-arret-cardiaque-traumatique/",
+    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ trauma Traumatologie pédiatrique- Arrêt cardiaque traumatique Traumatologie pédiatrique : arrêt cardiaque traumatique",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/Algorithme_PTCA-Vfinal_20220330-2.pdf",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -8729,6 +8459,159 @@
     "tags": "vertige VPPB Dix-Hallpike Epley algorithme prise en charge référence",
     "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/ORL/Vertiges_rotatoires_aigus.pdf",
     "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Anévrisme de l’aorte abdominale : tableau de recommandations de dépistage (EN)",
+    "org": "Groupe d’étude canadien sur les soins de santé préventifs",
+    "cat": "Prévention et vaccination",
+    "tags": "anévrisme aorte abdominale AAA dépistage échographie homme",
+    "url": "https://canadiantaskforce.ca/wp-content/uploads/2017/11/CTFPHC_AAA_Clinician-Algorithim_FINAL.pdf",
+    "desc": "Tableau pour les cliniciens : qui dépister pour l’AAA, avec quel test et à quel âge (2017).",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Cancer colorectal : tableau de recommandations de dépistage (EN)",
+    "org": "Groupe d’étude canadien sur les soins de santé préventifs",
+    "cat": "Prévention et vaccination",
+    "tags": "dépistage cancer colorectal RSOSi FIT sigmoïdoscopie coloscopie",
+    "url": "https://canadiantaskforce.ca/wp-content/uploads/2016/05/ctfphccolorectal-cancerrecommendation-tablefinal160121.pdf",
+    "desc": "Tableau pour les cliniciens : tests, intervalles et âges de dépistage du cancer colorectal (2016).",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Diabète de type 2 : questionnaire CANRISK sur le risque de diabète",
+    "org": "Groupe d’étude canadien sur les soins de santé préventifs",
+    "cat": "Prévention et vaccination",
+    "tags": "CANRISK dépistage diabète type 2 prédiabète questionnaire risque",
+    "url": "https://canadiantaskforce.ca/wp-content/uploads/2016/10/2012-type-2-diabetes-canrisk-fr.pdf",
+    "desc": "Questionnaire canadien sur le risque de diabète, version adaptée par le Groupe d’étude canadien.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Anémie d’étiologie indéterminée (algorithme)",
+    "org": "CIUSSS de l’Estrie–CHUS",
+    "cat": "Hématologie et oncologie",
+    "tags": "anémie ferriprive hémoglobine bilan martial ferritine",
+    "url": "https://www.santeestrie.qc.ca/clients/SanteEstrie/Professionnels/Algorithmes-traitement/Gastro-anterologie/Anemie_moins_de_100_Etiologie_indeterminee.pdf",
+    "desc": "Algorithme de prise en charge et de référence du CIUSSS de l’Estrie–CHUS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Douleur neuropathique : algorithme de prise en charge",
+    "org": "MSSS",
+    "cat": "Os, articulations et douleur",
+    "tags": "douleur neuropathique DN4 prégabaline gabapentine duloxétine amitriptyline",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2021/21-947-04W.pdf",
+    "desc": "Algorithme du MSSS (centre d’expertise en gestion de la douleur chronique du RUISSS de l’Université de Montréal).",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Fibromyalgie : algorithme de prise en charge (MSSS)",
+    "org": "MSSS",
+    "cat": "Os, articulations et douleur",
+    "tags": "fibromyalgie douleur chronique diffuse",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2021/21-947-03W.pdf",
+    "desc": "Cheminement clinique du MSSS pour la prise en charge de la fibromyalgie.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Vestibulodynie provoquée : algorithme de prise en charge",
+    "org": "MSSS",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "vestibulodynie vulvodynie dyspareunie douleur vulvaire",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2021/21-947-01W.pdf",
+    "desc": "Cheminement clinique du MSSS pour la prise en charge de la vestibulodynie provoquée.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Zona aigu : algorithme de prise en charge",
+    "org": "MSSS",
+    "cat": "Infections et ITSS",
+    "tags": "zona herpès zoster névralgie postherpétique antiviral vaccin",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2021/21-947-02W.pdf",
+    "desc": "Algorithme du MSSS pour la prise en charge du zona aigu et de la douleur associée.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Inhibiteurs de la pompe à protons : trousse pour optimiser leur usage (« Pourquoi des IPP ? »)",
+    "org": "Choisir avec soin",
+    "cat": "Digestif et foie",
+    "tags": "IPP déprescription pantoprazole oméprazole Adieu aux IPP",
+    "url": "https://choosingwiselycanada.org/wp-content/uploads/dlm_uploads/2025/07/CWC_Toolkit_AskWhyPPI_2025_FR.pdf",
+    "desc": "Trousse de Choisir avec soin (2025) pour réduire les IPP sans indication continue en soins primaires.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Protocole médical national : ajustement des antihypertenseurs",
+    "org": "INESSS",
+    "cat": "Cardiovasculaire et métabolique",
+    "tags": "hypertension HTA antihypertenseurs ajustement protocole ordonnance collective",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Ordonnances_collectives/Hypertension_arterielle/INESSS-Protocole_medical_national.pdf",
+    "desc": "Protocole de l’INESSS (révisé en 2026) pour l’ajustement de la médication antihypertensive de première intention.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Dépistage du cancer de la prostate par l’APS : outil d’aide à la discussion",
+    "org": "INESSS",
+    "cat": "Prévention et vaccination",
+    "tags": "cancer prostate APS PSA dépistage décision partagée",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Oncologie/INESSS_outil_depistage_cancer_prostate_FRC.pdf",
+    "desc": "Outil de l’INESSS pour discuter avec le patient des avantages et des inconvénients du dosage de l’APS.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Ménopause : prise en charge des manifestations cliniques par l’hormonothérapie",
+    "org": "INESSS",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "ménopause hormonothérapie HT bouffées de chaleur œstrogène progestatif",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Hormonotherapie/INESSS_Hormono_Outil_prise_charge_FRANCAIS_VF.pdf",
+    "desc": "Outil d’aide de l’INESSS : évaluation, amorce, suivi et arrêt de l’hormonothérapie de la ménopause.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Trouble du spectre de l’autisme : outil clinique de prise en charge et de suivi",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "TSA autisme trouble du spectre de l’autisme suivi enfant",
+    "url": "https://cps.ca/uploads/issues/CPS_Autism-FRE-clinical-tool.pdf",
+    "desc": "Outil clinique de la SCP pour la prise en charge et le suivi de l’enfant une fois le diagnostic de TSA posé.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "TDAH : tableau des médicaments offerts au Canada (CADDRA, 2024)",
+    "org": "CADDRA",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "TDAH médicaments psychostimulants méthylphénidate lisdexamfétamine dose",
+    "url": "https://www.caddra.ca/wp-content/uploads/CADDRA_ADHD-Medication-Chart_EN-FR_October2024_Final.pdf",
+    "desc": "Tableau bilingue de CADDRA (octobre 2024) : médicaments du TDAH, doses de départ, titration et durée d’action.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "TDAH : trousse CADDRA d’évaluation (version imprimée)",
+    "org": "CADDRA",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "TDAH évaluation questionnaires SNAP-IV ASRS Weiss trousse CADDRA",
+    "url": "https://www.caddra.ca/wp-content/uploads/French_CADDRA-eToolkit-for-Download-July-10-2018.pdf",
+    "desc": "Trousse d’évaluation du TDAH de CADDRA en français : formulaires et échelles pour enfants, adolescents et adultes.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Guide de poche : dyslipidémie (SCC 2021)",
+    "org": "Société canadienne de cardiologie",
+    "cat": "Cardiovasculaire et métabolique",
+    "tags": "dyslipidémie lipides cholestérol LDL statine Lp(a)",
+    "url": "https://ccs.ca/wp-content/uploads/2023/01/2022-Lipids-Gui-PG-FR.pdf",
+    "desc": "Guide de poche de la SCC fondé sur les lignes directrices 2021 sur la dyslipidémie.",
+    "verifie": "2026-09-25"
+  },
+  {
+    "title": "Guide de poche : insuffisance cardiaque (SCC 2021)",
+    "org": "Société canadienne de cardiologie",
+    "cat": "Cardiovasculaire et métabolique",
+    "tags": "insuffisance cardiaque IC FEVG diurétique ARNI SGLT2",
+    "url": "https://ccs.ca/app/uploads/2022/05/2021-HF-Gui-PG-FR-Web-v2.pdf",
+    "desc": "Guide de poche de la SCC sur le diagnostic et la prise en charge de l’insuffisance cardiaque (mise à jour 2021).",
     "verifie": "2026-09-25"
   }
 ]
