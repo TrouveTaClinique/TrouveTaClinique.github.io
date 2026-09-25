@@ -2027,15 +2027,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Admission unité débordement",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/admission-unite-debordement/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Agitation - patient agité",
     "org": "CHU Sainte-Justine",
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
@@ -2077,15 +2068,6 @@
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
     "url": "https://www.urgencehsj.ca/protocoles/allergies-saisonnieres/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "ALTE (voir BRUE)",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ malaise grave nourrisson BRUE malaise grave nourrisson ALTE",
-    "url": "https://www.urgencehsj.ca/protocoles/alte-voir-brue/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2234,15 +2216,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Cathéters veineux centraux: désobstruction",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/catheter-veineux-centraux-desobstruction/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Cellulite préseptale (périorbitaire) et orbitaire",
     "org": "CHU Sainte-Justine",
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
@@ -2329,42 +2302,6 @@
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ SRAS-CoV-2 coronavirus",
     "url": "https://www.urgencehsj.ca/protocoles/covid-19/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "COVID-19: soins patients critiques et transport",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ SRAS-CoV-2 coronavirus",
-    "url": "https://www.urgencehsj.ca/protocoles/covid-19-soins-patients-critiques-transport/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "COVID-19: soutien aux familles",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ SRAS-CoV-2 coronavirus",
-    "url": "https://www.urgencehsj.ca/protocoles/covid-19-soutien-aux-familles/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Décès à l’urgence",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/deces-a-lurgence/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Défibrillateur HSJ",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/defibrillateur-hsj/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2522,29 +2459,11 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Feuilles d’ordonnances pré-rédigées (FOPRs) du CHU Sainte-Justine",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ FOPR ordonnances pré-rédigées",
-    "url": "https://www.urgencehsj.ca/protocoles/feuilles-dordonnances-pre-redigees-foprs-du-chu-sainte-justine/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Fièvre nourrisson de moins de 60 jours de vie",
     "org": "CHU Sainte-Justine",
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
     "url": "https://www.urgencehsj.ca/protocoles/fievre-nourrisson-de-de-60-jours-de-vie/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Fractures- Guides suivi CHU HSJ",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ orthopédie plâtre attelle",
-    "url": "https://www.urgencehsj.ca/protocoles/fractures-guides-suivi-chu-hsj/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2693,15 +2612,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Immunoglobulines",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/immunoglobulines/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Infarctus aigu du myocarde suspecté chez l’adulte",
     "org": "CHU Sainte-Justine",
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
@@ -2725,15 +2635,6 @@
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ cortisol hydrocortisone",
     "url": "https://www.urgencehsj.ca/protocoles/insuffisance-surrenalienne-primaire-et-secondaire/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Interprètes HSJ",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/interpretes-hsj/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2806,15 +2707,6 @@
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ douleur abdominale",
     "url": "https://www.urgencehsj.ca/protocoles/invagination/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Jeûne – politique CHUSJ pré-op",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/jeune-politique-chusj-pre-op/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
@@ -2936,15 +2828,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Néonatalogie- Guide médicaments",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/neonatalogie-guide-medicaments/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Neutropénie fébrile",
     "org": "CHU Sainte-Justine",
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
@@ -3026,15 +2909,6 @@
     "verifie": "2026-09-25"
   },
   {
-    "title": "Physiothérapie HSJ",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/physiotherapie-hsj/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
     "title": "Pleurs nourrisson",
     "org": "CHU Sainte-Justine",
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
@@ -3067,24 +2941,6 @@
     "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
     "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ échographie POCUS",
     "url": "https://www.urgencehsj.ca/protocoles/analgesie-procedures-mineures/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Prostaglandines",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/prostaglandines/",
-    "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
-    "verifie": "2026-09-25"
-  },
-  {
-    "title": "Protocole d’application des mesures de contrôle",
-    "org": "CHU Sainte-Justine",
-    "cat": "Guides cliniques de l’urgence – CHU Sainte-Justine",
-    "tags": "protocole guide clinique urgence pédiatrie pédiatrique enfant Sainte-Justine Ste-Justine CHUSJ HSJ",
-    "url": "https://www.urgencehsj.ca/protocoles/protocole-dapplication-mesures-de-controle/",
     "desc": "Guide clinique de l’urgence du CHU Sainte-Justine.",
     "verifie": "2026-09-25"
   },
