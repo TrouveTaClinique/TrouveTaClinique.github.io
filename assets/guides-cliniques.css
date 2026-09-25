@@ -142,3 +142,13 @@
 .guides-app-note{font-size:.92rem;color:#170A72;opacity:.85}
 .guides-app-aide{flex-basis:100%;margin:.2rem 0 0;padding:.7rem .9rem;border-left:3px solid #08A0A0;background:#EFFAF9;border-radius:8px;font-size:.95rem;color:#170A72;max-width:60ch}
 @media (max-width:640px){.guides-ia{margin-inline:.6rem;padding:1.4rem 1.1rem;border-radius:16px}}
+/* Attente de la réponse de l'IA : trois points qui rebondissent et étapes qui défilent. */
+.guides-ia-attente{display:flex;align-items:center;gap:.9rem;color:var(--navy);font-weight:600}
+.guides-ia-points{display:inline-flex;gap:.35rem;flex:none}
+.guides-ia-points span{width:.6rem;height:.6rem;border-radius:50%;background:#08A0A0;animation:guides-ia-rebond 1.1s ease-in-out infinite}
+.guides-ia-points span:nth-child(2){animation-delay:.15s;background:#2B1C8C}
+.guides-ia-points span:nth-child(3){animation-delay:.3s}
+.guides-ia-etape{animation:guides-ia-fondu .5s ease}
+@keyframes guides-ia-rebond{0%,80%,100%{transform:translateY(0);opacity:.45}40%{transform:translateY(-.45rem);opacity:1}}
+@keyframes guides-ia-fondu{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.guides-ia-points span,.guides-ia-etape{animation:none;opacity:1}}

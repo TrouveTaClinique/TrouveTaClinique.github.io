@@ -59,6 +59,39 @@
   /* Question sur une ressource communautaire : même encadré 211 que la recherche. */
   const noteCommunautaire = () => { const n = catalogue.noteCommunautaire(); n.hidden = false; return n; };
 
+  /* Attente animée : points qui rebondissent et étapes qui défilent. Le lecteur d'écran
+     n'annonce qu'une phrase ; les étapes visibles lui sont masquées. */
+  const ETAPES = ['L’IA lit le catalogue…', 'Analyse de la situation…', 'Choix des ressources les plus utiles…', 'Rédaction des explications…'];
+  let minuterieEtapes = null;
+  function attendre() {
+    const bloc = document.createElement('div');
+    bloc.className = 'guides-ia-attente';
+    const points = document.createElement('span');
+    points.className = 'guides-ia-points';
+    points.setAttribute('aria-hidden', 'true');
+    points.append(document.createElement('span'), document.createElement('span'), document.createElement('span'));
+    const texte = document.createElement('span');
+    texte.className = 'guides-ia-etape';
+    texte.setAttribute('aria-hidden', 'true');
+    texte.textContent = ETAPES[0];
+    const lu = document.createElement('span');
+    lu.className = 'visually-hidden';
+    lu.textContent = 'Recherche en cours dans tout le catalogue.';
+    bloc.append(points, texte, lu);
+    zone.replaceChildren(bloc);
+    let n = 0;
+    clearInterval(minuterieEtapes);
+    let actuel = texte;
+    minuterieEtapes = setInterval(() => {
+      n = Math.min(n + 1, ETAPES.length - 1);
+      const suivant = actuel.cloneNode(false);   // nouvel élément : le fondu se rejoue
+      suivant.textContent = ETAPES[n];
+      actuel.replaceWith(suivant);
+      actuel = suivant;
+      if (n === ETAPES.length - 1) clearInterval(minuterieEtapes);
+    }, 2200);
+  }
+
   const erreur = texte => { zone.replaceChildren(paragraphe('guides-ia-erreur', texte)); };
 
   form.addEventListener('submit', async event => {
@@ -71,7 +104,7 @@
     const communautaire = catalogue.estCommunautaire && catalogue.estCommunautaire(question);
     bouton.disabled = true;
     section.setAttribute('aria-busy', 'true');
-    zone.replaceChildren(paragraphe('guides-ia-attente', 'L’IA parcourt tout le catalogue…'));
+    attendre();
     try {
       const controleur = new AbortController();
       const minuterie = setTimeout(() => controleur.abort(), 45000);
@@ -92,6 +125,7 @@
     } catch (e) {
       erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
     } finally {
+      clearInterval(minuterieEtapes);
       bouton.disabled = false;
       section.removeAttribute('aria-busy');
     }
