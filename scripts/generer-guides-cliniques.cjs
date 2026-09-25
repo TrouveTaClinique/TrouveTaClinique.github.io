@@ -123,10 +123,12 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta property="og:title" content="Guides pratiques et ressources cliniques">
   <meta property="og:url" content="https://trouvetaclinique.ca/guides/">
   <meta property="og:description" content="Guides de pratique, algorithmes et ressources pour la médecine familiale, classés par sujet et par organisme, avec un lien direct vers la source originale.">
-  <meta property="og:image" content="https://trouvetaclinique.ca/assets/og-accueil.png">
+  <meta property="og:image" content="https://trouvetaclinique.ca/assets/og-guides.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Guides pratiques, algorithmes et ressources communautaires · Trouve ta clinique">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-guides.png">
   <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
