@@ -148,11 +148,11 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=101-ia-attente">
-  <script src="/assets/guides-recherche.js?v=101-ia-attente" defer></script>
-  <script src="/assets/guides-cliniques.js?v=101-ia-attente" defer></script>
-  <script src="/assets/guides-installer.js?v=101-ia-attente" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=101-ia-attente" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=102-ia-attente-animee">
+  <script src="/assets/guides-recherche.js?v=102-ia-attente-animee" defer></script>
+  <script src="/assets/guides-cliniques.js?v=102-ia-attente-animee" defer></script>
+  <script src="/assets/guides-installer.js?v=102-ia-attente-animee" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=102-ia-attente-animee" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
