@@ -103,10 +103,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=95-guides-proposer">
-  <script src="/assets/guides-recherche.js?v=95-guides-proposer" defer></script>
-  <script src="/assets/guides-cliniques.js?v=95-guides-proposer" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=95-guides-proposer" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=96-guides-communautaire">
+  <script src="/assets/guides-recherche.js?v=96-guides-communautaire" defer></script>
+  <script src="/assets/guides-cliniques.js?v=96-guides-communautaire" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=96-guides-communautaire" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -135,6 +135,10 @@ ${header.replace(/ aria-current="page"/g, '')}
       </div>
     </div>
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${ressources.length} ressources dans le catalogue</p>
+    <div class="guides-communautaire" hidden>
+      <p><strong>Vous cherchez une ressource communautaire&nbsp;?</strong> Le catalogue ne contient pas encore les organismes communautaires.</p>
+      <p>Le 211 répertorie les organismes près de chez vous (aide alimentaire, répit, hébergement, proches aidants, transport, deuil…) : composez le <a href="tel:211">2-1-1</a> ou consultez <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211qc.ca<span class="visually-hidden"> (nouvel onglet)</span></a>.<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.</p>
+    </div>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>
   </section>
 ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="${esc(URL_AIGUILLAGE)}" hidden>

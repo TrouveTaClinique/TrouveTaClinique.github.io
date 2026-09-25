@@ -8,6 +8,7 @@
   const sections = Array.from(document.querySelectorAll('.guides-category'));
   const status = document.getElementById('guide-status');
   const empty = document.querySelector('.guides-empty');
+  const communautaire = document.querySelector('.guides-communautaire');
   const selSujet = document.getElementById('guides-filtre-sujet');
   const selOrganisme = document.getElementById('guides-filtre-organisme');
   const effacerFiltres = document.querySelector('.guides-filtres-reset');
@@ -154,6 +155,7 @@
       }
     });
     empty.hidden = count !== 0;
+    communautaire.hidden = !moteur.estCommunautaire(requete);
     effacerFiltres.hidden = !sujet && !organisme;
     const filtres = [sujet, organisme].filter(Boolean).join(' · ');
     status.textContent = count + ' ressource' + (count > 1 ? 's' : '') + (filtres ? ' · ' + filtres : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue');
@@ -172,7 +174,9 @@
   window.GuidesCatalogue = {
     /* Sans seuil de pertinence : l'IA gagne à voir large, jusqu'à n guides. */
     candidats: (question, n) => moteur.rechercher(index, question, { seuil: 0 }).slice(0, n).map(({ i }) => resources[i].id),
-    carte: id => (parId.has(id) ? cloner(id) : null)
+    carte: id => (parId.has(id) ? cloner(id) : null),
+    estCommunautaire: question => moteur.estCommunautaire(question),
+    noteCommunautaire: () => communautaire.cloneNode(true)
   };
   input.value = new URLSearchParams(location.search).get('q') || '';
   render();

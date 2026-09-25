@@ -105,3 +105,15 @@ test('deux mots-clés sans guide commun : chacun garde ses résultats', () => {
   const res = titres('otite pénicilline');
   assert.ok(contient(res, /otite/) && contient(res, /penicilline/), res.join(' | '));
 });
+
+// Questions hors catalogue : aucun résultat plutôt que des guides sans rapport.
+test('hors catalogue : pas de faux résultat', () => {
+  for (const q of ['banque alimentaire', 'hébergement femme violence', 'proche aidant épuisé', 'organisme deuil', 'aide à domicile personne âgée']) {
+    assert.deepEqual(titres(q), [], q);
+  }
+});
+
+test('questions communautaires reconnues, questions cliniques non', () => {
+  for (const q of ['banque alimentaire', 'répit pour proche aidant', 'maison d’hébergement', 'centre d’action bénévole', '211']) assert.ok(R.estCommunautaire(q), q);
+  for (const q of ['otite', 'sevrage alcool', 'fibrillation auriculaire']) assert.ok(!R.estCommunautaire(q), q);
+});

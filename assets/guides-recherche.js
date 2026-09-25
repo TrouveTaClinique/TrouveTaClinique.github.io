@@ -13,7 +13,7 @@
 
   const MOTS_VIDES = new Set(['a', 'au', 'aux', 'avec', 'chez', 'd', 'de', 'des', 'du', 'en', 'et', 'l', 'la', 'le', 'les', 'ou', 'par', 'pour', 'sur', 'un', 'une', 'the', 'of', 'and', 'in', 'for']);
   /* Mots de question sans valeur de recherche (mis au singulier plus bas, comme la requête). */
-  const MOTS_QUESTION = 'patient patiente personne homme avant apres sous depuis quel quelle quels quelles option options comment faire cas sans dans mon ma mes son sa ses leur qui que quoi est sont doit doivent peut peux faut il elle ce cette ces plus moins semaine semaines jour jours mois an ans annee annees age agee ayant atteint atteinte traiter prendre quoi';
+  const MOTS_QUESTION = 'patient patiente personne homme avant apres sous depuis quel quelle quels quelles option options comment faire cas sans dans mon ma mes son sa ses leur qui que quoi est sont doit doivent peut peux faut il elle ce cette ces plus moins semaine semaines jour jours mois an ans annee annees age agee ayant atteint atteinte traiter prendre quoi aide besoin trouver ressource service organisme';
 
   /* Chaque groupe réunit des expressions équivalentes. Écrire sans accents, en minuscules. */
   const GROUPES = [
@@ -153,7 +153,8 @@
     if (q === m) return 1;
     if (q.length <= 3) return 0;                       // abréviation courte : mot entier seulement
     if (m.startsWith(q)) return dernier ? 0.9 : 0.8;   // saisie en cours ou mot tronqué
-    const max = !flou ? 0 : q.length >= 8 ? 2 : q.length >= 5 ? 1 : 0;
+    /* Mots courts : la première lettre doit correspondre (« deuil » n'est pas « seuil »). */
+    const max = !flou ? 0 : q.length >= 8 ? 2 : q.length >= 5 && q[0] === m[0] ? 1 : 0;
     if (max && distance(q, m, max) <= max) return 0.6;
     return 0;
   }
@@ -244,8 +245,15 @@
       let scores = index.map(champs => score(champs, [t]));
       let df = scores.filter(s => s > 0).length;
       if (!df) { t.flou = true; scores = index.map(champs => score(champs, [t])); df = scores.filter(s => s > 0).length; }
-      return { scores, df };
-    }).filter(s => s.df > 0);
+      return { scores, df, inconnu: t.flou };
+    });
+    /* Question en bonne partie hors catalogue (au moins la moitié des mots introuvables tels
+       quels, ex. « banque alimentaire », « hébergement femme violence ») : mode prudent, seules
+       les correspondances fortes (titre ou concept dans le titre) comptent. Sinon, le mot
+       restant ramènerait des guides sans rapport. */
+    const prudent = termes.length > 1 && stats.filter(s => s.inconnu).length * 2 >= termes.length;
+    if (prudent) stats.forEach(s => { s.scores = s.scores.map(v => (v >= POIDS.titre * 0.7 ? v : 0)); s.df = s.scores.filter(v => v > 0).length; });
+    stats.splice(0, stats.length, ...stats.filter(s => s.df > 0));
     /* Un terme présent dans plus des deux tiers du catalogue ne départage rien : ignoré s'il en
        reste d'autres. Entre la moitié et les deux tiers (ex. « bébé », relié à tous les guides
        pédiatriques), il compte encore, mais peu : sa rareté (IDF) est faible. */
@@ -263,7 +271,11 @@
     return resultats.filter(r => r.score >= seuil);
   }
 
-  const api = { normaliser, mots, analyserRequete, preparer, score, rechercher, distance, GROUPES };
+  /* Questions qui visent une ressource communautaire plutôt qu'un guide clinique. */
+  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|logements?|itinerance|itinerant|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport|accompagnement|juridique|impots?|friperies?|centre d action)\b/;
+  const estCommunautaire = requete => COMMUNAUTAIRE.test(normaliser(requete));
+
+  const api = { estCommunautaire, normaliser, mots, analyserRequete, preparer, score, rechercher, distance, GROUPES };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else racine.GuidesRecherche = api;
 })(typeof window !== 'undefined' ? window : globalThis);

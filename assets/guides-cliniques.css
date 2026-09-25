@@ -91,3 +91,8 @@
 .guides-proposer-bouton{display:inline-flex;align-items:center;min-height:52px;padding:.7rem 1.6rem;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;text-decoration:none}
 .guides-proposer-bouton:hover{text-decoration:underline;text-underline-offset:3px}
 .guides-page .guides-proposer-bouton:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+/* Question communautaire : renvoi au 211 (le catalogue ne contient pas encore les organismes). */
+.guides-communautaire{margin:1rem 0 0;padding:1rem 1.2rem;border-left:4px solid var(--navy);border-radius:8px;background:#fff;max-width:80ch}
+.guides-communautaire p{margin:0 0 .5rem;line-height:1.6}
+.guides-communautaire p:last-child{margin:0}
+.guides-ia-resultat .guides-communautaire{margin:0 0 1rem}
