@@ -129,7 +129,7 @@ const THEME_SCRIPT = `<script src="/assets/theme.js" defer></script>`;
 
 function htmlBrand() {
   return `<a class="brand" href="/">
-    <img src="/assets/logo-banniere.png" alt="">
+    <img src="/assets/logo-128.webp" width="128" height="128" alt="">
     <span class="vh">Trouve ta clinique</span>
     ${WORDMARK_HTML}
   </a>`;
@@ -138,18 +138,18 @@ function htmlBrand() {
 function htmlFooterSite() {
   return `<footer class="pied-site">
   <div class="brandf">
-    <img src="/assets/logo-banniere.png" alt="">
+    <img src="/assets/logo-128.webp" width="128" height="128" alt="">
     <span class="vh">Trouve ta clinique</span>
     ${WORDMARK_HTML}
   </div>
   <div class="fgrid">
-    <div class="f-col f-territoires"><h4>Territoires</h4><ul>
+    <div class="f-col f-territoires"><h2>Territoires</h2><ul>
       <li><a href="/monteregie-est/">Montérégie-Est</a></li>
       <li><a href="/monteregie/">Montérégie</a></li>
       <li><a href="/monteregie-centre/">Montérégie-Centre</a></li>
       <li><a href="/monteregie-ouest/">Montérégie-Ouest</a></li>
     </ul></div>
-    <div class="f-col f-guides"><h4>Guides et outils</h4><ul>
+    <div class="f-col f-guides"><h2>Guides et outils</h2><ul>
       <li><a href="/monteregie-est/ptem/">PTEM 2027</a></li>
       <li><a href="/monteregie-est/amp/">AMP</a></li>
       <li><a href="/guides/">Guides cliniques</a></li>
@@ -158,7 +158,7 @@ function htmlFooterSite() {
       <li><a href="/recherche/">Recherche</a></li>
       <li><a href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></li>
     </ul></div>
-    <div class="f-col f-rls"><h4>Réseaux locaux (RLS)</h4><ul>
+    <div class="f-col f-rls"><h2>Réseaux locaux (RLS)</h2><ul>
       <li><a href="/monteregie-est/rls/pierre-boucher/">Pierre-Boucher</a></li>
       <li><a href="/monteregie-est/rls/richelieu-yamaska/">Richelieu-Yamaska</a></li>
       <li><a href="/monteregie-est/rls/pierre-de-saurel/">Pierre-De Saurel</a></li>
@@ -518,6 +518,8 @@ function descriptionClinique(c) {
   const candidats = [
     `${c.nom}, ${type} à ${ville}${rlsCourt}, ${statut}.`,
     `${c.nom} à ${ville}${rlsCourt} : ${statut}.`,
+    /* Nom long : on garde le nom, pour que deux milieux de la même ville ne partagent pas la même description. */
+    `${c.nom}, ${ville} : ${statut}.`,
     `${type} à ${ville}${rlsCourt} : ${statut}, fiche et contacts.`
   ];
   const choisi = candidats.find(t => t.length <= META_DESC_CIBLE) || candidats[candidats.length - 1];
@@ -991,7 +993,7 @@ ${metaVerification}  <meta property="og:locale" content="fr_CA">
   <meta name="twitter:title" content="${esc(titre)}">
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${ogImage}">
-  <link rel="icon" type="image/png" sizes="1024x1024" href="/assets/logo-banniere.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="${cssHref}">
 ${cssExtra ? `  <link rel="stylesheet" href="${cssExtra}">\n` : ''}  <script type="application/ld+json">
@@ -1012,8 +1014,9 @@ ${nav}
 </header>
 ${SEARCH_PANEL}
 ${modeAccueil
-  ? `<span id="contenu"></span>
-${corps}`
+  ? `<div id="contenu" role="main">
+${corps}
+</div>`
   : `<main id="contenu">
 ${filDAriane ? `  <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAriane}</nav>\n` : ''}
 ${corps}
@@ -3658,6 +3661,31 @@ function publierRecherche(cliniques, slugs) {
   return items.length;
 }
 
+/* Dates de modification réelles du sitemap (audit du 25 septembre 2026).
+   scripts/lastmod.json garde, pour chaque adresse, l'empreinte de la page publiée et la date
+   de son dernier changement. Une page dont le contenu change reçoit la date du jour (heure du
+   Québec) ; une page inchangée garde sa date. Deux générations de suite donnent donc le même
+   résultat. Une adresse nouvelle part de la date calculée par l'ancienne méthode. */
+function datesReelles(entrees) {
+  const fichierMemoire = path.join(RACINE, 'scripts', 'lastmod.json');
+  let memoire = {};
+  try { memoire = JSON.parse(fs.readFileSync(fichierMemoire, 'utf8')); } catch (e) { memoire = {}; }
+  const aujourdhui = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).format(new Date());
+  const suivante = {};
+  for (const e of entrees) {
+    const fichier = path.join(RACINE, e.loc, 'index.html');
+    if (!fs.existsSync(fichier)) continue;
+    const empreinte = require('crypto').createHash('sha1').update(fs.readFileSync(fichier)).digest('hex');
+    const avant = memoire[e.loc];
+    const date = !avant ? e.lastmod : avant.empreinte === empreinte ? avant.date : aujourdhui;
+    suivante[e.loc] = { empreinte, date };
+    e.lastmod = date;
+  }
+  const trie = Object.fromEntries(Object.keys(suivante).sort().map(k => [k, suivante[k]]));
+  ecrire(path.join('scripts', 'lastmod.json'), JSON.stringify(trie, null, 1) + '\n');
+  return entrees;
+}
+
 function sitemap(entrees) {
   const urls = entrees.map(e => `  <url>
     <loc>${SITE}${e.loc}</loc>
@@ -3874,7 +3902,7 @@ function normaliserPageGuide(html, nom) {
   let sortie = html;
   // Même PNG HD transparent que dans l'en-tête, sans réencoder le logo.
   sortie = sortie.replace(/<link\b(?=[^>]*\brel="icon")[^>]*>\s*/g, '');
-  sortie = sortie.replace('</head>', '<link rel="icon" type="image/png" sizes="1024x1024" href="/assets/logo-banniere.png">\n</head>');
+  sortie = sortie.replace('</head>', '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">\n</head>');
   const renumerotation = renumeroterSectionsGuide(sortie);
   sortie = renumerotation.html;
   if (renumerotation.total) {
@@ -4320,7 +4348,7 @@ function main() {
   require('./generer-guides-cliniques.cjs').genererGuidesCliniques(RACINE);
   entrees.push({ loc: '/guides/', lastmod: '2026-09-24', changefreq: 'monthly', priority: '0.7' });
 
-  ecrire('sitemap.xml', sitemap(entrees));
+  ecrire('sitemap.xml', sitemap(datesReelles(entrees)));
   ecrireLlmsTxt(majDonnees);
   const nRedirCf = exporterRedirectionsCloudflare();
 

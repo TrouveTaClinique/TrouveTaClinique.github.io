@@ -369,7 +369,7 @@ body.fiche-open .leaflet-control-attribution { display: none; }
 .credits-carte .credits-l1 { display: block; font-weight: 600; font-size: 11px; color: #170A72; }
 .credits-carte .credits-l2 { display: block; }
 .leaflet-control-attribution.credits-carte a,
-:root[data-theme="sombre"] .leaflet-control-attribution.credits-carte a { color: #0065A9 !important; }
+:root[data-theme="sombre"] .leaflet-control-attribution.credits-carte a { color: #0065A9 !important; text-decoration: underline; }
 /* Carte étroite : on remonte la légende RLS pour qu'elle ne touche pas le bloc. */
 @media (max-width: 520px), (min-width: 861px) and (max-width: 1000px) {
   .leaflet-container .leaflet-control-attribution.credits-carte { font-size: 10px; }
@@ -728,7 +728,9 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
    Un 2e clic sur le même bouton retire le filtre et les 3 redeviennent foncés. */
 /* Les boutons peuvent revenir à la ligne sur les écrans très étroits. */
 .rls-btn { flex:1 1 86px; min-width:0; padding:8px 4px; box-sizing:border-box; border-radius:9px;
-  border:1.5px solid var(--c); background:var(--c); color:#fff; cursor:pointer;
+  border:1.5px solid var(--c);
+  /* Fond foncé à 78 % : texte blanc lisible (4,5:1 ou plus) sur toutes les couleurs de RLS. */
+  background:color-mix(in srgb, var(--c) 78%, #000); color:#fff; cursor:pointer;
   font-family:'Raleway',sans-serif; font-weight:700; font-size:11.5px; line-height:1.18;
   text-align:center; transition:background .15s ease,color .15s ease,opacity .15s ease; }
 .rls-btn:hover { filter:brightness(1.08); }
@@ -1514,13 +1516,6 @@ body.cmp-open { overflow:hidden; }
      par les lecteurs d'écran et par les moteurs de recherche, qui n'en trouvaient aucun
      jusqu'ici. Le texte décrit fidèlement ce que la page contient : pas de mots-clés
      ajoutés qui ne correspondraient à rien de visible. -->
-<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie-Est</h1>
-<p class="sr-only" id="page-desc">
-  Carte interactive des cliniques et points de service qui recrutent des médecins de famille
-  en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu :
-  coordonnées, type de clinique, réseau local de services, pratiques offertes, horaires et
-  personne-ressource pour le recrutement.
-</p>
 
 <!-- La liste des 61 cliniques qui vivait ici (bloc .sr-only, 18 août) a été RETIRÉE le 19 août
      2026 : elle dupliquait data.json à la main et devait être refaite à chaque changement. Le
@@ -1631,7 +1626,15 @@ body.cmp-open { overflow:hidden; }
   </div>
 </div>
 
-<div class="layout">
+<div class="layout" role="main">
+<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie-Est</h1>
+<p class="sr-only" id="page-desc">
+  Carte interactive des cliniques et points de service qui recrutent des médecins de famille
+  en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu :
+  coordonnées, type de clinique, réseau local de services, pratiques offertes, horaires et
+  personne-ressource pour le recrutement.
+</p>
+
   <div class="sidebar">
     <div class="sb-head">
       <button class="sb-close" id="sb-close" aria-label="Fermer la liste">&times;</button>

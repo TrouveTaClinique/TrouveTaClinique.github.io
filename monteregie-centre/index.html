@@ -304,7 +304,7 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   .docs-wrap { margin-top: 6px; }
 }
 .sb-head p { font-size: 13px; color: var(--muted); margin-top: 3px; font-weight: 300; }
-.sb-head .maj { font-size: 11px; font-style: italic; margin-top: 6px; opacity: .85; }
+.sb-head .maj { font-size: 11px; font-style: italic; margin-top: 6px; color: var(--texte); }
 .sb-search { position: relative; margin-top: 12px; }
 .sb-search-ic { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: .55; pointer-events: none; }
 .sb-search input { width: 100%; box-sizing: border-box; padding: 9px 32px 9px 30px; border: 1px solid var(--border); border-radius: 9px; font-family: var(--sq-font); font-size: 13.5px; background: var(--champ); color: var(--texte); }
@@ -810,7 +810,7 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   border:1.5px solid var(--c); color:var(--c); background:var(--champ); cursor:pointer; font-family: var(--sq-font); transition:all .15s; }
 .reg-chip:hover { opacity:.72; }
-.reg-chip.on { background:var(--c); color:#fff; }
+.reg-chip.on { background:color-mix(in srgb, var(--c) 78%, #000); color:#fff; }
 .rls-filter { margin-top:8px; width:100%; box-sizing:border-box; padding:8px 10px; border:1.5px solid var(--navy);
   border-radius:9px; font-family: var(--sq-font); font-size:13px; background:var(--champ); color:var(--texte); cursor:pointer; }
 .rls-filter:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(0,128,215,.16); }
@@ -837,7 +837,9 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
    ligne pour l'Est et le Centre partout, et deux lignes de deux pour l'Ouest sur les écrans
    étroits seulement. */
 .rls-btn { flex:1 1 86px; min-width:0; padding:8px 4px; box-sizing:border-box; border-radius:9px;
-  border:1.5px solid var(--c); background:var(--c); color:#fff; cursor:pointer;
+  border:1.5px solid var(--c);
+  /* Fond foncé à 78 % : texte blanc lisible (4,5:1 ou plus) sur toutes les couleurs de RLS. */
+  background:color-mix(in srgb, var(--c) 78%, #000); color:#fff; cursor:pointer;
   font-family: var(--sq-font); font-weight: 600; font-size:11.5px; line-height:1.18;
   text-align:center; transition:background .15s ease,color .15s ease,opacity .15s ease; }
 .rls-btn:hover { filter:brightness(1.08); }
@@ -1165,12 +1167,6 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
      par les lecteurs d'écran et par les moteurs de recherche, qui n'en trouvaient aucun
      jusqu'ici. Le texte décrit fidèlement ce que la page contient : pas de mots-clés
      ajoutés qui ne correspondraient à rien de visible. -->
-<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie-Centre</h1>
-<p class="sr-only" id="page-desc">
-  Carte interactive des cliniques, points de service et établissements de la Montérégie-Centre, dans
-  les réseaux locaux de services Champlain et Haut-Richelieu–Rouville. Pour chaque clinique : coordonnées, type de
-  milieu, pratiques offertes, horaires et personne-ressource pour le recrutement.
-</p>
 
 <!-- La liste des 61 cliniques qui vivait ici (bloc .sr-only, 18 août) a été RETIRÉE le 19 août
      2026 : elle dupliquait data.json à la main et devait être refaite à chaque changement. Le
@@ -1274,7 +1270,14 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
   </div>
 </div>
 
-<div class="layout">
+<div class="layout" role="main">
+<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie-Centre</h1>
+<p class="sr-only" id="page-desc">
+  Carte interactive des cliniques, points de service et établissements de la Montérégie-Centre, dans
+  les réseaux locaux de services Champlain et Haut-Richelieu–Rouville. Pour chaque clinique : coordonnées, type de
+  milieu, pratiques offertes, horaires et personne-ressource pour le recrutement.
+</p>
+
   <div class="sidebar">
     <div class="sb-head">
       <button class="sb-close" id="sb-close" aria-label="Fermer la liste">&times;</button>
@@ -4613,7 +4616,7 @@ html, body {
 #repertoire-territoire p { margin: .55rem 0; }
 #repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
 #repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
-#repertoire-territoire a { color: #0080d7; }
+#repertoire-territoire a { color: #0067ad; }
 #repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
 #repertoire-territoire .repertoire-suite { margin-top: .75rem; }
 </style>

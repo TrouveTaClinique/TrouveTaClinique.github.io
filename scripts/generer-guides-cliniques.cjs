@@ -18,6 +18,10 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   if (!header || !footer) throw new Error('Composants communs de l’accueil introuvables.');
   const scriptsCommuns = accueil.slice(accueil.indexOf('</footer>') + '</footer>'.length, accueil.lastIndexOf('</body>'));
   const categories = [...new Set(ressources.map(r => r.cat))];
+  /* Date de la vérification de liens la plus récente, affichée dans l'avertissement. */
+  const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const derniere = ressources.map(r => r.verifie).filter(Boolean).sort().pop();
+  const dateVerif = derniere ? `${Number(derniere.slice(8, 10))}${derniere.slice(8, 10) === '01' ? '<sup>er</sup>' : ''} ${MOIS[Number(derniere.slice(5, 7)) - 1]} ${derniere.slice(0, 4)}` : '';
   const titres = [];
   const sections = categories.map((cat, index) => {
     const entries = ressources.map((r, i) => ({...r, id:i})).filter(r => r.cat === cat);
@@ -74,7 +78,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     isPartOf: { '@type': 'WebSite', name: 'Trouve ta clinique', url: 'https://trouvetaclinique.ca/' },
     mainEntity: { '@type': 'ItemList', numberOfItems: ressources.length }
   }).replace(/</g, '\\u003c')}</script>
-  <link rel="icon" type="image/png" href="/assets/logo-banniere.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
   <link rel="stylesheet" href="/assets/guides-cliniques.css?v=92-guides-aiguillage">
@@ -90,6 +94,7 @@ ${header.replace(/ aria-current="page"/g, '')}
     <p class="eyebrow">Médecine familiale · Première ligne</p>
     <h1>Guides pratiques et ressources cliniques</h1>
     <p class="lead">Retrouvez les guides de pratique, algorithmes et ressources utiles à la médecine familiale, puis consultez directement leur site d’origine.</p>
+    <p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.${dateVerif ? ` Liens vérifiés le ${dateVerif}.` : ''} Ce catalogue ne remplace pas le jugement clinique.</p>
   </section>
   <section class="guides-band guides-band--green guides-search" aria-labelledby="guides-search-title">
     <h2 id="guides-search-title">Quelle ressource cherchez-vous&nbsp;?</h2>

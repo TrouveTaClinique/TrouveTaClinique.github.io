@@ -34,11 +34,15 @@ const EXTENSIONS = new Set([
 ]);
 const TEXTE = new Set(['.html', '.css', '.js', '.json', '.webmanifest', '.svg']);
 
+/* Fichiers de travail jamais publiés, même dans un dossier autorisé (audit du 25 septembre 2026). */
+const EXCLUS = new Set(['assets/source', 'assets/banniere_qr.png']);
+
 function lister(racine, relatif = '') {
   const resultat = [];
   for (const entree of fs.readdirSync(path.join(racine, relatif), { withFileTypes: true })) {
     if (entree.name.startsWith('.')) continue;
     const fichier = path.posix.join(relatif, entree.name);
+    if (EXCLUS.has(fichier)) continue;
     if (!relatif && !DOSSIERS.has(entree.name) && !FICHIERS.has(entree.name)) continue;
     if (entree.isSymbolicLink()) throw new Error('Lien symbolique interdit : ' + fichier);
     if (entree.isDirectory()) resultat.push(...lister(racine, fichier));

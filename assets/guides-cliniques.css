@@ -7,6 +7,7 @@
 .guides-intro .eyebrow{font-size:.86rem;letter-spacing:.1em}
 .guides-intro h1{font-size:clamp(2.2rem,4.2vw,4rem);line-height:1.1;max-width:none}
 .guides-intro .lead{font-size:clamp(1.15rem,1vw + .9rem,1.4rem);line-height:1.58;max-width:74ch;margin:0}
+.guides-avis{margin:1rem 0 0;max-width:74ch;font-size:.95rem;line-height:1.55;color:var(--navy);border-left:3px solid var(--teal);padding-left:.8rem}
 .guides-band h2{font-size:clamp(1.8rem,2vw + 1rem,2.65rem);line-height:1.16;margin:0 0 1.2rem;font-weight:700}
 .guides-search-form.search-page-form{max-width:none;gap:.8rem;margin:1.45rem 0 0}
 .guides-search-form.search-page-form input[type="search"]{flex-basis:15rem;min-height:60px;border-color:rgba(6,156,156,.4);font-size:1.12rem;padding-inline:1.4rem}
@@ -33,7 +34,7 @@
 .guides-ia-erreur{border-left:4px solid #b3261e}
 .guides-ia .guides-resource-link{height:auto;padding-bottom:.5rem}
 .guides-ia-raison{margin:0 0 1.2rem;padding:0 4.6rem 0 .15rem;font-size:.97rem;line-height:1.55}
-.guides-ia-raison strong{color:var(--teal)}
+.guides-ia-raison strong{color:var(--teal-texte)}
 .guides-ia-pied{font-size:.88rem;opacity:.75;margin:.8rem 0 0}
 .guides-page .guides-ia-form :is(textarea,button):focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .guides-status{margin:1.25rem 0 0;font-size:.96rem;font-weight:600}
@@ -45,7 +46,7 @@
 .guides-resource-source{display:block;font-size:.9rem;font-weight:650;color:var(--navy);opacity:.75;margin-bottom:.4rem}
 .guides-resource h3{font-size:clamp(1.16rem,.5vw + 1rem,1.38rem);line-height:1.35;margin:0 0 .6rem;text-wrap:pretty}
 .guides-keywords{display:block;font-size:.94rem;line-height:1.6;color:var(--navy);opacity:.7}
-.guides-resource-arrow{position:absolute;right:.25rem;top:1.2rem;font-size:1.5rem;color:var(--teal);line-height:1}
+.guides-resource-arrow{position:absolute;right:.25rem;top:1.2rem;font-size:1.5rem;color:var(--teal-texte);line-height:1}
 .guides-resource-link:hover h3{text-decoration:underline;text-underline-offset:4px}
 .guides-resource-link:hover{background:var(--teal-pale)}
 .guides-band--green .guides-resource-link:hover{background:rgba(255,255,255,.55)}

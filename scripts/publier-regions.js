@@ -685,7 +685,7 @@ html, body {
 #repertoire-territoire p { margin: .55rem 0; }
 #repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
 #repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
-#repertoire-territoire a { color: #0080d7; }
+#repertoire-territoire a { color: #0067ad; }
 #repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
 #repertoire-territoire .repertoire-suite { margin-top: .75rem; }
 </style>`;
