@@ -148,11 +148,11 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=99-app-guides">
-  <script src="/assets/guides-recherche.js?v=99-app-guides" defer></script>
-  <script src="/assets/guides-cliniques.js?v=99-app-guides" defer></script>
-  <script src="/assets/guides-installer.js?v=99-app-guides" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=99-app-guides" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=100-ia-catalogue-complet">
+  <script src="/assets/guides-recherche.js?v=100-ia-catalogue-complet" defer></script>
+  <script src="/assets/guides-cliniques.js?v=100-ia-catalogue-complet" defer></script>
+  <script src="/assets/guides-installer.js?v=100-ia-catalogue-complet" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=100-ia-catalogue-complet" defer></script>` : ''}
 </head>
 <body class="guides-page">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

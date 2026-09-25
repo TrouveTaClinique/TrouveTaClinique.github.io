@@ -6,11 +6,13 @@ jamais le dossier `workers/`.
 
 ## Ce qu'il fait
 
-1. La page présélectionne jusqu'à 40 guides avec le moteur de recherche du site
-   (`assets/guides-recherche.js`) et les envoie avec la question.
-2. Le service ne garde que les adresses présentes dans le catalogue publié
-   (`/guides/donnees.json` du site qui pose la question : production ou aperçu).
-3. Claude Sonnet 5 choisit au plus 5 de ces guides et donne une raison courte pour chacun.
+1. Le service lit le catalogue publié (`/guides/donnees.json` du site qui pose la question :
+   production ou aperçu) et le donne **en entier** à Claude Sonnet 5, une ligne par ressource
+   (environ 29 000 jetons, mis en cache une heure chez Anthropic).
+2. La page envoie aussi les 15 meilleurs résultats de son moteur de mots-clés
+   (`assets/guides-recherche.js`), à titre d'indice seulement : un guide que ce moteur a raté
+   (« essoufflement et œdème » pour l'insuffisance cardiaque) reste trouvable.
+3. Claude choisit au plus 5 ressources et donne une raison courte pour chacune.
    Consigne : ne jamais répondre à la question clinique elle-même.
 4. Le service renvoie les titres et les liens tirés du catalogue, jamais écrits par l'IA.
 
@@ -18,7 +20,9 @@ Aucune question n'est journalisée ni conservée par le service.
 
 ## Coûts et plafond
 
-- Environ 1 ¢ US par question avec Sonnet 5 (lecture d'au plus 40 guides).
+- Environ 2 ¢ US par question avec Sonnet 5 quand le catalogue est en cache (lecture en cache
+  à 10 % du prix, plus la réponse) ; l'écriture du cache coûte environ 12 ¢ par heure d'activité.
+  Ordre de grandeur : un millier de questions pour 20 $.
 - Le plafond est fixé chez Anthropic : crédits prépayés **sans recharge automatique**. Quand ils
   sont épuisés, la boîte affiche « Le service d'IA a atteint son budget » et la recherche
   normale continue de fonctionner.

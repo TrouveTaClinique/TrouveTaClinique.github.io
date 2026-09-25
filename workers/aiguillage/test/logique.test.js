@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  traiter, indexerCatalogue, retenirCandidats, construireRequete, interpreterReponse,
+  traiter, indexerCatalogue, retenirCandidats, construireRequete, interpreterReponse, listerCatalogue,
   CANDIDATS_MAX, GUIDES_MAX, SCHEMA
 } from '../src/logique.js';
 
@@ -41,21 +41,39 @@ test('candidats : adresses inconnues, doublons et excédent écartés', () => {
   assert.deepEqual(retenirCandidats('pas une liste', PAR_URL), []);
 });
 
-test('requête Sonnet 5 : sortie JSON, effort bas, sans repli ni cache', () => {
-  const r = construireRequete({ modele: 'claude-sonnet-5', candidats: retenirCandidats([CATALOGUE[3].url], PAR_URL), question: 'otite' });
+const LISTE = [...PAR_URL.values()];
+
+test('requête Sonnet 5 : catalogue complet mis en cache, présélection en indice, sortie JSON', () => {
+  const r = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [3, 7], question: 'otite' });
   assert.equal(r.model, 'claude-sonnet-5');
-  assert.deepEqual(r.output_config, { format: { type: 'json_schema', schema: SCHEMA }, effort: 'low' });
+  assert.deepEqual(r.output_config, { format: { type: 'json_schema', schema: SCHEMA }, effort: 'medium' });
   assert.equal(r.fallbacks, undefined);
   assert.equal(r.betas, undefined);
-  assert.match(r.messages[0].content, /^Ressources proposées.*\n0 \| Guide 3 \| INESSS \| Catégorie \| otite enfant/s);
-  assert.match(r.messages[0].content, /<question>otite<\/question>$/);
+  const [consignes, catalogue] = r.system;
+  assert.equal(consignes.cache_control, undefined);
+  assert.deepEqual(catalogue.cache_control, { type: 'ephemeral', ttl: '1h' });
+  assert.match(catalogue.text, /\n3 \| Guide 3 \| INESSS \| Catégorie \| otite enfant/);
+  assert.match(catalogue.text, /\n59 \| Guide 59 /);
+  assert.match(r.messages[0].content, /^Présélection du moteur de mots-clés \(indice seulement\) : 3, 7\n\n<question>otite<\/question>$/);
+});
+
+test('requête : le catalogue ne dépend pas de la question (cache stable)', () => {
+  const a = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [1], question: 'otite' });
+  const b = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [], question: 'autre chose' });
+  assert.deepEqual(a.system, b.system);
+  assert.match(b.messages[0].content, /rien présélectionné/);
+});
+
+test('catalogue : ligne propre aux ressources communautaires', () => {
+  const liste = [...indexerCatalogue([{ title: 'Abri', url: 'https://a.ca', cat: 'Ressources communautaires', type: 'communautaire', rubriques: ['Hébergement · Femmes'], ville: 'Longueuil', pourQui: '18 ans et plus' }]).values()];
+  assert.equal(listerCatalogue(liste), '0 | Abri | Ressource communautaire : Hébergement · Femmes | Longueuil | 18 ans et plus');
 });
 
 test('requête Opus 5 : repli automatique ; Haiku 4.5 : sans effort', () => {
-  const opus = construireRequete({ modele: 'claude-opus-5', candidats: [], question: 'x' });
+  const opus = construireRequete({ modele: 'claude-opus-5', catalogue: LISTE, question: 'x' });
   assert.deepEqual(opus.betas, ['server-side-fallback-2026-07-01']);
   assert.equal(opus.fallbacks, 'default');
-  const haiku = construireRequete({ modele: 'claude-haiku-4-5', candidats: [], question: 'x' });
+  const haiku = construireRequete({ modele: 'claude-haiku-4-5', catalogue: LISTE, question: 'x' });
   assert.equal(haiku.output_config.effort, undefined);
 });
 
@@ -94,22 +112,23 @@ test('HTTP : limite de requêtes atteinte', async () => {
   assert.equal(r.status, 429);
 });
 
-test('HTTP : aucun candidat valide, donc aucun appel au modèle', async () => {
+test('HTTP : sans présélection valide, le modèle cherche quand même dans tout le catalogue', async () => {
   const d = deps();
   const r = await traiter(requete({ question: 'otite enfant', candidats: ['https://ailleurs.com/x'] }), {}, d);
   assert.equal(r.status, 200);
-  assert.equal(d.appels.length, 0);
-  assert.equal((await r.json()).guides.length, 0);
+  assert.equal(d.appels.length, 1);
+  assert.match(d.appels[0].messages[0].content, /rien présélectionné/);
+  assert.deepEqual((await r.json()).guides.map(g => g.titre), ['Guide 1']);
 });
 
-test('HTTP : parcours complet, titres et liens tirés du catalogue', async () => {
-  const d = deps();
+test('HTTP : parcours complet, numéros du catalogue complet, titres et liens tirés du catalogue', async () => {
+  const d = deps({ appelerModele: async params => { d.appels.push(params); return reponseModele({ guides: [{ numero: 42, raison: 'Couvre le sujet.' }], message: '' }); } });
   const r = await traiter(requete({ question: '  otite   chez un enfant ', candidats: [CATALOGUE[0].url, CATALOGUE[7].url] }), { MODELE: 'claude-sonnet-5' }, d);
   assert.equal(r.status, 200);
   assert.equal(r.headers.get('Access-Control-Allow-Origin'), ORIGINE);
   const corps = await r.json();
-  assert.deepEqual(corps.guides.map(g => [g.titre, g.url]), [['Guide 7', 'https://exemple.ca/g7']]);
-  assert.match(d.appels[0].messages[0].content, /<question>otite chez un enfant<\/question>/);
+  assert.deepEqual(corps.guides.map(g => [g.titre, g.url]), [['Guide 42', 'https://exemple.ca/g42']]);
+  assert.match(d.appels[0].messages[0].content, /indice seulement\) : 0, 7\n\n<question>otite chez un enfant<\/question>/);
 });
 
 test('HTTP : erreur du service transmise proprement', async () => {

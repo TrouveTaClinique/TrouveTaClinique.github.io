@@ -70,8 +70,10 @@ dates du sitemap selon le contenu réel des pages).
 - Recherche : `assets/guides-recherche.js` (synonymes `GROUPES`, concepts `CONCEPTS`), testée
   par `scripts/test-recherche-guides.cjs`.
 - Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5, crédits prépayés de
-  20 $ sans recharge). L'IA suggère des guides ou des organismes du catalogue, elle ne répond jamais
-  à la question clinique (décision du propriétaire).
+  20 $ sans recharge). L'IA reçoit tout le catalogue (une ligne par ressource, mis en cache une
+  heure) ; la présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
+  des organismes du catalogue, elle ne répond jamais à la question clinique (décision du
+  propriétaire). Le Worker se déploie depuis `main` (Cloudflare Workers Builds).
 
 ## Divers
 

@@ -4,7 +4,7 @@
 // Fichiers statiques : cache d'abord, rafraîchi en arrière-plan.
 'use strict';
 
-const CACHE = 'ttc-guides-v1';
+const CACHE = 'ttc-guides-v2';
 const PAGE = '/guides/';
 const PRECHARGE = [
   '/guides/',

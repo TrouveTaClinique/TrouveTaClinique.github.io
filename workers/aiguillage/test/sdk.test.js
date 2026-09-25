@@ -48,8 +48,11 @@ test('Sonnet 5 : requête envoyée au bon point d’accès, réponse traduite', 
   assert.equal(appels[0].entetes.get('x-api-key'), 'sk-test');
   assert.equal(appels[0].corps.model, 'claude-sonnet-5');
   assert.equal(appels[0].corps.output_config.format.type, 'json_schema');
-  assert.equal(appels[0].corps.output_config.effort, 'low');
+  assert.equal(appels[0].corps.output_config.effort, 'medium');
   assert.equal(appels[0].corps.fallbacks, undefined);
+  /* Catalogue complet dans le prompt système, mis en cache une heure. */
+  assert.deepEqual(appels[0].corps.system[1].cache_control, { type: 'ephemeral', ttl: '1h' });
+  assert.match(appels[0].corps.system[1].text, /\n1 \| Allergie aux pénicillines \| INESSS/);
 });
 
 test('Opus 5 : repli automatique par l’en-tête bêta, pas dans le corps', { skip: !worker && 'SDK non installé' }, async () => {
