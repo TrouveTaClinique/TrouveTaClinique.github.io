@@ -98,7 +98,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     }).join('\n');
     return `<section class="guides-band guides-category${index % 2 ? '' : ' guides-band--green'}" id="${ancre(cat)}" aria-labelledby="guides-category-${index}">
       <div class="guides-category-heading"><h2 id="guides-category-${index}">${esc(cat)}</h2><span class="compte" aria-label="${entries.length} ressource${entries.length > 1 ? 's' : ''}">${entries.length}</span></div>
-      ${cat === SUJET_COMMUNAUTAIRE ? `<p class="guides-comm-note">Organismes surtout de l’agglomération de Longueuil, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a>. Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>).</p>` : ''}
+      ${cat === SUJET_COMMUNAUTAIRE ? `<p class="guides-comm-note">Organismes de l’agglomération de Longueuil, de la région de Saint-Hyacinthe et de la Vallée-du-Richelieu, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a> et des répertoires des corporations de développement communautaire (CDC). La mention « hors territoire » signale un organisme situé hors de la Montérégie‑Est. Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>).</p>` : ''}
       <ul class="guides-resource-list">${cards}</ul>
     </section>`;
   }).join('\n');
@@ -187,7 +187,7 @@ ${header.replace(/ aria-current="page"/g, '')}
     </div>
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${ressources.length} ressources dans le catalogue</p>
     <div class="guides-communautaire" hidden>
-      <p><strong>Ressources communautaires :</strong> les organismes du catalogue viennent surtout de l’agglomération de Longueuil (bottin 2023). Téléphonez avant de diriger quelqu’un.</p>
+      <p><strong>Ressources communautaires :</strong> les organismes du catalogue couvrent surtout l’agglomération de Longueuil, la région de Saint-Hyacinthe et la Vallée-du-Richelieu. Téléphonez avant de diriger quelqu’un.</p>
       <p>Ailleurs en Montérégie, le 211 répertorie les organismes près de chez vous : composez le <a href="tel:211">2-1-1</a> ou consultez <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211qc.ca<span class="visually-hidden"> (nouvel onglet)</span></a>.<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.</p>
     </div>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toutes les ressources ci-dessous.</p></noscript>

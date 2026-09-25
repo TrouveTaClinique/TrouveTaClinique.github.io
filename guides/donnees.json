@@ -2313,7 +2313,7 @@
     "title": "Centre Hospitalier Charles-Lemoyne",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Urgence et lignes d’écoute Greenfield Park crise ligne détresse ressource communautaire organisme",
+    "tags": "Urgence et lignes d’écoute Greenfield Park crise ligne détresse ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=14&fiche=centre-hospitalier-charles-lemoyne",
     "desc": "Urgence générale. Soins hospitaliers. Urgence psychiatrique. Clinique de suivi externe.",
     "verifie": "2026-09-25",
@@ -2322,7 +2322,7 @@
     "rubriques": [
       "Urgence et lignes d’écoute"
     ],
-    "ville": "Greenfield Park",
+    "ville": "Greenfield Park (hors territoire)",
     "adresse": "3120, boulevard Taschereau, Greenfield Park",
     "telephone": "(450) 466-5000 - général (450) 466-5050 - urgence (450) 466-5020 - psychiatrie",
     "pourQui": "Toute personne ayant des troubles de santé physique ou d’ordre psychiatrique",
@@ -2357,7 +2357,7 @@
     "title": "Clinique Médicale de la Mission Old Brewery",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Urgence et lignes d’écoute Montréal crise ligne détresse ressource communautaire organisme",
+    "tags": "Urgence et lignes d’écoute Montréal crise ligne détresse ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=14&fiche=clinique-medicale-de-la-mission-old-brewery",
     "desc": "clinique médicale sans rendez-vous adaptée aux besoins des hommes et des femmes sans-abri de Montréal.",
     "verifie": "2026-09-25",
@@ -2366,7 +2366,7 @@
     "rubriques": [
       "Urgence et lignes d’écoute"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "906, boulevard Saint-Laurent, Montréal",
     "telephone": "(514) 866-6591 poste 226",
     "pourQui": "Personnes sans-abri de Montréal en quête de soins de santé",
@@ -2493,7 +2493,7 @@
     "title": "Abri de l’Espoir",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=18",
     "desc": "Soixante lits disponibles pour des séjours variant d’une nuitée à vingt-quatre mois. L’hébergement inclut les repas, les soins de base, un soutien moral, un service bilingue et davantage.",
     "verifie": "2026-09-25",
@@ -2502,7 +2502,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 934-5615",
     "pourQui": "Femme en difficulté, 18 ans et +, avec ou sans enfant",
@@ -2537,7 +2537,7 @@
     "title": "Le Chaînon",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://lechainon.org/",
     "desc": "Hébergement de nuit (de 16-30 h à 10 h), souper et déjeuner sont servis Lunch pour emporter lors du départ. Les services ponctuels incluent des soins de santé, de référence, d’hygiène et d’entretien de vêtements. Hébergement de plusieurs jours à plusieurs mois disponibles.",
     "verifie": "2026-09-25",
@@ -2546,7 +2546,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "4373, avenue de l'Esplanade, Montréal",
     "telephone": "(514) 845-0151",
     "pourQui": "18 ans et plus, sans enfant",
@@ -2559,7 +2559,7 @@
     "title": "La Rue des Femmes",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://www.laruedesfemmes.org/",
     "desc": "Centre de jour et hébergement d'urgence pour femmes en situation d'itinérance. Centre de jour: repas, espace de repos et soins de santé relationnelle. Soutien, relation d'aide, intervention en situation de crise, consultation individuelle, référence et accompagnement. Soutien pour l'obtention de la carte d'assurance-maladie pour les personnes en situation d'itinérance qui fréquentent l'organisme et dont l'organisme peut confirmer l'identité. Distribution de produits d'hygiène menstruelle. Récupération et redistribution de dons matériels: vêtements, produits d'hygiène et de soins personnels, sacs de couchage, etc. Hébergement à court, moyen ou long terme et lits d'urgence",
     "verifie": "2026-09-25",
@@ -2568,7 +2568,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1050 rue Jeanne-Mance, Montréal",
     "telephone": "(514) 284-9665",
     "pourQui": "Femmes en situation d’itinérance ou en difficulté",
@@ -2581,7 +2581,7 @@
     "title": "Pavillon Marguerite de Champlain",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Saint-Hubert refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Saint-Hubert refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://www.pavillonmarguerite.com/",
     "desc": "Hébergement 2 mois maximum, gratuit. Service téléphonique 24 heures et 7 jours sur 7 (consultation, écoute active, référence), intervention en cas de crise, réception et évaluation, information, intervention psychosociale individuelle, de groupe et familiale, intervention éducative de groupe, sensibilisation et prévention, accompagnement, groupes de parents, intervention et animation auprès des enfants.",
     "verifie": "2026-09-25",
@@ -2590,7 +2590,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "Saint-Hubert",
     "telephone": "(450) 656-1946",
     "pourQui": "Femmes victimes de violence conjugale, avec ou sans enfant.",
@@ -2603,7 +2603,7 @@
     "title": "Pavillon Patricia Mackenzie",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=19",
     "desc": "Lit, nourriture et vêtement, séjour illimité, Frais de séjour mensuels en fonction du revenu de la personne (de $200 à $450), admissions sur place ou au téléphone en fonction des places disponibles, accompagnement psychosocial.",
     "verifie": "2026-09-25",
@@ -2612,7 +2612,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1301 de Maisonneuve Est, Montréal",
     "telephone": "(514) 526-6446",
     "pourQui": "Femmes de 18 ans et plus",
@@ -2625,7 +2625,7 @@
     "title": "La Maison du Père",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme",
+    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme hors territoire",
     "url": "https://maisondupere.org/",
     "desc": "Réponse au besoin de base (manger, se laver, dormir). Intervenants à disposition pour écoute ou référencement. Service de halte-chaleur les jours de grands froids et de centre de jour lors de périodes de canicule.",
     "verifie": "2026-09-25",
@@ -2634,7 +2634,7 @@
     "rubriques": [
       "Hébergement · Hommes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "550, René-Lévesque est, Montréal",
     "telephone": "(514) 845-0168 poste 360",
     "pourQui": "Hommes de 25 ans et plus",
@@ -2647,7 +2647,7 @@
     "title": "Mission Bon Accueil",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme",
+    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme hors territoire",
     "url": "https://missionbonaccueil.com/",
     "desc": "Gîte, repas et douche, vêtements distribués les mardis et vendredi après le souper, 15 jours / mois, gratuit.",
     "verifie": "2026-09-25",
@@ -2656,7 +2656,7 @@
     "rubriques": [
       "Hébergement · Hommes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1490, rue St-Antoine ouest, Montréal",
     "telephone": "(514) 935-6396",
     "pourQui": "18 ans et plus",
@@ -2669,7 +2669,7 @@
     "title": "O.B.M. (Old Brewery Mission)",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme",
+    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme hors territoire",
     "url": "https://www.missionoldbrewery.ca/fr",
     "desc": "Ensemble de pavillons fournissant refuge, logement, vêtements et repas.",
     "verifie": "2026-09-25",
@@ -2678,7 +2678,7 @@
     "rubriques": [
       "Hébergement · Hommes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "902, boulevard Saint-Laurent, Montréal",
     "telephone": "(514) 866-6591",
     "pourQui": "Personne de 18 ans et plus en situation d’itinérance",
@@ -2713,7 +2713,7 @@
     "title": "Maison du Goéland",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Mixte Appartements supervisés Saint-Constant refuge gîte sans-abri itinérance maison d’hébergement appartement supervisé logement de transition ressource communautaire organisme",
+    "tags": "Hébergement Mixte Appartements supervisés Saint-Constant refuge gîte sans-abri itinérance maison d’hébergement appartement supervisé logement de transition ressource communautaire organisme hors territoire",
     "url": "https://lamaisongoeland.com/",
     "desc": "Hébergement, intervenants sur place. Frais selon le revenu.",
     "verifie": "2026-09-25",
@@ -2723,7 +2723,7 @@
       "Hébergement · Mixte",
       "Appartements supervisés"
     ],
-    "ville": "Saint-Constant",
+    "ville": "Saint-Constant (hors territoire)",
     "adresse": "Saint-Constant",
     "telephone": "(450) 845-1700",
     "pourQui": "Personnes de 18 et plus ayant un problème de santé mentale",
@@ -2758,7 +2758,7 @@
     "title": "Baluchon",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Saint-Hubert refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Saint-Hubert refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme hors territoire",
     "url": "https://www.maisonlebaluchon.org/",
     "desc": "Hébergement 24/7 jusqu’à 60 jours pour les jeunes de 12 à 17 ans – 9 places. Repas et intervenant sur place. Frais d’admission de 50$. Frais d’hébergement de 7$/jour et dépôt de 20$. Suivi individuel, familial et de groupe; Soutien et accompagnement dans les démarches; Information et références; Prévention et sensibilisation; Ateliers éducatifs, culturels et sportifs; Activités diversifiées; Implication communautaire et promotion des droits des jeunes; Suivi en post-hébergement. Hébergement en appartements supervisés d’une durée de 6 mois renouvelable jusqu’à un maximum de 3 ans pour les jeunes de 16 à 23 ans – 15 places. Frais d’hébergement de 300$/mois ou 25% du revenu et dépôt de 100$. Suivi individuel et de groupe; Soutien et accompagnement dans les démarches; Information et références; Prévention et sensibilisation; Ateliers éducatifs sur les saines habitudes de vie; Implication communautaire et promotion des droits des jeunes; Suivi en post-hébergement.",
     "verifie": "2026-09-25",
@@ -2767,7 +2767,7 @@
     "rubriques": [
       "Hébergement · Jeunes"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "2290 avenue Saint-Joseph, Ste-Hyacinthe (47,9 km de Saint-Hubert)",
     "telephone": "(450) 773-8818 ou 1-866-263-8794",
     "pourQui": "Jeunes en difficulté et sans-abri ou à risque de le devenir âgés de 12 à 23 ans",
@@ -2780,7 +2780,7 @@
     "title": "Le Bunker",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=22",
     "desc": "Lit, repas chauds, douche, lavage de vêtements. Intervenants sur place (accueil, écoute, référence, accompagnement), gratuit.",
     "verifie": "2026-09-25",
@@ -2789,7 +2789,7 @@
     "rubriques": [
       "Hébergement · Jeunes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 524-0029 ou 1-888-520-7677",
     "pourQui": "12 à 21 ans",
@@ -2802,7 +2802,7 @@
     "title": "En Marge",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Appartements supervisés Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse appartement supervisé logement de transition ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Appartements supervisés Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse appartement supervisé logement de transition ressource communautaire organisme hors territoire",
     "url": "https://www.enmarge1217.ca/",
     "desc": "Hébergement de dépannage de 3 jours, gratuit, pour les jeunes en fugue, mis à la porte, en rupture de liens, se retrouvant dans les rues de Montréal. Ce gîte permet, avec l’aide d’un intervenant, de faire le point sur la situation de crise, afin de rétablir un pont avec le milieu d’origine, autant que possible. Suite à l’hébergement de dépannage, possibilité d’une nuit d’hébergement tous les sept jours. Hébergement court terme 16-17 ans et logement social 16- 22 ans aussi possible.",
     "verifie": "2026-09-25",
@@ -2812,7 +2812,7 @@
       "Hébergement · Jeunes",
       "Appartements supervisés"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1151, rue Alexandre-DeSève, Montréal",
     "telephone": "(514) 849-7117",
     "pourQui": "12 à 17 ans",
@@ -2825,7 +2825,7 @@
     "title": "Refuge des Jeunes de Montréal",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme hors territoire",
     "url": "https://www.refugedesjeunes.org/",
     "desc": "Gîte temporaire, 45 lits, repas (souper et déjeuner), dépannage alimentaire, produit d’hygiène personnelle et vêtements, service de premiers soins (infirmier 2 fois/semaine), référence, accompagnement (diverses démarches dont immigration) et programme de pré-employabilité. Autres services : aide pour obtention de carte d’aide sociale et assurance-maladie, aide pour obtention d’un chèque d’aide sociale, budgétisation, billet d’autobus, entreposage d’effets personnels, accès téléphone, courrier et messages. Logement sociaux avec soutien communautaire.",
     "verifie": "2026-09-25",
@@ -2834,7 +2834,7 @@
     "rubriques": [
       "Hébergement · Jeunes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1836 rue Sainte-Catherine Est, Montréal",
     "telephone": "(514) 849-4221 poste 2 ou 1-877-849-4221",
     "pourQui": "Jeunes hommes sans-abri de 17 à 26 ans",
@@ -2847,7 +2847,7 @@
     "title": "L’Arrêt-Source",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://www.arretsource.org/",
     "desc": "Hébergement collectif (1ère étape) 24/7 avec présence d’intervenantes, appartement transitoire (2e étape) pour femmes provenant d’une maison 1ère et 2e étape, suivi post-hébergement et services externes pour les femmes (avec ou sans enfant) ayant besoin d’aide sans nécessiter un hébergement.",
     "verifie": "2026-09-25",
@@ -2856,7 +2856,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 383-2335",
     "pourQui": "Jeunes femmes violentées de 18 à 30 ans",
@@ -2869,7 +2869,7 @@
     "title": "Auberge Madeleine",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://www.aubergemadeleine.org/",
     "desc": "Hébergement offrant des séjours de quelques semaines à quelques mois en réponse aux besoins immédiats. Gratuit. Soutien, intervention, référence. Accompagnement dans les démarches, suivi post-hébergement. 24/7.",
     "verifie": "2026-09-25",
@@ -2878,7 +2878,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 597-1499",
     "pourQui": "Femmes seules de 18 ans et plus en situation d’itinérance",
@@ -2891,7 +2891,7 @@
     "title": "Logifem",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://logifem.org/",
     "desc": "Hébergement temporaire, 13 $ par jour, 400 $ par mois pour une chambre individuelle (50 $ par enfant de plus de 6 mois), 1 an maximum. Repas, téléphone et Internet fournis. Intervenantes accessibles 24/7. Suivi, intervention, écoute et activités.",
     "verifie": "2026-09-25",
@@ -2900,7 +2900,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 939-3172",
     "pourQui": "Femmes de 18 ans à 65 ans, seule ou avec enfant de moins de 12 ans",
@@ -2913,7 +2913,7 @@
     "title": "Maison Dauphinelle",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://ladauphinelle.org/",
     "desc": "Hébergement de 8 semaines, 3 repas fournis, accompagnement psychosocial individualisé. Participation financière de 5 $ par jour pour les femmes hébergées (possibilité de s’ajuster si sans revenu). Logement sécuritaire et transitoire de 2e étape.",
     "verifie": "2026-09-25",
@@ -2922,7 +2922,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 598-7779",
     "pourQui": "Femmes victimes de violence ou en difficulté, avec ou sans enfant",
@@ -2935,7 +2935,7 @@
     "title": "Maison de l’Ancre",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://www.lesmaisonsdelancre.org/",
     "desc": "Foyer de groupe séjour 6 mois à 2 ans, supervision 24/7. Hébergement long terme subventionné à 25 % du revenu avec soutien communautaire. Suivi externe et post-hébergement (budget, entretien du logement, relations saines, réinsertion sociale, dépendance) ce service de suivi externe est également offert gratuitement aux femmes n’ayant pas eu recours à l’hébergement et qui nécessitent des besoins de suivis individuels.",
     "verifie": "2026-09-25",
@@ -2944,7 +2944,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 374-5573",
     "pourQui": "Femmes seules en difficulté de 18 ans et plus",
@@ -2957,7 +2957,7 @@
     "title": "La Maison Grise de Montréal",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://lamaisongrise.org/",
     "desc": "Hébergement à moyen terme de 24 mois maximum, 25 % du revenu, sans repas, plus les frais d’électricité et les services, incluant un suivi psychosocial hebdomadaire poursuivant un objectif d’autonomisation. Services externes, Consultation, Groupe de soutien, Art-thérapie, post- hébergement.",
     "verifie": "2026-09-25",
@@ -2966,7 +2966,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 722-0009",
     "pourQui": "Femmes de 18 ans et plus, seules ou avec un bébé de 2 ans et moins, victimes de violence sous toutes ses formes et vivant de multiples problématiques sociales.",
@@ -2979,7 +2979,7 @@
     "title": "Maison Marguerite de Montréal",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://maisonmarguerite.com/",
     "desc": "Hébergement et repas, jusqu’à 6 semaines. Soutien psychosocial et possibilité de suivi post- hébergement. Les services sont gratuits. Studio de transition avec suivi psychosocial. Infos, références.",
     "verifie": "2026-09-25",
@@ -2988,7 +2988,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 932-2250",
     "pourQui": "Femmes en difficulté de 18 ans et plus, sans enfant",
@@ -3001,7 +3001,7 @@
     "title": "Maison Simonne-Monet-Chartrand",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Chambly refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Chambly refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://www.maisonsmc.org/fr",
     "desc": "Hébergement, soutien et accompagnement, suivis individuels, ateliers de groupe, services mères-enfants, suivis post-hébergement, suivis externes individuels, groupe de soutien, sensibilisation, informations, références, écoute téléphonique.",
     "verifie": "2026-09-25",
@@ -3010,7 +3010,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Chambly",
+    "ville": "Chambly (hors territoire)",
     "adresse": "Chambly",
     "telephone": "(450) 658-9780",
     "pourQui": "Femmes victimes de violence conjugale, avec enfant.",
@@ -3023,7 +3023,7 @@
     "title": "Nisa Homes – Rive-Sud",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=26",
     "desc": "Maison de transition dans un milieu sécurisé. Durée du séjour au cas par cas allant de 1 à 3 mois Accompagnement émotionnel, psychologique, physique et spirituel.",
     "verifie": "2026-09-25",
@@ -3032,7 +3032,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "1-888-456-8043",
     "pourQui": "Femmes sans ou avec enfants âgés de 12 ans et moins victimes de violence conjugale, en situation d’itinérance ou de pauvreté",
@@ -3045,7 +3045,7 @@
     "title": "Secours aux Femmes",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme",
+    "tags": "Hébergement Femmes Montréal refuge gîte sans-abri itinérance maison d’hébergement femme ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=26&fiche=secours-aux-femmes",
     "desc": "Hébergement. Référence et informations. Écoute, consultation téléphonique et externe. Suivi post-hébergement et accompagnement. Interprétariat. Sensibilisation et prévention. 24/7.",
     "verifie": "2026-09-25",
@@ -3054,7 +3054,7 @@
     "rubriques": [
       "Hébergement · Femmes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 593-6353",
     "pourQui": "Femmes victimes de violence conjugale avec ou sans enfant.",
@@ -3067,7 +3067,7 @@
     "title": "L’Armée du Salut",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme",
+    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme hors territoire",
     "url": "https://www.centreboothmtl.ca/",
     "desc": "Hébergement de transition à court ou long terme avec soutien communautaire. 24/7. Frais selon le revenu.",
     "verifie": "2026-09-25",
@@ -3076,7 +3076,7 @@
     "rubriques": [
       "Hébergement · Hommes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "880, rue Guy, Montréal",
     "telephone": "(514) 932-2214",
     "pourQui": "Homme de 18 ans et plus en difficulté",
@@ -3089,7 +3089,7 @@
     "title": "Centre Naha",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Vêtements, meubles et services à bas prix Montréal refuge gîte sans-abri itinérance maison d’hébergement homme vêtements friperie comptoir familial ressource communautaire organisme",
+    "tags": "Hébergement Hommes Vêtements, meubles et services à bas prix Montréal refuge gîte sans-abri itinérance maison d’hébergement homme vêtements friperie comptoir familial ressource communautaire organisme hors territoire",
     "url": "https://centrenaha.org/",
     "desc": "Programme de réinsertion sociale d’une durée de 9 à 12 mois avec hébergement. 25 % du revenu + 390 $, inclut repas, câblodistribution, internet et buanderie. Service de soutien individuel est disponible au besoin. Logements permanents (phase 2) 25 % du revenu + frais de services (inclut électricité, buanderie, câblodistribution et climatisation.",
     "verifie": "2026-09-25",
@@ -3099,7 +3099,7 @@
       "Hébergement · Hommes",
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 259-9962",
     "pourQui": "35 ans et plus, situation d’itinérance ou ayant séjourné dans un centre de thérapie ou désintoxication",
@@ -3134,7 +3134,7 @@
     "title": "Résidence J. A. Desève",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme",
+    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme hors territoire",
     "url": "https://maisondupere.org/#fiche=residence-j-a-deseve",
     "desc": "Chambre privée avec suivi psychosocial, repas, gestion du budget et de la médication, soins d’hygiène et accompagnement aux rendez-vous médicaux, activités sociales, présence régulière de spécialistes de la santé, clinique d’impôts.",
     "verifie": "2026-09-25",
@@ -3143,7 +3143,7 @@
     "rubriques": [
       "Hébergement · Hommes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 843-3739",
     "pourQui": "50 ans et plus, personnes ayant des problèmes de dépendance, de santé physique et/ou mentale",
@@ -3156,7 +3156,7 @@
     "title": "Le Tournant",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme",
+    "tags": "Hébergement Hommes Montréal refuge gîte sans-abri itinérance maison d’hébergement homme ressource communautaire organisme hors territoire",
     "url": "https://www.aubergeletournant.org/",
     "desc": "Hébergement et repas, Évaluation des besoins et plan de séjour, soutien et accompagnement dans les démarches, information, orientation et référence. 24/7. 6 mois maximum, 10 $ / jour",
     "verifie": "2026-09-25",
@@ -3165,7 +3165,7 @@
     "rubriques": [
       "Hébergement · Hommes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 523-2157",
     "pourQui": "18 à 29 ans, sans-abri et sans ressources",
@@ -3178,7 +3178,7 @@
     "title": "L’Auberge Communautaire du Sud-Ouest",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme",
+    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme hors territoire",
     "url": "https://laubergecommunautaire.org/",
     "desc": "Hébergement, soutien individuel et collectif, gîte et couvert, jusqu’à 1 an. 300 $ par mois tout inclus. Autres volets d’appartements abordables et supervisés.",
     "verifie": "2026-09-25",
@@ -3187,7 +3187,7 @@
     "rubriques": [
       "Hébergement · Mixte"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 768-5223",
     "pourQui": "Jeunes adultes de 18 à 29 ans, en difficulté",
@@ -3200,7 +3200,7 @@
     "title": "L’Avant-Toît",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Mixte La Prairie refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme",
+    "tags": "Hébergement Mixte La Prairie refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=28",
     "desc": "Logements temporaires, soutien pour la relocalisation et accompagnement des locataires hébergés.",
     "verifie": "2026-09-25",
@@ -3209,7 +3209,7 @@
     "rubriques": [
       "Hébergement · Mixte"
     ],
-    "ville": "La Prairie",
+    "ville": "La Prairie (hors territoire)",
     "adresse": "636, chemin de Saint-Jean, La Prairie",
     "telephone": "(450) 907-1333",
     "pourQui": "Personnes en situation d’instabilité résidentielle",
@@ -3222,7 +3222,7 @@
     "title": "L’Avenue",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme",
+    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme hors territoire",
     "url": "https://www.lavenuehc.org/fr",
     "desc": "Hébergement d’une durée maximum de 6 mois, accompagnement et soutien dans les démarches, référence, suivi post-hébergement. Frais de 6 $/jour pour un maximum de 180 $/mois. Autres projets des logements transitoires et supervisés également offert.",
     "verifie": "2026-09-25",
@@ -3231,7 +3231,7 @@
     "rubriques": [
       "Hébergement · Mixte"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 254-2244",
     "pourQui": "18 à 29 ans en situation d’itinérance ou à risque",
@@ -3244,7 +3244,7 @@
     "title": "L’Escalier",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme",
+    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme hors territoire",
     "url": "https://www.lescalier.ca/hebergement/",
     "desc": "Hébergement de transition, maximum 1 an. Rencontres individuelles, activités de groupe, encadrement psychosocial, suivi post-hébergement. Environ 25 % du revenu, entre 150 – 200 $/mois, sans repas.",
     "verifie": "2026-09-25",
@@ -3253,7 +3253,7 @@
     "rubriques": [
       "Hébergement · Mixte"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 252-9886",
     "pourQui": "18 à 30 ans en difficulté",
@@ -3266,7 +3266,7 @@
     "title": "Maison Tangente",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme",
+    "tags": "Hébergement Mixte Montréal refuge gîte sans-abri itinérance maison d’hébergement ressource communautaire organisme hors territoire",
     "url": "https://www.maisontangente.qc.ca/",
     "desc": "Hébergement de maximum 1 an, 10$/jour. Écoute, soutien et référence. Accompagnement et encadrement dans les démarches d’insertion sociale. Apprentissage de l’autonomie. Activités socioculturelles. Suivi post-hébergement. Soutien pour obtention d’une carte d’assurance- maladie. Projet de logements transitoires pour les jeunes ayant séjourné à l’hébergement.",
     "verifie": "2026-09-25",
@@ -3275,7 +3275,7 @@
     "rubriques": [
       "Hébergement · Mixte"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 252-8771",
     "pourQui": "18 à 25 ans en difficulté",
@@ -3332,7 +3332,7 @@
     "title": "Regroupement des Auberges du Cœur du Québec",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme hors territoire",
     "url": "https://www.aubergesducoeur.org/",
     "desc": "",
     "verifie": "2026-09-25",
@@ -3341,7 +3341,7 @@
     "rubriques": [
       "Hébergement · Jeunes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 523-8559",
     "pourQui": "",
@@ -3354,7 +3354,7 @@
     "title": "Ressources Jeunesse St-Laurent",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme hors territoire",
     "url": "https://www.rjsl.ca/",
     "desc": "Hébergement et repas, 8 $ par jour, 6 mois maximum. Soutien et service téléphonique de référence Suivi post-hébergement, 24/7.",
     "verifie": "2026-09-25",
@@ -3363,7 +3363,7 @@
     "rubriques": [
       "Hébergement · Jeunes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 747-1341",
     "pourQui": "16 à 22 ans en difficulté",
@@ -3376,7 +3376,7 @@
     "title": "Service d’Hébergement St-Denis",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme",
+    "tags": "Hébergement Jeunes Montréal refuge gîte sans-abri itinérance maison d’hébergement jeune jeunesse ressource communautaire organisme hors territoire",
     "url": "https://www.hebergementstdenis.com",
     "desc": "Hébergement et repas, 3 à 6 mois, 9 $/jour. Intervention individuelle et de groupe, intervention et médiation familiale. Soutien pour l’obtention d’une carte d’assurance-maladie, suivi post- hébergement.",
     "verifie": "2026-09-25",
@@ -3385,7 +3385,7 @@
     "rubriques": [
       "Hébergement · Jeunes"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 374-6673",
     "pourQui": "15 à 20 ans en difficulté",
@@ -3464,7 +3464,7 @@
     "title": "L’Égide",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Appartements supervisés La Prairie appartement supervisé logement de transition hébergement ressource communautaire organisme",
+    "tags": "Appartements supervisés La Prairie appartement supervisé logement de transition hébergement ressource communautaire organisme hors territoire",
     "url": "https://maisonlegide.org/",
     "desc": "Sept logements (4½ - 3½) meublés et équipés. Suivis individuels, suivis mère-enfant, ateliers de groupe, rencontres post-hébergement.",
     "verifie": "2026-09-25",
@@ -3473,7 +3473,7 @@
     "rubriques": [
       "Appartements supervisés"
     ],
-    "ville": "La Prairie",
+    "ville": "La Prairie (hors territoire)",
     "adresse": "La Prairie",
     "telephone": "(450) 619-9000",
     "pourQui": "Femmes avec ou sans enfant, victime de violence conjugale",
@@ -3530,7 +3530,7 @@
     "title": "Our Harbour / le Havre",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Appartements supervisés Saint-Lambert appartement supervisé logement de transition hébergement ressource communautaire organisme",
+    "tags": "Appartements supervisés Saint-Lambert appartement supervisé logement de transition hébergement ressource communautaire organisme hors territoire",
     "url": "https://ourharbour.org/",
     "desc": "Hébergement à long terme, 500 $/mois. Accompagnement dans les démarches de santé, aide sociale et services sociaux. Références. Soutien à la vie quotidienne : budget, organisation des repas. Activités individuelles et collectives.",
     "verifie": "2026-09-25",
@@ -3539,7 +3539,7 @@
     "rubriques": [
       "Appartements supervisés"
     ],
-    "ville": "Saint-Lambert",
+    "ville": "Saint-Lambert (hors territoire)",
     "adresse": "St-Lambert",
     "telephone": "(450) 671-9160",
     "pourQui": "Adulte ayant un diagnostic de santé mentale",
@@ -3552,7 +3552,7 @@
     "title": "Pavillon Lise Watier",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Appartements supervisés Montréal appartement supervisé logement de transition hébergement ressource communautaire organisme",
+    "tags": "Appartements supervisés Montréal appartement supervisé logement de transition hébergement ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=33",
     "desc": "Logements sociaux avec suivi psychosocial individuel. 25 % du revenu et un supplément de 115 $/mois, tout équipé, repas non inclus.",
     "verifie": "2026-09-25",
@@ -3561,7 +3561,7 @@
     "rubriques": [
       "Appartements supervisés"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 687-2025 p.625",
     "pourQui": "Femmes en situation d’itinérance",
@@ -3574,7 +3574,7 @@
     "title": "Le Relais",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Appartements supervisés Saint-Hubert appartement supervisé logement de transition hébergement ressource communautaire organisme",
+    "tags": "Appartements supervisés Saint-Hubert appartement supervisé logement de transition hébergement ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=33&fiche=le-relais",
     "desc": "22 logements en colocation pour hommes qui souhaitent consolider une démarche de réinsertion sociale et assurer une transition progressive vers la vie autonome en logement. Soutien psychosocial. Durée maximum (30 mois)",
     "verifie": "2026-09-25",
@@ -3583,7 +3583,7 @@
     "rubriques": [
       "Appartements supervisés"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "St-Hubert",
     "telephone": "(450) 442-4777",
     "pourQui": "Hommes en difficulté de 18 ans et plus ayant un projet de vie, Volet père et enfant",
@@ -3707,7 +3707,7 @@
     "title": "Hébergement Eurka",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Information et support concernant le logement Montréal loyer HLM coopérative d’habitation comité ressource communautaire organisme",
+    "tags": "Information et support concernant le logement Montréal loyer HLM coopérative d’habitation comité ressource communautaire organisme hors territoire",
     "url": "https://www.hebergementeureka.ca/",
     "desc": "Accompagnement dans les différentes étapes de la recherche de résidences, de l’évaluation des besoins jusqu’à la signature du bail. Les services sont gratuits.",
     "verifie": "2026-09-25",
@@ -3716,7 +3716,7 @@
     "rubriques": [
       "Information et support concernant le logement"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal, Québec, Laval, Rive-Sud, Montérégie",
     "telephone": "(514) 969-6843",
     "pourQui": "Aînés à la recherche d’une résidence",
@@ -3729,7 +3729,7 @@
     "title": "Office Municipal d’Habitation",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Information et support concernant le logement La Prairie loyer HLM coopérative d’habitation comité ressource communautaire organisme",
+    "tags": "Information et support concernant le logement La Prairie loyer HLM coopérative d’habitation comité ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=35",
     "desc": "Demande pour un loyer à prix modique dans différents secteurs",
     "verifie": "2026-09-25",
@@ -3738,7 +3738,7 @@
     "rubriques": [
       "Information et support concernant le logement"
     ],
-    "ville": "La Prairie",
+    "ville": "La Prairie (hors territoire)",
     "adresse": "La Prairie",
     "telephone": "",
     "pourQui": "Personnes ou familles à faible revenu",
@@ -3751,7 +3751,7 @@
     "title": "Réseau d’Habitations chez Soi",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Information et support concernant le logement Soutien dans la communauté Saint-Hubert loyer HLM coopérative d’habitation comité accompagnement suivi communautaire ressource organisme",
+    "tags": "Information et support concernant le logement Soutien dans la communauté Saint-Hubert loyer HLM coopérative d’habitation comité accompagnement suivi communautaire ressource organisme hors territoire",
     "url": "https://www.reseaudhabitationschezsoi.org/",
     "desc": "Accompagnement dans la recherche et le maintien harmonieux en logement. Promotion du logement social par des actions de concertation et de sensibilisation.",
     "verifie": "2026-09-25",
@@ -3761,7 +3761,7 @@
       "Information et support concernant le logement",
       "Soutien dans la communauté"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "3115, montée St-Hubert, St-Hubert",
     "telephone": "(450) 676-8940",
     "pourQui": "Personnes adultes, à faible revenu, ayant des problèmes de santé mentale, en situation d’itinérance ou à risque",
@@ -3818,7 +3818,7 @@
     "title": "Maison d’Entraide St-Alphonse",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Brossard banque dépannage nourriture épicerie comptoir ressource communautaire organisme Vêtements, meubles et services à bas prix vêtements friperie familial",
+    "tags": "Aide alimentaire Brossard banque dépannage nourriture épicerie comptoir ressource communautaire organisme Vêtements, meubles et services à bas prix vêtements friperie familial hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=37",
     "desc": "Dépannage alimentaire, coût selon l’évaluation de la demande",
     "verifie": "2026-09-25",
@@ -3828,7 +3828,7 @@
       "Aide alimentaire",
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "2190, rue André, Brossard",
     "telephone": "(450) 676-3712",
     "pourQui": "Population de Brossard",
@@ -3841,7 +3841,7 @@
     "title": "Mission Nouvelle Génération",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Brossard banque dépannage nourriture épicerie comptoir ressource communautaire organisme Vêtements, meubles et services à bas prix vêtements friperie familial",
+    "tags": "Aide alimentaire Brossard banque dépannage nourriture épicerie comptoir ressource communautaire organisme Vêtements, meubles et services à bas prix vêtements friperie familial hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=37&fiche=mission-nouvelle-generation",
     "desc": "Dépannage alimentaire (17$ panier, 10$ carte annuelle obligatoire) se présenter au plus tard 1 h avant la fermeture. Inscription : Preuve de revenu et bail",
     "verifie": "2026-09-25",
@@ -3851,7 +3851,7 @@
       "Aide alimentaire",
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "1423, boulevard Provencher, Brossard",
     "telephone": "(450) 486-7667",
     "pourQui": "Montérégie, île de Montréal",
@@ -3864,7 +3864,7 @@
     "title": "Hope",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Greenfield Park banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Greenfield Park banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=37&fiche=hope",
     "desc": "Dépannage alimentaire gratuit et livré sur rendez-vous",
     "verifie": "2026-09-25",
@@ -3873,7 +3873,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Greenfield Park",
+    "ville": "Greenfield Park (hors territoire)",
     "adresse": "",
     "telephone": "(450) 693-0262 (Laisser un message)",
     "pourQui": "Population anglophone dans le besoin de Greenfield Park, Brossard, Ville Lemoyne et St-Hubert",
@@ -3886,7 +3886,7 @@
     "title": "Complexe le Partage",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Vêtements, meubles et services à bas prix La Prairie banque dépannage nourriture épicerie comptoir vêtements friperie familial ressource communautaire organisme",
+    "tags": "Aide alimentaire Vêtements, meubles et services à bas prix La Prairie banque dépannage nourriture épicerie comptoir vêtements friperie familial ressource communautaire organisme hors territoire",
     "url": "https://lepartage.info/",
     "desc": "Dépannage alimentaire, cuisine collective et atelier culinaire, panier de Noël.",
     "verifie": "2026-09-25",
@@ -3896,7 +3896,7 @@
       "Aide alimentaire",
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "La Prairie",
+    "ville": "La Prairie (hors territoire)",
     "adresse": "547, rue Saint-Henri, La Prairie",
     "telephone": "(450) 444-0803",
     "pourQui": "Population de La Prairie",
@@ -3957,7 +3957,7 @@
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
     "tags": "Aide alimentaire Longueuil banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
-    "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=38",
+    "url": "https://actionnv.com/",
     "desc": "Comptoir alimentaire hebdomadaire et dépannage alimentaire d’urgence. Panier de Noël. Friperie. Ressources matérielles et alimentaires nécessaires pour les mères et leur bébé. Distribution de fournitures scolaires. Camp de jour estival pour les enfants de 8 à 12 ans.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -4139,7 +4139,7 @@
     "title": "Les Maisons Familiales par Amour",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Vêtements, meubles et services à bas prix Saint-Hubert banque dépannage nourriture épicerie comptoir vêtements friperie familial ressource communautaire organisme",
+    "tags": "Aide alimentaire Vêtements, meubles et services à bas prix Saint-Hubert banque dépannage nourriture épicerie comptoir vêtements friperie familial ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=40&fiche=les-maisons-familiales-par-amour",
     "desc": "Dépannage alimentaire.",
     "verifie": "2026-09-25",
@@ -4149,7 +4149,7 @@
       "Aide alimentaire",
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "4015, chemin de Chambly, Saint-Hubert",
     "telephone": "(450) 486-4719",
     "pourQui": "Personnes dans le besoin",
@@ -4163,7 +4163,7 @@
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
     "tags": "Aide alimentaire Longueuil banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
-    "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=40&fiche=partage-saint-francois-de-sales",
+    "url": "https://partagelongueuil.com",
     "desc": "Bon d’achat et dépannage alimentaire. Panier de Noël. Cuisines collectives et ateliers de cuisine. Friperie.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -4298,7 +4298,7 @@
     "title": "Église Saint-Jean-de-Lalande",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=41&fiche=eglise-saint-jean-de-lalande",
     "desc": "Aide alimentaire gratuite (paroisse jean XXIII)",
     "verifie": "2026-09-25",
@@ -4307,7 +4307,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "4805, boulevard Westley, Saint-Hubert",
     "telephone": "(450) 676-1337",
     "pourQui": "Résidents de la paroisse et des environs",
@@ -4320,7 +4320,7 @@
     "title": "Frigid’Aide",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=42",
     "desc": "Aide alimentaire",
     "verifie": "2026-09-25",
@@ -4329,7 +4329,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "3780, rue Grande-Allée, Saint-Hubert",
     "telephone": "(450) 286-1900 poste 9",
     "pourQui": "Personnes dans le besoin dans les secteurs de Greenfield Park, Lemoyne et Saint-Hubert",
@@ -4342,7 +4342,7 @@
     "title": "Frigidaire Communautaire",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=42&fiche=frigidaire-communautaire",
     "desc": "Friperie, frigidaire communautaire, paniers alimentaires (20$/mois pour 4), épicerie communautaire, panier de Noël, fournitures scolaires.",
     "verifie": "2026-09-25",
@@ -4351,7 +4351,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "5430, boulevard Cousineau, local 102, Saint-Hubert",
     "telephone": "(438) 836-1317",
     "pourQui": "Personnes en situation de grande précarité de l’arrondissement de Saint-Hubert",
@@ -4364,7 +4364,7 @@
     "title": "Paroisse Saint-Hubert - Communauté Immaculée-Conception",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=42&fiche=paroisse-saint-hubert-communaute-immaculee-conception",
     "desc": "Bons d’achat et sac de nourriture, paniers de Noël, fournitures scolaires.",
     "verifie": "2026-09-25",
@@ -4373,7 +4373,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "5403, avenue Hémard, Saint-Hubert",
     "telephone": "(450) 676-2661",
     "pourQui": "Résidents de la paroisse",
@@ -4386,7 +4386,7 @@
     "title": "Paroisse Sainte-Marguerite-Bourgeois",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Repas à bas prix Saint-Hubert banque dépannage nourriture épicerie comptoir popote roulante dîner communautaire ressource organisme",
+    "tags": "Aide alimentaire Repas à bas prix Saint-Hubert banque dépannage nourriture épicerie comptoir popote roulante dîner communautaire ressource organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=42&fiche=paroisse-sainte-marguerite-bourgeois",
     "desc": "Distribution de bons d’achat de nourriture et de denrées. Paniers de Noël. Bons d’achat pour les fournitures scolaires. Magasin-partage.",
     "verifie": "2026-09-25",
@@ -4396,7 +4396,7 @@
       "Aide alimentaire",
       "Repas à bas prix"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "1720, Georges, Saint-Hubert",
     "telephone": "(450) 812-5354",
     "pourQui": "Personnes à faible revenu du quartier Laflèche, nouveau Greenfield Park",
@@ -4409,7 +4409,7 @@
     "title": "Paroisse Saint-Hubert - Communauté Saint-Hubert",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=42&fiche=paroisse-saint-hubert-communaute-saint-hubert",
     "desc": "Aide alimentaire",
     "verifie": "2026-09-25",
@@ -4418,7 +4418,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "5310, chemin Chambly, St-Hubert",
     "telephone": "(450) 676-4899",
     "pourQui": "Résidents de la paroisse en situation de grande précarité",
@@ -4431,7 +4431,7 @@
     "title": "Paroisse Jean XXIII",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://sj23.ca/",
     "desc": "Dépannage alimentaire",
     "verifie": "2026-09-25",
@@ -4440,7 +4440,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "4850, rue Quevillon, Saint-Hubert",
     "telephone": "(450) 676-7906",
     "pourQui": "Résidents de la paroisse",
@@ -4453,7 +4453,7 @@
     "title": "SAC - Service Adventiste Communautaire",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme",
+    "tags": "Aide alimentaire Saint-Hubert banque dépannage nourriture épicerie comptoir ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=43",
     "desc": "Dépannage alimentaire",
     "verifie": "2026-09-25",
@@ -4462,7 +4462,7 @@
     "rubriques": [
       "Aide alimentaire"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "7350, Chambly, St-Hubert",
     "telephone": "(450) 676-2446",
     "pourQui": "Population dans le besoin de St-Hubert",
@@ -4565,7 +4565,7 @@
     "title": "Bouffe du Carrefour",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Repas à bas prix Saint-Hubert popote roulante dîner communautaire ressource organisme",
+    "tags": "Repas à bas prix Saint-Hubert popote roulante dîner communautaire ressource organisme hors territoire",
     "url": "https://labouffeducarrefour.org/",
     "desc": "Atelier de cuisine collective, cuisine jeunesse. Ateliers de cuisine thématique. Diners communautaires. Repas congelés.",
     "verifie": "2026-09-25",
@@ -4574,7 +4574,7 @@
     "rubriques": [
       "Repas à bas prix"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "3780, Grande-Allée, St-Hubert",
     "telephone": "(450) 926-2386",
     "pourQui": "Personnes de Saint-Hubert et les environs",
@@ -4609,7 +4609,7 @@
     "title": "Centre d’Action Bénévole de St-Hubert",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Repas à bas prix Aide pour déclaration d’impôt Saint-Hubert popote roulante dîner communautaire impôt de revenus rapport ressource organisme",
+    "tags": "Repas à bas prix Aide pour déclaration d’impôt Saint-Hubert popote roulante dîner communautaire impôt de revenus rapport ressource organisme hors territoire",
     "url": "https://www.cab-saint-hubert.org/",
     "desc": "Popote roulante, repas à emporter",
     "verifie": "2026-09-25",
@@ -4619,7 +4619,7 @@
       "Repas à bas prix",
       "Aide pour déclaration d’impôt"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "3339, Grande-Allée, St-Hubert",
     "telephone": "(450) 656-9110",
     "pourQui": "Résidents de St-Hubert dans le besoin, résidents âgés de 65 ans et plus",
@@ -4632,7 +4632,7 @@
     "title": "Cuisine de l’Amitié",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Repas à bas prix Brossard popote roulante dîner communautaire ressource organisme",
+    "tags": "Repas à bas prix Brossard popote roulante dîner communautaire ressource organisme hors territoire",
     "url": "https://www.cuisinesdelamitie.org/",
     "desc": "Cuisines collectives. Cours et ateliers culinaires. Vente de repas frais ou congelés à prix modique. Café en toute amitié : groupe de discussion pour les 50 ans et plus.",
     "verifie": "2026-09-25",
@@ -4641,7 +4641,7 @@
     "rubriques": [
       "Repas à bas prix"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "2210, rue André, bureau 1, Brossard",
     "telephone": "(450) 443-6770",
     "pourQui": "Personnes aînées, personnes à faible revenu, de Brossard et les environs",
@@ -4677,7 +4677,7 @@
     "title": "1-866-Appelle",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Écoute téléphonique ou en personne Québec ligne d’écoute détresse soutien ressource communautaire organisme",
+    "tags": "Écoute téléphonique ou en personne Québec ligne d’écoute détresse soutien ressource communautaire organisme hors territoire",
     "url": "https://besoinaide.ca/ligne-1866appelle/",
     "desc": "Écoute et intervention téléphonique Depuis novembre 2023, la ligne 9-8-8 (appel ou texto) répond aussi partout au Canada.",
     "verifie": "2026-09-25",
@@ -4686,7 +4686,7 @@
     "rubriques": [
       "Écoute téléphonique ou en personne"
     ],
-    "ville": "Québec",
+    "ville": "Québec (hors territoire)",
     "adresse": "Partout au Québec",
     "telephone": "1-866-277-3553",
     "pourQui": "Personnes ayant des idées suicidaires, personnes vivant de la détresse, de l’anxiété, une dépression, des problèmes de dépendances ou une crise qui les amène à une désorganisation. Personnes qui ont besoin d’être guidés, accompagnées, informées en lien avec la problématique suicidaire, tant au niveau de la prévention que de l’intervention. (Entourage, intervenants, etc.)",
@@ -4927,7 +4927,7 @@
     "title": "Phobie-Zéro",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Écoute téléphonique ou en personne Groupe d’entraide et de soutien Aide thérapeutique Saint-Hubert ligne d’écoute détresse entraide thérapie ressource communautaire organisme",
+    "tags": "Écoute téléphonique ou en personne Groupe d’entraide et de soutien Aide thérapeutique Saint-Hubert ligne d’écoute détresse entraide thérapie ressource communautaire organisme hors territoire",
     "url": "https://www.phobies-zero.qc.ca/",
     "desc": "Ligne d’écoute téléphonique. Conférences, ateliers, groupes d’entraide",
     "verifie": "2026-09-25",
@@ -4938,7 +4938,7 @@
       "Groupe d’entraide et de soutien",
       "Aide thérapeutique"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "Point de rencontre à Saint-Hubert",
     "telephone": "(450) 922-5964 - Information (514) 276-3105 - Ligne d’écoute 1-866-922-0002 - Sans frais",
     "pourQui": "Adolescent et adultes souffrant de troubles d’anxiété. Famille et proches.",
@@ -4975,7 +4975,7 @@
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
     "tags": "Groupe d’entraide et de soutien Divertissements, activités loisirs Longueuil entraide ressource communautaire organisme",
-    "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=51",
+    "url": "https://www.centregens.com",
     "desc": "Soutien, accompagnement, relation d’aide, écoute. Activités de loisirs éducatives. Activités de formation. Promotion, vigilance et défense de droits. Groupes d’entraide.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -5019,7 +5019,7 @@
     "title": "APAMM - Rive-Sud",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Greenfield Park entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Greenfield Park entraide ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=51&fiche=apamm-rive-sud",
     "desc": "Interventions psychosociales individuelles, familiales et de couple. Groupes d’entraide pour les proches. Conférences, formations et sensibilisation pour les familles et proches. Ateliers.",
     "verifie": "2026-09-25",
@@ -5028,7 +5028,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "Greenfield Park",
+    "ville": "Greenfield Park (hors territoire)",
     "adresse": "10, rue Churchill, suite 206, Greenfield Park",
     "telephone": "(450) 766-0524",
     "pourQui": "Personnes touchées par la maladie mentale d’un proche",
@@ -5085,7 +5085,7 @@
     "title": "L’Avant-Garde",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien La Prairie entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien La Prairie entraide ressource communautaire organisme hors territoire",
     "url": "https://lavantgarde.ca/",
     "desc": "Groupe d’entraide, éducation populaire, ateliers-conférences, accompagnement",
     "verifie": "2026-09-25",
@@ -5094,7 +5094,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "La Prairie",
+    "ville": "La Prairie (hors territoire)",
     "adresse": "462, rue St-Paul, La Prairie",
     "telephone": "(450) 444-9661",
     "pourQui": "Personne de 18 ans et plus ayant des problèmes de santé mentale",
@@ -5175,7 +5175,7 @@
     "title": "Centre de Femmes l’Éclaircie",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Sainte-Catherine entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Sainte-Catherine entraide ressource communautaire organisme hors territoire",
     "url": "https://centredefemmesleclaircie.com/",
     "desc": "Accueil, information, documentation, entrevue individuelle, écoute, support, entraide. Cours et ateliers. Formation des personnes bénévoles. Halte-garderie, accompagnement, action collective.",
     "verifie": "2026-09-25",
@@ -5184,7 +5184,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "Sainte-Catherine",
+    "ville": "Sainte-Catherine (hors territoire)",
     "adresse": "1025, rue Centrale, Sainte-Catherine",
     "telephone": "(450) 638-1131",
     "pourQui": "Femmes",
@@ -5197,7 +5197,7 @@
     "title": "Centre de Soutien en Santé Mentale Montérégie",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Saint-Hubert entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Saint-Hubert entraide ressource communautaire organisme hors territoire",
     "url": "https://www.cssm-m.com/",
     "desc": "Soutien et accompagnement. Intervention à domicile et sur place. Psychothérapie, rencontre individuelles ou de groupe, suivi. Ateliers divers. Activités diverses. Formations, renseignements, conférences.",
     "verifie": "2026-09-25",
@@ -5206,7 +5206,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "2046 boulevard Édouard, Saint-Hubert",
     "telephone": "(450) 486-1609",
     "pourQui": "Proche ou personnes atteintes de maladies mentales",
@@ -5219,8 +5219,8 @@
     "title": "Com’Femme",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Brossard entraide ressource communautaire organisme",
-    "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=54",
+    "tags": "Groupe d’entraide et de soutien Brossard entraide ressource communautaire organisme hors territoire",
+    "url": "https://www.comfemme.org/",
     "desc": "Accueil et référence, ateliers de discussion et d’échange, activités socioculturelles et de loisir. Séries de conférences. Information sur différents thèmes. Séminaire de croissance. Ateliers de développement personnel et fonctionnel, soirées-conférence, info-rencontres.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -5228,7 +5228,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "6035, Adam, Brossard",
     "telephone": "(450) 676-7719",
     "pourQui": "Femmes de 18 ans et plus",
@@ -5308,7 +5308,7 @@
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
     "tags": "Groupe d’entraide et de soutien Études, alphabétisation, formations, etc. Longueuil entraide alphabétisation études formation francisation ressource communautaire organisme",
-    "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=55",
+    "url": "https://lamaisondejonathan.ca/",
     "desc": "Activités manuelles et académiques pour décrocheurs scolaires de 12 à 17 ans. Activités sportives, ateliers de pyrogravure, ordinateur, cuir, etc. pour jeunes de niveau secondaire vivant des difficultés scolaires, familiales ou sociales. Soirées-causeries avec personnes ressources pour les parents vivant des difficultés avec leurs adolescents.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -5330,7 +5330,7 @@
     "title": "Maison de la Famille de Brossard Inc.",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Brossard entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Brossard entraide ressource communautaire organisme hors territoire",
     "url": "https://www.mfdebrossard.org/fr/",
     "desc": "Soutien auprès des familles. Soutien au développement des compétences parentales, valorisation du rôle parental, écoute et soutien téléphoniques, références, café-rencontres, ateliers en soirée, soutien au répit, halte-garderie, clinique d’impôt (sous conditions). Médiation sociale.",
     "verifie": "2026-09-25",
@@ -5339,7 +5339,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "2210 rue André, Brossard",
     "telephone": "(450) 678-5222",
     "pourQui": "Familles",
@@ -5396,7 +5396,7 @@
     "title": "Maison de la Famille la Parentr’Aide",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Divertissements, activités loisirs Saint-Hubert entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Divertissements, activités loisirs Saint-Hubert entraide ressource communautaire organisme hors territoire",
     "url": "https://laparentraide.ca/",
     "desc": "Rencontres individuelles, soutien téléphonique, soutien aux familles, activités diverses, déjeuner-causerie, rencontre d’informations, ateliers parents/enfants, halte-garderie, camp de jour (été)",
     "verifie": "2026-09-25",
@@ -5406,7 +5406,7 @@
       "Groupe d’entraide et de soutien",
       "Divertissements, activités et loisirs"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "2060, rue Holmes, Saint-Hubert",
     "telephone": "(450) 923-9333",
     "pourQui": "Familles avec enfants (0-17 ans)",
@@ -5463,7 +5463,7 @@
     "title": "Au Second Lieu",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Divertissements, activités loisirs Saint-Hubert entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Divertissements, activités loisirs Saint-Hubert entraide ressource communautaire organisme hors territoire",
     "url": "https://secondlieu.org/",
     "desc": "Groupes de soutien et d’entraide. Rencontres afin de définir les besoins des personnes, de les amener à redécouvrir leurs capacités, leurs ressources, leurs talents et briser l’isolement.",
     "verifie": "2026-09-25",
@@ -5473,7 +5473,7 @@
       "Groupe d’entraide et de soutien",
       "Divertissements, activités et loisirs"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "3200, boulevard Grande-Allée, St-Hubert",
     "telephone": "(450) 672-8725",
     "pourQui": "Personnes vivant ou ayant vécu des troubles de santé mentale",
@@ -5486,7 +5486,7 @@
     "title": "Société Québécoise de la Schizophrénie",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Groupe d’entraide et de soutien Montréal entraide ressource communautaire organisme",
+    "tags": "Groupe d’entraide et de soutien Montréal entraide ressource communautaire organisme hors territoire",
     "url": "https://www.schizophrenie.qc.ca/fr/",
     "desc": "Soutien aux personnes, groupes d’entraide mensuels entre pairs, centre de documentation, conférences mensuelles, défi schizophrénie, soirées de ressourcement, activités sociales et de répit, programme d’éducation, formations, bourses d’études, information et sensibilisation publique. Défense des droits.",
     "verifie": "2026-09-25",
@@ -5495,7 +5495,7 @@
     "rubriques": [
       "Groupe d’entraide et de soutien"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "7401, Hochelaga, Montréal",
     "telephone": "(514) 251-4125 ou 1-866-888-2323",
     "pourQui": "Personnes touchées par la schizophrénie et les psychoses apparentées, membre de l’entourage",
@@ -5552,7 +5552,7 @@
     "title": "Diogène",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Soutien dans la communauté Montréal accompagnement suivi communautaire ressource organisme",
+    "tags": "Soutien dans la communauté Montréal accompagnement suivi communautaire ressource organisme hors territoire",
     "url": "https://www.diogeneqc.org/",
     "desc": "Accompagnement dans les démarches médicales, financières et de logement, recherche de papiers d’identité et autres. Information, orientation et accompagnement à la cour municipale et au palais de justice. Service de référence au sein d’autres ressources en itinérance ou milieux carcéraux. Suivi continu dans les milieux de vie.",
     "verifie": "2026-09-25",
@@ -5561,7 +5561,7 @@
     "rubriques": [
       "Soutien dans la communauté"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "Montréal",
     "telephone": "(514) 874-1214",
     "pourQui": "Toutes personnes adultes ayant des problèmes de santé mentale de type sévère et persistant et vivant des difficultés reliées à la judiciarisation et/ou l’itinérance",
@@ -5619,7 +5619,7 @@
     "title": "Sino-Québec",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Soutien dans la communauté Brossard accompagnement suivi communautaire ressource organisme",
+    "tags": "Soutien dans la communauté Brossard accompagnement suivi communautaire ressource organisme hors territoire",
     "url": "https://www.centresinoquebec.com/fr/",
     "desc": "Accueil et aide à l’établissement des nouveaux immigrants. Brisez le silence : programme pour contrer l’abus envers les aînés. Francisation à temps partiel. Accompagnement, interprétation, traduction et assermentation de documents. Club des aînés Cheng Qing. Programme d’aide et d’orientation sur les problèmes de dépendance au jeu. Séances d’information. Activités sociales. Clinique d’impôts.",
     "verifie": "2026-09-25",
@@ -5628,7 +5628,7 @@
     "rubriques": [
       "Soutien dans la communauté"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "7209 boulevard Taschereau local 108, Brossard",
     "telephone": "(450) 445-6666",
     "pourQui": "Communautés chinoises et asiatiques",
@@ -5663,7 +5663,7 @@
     "title": "Amélys",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide et soutien à domicile Saint-Hubert maintien domestique ressource communautaire organisme",
+    "tags": "Aide et soutien à domicile Saint-Hubert maintien domestique ressource communautaire organisme hors territoire",
     "url": "https://amelys.ca/",
     "desc": "Entretien ménager léger, entretien ménager lourd (lavage de fenêtres, murs, réfrigérateurs, etc.), préparation de repas simples, accompagnement pour les courses, assistance à la personne, service de répit, accompagnement et surveillance sécuritaire *Possibilité de subvention par la RAMQ*",
     "verifie": "2026-09-25",
@@ -5672,7 +5672,7 @@
     "rubriques": [
       "Aide et soutien à domicile"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "3323, boulevard Grande-Allée, Saint-Hubert",
     "telephone": "(450) 466-8444",
     "pourQui": "Personne aînées, personnes avec limitations physiques, personnes en convalescence, personnes nécessitant une aide ponctuelle",
@@ -5795,7 +5795,7 @@
     "title": "La Maison d’Intervention Vivre",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide thérapeutique Saint-Hubert thérapie ressource communautaire organisme",
+    "tags": "Aide thérapeutique Saint-Hubert thérapie ressource communautaire organisme hors territoire",
     "url": "https://www.maisonvivre.org/",
     "desc": "Démarche intensive de groupe, de jour, dont l’approche utilisée intègre l’histoire de la personne, son potentiel, sa créativité, ses qualités et sa conscience corporelle. Cette démarche de groupe, pour un maximum de 15 personnes, se réalise à travers un programme intensif demandant une implication de quatre jours par semaine durant une période minimale de trois mois. Sont intégrées dans ce programme, des ateliers en santé corporelle, des ateliers d’arts et créativité, des rencontres de groupe, des rencontres individuelles et des séances de thérapie psychocorporelle et de massothérapie. Selon les besoins manifestés lors de la démarche, d’autres services sont offerts : éducation et suivi en santé globale; rencontres conjugales et familiales; références; accompagnement en temps de crise; soutien dans l’insertion sociale; intervention téléphonique en situation d’urgence. Un suivi post-programme est offert aux personnes ayant fait la démarche. Possibilité hébergement facilitant.",
     "verifie": "2026-09-25",
@@ -5804,7 +5804,7 @@
     "rubriques": [
       "Aide thérapeutique"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "1807, Duke, St-Hubert",
     "telephone": "(450) 465-0264",
     "pourQui": "Hommes et femmes de 18 à 55 ans aux prises principalement avec la dépression. Elles peuvent également souffrir de problème reliés à des négligences ou des abus physiques, psychologiques ou sexuels, d’un trouble de la personnalité, d’états suicidaires, des difficultés d’accepter et de vivre son orientation affective et sexuelle.",
@@ -5818,7 +5818,7 @@
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
     "tags": "Aide thérapeutique Longueuil thérapie ressource communautaire organisme",
-    "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=65",
+    "url": "https://lamaisonjacquesferron.com",
     "desc": "Hébergement thérapeutique à moyen et long terme, programmation favorisant une mobilisation personnelle, psychique et sociale. Programmes de développement des aptitudes psychosociales et de gestion de vie, suivi à long terme aux personnes qui seront éventuellement en mesure de quitter les résidences supervisées.",
     "verifie": "2026-09-25",
     "type": "communautaire",
@@ -5839,7 +5839,7 @@
     "title": "CLSC Kateri",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide psychologique Soutien et suivi Candiac psychosocial ressource communautaire organisme",
+    "tags": "Aide psychologique Soutien et suivi Candiac psychosocial ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=67",
     "desc": "",
     "verifie": "2026-09-25",
@@ -5848,7 +5848,7 @@
     "rubriques": [
       "Aide psychologique · Soutien et suivi"
     ],
-    "ville": "Candiac",
+    "ville": "Candiac (hors territoire)",
     "adresse": "90, boulevard Marie-Victorin, Candiac",
     "telephone": "(450) 659-7661 Secteur : Candiac, Delson, La Prairie, Saint-Constant, Saint-Mathieu, St-Philippe, Sainte-Catherine",
     "pourQui": "",
@@ -5883,7 +5883,7 @@
     "title": "CLSC Saint-Hubert",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide psychologique Soutien et suivi Saint-Hubert psychosocial ressource communautaire organisme",
+    "tags": "Aide psychologique Soutien et suivi Saint-Hubert psychosocial ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=67&fiche=clsc-saint-hubert",
     "desc": "",
     "verifie": "2026-09-25",
@@ -5892,7 +5892,7 @@
     "rubriques": [
       "Aide psychologique · Soutien et suivi"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "6800, Cousineau, St-Hubert",
     "telephone": "(450) 443-7400 Secteur : St-Hubert",
     "pourQui": "",
@@ -5905,7 +5905,7 @@
     "title": "CLSC Samuel de Champlain",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide psychologique Soutien et suivi Brossard psychosocial ressource communautaire organisme",
+    "tags": "Aide psychologique Soutien et suivi Brossard psychosocial ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=67&fiche=clsc-samuel-de-champlain",
     "desc": "",
     "verifie": "2026-09-25",
@@ -5914,7 +5914,7 @@
     "rubriques": [
       "Aide psychologique · Soutien et suivi"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "5811, Taschereau, Brossard",
     "telephone": "(450) 445-4452 Secteur : Brossard, Ville Lemoyne, Greenfield Park, St-Lambert",
     "pourQui": "",
@@ -6081,7 +6081,7 @@
     "title": "Service ANDC-Aide",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide psychologique Soutien et suivi Montréal psychosocial ressource communautaire organisme",
+    "tags": "Aide psychologique Soutien et suivi Montréal psychosocial ressource communautaire organisme hors territoire",
     "url": "https://www.cramformation.com/service-andc-aide",
     "desc": "Thérapie en relation d’aide (individuelle, couple). 10 séances hebdomadaires consécutives gratuites moyennant des frais d’inscription non remboursable de 50 $. Le service ANDC-AIDE n’est pas un service d’urgence, le délai d’attente peut varier d’une semaine à sept mois selon la période de l’année.",
     "verifie": "2026-09-25",
@@ -6090,7 +6090,7 @@
     "rubriques": [
       "Aide psychologique · Soutien et suivi"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1030, rue Cherrier, bureau 205, Montréal",
     "telephone": "(514) 598-7000",
     "pourQui": "Adultes, jeunes, personnes endeuillées, couples",
@@ -6103,7 +6103,7 @@
     "title": "La Traversée (Rive-Sud) Inc.",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide psychologique Soutien et suivi Saint-Lambert psychosocial ressource communautaire organisme",
+    "tags": "Aide psychologique Soutien et suivi Saint-Lambert psychosocial ressource communautaire organisme hors territoire",
     "url": "https://www.latraversee.qc.ca/",
     "desc": "Évaluation et traitement psychologique individuel à long terme. Information, référence et soutien à la famille.",
     "verifie": "2026-09-25",
@@ -6112,7 +6112,7 @@
     "rubriques": [
       "Aide psychologique · Soutien et suivi"
     ],
-    "ville": "Saint-Lambert",
+    "ville": "Saint-Lambert (hors territoire)",
     "adresse": "Saint-Lambert",
     "telephone": "(450) 465-5263",
     "pourQui": "Femmes, enfants, adolescentes victimes de violence sexuelle",
@@ -6235,7 +6235,7 @@
     "title": "Pavillon l’Essence Ciel",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Problème de dépendance Saint-Hubert toxicomanie drogue alcool jeu ressource communautaire organisme",
+    "tags": "Problème de dépendance Saint-Hubert toxicomanie drogue alcool jeu ressource communautaire organisme hors territoire",
     "url": "https://lessenceciel.org/",
     "desc": "centre de réadaptation interne d’une durée de 3 à 6 mois. Programme distinct pour les dépendances aux substances. Thérapie de groupe et individuelle. Suivi postcure. Hébergement reconnu par les services correctionnels pour les personnes prévenues, en libération conditionnelle ou sous probation.",
     "verifie": "2026-09-25",
@@ -6244,7 +6244,7 @@
     "rubriques": [
       "Problème de dépendance"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "Saint-Hubert",
     "telephone": "(450) 672-0926 ou 1-855-672-0926",
     "pourQui": "Hommes de 18 ans et plus ayant un problème de dépendance (alcool, drogue, médicament, opiacés)",
@@ -6257,7 +6257,7 @@
     "title": "Pavillon Foster",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Problème de dépendance La Prairie toxicomanie drogue alcool jeu ressource communautaire organisme",
+    "tags": "Problème de dépendance La Prairie toxicomanie drogue alcool jeu ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=70",
     "desc": "Thérapie externe individuelle ou de groupe, stage intensif à l’interne possible",
     "verifie": "2026-09-25",
@@ -6266,7 +6266,7 @@
     "rubriques": [
       "Problème de dépendance"
     ],
-    "ville": "La Prairie",
+    "ville": "La Prairie (hors territoire)",
     "adresse": "6, rue Foucreault, Saint-Philippe-de-La Prairie",
     "telephone": "1-866-964-4413",
     "pourQui": "Personnes vivant des problèmes de dépendance",
@@ -6301,7 +6301,7 @@
     "title": "Armée du Salut",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Vêtements, meubles et services à bas prix Brossard vêtements friperie comptoir familial ressource communautaire organisme",
+    "tags": "Vêtements, meubles et services à bas prix Brossard vêtements friperie comptoir familial ressource communautaire organisme hors territoire",
     "url": "https://salvationarmy.ca/",
     "desc": "Service de cueillette par camion. Vente de meubles et de vêtements à bas prix.",
     "verifie": "2026-09-25",
@@ -6310,7 +6310,7 @@
     "rubriques": [
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "1875, Panama, Brossard",
     "telephone": "(450) 462-9185",
     "pourQui": "Personnes dans le besoin",
@@ -6477,7 +6477,7 @@
     "title": "Paroisse Saint-Jean-de-Lalande",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Vêtements, meubles et services à bas prix Saint-Hubert vêtements friperie comptoir familial ressource communautaire organisme",
+    "tags": "Vêtements, meubles et services à bas prix Saint-Hubert vêtements friperie comptoir familial ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=75&fiche=paroisse-saint-jean-de-lalande",
     "desc": "Comptoir familial, Vêtements et menus accessoires",
     "verifie": "2026-09-25",
@@ -6486,7 +6486,7 @@
     "rubriques": [
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "4805, rue Westley, Saint-Hubert",
     "telephone": "(450) 676-1337",
     "pourQui": "Résidents de la paroisse et des environs",
@@ -6499,7 +6499,7 @@
     "title": "Paroisse Saint-Jean XXIII",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Vêtements, meubles et services à bas prix Saint-Hubert vêtements friperie comptoir familial ressource communautaire organisme",
+    "tags": "Vêtements, meubles et services à bas prix Saint-Hubert vêtements friperie comptoir familial ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=76",
     "desc": "Comptoir familial. Items à prix modiques : vêtements, meubles, articles de maison, jouets, etc.",
     "verifie": "2026-09-25",
@@ -6508,7 +6508,7 @@
     "rubriques": [
       "Vêtements, meubles et services à bas prix"
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "4990, rue Redmond, Saint-Hubert",
     "telephone": "(450) 812-9486",
     "pourQui": "Population en général",
@@ -6587,7 +6587,7 @@
     "title": "Centre d’Éducation des Adultes Antoine-Brossard",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Études, alphabétisation, formations, etc. Brossard alphabétisation études formation francisation ressource communautaire organisme",
+    "tags": "Études, alphabétisation, formations, etc. Brossard alphabétisation études formation francisation ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=78",
     "desc": "Formation générale, secondaires I à V, francisation",
     "verifie": "2026-09-25",
@@ -6596,7 +6596,7 @@
     "rubriques": [
       "Études, alphabétisation, formations, etc."
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "5885, avenue Auteuil, Brossard",
     "telephone": "(450) 443-0017",
     "pourQui": "Population adulte",
@@ -6653,7 +6653,7 @@
     "title": "L’Écrit Tôt",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Études, alphabétisation, formations, etc. Saint-Hubert alphabétisation études formation francisation ressource communautaire organisme",
+    "tags": "Études, alphabétisation, formations, etc. Saint-Hubert alphabétisation études formation francisation ressource communautaire organisme hors territoire",
     "url": "https://www.ecritot.ca/",
     "desc": "Accompagnement des adultes et familles dans les apprentissages de base en lecture, écriture et calcul, prévention de l’analphabétisme. Lutte au décrochage scolaire. Sensibilisation. Ateliers d’alphabétisation. Activités éducatives.",
     "verifie": "2026-09-25",
@@ -6662,7 +6662,7 @@
     "rubriques": [
       "Études, alphabétisation, formations, etc."
     ],
-    "ville": "Saint-Hubert",
+    "ville": "Saint-Hubert (hors territoire)",
     "adresse": "4050, Grande-Allée, Saint-Hubert",
     "telephone": "(450) 443-1411",
     "pourQui": "Parents et enfants éprouvant des difficultés scolaires, personnes analphabètes",
@@ -6719,7 +6719,7 @@
     "title": "Maison Internationale de la Rive-Sud",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Études, alphabétisation, formations, etc. Organismes d’aide à l’emploi Aide au niveau juridique et défense des droits pour déclaration d’impôt Brossard alphabétisation études formation francisation emploi recherche d’emploi insertion professionnelle impôt de revenus rapport ressource communautaire organisme",
+    "tags": "Études, alphabétisation, formations, etc. Organismes d’aide à l’emploi Aide au niveau juridique et défense des droits pour déclaration d’impôt Brossard alphabétisation études formation francisation emploi recherche d’emploi insertion professionnelle impôt de revenus rapport ressource communautaire organisme hors territoire",
     "url": "https://mirs.qc.ca/",
     "desc": "Accueil et aide aux immigrants, cours de français, espagnol et autres. Francisation pour les personnes immigrantes. Assermentation, traduction de documents.",
     "verifie": "2026-09-25",
@@ -6731,7 +6731,7 @@
       "Aide au niveau juridique et défense des droits",
       "Aide pour déclaration d’impôt"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "2500, boulevard Lapinière, Brossard",
     "telephone": "(450) 445-8777",
     "pourQui": "Personnes immigrantes, réfugiées et population en général",
@@ -6788,7 +6788,7 @@
     "title": "Accès-Cible SMT",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://www.acces-cible.org/fr/",
     "desc": "Aide en employabilité et intégration au marché du travail. Ateliers de connaissance de soi, stage en entreprise, méthodes et recherche d’emploi.",
     "verifie": "2026-09-25",
@@ -6797,7 +6797,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "5650, rue D’Iberville, local 600, Montréal",
     "telephone": "(514) 525-8888",
     "pourQui": "Personnes ayant vécu ou vivant des problèmes de santé mentale désirant réintégrer le marché du travail",
@@ -6810,7 +6810,7 @@
     "title": "L’Atelier",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=81",
     "desc": "Formation en métiers d’art et en employabilité.",
     "verifie": "2026-09-25",
@@ -6819,7 +6819,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "3680, Jeanne-Mance, local 213, Montréal",
     "telephone": "(514) 844-6458",
     "pourQui": "Adultes vivant avec des problèmes de santé mentale",
@@ -6832,7 +6832,7 @@
     "title": "CAP – Centre d’Apprentissage Parallèle",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=81&fiche=cap-centre-dapprentissage-parallele",
     "desc": "Insertion par l’art et programme d’employabilité.",
     "verifie": "2026-09-25",
@@ -6841,7 +6841,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "4865, boulevard St-Laurent, Montréal",
     "telephone": "(514) 843-5658",
     "pourQui": "Personnes vivant des troubles de santé mentale ou de la détresse émotionnelle",
@@ -6854,7 +6854,7 @@
     "title": "Carrefour Jeunesse Emploi",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Brossard emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Brossard emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://www.rcjeq.org/",
     "desc": "Aide à la recherche d’emploi, information et orientation scolaire.",
     "verifie": "2026-09-25",
@@ -6863,7 +6863,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "CJE Brossard – 1, Place du Commerce, bureau 100",
     "telephone": "",
     "pourQui": "Personnes de 15-35 ans pouvant s’intégrer à un groupe",
@@ -6876,7 +6876,7 @@
     "title": "Centre d’Intégration Jeunesse-Adulte – Espace Pivot",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Saint-Lambert emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Saint-Lambert emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://espacepivot.ca/",
     "desc": "Aide à la recherche d’emploi : rencontres individuelles, rédaction de CV et lettre de présentation, techniques de recherche d’emploi, centre de documentation, postes internet. Orientation scolaire et professionnelle. Entrepreneuriat. Services aux entreprises.",
     "verifie": "2026-09-25",
@@ -6885,7 +6885,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Saint-Lambert",
+    "ville": "Saint-Lambert (hors territoire)",
     "adresse": "465, rue Victoria, local 500, Saint-Lambert",
     "telephone": "(450) 671-8949",
     "pourQui": "Personnes de 35 à 65 ans à la recherche d’un emploi, prestataires de l’assistance emploi, à revenu précaire ou sans emploi",
@@ -6921,7 +6921,7 @@
     "title": "Coffre - Centre d’Orientation et de Formation pour Femme en Recherche d’Emploi",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Chambly emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Chambly emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://coffre.ca/",
     "desc": "Formation et information. Orientation professionnelle par le biais d’ateliers : connaissance de soi, bilan des acquis, exploration du marché du travail, outils de communication, techniques de recherche d’emploi. Stage en entreprise. Aide à la recherche d’emploi.",
     "verifie": "2026-09-25",
@@ -6930,7 +6930,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Chambly",
+    "ville": "Chambly (hors territoire)",
     "adresse": "5664, ch. Chambly",
     "telephone": "",
     "pourQui": "Femmes sans emploi ou avec emploi précaire",
@@ -6943,7 +6943,7 @@
     "title": "De Soi à l’Emploi",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Saint-Lambert emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Saint-Lambert emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://www.tandem-emploi.org/",
     "desc": "Programme d’orientation et de préparation à l’emploi. Exploration du marché du travail. Développement d’une meilleure connaissance de soi. Plan d’action personnalisé. Coaching en emploi. Autonomie financière. Estime de soi. Aide au maintien en emploi.",
     "verifie": "2026-09-25",
@@ -6952,7 +6952,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Saint-Lambert",
+    "ville": "Saint-Lambert (hors territoire)",
     "adresse": "2035, avenue Victoria, bureau 303, St-Lambert",
     "telephone": "(450) 465-4078",
     "pourQui": "Femmes de 18 ans et plus ayant un besoin de réorientation de carrière et d’aide à la recherche d’emploi",
@@ -6965,7 +6965,7 @@
     "title": "Forward House - Maison les Étapes",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme",
+    "tags": "Organismes d’aide à l’emploi Montréal emploi recherche d’emploi insertion professionnelle ressource communautaire organisme hors territoire",
     "url": "https://en.maisonlesetapes.org/",
     "desc": "Programme de recherche d’emploi, service de placement",
     "verifie": "2026-09-25",
@@ -6974,7 +6974,7 @@
     "rubriques": [
       "Organismes d’aide à l’emploi"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "2240, rue Girouard, Montréal",
     "telephone": "(514) 488-9119",
     "pourQui": "Personnes vivant des troubles de santé mentale",
@@ -7186,7 +7186,7 @@
     "title": "Centre de Justice de Proximité",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau juridique et défense des droits Brossard ressource communautaire organisme",
+    "tags": "Aide au niveau juridique et défense des droits Brossard ressource communautaire organisme hors territoire",
     "url": "https://info-justice.ca/centres/monteregie/",
     "desc": "Informations juridiques (explication de la loi, informations sur les types de recours, les actes de procédure et le déroulement des instances, orientation dans le système juridique). Références. Outils d’information juridique et séance sur de sujets divers de nature juridique. Ne représente pas les citoyens devant les tribunaux, ne donne pas d’avis juridique.",
     "verifie": "2026-09-25",
@@ -7195,7 +7195,7 @@
     "rubriques": [
       "Aide au niveau juridique et défense des droits"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "6300, avenue Auteuil, bureau 503, Brossard",
     "telephone": "1-844-723-3700",
     "pourQui": "Personnes à la recherche d’informations juridiques",
@@ -7208,7 +7208,7 @@
     "title": "Centre du Pardon National",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme",
+    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme hors territoire",
     "url": "https://nationalpardon.org/",
     "desc": "Pardon, élimination et destruction du dossier judiciaire",
     "verifie": "2026-09-25",
@@ -7217,7 +7217,7 @@
     "rubriques": [
       "Aide au niveau juridique et défense des droits"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "2000 Peel, suite 650, Montréal",
     "telephone": "(514) 842-2411",
     "pourQui": "Toute personne ayant un casier judiciaire",
@@ -7384,7 +7384,7 @@
     "title": "OPC - Office de la Protection du Consommateur",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme",
+    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme hors territoire",
     "url": "https://www.opc.gouv.qc.ca/",
     "desc": "Information légale et aide aux démarches dans le but de faire respecter les droits des consommateurs",
     "verifie": "2026-09-25",
@@ -7393,7 +7393,7 @@
     "rubriques": [
       "Aide au niveau juridique et défense des droits"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "5199 Sherbrooke est bureau 3671, aile A, Montréal",
     "telephone": "1-888-672-2556 ou (514) 253-6556",
     "pourQui": "Toute la population",
@@ -7406,7 +7406,7 @@
     "title": "Perception des Pensions Alimentaires",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau juridique et défense des droits Laval ressource communautaire organisme",
+    "tags": "Aide au niveau juridique et défense des droits Laval ressource communautaire organisme hors territoire",
     "url": "https://www.revenuquebec.ca",
     "desc": "Aide et renseignements légaux concernant les pensions alimentaires",
     "verifie": "2026-09-25",
@@ -7415,7 +7415,7 @@
     "rubriques": [
       "Aide au niveau juridique et défense des droits"
     ],
-    "ville": "Laval",
+    "ville": "Laval (hors territoire)",
     "adresse": "5, Place-Laval, bureau 147, Laal",
     "telephone": "1-800-488-2323",
     "pourQui": "Les parents",
@@ -7428,7 +7428,7 @@
     "title": "Le Protecteur du Citoyen",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme",
+    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme hors territoire",
     "url": "https://protecteurducitoyen.qc.ca/fr",
     "desc": "Traitement des plaintes pour tous les services reçus auprès d’un établissement de santé ou de services sociaux",
     "verifie": "2026-09-25",
@@ -7437,7 +7437,7 @@
     "rubriques": [
       "Aide au niveau juridique et défense des droits"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1080, côte du Beaver Hall, 10e étage, Montréal",
     "telephone": "1-800-463-5070",
     "pourQui": "Toutes personnes recevant des services de santé et des services sociaux",
@@ -7472,7 +7472,7 @@
     "title": "Y des Femmes de Montréal - Clinique d’Information Juridique",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme",
+    "tags": "Aide au niveau juridique et défense des droits Montréal ressource communautaire organisme hors territoire",
     "url": "https://www.ydesfemmesmtl.org/",
     "desc": "Information, référence et soutien. Consultation individuelle et familiale. Groupe de soutien. Information juridique. Ateliers thérapeutiques. Activités sociales. Conférences.",
     "verifie": "2026-09-25",
@@ -7481,7 +7481,7 @@
     "rubriques": [
       "Aide au niveau juridique et défense des droits"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "1355 boulevard René-Lévesque Ouest, Montréal",
     "telephone": "(514) 866-9941 poste 293",
     "pourQui": "Population en général",
@@ -7560,7 +7560,7 @@
     "title": "Fonds d’Emprunt Montérégie",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide au niveau financier Brossard financière budget allocation prestation ressource communautaire organisme",
+    "tags": "Aide au niveau financier Brossard financière budget allocation prestation ressource communautaire organisme hors territoire",
     "url": "https://www.femonteregie.ca/",
     "desc": "Soutien financier et technique aux projets d’entreprises et aux initiatives communautaires. Prêt pouvant atteindre 20 000 $. Soutien technique pré-démarrage, démarrage et croissance du projet. Encadrement personnalisé.",
     "verifie": "2026-09-25",
@@ -7569,7 +7569,7 @@
     "rubriques": [
       "Aide au niveau financier"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "6300, avenue Auteuil, bureau 505, Brossard",
     "telephone": "(450) 904-5822",
     "pourQui": "Personnes entrepreneures n’ayant pas accès au financement traditionnel : jeunes sans emploi, chefs de famille monoparentale, personnes immigrantes, prestataires de l’aide sociale ou de l’aide de dernier recours",
@@ -7604,7 +7604,7 @@
     "title": "Les Impatients",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Divertissements, activités et loisirs Montréal ressource communautaire organisme",
+    "tags": "Divertissements, activités et loisirs Montréal ressource communautaire organisme hors territoire",
     "url": "https://impatients.ca/",
     "desc": "Ateliers d’expression artistique. Expositions sur place, en galerie et itinérantes. Concerts, lecture. Conférences et publications. Boutique.",
     "verifie": "2026-09-25",
@@ -7613,7 +7613,7 @@
     "rubriques": [
       "Divertissements, activités et loisirs"
     ],
-    "ville": "Montréal",
+    "ville": "Montréal (hors territoire)",
     "adresse": "100 Sherbrooke Est, bureau 4000, Montréal",
     "telephone": "(514) 842-1043",
     "pourQui": "Personnes vivant des troubles de santé mentale",
@@ -7626,7 +7626,7 @@
     "title": "Info-Loisir Sport et Culture",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
-    "tags": "Divertissements, activités et loisirs Brossard ressource communautaire organisme",
+    "tags": "Divertissements, activités et loisirs Brossard ressource communautaire organisme hors territoire",
     "url": "https://reseaudhabitationschezsoi.org/data/documents/Bottin-version-web_1.pdf#page=93",
     "desc": "Chaque ville offre un service des loisirs. On y retrouve différentes activités de loisir, sportives et culturelles. Une programmation automne et hiver est disponible chaque année.",
     "verifie": "2026-09-25",
@@ -7635,7 +7635,7 @@
     "rubriques": [
       "Divertissements, activités et loisirs"
     ],
-    "ville": "Brossard",
+    "ville": "Brossard (hors territoire)",
     "adresse": "Brossard",
     "telephone": "Boucherville ................................................................................................................................. (450) 449-8640",
     "pourQui": "",
@@ -8613,5 +8613,1215 @@
     "url": "https://ccs.ca/app/uploads/2022/05/2021-HF-Gui-PG-FR-Web-v2.pdf",
     "desc": "Guide de poche de la SCC sur le diagnostic et la prise en charge de l’insuffisance cardiaque (mise à jour 2021).",
     "verifie": "2026-09-25"
+  },
+  {
+    "title": "ACEF Montérégie-Est",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide au niveau financier budget endettement consommation dette Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.acefme.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide au niveau financier.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide au niveau financier",
+    "rubriques": [
+      "Aide au niveau financier"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "AQDR Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide au niveau juridique et défense des droits aînés droits retraités Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.aqdr.org/section/richelieu-yamaska/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide au niveau juridique et défense des droits.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide au niveau juridique et défense des droits",
+    "rubriques": [
+      "Aide au niveau juridique et défense des droits"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "APARY – Association des personnes aphasiques Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien aphasie AVC langage Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.aphasieapary.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Association des stomisés Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien stomie colostomie iléostomie Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://stomisesmonteregie.ca/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Centre d’action bénévole de la région de Saint-Hyacinthe",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide et soutien à domicile bénévolat aînés accompagnement Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.cabrsh.ca/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide et soutien à domicile.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide et soutien à domicile",
+    "rubriques": [
+      "Aide et soutien à domicile"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Centre de femmes l’Autonomie en soiE",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien femmes centre de femmes Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://cfautonomieensoie.wordpress.com",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Centre psychosocial Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide psychologique · Soutien et suivi santé mentale suivi psychosocial Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.centrepsychosocial.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide psychologique · Soutien et suivi.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide psychologique · Soutien et suivi",
+    "rubriques": [
+      "Aide psychologique · Soutien et suivi"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Comptoir-Partage La Mie",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide alimentaire aide alimentaire dépannage Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.la-mie.com/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide alimentaire.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide alimentaire",
+    "rubriques": [
+      "Aide alimentaire"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Contact Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Écoute téléphonique ou en personne écoute soutien Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.contactry.qc.ca/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Écoute téléphonique ou en personne.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Écoute téléphonique ou en personne",
+    "rubriques": [
+      "Écoute téléphonique ou en personne"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Coopérative Aux p’tits soins",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide et soutien à domicile soins à domicile Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.coopauxptitssoins.com/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide et soutien à domicile.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide et soutien à domicile",
+    "rubriques": [
+      "Aide et soutien à domicile"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Espace Proches Aidants – santé mentale",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Proches aidants proches santé mentale famille Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.espaceprochesaidants.ca/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Proches aidants.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Proches aidants",
+    "rubriques": [
+      "Proches aidants"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Fédération de la famille Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien famille parents Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.ffry.ca/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Le JAG",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien LGBTQ diversité sexuelle genre Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.lejag.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "La Clé sur la porte",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Hébergement · Femmes violence conjugale hébergement femmes Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.clesurlaporte.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Hébergement · Femmes.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Hébergement · Femmes",
+    "rubriques": [
+      "Hébergement · Femmes"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Les Amis du crépuscule",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide psychologique · Soutien et suivi deuil soutien Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.lesamisducrepuscule.com/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide psychologique · Soutien et suivi.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide psychologique · Soutien et suivi",
+    "rubriques": [
+      "Aide psychologique · Soutien et suivi"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Maison de la famille des Maskoutains",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien famille parents Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.mfm.qc.ca",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Mouvement d’aide et de consultation sur le travail (MACT)",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide au niveau juridique et défense des droits travail normes droits travailleurs Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://mactsthyacinthe.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide au niveau juridique et défense des droits.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide au niveau juridique et défense des droits",
+    "rubriques": [
+      "Aide au niveau juridique et défense des droits"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Nourri-Source Montérégie",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien allaitement marraines Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://nourrisourcemonteregie.org/accueil",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Office d’habitation (OHMA)",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Information et support concernant le logement HLM logement social Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.ohma.ca/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Information et support concernant le logement.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Information et support concernant le logement",
+    "rubriques": [
+      "Information et support concernant le logement"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Réseau famille action",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien famille Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://icirfa.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Satellite – Prévention des dépendances",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Problème de dépendance dépendance prévention jeunes Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://preventiondesdependances.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Problème de dépendance.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Problème de dépendance",
+    "rubriques": [
+      "Problème de dépendance"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Société canadienne de la sclérose en plaques – Saint-Hyacinthe",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien sclérose en plaques SEP Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://www.scleroseenplaques.org",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Solidarité populaire Richelieu-Yamaska",
+    "org": "CDC des Maskoutains (membres)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide au niveau juridique et défense des droits pauvreté droits Saint-Hyacinthe ressource communautaire organisme",
+    "url": "https://spr-y.org/",
+    "desc": "Organisme communautaire de Saint-Hyacinthe · Aide au niveau juridique et défense des droits.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide au niveau juridique et défense des droits",
+    "rubriques": [
+      "Aide au niveau juridique et défense des droits"
+    ],
+    "ville": "Saint-Hyacinthe",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://www.cdcdesmaskoutains.org/nos-membres"
+  },
+  {
+    "title": "Albatros en Montérégie",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide et soutien à domicile accompagnement fin de vie soins palliatifs bénévoles Longueuil ressource communautaire organisme",
+    "url": "https://albatrosenmonteregie.org/",
+    "desc": "Organisme communautaire de Longueuil · Aide et soutien à domicile.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide et soutien à domicile",
+    "rubriques": [
+      "Aide et soutien à domicile"
+    ],
+    "ville": "Longueuil",
+    "adresse": "740, rue Coteau-Rouge, Longueuil",
+    "telephone": "438 455-4558",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Association de la fibromyalgie région Montérégie (AFRM)",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien fibromyalgie douleur chronique Longueuil ressource communautaire organisme",
+    "url": "https://www.fibromyalgiemonteregie.ca",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "570, boulevard Roland-Therrien, suite 205, Longueuil",
+    "telephone": "450 928-1261",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Association des parents et des handicapés de la Rive-Sud métropolitaine (APHRSM)",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien handicap parents loisirs répit Longueuil ressource communautaire organisme",
+    "url": "https://www.aphrsm.org",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "2545, rue Delorimier, bureau 110, Longueuil",
+    "telephone": "450 674-5224",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Association Sclérose en plaques Rive-Sud (ASPRS)",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien sclérose en plaques SEP Sainte-Julie ressource communautaire organisme",
+    "url": "https://asprs.qc.ca/",
+    "desc": "Organisme communautaire de Sainte-Julie · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Sainte-Julie",
+    "adresse": "C.P. 5641, Sainte-Julie",
+    "telephone": "450 926-5210",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Autisme Montérégie",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien autisme TSA parents Longueuil ressource communautaire organisme",
+    "url": "https://www.autismemonteregie.org/",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "755, chemin du Coteau-Rouge, bureau 210, Longueuil",
+    "telephone": "450 646-2742",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "L’Autre Maison – Centre de périnatalité",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien périnatalité grossesse bébé parents allaitement Longueuil ressource communautaire organisme",
+    "url": "https://www.lautremaison.ca",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "575, rue Saint-Charles Est, Longueuil",
+    "telephone": "450 332-9833",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "CALACS Longueuil",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Écoute téléphonique ou en personne agression sexuelle CALACS Longueuil ressource communautaire organisme",
+    "url": "https://www.calacslongueuil.org/",
+    "desc": "Organisme communautaire de Longueuil · Écoute téléphonique ou en personne.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Écoute téléphonique ou en personne",
+    "rubriques": [
+      "Écoute téléphonique ou en personne"
+    ],
+    "ville": "Longueuil",
+    "adresse": "",
+    "telephone": "450 616-8580",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Centre d’intervention en violence et agressions sexuelles de la Montérégie (CIVAS)",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Écoute téléphonique ou en personne agression sexuelle violence CALACS Longueuil ressource communautaire organisme",
+    "url": "https://civasmonteregie.ca/",
+    "desc": "Organisme communautaire de Longueuil · Écoute téléphonique ou en personne.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Écoute téléphonique ou en personne",
+    "rubriques": [
+      "Écoute téléphonique ou en personne"
+    ],
+    "ville": "Longueuil",
+    "adresse": "550, chemin de Chambly, bureau 300, Longueuil",
+    "telephone": "450 616-6969",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Centre de répit-dépannage Aux quatre poches",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien répit handicap enfants parents Boucherville ressource communautaire organisme",
+    "url": "https://www.4poches.org/",
+    "desc": "Organisme communautaire de Boucherville · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Boucherville",
+    "adresse": "560, chemin du Lac, Boucherville",
+    "telephone": "450 641-1255",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Centre de ressources pour les familles des militaires (Longueuil)",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien militaires familles Longueuil ressource communautaire organisme",
+    "url": "https://crfmmfrcmtl.ca/fr/accueil",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "4815, chemin de la Savane, Longueuil",
+    "telephone": "450 462-8777",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Comité d’entraide de Boucherville",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide alimentaire aide alimentaire dépannage Boucherville ressource communautaire organisme",
+    "url": "https://www.comite-entraide-boucherville.org/",
+    "desc": "Organisme communautaire de Boucherville · Aide alimentaire.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide alimentaire",
+    "rubriques": [
+      "Aide alimentaire"
+    ],
+    "ville": "Boucherville",
+    "adresse": "11, rue Louis-H.-La Fontaine Nord, Boucherville",
+    "telephone": "514 236-5042",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Diabète Montérégie",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien diabète Longueuil ressource communautaire organisme Diabète Rive-Sud",
+    "url": "https://diabetemonteregie.com/",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "150, rue Grant, bureau 211, Longueuil",
+    "telephone": "450 928-3422",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Équipe Service Quartier Saint-Vincent-de-Paul",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide alimentaire aide alimentaire Longueuil ressource communautaire organisme",
+    "url": "https://www.equipeservicesvp.com/",
+    "desc": "Organisme communautaire de Longueuil · Aide alimentaire.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide alimentaire",
+    "rubriques": [
+      "Aide alimentaire"
+    ],
+    "ville": "Longueuil",
+    "adresse": "2027, rue Daniel, Longueuil",
+    "telephone": "450 646-8817",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "L’Escale familiale de Boucherville",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien famille parents Boucherville ressource communautaire organisme",
+    "url": "https://www.escalefamiliale.ca/",
+    "desc": "Organisme communautaire de Boucherville · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Boucherville",
+    "adresse": "1075, Lionel-Daunais, bureau 108, Boucherville",
+    "telephone": "450 641-2366",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "ESPACE Proche Aidance",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Proches aidants proches aidants répit soutien Longueuil ressource communautaire organisme",
+    "url": "https://www.espaceprocheaidance.org",
+    "desc": "Organisme communautaire de Longueuil · Proches aidants.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Proches aidants",
+    "rubriques": [
+      "Proches aidants"
+    ],
+    "ville": "Longueuil",
+    "adresse": "2160, chemin du Tremblay, bureau 95, Longueuil",
+    "telephone": "450 928-0776",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Les Grands Frères et Grandes Sœurs de la Montérégie",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien jeunes mentorat Longueuil ressource communautaire organisme",
+    "url": "https://www.gfgsm.org/",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "",
+    "telephone": "1 866 464-6188",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Intégration sociale des enfants handicapés en milieu de garde (ISEHMG)",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien handicap enfants garderie Longueuil ressource communautaire organisme",
+    "url": "https://isehmg.org/",
+    "desc": "Organisme communautaire de Longueuil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Longueuil",
+    "adresse": "386, de Gentilly Ouest, bureau 105, Longueuil",
+    "telephone": "450 646-2714",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Juripop",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide au niveau juridique et défense des droits avocat juridique Longueuil ressource communautaire organisme",
+    "url": "https://juripop.org/",
+    "desc": "Organisme communautaire de Longueuil · Aide au niveau juridique et défense des droits.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide au niveau juridique et défense des droits",
+    "rubriques": [
+      "Aide au niveau juridique et défense des droits"
+    ],
+    "ville": "Longueuil",
+    "adresse": "",
+    "telephone": "450 845-1637",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Les Petits Frères – Montérégie",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Soutien dans la communauté aînés isolement solitude jumelage Longueuil ressource communautaire organisme",
+    "url": "https://petitsfreres.ca/trouver-une-region/monteregie/",
+    "desc": "Organisme communautaire de Longueuil · Soutien dans la communauté.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Soutien dans la communauté",
+    "rubriques": [
+      "Soutien dans la communauté"
+    ],
+    "ville": "Longueuil",
+    "adresse": "",
+    "telephone": "579 721-5115",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Loisirs et Répit Sans Limites",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien handicap répit loisirs Boucherville ressource communautaire organisme",
+    "url": "https://www.aeahbv.org",
+    "desc": "Organisme communautaire de Boucherville · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Boucherville",
+    "adresse": "20, Pierre-Boucher, Boucherville",
+    "telephone": "514 771-8347",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Maison de quartier Fonrouge",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Soutien dans la communauté centre communautaire famille aide alimentaire Longueuil ressource communautaire organisme",
+    "url": "https://maisonfonrouge.com/",
+    "desc": "Organisme communautaire de Longueuil · Soutien dans la communauté.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Soutien dans la communauté",
+    "rubriques": [
+      "Soutien dans la communauté"
+    ],
+    "ville": "Longueuil",
+    "adresse": "301, rue Cuvillier Est, Longueuil",
+    "telephone": "450 646-8800",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Office d’habitation de Longueuil",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Information et support concernant le logement HLM logement social Longueuil ressource communautaire organisme",
+    "url": "https://www.ohlongueuil.com/",
+    "desc": "Organisme communautaire de Longueuil · Information et support concernant le logement.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Information et support concernant le logement",
+    "rubriques": [
+      "Information et support concernant le logement"
+    ],
+    "ville": "Longueuil",
+    "adresse": "445, rue Labonté, Longueuil",
+    "telephone": "450 670-2733",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Ressources Saint-Jean-Vianney",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide alimentaire aide alimentaire centre communautaire Longueuil ressource communautaire organisme",
+    "url": "https://www.rsjv.org",
+    "desc": "Organisme communautaire de Longueuil · Aide alimentaire.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide alimentaire",
+    "rubriques": [
+      "Aide alimentaire"
+    ],
+    "ville": "Longueuil",
+    "adresse": "2255, Cartier, bureau 090, Longueuil",
+    "telephone": "450 646-6722",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Santé mentale Québec – Rive-Sud",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide psychologique · Soutien et suivi santé mentale prévention Longueuil ressource communautaire organisme",
+    "url": "https://www.smqrivesud.ca/",
+    "desc": "Organisme communautaire de Longueuil · Aide psychologique · Soutien et suivi.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide psychologique · Soutien et suivi",
+    "rubriques": [
+      "Aide psychologique · Soutien et suivi"
+    ],
+    "ville": "Longueuil",
+    "adresse": "150, rue Grant, bureau 227, Longueuil",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Société Alzheimer Rive-Sud",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Proches aidants Alzheimer démence troubles neurocognitifs proches aidants Longueuil ressource communautaire organisme",
+    "url": "https://www.alzheimerrivesud.ca",
+    "desc": "Organisme communautaire de Longueuil · Proches aidants.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Proches aidants",
+    "rubriques": [
+      "Proches aidants"
+    ],
+    "ville": "Longueuil",
+    "adresse": "1160, boulevard Nobert, Longueuil",
+    "telephone": "450 442-3333",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Société Saint-Vincent de Paul, conférence Saint-Jean-Vianney",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide alimentaire aide alimentaire Longueuil ressource communautaire organisme",
+    "url": "https://ssvp.qc.ca",
+    "desc": "Organisme communautaire de Longueuil · Aide alimentaire.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide alimentaire",
+    "rubriques": [
+      "Aide alimentaire"
+    ],
+    "ville": "Longueuil",
+    "adresse": "1103, Beauregard, bureau 1, Longueuil",
+    "telephone": "450 442-2425",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Le Virage – réadaptation en dépendance",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Problème de dépendance dépendance alcool drogues jeu réadaptation CRD Longueuil ressource communautaire organisme",
+    "url": "https://www.santemonteregie.qc.ca/services/dependances",
+    "desc": "Organisme communautaire de Longueuil · Problème de dépendance.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Problème de dépendance",
+    "rubriques": [
+      "Problème de dépendance"
+    ],
+    "ville": "Longueuil",
+    "adresse": "1525, rue Joliette, Longueuil",
+    "telephone": "450 651-3113",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Vision Inter-Cultures",
+    "org": "CDC de l’agglomération de Longueuil (répertoire)",
+    "cat": "Ressources communautaires",
+    "tags": "Soutien dans la communauté immigrants nouveaux arrivants francisation Longueuil ressource communautaire organisme",
+    "url": "https://www.visionintercultures.com",
+    "desc": "Organisme communautaire de Longueuil · Soutien dans la communauté.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Soutien dans la communauté",
+    "rubriques": [
+      "Soutien dans la communauté"
+    ],
+    "ville": "Longueuil",
+    "adresse": "2255, rue Cartier, bureau 60, Longueuil",
+    "telephone": "450 646-6725",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://communaute.cdcal.org/repertoire"
+  },
+  {
+    "title": "Association de la Vallée du Richelieu pour la déficience intellectuelle et le TSA (AVRDI/TSA)",
+    "org": "Info SVP (CDC Vallée-du-Richelieu)",
+    "cat": "Ressources communautaires",
+    "tags": "Groupe d’entraide et de soutien déficience intellectuelle autisme TSA adultes répit activités de jour Beloeil ressource communautaire organisme",
+    "url": "https://avrditsa.org/",
+    "desc": "Organisme communautaire de Beloeil · Groupe d’entraide et de soutien.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Groupe d’entraide et de soutien",
+    "rubriques": [
+      "Groupe d’entraide et de soutien"
+    ],
+    "ville": "Beloeil",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://infosvp.ca/repertoire-des-services/"
+  },
+  {
+    "title": "Centre d’action bénévole de la Vallée-du-Richelieu",
+    "org": "Info SVP (CDC Vallée-du-Richelieu)",
+    "cat": "Ressources communautaires",
+    "tags": "Aide alimentaire bénévolat aide alimentaire friperie aînés Mont-Saint-Hilaire ressource communautaire organisme",
+    "url": "https://cabvr.org/",
+    "desc": "Organisme communautaire de Mont-Saint-Hilaire · Aide alimentaire.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Aide alimentaire",
+    "rubriques": [
+      "Aide alimentaire"
+    ],
+    "ville": "Mont-Saint-Hilaire",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://infosvp.ca/repertoire-des-services/"
+  },
+  {
+    "title": "Parrainage civique de la Vallée-du-Richelieu",
+    "org": "Info SVP (CDC Vallée-du-Richelieu)",
+    "cat": "Ressources communautaires",
+    "tags": "Soutien dans la communauté jumelage déficience intellectuelle TSA santé mentale isolement Beloeil ressource communautaire organisme",
+    "url": "https://pcvr.ca/",
+    "desc": "Organisme communautaire de Beloeil · Soutien dans la communauté.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Soutien dans la communauté",
+    "rubriques": [
+      "Soutien dans la communauté"
+    ],
+    "ville": "Beloeil",
+    "adresse": "",
+    "telephone": "",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://infosvp.ca/repertoire-des-services/"
+  },
+  {
+    "title": "Transport collectif de la MRC d’Acton (Omnibus région d’Acton)",
+    "org": "Ville d’Acton Vale (répertoire des organismes)",
+    "cat": "Ressources communautaires",
+    "tags": "Soutien dans la communauté transport collectif rendez-vous médical déplacement Acton Vale ressource communautaire organisme",
+    "url": "https://www.omnibusra.com/",
+    "desc": "Organisme communautaire de Acton Vale · Soutien dans la communauté.",
+    "verifie": "2026-09-25",
+    "type": "communautaire",
+    "rubrique": "Soutien dans la communauté",
+    "rubriques": [
+      "Soutien dans la communauté"
+    ],
+    "ville": "Acton Vale",
+    "adresse": "430, rue Bonin, Acton Vale",
+    "telephone": "450 546-4039",
+    "pourQui": "",
+    "services": "",
+    "heures": "",
+    "acces": "",
+    "sourcePage": "https://ville.actonvale.qc.ca/organisme_category/organismes-communautaires/"
   }
 ]

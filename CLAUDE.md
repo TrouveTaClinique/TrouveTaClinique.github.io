@@ -61,8 +61,9 @@ dates du sitemap selon le contenu réel des pages).
 - Liens vérifiés chaque lundi par `.github/workflows/verifier-liens-guides.yml`
   (`scripts/verifier-liens-guides.js`), qui ouvre un ticket s'il y a lieu.
 - Ressources communautaires : fiches `type: "communautaire"` de `guides/donnees.json`, sujet
-  « Ressources communautaires » (bottin 2023 du Réseau d'habitations chez soi, agglomération de
-  Longueuil, plus 211, Info-aidant, Info-Social 811 et 9-8-8). Champs propres : `rubrique`,
+  « Ressources communautaires » (bottin 2023 du Réseau d'habitations chez soi et répertoires des
+  CDC : Longueuil, Maskoutains, Vallée-du-Richelieu ; « (hors territoire) » dans `ville` hors
+  Montérégie-Est ; plus 211, Info-aidant, Info-Social 811 et 9-8-8). Champs propres : `rubrique`,
   `rubriques`, `ville`, `adresse`, `telephone`, `pourQui`, `heures`, `acces`, `services`,
   `sourcePage`. Lien : site de l'organisme vérifié, sinon la page du bottin PDF.
   La recherche fait passer les organismes devant pour une question communautaire
