@@ -250,6 +250,11 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
 .annonce-banner.annonce-sortie { transform: translateX(calc(50vw + 24px)); opacity: 0;
   transition: transform .3s cubic-bezier(.4,0,1,1), opacity .3s ease-in; pointer-events: none; }
 .annonce-accent { height: 4px; background: linear-gradient(90deg, var(--orange), #f5b301); }
+/* Compte à rebours : la ligne dégradée se retire vers la gauche pendant l'affichage ; quand elle
+   a disparu, l'annonce glisse vers la droite. Suspendu au survol et au clavier (annonce-pause). */
+.annonce-banner.annonce-compte .annonce-accent { animation: annonce-compte 15s linear forwards; }
+.annonce-banner.annonce-pause .annonce-accent { animation-play-state: paused; }
+@keyframes annonce-compte { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 100% 0 0); } }
 .annonce-inner { position: relative; padding: 12px 14px 13px; }
 .annonce-head { font-family: var(--sq-font); font-weight: 600; font-size: 11px;
   text-transform: uppercase; letter-spacing: .07em; color: var(--orange);
@@ -4176,30 +4181,32 @@ function showBanner() {
   planifierSortieAnnonce(banner);
 }
 
-/* L'annonce glisse hors de l'écran vers la droite après 15 secondes. Le délai est suspendu
-   tant que la souris ou le clavier est dans l'annonce (lecture ou clic sur un bouton), puis
-   reprend 5 secondes après. Une annonce partie ne revient pas pendant la visite. */
+/* L'annonce reste 15 secondes : la ligne dégradée du haut se retire vers la gauche pour montrer
+   le temps restant, puis l'annonce glisse hors de l'écran vers la droite. Le compte est suspendu
+   tant que la souris ou le clavier est dans l'annonce, et reprend là où il s'était arrêté.
+   Une annonce partie ne revient pas pendant la visite. */
 const ANNONCE_DELAI = 15000;
-let minuterieAnnonce = null;
 function planifierSortieAnnonce(banner) {
-  clearTimeout(minuterieAnnonce);
-  banner.classList.remove('annonce-sortie');
-  const sortir = () => {
+  const accent = banner.querySelector('.annonce-accent');
+  banner.classList.remove('annonce-sortie', 'annonce-pause', 'annonce-compte');
+  if (!accent) return;
+  accent.style.animationDuration = ANNONCE_DELAI + 'ms';
+  void accent.offsetWidth;            // relance l'animation depuis le début
+  banner.classList.add('annonce-compte');
+  if (banner.dataset.sortiePlanifiee) return;
+  banner.dataset.sortiePlanifiee = '1';
+  accent.addEventListener('animationend', event => {
+    if (event.animationName !== 'annonce-compte' || annonceFermee) return;
     banner.classList.add('annonce-sortie');
     annonceFermee = true;
-    setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('annonce-sortie'); }, 350);
-  };
-  const lancer = delai => { clearTimeout(minuterieAnnonce); minuterieAnnonce = setTimeout(sortir, delai); };
-  if (!banner.dataset.sortiePlanifiee) {
-    banner.dataset.sortiePlanifiee = '1';
-    const pause = () => clearTimeout(minuterieAnnonce);
-    const reprise = () => { if (!annonceFermee) lancer(5000); };
-    banner.addEventListener('mouseenter', pause);
-    banner.addEventListener('focusin', pause);
-    banner.addEventListener('mouseleave', reprise);
-    banner.addEventListener('focusout', event => { if (!banner.contains(event.relatedTarget)) reprise(); });
-  }
-  lancer(ANNONCE_DELAI);
+    setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('annonce-sortie', 'annonce-compte'); }, 350);
+  });
+  const pause = () => banner.classList.add('annonce-pause');
+  const reprise = () => banner.classList.remove('annonce-pause');
+  banner.addEventListener('mouseenter', pause);
+  banner.addEventListener('focusin', pause);
+  banner.addEventListener('mouseleave', () => { if (!banner.contains(document.activeElement)) reprise(); });
+  banner.addEventListener('focusout', event => { if (!banner.contains(event.relatedTarget) && !banner.matches(':hover')) reprise(); });
 }
 
 function showUpdateDate() {
