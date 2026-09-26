@@ -379,6 +379,12 @@ body.fiche-open .leaflet-control-attribution { display: none; }
   .credits-carte .credits-l1 { font-size: 10.5px; }
   .rls-legend { margin-bottom: 72px !important; }
 }
+/* Cellulaire : légende et crédits côte à côte, à la même hauteur (bas de la carte). Le bloc de
+   crédits se resserre pour laisser la place à la légende, au lieu de pousser celle-ci vers le haut. */
+@media (max-width: 860px) {
+  .rls-legend { margin-bottom: 6px !important; }
+  .leaflet-container .leaflet-control-attribution.credits-carte { max-width: calc(100vw - 186px); }
+}
 
 .rls-dot { display:inline-block; width:9px; height:9px; border-radius:50%;
   margin-right:6px; vertical-align:middle; flex-shrink:0; }
