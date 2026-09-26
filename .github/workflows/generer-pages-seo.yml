@@ -161,7 +161,7 @@ jobs:
             exit 1
           fi
           echo "Vérification que data.json ne contient aucune note interne (fichier et dépôt publics)..."
-          node -e 'const d=require("./data.json");const n=(d.cliniques||[]).filter(c=>String(c.notes||"").trim());if(n.length){console.error("Notes internes dans data.json : "+n.map(c=>c.id).join(", "));process.exit(1)}'
+          node -e 'const d=require("./data.json");const n=(d.cliniques||[]).filter(c=>String(c.notes||"").trim());if(n.length){console.error("Notes internes dans data.json : cliniques "+n.map(c=>c.id).join(", ")+". Vider leur champ notes (\"notes\": \"\") et mettre à jour PTEM2027_v2.gs dans le classeur (voir CLAUDE.md, « Notes internes des cliniques »). Ne pas retirer ce garde-fou.");process.exit(1)}'
           echo "Vérification que le générateur n'a pas modifié data.json après sa datation..."
           sha256sum -c "$RUNNER_TEMP/data-json-apres-date.sha256"
           echo "Vérification de l'architecture accueil/carte et de la PWA Est..."
