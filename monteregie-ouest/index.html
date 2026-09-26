@@ -246,6 +246,9 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   z-index: 920; width: min(330px, calc(100% - 104px));
   background: var(--carte); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
   box-shadow: 0 10px 30px rgba(15,34,64,.22); }
+/* Sortie automatique : glisse vers la droite après 15 s (voir planifierSortieAnnonce). */
+.annonce-banner.annonce-sortie { transform: translateX(calc(50vw + 24px)); opacity: 0;
+  transition: transform .7s cubic-bezier(.5,0,.75,0), opacity .7s ease-in; pointer-events: none; }
 .annonce-accent { height: 4px; background: linear-gradient(90deg, var(--orange), #f5b301); }
 .annonce-inner { position: relative; padding: 12px 14px 13px; }
 .annonce-head { font-family: var(--sq-font); font-weight: 600; font-size: 11px;
@@ -4136,6 +4139,33 @@ function showBanner() {
   const actionsEl = document.getElementById('annonce-actions');
   if (actionsEl) actionsEl.style.display = (lien || lienCarte) ? '' : 'none';
   banner.style.display = 'block';
+  planifierSortieAnnonce(banner);
+}
+
+/* L'annonce glisse hors de l'écran vers la droite après 15 secondes. Le délai est suspendu
+   tant que la souris ou le clavier est dans l'annonce (lecture ou clic sur un bouton), puis
+   reprend 5 secondes après. Une annonce partie ne revient pas pendant la visite. */
+const ANNONCE_DELAI = 15000;
+let minuterieAnnonce = null;
+function planifierSortieAnnonce(banner) {
+  clearTimeout(minuterieAnnonce);
+  banner.classList.remove('annonce-sortie');
+  const sortir = () => {
+    banner.classList.add('annonce-sortie');
+    annonceFermee = true;
+    setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('annonce-sortie'); }, 750);
+  };
+  const lancer = delai => { clearTimeout(minuterieAnnonce); minuterieAnnonce = setTimeout(sortir, delai); };
+  if (!banner.dataset.sortiePlanifiee) {
+    banner.dataset.sortiePlanifiee = '1';
+    const pause = () => clearTimeout(minuterieAnnonce);
+    const reprise = () => { if (!annonceFermee) lancer(5000); };
+    banner.addEventListener('mouseenter', pause);
+    banner.addEventListener('focusin', pause);
+    banner.addEventListener('mouseleave', reprise);
+    banner.addEventListener('focusout', event => { if (!banner.contains(event.relatedTarget)) reprise(); });
+  }
+  lancer(ANNONCE_DELAI);
 }
 
 function showUpdateDate() {
