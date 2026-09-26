@@ -1244,7 +1244,8 @@ function versCarte_(r, gabaritPersonnel) {
     horaire: vide ? {} : horaire,
     personnel: personnel,
     // Notes internes : jamais exportées. Le dépôt et data.json sont publics (26 sept. 2026) ;
-    // la colonne « [carte] notes » reste dans le classeur seulement.
+    // la colonne « [carte] notes » reste dans le classeur seulement. Le robot de publication
+    // refuse un data.json dont une note n'est pas vide : garder cette ligne telle quelle.
     notes: '',
     rls: txt_(r.q3_rls),
     posApprox: r.position_precision === 'Approximative',

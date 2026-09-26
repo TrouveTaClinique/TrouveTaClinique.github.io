@@ -92,5 +92,20 @@ dates du sitemap selon le contenu réel des pages).
 - Deux PWA indépendantes : `/monteregie-est/` (`sw.js` à la racine) et l'app « Guides »
   (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
   cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
-- Les courriels de recrutement sont publiés volontairement (`PUBLIER_COURRIELS = true`) ; le
-  champ `notes` de `data.json` ne doit jamais être public.
+- Les courriels de recrutement sont publiés volontairement (`PUBLIER_COURRIELS = true`).
+
+## Notes internes des cliniques (garde-fou du 26 septembre 2026)
+
+Le dépôt et `data.json` sont publics : le champ `notes` des cliniques doit rester **vide**.
+Les notes de travail restent dans le classeur Google Sheets (colonne « [carte] notes »).
+
+- `data.json` est exporté du classeur par `PTEM2027_v2.gs` (Apps Script), qui écrit maintenant
+  toujours `notes: ''`. **La copie de ce script dans le classeur doit être la version du dépôt** :
+  une ancienne copie remettrait les notes dans l'export.
+- Deux garde-fous refusent toute note non vide : le test `scripts/test-pages-production.cjs` et
+  l'étape « Vérifier qu'aucune donnée privée n'a fui » du robot `.github/workflows/generer-pages-seo.yml`
+  (message « Notes internes dans data.json : … »).
+- Si le robot échoue avec ce message après un export : **ne pas retirer le garde-fou**. Vider les
+  `notes` des cliniques nommées dans `data.json` (`"notes": ""`), pousser, puis coller la version
+  à jour de `PTEM2027_v2.gs` dans l'éditeur Apps Script du classeur pour que l'export suivant
+  soit propre.

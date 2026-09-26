@@ -40,5 +40,5 @@ test('L\'artefact de production n\'inclut pas la source de travail ni de noindex
 test('data.json : le champ notes des cliniques reste vide (le dépôt et le fichier sont publics)', () => {
   const donnees = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
   const remplies = donnees.cliniques.filter(c => String(c.notes || '').trim()).map(c => `${c.id} ${c.nom}`);
-  assert.deepEqual(remplies, [], 'Notes internes à retirer de data.json (à garder hors du dépôt)');
+  assert.deepEqual(remplies, [], 'Notes internes dans data.json : vider leur champ notes et mettre à jour PTEM2027_v2.gs dans le classeur (voir CLAUDE.md, « Notes internes des cliniques »). Ne pas retirer ce test.');
 });
