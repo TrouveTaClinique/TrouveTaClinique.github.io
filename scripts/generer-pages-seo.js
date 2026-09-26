@@ -2055,36 +2055,62 @@ function jsonLdEvenement(c, url) {
    « Signaler une clinique ». */
 const COURRIEL_MISE_A_JOUR = 'olivier.laplante.med@ssss.gouv.qc.ca';
 function lienMiseAJour(c, url) {
-  const jours = rempli(c.horaire)
-    ? JOURS.filter(j => rempli(c.horaire[j])).map(j => `${j.slice(0, 3)} ${c.horaire[j]}`).join(' ; ')
-    : '';
+  /* Un courriel « mailto: » ne peut contenir que du texte brut (pas de gras) : la structure
+     vient des titres de section en majuscules, des filets et des lignes vides. Une valeur par
+     ligne ; « (à compléter) » signale ce qui manque. */
+  const val = v => (rempli(v) ? String(v).replace(/\s+/g, ' ').trim() : '(à compléter)');
+  const ligne = (etiquette, v) => `${etiquette} : ${val(v)}`;
+  const section = (titre, lignes) => `${titre}\n━━━━━━━━━━━━\n${lignes.join('\n')}\n`;
+  const horaire = rempli(c.horaire)
+    ? JOURS.map(j => ligne(j, c.horaire[j]))
+    : ['(à compléter : jours et heures d’ouverture)'];
   const equipe = rempli(c.personnel)
-    ? Object.keys(PERSONNEL).filter(k => rempli(c.personnel[k])).map(k => `${c.personnel[k]} ${PERSONNEL[k].toLowerCase()}`).join(', ')
-    : '';
-  const champs = [
-    ['Adresse', c.adresse],
-    ['Site web', c.site],
-    ['Heures d’ouverture', jours],
-    ['Équipe', equipe],
-    ['DMÉ', c.dme],
-    ['Pratiques offertes', Array.isArray(c.pratiques) ? c.pratiques.map(x => PRATIQUES[x] || x).join(', ') : ''],
-    ['Bureau', c.bureau],
-    ['Frais de bureau', c.frais],
-    ['Médecin responsable du recrutement', c.responsableNom],
-    ['Courriel de recrutement', c.personneRessource],
-    ['Postes visés', c.medecinsRecherches],
-    ['Recrute actuellement (oui ou non)', recrute(c) ? 'oui' : 'non'],
-    ['Portes ouvertes', c.porteOuverte],
-    ['Présentation du milieu (quelques phrases)', c.presentation]
-  ];
-  const corps = `Bonjour,\n\nVoici des corrections ou des ajouts pour la fiche « ${c.nom} » :\n${url}\n\n`
-    + 'Modifiez ce qui a changé et complétez ce qui manque :\n\n'
-    + champs.map(([k, v]) => `${k} : ${rempli(v) ? String(v).replace(/\s+/g, ' ').trim() : ''}`).join('\n')
-    + '\n\nNom et rôle de la personne qui écrit : \n\nMerci !';
+    ? Object.keys(PERSONNEL).filter(k => rempli(c.personnel[k])).map(k => ligne(PERSONNEL[k], c.personnel[k]))
+    : ['(à compléter : nombre de médecins, IPS, infirmières, professionnels…)'];
+  const pratiques = Array.isArray(c.pratiques) && c.pratiques.length ? c.pratiques.map(x => PRATIQUES[x] || x).join(', ') : '';
+  const corps = [
+    'Bonjour,',
+    '',
+    `Je souhaite mettre à jour la fiche de ${c.nom} sur Trouve ta clinique :`,
+    url,
+    '',
+    'Corrigez directement les renseignements ci-dessous et complétez ceux qui manquent.',
+    'Ce qui est exact peut rester tel quel.',
+    '',
+    section('📍 COORDONNÉES', [ligne('Adresse', c.adresse), ligne('Site web', c.site)]),
+    section('🕒 HEURES D’OUVERTURE', horaire),
+    section('👥 ÉQUIPE', equipe),
+    section('🩺 PRATIQUE', [ligne('DMÉ', c.dme), ligne('Pratiques offertes', pratiques), ligne('Bureau', c.bureau), ligne('Frais de bureau', c.frais)]),
+    section('📣 RECRUTEMENT', [
+      ligne('Recrute actuellement', recrute(c) ? 'Oui' : 'Non'),
+      ligne('Postes visés', c.medecinsRecherches),
+      ligne('Médecin responsable', c.responsableNom),
+      ligne('Courriel de recrutement', c.personneRessource),
+      ligne('Portes ouvertes', c.porteOuverte)
+    ]),
+    section('✍️ PRÉSENTATION DU MILIEU', [rempli(c.presentation) ? val(c.presentation) : '(à compléter : quelques phrases pour présenter le milieu aux résidents)']),
+    section('🙋 PERSONNE QUI ÉCRIT', ['Nom : ', 'Rôle : ', 'Téléphone (facultatif) : ']),
+    'Merci !'
+  ].join('\n');
   return `mailto:${COURRIEL_MISE_A_JOUR}?subject=${encodeURIComponent(`Mise à jour de la fiche : ${c.nom}`)}&body=${encodeURIComponent(corps)}`;
 }
+/* Encadré aéré avec un bouton vert « Contactez-nous » (styles propres au bloc, pour ne pas
+   changer la feuille commune). */
 function calloutMiseAJour(c, url) {
-  return `  <div class="callout maj-fiche"><strong>Vous travaillez dans ce milieu&nbsp;?</strong> Une information manque ou a changé&nbsp;? <a href="${esc(lienMiseAJour(c, url))}">Mettre à jour cette fiche</a> : un courriel prérempli avec les renseignements actuels s’ouvre, il suffit de corriger ou de compléter.</div>`;
+  return `  <style>
+  .maj-fiche{margin:var(--s-md) 0;padding:1.4rem 1.5rem;border:2px solid var(--teal);border-radius:16px;background:var(--teal-pale);max-width:min(72ch,100%)}
+  .maj-fiche h2{margin:0 0 .5rem;font-size:clamp(1.25rem,1vw + 1rem,1.5rem);color:var(--navy)}
+  .maj-fiche p{margin:0 0 1.1rem;font-size:1.05rem;line-height:1.55;color:var(--navy)}
+  .maj-fiche .maj-bouton{display:inline-flex;align-items:center;gap:.55rem;min-height:52px;padding:.75rem 1.7rem;border-radius:999px;background:var(--teal-texte);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 4px 12px rgba(6,122,122,.25)}
+  .maj-fiche .maj-bouton:hover{background:#055f5f;color:#fff}
+  .maj-fiche .maj-bouton:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
+  @media(max-width:560px){.maj-fiche .maj-bouton{width:100%;justify-content:center}}
+  </style>
+  <section class="maj-fiche" aria-labelledby="maj-fiche-titre">
+    <h2 id="maj-fiche-titre">Vous travaillez dans ce milieu&nbsp;?</h2>
+    <p>Contactez-nous pour mettre à jour une information manquante ou erronée.</p>
+    <a class="maj-bouton" href="${esc(lienMiseAJour(c, url))}"><span aria-hidden="true">✉</span> Contactez-nous</a>
+  </section>`;
 }
 
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
