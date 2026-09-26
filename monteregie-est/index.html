@@ -272,7 +272,7 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   box-shadow: 0 10px 30px rgba(15,34,64,.22); }
 /* Sortie automatique : glisse vers la droite après 15 s (voir planifierSortieAnnonce). */
 .annonce-banner.annonce-sortie { transform: translateX(calc(50vw + 24px)); opacity: 0;
-  transition: transform .7s cubic-bezier(.5,0,.75,0), opacity .7s ease-in; pointer-events: none; }
+  transition: transform .3s cubic-bezier(.4,0,1,1), opacity .3s ease-in; pointer-events: none; }
 .annonce-accent { height: 4px; background: linear-gradient(90deg, var(--orange), #f5b301); }
 .annonce-inner { position: relative; padding: 12px 14px 13px; }
 .annonce-head { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 11px;
@@ -4418,7 +4418,7 @@ function planifierSortieAnnonce(banner) {
   const sortir = () => {
     banner.classList.add('annonce-sortie');
     annonceFermee = true;
-    setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('annonce-sortie'); }, 750);
+    setTimeout(() => { banner.style.display = 'none'; banner.classList.remove('annonce-sortie'); }, 350);
   };
   const lancer = delai => { clearTimeout(minuterieAnnonce); minuterieAnnonce = setTimeout(sortir, delai); };
   if (!banner.dataset.sortiePlanifiee) {
