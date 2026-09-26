@@ -1243,7 +1243,9 @@ function versCarte_(r, gabaritPersonnel) {
     dme: r.q26_emrs ? chercher_(inverser_(DME), r.q26_emrs, String(r.q26_emrs)) : '',
     horaire: vide ? {} : horaire,
     personnel: personnel,
-    notes: txt_(r.carte_notes),
+    // Notes internes : jamais exportées. Le dépôt et data.json sont publics (26 sept. 2026) ;
+    // la colonne « [carte] notes » reste dans le classeur seulement.
+    notes: '',
     rls: txt_(r.q3_rls),
     posApprox: r.position_precision === 'Approximative',
     bureau: reduireCases_(r.q28_offices, BUREAU_RETOUR),
