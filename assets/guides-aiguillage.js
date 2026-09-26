@@ -18,6 +18,22 @@
   const DELAI_MAX = 60000;
   section.hidden = false;
 
+  /* Champ d'une seule hauteur de base, qui grandit tout seul pendant la saisie (plafond en CSS).
+     Entrée envoie la question ; Maj+Entrée ajoute une ligne. */
+  const ajuster = () => {
+    /* Champ vide : hauteur de base (le texte d'exemple ne doit pas l'agrandir). */
+    if (!champ.value) { champ.style.height = ''; champ.style.overflowY = ''; return; }
+    champ.style.height = 'auto';
+    champ.style.height = champ.scrollHeight + 2 + 'px';   // + bordures
+    champ.style.overflowY = champ.scrollHeight + 2 > parseFloat(getComputedStyle(champ).maxHeight) ? 'auto' : 'hidden';
+  };
+  champ.addEventListener('input', ajuster);
+  champ.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return;
+    event.preventDefault();
+    if (!bouton.disabled) form.requestSubmit ? form.requestSubmit(bouton) : bouton.click();
+  });
+
   const paragraphe = (classe, texte) => {
     const p = document.createElement('p');
     p.className = classe;

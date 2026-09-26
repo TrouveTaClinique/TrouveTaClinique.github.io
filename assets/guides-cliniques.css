@@ -22,8 +22,8 @@
 .guides-resultats{border-top:4px solid var(--teal)}
 /* Boîte d'aiguillage IA (affichée seulement quand le service est configuré). */
 .guides-ia-intro{font-size:1.05rem;line-height:1.6;max-width:74ch;margin:0 0 1rem}
-.guides-ia-form{display:flex;flex-wrap:wrap;gap:.8rem;align-items:stretch}
-.guides-ia-form textarea{flex:1 1 22rem;min-height:60px;padding:.9rem 1.2rem;border:2px solid rgba(18,6,114,.3);border-radius:16px;font:inherit;font-size:1.05rem;color:var(--navy);background:#fff;resize:vertical}
+.guides-ia-form{display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-start}
+.guides-ia-form textarea{flex:1 1 22rem;min-height:60px;padding:.9rem 1.2rem;border:2px solid rgba(18,6,114,.3);border-radius:16px;font:inherit;font-size:1.05rem;color:var(--navy);background:#fff;resize:none;overflow-y:hidden;line-height:1.45;max-height:14rem}
 .guides-ia-form button{min-height:60px;padding:0 1.8rem;border:0;border-radius:999px;background:var(--navy);color:#fff;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer}
 .guides-ia-form button[disabled]{opacity:.6;cursor:progress}
 .guides-ia-avis{font-size:.9rem;margin:.75rem 0 0;color:var(--navy);opacity:.85;max-width:80ch}
@@ -135,11 +135,11 @@
 /* Application « Guides » : bouton d’installation (visible seulement si l’app peut être installée). */
 .guides-app{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin:1.2rem 0 0}
 .guides-app[hidden]{display:none}
-.guides-app-bouton{display:inline-flex;align-items:center;gap:.6rem;min-height:48px;padding:.45rem 1.2rem .45rem .5rem;border:2px solid #08A0A0;border-radius:999px;background:#fff;color:#170A72;font:inherit;font-weight:600;font-size:1rem;cursor:pointer}
+.guides-app-bouton{display:inline-flex;align-items:center;gap:.8rem;min-height:60px;padding:.55rem 1.6rem .55rem .6rem;border:2px solid #08A0A0;border-radius:999px;background:#fff;color:#170A72;font:inherit;font-weight:700;font-size:1.15rem;cursor:pointer}
+.guides-app-bouton img{width:40px;height:40px}
 .guides-app-bouton img{border-radius:8px}
 .guides-app-bouton:hover{background:#EFFAF9}
 .guides-page .guides-app-bouton:focus-visible{outline:3px solid #08A0A0;outline-offset:3px}
-.guides-app-note{font-size:.92rem;color:#170A72;opacity:.85}
 .guides-app-aide{flex-basis:100%;margin:.2rem 0 0;padding:.7rem .9rem;border-left:3px solid #08A0A0;background:#EFFAF9;border-radius:8px;font-size:.95rem;color:#170A72;max-width:60ch}
 @media (max-width:640px){.guides-ia{margin-inline:.6rem;padding:1.4rem 1.1rem;border-radius:16px}}
 /* Attente de la réponse de l'IA : pastille ✦ avec anneau qui tourne, étapes qui défilent,

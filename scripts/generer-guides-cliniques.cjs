@@ -95,7 +95,7 @@ const PAGES = {
     aide: 'Mots-clés ou phrase complète, par exemple : MPOC, otite chez un enfant allergique, patient sous apixaban. Les abréviations, synonymes et fautes de frappe courantes sont reconnus.',
     catalogueTitre: 'Parcourir par sujet',
     iaTitre: 'Demandez à l’IA quel guide consulter',
-    iaIntro: 'Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.',
+    iaIntro: 'Décrivez la situation en quelques mots.',
     iaExemple: 'Ex. : toux depuis 4 semaines chez un fumeur de 60 ans',
     proposerTexte: 'Proposez un guide de pratique, un outil clinique ou un document pour les patients utile en première ligne : il sera vérifié avant d’être ajouté au catalogue.'
   },
@@ -118,14 +118,14 @@ const PAGES = {
     aide: 'Mots-clés ou phrase complète, par exemple : banque alimentaire à Longueuil, hébergement pour femme victime de violence, répit pour proche aidant.',
     catalogueTitre: 'Parcourir par type d’aide',
     iaTitre: 'Demandez à l’IA vers quel organisme diriger votre patient',
-    iaIntro: 'Décrivez le besoin en quelques mots : l’IA suggère jusqu’à 5 organismes ou lignes d’aide du catalogue et explique chaque choix.',
+    iaIntro: 'Décrivez le besoin en quelques mots.',
     iaExemple: 'Ex. : aîné isolé à Boucherville qui a besoin de repas',
     proposerTexte: 'Proposez un organisme communautaire ou une ligne d’aide utile à vos patients : il sera vérifié avant d’être ajouté au catalogue.'
   }
 };
 
 /* Note sur la provenance des organismes, en tête de la page communautaire. */
-const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la région de Saint-Hyacinthe et de la Vallée-du-Richelieu, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a> et des répertoires des corporations de développement communautaire (CDC). Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>). En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.`;
+const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la région de Saint-Hyacinthe et de la Vallée-du-Richelieu, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a> et des répertoires des corporations de développement communautaire (CDC).<br>Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>).<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.`;
 
 const SANS_ADRESSE = '(sans adresse)';
 
@@ -237,11 +237,11 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=104-deux-pages">
-  <script src="/assets/guides-recherche.js?v=104-deux-pages" defer></script>
-  <script src="/assets/guides-cliniques.js?v=104-deux-pages" defer></script>
-  <script src="/assets/guides-installer.js?v=104-deux-pages" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=104-deux-pages" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=105-ia-entree">
+  <script src="/assets/guides-recherche.js?v=105-ia-entree" defer></script>
+  <script src="/assets/guides-cliniques.js?v=105-ia-entree" defer></script>
+  <script src="/assets/guides-installer.js?v=105-ia-entree" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=105-ia-entree" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -253,11 +253,10 @@ ${header.replace(/ aria-current="page"/g, '')}
     <h1>${P.h1}</h1>
     <p class="lead">${P.lead}</p>
     ${cle === 'guides'
-      ? `<p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.${dateVerif ? ` Liens vérifiés le ${dateVerif}.` : ''} Ce catalogue ne remplace pas le jugement clinique.</p>`
+      ? `<p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.<br>${dateVerif ? `Liens vérifiés le ${dateVerif}.<br>` : ''}Ce catalogue ne remplace pas le jugement clinique.</p>`
       : `<p class="guides-avis">${NOTE_COMMUNAUTAIRE}</p>`}
     <div class="guides-app" id="guides-app" hidden>
       <button type="button" class="guides-app-bouton" id="guides-app-installer"><img src="/guides/icon-192.png" width="28" height="28" alt=""> Installer l’app Guides</button>
-      <span class="guides-app-note">Accès direct depuis l’écran d’accueil, même hors connexion.</span>
       <p class="guides-app-aide" id="guides-app-aide" role="status" hidden></p>
     </div>
   </section>
@@ -279,7 +278,7 @@ ${header.replace(/ aria-current="page"/g, '')}
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${n} ${P.mot}s dans le catalogue</p>
     <p class="guides-autre" hidden><a href="${autre.chemin}"></a></p>
 ${cle === 'guides' ? `    <div class="guides-communautaire" hidden>
-      <p><strong>Vous cherchez un organisme&nbsp;?</strong> Consultez les <a href="${autre.chemin}">ressources communautaires</a> : ${organismes.length} organismes et lignes d’aide, par ville et par type d’aide. Téléphonez avant de diriger quelqu’un.</p>
+      <p><strong>Vous cherchez un organisme&nbsp;?</strong> Consultez les <a href="${autre.chemin}">ressources communautaires</a> : ${organismes.length} organismes et lignes d’aide, par ville et par type d’aide.<br>Téléphonez avant de diriger quelqu’un.</p>
       <p>Ailleurs en Montérégie, le 211 répertorie les organismes près de chez vous : composez le <a href="tel:211">2-1-1</a> ou consultez <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211qc.ca<span class="visually-hidden"> (nouvel onglet)</span></a>.<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.</p>
     </div>
 ` : ''}    <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toute la liste ci-dessous.</p></noscript>
@@ -290,10 +289,9 @@ ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="gu
     <p class="guides-ia-intro">${P.iaIntro}</p>
     <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
-      <textarea id="guides-ia-question" name="question" rows="2" maxlength="400" placeholder="${P.iaExemple}" required></textarea>
+      <textarea id="guides-ia-question" name="question" rows="1" maxlength="400" enterkeyhint="send" placeholder="${P.iaExemple}" required></textarea>
       <button type="submit">Obtenir des suggestions</button>
     </form>
-    <p class="guides-ia-avis"><strong>Confidentialité :</strong> votre question est transmise à un service d’IA (Anthropic) pour être traitée, puis n’est pas conservée par ce site. N’y inscrivez aucun renseignement permettant d’identifier un patient.</p>
     <div class="guides-ia-resultat" aria-live="polite"></div>
   </section>
 ` : ''}  <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>
