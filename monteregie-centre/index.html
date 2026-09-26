@@ -1349,8 +1349,6 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
 </div>
 
 <script src="../leaflet.js"></script>
-<script src="../vendor/maplibre-gl.js"></script>
-<script src="../vendor/leaflet-maplibre-gl.js"></script>
 <script src="../territoires-monteregie.js"></script>
 <script src="../territoires-rls-est.js"></script>
 <script src="../territoires-rls-centre-ouest.js"></script>
@@ -1963,13 +1961,36 @@ map.on('locationerror', function () {
     return (sombre ? STYLE_SOMBRE : STYLE_CLAIR) + '?key=' + encodeURIComponent(CARTO_KEY);
   }
 
-  // La build 5.24.0 de MapLibre GL JS (celle du brouillon, copiée telle quelle dans ./vendor/)
-  // n'exporte plus de fonction maplibregl.supported() — ce test n'a donc jamais pu passer,
-  // sur AUCUN navigateur, même quand WebGL est disponible. On considère le fond vectoriel
-  // possible dès que le script est chargé, et on continue de s'appuyer sur le bloc try/catch
-  // ci-dessous (déjà présent dans le brouillon) pour retomber sur le raster si la création de
-  // la carte MapLibre échoue réellement (WebGL absent ou désactivé).
-  var vectorielDisponible = !!(window.maplibregl && (typeof maplibregl.supported !== 'function' || maplibregl.supported()));
+  /* Chargement différé (26 sept. 2026) : le moteur MapLibre (~1 Mo) n'est plus chargé en tête
+     de page. Les épingles, la liste et les filtres s'affichent d'abord ; le fond de carte suit
+     dès que le moteur est prêt (après l'événement « load »). Si le chargement ou WebGL échoue,
+     repli sur le fond raster, comme avant. */
+  var vectorielDisponible = true;
+  var moteurPret = null;
+  function chargerScript(src) {
+    return new Promise(function (ok, ko) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      s.onload = ok;
+      s.onerror = ko;
+      document.head.appendChild(s);
+    });
+  }
+  function chargerMoteur() {
+    if (!moteurPret) {
+      moteurPret = chargerScript('../vendor/maplibre-gl.js')
+        .then(function () { return chargerScript('../vendor/leaflet-maplibre-gl.js'); })
+        .then(function () {
+          // La build 5.24.0 n'exporte plus maplibregl.supported() : le moteur est jugé
+          // utilisable dès qu'il est chargé ; l'essai de création ci-dessous tranche.
+          if (!(window.maplibregl && L.maplibreGL && (typeof maplibregl.supported !== 'function' || maplibregl.supported()))) {
+            throw new Error('MapLibre indisponible');
+          }
+        });
+    }
+    return moteurPret;
+  }
 
   function coucheRasterRepli(sombre) {
     return L.tileLayer('https://basemaps.cartocdn.com/rastertiles/' + (sombre ? 'dark_all' : 'light_all')
@@ -2001,20 +2022,33 @@ map.on('locationerror', function () {
   }
 
   var modeSombreActuel = document.documentElement.dataset.theme === 'sombre';
-  var actuelle = ajouterCouche(modeSombreActuel);
+  var actuelle = null;
+  function poserFond() {
+    var neuve = ajouterCouche(modeSombreActuel);
+    if (actuelle) map.removeLayer(actuelle);
+    actuelle = neuve;
+  }
+  function demarrerFond() {
+    chargerMoteur().then(poserFond, function (e) {
+      vectorielDisponible = false;
+      console.warn('Moteur MapLibre non chargé, fond raster de secours.', e);
+      poserFond();
+    });
+  }
+  if (document.readyState === 'complete') setTimeout(demarrerFond, 0);
+  else window.addEventListener('load', demarrerFond, { once: true });
   // « map » est déclaré avec const : il n'existe pas sur window. On le capture ici,
   // dans la portée du script, plutôt que d'y accéder globalement.
   window.fondCarte = function (sombre) {
-    if (!actuelle || sombre === modeSombreActuel) return;
+    if (sombre === modeSombreActuel) return;
     modeSombreActuel = sombre;
+    if (!actuelle) return;   // fond pas encore posé : il le sera avec le bon thème
     var carteVectorielle = actuelle.getMaplibreMap && actuelle.getMaplibreMap();
     if (carteVectorielle) {
       carteVectorielle.setStyle(styleUrl(sombre));
       return;
     }
-    var neuve = ajouterCouche(sombre);
-    map.removeLayer(actuelle);
-    actuelle = neuve;
+    poserFond();
   };
 })();
 
