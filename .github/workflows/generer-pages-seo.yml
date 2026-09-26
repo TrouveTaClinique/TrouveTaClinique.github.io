@@ -160,6 +160,8 @@ jobs:
             echo "::error::Un champ interne apparaît dans les pages générées. Publication annulée."
             exit 1
           fi
+          echo "Vérification que data.json ne contient aucune note interne (fichier et dépôt publics)..."
+          node -e 'const d=require("./data.json");const n=(d.cliniques||[]).filter(c=>String(c.notes||"").trim());if(n.length){console.error("Notes internes dans data.json : "+n.map(c=>c.id).join(", "));process.exit(1)}'
           echo "Vérification que le générateur n'a pas modifié data.json après sa datation..."
           sha256sum -c "$RUNNER_TEMP/data-json-apres-date.sha256"
           echo "Vérification de l'architecture accueil/carte et de la PWA Est..."

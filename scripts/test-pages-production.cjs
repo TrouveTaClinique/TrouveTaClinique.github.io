@@ -36,3 +36,9 @@ test('L\'artefact de production n\'inclut pas la source de travail ni de noindex
     fs.rmSync(temporaire, { recursive: true, force: true });
   }
 });
+
+test('data.json : le champ notes des cliniques reste vide (le dépôt et le fichier sont publics)', () => {
+  const donnees = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
+  const remplies = donnees.cliniques.filter(c => String(c.notes || '').trim()).map(c => `${c.id} ${c.nom}`);
+  assert.deepEqual(remplies, [], 'Notes internes à retirer de data.json (à garder hors du dépôt)');
+});
