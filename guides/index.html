@@ -29,11 +29,11 @@
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=104-deux-pages">
-  <script src="/assets/guides-recherche.js?v=104-deux-pages" defer></script>
-  <script src="/assets/guides-cliniques.js?v=104-deux-pages" defer></script>
-  <script src="/assets/guides-installer.js?v=104-deux-pages" defer></script>
-  <script src="/assets/guides-aiguillage.js?v=104-deux-pages" defer></script>
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=105-ia-entree">
+  <script src="/assets/guides-recherche.js?v=105-ia-entree" defer></script>
+  <script src="/assets/guides-cliniques.js?v=105-ia-entree" defer></script>
+  <script src="/assets/guides-installer.js?v=105-ia-entree" defer></script>
+  <script src="/assets/guides-aiguillage.js?v=105-ia-entree" defer></script>
 </head>
 <body class="guides-page" data-page="guides" data-mot="ressource" data-autre-page="/guides/ressources-communautaires/">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -55,7 +55,7 @@
       <a href="/monteregie-est/amp/">AMP</a>
   </nav>
   <div class="actions">
-    <a class="recherche" id="search-toggle" href="/recherche/" aria-expanded="false" aria-controls="search-panel">
+    <a class="recherche" id="search-toggle" href="/recherche/" aria-label="Rechercher" aria-expanded="false" aria-controls="search-panel">
       <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
         <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
         <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
@@ -72,10 +72,9 @@
     <p class="eyebrow">Médecine familiale · Première ligne</p>
     <h1>Guides pratiques et ressources cliniques</h1>
     <p class="lead">Retrouvez les guides de pratique, algorithmes et documents pour les patients utiles à la médecine familiale.</p>
-    <p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site. Liens vérifiés le 25 septembre 2026. Ce catalogue ne remplace pas le jugement clinique.</p>
+    <p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.<br>Liens vérifiés le 25 septembre 2026.<br>Ce catalogue ne remplace pas le jugement clinique.</p>
     <div class="guides-app" id="guides-app" hidden>
       <button type="button" class="guides-app-bouton" id="guides-app-installer"><img src="/guides/icon-192.png" width="28" height="28" alt=""> Installer l’app Guides</button>
-      <span class="guides-app-note">Accès direct depuis l’écran d’accueil, même hors connexion.</span>
       <p class="guides-app-aide" id="guides-app-aide" role="status" hidden></p>
     </div>
   </section>
@@ -98,7 +97,7 @@
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">347 ressources dans le catalogue</p>
     <p class="guides-autre" hidden><a href="/guides/ressources-communautaires/"></a></p>
     <div class="guides-communautaire" hidden>
-      <p><strong>Vous cherchez un organisme&nbsp;?</strong> Consultez les <a href="/guides/ressources-communautaires/">ressources communautaires</a> : 302 organismes et lignes d’aide, par ville et par type d’aide. Téléphonez avant de diriger quelqu’un.</p>
+      <p><strong>Vous cherchez un organisme&nbsp;?</strong> Consultez les <a href="/guides/ressources-communautaires/">ressources communautaires</a> : 302 organismes et lignes d’aide, par ville et par type d’aide.<br>Téléphonez avant de diriger quelqu’un.</p>
       <p>Ailleurs en Montérégie, le 211 répertorie les organismes près de chez vous : composez le <a href="tel:211">2-1-1</a> ou consultez <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211qc.ca<span class="visually-hidden"> (nouvel onglet)</span></a>.<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.</p>
     </div>
     <noscript><p>La recherche nécessite JavaScript. Vous pouvez consulter toute la liste ci-dessous.</p></noscript>
@@ -106,13 +105,12 @@
   <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/" data-page="guides" hidden>
     <p class="guides-ia-pastille"><span aria-hidden="true">✦</span> Nouveau : recherche assistée par IA</p>
     <h2 id="guides-ia-titre">Demandez à l’IA quel guide consulter</h2>
-    <p class="guides-ia-intro">Décrivez la situation en quelques mots : l’IA suggère jusqu’à 5 guides du catalogue et explique chaque choix. Elle ne donne pas d’avis clinique.</p>
+    <p class="guides-ia-intro">Décrivez la situation en quelques mots.</p>
     <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
-      <textarea id="guides-ia-question" name="question" rows="2" maxlength="400" placeholder="Ex. : toux depuis 4 semaines chez un fumeur de 60 ans" required></textarea>
+      <textarea id="guides-ia-question" name="question" rows="1" maxlength="400" enterkeyhint="send" placeholder="Ex. : toux depuis 4 semaines chez un fumeur de 60 ans" required></textarea>
       <button type="submit">Obtenir des suggestions</button>
     </form>
-    <p class="guides-ia-avis"><strong>Confidentialité :</strong> votre question est transmise à un service d’IA (Anthropic) pour être traitée, puis n’est pas conservée par ce site. N’y inscrivez aucun renseignement permettant d’identifier un patient.</p>
     <div class="guides-ia-resultat" aria-live="polite"></div>
   </section>
   <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>

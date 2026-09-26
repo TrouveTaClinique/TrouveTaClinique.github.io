@@ -101,7 +101,7 @@ const NAV_TOGGLE_SCRIPT = `<script>
 
 /* Le lien reste un vrai href pour fonctionner sans JavaScript. Quand recherche.js est chargé,
    il ouvre plutôt le panneau de recherche rapide sans quitter la page. */
-const RECHERCHE_LIEN = `<a class="recherche" id="search-toggle" href="/recherche/" aria-expanded="false" aria-controls="search-panel">
+const RECHERCHE_LIEN = `<a class="recherche" id="search-toggle" href="/recherche/" aria-label="Rechercher" aria-expanded="false" aria-controls="search-panel">
       <svg viewBox="0 0 20 20" width="19" height="19" fill="none" aria-hidden="true">
         <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.9"/>
         <path d="M12.6 12.6 L16.9 16.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
