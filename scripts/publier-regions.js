@@ -511,7 +511,7 @@ function htmlIntroTerritoire(t, cliniques, etablissements) {
     : `La carte complète regroupe les ${nRls} RLS des trois territoires de la Montérégie (${phraseVilles(TERRITOIRES.map((x) => x.nom))}).`;
   if (nTotal) {
     p1 += ` On y trouve ${nTotal} clinique${nTotal > 1 ? 's' : ''} de médecine familiale`;
-    if (composition) p1 += ` — ${composition}`;
+    if (composition) p1 += ` (${composition})`;
     p1 += ', toutes listées ci-dessous.';
   }
 

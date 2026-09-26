@@ -44,7 +44,6 @@
 .guides-resource-link{position:relative;display:block;height:100%;padding:1.25rem 2.2rem 1.4rem .15rem;text-decoration:none;border-radius:4px}
 .guides-resource-source{display:block;font-size:.9rem;font-weight:650;color:var(--navy);opacity:.75;margin-bottom:.4rem}
 .guides-resource h3{font-size:clamp(1.16rem,.5vw + 1rem,1.38rem);line-height:1.35;margin:0 0 .6rem;text-wrap:pretty}
-.guides-keywords{display:block;font-size:.94rem;line-height:1.6;color:var(--navy);opacity:.7}
 .guides-resource-arrow{position:absolute;right:.25rem;top:1.2rem;font-size:1.5rem;color:var(--teal-texte);line-height:1}
 .guides-resource-link:hover h3{text-decoration:underline;text-underline-offset:4px}
 .guides-resource-link:hover{background:var(--teal-pale)}
@@ -192,3 +191,14 @@
   .guides-onglets a{flex:1 1 0;min-width:0;justify-content:center;flex-wrap:wrap;gap:.2rem .4rem;padding:.45rem .6rem;border-radius:16px;font-size:.92rem;line-height:1.2;text-align:center}
   .guides-onglet-compte{font-size:.78rem}
 }
+/* Récemment ajoutés : section repliée au-dessus du catalogue. */
+.guides-recents{padding-top:1.4rem;padding-bottom:1.4rem;border-top:4px solid var(--teal)}
+.guides-recents summary{display:flex;align-items:baseline;gap:.85rem;cursor:pointer;list-style:none}
+.guides-recents summary::-webkit-details-marker{display:none}
+.guides-recents summary h2{margin:0;font-size:clamp(1.4rem,1.2vw + 1rem,1.9rem)}
+.guides-recents summary .guides-chevron{margin-left:auto;align-self:center}
+.guides-recents details[open] .guides-chevron{transform:rotate(180deg)}
+.guides-page .guides-recents summary:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+.guides-recents-liste{margin:1rem 0 0;padding-left:1.4rem;display:grid;gap:.55rem;font-size:1.02rem;line-height:1.45}
+.guides-recents-liste a{color:var(--navy);font-weight:650;text-decoration:underline;text-underline-offset:3px}
+.guides-recents-meta{display:block;font-size:.9rem;color:var(--navy);opacity:.75}

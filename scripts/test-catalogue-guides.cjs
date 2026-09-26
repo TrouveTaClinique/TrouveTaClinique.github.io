@@ -51,3 +51,8 @@ test('pages générées : guides et organismes séparés, onglets et filtres pro
   assert.ok(guides.includes('<a href="/guides/" aria-current="page">') && comm.includes('<a href="/guides/ressources-communautaires/" aria-current="page">'));
   assert.ok(comm.includes('data-page="communautaire"') && guides.includes('data-page="guides"'));
 });
+
+test('chaque ressource a sa date d’ajout (champ ajoute, AAAA-MM-JJ) pour « Récemment ajoutés »', () => {
+  const fautifs = ressources.filter(r => !/^\d{4}-\d{2}-\d{2}$/.test(r.ajoute || '')).map(r => r.title);
+  assert.deepEqual(fautifs, []);
+});

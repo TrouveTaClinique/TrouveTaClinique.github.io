@@ -27,6 +27,11 @@ test('L\'artefact de production n\'inclut pas la source de travail ni de noindex
     assert.doesNotMatch(accueil, /BROUILLON \|/);
     const r = verifier({ sortie: destination });
     assert.equal(r.ok, true);
+    /* Les notes de travail des cliniques ne sont jamais publiées. */
+    const publiees = JSON.parse(fs.readFileSync(path.join(destination, 'data.json'), 'utf8'));
+    assert.ok(publiees.cliniques.length > 50);
+    assert.ok(publiees.cliniques.every(c => !('notes' in c)));
+    assert.ok(publiees.cliniques.every(c => Number.isFinite(c.lat) && c.nom));
   } finally {
     fs.rmSync(temporaire, { recursive: true, force: true });
   }

@@ -1032,7 +1032,7 @@
       "ville": "Beloeil",
       "lat": 45.563983,
       "lng": -73.205364,
-      "site": "https://carrefourmedical.com",
+      "site": "https://www.carrefourmedical.com/",
       "personneRessource": "michel.beaudoin.med@ssss.gouv.qc.ca",
       "responsableNom": "Dr Michel Beaudoin",
       "dme": "Myle (Medfar Solutions)",
@@ -1620,7 +1620,7 @@
       "ville": "Mercier",
       "lat": 45.327518,
       "lng": -73.73496,
-      "site": "https://gmf-mercier.ca/",
+      "site": "https://gmfmercier.ca/fr/",
       "personneRessource": "",
       "dme": "",
       "horaire": {
@@ -1766,7 +1766,7 @@
       "ville": "Châteauguay",
       "lat": 45.358815,
       "lng": -73.718069,
-      "site": "https://www.gmfrl.com/",
+      "site": "https://gmfrl.com/",
       "personneRessource": "",
       "dme": "Medesync (Telus)",
       "horaire": {

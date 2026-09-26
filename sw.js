@@ -53,7 +53,9 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v90-guides-favoris : favoris du catalogue clinique (étoile, section « Mes favoris »).
 // v91-guides-recherche : moteur de recherche du catalogue (synonymes, fautes, pertinence) et filtres Sujet/Organisme.
 // v92-guides-aiguillage : recherche en phrase complète (pertinence, concepts) et boîte d'aiguillage IA.
-const CACHE = CACHE_PREFIX + 'v92-guides-aiguillage';
+// v93-icones-transparentes (26 septembre 2026) : favicons et icônes « any » sans carré blanc
+// (les icônes maskable et apple-touch gardent leur fond blanc).
+const CACHE = CACHE_PREFIX + 'v93-icones-transparentes';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un

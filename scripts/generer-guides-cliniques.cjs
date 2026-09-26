@@ -130,11 +130,11 @@ const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la
 const SANS_ADRESSE = '(sans adresse)';
 
 function carteGuide(r) {
-  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-search="${esc([r.title,r.org,r.cat,r.tags,r.desc].join(' '))}">
+  /* Mots-clés : gardés dans data-tags pour la recherche, plus affichés sous le titre. */
+  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}">
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">${esc(r.org)}</span>
           <h3>${esc(r.title)}</h3>
-          <span class="guides-keywords">${esc(r.tags)}</span>
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -187,6 +187,25 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
         <label class="guides-select"><span>Ville</span><select id="guides-filtre-ville" data-filtre="ville"><option value="">Toutes les villes</option><optgroup label="Montérégie-Est">${trierFr([...villesEst.keys()]).map(v => option(v, v, villesEst.get(v))).join('')}</optgroup><optgroup label="Hors territoire">${trierFr([...villesHors.keys()]).map(v => option(v, v, villesHors.get(v))).join('')}</optgroup>${sansAdresse ? `<optgroup label="Autres">${option(SANS_ADRESSE, 'Lignes d’aide et services à distance', sansAdresse)}</optgroup>` : ''}</select></label>
         <label class="guides-case"><input type="checkbox" id="guides-hors"> Inclure les organismes hors territoire (${organismes.filter(estHors).length})</label>`;
 
+  /* « Récemment ajoutés » : les 10 dernières fiches de la page (champ « ajoute », puis ordre du
+     fichier), dans une section repliée, masquée pendant une recherche ou un filtre. */
+  const dateFr = iso => `${Number(iso.slice(8, 10))}${iso.slice(8, 10) === '01' ? '<sup>er</sup>' : ''} ${MOIS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}`;
+  const recents = liste => liste.map((r, i) => ({ r, i })).filter(x => x.r.ajoute)
+    .sort((a, b) => b.r.ajoute.localeCompare(a.r.ajoute) || b.i - a.i).slice(0, 10).map(x => x.r);
+  const sectionRecents = liste => {
+    const l = recents(liste);
+    if (!l.length) return '';
+    return `  <section class="guides-band guides-recents" aria-label="Récemment ajoutés">
+    <details>
+      <summary><h2>Récemment ajoutés</h2><span class="compte" aria-label="${l.length} ressources">${l.length}</span><span class="guides-chevron" aria-hidden="true"></span></summary>
+      <ol class="guides-recents-liste">
+${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.title)}<span class="visually-hidden"> (nouvel onglet)</span></a> <span class="guides-recents-meta">${esc(r.type === 'communautaire' ? [rubriqueDe(r), r.ville].filter(Boolean).join(' · ') : r.org)} · ajouté le ${dateFr(r.ajoute)}</span></li>`).join('\n')}
+      </ol>
+    </details>
+  </section>
+`;
+  };
+
   const page = cle => {
     const P = PAGES[cle];
     const autre = PAGES[cle === 'guides' ? 'communautaire' : 'guides'];
@@ -237,11 +256,11 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=105-ia-entree">
-  <script src="/assets/guides-recherche.js?v=105-ia-entree" defer></script>
-  <script src="/assets/guides-cliniques.js?v=105-ia-entree" defer></script>
-  <script src="/assets/guides-installer.js?v=105-ia-entree" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=105-ia-entree" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=106-recents">
+  <script src="/assets/guides-recherche.js?v=106-recents" defer></script>
+  <script src="/assets/guides-cliniques.js?v=106-recents" defer></script>
+  <script src="/assets/guides-installer.js?v=106-recents" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=106-recents" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -303,7 +322,7 @@ ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="gu
     <div class="guides-category-heading"><h2 id="guides-resultats-titre">Résultats les plus pertinents</h2><span class="compte"></span></div>
     <ul class="guides-resource-list"></ul>
   </section>
-  <div id="guides-catalogue">
+${sectionRecents(liste)}  <div id="guides-catalogue">
     <h2 class="guides-catalogue-titre" id="guides-catalogue-titre">${P.catalogueTitre}</h2>
 ${cle === 'guides' ? sectionsDe(sujets, guides, r => r.cat, carteGuide) : sectionsDe(rubriques, organismes, rubriqueDe, carteCommunautaire)}</div>
   <section class="guides-band guides-empty" hidden>
