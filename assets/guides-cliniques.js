@@ -114,6 +114,7 @@
   /* Sans recherche ni filtre, les sujets sont fermés : leur titre est un bouton qui ouvre la
      liste. Une recherche ou un filtre les ouvre tous. Sans JavaScript, tout reste affiché. */
   const titreCatalogue = document.querySelector('.guides-catalogue-titre');
+  const recents = document.querySelector('.guides-recents');
   const ouverts = new Set();   // sujets ouverts à la main (catalogue complet)
   const fermes = new Set();    // sujets refermés à la main (recherche ou filtre en cours)
   let replier = true;
@@ -205,6 +206,7 @@
       }
     });
     empty.hidden = count !== 0;
+    if (recents) recents.hidden = !replier;
     if (communautaire) communautaire.hidden = !moteur.estCommunautaire(requete);
     effacerFiltres.hidden = !actifs.length;
     const libelles = actifs.map(s => s.value === SANS_ADRESSE ? 'lignes d’aide et services à distance' : s.value).join(' · ');

@@ -111,6 +111,15 @@ async function verifierPagesEnLigne() {
   console.log('Destination apercu vérifiée : ' + url);
 }
 
+/* data.json publié : le champ « notes » des cliniques reste privé (notes de travail). Il est
+   retiré de la copie publique ; la carte ne s'en sert pas. Même traitement pour la production. */
+const CHAMPS_PRIVES_CLINIQUES = ['notes'];
+function donneesPubliques(texte) {
+  const donnees = JSON.parse(texte);
+  for (const c of donnees.cliniques || []) for (const champ of CHAMPS_PRIVES_CLINIQUES) delete c[champ];
+  return JSON.stringify(donnees, null, 2) + '\n';
+}
+
 function preparerApercu(racine, destination, options = {}) {
   racine = fs.realpathSync(racine);
   destination = path.resolve(destination);
@@ -136,6 +145,7 @@ function preparerApercu(racine, destination, options = {}) {
         manifeste.short_name = 'PTEM 2027';
         texte = JSON.stringify(manifeste, null, 2) + '\n';
       }
+      if (fichier === 'data.json') texte = donneesPubliques(texte);
       if (fichier === 'sw.js') texte = texte.replace("'trouve-clinique-est-'", "'trouve-clinique-est-brouillon-'");
       contenu = Buffer.from(texte);
     }
@@ -169,6 +179,8 @@ function preparerApercu(racine, destination, options = {}) {
 
 module.exports = {
   preparerApercu,
+  donneesPubliques,
+  CHAMPS_PRIVES_CLINIQUES,
   adapterHtml,
   verifierConfigurationPages,
   lister,

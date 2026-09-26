@@ -1267,6 +1267,7 @@ ${lignes.join('\n')}
     </dl>
   </section>${blocHoraire}${blocEquipe}${blocTexte}
   <div class="data-note">Les éléments susceptibles d’évoluer (DMÉ, équipe, frais, horaires et pratiques offertes) doivent être confirmés auprès du milieu;<br>pour le PTEM et les AMP, les sources officielles et le DTMF priment.</div>
+${calloutMiseAJour(c, canonical || url)}
 
   <section id="suite">
     <h2>Pour aller plus loin</h2>
@@ -1787,7 +1788,7 @@ ${rlsAutresTheme}
 <section class="zone" style="padding-top:0">
   <aside class="rappel appel reveal">
     <h3>Une clinique manque à l'appel&nbsp;?</h3>
-    <p>La carte est mise à jour en continu avec le Recrutement médical de Santé Québec — Montérégie-Est et avec les milieux eux-mêmes. Une fiche incomplète, une erreur, une clinique absente&nbsp;: les signalements sont bienvenus.</p>
+    <p>La carte est mise à jour en continu avec le Recrutement médical de Santé Québec Montérégie-Est et avec les milieux eux-mêmes. Une fiche incomplète, une erreur, une clinique absente&nbsp;: les signalements sont bienvenus.</p>
     <p><a class="btn teal" href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></p>
   </aside>
   <aside class="rappel patient reveal">
@@ -1880,18 +1881,17 @@ ${items}
     </div>
     ${majRepertoire}
   </section>`;
-  const heroEst = `  <div class="cliniques-acces">
+  /* Titre d'abord (26 sept. 2026) : les boutons suivent le chapeau au lieu de le précéder. */
+  const heroEst = `  <section class="zone zone-action cliniques-carte reveal">
+    <p class="eyebrow">Médecine familiale · Montérégie</p>
+    <h1>${esc(titreRepertoire)}</h1>
+    ${leadRepertoire}
     <div class="cta-row">
       ${ancreListe ? `<a class="button primary" href="${ancreListe}">Voir les cliniques</a>` : ''}
       <a class="button secondary" href="${accueilCarte}">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/ptem/">Guide PTEM</a>
     </div>
     ${majRepertoire}
-  </div>
-  <section class="zone zone-action cliniques-carte reveal">
-    <p class="eyebrow">Médecine familiale · Montérégie</p>
-    <h1>${esc(titreRepertoire)}</h1>
-    ${leadRepertoire}
     <a class="banniere" href="${EST_ACCUEIL}" aria-label="Ouvrir la carte interactive Montérégie-Est">
       <img src="../../assets/${BANNIERE_EST_FICHIER}" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="${BANNIERE_EST_LARGEUR}" height="${BANNIERE_EST_HAUTEUR}">
     </a>
@@ -2048,6 +2048,43 @@ function jsonLdEvenement(c, url) {
     organizer: { '@type': 'Organization', name: c.nom, url },
     url: url + '#evenement-titre'
   };
+}
+
+/* « Mettre à jour cette fiche » (26 sept. 2026) : courriel prérempli avec les valeurs actuelles
+   de la fiche, pour que le milieu corrige ou complète ce qui s'applique. Même adresse que
+   « Signaler une clinique ». */
+const COURRIEL_MISE_A_JOUR = 'olivier.laplante.med@ssss.gouv.qc.ca';
+function lienMiseAJour(c, url) {
+  const jours = rempli(c.horaire)
+    ? JOURS.filter(j => rempli(c.horaire[j])).map(j => `${j.slice(0, 3)} ${c.horaire[j]}`).join(' ; ')
+    : '';
+  const equipe = rempli(c.personnel)
+    ? Object.keys(PERSONNEL).filter(k => rempli(c.personnel[k])).map(k => `${c.personnel[k]} ${PERSONNEL[k].toLowerCase()}`).join(', ')
+    : '';
+  const champs = [
+    ['Adresse', c.adresse],
+    ['Site web', c.site],
+    ['Heures d’ouverture', jours],
+    ['Équipe', equipe],
+    ['DMÉ', c.dme],
+    ['Pratiques offertes', Array.isArray(c.pratiques) ? c.pratiques.map(x => PRATIQUES[x] || x).join(', ') : ''],
+    ['Bureau', c.bureau],
+    ['Frais de bureau', c.frais],
+    ['Médecin responsable du recrutement', c.responsableNom],
+    ['Courriel de recrutement', c.personneRessource],
+    ['Postes visés', c.medecinsRecherches],
+    ['Recrute actuellement (oui ou non)', recrute(c) ? 'oui' : 'non'],
+    ['Portes ouvertes', c.porteOuverte],
+    ['Présentation du milieu (quelques phrases)', c.presentation]
+  ];
+  const corps = `Bonjour,\n\nVoici des corrections ou des ajouts pour la fiche « ${c.nom} » :\n${url}\n\n`
+    + 'Modifiez ce qui a changé et complétez ce qui manque :\n\n'
+    + champs.map(([k, v]) => `${k} : ${rempli(v) ? String(v).replace(/\s+/g, ' ').trim() : ''}`).join('\n')
+    + '\n\nNom et rôle de la personne qui écrit : \n\nMerci !';
+  return `mailto:${COURRIEL_MISE_A_JOUR}?subject=${encodeURIComponent(`Mise à jour de la fiche : ${c.nom}`)}&body=${encodeURIComponent(corps)}`;
+}
+function calloutMiseAJour(c, url) {
+  return `  <div class="callout maj-fiche"><strong>Vous travaillez dans ce milieu&nbsp;?</strong> Une information manque ou a changé&nbsp;? <a href="${esc(lienMiseAJour(c, url))}">Mettre à jour cette fiche</a> : un courriel prérempli avec les renseignements actuels s’ouvre, il suffit de corriger ou de compléter.</div>`;
 }
 
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
@@ -2485,6 +2522,7 @@ ${lignesClinique}${ligneSite}    </dl>
   </section>
 
   <div class="data-note">${NOTE_SOURCE_ETABLISSEMENTS}</div>
+${cliniqueLiee ? calloutMiseAJour(cliniqueLiee, url) : ''}
 
   <section id="suite">
     <h2>Pour aller plus loin</h2>
@@ -3443,6 +3481,7 @@ ${ligneTel}${ligneSite}${liee.lignes}    </dl>
   </section>
 
   <div class="data-note">${NOTE_SOURCE_ETABLISSEMENTS}</div>
+${cliniqueLiee ? calloutMiseAJour(cliniqueLiee, url) : ''}
 
   <section id="suite">
     <h2>Pour aller plus loin</h2>

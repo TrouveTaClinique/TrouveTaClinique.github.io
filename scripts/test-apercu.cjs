@@ -65,9 +65,13 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.deepEqual(sources.map(hash), avant);
   assert.ok(bilan.fichiers > 200);
   assert.equal(bilan.origine, ORIGINE);
-  for (const fichier of ['data.json', 'leaflet.js', 'territoires-rls-est.js', 'assets/seo-pages.css']) {
+  for (const fichier of ['leaflet.js', 'territoires-rls-est.js', 'assets/seo-pages.css']) {
     assert.deepEqual(fs.readFileSync(path.join(destination, fichier)), fs.readFileSync(path.join(RACINE, fichier)));
   }
+  /* data.json : identique, sauf les notes de travail des cliniques, jamais publiées. */
+  const source = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
+  source.cliniques.forEach(c => { delete c.notes; });
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(destination, 'data.json'), 'utf8')), source);
   for (const fichier of [
     '.github', 'scripts', 'PTEM2027_v2.gs', '_apercu-accueil',
     'README.md', 'CHANGELOG.md', 'ETAT-DU-BROUILLON.md', 'sitemap.xml', 'google0e6f553795bbb4a9.html',

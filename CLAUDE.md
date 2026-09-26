@@ -54,6 +54,8 @@ dates du sitemap selon le contenu réel des pages).
   pages, lien dans le pied de page commun ; recherche, IA (champ `page` envoyé au Worker) et
   favoris partagés. Un lien « N … correspondent aussi » renvoie vers l'autre page.
 
+- Chaque fiche porte `ajoute` (date d'ajout, AAAA-MM-JJ), qui alimente la section « Récemment
+  ajoutés » ; l'ajouter à toute nouvelle ressource (vérifié par `scripts/test-catalogue-guides.cjs`).
 - Version française d'abord ; l'anglais seulement à défaut, avec « (EN) » à la fin du titre.
 - Seulement ce qui sert à un médecin de famille (pas de documents internes d'établissement).
 - Sources québécoises et canadiennes seulement ; lien direct vers le guide ou le PDF, jamais une
