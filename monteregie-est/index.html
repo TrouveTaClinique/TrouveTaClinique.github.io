@@ -457,7 +457,8 @@ body.fiche-open .leaflet-control-attribution { display: none; }
 /* Cellulaire : légende et crédits côte à côte, à la même hauteur (bas de la carte). Le bloc de
    crédits se resserre pour laisser la place à la légende, au lieu de pousser celle-ci vers le haut. */
 /* Encadré « Réalisé en collaboration avec » (27 sept. 2026) : bas droite, juste au-dessus de la
-   bande de crédits ; même style que l'ancien bloc, sans « © ». Fond blanc aussi en mode sombre. */
+   bande de crédits ; même style que l'ancien bloc, sans « © ». En mode sombre, même surface
+   sombre que la légende des RLS (demande du 27 sept. 2026). */
 .leaflet-control.credits-collab { margin: 0 6px 6px 0; padding: 7px 11px 7px 12px; max-width: 270px;
   background: #fff; color: #4a5670; border-left: 4px solid #08A0A0; border-radius: 8px;
   box-shadow: 0 1px 5px rgba(23,10,114,.18); text-align: left;
@@ -467,6 +468,10 @@ body.fiche-open .leaflet-control-attribution { display: none; }
 .credits-collab .cc-l1 { display: block; font-weight: 600; font-size: 11.5px; color: #170A72; }
 .credits-collab .cc-l2 { display: block; }
 body.fiche-open .credits-collab { display: none; }
+:root[data-theme="sombre"] .leaflet-control.credits-collab {
+  background: rgba(21,31,51,.94); color: var(--muted); box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+:root[data-theme="sombre"] .credits-collab .cc-l0 { color: #2FC4C4; }
+:root[data-theme="sombre"] .credits-collab .cc-l1 { color: var(--texte); }
 @media (max-width: 520px) {
   .leaflet-control.credits-collab { max-width: calc(100vw - 186px); }
 }
