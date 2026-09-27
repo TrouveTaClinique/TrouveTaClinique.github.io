@@ -2034,14 +2034,15 @@ function blocEvenement(c) {
 function jsonLdEvenement(c, url) {
   if (!evenementActif(c)) return null;
   const e = c.evenement;
-  const heures = String(e.heures || '').match(/(\d{1,2})\s*h\s*(\d{2})?\D+(\d{1,2})\s*h\s*(\d{2})?/);
+  /* « de 18 h à 20 h » donne le début et la fin ; « à 18 h » seulement le début. */
+  const heures = String(e.heures || '').match(/(\d{1,2})\s*h\s*(\d{2})?(?:\D+(\d{1,2})\s*h\s*(\d{2})?)?/);
   const t = (h, m) => `T${String(h).padStart(2, '0')}:${m || '00'}:00-04:00`;
   return {
     '@type': 'Event',
     name: `${e.titre} · ${c.nom}`,
     ...(rempli(e.texte) ? { description: e.texte } : {}),
     startDate: e.date + (heures ? t(heures[1], heures[2]) : ''),
-    ...(heures ? { endDate: e.date + t(heures[3], heures[4]) } : {}),
+    ...(heures && heures[3] ? { endDate: e.date + t(heures[3], heures[4]) } : {}),
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     location: { '@type': 'Place', name: c.nom, address: e.lieu || c.adresse || '' },
