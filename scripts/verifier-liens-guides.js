@@ -7,7 +7,7 @@
 //   node scripts/verifier-liens-guides.js [--rapport rapport.md]
 //
 // Classement de chaque lien :
-//   brisé       : erreur 404, 410 ou autre erreur HTTP persistante ;
+//   brisé       : erreur 404, 410 ou autre erreur HTTP persistante, ou domaine qui ne se résout plus ;
 //   à vérifier  : la page répond, mais ressemble à une page d'erreur (« page introuvable »)
 //                 ou renvoie vers l'accueil du site au lieu du document ;
 //   redirigé    : la page répond après redirection vers une autre adresse
@@ -73,6 +73,8 @@ function visiter(url) {
         if (res.code < 500) break;
       } catch (e) {
         const code = e.cause?.code || '';
+        /* Domaine qui ne se résout plus (site abandonné) : lien brisé, pas une panne passagère. */
+        if (code === 'ENOTFOUND') { res = { domaineMort: true }; break; }
         res = { erreur: e.name === 'TimeoutError' ? 'délai dépassé'
           : /CERT|SIGNATURE|SSL|TLS/.test(code) ? 'certificat du site incomplet (s’ouvre souvent quand même dans un navigateur)'
           : code || e.message };
@@ -87,6 +89,7 @@ function visiter(url) {
 async function verifier(r) {
   const res = await visiter(r.url);
   const base = { titre: r.title, org: r.org, url: r.url };
+  if (res.domaineMort) return { ...base, etat: 'brisé', detail: 'domaine introuvable (le site n’existe plus)' };
   if (res.erreur) return { ...base, etat: 'injoignable', detail: res.erreur };
   const { code, finale, titre } = res;
   if ([401, 403, 406, 429, 999].includes(code)) return { ...base, etat: 'bloqué', detail: `HTTP ${code}` };

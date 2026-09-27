@@ -119,7 +119,7 @@
     listeEl.innerHTML = vus.map(htmlItem).join('');
     if (statutEl) {
       if (!n) statutEl.textContent = 'Aucun résultat pour « ' + texte + ' ».';
-      else if (limite && n > limite) statutEl.textContent = n + ' résultats — les ' + limite + ' plus proches :';
+      else if (limite && n > limite) statutEl.textContent = n + ' résultats, voici les ' + limite + ' plus proches :';
       else statutEl.textContent = n === 1 ? '1 résultat' : n + ' résultats';
     }
   }

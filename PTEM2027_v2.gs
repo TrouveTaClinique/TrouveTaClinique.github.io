@@ -1,6 +1,6 @@
 /**
  * PTEM 2027 — Montérégie · classeur maître v2
- * Version : v2-2026-09-02
+ * Version : v3-2026-09-26 (affichée dans le nom du menu « PTEM 2027 » du classeur)
  *
  * Départ à neuf. Aucune migration, aucune table LEGACY, aucune donnée figée
  * dans le script : les fiches sont lues depuis le data.json publié.
@@ -18,10 +18,15 @@
  *   - échec de lecture de la référence = refus d'export (plus un simple avertissement) ;
  *   - conservation du tableau hopitaux et des champs absents du classeur ;
  *   - les courriels de recrutement (personneRessource) sont conservés volontairement.
+ *
+ * Correctifs du 26 septembre 2026 : l'export écrit toujours notes: '' (le dépôt et data.json sont
+ * publics) ; numéro de version v3-2026-09-26, visible dans le menu, pour reconnaître d'un coup d'œil
+ * une ancienne copie du script (qui remettrait les notes dans l'export). Le formulaire et ses
+ * réponses ne sont pas touchés : le script les lit dans le classeur, comme avant.
  */
 
 var PTEM2 = {
-  version: 'v2-2026-09-02',
+  version: 'v3-2026-09-26',
   titreClasseur: 'PTEM 2027 — Base maître des cliniques de la Montérégie',
   sourceDataJson: 'https://raw.githubusercontent.com/TrouveTaClinique/TrouveTaClinique.github.io/main/data.json',
   propVersion: 'PTEM2027_V2_VERSION',
@@ -402,7 +407,8 @@ function synchroniserEntetes_(sheet) {
  * ===================================================================== */
 
 function onOpen() {
-  SpreadsheetApp.getUi().createMenu('PTEM 2027')
+  // Le numéro de version dans le nom du menu permet de vérifier que le classeur utilise la copie à jour du script.
+  SpreadsheetApp.getUi().createMenu('PTEM 2027 (' + PTEM2.version + ')')
     .addItem('Actualiser le suivi', 'actualiserSuivi')
     .addItem('Préparer l’export data.json', 'preparerExport')
     .addItem('Créer un instantané maintenant', 'creerInstantane')

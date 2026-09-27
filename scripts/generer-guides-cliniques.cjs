@@ -187,7 +187,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   const sectionsDe = (groupes, liste, cle, carte) => groupes.map((nom, index) => {
     const entries = liste.filter(r => cle(r) === nom);
     return `<section class="guides-band guides-category${index % 2 ? '' : ' guides-band--green'}" id="${ancre(nom)}" aria-labelledby="guides-category-${index}">
-      <div class="guides-category-heading"><h2 id="guides-category-${index}">${esc(nom)}</h2><span class="compte" aria-label="${entries.length} ${entries.length > 1 ? 'ressources' : 'ressource'}">${entries.length}</span></div>
+      <div class="guides-category-heading"><h2 id="guides-category-${index}">${esc(nom)}</h2><span class="compte">${entries.length}<span class="visually-hidden"> ${entries.length > 1 ? 'ressources' : 'ressource'}</span></span></div>
       <ul class="guides-resource-list">${entries.map(carte).join('\n')}</ul>
     </section>`;
   }).join('\n');
@@ -219,7 +219,7 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
     if (!l.length) return '';
     return `  <section class="guides-band guides-recents" aria-label="Récemment ajoutés">
     <details>
-      <summary><h2>Récemment ajoutés</h2><span class="compte" aria-label="${l.length} ressources">${l.length}</span><span class="guides-chevron" aria-hidden="true"></span></summary>
+      <summary><h2>Récemment ajoutés</h2><span class="compte">${l.length}<span class="visually-hidden"> ressources</span></span><span class="guides-chevron" aria-hidden="true"></span></summary>
       <ol class="guides-recents-liste">
 ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.title)}<span class="visually-hidden"> (nouvel onglet)</span></a> <span class="guides-recents-meta">${esc(r.type === 'communautaire' ? [rubriqueDe(r), r.ville].filter(Boolean).join(' · ') : r.org)} · ajouté le ${dateFr(r.ajoute)}</span></li>`).join('\n')}
       </ol>
@@ -331,9 +331,10 @@ ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="gu
     <p class="guides-ia-intro">${P.iaIntro}</p>
     <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
-      <textarea id="guides-ia-question" name="question" rows="1" maxlength="400" enterkeyhint="send" placeholder="${P.iaExemple}" required></textarea>
+      <textarea id="guides-ia-question" name="question" rows="1" maxlength="400" enterkeyhint="send" placeholder="${P.iaExemple}" aria-describedby="guides-ia-avis" required></textarea>
       <button type="submit">Obtenir des suggestions</button>
     </form>
+    <p class="guides-ia-avis" id="guides-ia-avis">N’inscrivez aucun renseignement permettant d’identifier un patient.</p>
     <div class="guides-ia-resultat" aria-live="polite"></div>
   </section>
 ` : ''}  <section class="guides-band guides-favoris" aria-labelledby="guides-favoris-titre" hidden>
