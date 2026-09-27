@@ -1372,9 +1372,7 @@ body.cmp-open { overflow:hidden; }
 :root[data-region="Est"] .dp-ic-pdf { background: #E6F4FC; border-color: #91CBEF; color: #0065A9; }
 :root[data-region="Est"] .rls-legend {
   border: 1px solid rgba(23,10,114,.13);
-  /* Même filet sarcelle à gauche que l'encadré de collaboration (27 sept. 2026). */
-  border-left: 4px solid #08A0A0;
-  border-radius: 8px;
+  border-radius: 14px;
   box-shadow: 0 7px 20px rgba(23,10,114,.16);
 }
 :root[data-region="Est"] .leaflet-control-zoom,
@@ -1489,6 +1487,9 @@ body.cmp-open { overflow:hidden; }
 :root[data-region="Est"] .etab-marker::after,
 :root[data-region="Est"] .etab-marker.active::after { content: none; display: none; }
 #app-loader { display: none !important; }
+/* Légende des RLS : même filet sarcelle à gauche que l'encadré de collaboration
+   (27 sept. 2026). Hors du bloc SQ historique, qui reste intact. */
+:root[data-region="Est"] .rls-legend { border-left: 4px solid #08A0A0; border-radius: 8px; }
 </style>
 <script>
 // Thème appliqué avant le premier rendu, pour éviter un éclair de blanc.
