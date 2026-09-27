@@ -56,3 +56,27 @@ test('chaque ressource a sa date d’ajout (champ ajoute, AAAA-MM-JJ) pour « R�
   const fautifs = ressources.filter(r => !/^\d{4}-\d{2}-\d{2}$/.test(r.ajoute || '')).map(r => r.title);
   assert.deepEqual(fautifs, []);
 });
+
+test('plan Guides (24 à 30) : type de document, pastilles, filtres, actions et consultés récemment', () => {
+  const fs = require('node:fs');
+  const racine = path.join(__dirname, '..');
+  const guidesSeuls = ressources.filter(r => r.type !== 'communautaire');
+  const FORMATS = ['guide', 'algorithme', 'patient', 'outil'];
+  assert.deepEqual(guidesSeuls.filter(r => !FORMATS.includes(r.format)).map(r => r.title), [], 'champ « format » manquant ou inconnu');
+  assert.ok(ressources.filter(r => r.type === 'communautaire').every(r => r.format === undefined), 'les organismes n’ont pas de format');
+  const guides = fs.readFileSync(path.join(racine, 'guides/index.html'), 'utf8');
+  const comm = fs.readFileSync(path.join(racine, 'guides/ressources-communautaires/index.html'), 'utf8');
+  const sujets = new Set(guidesSeuls.map(r => r.cat));
+  assert.equal((guides.match(/class="guides-pastille"/g) || []).length, sujets.size);
+  assert.ok((comm.match(/class="guides-pastille"/g) || []).length >= 20);
+  assert.ok(guides.includes('data-filtre="format"') && guides.includes('id="guides-fr"'));
+  assert.ok(!comm.includes('data-filtre="format"') && !comm.includes('id="guides-fr"'));
+  for (const page of [guides, comm]) {
+    assert.ok(page.includes('class="guides-band guides-consultes"'));
+    assert.ok(page.includes('class="btn guides-demander-ia"') && page.includes('class="btn guides-proposer-ce"'));
+    assert.ok(page.includes('class="guides-partiel"'));
+    assert.match(page, /data-courriel="[^"@]+@[^"]+"/);
+  }
+  assert.equal((guides.match(/data-format="patient"/g) || []).length, guidesSeuls.filter(r => r.format === 'patient').length);
+  assert.ok(fs.existsSync(path.join(racine, 'vendor/qrcode-generator.js')) && fs.existsSync(path.join(racine, 'vendor/LICENSE-qrcode-generator.txt')));
+});

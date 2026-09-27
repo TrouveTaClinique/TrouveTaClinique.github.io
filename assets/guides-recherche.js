@@ -418,7 +418,20 @@
     return res.filter(x => x.score >= min);
   }
 
-  const api = { estCommunautaire, rechercherParType, normaliser, mots, analyserRequete, preparer, score, rechercher, distance, GROUPES };
+  /* Mots de la question introuvables dans tout le catalogue, même avec une faute de frappe (plan
+     Guides, 20b) : la page le signale au-dessus des résultats, qui ne reposent alors que sur les
+     autres mots. Les mots génériques (« chronique », « enfant ») ne sont pas signalés. */
+  function motsAbsents(index, requete) {
+    const termes = analyserRequete(requete);
+    if (termes.length < 2) return [];
+    return termes.filter(t => {
+      if (t.generique) return false;
+      t.flou = true;
+      return !index.some(champs => score(champs, [t]) > 0);
+    }).map(t => t.saisie.join(' '));
+  }
+
+  const api = { estCommunautaire, rechercherParType, normaliser, mots, analyserRequete, preparer, score, rechercher, motsAbsents, distance, GROUPES };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else racine.GuidesRecherche = api;
 })(typeof window !== 'undefined' ? window : globalThis);

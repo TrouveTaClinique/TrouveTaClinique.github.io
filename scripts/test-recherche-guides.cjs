@@ -213,3 +213,10 @@ test('Plan Guides (2, 21) : les recherches qui ne trouvaient rien trouvent le bo
     assert.ok(res.length && motif.test(R.normaliser(res[0])), `${q} : ${res.slice(0, 3).join(' | ')}`);
   }
 });
+
+test('Plan Guides (20b) : un mot précis introuvable partout est signalé, les autres non', () => {
+  assert.deepEqual(R.motsAbsents(index, 'zorglub asthme'), ['zorglub']);
+  assert.deepEqual(R.motsAbsents(index, 'asthme'), []);
+  assert.deepEqual(R.motsAbsents(index, 'otite chez un enfant allergique'), []);
+  assert.deepEqual(R.motsAbsents(index, 'interruption de grossesse'), []);
+});

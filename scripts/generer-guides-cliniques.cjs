@@ -131,12 +131,29 @@ const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la
 
 const SANS_ADRESSE = '(sans adresse)';
 
+/* Types de documents (champ « format » des guides) : filtre « Type » (plan Guides, 25). */
+const FORMATS = { guide: 'Guide ou ligne directrice', algorithme: 'Algorithme', patient: 'Document pour le patient', outil: 'Formulaire ou outil' };
+const estPdf = url => /\.pdf(?:$|[?#])/i.test(url);
+const estAnglais = r => /\(EN\)$/.test(r.title.trim());
+/* Résumé d'une ligne sous le titre (plan Guides, 26) : seulement s'il apprend quelque chose de plus que
+   le titre et l'organisme (au moins deux mots significatifs nouveaux). */
+const motsDe = t => String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(m => m.length > 3);
+const VIDES_RESUME = new Set(['guide', 'guides', 'usage', 'optimal', 'dans', 'pour', 'avec', 'chez', 'sont', 'des', 'les', 'une', 'aux', 'selon', 'document', 'outil', 'fiche', 'prise', 'charge']);
+function resumeUtile(r) {
+  const d = String(r.desc || '').trim();
+  if (!d) return '';
+  const connus = new Set(motsDe(r.title + ' ' + r.org + ' ' + r.cat));
+  return motsDe(d).filter(m => !connus.has(m) && !VIDES_RESUME.has(m)).length >= 2 ? d : '';
+}
+
 function carteGuide(r) {
   /* Mots-clés : gardés dans data-tags pour la recherche, plus affichés sous le titre. */
-  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}">
+  const resume = resumeUtile(r);
+  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}>
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
-          <span class="guides-resource-source">${esc(r.org)}</span>
-          <h3>${esc(r.title)}</h3>
+          <span class="guides-resource-source">${esc(r.org)}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}</span>
+          <h3>${esc(r.title)}</h3>${resume ? `
+          <span class="guides-resource-desc">${esc(resume)}</span>` : ''}
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>
@@ -178,8 +195,11 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   /* Filtres propres à chaque page (attribut data-filtre = attribut data-* des fiches). */
   const parSujet = compter(guides, r => r.cat);
   const parOrganisme = compter(guides, r => r.org);
+  const parFormat = compter(guides, r => r.format || 'guide');
   const filtresGuides = `<label class="guides-select"><span>Sujet</span><select id="guides-filtre-sujet" data-filtre="category"><option value="">Tous les sujets</option>${sujets.map(c => option(c, c, parSujet.get(c))).join('')}</select></label>
-        <label class="guides-select"><span>Organisme</span><select id="guides-filtre-organisme" data-filtre="org"><option value="">Tous les organismes</option>${trierFr([...parOrganisme.keys()]).map(o => option(o, o, parOrganisme.get(o))).join('')}</select></label>`;
+        <label class="guides-select"><span>Organisme</span><select id="guides-filtre-organisme" data-filtre="org"><option value="">Tous les organismes</option>${trierFr([...parOrganisme.keys()]).map(o => option(o, o, parOrganisme.get(o))).join('')}</select></label>
+        <label class="guides-select"><span>Type</span><select id="guides-filtre-format" data-filtre="format"><option value="">Tous les types</option>${Object.keys(FORMATS).filter(k => parFormat.get(k)).map(k => option(k, FORMATS[k], parFormat.get(k))).join('')}</select></label>
+        <label class="guides-case"><input type="checkbox" id="guides-fr"> Français seulement (masque ${guides.filter(estAnglais).length} documents en anglais)</label>`;
   const parRubrique = new Map();
   organismes.forEach(r => [...new Set((r.rubriques || [r.rubrique]).map(x => x.split(' · ')[0]))].forEach(k => parRubrique.set(k, (parRubrique.get(k) || 0) + 1)));
   const villesEst = compter(organismes.filter(r => r.ville && !estHors(r)), villeDe);
@@ -264,7 +284,7 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <script src="/assets/guides-installer.js?v=107-plan-guides" defer></script>${URL_AIGUILLAGE ? `
   <script src="/assets/guides-aiguillage.js?v=107-plan-guides" defer></script>` : ''}
 </head>
-<body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}">
+<body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 ${header.replace(/ aria-current="page"/g, '')}
 <main id="contenu" class="guides-main">
@@ -297,6 +317,7 @@ ${header.replace(/ aria-current="page"/g, '')}
       </div>
     </div>
     <p class="guides-status" id="guide-status" role="status" aria-live="polite" aria-atomic="true">${n} ${P.mot}s dans le catalogue</p>
+    <p class="guides-partiel" hidden></p>
     <p class="guides-autre" hidden><a href="${autre.chemin}"></a></p>
 ${cle === 'guides' ? `    <div class="guides-communautaire" hidden>
       <p><strong>Vous cherchez un organisme&nbsp;?</strong> Consultez les <a href="${autre.chemin}">ressources communautaires</a> : ${organismes.length} organismes et lignes d’aide, par ville et par type d’aide.<br>Téléphonez avant de diriger quelqu’un.</p>
@@ -320,17 +341,29 @@ ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="gu
     <p class="guides-favoris-note">Vos favoris sont gardés dans ce navigateur seulement : ils ne se synchronisent pas entre votre cellulaire et votre ordinateur.</p>
     <ul class="guides-resource-list"></ul>
   </section>
+  <section class="guides-band guides-consultes" aria-label="Consultés récemment" hidden>
+    <details>
+      <summary><h2>Consultés récemment</h2><span class="compte"></span><span class="guides-chevron" aria-hidden="true"></span></summary>
+      <p class="guides-favoris-note">Les 5 dernières ressources ouvertes, gardées dans ce navigateur seulement.</p>
+      <ul class="guides-resource-list"></ul>
+    </details>
+  </section>
   <section class="guides-band guides-resultats" aria-labelledby="guides-resultats-titre" hidden>
     <div class="guides-category-heading"><h2 id="guides-resultats-titre">Résultats les plus pertinents</h2><span class="compte"></span></div>
     <ul class="guides-resource-list"></ul>
   </section>
 ${sectionRecents(liste)}  <div id="guides-catalogue">
     <h2 class="guides-catalogue-titre" id="guides-catalogue-titre">${P.catalogueTitre}</h2>
+    <nav class="guides-pastilles" aria-label="${cle === 'guides' ? 'Aller à un sujet' : 'Aller à un type d’aide'}">${(cle === 'guides' ? sujets : rubriques).map(nom => `<a class="guides-pastille" href="#${ancre(nom)}">${esc(nom)}</a>`).join('')}</nav>
 ${cle === 'guides' ? sectionsDe(sujets, guides, r => r.cat, carteGuide) : sectionsDe(rubriques, organismes, rubriqueDe, carteCommunautaire)}</div>
   <section class="guides-band guides-empty" hidden>
     <h2>Aucun résultat</h2>
     <p>Essayez un autre mot-clé, retirez un filtre ou consultez toute la liste.</p>
-    <button class="btn guides-reset" type="button">Tout afficher</button>
+    <div class="guides-empty-actions">
+      <button class="btn guides-reset" type="button">Tout afficher</button>
+      <button class="btn guides-demander-ia" type="button" hidden>Demander à l’IA</button>
+      <a class="btn guides-proposer-ce" href="${esc(PROPOSITION_HREF)}" data-courriel="${esc(COURRIEL_PROPOSITION)}" hidden>Proposer ${cle === 'guides' ? 'ce guide' : 'cet organisme'}</a>
+    </div>
   </section>
   <section class="guides-band guides-proposer" aria-labelledby="guides-proposer-titre">
     <h2 id="guides-proposer-titre">Il manque ${cle === 'guides' ? 'un guide' : 'un organisme'}&nbsp;?</h2>
