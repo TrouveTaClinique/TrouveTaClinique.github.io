@@ -411,6 +411,18 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+/* Adresse de site web publiable : seuls http et https deviennent un lien (audit du 27 sept. 2026).
+   Une adresse saisie sans protocole (« www.clinique.ca », fréquente dans les questionnaires) reçoit
+   https:// ; tout autre protocole (javascript:, data:…) ou un texte libre donne '' : la valeur est
+   alors affichée en texte, sans lien. Même règle que urlWebSure() dans les gabarits de carte. */
+function urlWebSure(url) {
+  const s = String(url == null ? '' : url).trim();
+  if (/^https?:\/\/[^\s/]/i.test(s)) return s.replace(/\s/g, '%20');
+  if (/^[a-z][a-z0-9+.-]*:/i.test(s)) return '';
+  if (/^(?:[^\s\/:?#.@]+\.)+[a-z]{2,}(?:[\/?#]\S*)?$/i.test(s)) return 'https://' + s;
+  return '';
+}
+
 function rempli(v) {
   if (v == null) return false;
   if (typeof v === 'string') {
@@ -1089,7 +1101,7 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   ajouter('Autres gardes', esc(c.gardeAutre));
   ajouter('Porte ouverte', esc(c.porteOuverte));
   ajouter('Site web', rempli(c.site)
-    ? `<a href="${esc(c.site)}" rel="noopener" target="_blank">${esc(c.site)}</a>` : '');
+    ? (urlWebSure(c.site) ? `<a href="${esc(urlWebSure(c.site))}" rel="noopener" target="_blank">${esc(String(c.site).trim())}</a>` : esc(c.site)) : '');
   if (rempli(c.responsableNom)) {
     ajouter('Responsable', esc(c.responsableNom));
   }
@@ -1166,7 +1178,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     url: url,
     address: Object.assign({ '@type': 'PostalAddress' }, decouperAdresse(c.adresse, c.ville))
   };
-  if (rempli(c.site)) clinique.sameAs = [c.site];
+  if (urlWebSure(c.site)) clinique.sameAs = [urlWebSure(c.site)];
   if (typeof c.lat === 'number' && typeof c.lng === 'number') {
     clinique.geo = { '@type': 'GeoCoordinates', latitude: c.lat, longitude: c.lng };
   }
@@ -2421,8 +2433,8 @@ function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null, pol
   const libelleSite = inst.id === 'INS-012'
     ? 'Fiche Santé Montérégie de l’Hôtel-Dieu de Sorel'
     : `Fiche Santé Montérégie : ${inst.nom}`;
-  const siteOfficiel = inst.lienWeb
-    ? `<a href="${esc(inst.lienWeb)}" rel="noopener">${esc(libelleSite)}</a>`
+  const siteOfficiel = urlWebSure(inst.lienWeb)
+    ? `<a href="${esc(urlWebSure(inst.lienWeb))}" rel="noopener">${esc(libelleSite)}</a>`
     : '';
   const job = cliniqueLiee ? jsonLdJobPosting(cliniqueLiee, url, majPagesSeo) : null;
   const jsonLd = {
@@ -2443,7 +2455,7 @@ function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null, pol
         '@id': url + '#etablissement',
         name: inst.nom,
         url,
-        ...(inst.lienWeb ? { sameAs: [inst.lienWeb] } : {}),
+        ...(urlWebSure(inst.lienWeb) ? { sameAs: [urlWebSure(inst.lienWeb)] } : {}),
         address: {
           '@type': 'PostalAddress',
           addressLocality: inst.ville || '',
@@ -3276,8 +3288,8 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee, poli
   const lienRls = inst.territoireSource
     ? `${CENTRE_PREFIXE}/rls/${slugifier(inst.territoireSource)}/`
     : null;
-  const siteOfficiel = inst.lienWeb
-    ? `<a href="${esc(inst.lienWeb)}" rel="noopener">Fiche officielle : ${esc(inst.nom)}</a>`
+  const siteOfficiel = urlWebSure(inst.lienWeb)
+    ? `<a href="${esc(urlWebSure(inst.lienWeb))}" rel="noopener">Fiche officielle : ${esc(inst.nom)}</a>`
     : '';
   const liee = htmlBlocCliniqueLieeCentre(cliniqueLiee);
   const extraHopital = inst.id === 'INS-C-001'
@@ -3305,7 +3317,7 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee, poli
         '@id': url + '#etablissement',
         name: inst.nom,
         url,
-        ...(inst.lienWeb ? { sameAs: [inst.lienWeb] } : {}),
+        ...(urlWebSure(inst.lienWeb) ? { sameAs: [urlWebSure(inst.lienWeb)] } : {}),
         address: {
           '@type': 'PostalAddress',
           addressLocality: inst.ville || '',
