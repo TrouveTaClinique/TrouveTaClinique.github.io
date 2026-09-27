@@ -125,7 +125,9 @@ const PAGES = {
 };
 
 /* Note sur la provenance des organismes, en tête de la page communautaire. */
-const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la région de Saint-Hyacinthe et de la Vallée-du-Richelieu, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a> et des répertoires des corporations de développement communautaire (CDC).<br>Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>).<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.`;
+const SOURCE_SOREL = 'https://www.mrcpierredesaurel.com/wp-content/uploads/2023/03/Bottin-des-ressources.pdf';
+const SOURCE_INFOSVP = 'https://infosvp.ca/repertoire-des-services/';
+const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la région de Saint-Hyacinthe, de la Vallée-du-Richelieu et de la région de Sorel-Tracy, tirés du <a href="${SOURCE_COMMUNAUTAIRE}" target="_blank" rel="noopener noreferrer">bottin de ressources 2023 du Réseau d’habitations chez soi<span class="visually-hidden"> (nouvel onglet)</span></a>, du <a href="${SOURCE_SOREL}" target="_blank" rel="noopener noreferrer">bottin des ressources pour les aînés de la MRC de Pierre-De Saurel<span class="visually-hidden"> (nouvel onglet)</span></a>, du <a href="${SOURCE_INFOSVP}" target="_blank" rel="noopener noreferrer">répertoire Info SVP de la Vallée-du-Richelieu<span class="visually-hidden"> (nouvel onglet)</span></a> et des répertoires des corporations de développement communautaire (CDC).<br>Les heures et les conditions peuvent avoir changé : téléphonez avant de diriger quelqu’un.<br>Ailleurs en Montérégie : <a href="https://www.211qc.ca/" target="_blank" rel="noopener noreferrer">211<span class="visually-hidden"> (nouvel onglet)</span></a> (composez le <a href="tel:211">2-1-1</a>).<br>En cas de détresse psychosociale : Info-Social <a href="tel:811">811</a>, option 2.`;
 
 const SANS_ADRESSE = '(sans adresse)';
 
@@ -256,11 +258,11 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=106-recents">
-  <script src="/assets/guides-recherche.js?v=106-recents" defer></script>
-  <script src="/assets/guides-cliniques.js?v=106-recents" defer></script>
-  <script src="/assets/guides-installer.js?v=106-recents" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=106-recents" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=107-plan-guides">
+  <script src="/assets/guides-recherche.js?v=107-plan-guides" defer></script>
+  <script src="/assets/guides-cliniques.js?v=107-plan-guides" defer></script>
+  <script src="/assets/guides-installer.js?v=107-plan-guides" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=107-plan-guides" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

@@ -188,3 +188,28 @@ test('« œil rouge » ne trouve pas « Coup d’œil » ; hépatite B ne trouve
 test('noms de médicaments : Ventolin et Flovent mènent à l’asthme ou à la MPOC', () => {
   for (const q of ['ventolin', 'flovent']) assert.ok(contient(premiers(q, 3), /asthme|mpoc/), q);
 });
+
+test('« MRC » : la maladie rénale ne ramène pas la municipalité régionale de comté (plan Guides, 20a)', () => {
+  for (const q of ['insuffisance rénale chronique', 'IRC', 'maladie rénale']) {
+    const res = titres(q);
+    assert.ok(contient(res, /kidney|renale/), q + ' : ' + res.join(' | '));
+    assert.ok(!contient(res, /\bmrc\b/), q + ' : ' + res.join(' | '));
+  }
+  assert.ok(contient(titres('MRC d’Acton'), /transport collectif de la mrc d acton/));
+  assert.ok(contient(titres('MRC'), /kidney|renale/), 'MRC seul mène aussi au rein');
+});
+
+test('Plan Guides (2, 21) : les recherches qui ne trouvaient rien trouvent le bon guide en tête', () => {
+  const attendus = [
+    ['interruption de grossesse', /interruption de grossesse/], ['IVG', /interruption de grossesse/], ['avortement', /interruption de grossesse/],
+    ['trouble bipolaire', /bipolaire/], ['cannabis', /cannabis/], ['chutes', /chute/],
+    ['aide médicale à mourir', /aide medicale a mourir/], ['AMM', /aide medicale a mourir/],
+    ['inaptitude', /inaptitude/], ['formulaire SAAQ', /conduite automobile/], ['permis de conduire', /conduite automobile/],
+    ['cessation tabagique', /cessation tabagique/], ['hypothyroïdie', /thyroide/], ['acné', /acne/],
+    ['sédation palliative', /sedation/], ['test VPH', /col de l uterus/]
+  ];
+  for (const [q, motif] of attendus) {
+    const res = titres(q);
+    assert.ok(res.length && motif.test(R.normaliser(res[0])), `${q} : ${res.slice(0, 3).join(' | ')}`);
+  }
+});

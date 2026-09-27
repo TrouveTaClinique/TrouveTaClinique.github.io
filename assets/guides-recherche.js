@@ -80,7 +80,9 @@
     ['hepatite b', 'vhb', 'hbv'],
     ['hepatite c', 'vhc', 'hcv'],
     ['hepatite a', 'vha', 'hav'],
-    ['irc', 'insuffisance renale', 'insuffisance renale chronique', 'maladie renale chronique', 'maladie renale', 'mrc', 'ckd', 'chronic kidney disease', 'nephropathie', 'dfg', 'dfge'],
+    /* « MRC » n'est pas dans ce groupe : c'est aussi la « municipalité régionale de comté » (« MRC d'Acton ») ;
+       sinon « insuffisance rénale chronique » ramenait le transport de la MRC d'Acton. Voir CONCEPTS. */
+    ['irc', 'insuffisance renale', 'insuffisance renale chronique', 'maladie renale chronique', 'maladie renale', 'ckd', 'chronic kidney disease', 'nephropathie', 'dfg', 'dfge'],
     ['hbp', 'hypertrophie benigne de la prostate', 'hyperplasie benigne de la prostate', 'prostatisme'],
     ['prep', 'prophylaxie pre exposition', 'prophylaxie preexposition'],
     ['ppe', 'prophylaxie post exposition', 'prophylaxie postexposition'],
@@ -91,11 +93,26 @@
     ['urticaire', 'hives'],
     ['ictere', 'jaunisse', 'hyperbilirubinemie', 'bilirubine'],
     ['vaginite', 'vaginose', 'vaginose bacterienne', 'vulvovaginite', 'pertes vaginales', 'candidose vaginale'],
-    ['cessation tabagique', 'arret tabagique', 'arret du tabac', 'renoncement au tabac', 'abandon du tabac'],
+    ['cessation tabagique', 'arret tabagique', 'arret du tabac', 'renoncement au tabac', 'abandon du tabac', 'j arrete', 'jarrete'],
     ['hypothyroidie', 'thyroide', 'tsh', 'levothyroxine', 'synthroid'],
     ['preeclampsie', 'pre eclampsie', 'hypertension gestationnelle'],
     ['hemorroide', 'hemorroides'],
     ['deprescription', 'deprescrire', 'sevrage medicament', 'cessation medicament'],
+    /* Plan Guides du 27 sept. 2026 (proposition 21). « pied » (programme PIED) et « détresse » seule ne sont pas
+       dans ces groupes : ils ramèneraient le pied diabétique et la détresse respiratoire. */
+    ['ivg', 'avortement', 'interruption de grossesse', 'interruption volontaire de grossesse', 'pilule abortive', 'mifegymiso'],
+    ['sterilet', 'diu', 'dispositif intra uterin', 'dispositif intra-uterin', 'mirena', 'kyleena', 'jaydess', 'sterilet de cuivre'],
+    ['sopk', 'syndrome des ovaires polykystiques', 'ovaires polykystiques', 'pcos'],
+    ['spc', 'sedation palliative continue', 'sedation palliative'],
+    ['tuo', 'tluo', 'trouble lie a l usage d opioides', 'trouble lie a l usage des opioides', 'trouble lie a l usage de substances opioides', 'dependance aux opioides'],
+    ['tag', 'trouble d anxiete generalisee', 'anxiete generalisee', 'anxiete', 'trouble anxieux', 'troubles anxieux', 'trouble panique'],
+    ['trouble bipolaire', 'bipolaire', 'maladie bipolaire', 'maniaco depression', 'maniaco depressif'],
+    ['inaptitude', 'mandat de protection', 'homologation', 'tutelle', 'curatelle', 'regime de protection', 'curateur public'],
+    ['saaq', 'permis de conduire', 'aptitude a conduire', 'conduite automobile', 'aptitude a la conduite'],
+    ['chute', 'prevention des chutes', 'chute chez l aine', 'risque de chute'],
+    ['acne', 'isotretinoine', 'accutane', 'epuris'],
+    ['epuisement professionnel', 'burnout', 'burn out', 'sante des medecins', 'pamq', 'medecin en detresse', 'programme d aide aux medecins'],
+    ['cannabis', 'marijuana', 'marihuana', 'thc', 'cbd'],
     /* Ressources communautaires (sans mots vides : « aide », « de »… sont retirés de la requête). */
     ['banque alimentaire', 'aide alimentaire', 'depannage alimentaire', 'comptoir alimentaire', 'distribution alimentaire', 'nourriture', 'epicerie', 'panier noel', 'paniers de noel'],
     ['hebergement', 'refuge', 'gite', 'sans abri', 'sans-abri', 'itinerance', 'itinerant', 'maison hebergement', 'maison d hebergement'],
@@ -119,7 +136,7 @@
     [['apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban', 'eliquis', 'xarelto', 'pradaxa', 'lixiana'], ['anticoagulant', 'anticoagulants oraux directs', 'anticoagulotherapie']],
     [['heparine', 'hbpm', 'enoxaparine', 'tinzaparine', 'dalteparine'], ['anticoagulant', 'heparine']],
     [['coloscopie', 'endoscopie', 'gastroscopie', 'chirurgie', 'intervention', 'operation', 'procedure'], ['chirurgie', 'perioperatoire', 'procedure']],
-    [['fumeur', 'fumeuse', 'tabac', 'tabagisme', 'cigarette', 'vapotage'], ['mpoc', 'poumon', 'tabac']],
+    [['fumeur', 'fumeuse', 'tabac', 'tabagisme', 'cigarette', 'vapotage', 'nicotine'], ['mpoc', 'poumon', 'tabac', 'cessation tabagique']],
     [['bouffee de chaleur', 'bouffees de chaleur', 'sueurs nocturnes'], ['menopause', 'vasomoteur']],
     [['toux'], ['bronchite', 'respiratoire']],
     [['essoufflement', 'dyspnee'], ['mpoc', 'asthme', 'insuffisance cardiaque']],
@@ -155,7 +172,14 @@
     [['prep', 'prophylaxie pre exposition'], ['vih']],
     [['hepatite b', 'vhb', 'hepatite c', 'vhc', 'hepatite a', 'vha'], ['hepatite']],
     [['hbp', 'prostatisme'], ['prostate']],
-    [['irc', 'insuffisance renale', 'maladie renale chronique', 'dfg'], ['kidney', 'renale']]
+    [['irc', 'insuffisance renale', 'maladie renale chronique', 'dfg'], ['kidney', 'renale']],
+    /* Sens unique : « MRC » tapé seul mène aussi aux guides sur le rein, mais une question sur le rein ne cherche pas « MRC ». */
+    [['mrc'], ['insuffisance renale', 'maladie renale chronique', 'kidney']],
+    [['lithium', 'manie'], ['trouble bipolaire']],
+    [['detresse'], ['sante mentale', 'epuisement professionnel']],
+    [['equilibre', 'aine qui tombe', 'tombe souvent'], ['chute']],
+    [['fin de vie', 'soins de fin de vie'], ['soins palliatifs', 'aide medicale a mourir', 'sedation palliative continue']],
+    [['tsh', 'hypothyroidie', 'thyroide'], ['thyroide', 'hormones thyroidiennes']]
   ];
 
   /* Mots génériques : utiles pour départager, mais ils ne suffisent jamais seuls à retenir un
@@ -378,7 +402,7 @@
   }
 
   /* Questions qui visent une ressource communautaire plutôt qu'un guide clinique. */
-  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|alimentaires?|nourriture|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|gites?|sans abri|logements?|loyers?|hlm|itinerance|itinerants?|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport adapte|juridique|avocat|impots?|friperies?|vetements?|meubles?|centre d action|emploi|alphabetisation|francisation|lignes? d ecoute|lignes? ecoute|ecoute telephonique|toxicomanie|groupes? de soutien|suicid\w*|9 ?8 ?8)\b/;
+  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|alimentaires?|nourriture|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|gites?|sans abri|logements?|loyers?|hlm|itinerance|itinerants?|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport adapte|juridique|avocat|impots?|friperies?|vetements?|meubles?|centre d action|emploi|alphabetisation|francisation|lignes? d ecoute|lignes? ecoute|ecoute telephonique|toxicomanie|groupes? de soutien|suicid\w*|9 ?8 ?8|maisons? de soins palliatifs|perinatalite|relevailles|lgbt\w*|interligne|antipoison|centre antipoison)\b/;
   const estCommunautaire = requete => COMMUNAUTAIRE.test(normaliser(requete));
 
   /* Classement selon le type de question : une question communautaire fait passer les
