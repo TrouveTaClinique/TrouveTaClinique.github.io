@@ -472,8 +472,10 @@ body.fiche-open .credits-collab { display: none; }
   background: rgba(21,31,51,.94); color: var(--muted); box-shadow: 0 2px 10px rgba(0,0,0,.5); }
 :root[data-theme="sombre"] .credits-collab .cc-l0 { color: #2FC4C4; }
 :root[data-theme="sombre"] .credits-collab .cc-l1 { color: var(--texte); }
+/* Cellulaire : l'encadré laissait la place de la légende des RLS (retirée le 27 sept. 2026) ;
+   il reprend sa largeur normale. Remettre calc(100vw - 186px) si LEGENDE_RLS revient à true. */
 @media (max-width: 520px) {
-  .leaflet-control.credits-collab { max-width: calc(100vw - 186px); }
+  .leaflet-control.credits-collab { max-width: min(270px, calc(100vw - 24px)); }
 }
 /* Ancienne bande de crédits (CREDITS_BLOC = false) : sur un cellulaire étroit, la bande passe
    sous la légende ; celle-ci se pose juste au-dessus. */
@@ -2406,9 +2408,12 @@ function couleurEpingle(g) {
 const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4' };
 function fondChiffre(c) { return FOND_CHIFFRE[String(c || '').toUpperCase()] || c; }
 
-// Légende des trois RLS de la carte autonome.
+// Légende des trois RLS de la carte autonome. Retirée le 27 sept. 2026 (demande du propriétaire) :
+// les boutons de RLS, aux mêmes couleurs que les zones, servent de légende, et le bas de l'écran
+// était trop chargé au cellulaire. LEGENDE_RLS = true la rétablit telle quelle.
+const LEGENDE_RLS = false;
 let legendEl = null;
-(function(){
+if (LEGENDE_RLS) (function(){
   const legend = L.control({ position:'bottomleft' });
   legend.onAdd = function(){
     const d = L.DomUtil.create('div', 'rls-legend');
