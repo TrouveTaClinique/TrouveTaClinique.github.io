@@ -3983,7 +3983,9 @@ function partagerFiche() {
   const url = location.origin + location.pathname + '?c=' + activeId;
   const titre = g.nom + ' · Trouve ta clinique';
   if (navigator.share) { navigator.share({ title: titre, url }).catch(() => {}); return; }
-  const fini = () => annoncerA11y('Lien copié dans le presse-papiers');
+  // Sans partage natif (Firefox, Chrome sous Linux…), le lien est copié : on le confirme à l'écran
+  // comme le bouton de partage de l'en-tête, et aux lecteurs d'écran.
+  const fini = () => { annoncerA11y('Lien copié dans le presse-papiers'); showToast('Lien de la fiche copié, prêt à coller.'); };
   if (navigator.clipboard) navigator.clipboard.writeText(url).then(fini).catch(() => prompt('Lien vers cette fiche :', url));
   else prompt('Lien vers cette fiche :', url);
 }
