@@ -460,27 +460,30 @@
   /* Téléphone (plan Guides, 30) : la barre de recherche reste en haut pendant le défilement, et un
      bouton « Haut de page » apparaît après deux écrans. */
   const mqTelephone = window.matchMedia('(max-width: 680px)');
-  if ('IntersectionObserver' in window) {
-    const repere = document.createElement('div');
-    form.before(repere);
-    new IntersectionObserver(([e]) => {
-      const coller = mqTelephone.matches && !e.isIntersecting && e.boundingClientRect.top < 0;
-      if (coller === form.classList.contains('guides-form-collant')) return;
-      repere.style.height = coller ? form.offsetHeight + 'px' : '';
-      form.classList.toggle('guides-form-collant', coller);
-    }).observe(repere);
-  }
+  /* Le repère garde la place de la barre dans la page. La barre colle dès que le haut du repère
+     passe au-dessus de l'écran, calculé à chaque défilement : un saut direct (ancre, retour à une
+     position) qui franchit la barre sans l'afficher est ainsi pris en compte. */
+  const repere = document.createElement('div');
+  form.before(repere);
   const haut = document.createElement('button');
   haut.type = 'button'; haut.className = 'guides-haut'; haut.textContent = 'Haut de page'; haut.hidden = true;
   document.body.appendChild(haut);
   haut.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); input.focus({ preventScroll: true }); });
-  let imageHaut = 0;
-  window.addEventListener('scroll', () => {
-    if (imageHaut) return;
-    imageHaut = requestAnimationFrame(() => { imageHaut = 0; haut.hidden = !(mqTelephone.matches && window.scrollY > 2 * window.innerHeight); });
-  }, { passive: true });
+  function majDefilement() {
+    const coller = mqTelephone.matches && repere.getBoundingClientRect().top < 0;
+    if (coller !== form.classList.contains('guides-form-collant')) {
+      repere.style.height = coller ? form.offsetHeight + 'px' : '';
+      form.classList.toggle('guides-form-collant', coller);
+    }
+    haut.hidden = !(mqTelephone.matches && window.scrollY > 2 * window.innerHeight);
+  }
+  let imageDefilement = 0;
+  const planifier = () => { if (!imageDefilement) imageDefilement = requestAnimationFrame(() => { imageDefilement = 0; majDefilement(); }); };
+  window.addEventListener('scroll', planifier, { passive: true });
+  if (mqTelephone.addEventListener) mqTelephone.addEventListener('change', planifier);
 
   input.value = new URLSearchParams(location.search).get('q') || '';
   render();
   ouvrirDepuisAncre();
+  planifier();
 })();
