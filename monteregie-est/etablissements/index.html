@@ -146,137 +146,57 @@
   
   <section class="es-wrap reveal" aria-labelledby="es-titre">
     <h2 id="es-titre">Explorez par secteurs</h2>
-    <p class="es-lead">Choisissez d’abord une famille de pratique, puis un secteur.<br>Le chiffre indique le nombre de milieux en recrutement pour le cycle 2027.</p>
-
-    <div class="es-card">
-      <div class="es-chooser" id="es-chooser">
-        <button type="button" class="es-fam es-fam--hosp" data-famille="hospitalier">
-          <span class="es-fam-icon" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 56 56" fill="none"><path d="M16 46V20.5L28 12l12 8.5V46" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 46V34h8v12M28 24v10M23.5 29h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
-          <span class="es-fam-name">Hospitalier</span>
-          <span class="es-fam-meta">12 secteurs · 3 hôpitaux</span>
-          <span class="es-fam-cta">Voir les secteurs →</span>
-        </button>
-        <button type="button" class="es-fam es-fam--comm" data-famille="communautaire">
-          <span class="es-fam-icon" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 56 56" fill="none"><circle cx="21" cy="21" r="6.2" stroke="currentColor" stroke-width="2.2"/><circle cx="36.5" cy="22.5" r="5.2" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 42c1.8-7.2 6.2-10.8 10.5-10.8S29.4 34.8 31.2 42M29 42c1.3-5.4 4.5-8.8 8.8-8.8S45.4 36.8 47 42" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
-          <span class="es-fam-name">Communautaire</span>
-          <span class="es-fam-meta">19 secteurs · GMF-U, CHSLD, CLSC…</span>
-          <span class="es-fam-cta">Voir les secteurs →</span>
-        </button>
-      </div>
-
-      <div class="es-explorer" id="es-explorer" hidden>
-        <div class="es-tabs">
-          <div class="es-tabs-row">
-            <button type="button" class="es-tab" data-famille="hospitalier" id="es-tab-hosp">Hospitalier</button>
-            <button type="button" class="es-tab" data-famille="communautaire" id="es-tab-comm">Communautaire</button>
-            <button type="button" class="es-back" id="es-btn-back">Retour à l’accueil</button>
-          </div>
-        </div>
-        <div class="es-body">
-          <ul class="es-list" id="es-list" role="list"></ul>
-          <section class="es-panel" id="es-panel" aria-live="polite"></section>
-        </div>
+    <p class="es-lead">Choisissez une famille de pratique, puis un secteur.<br>Le chiffre indique le nombre de milieux en recrutement pour le cycle 2027.</p>
+    <div class="es-famille" role="group" aria-label="Famille de pratique">
+      <button type="button" data-famille="hospitalier" aria-pressed="true">Hospitalier</button>
+      <button type="button" data-famille="communautaire" aria-pressed="false">Communautaire</button>
+    </div>
+    <div class="es-chips" id="es-chips" role="group" aria-label="Secteurs"></div>
+    <div class="es-entete">
+      <p class="es-resume" id="es-resume" aria-live="polite"></p>
+      <div class="es-seg" role="group" aria-label="Classement">
+        <button type="button" id="es-btn-list" aria-pressed="true">Liste</button>
+        <button type="button" id="es-btn-rls" aria-pressed="false">Par RLS</button>
       </div>
     </div>
+    <div class="es-grille-zone" id="es-panel"></div>
   </section>
 
   <style>
-  .es-wrap{
-    --es-bleu:#170A72;--es-menthe:#90F1E9;--es-sarcelle:#08A0A0;--es-azur:#0080D7;
-    --es-ink:#27213f;--es-muted:#625d75;--es-line:#d8e3ea;
-    --es-shine:linear-gradient(to left,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 58%);
-    margin:2.3rem 0;
-    font-family:"Segoe UI",SegoeUI,Arial,sans-serif;
-  }
-  .es-wrap h2{color:var(--es-bleu);margin:0 0 .55rem;font-size:clamp(1.7rem,3vw,2.15rem)}
-  .es-lead{color:var(--es-muted);max-width:46rem;margin:0 0 1.35rem;font-size:1.08rem;line-height:1.6}
-  .es-card{background:transparent;border:none;box-shadow:none;overflow:visible}
-
-  .es-chooser{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .es-chooser[hidden]{display:none!important}
-  .es-fam{appearance:none;border:none;cursor:pointer;text-align:left;padding:2.15rem 1.9rem;display:flex;flex-direction:column;gap:.45rem;font-family:inherit;color:#fff;border-radius:18px;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;position:relative;min-height:11.5rem;box-shadow:0 12px 28px rgba(23,10,114,.18)}
-  .es-fam:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 16px 32px rgba(23,10,114,.22)}
-  .es-fam:focus-visible{outline:3px solid var(--es-menthe);outline-offset:3px}
-  .es-fam--hosp{background:var(--es-shine),var(--es-azur)}
-  .es-fam--comm{background:var(--es-shine),var(--es-sarcelle)}
-  .es-fam-icon{width:48px;height:48px;display:grid;place-items:center;margin-bottom:.35rem;color:#fff}
-  .es-fam-icon svg{display:block;width:48px;height:48px}
-  .es-fam-name{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.15}
-  .es-fam-meta{font-size:1.05rem;color:rgba(255,255,255,.9);font-weight:600}
-  .es-fam-cta{margin-top:.7rem;font-size:1rem;font-weight:800;color:#fff}
-
-  .es-explorer{background:#F7F4EF;border:1px solid var(--es-line);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(23,10,114,.08)}
-  .es-explorer[hidden]{display:none!important}
-  .es-tabs{display:flex;border-bottom:1px solid var(--es-line);padding:.85rem 1.1rem}
-  .es-tabs-row{display:flex;align-items:center;width:100%;gap:.55rem;flex-wrap:wrap}
-  .es-tab{appearance:none;border:none;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:800;color:#fff;padding:.7rem 1.15rem;border-radius:12px;transition:filter .15s ease,box-shadow .15s ease}
-  .es-tab[data-famille="hospitalier"]{background:var(--es-shine),var(--es-azur)}
-  .es-tab[data-famille="communautaire"]{background:var(--es-shine),var(--es-sarcelle)}
-  .es-tab:hover{filter:brightness(1.06)}
-  .es-tab:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-  .es-tab.on{box-shadow:0 0 0 3px var(--es-menthe),0 0 0 6px var(--es-bleu)}
-  .es-back{appearance:none;border:none;cursor:pointer;margin-left:auto;font-family:inherit;font-size:.88rem;font-weight:800;color:#fff;background:var(--es-shine),var(--es-bleu);padding:.7rem 1rem;border-radius:12px}
-  .es-back:hover{filter:brightness(1.08)}
-  .es-back:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-
-  .es-body{display:grid;grid-template-columns:280px minmax(0,1fr)}
-  .es-list{list-style:none;margin:0;padding:.85rem;border-right:1px solid var(--es-line);display:flex;flex-direction:column;gap:.55rem}
-  .es-row{appearance:none;border:none;background:var(--es-shine),var(--dot);cursor:pointer;width:100%;display:flex;align-items:center;gap:.7rem;padding:.85rem .85rem;border-radius:12px;text-align:left;font-family:inherit;color:#fff;transition:filter .15s ease,box-shadow .15s ease}
-  .es-row:hover{filter:brightness(1.06)}
-  .es-row:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-  .es-row[aria-pressed="true"]{background:var(--es-shine),var(--es-bleu);box-shadow:0 0 0 3px var(--es-menthe),0 0 0 6px var(--es-bleu)}
-  .es-row .es-chip{width:10px;height:10px;border-radius:50%;background:#fff;flex-shrink:0}
-  .es-row .es-txt{flex:1;min-width:0}
-  .es-row .es-nom{display:block;font-size:1rem;font-weight:800;color:#fff}
-  .es-row .es-sous{display:block;font-size:.82rem;color:rgba(255,255,255,.88);margin-top:2px;font-weight:600}
-  .es-row .es-count{flex-shrink:0;font-size:.88rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--es-bleu);background:#fff;border-radius:999px;padding:3px 10px}
-  .es-row[aria-pressed="true"] .es-count{color:var(--es-bleu);background:var(--es-menthe)}
-
-  .es-panel{padding:1.7rem 1.9rem;display:flex;flex-direction:column;gap:1rem;min-width:0}
-  .es-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
-  .es-panel-head h3{margin:0;font-size:1.35rem;font-weight:800;letter-spacing:-.01em;color:var(--es-bleu);line-height:1.3}
-  .es-panel-head .es-sous{margin:.25rem 0 0;font-size:.95rem;color:var(--es-muted)}
-  .es-seg{display:flex;gap:8px;align-self:flex-start;flex-shrink:0}
-  .es-seg button{appearance:none;border:none;border-radius:10px;padding:.5rem .85rem;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:800;color:#fff;transition:filter .15s ease,box-shadow .15s ease}
-  .es-seg button#es-btn-list{background:var(--es-shine),var(--es-azur)}
-  .es-seg button#es-btn-rls{background:var(--es-shine),var(--es-sarcelle)}
-  .es-seg button:hover{filter:brightness(1.06)}
-  .es-seg button.on{background:var(--es-shine),var(--es-bleu);box-shadow:0 0 0 3px var(--es-menthe),0 0 0 6px var(--es-bleu)}
-  .es-seg button:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-
-  .es-cards{display:flex;flex-direction:column;gap:8px}
-  .es-mcard{display:block;padding:.85rem 1rem;border-radius:12px;border:none;background:var(--es-shine),var(--es-bleu);font-size:.95rem;line-height:1.5;text-decoration:none;color:#fff;transition:filter .15s ease,transform .15s ease}
-  .es-mcard:hover{filter:brightness(1.06);transform:translateY(-1px)}
-  .es-mcard:focus-visible{outline:3px solid var(--es-menthe);outline-offset:2px}
-  .es-mcard .es-type{display:block;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.88);margin-bottom:2px}
-  .es-mcard strong{display:block;color:#fff;font-weight:800;font-size:1.05rem}
-  .es-mcard .es-meta{display:block;font-size:.88rem;color:rgba(255,255,255,.88);margin-top:2px;font-weight:600}
-  .es-mcard.es-accent-bleu{background:var(--es-shine),var(--es-bleu)}
-  .es-mcard.es-accent-azur{background:var(--es-shine),var(--es-azur)}
-  .es-mcard.es-accent-sarcelle{background:var(--es-shine),var(--es-sarcelle)}
-
-  .es-rls-label{display:block;font-size:.82rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--es-sarcelle);margin:.6rem 0 .4rem}
+  .es-wrap{--es-nv:#170A72;--es-tl:#08A0A0;--es-tt:#067A7A;--es-az:#0080D7;--es-tz:#DEF4F2;--es-tp:#EFFAF9;--es-ln:#D8E3EA;--es-mu:#5d5876;margin:2.3rem 0}
+  .es-wrap h2{color:var(--es-nv);margin:0 0 .55rem;font-size:clamp(1.7rem,3vw,2.15rem)}
+  .es-lead{color:var(--es-mu);max-width:46rem;margin:0 0 1.3rem;font-size:1.05rem;line-height:1.6}
+  .es-famille{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--es-tz);margin:0 0 1rem}
+  .es-famille button{appearance:none;border:0;background:transparent;border-radius:999px;padding:.6rem 1.3rem;min-height:44px;font:inherit;font-weight:800;font-size:1rem;color:var(--es-nv);cursor:pointer}
+  .es-famille button[aria-pressed="true"]{background:var(--es-nv);color:#fff}
+  .es-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}
+  .es-chip{appearance:none;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.5rem .95rem;border:1.5px solid var(--es-ln);border-radius:999px;background:#fff;font:inherit;font-weight:700;font-size:.98rem;color:var(--es-nv);cursor:pointer}
+  .es-chip:hover{border-color:var(--es-tl)}
+  .es-chip i{font-style:normal;font-size:.8rem;font-weight:800;color:var(--es-tt);background:var(--es-tz);border-radius:999px;padding:1px 8px;font-variant-numeric:tabular-nums}
+  .es-chip[aria-pressed="true"]{border-color:var(--es-tl);background:var(--es-tp);box-shadow:inset 0 0 0 1px var(--es-tl)}
+  .es-entete{display:flex;justify-content:space-between;align-items:center;gap:.8rem 1rem;flex-wrap:wrap;margin:0 0 1rem}
+  .es-resume{margin:0;color:var(--es-mu);font-size:.97rem}
+  .es-resume strong{color:var(--es-nv)}
+  .es-seg{display:inline-flex;border:1.5px solid var(--es-nv);border-radius:999px;overflow:hidden}
+  .es-seg button{appearance:none;border:0;background:#fff;padding:.4rem .95rem;min-height:36px;font:inherit;font-weight:700;font-size:.88rem;color:var(--es-nv);cursor:pointer}
+  .es-seg button[aria-pressed="true"]{background:var(--es-nv);color:#fff}
+  .es-grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.9rem}
+  .es-mcard{display:flex;flex-direction:column;border:1px solid var(--es-ln);border-top:4px solid var(--es-az);border-radius:12px;padding:1rem 1.1rem;background:#fff;text-decoration:none;color:inherit;transition:box-shadow .15s ease,border-color .15s ease}
+  .es-mcard:hover{box-shadow:0 6px 18px rgba(23,10,114,.1)}
+  .es-mcard.es-t-comm{border-top-color:var(--es-tl)}
+  .es-mcard.es-t-long{border-top-color:var(--es-nv)}
+  .es-mcard .es-type{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--es-mu)}
+  .es-mcard strong{display:block;color:var(--es-nv);font-size:1.06rem;line-height:1.35;margin:.25rem 0}
+  .es-mcard .es-meta{color:var(--es-mu);font-size:.88rem;line-height:1.45}
+  .es-mcard .es-voir{margin-top:auto;padding-top:.7rem;font-weight:700;color:var(--es-tt);text-decoration:underline;text-underline-offset:3px}
+  .es-rls-label{font-size:.82rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--es-tt);margin:1.2rem 0 .55rem}
   .es-rls-label:first-child{margin-top:0}
-
-  @media(max-width:820px){
-    .es-chooser{grid-template-columns:1fr}
-    .es-body{grid-template-columns:1fr}
-    .es-list{border-right:none;border-bottom:1px solid var(--es-line);flex-direction:row;overflow-x:auto;padding:.7rem}
-    .es-row{flex:0 0 auto;min-width:180px}
-    .es-panel{padding:1.3rem 1.1rem}
-    .es-panel-head{flex-direction:column;align-items:stretch}
-    .es-seg{align-self:auto}
+  .es-wrap :is(button,.es-mcard):focus-visible{outline:3px solid var(--es-tl);outline-offset:3px}
+  @media(max-width:560px){
+    .es-famille{display:flex}.es-famille button{flex:1}
+    .es-grille{grid-template-columns:1fr}
   }
-  @media(max-width:520px){
-    .es-fam{padding:1.6rem 1.25rem;min-height:0}
-    .es-fam-name{font-size:1.45rem}
-    .es-tabs{padding:.75rem .7rem}
-    .es-back{margin-left:0}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .es-wrap *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-    .es-fam:hover,.es-mcard:hover{transform:none}
-  }
+  @media(prefers-reduced-motion:reduce){.es-mcard{transition:none}}
   </style>
 
   <script>
@@ -334,168 +254,99 @@
     };
 
     var ES_HOSPITALIER = [
-      { id: "urgence", nom: "Urgence", sous: "Accueil 24 h", dot: "var(--es-azur)" },
-      { id: "hospitalisation", nom: "Hospitalisation", sous: "Courte durée", dot: "var(--es-sarcelle)" },
-      { id: "obstetrique", nom: "Obstétrique", sous: "Longueuil et Sorel", dot: "var(--es-azur)" },
-      { id: "ucdg", nom: "UCDG", sous: "Gériatrie courte durée", dot: "var(--es-sarcelle)" },
-      { id: "soins-intensifs", nom: "Soins intensifs", sous: "Unités ≤ 6 lits", dot: "var(--es-azur)" }
+      { id: "urgence", nom: "Urgence", sous: "Accueil 24 h", dot: "" },
+      { id: "hospitalisation", nom: "Hospitalisation", sous: "Courte durée", dot: "" },
+      { id: "obstetrique", nom: "Obstétrique", sous: "Longueuil et Sorel", dot: "" },
+      { id: "ucdg", nom: "UCDG", sous: "Gériatrie courte durée", dot: "" },
+      { id: "soins-intensifs", nom: "Soins intensifs", sous: "Unités ≤ 6 lits", dot: "" }
     ];
 
     var ES_COMMUNAUTAIRE = [
-      { id: "gmf-u", nom: "GMF-U", sous: "Première ligne universitaire", dot: "var(--es-azur)" },
-      { id: "chsld", nom: "CHSLD", sous: "Longue durée", dot: "var(--es-sarcelle)" },
-      { id: "sad", nom: "Soins à domicile", sous: "SAD, SIAD et palliatifs", dot: "var(--es-azur)" },
-      { id: "autres", nom: "Autres", sous: "Réadaptation et détention", dot: "var(--es-sarcelle)" }
+      { id: "gmf-u", nom: "GMF-U", sous: "Première ligne universitaire", dot: "" },
+      { id: "chsld", nom: "CHSLD", sous: "Longue durée", dot: "" },
+      { id: "sad", nom: "Soins à domicile", sous: "SAD, SIAD et palliatifs", dot: "" },
+      { id: "autres", nom: "Autres", sous: "Réadaptation et détention", dot: "" }
     ];
 
-    var esState = { famille: null, secteur: "", parRls: false };
-    var esChooser = document.getElementById("es-chooser");
-    var esExplorer = document.getElementById("es-explorer");
-    var esList = document.getElementById("es-list");
-    var esPanel = document.getElementById("es-panel");
-    var esTabHosp = document.getElementById("es-tab-hosp");
-    var esTabComm = document.getElementById("es-tab-comm");
-    if (!esChooser || !esExplorer || !esList || !esPanel || !esTabHosp || !esTabComm) return;
+    var esState = { famille: "hospitalier", secteur: "", parRls: false };
+    var zone = document.getElementById("es-panel");
+    var chips = document.getElementById("es-chips");
+    var resume = document.getElementById("es-resume");
+    var familles = document.querySelectorAll(".es-famille button");
+    var btnListe = document.getElementById("es-btn-list");
+    var btnRls = document.getElementById("es-btn-rls");
+    if (!zone || !chips || !resume) return;
 
-    function esItems() {
-      return esState.famille === "hospitalier" ? ES_HOSPITALIER : ES_COMMUNAUTAIRE;
-    }
-
+    function esItems() { return esState.famille === "hospitalier" ? ES_HOSPITALIER : ES_COMMUNAUTAIRE; }
     function esListe() {
       if (esState.secteur && ES_MILIEUX[esState.secteur]) return ES_MILIEUX[esState.secteur];
-      var ids = esItems().map(function (s) { return s.id; });
-      var vus = {};
-      var out = [];
-      ids.forEach(function (id) {
-        ES_MILIEUX[id].forEach(function (m) {
+      var vus = {}, out = [];
+      esItems().forEach(function (s) {
+        ES_MILIEUX[s.id].forEach(function (m) {
           var cle = m.nom + m.rls;
-          if (vus[cle]) return;
-          vus[cle] = true;
-          out.push(m);
+          if (!vus[cle]) { vus[cle] = true; out.push(m); }
         });
       });
       return out;
     }
-
-    function esFamilleNom() {
-      return esState.famille === "hospitalier" ? "Hospitalier" : "Communautaire";
+    function pluriel(n) { return n + (n > 1 ? " milieux" : " milieu"); }
+    function genre(type) {
+      if (type === "Hôpital") return "";
+      if (type === "CLSC" || type === "GMF-U") return " es-t-comm";
+      return " es-t-long";
     }
-
-    function esSyncTabs() {
-      esTabHosp.classList.toggle("on", esState.famille === "hospitalier");
-      esTabComm.classList.toggle("on", esState.famille === "communautaire");
+    function carte(m) {
+      return '<a class="es-mcard' + genre(m.type) + '" href="' + m.href + '"><span class="es-type">' + m.type + '</span>' +
+        '<strong>' + m.nom + '</strong><span class="es-meta">' + m.ville + ' · ' +
+        (m.rls === "Mission régionale" ? "Mission régionale" : "RLS " + m.rls) + '</span>' +
+        '<span class="es-voir">Voir les secteurs</span></a>';
     }
-
-    function esOpenFamille(famille) {
-      esState.famille = famille;
-      esState.secteur = "";
-      esState.parRls = false;
-      esChooser.hidden = true;
-      esExplorer.hidden = false;
-      esSyncTabs();
-      esDrawList();
-      esDrawPanel();
-      esExplorer.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-
-    function esBack() {
-      esState.famille = null;
-      esState.secteur = "";
-      esState.parRls = false;
-      esChooser.hidden = false;
-      esExplorer.hidden = true;
-      esList.innerHTML = "";
-      esPanel.innerHTML = "";
-    }
-
-    function esMilieuxLabel(n) {
-      return n + (n > 1 ? " milieux" : " milieu");
-    }
-
-    function esDrawList() {
-      var list = esItems();
-      esList.innerHTML = list.map(function (item) {
-        var n = ES_MILIEUX[item.id].length;
-        var pressed = esState.secteur === item.id;
-        return '<li><button type="button" class="es-row" data-id="' + item.id +
-          '" aria-pressed="' + pressed + '" style="--dot:' + item.dot + '">' +
-          '<span class="es-chip" aria-hidden="true"></span>' +
-          '<span class="es-txt"><span class="es-nom">' + item.nom + '</span>' +
-          '<span class="es-sous">' + item.sous + '</span></span>' +
-          '<span class="es-count">' + n + '</span></button></li>';
+    function dessinerPastilles() {
+      var tous = esListe.call(null);
+      var html = '<button type="button" class="es-chip" data-id="" aria-pressed="' + (esState.secteur === "") + '">Tous</button>';
+      html += esItems().map(function (s) {
+        return '<button type="button" class="es-chip" data-id="' + s.id + '" aria-pressed="' + (esState.secteur === s.id) + '">' +
+          s.nom + ' <i aria-label="' + pluriel(ES_MILIEUX[s.id].length) + '">' + ES_MILIEUX[s.id].length + '</i></button>';
       }).join("");
-      esList.querySelectorAll(".es-row").forEach(function (btn) {
-        btn.onclick = function () { esSelectSecteur(btn.getAttribute("data-id")); };
+      chips.innerHTML = html;
+      chips.querySelectorAll(".es-chip").forEach(function (b) {
+        b.onclick = function () { esState.secteur = b.getAttribute("data-id"); esState.parRls = false; tout(); };
       });
     }
-
-    function esSelectSecteur(id) {
-      esState.secteur = esState.secteur === id ? "" : id;
-      esState.parRls = false;
-      esList.querySelectorAll(".es-row").forEach(function (b) {
-        var on = b.getAttribute("data-id") === esState.secteur;
-        b.setAttribute("aria-pressed", on ? "true" : "false");
-      });
-      esDrawPanel();
-    }
-
-    function esAccent(type) {
-      if (type === "Hôpital") return " es-accent-bleu";
-      if (type === "CLSC" || type === "GMF-U") return " es-accent-azur";
-      if (type === "CHSLD" || type === "CRD" || type === "Détention") return " es-accent-sarcelle";
-      return "";
-    }
-
-    function esCard(m) {
-      return '<a class="es-mcard' + esAccent(m.type) + '" href="' + m.href + '"><span class="es-type">' + m.type +
-        "</span><strong>" + m.nom + '</strong><span class="es-meta">' + m.ville + " · " + m.rls + "</span></a>";
-    }
-
-    function esDrawPanel() {
+    function dessinerGrille() {
       var meta = esItems().filter(function (s) { return s.id === esState.secteur; })[0];
       var milieux = esListe();
-      var titre = meta ? meta.nom : "Tous les milieux";
-      var sous = meta
-        ? meta.sous + " · " + esMilieuxLabel(milieux.length)
-        : (esState.famille === "hospitalier"
-          ? milieux.length + " établissements · tous les secteurs de cette famille"
-          : esMilieuxLabel(milieux.length) + " · tous les secteurs de cette famille");
-      var body = "";
+      resume.innerHTML = meta
+        ? "<strong>" + meta.nom + "</strong> · " + meta.sous + " · " + pluriel(milieux.length)
+        : "<strong>Tous les secteurs</strong> · " + pluriel(milieux.length);
+      var corps = "";
       if (esState.parRls) {
-        var groupes = [];
-        var index = {};
+        var groupes = [], index = {};
         milieux.forEach(function (m) {
           if (!index[m.rls]) { index[m.rls] = []; groupes.push({ rls: m.rls, arr: index[m.rls] }); }
           index[m.rls].push(m);
         });
         groupes.forEach(function (g) {
-          body += '<div class="es-rls-label">' + g.rls + " · " + g.arr.length + '</div><div class="es-cards">' + g.arr.map(esCard).join("") + "</div>";
+          corps += '<p class="es-rls-label">' + g.rls + " · " + g.arr.length + '</p><div class="es-grille">' + g.arr.map(carte).join("") + "</div>";
         });
       } else {
-        body = '<div class="es-cards">' + milieux.map(esCard).join("") + "</div>";
+        corps = '<div class="es-grille">' + milieux.map(carte).join("") + "</div>";
       }
-      esPanel.innerHTML =
-        '<div class="es-panel-head"><div><h3>' + titre + '</h3><p class="es-sous">' + sous + "</p></div>" +
-        '<div class="es-seg" role="group" aria-label="Classement">' +
-        '<button type="button" id="es-btn-list" aria-pressed="' + (esState.parRls ? "false" : "true") + '"' + (esState.parRls ? "" : ' class="on"') + ">Liste</button>" +
-        '<button type="button" id="es-btn-rls" aria-pressed="' + (esState.parRls ? "true" : "false") + '"' + (esState.parRls ? ' class="on"' : "") + ">Par RLS</button></div></div>" +
-        '<div class="es-panel-body">' + body + "</div>";
-      document.getElementById("es-btn-list").onclick = function () { esState.parRls = false; esDrawPanel(); };
-      document.getElementById("es-btn-rls").onclick = function () { esState.parRls = true; esDrawPanel(); };
+      zone.innerHTML = corps;
+      btnListe.setAttribute("aria-pressed", String(!esState.parRls));
+      btnRls.setAttribute("aria-pressed", String(esState.parRls));
     }
-
-    document.querySelectorAll(".es-fam").forEach(function (btn) {
-      btn.onclick = function () { esOpenFamille(btn.getAttribute("data-famille")); };
+    function tout() {
+      familles.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-famille") === esState.famille)); });
+      dessinerPastilles();
+      dessinerGrille();
+    }
+    familles.forEach(function (b) {
+      b.onclick = function () { esState.famille = b.getAttribute("data-famille"); esState.secteur = ""; esState.parRls = false; tout(); };
     });
-    esTabHosp.onclick = function () { esOpenFamille("hospitalier"); };
-    esTabComm.onclick = function () { esOpenFamille("communautaire"); };
-    document.getElementById("es-btn-back").onclick = esBack;
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key !== "Escape") return;
-      if (esState.secteur) { esSelectSecteur(esState.secteur); return; }
-      if (esState.famille) esBack();
-    });
+    btnListe.onclick = function () { esState.parRls = false; dessinerGrille(); };
+    btnRls.onclick = function () { esState.parRls = true; dessinerGrille(); };
+    tout();
   })();
   </script>
 
