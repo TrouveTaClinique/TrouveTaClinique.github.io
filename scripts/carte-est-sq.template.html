@@ -2749,6 +2749,12 @@ function fitToData() {
   const pts = gmfs.filter(g => statutVisible(g) && g.lat && g.lng).map(g => [g.lat, g.lng]);
   if (pts.length) { try { map.fitBounds(pts, { padding:[40,40], maxZoom:11 }); } catch(e){} }
 }
+// Même cadrage que fitToData(), en vol animé ; faux s'il n'y a rien à cadrer.
+function flyToData(duree) {
+  const pts = gmfs.filter(g => statutVisible(g) && g.lat && g.lng).map(g => [g.lat, g.lng]);
+  if (!pts.length) return false;
+  try { map.flyToBounds(pts, { padding:[40,40], maxZoom:11, duration:duree }); return true; } catch(e) { return false; }
+}
 
 // Recadre la carte sur les fiches actuellement filtrées (recherche, région,
 // RLS, favoris) et annonce le nombre de résultats aux lecteurs d'écran.
@@ -4306,7 +4312,11 @@ function closeDetailUI() {
   if (sbToggle) sbToggle.classList.remove('hidden'); // réaffiche l'onglet Liste (mobile)
   if (typeof peekOn === 'function') peekOn(0);
   updateLegendVisibility();
-  map.flyTo(HOME.center, HOME.zoom, { duration:1 });
+  // Sur ordinateur, HOME (vue d'avant le chargement des données) laissait la carte trop loin et
+  // décentrée au sud-ouest (27 sept.) : on revient au cadrage d'ouverture (fitToData), en vol.
+  // Le cellulaire (mise en page à tiroir, max-width 860px) garde HOME.
+  const surCellulaire = window.matchMedia('(max-width: 860px)').matches;
+  if (surCellulaire || !flyToData(1)) map.flyTo(HOME.center, HOME.zoom, { duration:1 });
   rendreFocusDeclencheur();
 }
 
