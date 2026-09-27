@@ -3497,6 +3497,7 @@ const PAGES_FIXES = [
   { loc: '/monteregie-est/ptem/', lastmod: null, changefreq: 'weekly', priority: '0.9' },
   { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },
   { loc: '/monteregie-est/ptem-u/', lastmod: '2026-09-12', changefreq: 'monthly', priority: '0.6' },
+  { loc: '/monteregie-est/video/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
   /* /monteregie/ (carte des 3 territoires) reste en ligne pour les humains mais n’est plus
      dans le sitemap : elle concurrence l’accueil et /monteregie-est/. */
   { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
@@ -3578,9 +3579,10 @@ function pageRecherche(cliniques) {
 /* VIDÉO PROMOTIONNELLE DE LA MONTÉRÉGIE-EST (27 sept. 2026)                                    */
 /* ------------------------------------------------------------------------------------------- */
 
-/* Page non indexée (noindex, hors sitemap et hors recherche du site) : on la partage par son lien.
-   La vidéo et son affiche vivent à côté de la page (monteregie-est/video/), écrites à la main ;
-   seule la page est générée. VERSION_VIDEO change l'adresse du fichier quand la vidéo est remplacée. */
+/* Page indexée depuis le 27 sept. 2026 (d'abord publiée en noindex) : dans le sitemap et la recherche du
+   site, avec les données structurées VideoObject (résultats vidéo de Google). La vidéo et son affiche
+   vivent à côté de la page (monteregie-est/video/), déposées à la main ; seule la page est générée.
+   VERSION_VIDEO change l'adresse du fichier quand la vidéo est remplacée. */
 const VERSION_VIDEO = 'v5';
 function pageVideoEst() {
   const u = UNIVERS_PAR_REGION.Est;
@@ -3588,7 +3590,20 @@ function pageVideoEst() {
   const titre = 'Vidéo : la carte de la Montérégie-Est';
   const description = 'Visite guidée en vidéo de la carte interactive des cliniques et des établissements qui recrutent des médecins de famille en Montérégie-Est.';
   const fichier = `trouve-ta-clinique-monteregie-est.mp4?v=${VERSION_VIDEO}`;
-  const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: titre, url, inLanguage: 'fr-CA' };
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'Trouve ta clinique : la carte de la Montérégie-Est en vidéo',
+    description,
+    thumbnailUrl: `${url}affiche.jpg`,
+    uploadDate: '2026-09-27',
+    duration: 'PT3M56S',
+    contentUrl: `${url}trouve-ta-clinique-monteregie-est.mp4`,
+    embedUrl: url,
+    inLanguage: 'fr-CA',
+    publisher: { '@type': 'Organization', name: 'Trouve ta clinique', url: `${SITE}/`,
+      logo: { '@type': 'ImageObject', url: `${SITE}/assets/logo-128.png` } }
+  };
   const corps = `
 <div class="tete">
   <p class="eyebrow">Vidéo</p>
@@ -3607,7 +3622,7 @@ function pageVideoEst() {
   </p>
 </section>`;
   return page({
-    titre, description, url, profondeur: 2, indexable: false, jsonLd, univers: u,
+    titre, description, url, profondeur: 2, indexable: true, jsonLd, univers: u,
     filDAriane: `<a href="/">Accueil</a> › <a href="${EST_PREFIXE}/">Montérégie-Est</a> › Vidéo`,
     corps, actif: null
   });
@@ -3618,6 +3633,7 @@ function construireIndexRecherche(cliniques, slugs) {
   const pages = [
     { nom: 'Accueil', url: '/', extra: 'accueil trouve ta clinique' },
     { nom: 'Carte interactive Montérégie-Est', url: '/monteregie-est/', extra: 'carte interactive est' },
+    { nom: 'Vidéo : la carte de la Montérégie-Est', url: '/monteregie-est/video/', extra: 'video presentation visite guidee demonstration tutoriel' },
     { nom: 'Carte interactive Montérégie-Centre', url: '/monteregie-centre/', extra: 'carte centre' },
     { nom: 'Carte interactive Montérégie-Ouest', url: '/monteregie-ouest/', extra: 'carte ouest' },
     { nom: 'Cliniques de la Montérégie-Est', url: '/monteregie-est/cliniques/', extra: 'repertoire cliniques' },
@@ -4328,7 +4344,7 @@ function main() {
   /* Copies étanches de /ptem/, /amp/ et /ptem-u/ : le contenu vit désormais sous /monteregie-est/;
      les anciennes adresses et celles des autres territoires redirigent vers l'Est. */
   publierPagesGuide();
-  ecrire(path.join('monteregie-est', 'video', 'index.html'), pageVideoEst());   // non indexée, hors sitemap
+  ecrire(path.join('monteregie-est', 'video', 'index.html'), pageVideoEst());   // indexée (sitemap : PAGES_FIXES)
 
   const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo, cliniquesById);
   const nEtabCentre = publierPagesEtablissementsCentre(entrees, majPagesSeo, cliniquesById);
