@@ -30,7 +30,8 @@ const FICHIERS = new Set([
 ]);
 const EXTENSIONS = new Set([
   '.html', '.css', '.js', '.json', '.webmanifest', '.png', '.jpg', '.jpeg',
-  '.svg', '.webp', '.ico', '.gif', '.woff', '.woff2', '.ttf', '.pdf'
+  '.svg', '.webp', '.ico', '.gif', '.woff', '.woff2', '.ttf', '.pdf',
+  '.mp4'   // vidéo promotionnelle de /monteregie-est/video/ (27 sept. 2026)
 ]);
 const TEXTE = new Set(['.html', '.css', '.js', '.json', '.webmanifest', '.svg']);
 
