@@ -1442,7 +1442,9 @@ body.cmp-open { overflow:hidden; }
 :root[data-region="Est"] .dp-ic-pdf { background: #E6F4FC; border-color: #91CBEF; color: #0065A9; }
 :root[data-region="Est"] .rls-legend {
   border: 1px solid rgba(23,10,114,.13);
-  border-radius: 14px;
+  /* Même filet sarcelle à gauche que l'encadré de collaboration (27 sept. 2026). */
+  border-left: 4px solid #08A0A0;
+  border-radius: 8px;
   box-shadow: 0 7px 20px rgba(23,10,114,.16);
 }
 :root[data-region="Est"] .leaflet-control-zoom,
