@@ -3574,6 +3574,45 @@ function pageRecherche(cliniques) {
   });
 }
 
+/* ------------------------------------------------------------------------------------------- */
+/* VIDÉO PROMOTIONNELLE DE LA MONTÉRÉGIE-EST (27 sept. 2026)                                    */
+/* ------------------------------------------------------------------------------------------- */
+
+/* Page non indexée (noindex, hors sitemap et hors recherche du site) : on la partage par son lien.
+   La vidéo et son affiche vivent à côté de la page (monteregie-est/video/), écrites à la main ;
+   seule la page est générée. VERSION_VIDEO change l'adresse du fichier quand la vidéo est remplacée. */
+const VERSION_VIDEO = 'v5';
+function pageVideoEst() {
+  const u = UNIVERS_PAR_REGION.Est;
+  const url = `${SITE}${EST_PREFIXE}/video/`;
+  const titre = 'Vidéo : la carte de la Montérégie-Est';
+  const description = 'Visite guidée en vidéo de la carte interactive des cliniques et des établissements qui recrutent des médecins de famille en Montérégie-Est.';
+  const fichier = `trouve-ta-clinique-monteregie-est.mp4?v=${VERSION_VIDEO}`;
+  const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: titre, url, inLanguage: 'fr-CA' };
+  const corps = `
+<div class="tete">
+  <p class="eyebrow">Vidéo</p>
+  <h1>La carte de la Montérégie-Est en vidéo</h1>
+  <p class="lede">Une visite guidée de la carte des milieux qui recrutent, en moins de quatre minutes.</p>
+</div>
+<section class="zone" style="padding-top:var(--s-md)">
+  <video controls playsinline preload="metadata" width="1920" height="1080" poster="affiche.jpg?v=${VERSION_VIDEO}"
+    style="display:block;width:100%;height:auto;border-radius:14px;background:#170A72;box-shadow:0 12px 34px rgba(18,6,114,.18)">
+    <source src="${fichier}" type="video/mp4">
+    <a href="${fichier}">Télécharger la vidéo (MP4)</a>
+  </video>
+  <p class="cta-row" style="display:flex;flex-wrap:wrap;gap:.8rem;margin-top:var(--s-md)">
+    <a class="btn teal" href="${EST_PREFIXE}/">Essayer la carte</a>
+    <a class="btn ghost" href="${fichier}" download="trouve-ta-clinique-monteregie-est.mp4">Télécharger la vidéo (MP4, 47 Mo)</a>
+  </p>
+</section>`;
+  return page({
+    titre, description, url, profondeur: 2, indexable: false, jsonLd, univers: u,
+    filDAriane: `<a href="/">Accueil</a> › <a href="${EST_PREFIXE}/">Montérégie-Est</a> › Vidéo`,
+    corps, actif: null
+  });
+}
+
 function construireIndexRecherche(cliniques, slugs) {
   const items = [];
   const pages = [
@@ -4289,6 +4328,7 @@ function main() {
   /* Copies étanches de /ptem/, /amp/ et /ptem-u/ : le contenu vit désormais sous /monteregie-est/;
      les anciennes adresses et celles des autres territoires redirigent vers l'Est. */
   publierPagesGuide();
+  ecrire(path.join('monteregie-est', 'video', 'index.html'), pageVideoEst());   // non indexée, hors sitemap
 
   const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo, cliniquesById);
   const nEtabCentre = publierPagesEtablissementsCentre(entrees, majPagesSeo, cliniquesById);
