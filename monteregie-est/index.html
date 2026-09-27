@@ -452,12 +452,17 @@ body.fiche-open .leaflet-control-attribution { display: none; }
 @media (max-width: 520px), (min-width: 861px) and (max-width: 1000px) {
   .leaflet-container .leaflet-control-attribution.credits-carte { font-size: 10px; }
   .credits-carte .credits-l1 { font-size: 10.5px; }
-  .rls-legend { margin-bottom: 72px !important; }
+  .credits-bloc .rls-legend { margin-bottom: 72px !important; }
 }
 /* Cellulaire : légende et crédits côte à côte, à la même hauteur (bas de la carte). Le bloc de
    crédits se resserre pour laisser la place à la légende, au lieu de pousser celle-ci vers le haut. */
+/* Ancienne bande de crédits (CREDITS_BLOC = false) : sur un cellulaire étroit, la bande passe
+   sous la légende ; celle-ci se pose juste au-dessus. */
+@media (max-width: 500px) {
+  html:not(.credits-bloc) .leaflet-bottom .rls-legend { margin-bottom: 24px; }
+}
 @media (max-width: 860px) {
-  .rls-legend { margin-bottom: 6px !important; }
+  .credits-bloc .rls-legend { margin-bottom: 6px !important; }
   .leaflet-container .leaflet-control-attribution.credits-carte { max-width: calc(100vw - 186px); }
 }
 
@@ -2079,9 +2084,15 @@ const rankOf = id => currentOrder().indexOf(id) + 1;
 const HOME = { center:[45.45,-73.15], zoom:9 };
 const map = L.map('map', { center:HOME.center, zoom:HOME.zoom, zoomControl:false });
 L.control.zoom({ position:'topright' }).addTo(map);
-/* Crédits (22 sept. 2026) : un seul bloc, dans cet ordre —
-   Santé Québec, réalisation du projet, puis Leaflet | OpenStreetMap | CartoDB. */
-if (map.attributionControl) {
+/* Crédits de la carte : deux versions, choisies par CREDITS_BLOC.
+   - true  : bloc blanc du 22 sept. 2026 (Santé Québec, réalisation du projet, puis
+             Leaflet | OpenStreetMap | CartoDB), légende alignée avec lui sur cellulaire.
+   - false : ancienne bande de crédits en bas, « © OpenStreetMap © CartoDB | © Olivier Laplante ».
+   27 sept. 2026 : retour TEMPORAIRE à l'ancienne bande pour l'enregistrement d'une vidéo
+   promotionnelle ; remettre true pour réactiver le bloc (voir CLAUDE.md). */
+const CREDITS_BLOC = false;
+if (CREDITS_BLOC) document.documentElement.classList.add('credits-bloc');
+if (CREDITS_BLOC && map.attributionControl) {
   map.attributionControl.getContainer().classList.add('credits-carte');
   map.attributionControl.setPrefix(
     '<span class="credits-l1">© Santé Québec – CISSS de la Montérégie-Est</span>'
@@ -2196,7 +2207,8 @@ map.on('locationerror', function () {
   // Le fond raster avec clé (mis en place plus tôt le même jour, voir gabarit /rastertiles/ de
   // docs.carto.com/faqs/carto-basemaps) ne sert plus que de solution de secours pour les
   // navigateurs sans WebGL.
-  var ATTR = '© OpenStreetMap © CartoDB';
+  var ATTR = CREDITS_BLOC ? '© OpenStreetMap © CartoDB'
+    : '© OpenStreetMap © CartoDB<span class="credit-perso"> | © Olivier Laplante</span>';
   // Clé API CARTO (exigée depuis le 27 août 2026). Même clé pour les
   // styles vectoriels et pour le repli raster.
   var CARTO_KEY = 'cb1_29ok_1_b602e4a604176e32ebdf7824';

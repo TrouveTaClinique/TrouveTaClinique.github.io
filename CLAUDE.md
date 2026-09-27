@@ -93,6 +93,11 @@ dates du sitemap selon le contenu réel des pages).
   (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
   cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
 - Les courriels de recrutement sont publiés volontairement (`PUBLIER_COURRIELS = true`).
+- Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`). Depuis le
+  27 sept. 2026, **temporairement `false`** (ancienne bande « © Olivier Laplante », pour une vidéo
+  promotionnelle). Le bloc blanc « © Santé Québec… / Projet réalisé par Olivier Laplante et Nancy
+  Langlois » est conservé : remettre `true` quand le propriétaire le demande, puis
+  `node scripts/publier-regions.js`.
 
 ## Notes internes des cliniques (garde-fou du 26 septembre 2026)
 
