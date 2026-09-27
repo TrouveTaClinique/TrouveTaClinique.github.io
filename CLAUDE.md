@@ -97,7 +97,9 @@ dates du sitemap selon le contenu réel des pages).
   27 sept. 2026, **temporairement `false`** (ancienne bande « © Olivier Laplante », pour une vidéo
   promotionnelle). Le bloc blanc « © Santé Québec… / Projet réalisé par Olivier Laplante et Nancy
   Langlois » est conservé : remettre `true` quand le propriétaire le demande, puis
-  `node scripts/publier-regions.js`.
+  `node scripts/publier-regions.js`. Depuis le 27 sept. 2026, un encadré `CREDITS_COLLAB`
+  (« Réalisé en collaboration avec / Nancy Langlois et la DSMP / Santé Québec – CISSS de la
+  Montérégie-Est », sans « © ») s'affiche au-dessus de la bande, en bas à droite.
 
 ## Notes internes des cliniques (garde-fou du 26 septembre 2026)
 

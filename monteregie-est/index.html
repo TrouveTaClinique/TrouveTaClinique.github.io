@@ -456,6 +456,20 @@ body.fiche-open .leaflet-control-attribution { display: none; }
 }
 /* Cellulaire : légende et crédits côte à côte, à la même hauteur (bas de la carte). Le bloc de
    crédits se resserre pour laisser la place à la légende, au lieu de pousser celle-ci vers le haut. */
+/* Encadré « Réalisé en collaboration avec » (27 sept. 2026) : bas droite, juste au-dessus de la
+   bande de crédits ; même style que l'ancien bloc, sans « © ». Fond blanc aussi en mode sombre. */
+.leaflet-control.credits-collab { margin: 0 6px 6px 0; padding: 7px 11px 7px 12px; max-width: 270px;
+  background: #fff; color: #4a5670; border-left: 4px solid #08A0A0; border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(23,10,114,.18); text-align: left;
+  font: 400 10.5px/1.4 'Segoe UI', system-ui, -apple-system, 'Roboto', sans-serif; }
+.credits-collab .cc-l0 { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; color: #067A7A; margin-bottom: 1px; }
+.credits-collab .cc-l1 { display: block; font-weight: 600; font-size: 11.5px; color: #170A72; }
+.credits-collab .cc-l2 { display: block; }
+body.fiche-open .credits-collab { display: none; }
+@media (max-width: 520px) {
+  .leaflet-control.credits-collab { max-width: calc(100vw - 186px); }
+}
 /* Ancienne bande de crédits (CREDITS_BLOC = false) : sur un cellulaire étroit, la bande passe
    sous la légende ; celle-ci se pose juste au-dessus. */
 @media (max-width: 500px) {
@@ -2092,6 +2106,21 @@ L.control.zoom({ position:'topright' }).addTo(map);
    promotionnelle ; remettre true pour réactiver le bloc (voir CLAUDE.md). */
 const CREDITS_BLOC = false;
 if (CREDITS_BLOC) document.documentElement.classList.add('credits-bloc');
+/* Encadré de collaboration (27 sept. 2026), au-dessus de la bande de crédits : remercie
+   Nancy Langlois et la DSMP, sans mention de droits d'auteur. */
+const CREDITS_COLLAB = true;
+if (CREDITS_COLLAB && !CREDITS_BLOC) {
+  const collab = L.control({ position: 'bottomright' });
+  collab.onAdd = function () {
+    const d = L.DomUtil.create('div', 'credits-collab');
+    d.innerHTML = '<span class="cc-l0">Réalisé en collaboration avec</span>'
+      + '<span class="cc-l1">Nancy Langlois et la DSMP</span>'
+      + '<span class="cc-l2">Santé Québec – CISSS de la Montérégie-Est</span>';
+    L.DomEvent.disableClickPropagation(d);
+    return d;
+  };
+  collab.addTo(map);
+}
 if (CREDITS_BLOC && map.attributionControl) {
   map.attributionControl.getContainer().classList.add('credits-carte');
   map.attributionControl.setPrefix(
