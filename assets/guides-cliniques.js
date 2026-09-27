@@ -27,6 +27,7 @@
      organismes situés hors de la Montérégie-Est. */
   const filtres = Array.from(document.querySelectorAll('select[data-filtre]'));
   const caseHors = document.getElementById('guides-hors');
+  const caseFr = document.getElementById('guides-fr');   // « Français seulement » (plan Guides, 25)
   const SANS_ADRESSE = '(sans adresse)';
   const effacerFiltres = document.querySelector('.guides-filtres-reset');
   const resSection = document.querySelector('.guides-resultats');
@@ -97,14 +98,86 @@
     const clone = parId.get(id).el.cloneNode(true);
     clone.hidden = false;
     clone.querySelector('.guides-fav').remove();
+    const actions = clone.querySelector('.guides-actions');
+    if (actions) actions.remove();
     ajouterEtoile(clone);
+    ajouterActions(clone);
     return clone;
   }
   function construireFavoris() {
     favList.replaceChildren(...favoris.map(cloner));
     document.querySelectorAll('.guides-fav').forEach(b => majEtoile(b, b.parentElement.dataset.id));
   }
-  resources.forEach(r => ajouterEtoile(r.el));
+  /* Actions sous chaque fiche (plan Guides, 27 et 29) : partage et code QR pour les documents
+     destinés aux patients ; lien discret « Signaler un lien brisé » (courriel prérempli). La
+     bibliothèque de codes QR (vendor/) n'est chargée qu'au premier clic. */
+  const COURRIEL = document.body.dataset.courriel || '';
+  const boutonAction = (texte, action) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'guides-action'; b.textContent = texte;
+    b.addEventListener('click', () => action(b));
+    return b;
+  };
+  async function partager(bouton, titre, url) {
+    if (navigator.share) { try { await navigator.share({ title: titre, url }); } catch (e) { /* partage annulé */ } return; }
+    let copie = false;
+    try { await navigator.clipboard.writeText(url); copie = true; } catch (e) { /* presse-papiers refusé */ }
+    const avant = bouton.textContent;
+    bouton.textContent = copie ? 'Lien copié' : 'Copie impossible';
+    setTimeout(() => { bouton.textContent = avant; }, 2500);
+  }
+  let qrPret = null;
+  const chargerQR = () => qrPret || (qrPret = new Promise((ok, echec) => {
+    const script = document.createElement('script');
+    script.src = '/vendor/qrcode-generator.js';
+    script.onload = () => (window.qrcode ? ok(window.qrcode) : echec());
+    script.onerror = () => { qrPret = null; echec(); };
+    document.head.appendChild(script);
+  }));
+  function montrerQR(bouton, titre, url) {
+    chargerQR().then(qrcode => {
+      const qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      const d = document.createElement('dialog');
+      d.className = 'guides-qr';
+      d.setAttribute('aria-labelledby', 'guides-qr-titre');
+      d.innerHTML = '<h2 id="guides-qr-titre"></h2><div class="guides-qr-image"></div>'
+        + '<p class="guides-qr-texte">Le patient balaie ce code avec l’appareil photo de son téléphone pour ouvrir le document.</p>'
+        + '<p class="guides-qr-lien"></p><button type="button" class="guides-qr-fermer">Fermer</button>';
+      d.querySelector('h2').textContent = titre;
+      d.querySelector('.guides-qr-lien').textContent = url;
+      d.querySelector('.guides-qr-image').innerHTML = qr.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
+      const svg = d.querySelector('svg');
+      if (svg) { svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'Code QR du document'); }
+      d.querySelector('.guides-qr-fermer').addEventListener('click', () => d.close());
+      d.addEventListener('close', () => { d.remove(); bouton.focus(); });
+      document.body.appendChild(d);
+      d.showModal();
+    }).catch(() => {
+      const avant = bouton.textContent;
+      bouton.textContent = 'Code QR indisponible';
+      setTimeout(() => { bouton.textContent = avant; }, 2500);
+    });
+  }
+  function ajouterActions(li) {
+    const id = li.dataset.id, titre = li.dataset.title;
+    const zone = document.createElement('div');
+    zone.className = 'guides-actions';
+    if (li.dataset.format === 'patient') {
+      zone.append(boutonAction('Partager', b => partager(b, titre, id)), boutonAction('Code QR', b => montrerQR(b, titre, id)));
+    }
+    if (COURRIEL) {
+      const a = document.createElement('a');
+      a.className = 'guides-signaler';
+      a.textContent = 'Signaler un lien brisé';
+      a.href = 'mailto:' + COURRIEL + '?subject=' + encodeURIComponent('Lien brisé : ' + titre)
+        + '&body=' + encodeURIComponent('Bonjour,\n\nCe lien du catalogue /guides/ ne fonctionne pas ou ne mène plus au bon document :\n\n' + titre + '\n' + id + '\n\nMerci !');
+      zone.append(a);
+    }
+    li.appendChild(zone);
+  }
+  resources.forEach(r => { ajouterEtoile(r.el); ajouterActions(r.el); });
   construireFavoris();
   window.addEventListener('storage', event => {
     if (event.key !== CLE_FAVORIS) return;
@@ -147,6 +220,37 @@
 
   const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', pluriel(n, mot)); };
 
+  /* « Consultés récemment » (plan Guides, 28) : les 5 dernières fiches de cette page ouvertes dans ce
+     navigateur (clé commune aux deux pages), dans une section repliée sous les favoris. */
+  const CLE_CONSULTES = 'ttc-guides-recents';
+  const consSection = document.querySelector('.guides-consultes');
+  const consList = consSection && consSection.querySelector('.guides-resource-list');
+  const lireConsultes = () => {
+    try { const v = JSON.parse(localStorage.getItem(CLE_CONSULTES) || '[]'); return Array.isArray(v) ? v.filter(x => typeof x === 'string') : []; }
+    catch (e) { return []; }
+  };
+  let consultes = lireConsultes();
+  function construireConsultes() {
+    if (!consSection) return;
+    const ici = consultes.filter(id => parId.has(id)).slice(0, 5);
+    consList.replaceChildren(...ici.map(cloner));
+    badge(consSection.querySelector('.compte'), ici.length, 'ressource');
+  }
+  document.addEventListener('click', event => {
+    const lien = event.target.closest && event.target.closest('.guides-resource-link');
+    const li = lien && lien.closest('.guides-resource');
+    if (!li || !parId.has(li.dataset.id)) return;
+    consultes = [li.dataset.id, ...lireConsultes().filter(x => x !== li.dataset.id)].slice(0, 10);
+    try { localStorage.setItem(CLE_CONSULTES, JSON.stringify(consultes)); } catch (e) { /* stockage bloqué : pour cette visite seulement */ }
+    construireConsultes();
+    render();
+  });
+  construireConsultes();
+
+  /* Pastilles des sujets (plan Guides, 24) : un clic ouvre le sujet et y mène, même s'il est déjà l'ancre courante. */
+  const pastilles = document.querySelector('.guides-pastilles');
+  if (pastilles) pastilles.addEventListener('click', event => { if (event.target.closest('.guides-pastille')) setTimeout(ouvrirDepuisAncre, 0); });
+
   const correspond = (r, cle, valeur) => {
     if (!valeur) return true;
     if (cle === 'rubriques') return r.rubriques.includes(valeur);
@@ -166,6 +270,7 @@
       const r = resources[i];
       if (!filtres.every(s => correspond(r, s.dataset.filtre, s.value))) return;
       if (!horsVisible(r)) { horsMasques++; return; }
+      if (caseFr && caseFr.checked && r.el.dataset.en === '1') return;
       retenus.set(r.id, score);
     });
     const count = retenus.size;
@@ -206,13 +311,68 @@
       }
     });
     empty.hidden = count !== 0;
+    majPartiel(requete, count);
+    majActionsVides(requete, count);
     if (recents) recents.hidden = !replier;
+    if (pastilles) pastilles.hidden = !replier;
+    if (consSection) consSection.hidden = !replier || !consList.children.length;
     if (communautaire) communautaire.hidden = !moteur.estCommunautaire(requete);
-    effacerFiltres.hidden = !actifs.length;
-    const libelles = actifs.map(s => s.value === SANS_ADRESSE ? 'lignes d’aide et services à distance' : s.value).join(' · ');
+    const francais = !!(caseFr && caseFr.checked);
+    effacerFiltres.hidden = !actifs.length && !francais;
+    const libelles = actifs.map(s => s.value === SANS_ADRESSE ? 'lignes d’aide et services à distance' : (s.selectedOptions[0] ? s.selectedOptions[0].textContent.replace(/ \(\d+\)$/, '') : s.value)).concat(francais ? ['en français'] : []).join(' · ');
     status.textContent = pluriel(count, MOT) + (libelles ? ' · ' + libelles : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue')
       + (horsMasques ? ' (' + horsMasques + ' hors territoire masqué' + (horsMasques > 1 ? 's' : '') + ')' : '');
     signalerAutrePage(requete);
+  }
+
+  /* Correspondance partielle (plan Guides, 20b) : un mot précis de la question n'existe nulle part
+     dans le catalogue ; les résultats ne reposent que sur les autres mots, et la page le dit. */
+  const partiel = document.querySelector('.guides-partiel');
+  const sectionIA = document.querySelector('.guides-ia');
+  const iaDisponible = () => !!sectionIA && !sectionIA.hidden;
+  function demanderIA(question) {
+    const champ = sectionIA.querySelector('#guides-ia-question');
+    const formIA = sectionIA.querySelector('.guides-ia-form');
+    champ.value = question;
+    champ.dispatchEvent(new Event('input', { bubbles: true }));
+    sectionIA.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (formIA.requestSubmit) formIA.requestSubmit(); else formIA.querySelector('button[type="submit"]').click();
+  }
+  /* Mots de la question tels que tapés (avec leurs accents), à partir des mots normalisés du moteur. */
+  const telsQueTapes = (requete, normalises) => {
+    const correspondance = new Map();
+    requete.split(/[\s,;:!?()«»"]+/).filter(Boolean).forEach(m => { const k = moteur.mots(m).join(' '); if (k && !correspondance.has(k)) correspondance.set(k, m); });
+    return normalises.map(p => p.split(' ').map(t => correspondance.get(t) || t).join(' '));
+  };
+  function majPartiel(requete, count) {
+    if (!partiel) return;
+    const absents = requete && count ? moteur.motsAbsents(index, requete) : [];
+    partiel.hidden = !absents.length;
+    if (!absents.length) { partiel.replaceChildren(); return; }
+    const presents = moteur.analyserRequete(requete).map(t => t.saisie.join(' ')).filter(p => !absents.includes(p));
+    const guillemets = liste => telsQueTapes(requete, liste).map(m => '« ' + m + ' »').join(', ');
+    partiel.textContent = 'Aucune fiche ne contient ' + guillemets(absents) + (presents.length ? ' : résultats pour ' + guillemets(presents) + ' seulement.' : '.');
+    if (iaDisponible()) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'guides-partiel-ia'; b.textContent = 'Demander à l’IA';
+      b.addEventListener('click', () => demanderIA(requete));
+      partiel.append(' ', b);
+    }
+  }
+  /* Aucun résultat (plan Guides, 22) : demander à l'IA, ou proposer la ressource manquante. */
+  const boutonIAVide = document.querySelector('.guides-demander-ia');
+  const proposerCe = document.querySelector('.guides-proposer-ce');
+  if (boutonIAVide) boutonIAVide.addEventListener('click', () => demanderIA(input.value.trim()));
+  function majActionsVides(requete, count) {
+    const actif = count === 0 && requete !== '';
+    if (boutonIAVide) boutonIAVide.hidden = !(actif && iaDisponible());
+    if (!proposerCe) return;
+    proposerCe.hidden = !actif;
+    if (actif) {
+      const sujet = page === 'communautaire' ? 'Proposition d’organisme pour le catalogue' : 'Proposition pour le catalogue de guides';
+      const corps = 'Bonjour,\n\nJe cherchais « ' + requete + ' » dans le catalogue /guides/ sans rien trouver.\n\nJe propose d’ajouter :\n\nTitre : \nOrganisme : \nLien : \nPourquoi c’est utile en première ligne : \n\nMerci !';
+      proposerCe.href = 'mailto:' + proposerCe.dataset.courriel + '?subject=' + encodeURIComponent(sujet) + '&body=' + encodeURIComponent(corps);
+    }
   }
 
   /* Lien vers l'autre page quand la recherche y trouve aussi des fiches (ex. « dépendance »
@@ -272,10 +432,12 @@
   form.addEventListener('submit', event => { event.preventDefault(); clearTimeout(minuterie); render(); majAdresse(); });
   filtres.forEach(sel => sel.addEventListener('change', render));
   if (caseHors) caseHors.addEventListener('change', render);
-  effacerFiltres.addEventListener('click', () => { filtres.forEach(s => { s.value = ''; }); render(); filtres[0].focus(); });
+  if (caseFr) caseFr.addEventListener('change', render);
+  effacerFiltres.addEventListener('click', () => { filtres.forEach(s => { s.value = ''; }); if (caseFr) caseFr.checked = false; render(); filtres[0].focus(); });
   document.querySelector('.guides-reset').addEventListener('click', () => {
     input.value = ''; filtres.forEach(s => { s.value = ''; });
     if (caseHors) caseHors.checked = true;
+    if (caseFr) caseFr.checked = false;
     render(); majAdresse(); input.focus();
   });
   /* Pour l'aiguillage IA (guides-aiguillage.js) : présélection par le moteur du site et
@@ -288,6 +450,29 @@
     noteCommunautaire: () => (communautaire ? communautaire.cloneNode(true) : null),
     page
   };
+  /* Téléphone (plan Guides, 30) : la barre de recherche reste en haut pendant le défilement, et un
+     bouton « Haut de page » apparaît après deux écrans. */
+  const mqTelephone = window.matchMedia('(max-width: 680px)');
+  if ('IntersectionObserver' in window) {
+    const repere = document.createElement('div');
+    form.before(repere);
+    new IntersectionObserver(([e]) => {
+      const coller = mqTelephone.matches && !e.isIntersecting && e.boundingClientRect.top < 0;
+      if (coller === form.classList.contains('guides-form-collant')) return;
+      repere.style.height = coller ? form.offsetHeight + 'px' : '';
+      form.classList.toggle('guides-form-collant', coller);
+    }).observe(repere);
+  }
+  const haut = document.createElement('button');
+  haut.type = 'button'; haut.className = 'guides-haut'; haut.textContent = 'Haut de page'; haut.hidden = true;
+  document.body.appendChild(haut);
+  haut.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); input.focus({ preventScroll: true }); });
+  let imageHaut = 0;
+  window.addEventListener('scroll', () => {
+    if (imageHaut) return;
+    imageHaut = requestAnimationFrame(() => { imageHaut = 0; haut.hidden = !(mqTelephone.matches && window.scrollY > 2 * window.innerHeight); });
+  }, { passive: true });
+
   input.value = new URLSearchParams(location.search).get('q') || '';
   render();
   ouvrirDepuisAncre();
