@@ -1137,6 +1137,15 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
 :root[data-theme="sombre"] .activite-group-label { color: var(--reg-centre); }
 :root[data-theme="sombre"] .activite-reset { color: var(--blue); }
 :root[data-theme="sombre"] .dp-sect-stat .cmp-stat-on { color: #8fd992; }
+/* Annonce : titre et boutons d'un bleu un peu plus foncé en mode clair (4,8:1 avec le blanc au lieu
+   de 4,1:1 ; audit du 27 sept. 2026). Le mode sombre garde ses couleurs. */
+:root:not([data-theme="sombre"]) .annonce-head { color: #0075C4; }
+:root:not([data-theme="sombre"]) .annonce-btn { background: #0075C4; }
+:root:not([data-theme="sombre"]) .annonce-btn:hover { background: #2b6caa; }
+/* Clavier (audit du 27 sept. 2026) : nom de la liste activable, focus visible sur « Voir mes favoris ». */
+.sb-ouvrir { border-radius: 3px; }
+.sb-ouvrir:focus-visible, .fav-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.dp-name-display:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 </style>
 <script>
 // Thème appliqué avant le premier rendu, pour éviter un éclair de blanc.
@@ -1568,6 +1577,10 @@ function libelleMode(pluriel = true) {
     ? (pluriel ? 'secteurs' : 'secteur')
     : (pluriel ? 'cliniques' : 'clinique');
 }
+// Bouton de retour de la vue des favoris : accord du déterminant (« toutes les cliniques », « tous les secteurs »).
+function voirTousMode() {
+  return modeEtablissementsActif() ? '↩ Voir tous les secteurs' : '↩ Voir toutes les cliniques';
+}
 function libelleTerritoireSecteur(g) {
   if (!g) return 'À venir';
   const rls = g.rls ? ('RLS ' + g.rls) : '';
@@ -1581,6 +1594,22 @@ function modeEtablissementsActif() {
   return MODE_ETAB_UI && modeCarte === 'etablissements';
 }
 const normTxt = s => (s == null ? '' : String(s)).toLowerCase().replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+/* Recherche tolérante (audit du 27 sept. 2026) : ponctuation, traits d'union et apostrophes valent
+   une espace (« saint hyacinthe » trouve « Saint-Hyacinthe ») ; « st » et « ste » valent « saint » et
+   « sainte » ; « gmfu » vaut « GMF-U ». La correspondance exacte d'avant reste toujours acceptée. */
+function formesRecherche(s) {
+  const simple = normTxt(s).replace(/[^a-z0-9]+/g, ' ').trim();
+  return [simple, simple.replace(/\bste\b/g, 'sainte').replace(/\bst\b/g, 'saint').replace(/\bgmfu\b/g, 'gmf u')];
+}
+let formesRequete = { q: null, f: ['', ''] };
+function correspondRecherche(texte, requete) {
+  if (normTxt(texte).includes(requete)) return true;
+  if (formesRequete.q !== requete) formesRequete = { q: requete, f: formesRecherche(requete) };
+  const [qs, qd] = formesRequete.f;
+  if (!qs) return false;
+  const [hs, hd] = formesRecherche(texte);
+  return hs.includes(qs) || hd.includes(qd);
+}
 // Un milieu \u00ab en recrutement \u00bb a recrutementActif !== false (absent = recrute, comme avant
 // l'ajout du champ). statutVisible() est LE point d'entr\u00e9e unique : matchesFilters(),
 // currentOrder() et fitToData() y passent tous, de sorte qu'activer \u00ab Toutes les cliniques \u00bb
@@ -1597,8 +1626,7 @@ function matchesFilters(id) {
     const champs = g && g._secteurEtab
       ? [g.nom, g.nomInstallation, g.ville, g.secteur, g.type, g.rls, ...(g.termesRecherche || []), ...(g.activites || [])]
       : [g && g.nom, g && g.alias, g && g.ville, g && g.type, g && g.rls];
-    const hay = normTxt(champs.filter(Boolean).join(' '));
-    if (!hay.includes(searchQuery)) return false;
+    if (!correspondRecherche(champs.filter(Boolean).join(' '), searchQuery)) return false;
   }
   if (activiteFilters.size && modeEtablissementsActif()) {
     const g = byId(id);
@@ -2140,6 +2168,12 @@ function couleurEpingle(g) {
   if (MODE_REGION && RLS_COLORS_PALES_REGION[g.rls]) return RLS_COLORS_PALES_REGION[g.rls];
   return REGION_COLORS_PALES[g.region] || couleurMilieu(g);
 }
+/* Fond sous un chiffre ou une abréviation en blanc (épingles, ronds de la liste, pastilles de
+   secteur et de légende) : une teinte plus foncée quand la couleur du RLS n'atteint pas 4,5:1
+   avec le blanc (audit du 27 sept. 2026, WCAG 1.4.3). La couleur d'identité du RLS (zones de la
+   carte, boutons de filtre, comparatif, textes du mode sombre) ne change pas. */
+const FOND_CHIFFRE = { '#43A047': '#2E7D32', '#0080D7': '#0075C4', '#EE2D62': '#DB2755' };
+function fondChiffre(c) { return FOND_CHIFFRE[String(c || '').toUpperCase()] || c; }
 
 // Légende des couleurs. Carte des trois territoires : une ligne par territoire. Carte
 // régionale : une ligne par RLS, puisque c'est ce que les épingles y distinguent.
@@ -2149,7 +2183,7 @@ let legendEl = null;
   legend.onAdd = function(){
     const d = L.DomUtil.create('div', 'rls-legend');
     const ligne = (couleur, texte) =>
-      `<div class="rls-legend-row"><span class="rls-dot" style="background:${couleur}"></span>${texte}</div>`;
+      `<div class="rls-legend-row"><span class="rls-dot" style="background:${fondChiffre(couleur)}"></span>${texte}</div>`;
     d.innerHTML = MODE_REGION
       ? '<div class="rls-legend-title">Réseau local (RLS)</div>' +
         Object.keys(RLS_COLORS_REGION).map(r => ligne(RLS_COLORS_REGION[r], r)).join('')
@@ -2272,7 +2306,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function makeIcon(active, rank, couleur, id) {
-  const c = couleur;
+  const c = fondChiffre(couleur);
   const [dx, dy] = markerOffsets.get(id) || [0, 0];
   if (modeEtablissementsActif()) {
     const inst = installationEtabById(id);
@@ -2348,6 +2382,7 @@ function buildMarkers() {
         m.on('click', (e) => { L.DomEvent.stopPropagation(e); toggleDetail(g.id); });
       }
       markers[g.id] = m;
+      equiperEpingleClavier(m, g);
     } catch (e) {
       console.warn('Marqueur ignoré (erreur de construction) :', g && g.id, g && g.nom, e);
     }
@@ -2442,7 +2477,7 @@ function hopitalPopupHtml(h) {
       <h4>${esc(h.nom)}</h4>
       <p>${esc(h.adresse)}${h.ville ? ', ' + esc(h.ville) : ''}</p>
       <p><em>Pas encore ouvert${h.ouverturePrevue ? ' : ouverture prévue ' + esc(h.ouverturePrevue) : ''}. Ne pas s'y présenter en attendant.</em></p>
-      ${h.site ? `<p><a href="${esc(h.site)}" target="_blank" rel="noopener">Suivre le projet ↗</a></p>` : ''}
+      ${urlWebSure(h.site) ? `<p><a href="${esc(urlWebSure(h.site))}" target="_blank" rel="noopener">Suivre le projet ↗</a></p>` : ''}
     </div>`;
   }
   return `<div class="hosp-popup">
@@ -2450,7 +2485,7 @@ function hopitalPopupHtml(h) {
     <h4>${esc(h.nom)}</h4>
     <p>${esc(h.adresse)}${h.ville ? ', ' + esc(h.ville) : ''}</p>
     ${h.telephone ? `<p><a href="tel:${esc(tel)}">${esc(h.telephone)}</a></p>` : ''}
-    ${h.site ? `<p><a href="${esc(h.site)}" target="_blank" rel="noopener">Fiche de l'établissement ↗</a></p>` : ''}
+    ${urlWebSure(h.site) ? `<p><a href="${esc(urlWebSure(h.site))}" target="_blank" rel="noopener">Fiche de l'établissement ↗</a></p>` : ''}
   </div>`;
 }
 
@@ -2579,10 +2614,10 @@ function renderSidebar() {
     el.draggable = dragEnabled;
     el.innerHTML = `${dragEnabled ? '<span class="sb-grip" title="Glisser pour reclasser">⠿</span>' : ''}
       ${modeEtablissementsActif() && g._secteurEtab
-        ? `<div class="sb-num sb-num-abbr" data-long="${abbrActivitePour(g).length >= 5 ? '2' : (abbrActivitePour(g).length > 3 ? '1' : '0')}" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}" title="${esc(libelleActivitePour(g))}" aria-hidden="true">${esc(abbrActivitePour(g))}</div>`
-        : `<div class="sb-num" style="--rls:${couleurEpingle(g)};--rls-base:${couleurMilieu(g)}">${i+1}</div>`}
+        ? `<div class="sb-num sb-num-abbr" data-long="${abbrActivitePour(g).length >= 5 ? '2' : (abbrActivitePour(g).length > 3 ? '1' : '0')}" style="--rls:${fondChiffre(couleurEpingle(g))};--rls-base:${couleurMilieu(g)}" title="${esc(libelleActivitePour(g))}" aria-hidden="true">${esc(abbrActivitePour(g))}</div>`
+        : `<div class="sb-num" style="--rls:${fondChiffre(couleurEpingle(g))};--rls-base:${couleurMilieu(g)}">${i+1}</div>`}
       <div class="sb-info">
-        <div class="sb-name">${esc(nomMain)}${badgeVerifHtml(g)}</div>
+        <div class="sb-name"><span class="sb-ouvrir" role="button" tabindex="0">${esc(nomMain)}</span>${badgeVerifHtml(g)}</div>
         ${modeEtablissementsActif() && g._secteurEtab ? `<div class="sb-estab-install">${esc(g.nomInstallation)}</div>` : ''}
         <div class="sb-city">📍 ${esc(g.ville)}</div>
         ${modeEtablissementsActif() && g._secteurEtab ? `<div class="sb-estab-meta">${esc(g.type)} · ${esc(libelleTerritoireSecteur(g))}</div>` : ''}
@@ -2597,6 +2632,12 @@ function renderSidebar() {
     }
 
     el.addEventListener('click', () => { if (justDragged) return; toggleDetail(id); });
+    const ouvrirEl = el.querySelector('.sb-ouvrir');
+    if (ouvrirEl) ouvrirEl.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      ouvrirParClavier({ type: 'liste', id }, () => toggleDetail(id));
+    });
 
     if (dragEnabled) {
     el.addEventListener('dragstart', e => {
@@ -2716,11 +2757,22 @@ function escPhrases(s) {
   return phrases.map(p => esc(p.trim())).filter(Boolean).join('<br>');
 }
 
+/* Adresse de site web : seuls http et https deviennent un lien (audit du 27 sept. 2026). Une
+   adresse saisie sans protocole (« www.clinique.ca », fréquente dans les questionnaires) reçoit
+   https://. Tout le reste (autre protocole comme javascript:, texte libre) s'affiche tel quel,
+   sans lien : l'information saisie n'est jamais perdue. */
+function urlWebSure(url) {
+  const s = String(url == null ? '' : url).trim();
+  if (/^https?:\/\/[^\s/]/i.test(s)) return s.replace(/\s/g, '%20');
+  if (/^[a-z][a-z0-9+.-]*:/i.test(s)) return '';
+  if (/^(?:[^\s\/:?#.@]+\.)+[a-z]{2,}(?:[\/?#]\S*)?$/i.test(s)) return 'https://' + s;
+  return '';
+}
 function siteLink(url) {
   if (!url) return 'À venir';
-  const safe = esc(url);
-  const pretty = esc(url.replace(/^https?:\/\//,'').replace(/\/$/,''));
-  return `<a href="${safe}" target="_blank" rel="noopener">${pretty}</a>`;
+  const href = urlWebSure(url);
+  const pretty = esc(String(url).trim().replace(/^https?:\/\//i,'').replace(/\/$/,''));
+  return href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${pretty}</a>` : esc(String(url).trim());
 }
 function contactLink(c) {
   if (!c) return 'À venir';
@@ -2860,7 +2912,7 @@ function toggleFavView() {
   favOnly = !favOnly;
   const b = document.getElementById('fav-toggle');
   if (b) {
-    b.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
+    b.textContent = favOnly ? voirTousMode() : '★ Voir mes favoris';
     b.classList.toggle('active', favOnly);
   }
   renderSidebar();
@@ -3332,7 +3384,7 @@ function htmlAccordeonSecteurs(secteurs, ouvertId) {
     const long = abbr.length >= 5 ? '2' : (abbr.length > 3 ? '1' : '0');
     return `<div class="dp-sect${ouvert ? ' open' : ''}">
       <button type="button" class="dp-sect-head" data-secteur="${esc(s.id)}" aria-expanded="${ouvert ? 'true' : 'false'}">
-        <span class="dp-sect-abbr" data-long="${long}" style="--rls:${couleurEpingle(s)}" aria-hidden="true">${esc(abbr)}</span>
+        <span class="dp-sect-abbr" data-long="${long}" style="--rls:${fondChiffre(couleurEpingle(s))}" aria-hidden="true">${esc(abbr)}</span>
         <span class="dp-sect-txt">
           <span class="dp-sect-nom">${esc(s.nom)}</span>
           <span class="dp-sect-stat"><span class="cmp-stat ${recruteActuellement(s) ? 'cmp-stat-on' : 'cmp-stat-off'}"><span class="cmp-stat-dot"></span>${recruteActuellement(s) ? 'En recrutement' : 'Ne recrute pas actuellement'}</span>${!ouvert && favoris.has(s.id) ? ' · ★ favori' : ''}</span>
@@ -3579,7 +3631,7 @@ function syncModeCarteUI() {
     }
   }
   const fav = document.getElementById('fav-toggle');
-  if (fav) fav.textContent = favOnly ? '↩ Voir tous les ' + libelleMode(true) : '★ Voir mes favoris';
+  if (fav) fav.textContent = favOnly ? voirTousMode() : '★ Voir mes favoris';
   syncAllClinicsToggle();
   if (modeEtablissementsActif()) populateActiviteButtons();
   const prefix = /^BROUILLON \| /.test(document.title) ? 'BROUILLON | ' : '';
@@ -3902,6 +3954,53 @@ function saveNotes(flash = true) {
   }
 }
 
+/* Clavier (audit du 27 sept. 2026, WCAG 2.1.1) : le nom d'un milieu dans la liste et les épingles
+   s'ouvrent avec Entrée ou Espace. Une fiche ouverte au clavier reçoit le focus (son titre) ; à sa
+   fermeture, le focus revient au nom ou à l'épingle qui l'a ouverte. Rien ne change à la souris ni
+   au toucher : un clic efface le déclencheur mémorisé. */
+let declencheurFiche = null;
+document.addEventListener('pointerdown', () => { declencheurFiche = null; }, true);
+function ouvrirParClavier(source, action) {
+  action();
+  const detail = document.getElementById('detail');
+  if (!detail || !detail.classList.contains('open')) { declencheurFiche = null; return; }
+  declencheurFiche = source;
+  const titre = document.getElementById('dp-name-disp');
+  if (titre) { titre.setAttribute('tabindex', '-1'); titre.focus({ preventScroll: true }); }
+}
+function rendreFocusDeclencheur() {
+  const src = declencheurFiche;
+  declencheurFiche = null;
+  if (!src) return;
+  const detail = document.getElementById('detail');
+  const actif = document.activeElement;
+  // Seulement si le focus était dans la fiche (Échap, bouton Fermer au clavier) ou s'est perdu.
+  if (actif && actif !== document.body && detail && !detail.contains(actif)) return;
+  let cible = null;
+  if (src.type === 'epingle' && markers[src.id]) cible = markers[src.id].getElement();
+  if (!cible || !cible.isConnected) cible = document.querySelector('#si-' + CSS.escape(String(src.id)) + ' .sb-ouvrir');
+  if (cible) cible.focus();
+}
+// Épingle : nom accessible (le chiffre seul ne dit rien) et ouverture au clavier. Leaflet recrée
+// l'élément quand l'épingle revient sur la carte : on l'équipe à chaque ajout.
+function equiperEpingleClavier(m, g) {
+  const nom = String(g.nom || '').trim() + (g.ville ? ', ' + g.ville : '');
+  const equiper = () => {
+    const el = m.getElement();
+    if (!el || el.dataset.clavier) return;
+    el.dataset.clavier = '1';
+    el.setAttribute('aria-label', nom);
+    el.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      e.stopPropagation();
+      ouvrirParClavier({ type: 'epingle', id: g.id }, () => m.fire('click'));
+    });
+  };
+  m.on('add', equiper);
+  equiper();
+}
+
 function closeDetailUI() {
   // On retire le paramètre ?c= pour que l'URL reflète l'état réel de l'app.
   if (location.search) { try { history.replaceState({}, '', (typeof urlEtat === 'function' ? urlEtat() : location.pathname)); } catch (e) {} }
@@ -3919,6 +4018,7 @@ function closeDetailUI() {
   if (typeof peekOn === 'function') peekOn(0);
   updateLegendVisibility();
   map.flyTo(HOME.center, HOME.zoom, { duration:1 });
+  rendreFocusDeclencheur();
 }
 
 function closeDetail() {
@@ -4144,7 +4244,11 @@ function annonceContenu() {
 function showBanner() {
   const banner = document.getElementById('annonce-banner');
   if (!banner) return;
-  const { texte, lien, lienCarte, titre, dateFin } = annonceContenu();
+  const contenu = annonceContenu();
+  const { texte, titre, dateFin } = contenu;
+  // Liens de l'annonce : https (inscription, itinéraire) ou mailto (inscription par courriel) seulement.
+  const lien = /^mailto:/i.test(String(contenu.lien).trim()) ? String(contenu.lien).trim() : urlWebSure(contenu.lien);
+  const lienCarte = urlWebSure(contenu.lienCarte);
   if (!texte || annonceFermee) { banner.style.display = 'none'; return; }
   // L'annonce disparaît d'elle-même après sa date de fin (dernier jour inclus).
   if (dateFin && datePassee(dateFin)) { banner.style.display = 'none'; return; }
