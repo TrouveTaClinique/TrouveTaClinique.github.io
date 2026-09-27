@@ -307,3 +307,28 @@ main > .hero-guide ~ .toc > strong{border-bottom-color:rgba(6,156,156,.28)}
 .fact-card .source-chip{margin-top:auto}
 .content-section.guide-bandeau:not(.guide-bandeau--pale) .callout:not(.warning){background:var(--teal-pale)}
 .content-section.guide-bandeau--pale .callout:not(.warning){background:#fff}
+
+/* Places PTEM 2027 de l'Est (audit P15) : tableau daté dans la section Montérégie. */
+.places-ptem{
+  margin:1.2rem 0 1.4rem;max-width:52rem;
+  background:#fff;border:1px solid rgba(6,156,156,.3);border-left:4px solid var(--teal);border-radius:14px;
+  box-shadow:0 6px 18px rgba(18,6,114,.05);padding:clamp(1.2rem,2.2vw,1.8rem);
+}
+.places-ptem h3{margin:0 0 .5rem}
+.places-ptem p{margin:.2rem 0 .6rem;max-width:none}
+.places-defile{overflow-x:auto;margin:.4rem 0 .8rem}
+.places{width:100%;border-collapse:collapse;font-size:1rem;line-height:1.35}
+.places th,.places td{padding:.5rem .45rem;border-bottom:1px solid rgba(18,6,114,.12);text-align:left;vertical-align:top}
+.places thead th{font-size:.88rem;font-weight:700;color:var(--navy)}
+.places thead th+th,.places td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.places thead th+th{white-space:normal;min-width:6.5rem}
+.places tbody th{font-weight:500}
+.places tfoot th,.places tfoot td{font-weight:700;border-bottom:0}
+.places tfoot tr:first-child th,.places tfoot tr:first-child td{border-top:2px solid rgba(6,156,156,.45)}
+.places tfoot tr+tr th,.places tfoot tr+tr td{font-weight:500;opacity:.85}
+.places sup,.places-ptem .note sup{font-size:.7em;margin-left:.1em}
+@media(max-width:520px){
+  .places{font-size:.95rem}
+  .places th,.places td{padding:.45rem .25rem}
+  .places thead th+th{min-width:0}
+}

@@ -218,7 +218,14 @@
   }
   window.addEventListener('hashchange', ouvrirDepuisAncre);
 
-  const badge = (el, n, mot) => { el.textContent = n; el.setAttribute('aria-label', pluriel(n, mot)); };
+  /* Compteur : le chiffre visible, suivi du mot pour les lecteurs d'écran (un aria-label n'est pas permis sur un span). */
+  const badge = (el, n, mot) => {
+    const cache = document.createElement('span');
+    cache.className = 'visually-hidden';
+    cache.textContent = ' ' + (n > 1 ? mot + 's' : mot);
+    el.removeAttribute('aria-label');
+    el.replaceChildren(String(n), cache);
+  };
 
   /* « Consultés récemment » (plan Guides, 28) : les 5 dernières fiches de cette page ouvertes dans ce
      navigateur (clé commune aux deux pages), dans une section repliée sous les favoris. */

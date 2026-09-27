@@ -22,6 +22,8 @@ const EXTRAS = [
   'robots.txt',
   'google0e6f553795bbb4a9.html'
 ];
+/* Clé IndexNow (32 caractères hexadécimaux + .txt, à la racine) : Bing la lit sur le site public. */
+const CLE_INDEXNOW = /^[a-f0-9]{32}\.txt$/i;
 
 function preparerPagesProduction(racine, destination) {
   racine = fs.realpathSync(racine);
@@ -36,6 +38,7 @@ function preparerPagesProduction(racine, destination) {
   for (const extra of EXTRAS) {
     if (fs.existsSync(path.join(racine, extra))) fichiers.push(extra);
   }
+  for (const nom of fs.readdirSync(racine)) if (CLE_INDEXNOW.test(nom)) fichiers.push(nom);
   for (const fichier of fichiers) {
     const rel = fichier.split(path.sep).join('/');
     if (/(^|\/)donnees-etablissements-source\.json$/.test(rel)) {

@@ -60,9 +60,11 @@ on:
       - 'amp/index.html'
   workflow_dispatch:
 
-# Autorise ce robot à publier ses modifications dans le dépôt.
+# Autorise ce robot à publier ses modifications dans le dépôt, et à relancer « Pages production »
+# (un push fait avec le jeton du robot ne déclenche pas les autres robots : règle de GitHub).
 permissions:
   contents: write
+  actions: write
 
 # Si deux modifications de data.json arrivent coup sur coup, on ne garde que la dernière
 # régénération plutôt que d'en lancer deux en parallèle qui se marcheraient dessus.
@@ -82,7 +84,7 @@ jobs:
       - name: Installer Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Dater automatiquement une nouvelle version de data.json
         env:
@@ -130,12 +132,6 @@ jobs:
             exit 1
           fi
           echo "Vérification polices (Kaushan hors Est, Segoe UI présent) : ok."
-
-      - name: Vérifier l'absence du nom protégé
-        # 18 sept. 2026 — crédit public autorisé dans le bloc « D'où viennent ces informations »
-        # (collaboration étroite nommée). L'ancien garde-fou d'absence est retiré.
-        run: |
-          echo "Crédit public autorisé : vérification d'absence du nom désactivée."
 
       - name: Vérifier qu'aucune donnée privée n'a fui
         # Filet de sécurité : ce robot publie sans qu'un humain relise. Les courriels de
@@ -190,6 +186,7 @@ jobs:
         run: node scripts/verifier-fuites-etablissements.js
 
       - name: Publier si quelque chose a changé
+        id: publier
         run: |
           set -e
           git config user.name  "Robot Trouve ta clinique"
@@ -200,8 +197,23 @@ jobs:
             exit 0
           fi
           git commit -m "Régénération des pages du site depuis data.json [automatique]"
-          git push
+          # Se remettre à jour juste avant la poussée : une modification arrivée pendant la
+          # régénération ne fait plus échouer le robot (une seconde tentative au besoin).
+          for essai in 1 2; do
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME" && git push && break
+            if [ "$essai" = 2 ]; then echo "::error::Poussée impossible après deux tentatives."; exit 1; fi
+            sleep 5
+          done
+          echo "pousse=oui" >> "$GITHUB_OUTPUT"
           echo "Pages publiées."
+
+      - name: Relancer la publication de production (Pages)
+        # Le commit du robot ne déclenche pas « Pages production » tout seul (jeton du robot) :
+        # on la relance ici, sur main seulement, pour que trouvetaclinique.ca serve les pages régénérées.
+        if: github.ref == 'refs/heads/main' && steps.publier.outputs.pousse == 'oui'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages-production.yml --ref main --repo "$GITHUB_REPOSITORY"
 
       - name: Prévenir Bing (IndexNow)
         # Après le push des pages (étape précédente), jamais avant.
