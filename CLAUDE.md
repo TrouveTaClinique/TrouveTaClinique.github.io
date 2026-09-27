@@ -94,8 +94,8 @@ dates du sitemap selon le contenu réel des pages).
   (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
   cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
 - Les courriels de recrutement sont publiés volontairement (`PUBLIER_COURRIELS = true`).
-- Vidéo promotionnelle : page `/monteregie-est/video/` (générée par `pageVideoEst()`, noindex, hors sitemap et
-  hors recherche) ; le fichier `monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4` et son `affiche.jpg`
+- Vidéo promotionnelle : page `/monteregie-est/video/` (générée par `pageVideoEst()`, indexée, dans le sitemap
+  et la recherche du site, données structurées VideoObject) ; le fichier `monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4` et son `affiche.jpg`
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)
   et changer `VERSION_VIDEO`. La musique (Mixkit) ne doit jamais être publiée seule.
 - Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`). Depuis le
