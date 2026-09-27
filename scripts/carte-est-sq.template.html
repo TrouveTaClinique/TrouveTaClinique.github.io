@@ -1459,6 +1459,9 @@ body.cmp-open { overflow:hidden; }
 :root[data-region="Est"][data-theme="sombre"] .care-mode-btn { color: #C4D3DE; }
 :root[data-region="Est"][data-theme="sombre"] .care-mode-btn:hover { color: #FFFFFF; background: #28334E; }
 :root[data-region="Est"][data-theme="sombre"] .sb-list { background: linear-gradient(180deg, #111629, #141B2D); }
+/* Le fond clair de la barre (#F7FCFD) restait visible en mode sombre sous « Secteur d'activité »
+   (Établissements) et en filet à droite de la liste (signalé le 27 sept. 2026) : même nuit que la liste. */
+:root[data-region="Est"][data-theme="sombre"] .sidebar { background: #111629; box-shadow: 9px 0 30px rgba(0,0,0,.35); }
 :root[data-region="Est"][data-theme="sombre"] .sb-item { background: #1A2239; border-color: #34435C; }
 :root[data-region="Est"][data-theme="sombre"] .sb-item:hover { background: #203040; border-color: #4C7C82; }
 :root[data-region="Est"][data-theme="sombre"] .sb-item.active { background: #173C43; border-color: var(--sq-teal); border-left-color: var(--sq-mint); }
