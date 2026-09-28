@@ -57,6 +57,8 @@
 }
 </script>
 <meta name="theme-color" content="#170A72">
+<link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin>
+<link rel="preconnect" href="https://tiles.basemaps.cartocdn.com" crossorigin>
 <link rel="manifest" href="../manifest-est.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -68,6 +70,8 @@
 <link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
 <link rel="stylesheet" href="../leaflet.css">
 <link rel="stylesheet" href="../vendor/maplibre-gl.css">
+<link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin>
+<link rel="preconnect" href="https://tiles.basemaps.cartocdn.com" crossorigin>
 <!-- Carte SQ de référence : OLaplante/Monteregie-Est, index.html, commit
      5e2a2f1fcdee2f385f73730a644906885ecd39c6 (prototype v53, header V4).
      Le bloc visuel SQ est conservé intact. Le CSS original reste au-dessus.
@@ -1729,6 +1733,9 @@ body.cmp-open { overflow:hidden; }
       </a>
       <a class="info-menu-link" role="menuitem" href="amp/">
         <span class="info-menu-ic">📗</span> Guide des AMP
+      </a>
+      <a class="info-menu-link" role="menuitem" href="video/">
+        <span class="info-menu-ic">▶</span> La carte en vidéo (4 min)
       </a>
       <hr>
       <button type="button" class="info-menu-link" role="menuitem" id="info-menu-install">
