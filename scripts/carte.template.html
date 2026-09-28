@@ -1182,6 +1182,8 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
     })()) document.documentElement.dataset.logoFetes = '1'; }
 })();
 </script>
+<!-- Orientation d'impression du comparatif, remplie par le script (reste dans l'en-tête : HTML valide). -->
+<style id="cmp-orient"></style>
 </head>
 <body>
 
@@ -1296,8 +1298,8 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
     <div class="annonce-head"><span>📅</span> <span id="annonce-titre">Prochaine activité de recrutement</span></div>
     <div class="annonce-text" id="annonce-text"></div>
     <div class="annonce-actions" id="annonce-actions">
-      <a class="annonce-btn" id="annonce-link" target="_blank" rel="noopener" style="display:none">S'inscrire</a>
-      <a class="annonce-btn" id="annonce-map" target="_blank" rel="noopener" style="display:none">🗺 Itinéraire</a>
+      <a class="annonce-btn" id="annonce-link" style="display:none">S'inscrire</a>
+      <a class="annonce-btn" id="annonce-map" style="display:none">🗺 Itinéraire</a>
     </div>
   </div>
 </div>
@@ -4311,6 +4313,7 @@ function showBanner() {
   const linkEl = document.getElementById('annonce-link');
   if (lien) {
     linkEl.href = lien;
+    linkEl.rel = 'noopener';
     // Un lien « mailto: » ouvre le logiciel de courriel, pas une page :
     // target="_blank" laisserait un onglet vide derrière lui.
     const parCourriel = /^mailto:/i.test(lien);
@@ -4319,7 +4322,7 @@ function showBanner() {
     linkEl.style.display = '';
   } else { linkEl.style.display = 'none'; }
   const mapEl = document.getElementById('annonce-map');
-  if (lienCarte) { mapEl.href = lienCarte; mapEl.style.display = ''; } else { mapEl.style.display = 'none'; }
+  if (lienCarte) { mapEl.href = lienCarte; mapEl.target = '_blank'; mapEl.rel = 'noopener'; mapEl.style.display = ''; } else { mapEl.style.display = 'none'; }
   // Titre personnalisable depuis data.json, avec repli sur le libellé par défaut.
   const headEl = document.getElementById('annonce-titre');
   if (headEl) headEl.textContent = titre || 'Prochaine activité de recrutement';
@@ -4766,7 +4769,6 @@ fetch('../data.json', { cache: 'no-cache' })
   setTimeout(hideLoader, 7000); // filet de sécurité
 })();
 </script>
-<style id="cmp-orient"></style>
 <div id="cmp-print" aria-hidden="true"></div>
 <script>
 // Bascule clair / sombre

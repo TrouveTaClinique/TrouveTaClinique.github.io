@@ -693,26 +693,28 @@ html, body {
 #repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
 #repertoire-territoire .repertoire-suite { margin-top: .75rem; }
 </style>`;
-  return `${style}
+  /* La feuille de style va dans l'en-tête (une <style> dans le corps n'est pas du HTML valide),
+     juste avant </head> : après la feuille principale, donc même ordre de cascade qu'avant. */
+  return { style, nav: `
 <nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
   <h2>${escHtml(titre)}</h2>
   ${htmlIntroTerritoire(t, cliniques, etablissements)}
   ${htmlBlocRls(t)}
   ${htmlBlocCliniques(t, cliniques, gmfuMap)}
   ${htmlBlocEtablissements(t, etablissements)}
-</nav>`;
+</nav>` };
 }
 
 function injecterIndexSeo(html, t) {
   const bloc = htmlIndexSeoTerritoire(t);
-  if (!html.includes('</body>')) {
-    throw new Error('Balise </body> introuvable pour injecter le répertoire territorial.');
+  if (!html.includes('</body>') || !html.includes('</head>')) {
+    throw new Error('Balise </head> ou </body> introuvable pour injecter le répertoire territorial.');
   }
   /* Remplace un ancien bloc s’il existe (renommage index-seo → repertoire). */
   let out = html
     .replace(/<style id="(?:seo-index|repertoire)-territoire-css">[\s\S]*?<\/style>\s*/g, '')
     .replace(/<nav id="(?:index-seo|repertoire)-territoire"[\s\S]*?<\/nav>\s*/g, '');
-  return out.replace('</body>', `${bloc}\n</body>`);
+  return out.replace('</head>', `${bloc.style.trim()}\n</head>`).replace('</body>', `${bloc.nav}\n</body>`);
 }
 
 function main() {
