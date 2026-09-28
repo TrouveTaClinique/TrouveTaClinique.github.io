@@ -81,12 +81,10 @@ test('plan Guides (24 à 30) : type de document, pastilles, filtres, actions et 
   assert.ok(fs.existsSync(path.join(racine, 'vendor/qrcode-generator.js')) && fs.existsSync(path.join(racine, 'vendor/LICENSE-qrcode-generator.txt')));
 });
 
-test('modules PABP : accès réservé affiché, feuillets hébergés présents', () => {
+test('accès réservé affiché ; feuillets FMPE hébergés présents, sans module PABP', () => {
   const fs = require('node:fs');
   const racine = path.join(__dirname, '..');
-  const pabp = ressources.filter(r => r.acces === 'pabp');
-  assert.ok(pabp.length >= 60);
-  assert.ok(pabp.every(r => r.org === 'FMPE (PABP, accès réservé)' && /\(module PABP\)$/.test(r.title)));
+  assert.equal(ressources.filter(r => r.acces === 'pabp').length, 0, 'modules PABP retirés (pas d’accord de la FMPE)');
   const page = fs.readFileSync(path.join(racine, 'guides/index.html'), 'utf8');
   const reserves = ressources.filter(r => r.acces && r.type !== 'communautaire');
   assert.ok(reserves.every(r => ['pabp', 'abonnement'].includes(r.acces)));
