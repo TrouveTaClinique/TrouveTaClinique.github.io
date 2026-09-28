@@ -3741,16 +3741,19 @@ function pageAPropos(majDonnees) {
     <li>Des outils pour choisir&nbsp;: favoris, notes et comparatif, sur ordinateur ou sur cellulaire.</li>
     <li>Des guides sur le <a href="${EST_PREFIXE}/ptem/">PTEM 2027</a>, le <a href="${EST_PREFIXE}/ptem-u/">PTEM-U (PREM-U)</a> et les <a href="${EST_PREFIXE}/amp/">AMP</a>, et un <a href="/guides/">catalogue de guides cliniques</a> et de <a href="/guides/ressources-communautaires/">ressources communautaires</a>.</li>
   </ul>
-  <h2>Qui réalise le site</h2>
-  <p>Trouve ta clinique est réalisé par Olivier Laplante. Le volet Montérégie-Est est réalisé en collaboration avec Nancy Langlois et la DSMP de Santé Québec – CISSS de la Montérégie-Est.</p>
+  <h2>Collaboration</h2>
+  <p>Le volet Montérégie-Est est réalisé en collaboration avec Nancy Langlois et la DSMP de Santé Québec – CISSS de la Montérégie-Est.</p>
   <h2>D’où viennent les données</h2>
   <p>Les fiches regroupent les données du répertoire des milieux, des sources publiques et, lorsqu’elles sont disponibles, des renseignements transmis par les milieux eux-mêmes. En Montérégie-Est, la liste des milieux qui recrutent est validée avec Santé Québec Montérégie-Est. En Montérégie-Centre et en Montérégie-Ouest, elle reprend la dernière mise à jour du répertoire.</p>
   <p>Dernière mise à jour des données&nbsp;: ${htmlDateFr(majDonnees)}. Chaque fiche indique aussi sa propre date.</p>
   <h2>Faire corriger une fiche</h2>
-  <p>Vous travaillez dans un milieu présenté ici&nbsp;? Le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche ouvre un courriel prérempli pour corriger ou compléter les renseignements. Un milieu manque&nbsp;? <a href="${SIGNALER_CLINIQUE_HREF}">Signalez-le</a>.</p>
+  <p>Vous travaillez dans un milieu présenté ici&nbsp;? Le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche ouvre un courriel prérempli pour corriger ou compléter les renseignements. Un milieu manque&nbsp;? <a href="#nous-joindre">Écrivez-nous</a>.</p>
   <h2>Ce que le site n’est pas</h2>
   <p>Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Pour toute décision officielle (PTEM, avis de conformité, AMP), validez l’information auprès du milieu, du DTMF ou des sources gouvernementales.</p>
   <p>Vous êtes un patient&nbsp;? Le site ne permet pas de prendre rendez-vous. Sans médecin de famille, passez par le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-premiere-ligne" rel="noopener">guichet d’accès à la première ligne</a> (811, option&nbsp;3).</p>
+</section>
+${htmlNousJoindre()}
+<section class="zone" style="padding-top:0">
   <p><a href="/confidentialite/">Confidentialité</a> · <a href="${EST_PREFIXE}/video/">La carte en vidéo</a></p>
 </section>`;
   return page({
@@ -3758,6 +3761,49 @@ function pageAPropos(majDonnees) {
     filDAriane: `<a href="/">Accueil</a> › À propos`,
     corps, actif: null
   });
+}
+
+/* Encadré « Nous joindre » (demande du propriétaire, 28 sept. 2026) : ni nom ni courriel affichés.
+   Le formulaire prépare un courriel dans le logiciel du visiteur ; l'adresse n'est assemblée
+   qu'au moment de l'envoi (en deux morceaux dans la page, pour les robots qui ramassent les
+   adresses). Aucun renseignement ne passe par le site. */
+function htmlNousJoindre() {
+  const [boite, domaine] = COURRIEL_MISE_A_JOUR.split('@');
+  return `<section class="zone" id="nous-joindre" aria-labelledby="nous-joindre-titre" style="padding-top:0">
+  <h2 id="nous-joindre-titre">Nous joindre</h2>
+  <p>Une question, une correction, un milieu à ajouter&nbsp;? Écrivez-nous.</p>
+  <form class="contact" id="form-contact" data-a="${esc(boite)}" data-b="${esc(domaine)}" novalidate>
+    <label for="contact-nom"><span>Nom</span><input id="contact-nom" name="nom" autocomplete="name" required></label>
+    <label for="contact-titre"><span>Titre ou fonction <span class="opt">(facultatif)</span></span><input id="contact-titre" name="titre" autocomplete="organization-title" placeholder="Ex. : résidente R2, médecin recruteur, gestionnaire"></label>
+    <label for="contact-courriel"><span>Courriel pour vous répondre <span class="opt">(facultatif)</span></span><input id="contact-courriel" name="courriel" type="email" autocomplete="email"></label>
+    <label for="contact-message"><span>Message</span><textarea id="contact-message" name="message" rows="6" required></textarea></label>
+    <button class="btn" type="submit">Envoyer</button>
+    <p class="contact-etat" id="contact-etat" role="status" aria-live="polite">Votre logiciel de courriel s’ouvrira avec le message prêt à envoyer.</p>
+  </form>
+</section>
+<script>
+(function () {
+  var f = document.getElementById('form-contact');
+  if (!f) return;
+  var etat = document.getElementById('contact-etat');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = function (id) { return (document.getElementById(id).value || '').trim(); };
+    var nom = v('contact-nom'), titre = v('contact-titre'), courriel = v('contact-courriel'), message = v('contact-message');
+    if (!nom || !message) {
+      etat.textContent = 'Indiquez au moins votre nom et votre message.';
+      (nom ? document.getElementById('contact-message') : document.getElementById('contact-nom')).focus();
+      return;
+    }
+    var corps = message + '\\n\\n' + 'Nom : ' + nom + (titre ? '\\nTitre ou fonction : ' + titre : '') +
+      (courriel ? '\\nCourriel pour la réponse : ' + courriel : '') + '\\n\\n(Formulaire « Nous joindre » de trouvetaclinique.ca)';
+    var adresse = f.getAttribute('data-a') + '@' + f.getAttribute('data-b');
+    location.href = 'mailto:' + adresse + '?subject=' + encodeURIComponent('Trouve ta clinique : message de ' + nom) +
+      '&body=' + encodeURIComponent(corps);
+    etat.textContent = 'Votre logiciel de courriel devrait s’ouvrir avec le message prêt à envoyer.';
+  });
+})();
+</script>`;
 }
 
 function pageConfidentialite() {
@@ -3783,8 +3829,7 @@ function pageConfidentialite() {
   <h2>Coordonnées des milieux</h2>
   <p>Les coordonnées affichées sur les fiches servent uniquement au recrutement médical. Un milieu peut demander une correction ou un retrait avec le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche.</p>
   <h2>Nous joindre</h2>
-  <p>Pour toute question sur ces renseignements&nbsp;: <a href="mailto:${COURRIEL_MISE_A_JOUR}">${COURRIEL_MISE_A_JOUR}</a>.</p>
-  <p><a href="/a-propos/">À propos</a></p>
+  <p>Pour toute question sur ces renseignements, écrivez-nous avec le <a href="/a-propos/#nous-joindre">formulaire de la page À propos</a>.</p>
 </section>`;
   return page({
     titre, description, url, profondeur: 1, indexable: true, jsonLd,

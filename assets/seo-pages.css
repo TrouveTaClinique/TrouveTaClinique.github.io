@@ -743,3 +743,13 @@ main .cliniques-carte,main .carte-est{
   .hero-b .hb-titre .hg{font-size:2.25rem;max-width:11ch}
   .hero-b .hb-titre .bd{font-size:1.6rem;max-width:15ch}
 }
+
+/* ── Nous joindre (page À propos, 28 sept. 2026) ── */
+.contact{display:grid;gap:.95rem;max-width:min(40rem,100%);margin-top:1rem;padding:1.3rem 1.4rem;background:var(--teal-pale);border-radius:16px}
+.contact label{display:grid;gap:.35rem;font-weight:650;color:var(--navy)}
+.contact .opt{font-weight:400;color:var(--ink-60)}
+.contact input,.contact textarea{font:inherit;font-weight:400;color:var(--navy);background:#fff;border:1.5px solid var(--rule);border-radius:12px;padding:.7rem .9rem;min-height:48px}
+.contact textarea{min-height:9rem;resize:vertical}
+.contact input:focus,.contact textarea:focus{outline:3px solid rgba(6,156,156,.35);border-color:var(--teal)}
+.contact .btn{justify-self:start;border:0;cursor:pointer;font:inherit;font-weight:650}
+.contact-etat{margin:0;font-size:.93rem;color:var(--ink-60)}
