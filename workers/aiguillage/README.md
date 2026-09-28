@@ -32,8 +32,8 @@ Aucune question n'est journalisée ni conservée par le service.
   compté dans un espace KV Cloudflare. Sans ce plafond, un script qui imite l'origine du site
   pourrait vider les 20 $ en moins d'une heure. Mise en place : Cloudflare > Storage & Databases >
   KV > Create (« aiguillage-compteur ») ; copier son identifiant dans le bloc `[[kv_namespaces]]`
-  de `wrangler.toml` (retirer les « # ») ; publier sur `main`. Tant que le bloc reste en
-  commentaire, le service fonctionne sans plafond quotidien, comme avant.
+  de `wrangler.toml` (retirer les « # ») ; publier sur `main`. Fait le 28 septembre 2026
+  (espace « aiguillage-compteur ») : le plafond est actif.
 - Cloudflare Workers : gratuit à ce volume.
 
 ## Mise en place (une seule fois)

@@ -17,12 +17,11 @@ PLAFOND_JOUR = "150"
 # Adresse d'expédition du formulaire « Nous joindre » (domaine où Email Routing est activé).
 CONTACT_EXPEDITEUR = "formulaire@trouvetaclinique.ca"
 
-# Compteur du plafond quotidien (audit P03). Créer l'espace dans Cloudflare
-# (Storage & Databases > KV > Create, nom « aiguillage-compteur »), puis retirer les « # »
-# des trois lignes suivantes et y inscrire son identifiant (ce n'est pas un secret).
-# [[kv_namespaces]]
-# binding = "COMPTEUR"
-# id = "IDENTIFIANT_DE_L_ESPACE_KV"
+# Compteur du plafond quotidien (audit P03) : espace KV « aiguillage-compteur », créé le
+# 28 septembre 2026 dans Cloudflare (son identifiant n'est pas un secret).
+[[kv_namespaces]]
+binding = "COMPTEUR"
+id = "60c7e4d2b7fc490aa0dd6658824e14bf"
 
 # 5 questions par minute par visiteur.
 [[ratelimits]]
