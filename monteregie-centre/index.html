@@ -56,7 +56,7 @@
   }
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&family=Lato:wght@300;400;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+<link href="../assets/polices/polices-cartes.css" rel="stylesheet">
 <meta name="theme-color" content="#0f2240">
 
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
@@ -350,11 +350,15 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
   box-shadow: 0 1px 3px rgba(15,34,64,.28); transform: translateX(0); transition: transform .16s; }
 .all-clinics-toggle[aria-checked="true"] .mini-toggle { background: var(--blue); }
 .all-clinics-toggle[aria-checked="true"] .mini-toggle::after { transform: translateX(12px); }
-.all-clinics-info { position: absolute; top: -6px; right: -4px; width: 18px; height: 18px; display: flex;
-  align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--muted);
-  background: var(--white); color: var(--muted); font: italic 11px/1 Georgia, serif; cursor: pointer; padding: 0;
-  box-shadow: 0 1px 4px rgba(15,34,64,.15); z-index: 2; }
-.all-clinics-info:hover, .all-clinics-info[aria-expanded="true"] { border-color: var(--orange); color: var(--orange); }
+/* Zone cliquable de 24 px (WCAG 2.5.8) ; la pastille visible reste de 18 px, dessinée par ::before. */
+.all-clinics-info { position: absolute; top: -9px; right: -7px; width: 24px; height: 24px; display: flex;
+  align-items: center; justify-content: center; border: 0; border-radius: 50%;
+  background: transparent; color: var(--muted); font: italic 11px/1 Georgia, serif; cursor: pointer; padding: 0;
+  z-index: 2; }
+.all-clinics-info::before { content: ''; position: absolute; inset: 3px; border-radius: 50%;
+  border: 1px solid var(--muted); background: var(--white); box-shadow: 0 1px 4px rgba(15,34,64,.15); z-index: -1; }
+.all-clinics-info:hover, .all-clinics-info[aria-expanded="true"] { color: var(--orange); }
+.all-clinics-info:hover::before, .all-clinics-info[aria-expanded="true"]::before { border-color: var(--orange); }
 .all-clinics-tip { position: absolute; top: 46px; right: 0; width: min(250px, calc(100vw - 48px)); z-index: 20;
   background: var(--navy); color: #fff; border-radius: 9px; padding: 9px 11px; font-size: 12px; line-height: 1.4;
   box-shadow: 0 5px 18px rgba(15,34,64,.28); }
@@ -2317,7 +2321,7 @@ function makeIcon(active, rank, couleur, id) {
       const border = active ? '#0f2240' : '#fff';
       const bw = active ? 5 : 3;
       return L.divIcon({ className:'',
-        html:`<div style="position:relative;width:${size}px;height:${size}px;background:#c0182c;border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)"><div class="hosp-pin-circle"><div class="hosp-pin-circle-inner"><span style="font-size:13px">H</span></div></div></div>`,
+        html:`<div aria-hidden="true" style="position:relative;width:${size}px;height:${size}px;background:#c0182c;border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)"><div class="hosp-pin-circle"><div class="hosp-pin-circle-inner"><span style="font-size:13px">H</span></div></div></div>`,
         iconSize:[size,size], iconAnchor:[size/2-dx,size-dy], popupAnchor:[dx,dy-size-2] });
     }
     const size = active ? 32 : 27;
@@ -2325,14 +2329,14 @@ function makeIcon(active, rank, couleur, id) {
     const bw = active ? 4 : 2.5;
     const label = rank != null && rank !== '' ? rank : '';
     return L.divIcon({ className:'',
-      html:`<div class="etab-marker${active ? ' active' : ''}" style="width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border}">${label}</div>`,
+      html:`<div class="etab-marker${active ? ' active' : ''}" aria-hidden="true" style="width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border}">${label}</div>`,
       iconSize:[size,size], iconAnchor:[size/2-dx,size/2-dy], popupAnchor:[dx,dy-size/2-7] });
   }
   const size = active ? 26 : 20;
   const border = active ? '#0f2240' : '#fff';
   const bw = active ? 3 : 2.5;
   return L.divIcon({ className:'',
-    html:`<div style="position:relative;width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,.35)"><span class="pin-num">${rank}</span></div>`,
+    html:`<div aria-hidden="true" style="position:relative;width:${size}px;height:${size}px;background:${c};border:${bw}px solid ${border};border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(0,0,0,.35)"><span class="pin-num">${rank}</span></div>`,
     iconSize:[size,size], iconAnchor:[size/2-dx,size-dy], popupAnchor:[dx,dy-size-2] });
 }
 
@@ -2396,7 +2400,7 @@ const ETABLISSEMENT_TAILLE = 30;
 function makeEtablissementIcon() {
   const size = ETABLISSEMENT_TAILLE;
   return L.divIcon({ className:'',
-    html:`<div style="position:relative;width:${size}px;height:${size}px;background:#170A72;border:3px solid #90F1E9;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 7px rgba(15,34,64,.38)"><div class="est-pin-circle"><div class="est-pin-circle-inner"><span>É</span></div></div></div>`,
+    html:`<div aria-hidden="true" style="position:relative;width:${size}px;height:${size}px;background:#170A72;border:3px solid #90F1E9;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 7px rgba(15,34,64,.38)"><div class="est-pin-circle"><div class="est-pin-circle-inner"><span>É</span></div></div></div>`,
     iconSize:[size,size], iconAnchor:[size/2,size], popupAnchor:[0,-size-2] });
 }
 
@@ -3249,9 +3253,10 @@ function populateRlsButtons() {
     const coupure = r.includes('-') ? r.indexOf('-') + 1 : r.indexOf(' ');
     const ligne1 = coupure > 0 ? r.slice(0, coupure) : r;
     const ligne2 = coupure > 0 ? r.slice(coupure) : '';
-    b.innerHTML = ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1);
+    // « Filtrer : » reste lu par les lecteurs d'écran sans remplacer le texte visible (WCAG 2.5.3).
+    b.innerHTML = '<span class="sr-only">Filtrer : </span>' + (ligne2 ? `${esc(ligne1)}<br>${esc(ligne2)}` : esc(ligne1));
+    b.dataset.rls = r;
     b.style.setProperty('--c', RLS_COLORS_REGION[r]);
-    b.setAttribute('aria-label', 'Filtrer : ' + r);
     // Pâle seulement si UN AUTRE bouton est le filtre actif ; foncé sinon (par défaut, ou si
     // c'est lui le filtre actif).
     const pale = rlsFilter !== '' && rlsFilter !== r;
@@ -3260,7 +3265,7 @@ function populateRlsButtons() {
     b.addEventListener('click', () => {
       rlsFilter = (rlsFilter === r) ? '' : r;
       wrap.querySelectorAll('.rls-btn').forEach(btn => {
-        const nomBtn = btn.getAttribute('aria-label').slice('Filtrer : '.length);
+        const nomBtn = btn.dataset.rls;
         const paleBtn = rlsFilter !== '' && rlsFilter !== nomBtn;
         btn.classList.toggle('dim', paleBtn);
         btn.setAttribute('aria-pressed', rlsFilter === nomBtn ? 'true' : 'false');
@@ -4326,6 +4331,8 @@ function showUpdateDate() {
 
 function initData(data, lotsEtab) {
   const brut = Array.isArray(data) ? data : (data.cliniques || []);
+  // Horaires : « 8h00 - 16h00 » saisi avec un trait d'union s'affiche « 8h00 – 16h00 », comme les autres (audit P21).
+  brut.forEach(g => { const h = g && g.horaire; if (h && typeof h === 'object') Object.keys(h).forEach(j => { if (typeof h[j] === 'string') h[j] = h[j].replace(/(\d)\s*-\s*(\d)/g, '$1 – $2'); }); });
   // Une fiche dont « visible » vaut false est conservée dans data.json mais
   // n'apparaît nulle part dans l'application : c'est le cas d'un milieu qui ne
   // recrute pas cette année. Elle revient dès que le drapeau repasse à true.

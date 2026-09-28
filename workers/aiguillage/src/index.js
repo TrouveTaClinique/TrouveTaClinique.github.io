@@ -2,7 +2,7 @@
    d'Anthropic, le catalogue publié et les limites de requêtes.
    Secret requis : ANTHROPIC_API_KEY (Cloudflare > Worker > Settings > Variables and Secrets). */
 import Anthropic from '@anthropic-ai/sdk';
-import { traiter, indexerCatalogue } from './logique.js';
+import { traiter, indexerCatalogue, compterQuestionDuJour, PLAFOND_JOUR_PAR_DEFAUT } from './logique.js';
 
 /* Catalogue lu sur le site d'où vient la question (production ou aperçu), gardé 10 minutes. */
 const DUREE_CATALOGUE_MS = 10 * 60 * 1000;
@@ -54,6 +54,10 @@ export default {
         if (env.LIMITE_GLOBALE && !(await env.LIMITE_GLOBALE.limit({ key: 'site' })).success) return false;
         return true;
       },
+      /* Plafond quotidien : actif seulement si l'espace KV « COMPTEUR » est relié (wrangler.toml). */
+      plafondJour: env.COMPTEUR
+        ? () => compterQuestionDuJour(env.COMPTEUR, Number(env.PLAFOND_JOUR) || PLAFOND_JOUR_PAR_DEFAUT)
+        : null,
       classerErreur
     });
   }

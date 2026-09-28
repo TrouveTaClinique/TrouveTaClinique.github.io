@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   traiter, indexerCatalogue, retenirCandidats, construireRequete, interpreterReponse, listerCatalogue,
-  CANDIDATS_MAX, GUIDES_MAX, SCHEMA
+  compterQuestionDuJour, cleDuJour, CANDIDATS_MAX, GUIDES_MAX, SCHEMA
 } from '../src/logique.js';
 
 const CATALOGUE = Array.from({ length: 60 }, (_, i) => ({
@@ -120,6 +120,35 @@ test('HTTP : question trop courte ou trop longue', async () => {
 test('HTTP : limite de requêtes atteinte', async () => {
   const r = await traiter(requete({ question: 'otite enfant', candidats: [CATALOGUE[0].url] }), {}, deps({ limiter: async () => false }));
   assert.equal(r.status, 429);
+});
+
+/* Espace KV factice : get/put comme Cloudflare, sans expiration réelle. */
+function kvFactice() {
+  const m = new Map();
+  return { m, get: async k => (m.has(k) ? m.get(k) : null), put: async (k, v, o) => { m.set(k, v); m.options = o; } };
+}
+
+test('plafond quotidien : compte les questions et refuse au-delà du plafond', async () => {
+  const kv = kvFactice();
+  const midi = new Date('2026-09-28T16:00:00Z');
+  for (let i = 0; i < 3; i++) assert.equal(await compterQuestionDuJour(kv, 3, midi), true);
+  assert.equal(await compterQuestionDuJour(kv, 3, midi), false);
+  assert.equal(kv.m.get('questions-2026-09-28'), '3');
+  assert.equal(kv.m.options.expirationTtl, 172800);
+  /* Nouveau jour à minuit, heure du Québec (4 h UTC en été) : le compteur repart. */
+  assert.equal(cleDuJour(new Date('2026-09-29T03:59:00Z')), 'questions-2026-09-28');
+  assert.equal(cleDuJour(new Date('2026-09-29T04:01:00Z')), 'questions-2026-09-29');
+  assert.equal(await compterQuestionDuJour(kv, 3, new Date('2026-09-29T04:01:00Z')), true);
+});
+
+test('HTTP : plafond quotidien atteint, sans appel au modèle', async () => {
+  const d = deps({ plafondJour: async () => false });
+  const r = await traiter(requete({ question: 'otite enfant', candidats: [CATALOGUE[0].url] }), {}, d);
+  assert.equal(r.status, 429);
+  assert.match((await r.json()).erreur, /limite de questions pour aujourd’hui/);
+  assert.equal(d.appels.length, 0);
+  const libre = deps({ plafondJour: null });
+  assert.equal((await traiter(requete({ question: 'otite enfant', candidats: [CATALOGUE[0].url] }), {}, libre)).status, 200);
 });
 
 test('HTTP : sans présélection valide, le modèle cherche quand même dans tout le catalogue', async () => {
