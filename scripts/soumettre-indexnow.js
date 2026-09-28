@@ -23,12 +23,12 @@ const MOTIF_CLE = /^[a-f0-9]{32}\.txt$/i;
 const ATTENTE_DEPLOIEMENT_MS = 30 * 1000;
 
 /*
- * INDEXNOW_ENABLED reste false tant que Bing répond 403 UserForbiddenToAccessSite
- * malgré un fichier clé conforme à la racine (HTTP 200, 32 octets, sans BOM).
- * Ce n’est pas un problème de fichier de clé : c’est l’autorisation clé/domaine
- * côté Bing Webmaster Tools. Remettre à true seulement après correction Bing.
+ * Réactivé le 28 septembre 2026 (choix du propriétaire, audit P30). En septembre, Bing répondait
+ * 403 UserForbiddenToAccessSite à l'ancienne clé malgré un fichier conforme ; le site est
+ * maintenant vérifié dans Bing Webmaster Tools et la nouvelle clé (df3c00a6…) a reçu 202 au
+ * premier envoi. Si Bing répond de nouveau 403, repasser à false et vérifier Bing Webmaster Tools.
  */
-const INDEXNOW_ENABLED = false;
+const INDEXNOW_ENABLED = true;
 
 function trouverCle() {
   const fichiers = fs.readdirSync(RACINE).filter((nom) => MOTIF_CLE.test(nom));
