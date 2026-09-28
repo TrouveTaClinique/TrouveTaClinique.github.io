@@ -2417,6 +2417,16 @@ map.on('locationerror', function () {
     if (actuelle) map.removeLayer(actuelle);
     actuelle = neuve;
   }
+  /* Carte rapide au cellulaire (prototype du 28 sept. 2026) : sur un petit écran ou un appareil
+     modeste, fond en images (même style CARTO Positron / Dark Matter, en haute densité), sans le
+     moteur vectoriel (~1 Mo et plusieurs secondes de calcul sur un téléphone moyen). */
+  function fondImagesPrefere() {
+    try {
+      if (window.matchMedia('(max-width: 860px)').matches) return true;
+      if (navigator.deviceMemory && navigator.deviceMemory <= 2) return true;
+    } catch (e) { /* matchMedia absent : garder le vectoriel */ }
+    return false;
+  }
   function demarrerFond() {
     chargerMoteur().then(poserFond, function (e) {
       vectorielDisponible = false;
@@ -2424,7 +2434,9 @@ map.on('locationerror', function () {
       poserFond();
     });
   }
-  if (document.readyState === 'complete') setTimeout(demarrerFond, 0);
+  // Fond en images : posé tout de suite (rien de lourd à charger) ; vectoriel : après « load ».
+  if (fondImagesPrefere()) { vectorielDisponible = false; poserFond(); }
+  else if (document.readyState === 'complete') setTimeout(demarrerFond, 0);
   else window.addEventListener('load', demarrerFond, { once: true });
   // « map » est déclaré avec const : il n'existe pas sur window. On le capture ici,
   // dans la portée du script, plutôt que d'y accéder globalement.

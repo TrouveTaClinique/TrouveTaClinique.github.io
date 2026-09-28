@@ -144,3 +144,4 @@ Une ligne par version de `CACHE`, de la plus ancienne à la plus récente.
 - v97-sans-legende (27 septembre 2026) : légende des RLS retirée ; encadré de collaboration plus large au cellulaire.
 - v98-retour-fiche (27 septembre 2026) : fermer une fiche ramène la vue d'ouverture sur ordinateur.
 - v99-audit (28 septembre 2026) : lot de l'audit du 28 septembre (vidéo liée, préconnexion du fond de carte, horaires, HTML valide).
+- v100-fond-images (28 septembre 2026) : fond de carte en images au cellulaire (sans moteur vectoriel), choix du propriétaire.
