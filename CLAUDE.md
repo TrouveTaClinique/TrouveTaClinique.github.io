@@ -84,12 +84,25 @@ dates du sitemap selon le contenu réel des pages).
   20 $ sans recharge). L'IA reçoit tout le catalogue (une ligne par ressource, mis en cache une
   heure) ; la présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
   des organismes du catalogue, elle ne répond jamais à la question clinique (décision du
-  propriétaire). Le Worker se déploie depuis `main` (Cloudflare Workers Builds).
+  propriétaire). Le Worker se déploie depuis `main` (Cloudflare Workers Builds). Plafond de
+  150 questions par jour (`PLAFOND_JOUR`), compté dans l'espace KV `COMPTEUR` de `wrangler.toml`.
 
 ## Divers
 
 - Ce qui est publié est défini par la liste blanche de `scripts/preparer-apercu.js` (dossiers,
-  fichiers, extensions, exclusions).
+  fichiers, extensions, exclusions), plus les extras de `scripts/preparer-pages-production.js`.
+  Depuis le 28 sept. 2026, GitHub Pages est en mode « GitHub Actions » : la production est
+  l'artefact du robot « Pages production », sans `scripts/`, ni `.md`, ni `.gs`, ni notes.
+- Cartes : fond vectoriel (MapLibre) à l'ordinateur, fond CARTO en images au cellulaire
+  (≤ 860 px, choix du propriétaire, 28 sept. 2026). Polices des cartes Montérégie, Centre et
+  Ouest hébergées dans `assets/polices/` : aucun service de police externe.
+- IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
+- DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
+  Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
+- Pages `/a-propos/` et `/confidentialite/` : liens seulement dans le pied de page ; ni le nom
+  ni le courriel du propriétaire dans leur texte (demande du propriétaire). Formulaire
+  « Nous joindre » : Worker `/contact`, repli sur un courriel prérempli tant que l'envoi direct
+  n'est pas configuré.
 - Deux PWA indépendantes : `/monteregie-est/` (`sw.js` à la racine) et l'app « Guides »
   (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
   cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
