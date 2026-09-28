@@ -755,3 +755,6 @@ main .cliniques-carte,main .carte-est{
 .contact-etat{margin:0;font-size:.93rem;color:var(--ink-60)}
 .contact .piege{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .contact .btn:disabled{opacity:.6;cursor:progress}
+/* Accueil : date des données et lien « À propos » discrets (remplace le bloc « D'où viennent ces informations »). */
+.maj-discret{margin-top:2rem;padding-top:.9rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--ink-60)}
+.maj-discret a{color:inherit}
