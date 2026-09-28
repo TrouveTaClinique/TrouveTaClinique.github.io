@@ -173,6 +173,7 @@ function htmlFooterSite() {
     </ul></div>
   </div>
   <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
+  <p class="avis avis-liens"><a href="/a-propos/">À propos</a> · <a href="/confidentialite/">Confidentialité</a></p>
   <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© ${new Date().getFullYear()} Olivier Laplante · Trouve ta clinique</p>
 </footer>`;
 }
@@ -3534,6 +3535,8 @@ const PAGES_FIXES = [
   { loc: '/monteregie-est/amp/', lastmod: null, changefreq: 'monthly', priority: '0.9' },
   { loc: '/monteregie-est/ptem-u/', lastmod: '2026-09-12', changefreq: 'monthly', priority: '0.6' },
   { loc: '/monteregie-est/video/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
+  { loc: '/a-propos/', lastmod: null, changefreq: 'monthly', priority: '0.4' },
+  { loc: '/confidentialite/', lastmod: null, changefreq: 'yearly', priority: '0.2' },
   /* /monteregie/ (carte des 3 territoires) reste en ligne pour les humains mais n’est plus
      dans le sitemap : elle concurrence l’accueil et /monteregie-est/. */
   { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
@@ -3706,6 +3709,86 @@ ${CHAPITRES_VIDEO.map(([debut, nom]) => `    <li style="break-inside:avoid;margi
   return page({
     titre, description, url, profondeur: 2, indexable: true, jsonLd, univers: u,
     filDAriane: `<a href="/">Accueil</a> › <a href="${EST_PREFIXE}/">Montérégie-Est</a> › Vidéo`,
+    corps, actif: null
+  });
+}
+
+/* Pages « À propos » et « Confidentialité » (audit du 28 sept. 2026, P06) : qui publie le site,
+   d'où viennent les données, ce que le site fait des renseignements. Textes validés par le
+   propriétaire avant publication. */
+function pageAPropos(majDonnees) {
+  const url = `${SITE}/a-propos/`;
+  const titre = 'À propos de Trouve ta clinique';
+  const description = 'Qui réalise Trouve ta clinique, d’où viennent les données sur les milieux qui recrutent en Montérégie et comment faire corriger une fiche.';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: titre, url, description, inLanguage: 'fr-CA',
+    dateModified: majDonnees,
+    about: { '@type': 'WebSite', name: 'Trouve ta clinique', url: `${SITE}/` }
+  };
+  const corps = `
+<div class="tete">
+  <p class="eyebrow">À propos</p>
+  <h1>À propos de Trouve ta clinique</h1>
+  <p class="lede">Une carte gratuite des milieux qui recrutent des médecins de famille en Montérégie, pour les résidents et les médecins qui cherchent un milieu de pratique.</p>
+</div>
+<section class="zone" style="padding-top:var(--s-md)">
+  <h2>Ce que vous trouvez ici</h2>
+  <ul>
+    <li>La carte des cliniques et des secteurs en établissement qui recrutent, par réseau local de services (RLS).</li>
+    <li>Une fiche par milieu&nbsp;: équipe, horaire, pratiques, DMÉ, frais de bureau et contact du responsable du recrutement.</li>
+    <li>Des outils pour choisir&nbsp;: favoris, notes et comparatif, sur ordinateur ou sur cellulaire.</li>
+    <li>Des guides sur le <a href="${EST_PREFIXE}/ptem/">PTEM 2027</a>, le <a href="${EST_PREFIXE}/ptem-u/">PTEM-U (PREM-U)</a> et les <a href="${EST_PREFIXE}/amp/">AMP</a>, et un <a href="/guides/">catalogue de guides cliniques</a> et de <a href="/guides/ressources-communautaires/">ressources communautaires</a>.</li>
+  </ul>
+  <h2>Qui réalise le site</h2>
+  <p>Trouve ta clinique est réalisé par Olivier Laplante. Le volet Montérégie-Est est réalisé en collaboration avec Nancy Langlois et la DSMP de Santé Québec – CISSS de la Montérégie-Est.</p>
+  <h2>D’où viennent les données</h2>
+  <p>Les fiches regroupent les données du répertoire des milieux, des sources publiques et, lorsqu’elles sont disponibles, des renseignements transmis par les milieux eux-mêmes. En Montérégie-Est, la liste des milieux qui recrutent est validée avec Santé Québec Montérégie-Est. En Montérégie-Centre et en Montérégie-Ouest, elle reprend la dernière mise à jour du répertoire.</p>
+  <p>Dernière mise à jour des données&nbsp;: ${htmlDateFr(majDonnees)}. Chaque fiche indique aussi sa propre date.</p>
+  <h2>Faire corriger une fiche</h2>
+  <p>Vous travaillez dans un milieu présenté ici&nbsp;? Le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche ouvre un courriel prérempli pour corriger ou compléter les renseignements. Un milieu manque&nbsp;? <a href="${SIGNALER_CLINIQUE_HREF}">Signalez-le</a>.</p>
+  <h2>Ce que le site n’est pas</h2>
+  <p>Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Pour toute décision officielle (PTEM, avis de conformité, AMP), validez l’information auprès du milieu, du DTMF ou des sources gouvernementales.</p>
+  <p>Vous êtes un patient&nbsp;? Le site ne permet pas de prendre rendez-vous. Sans médecin de famille, passez par le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-premiere-ligne" rel="noopener">guichet d’accès à la première ligne</a> (811, option&nbsp;3).</p>
+  <p><a href="/confidentialite/">Confidentialité</a> · <a href="${EST_PREFIXE}/video/">La carte en vidéo</a></p>
+</section>`;
+  return page({
+    titre, description, url, profondeur: 1, indexable: true, jsonLd,
+    filDAriane: `<a href="/">Accueil</a> › À propos`,
+    corps, actif: null
+  });
+}
+
+function pageConfidentialite() {
+  const url = `${SITE}/confidentialite/`;
+  const titre = 'Confidentialité : Trouve ta clinique';
+  const description = 'Ce que Trouve ta clinique fait des renseignements : pas de compte ni de témoin publicitaire, favoris et notes gardés dans votre appareil, questions à l’IA non conservées.';
+  const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: titre, url, description, inLanguage: 'fr-CA' };
+  const corps = `
+<div class="tete">
+  <p class="eyebrow">Confidentialité</p>
+  <h1>Confidentialité</h1>
+  <p class="lede">Trouve ta clinique ne demande aucun compte et n’utilise aucun témoin (cookie) publicitaire ni de suivi.</p>
+</div>
+<section class="zone" style="padding-top:var(--s-md)">
+  <h2>Ce qui reste dans votre appareil</h2>
+  <p>Vos favoris, vos notes et votre comparatif sont enregistrés dans votre navigateur seulement. Ils ne sont jamais transmis au site. Vous pouvez les effacer en tout temps en vidant les données du site dans votre navigateur.</p>
+  <h2>Statistiques de fréquentation</h2>
+  <p>Le site utilise Cloudflare Web Analytics, qui compte les visites sans témoin et sans profil individuel.</p>
+  <h2>Carte</h2>
+  <p>Le fond de carte est fourni par CARTO, à partir des données d’OpenStreetMap. Pour afficher la carte, votre navigateur télécharge les images de CARTO, qui reçoit donc votre adresse IP, comme pour tout site Web. Les polices de caractères sont hébergées sur le site lui-même.</p>
+  <h2>Demander à l’IA quel guide consulter</h2>
+  <p>Sur la page des <a href="/guides/">guides cliniques</a>, votre question est transmise à un service de Trouve ta clinique hébergé chez Cloudflare, puis au modèle Claude d’Anthropic, pour choisir des ressources du catalogue. Ce service ne conserve pas les questions. N’y inscrivez aucun renseignement qui permettrait d’identifier un patient. Voir aussi la <a href="https://www.anthropic.com/legal/privacy" rel="noopener">politique de confidentialité d’Anthropic</a>.</p>
+  <h2>Coordonnées des milieux</h2>
+  <p>Les coordonnées affichées sur les fiches servent uniquement au recrutement médical. Un milieu peut demander une correction ou un retrait avec le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche.</p>
+  <h2>Nous joindre</h2>
+  <p>Pour toute question sur ces renseignements&nbsp;: <a href="mailto:${COURRIEL_MISE_A_JOUR}">${COURRIEL_MISE_A_JOUR}</a>.</p>
+  <p><a href="/a-propos/">À propos</a></p>
+</section>`;
+  return page({
+    titre, description, url, profondeur: 1, indexable: true, jsonLd,
+    filDAriane: `<a href="/">Accueil</a> › Confidentialité`,
     corps, actif: null
   });
 }
@@ -4445,6 +4528,8 @@ function main() {
      les anciennes adresses et celles des autres territoires redirigent vers l'Est. */
   publierPagesGuide();
   ecrire(path.join('monteregie-est', 'video', 'index.html'), pageVideoEst());   // indexée (sitemap : PAGES_FIXES)
+  ecrire(path.join('a-propos', 'index.html'), pageAPropos(majDonnees));
+  ecrire(path.join('confidentialite', 'index.html'), pageConfidentialite());
 
   const nEtabSeo = publierPagesEtablissements(slugs, entrees, majPagesSeo, cliniquesById);
   const nEtabCentre = publierPagesEtablissementsCentre(entrees, majPagesSeo, cliniquesById);

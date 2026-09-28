@@ -52,6 +52,18 @@
     </video:video>
   </url>
   <url>
+    <loc>https://trouvetaclinique.ca/a-propos/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://trouvetaclinique.ca/confidentialite/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
