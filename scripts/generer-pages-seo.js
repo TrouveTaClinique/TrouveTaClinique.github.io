@@ -779,6 +779,11 @@ function decouperAdresse(adresse, ville) {
   return out;
 }
 
+/* Horaire saisi avec un trait d'union (« 8h00 - 16h00 ») : même tiret demi-cadratin que les autres (audit P21). */
+function normaliserHoraire(texte) {
+  return String(texte).replace(/(\d)\s*-\s*(\d)/g, '$1 – $2');
+}
+
 /* « 8h00 – 20h00 » → { opens:'08:00', closes:'20:00' }. Gère les journées coupées
    (« 8h30 – 11h45 / 13h00 – 16h30 » → deux plages). Tout ce qui n'est pas une plage horaire
    claire (« Fermé », « Urgence sur RDV seulement ») ne produit RIEN plutôt qu'une approximation. */
@@ -1119,7 +1124,7 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   let blocHoraire = '';
   if (rempli(c.horaire)) {
     const rangs = JOURS.filter(j => rempli(c.horaire[j]))
-      .map(j => `        <tr><th scope="row">${j}</th><td>${esc(c.horaire[j])}</td></tr>`).join('\n');
+      .map(j => `        <tr><th scope="row">${j}</th><td>${esc(normaliserHoraire(c.horaire[j]))}</td></tr>`).join('\n');
     if (rangs) {
       blocHoraire = `
   <section id="horaire">

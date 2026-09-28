@@ -28,6 +28,12 @@ Aucune question n'est journalisée ni conservée par le service.
   normale continue de fonctionner.
 - Limites de requêtes (voir `wrangler.toml`) : 5 questions par minute par visiteur,
   20 par minute pour l'ensemble du site.
+- Plafond quotidien (audit P03) : 150 questions par jour pour tout le site (`PLAFOND_JOUR`),
+  compté dans un espace KV Cloudflare. Sans ce plafond, un script qui imite l'origine du site
+  pourrait vider les 20 $ en moins d'une heure. Mise en place : Cloudflare > Storage & Databases >
+  KV > Create (« aiguillage-compteur ») ; copier son identifiant dans le bloc `[[kv_namespaces]]`
+  de `wrangler.toml` (retirer les « # ») ; publier sur `main`. Tant que le bloc reste en
+  commentaire, le service fonctionne sans plafond quotidien, comme avant.
 - Cloudflare Workers : gratuit à ce volume.
 
 ## Mise en place (une seule fois)

@@ -4673,6 +4673,8 @@ function showUpdateDate() {
 
 function initData(data, etabData) {
   const brut = Array.isArray(data) ? data : (data.cliniques || []);
+  // Horaires : « 8h00 - 16h00 » saisi avec un trait d'union s'affiche « 8h00 – 16h00 », comme les autres (audit P21).
+  brut.forEach(g => { const h = g && g.horaire; if (h && typeof h === 'object') Object.keys(h).forEach(j => { if (typeof h[j] === 'string') h[j] = h[j].replace(/(\d)\s*-\s*(\d)/g, '$1 – $2'); }); });
   // Une fiche dont « visible » vaut false est conservée dans data.json mais
   // n'apparaît nulle part dans l'application : c'est le cas d'un milieu qui ne
   // recrute pas cette année. Elle revient dès que le drapeau repasse à true.

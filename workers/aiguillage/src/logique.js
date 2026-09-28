@@ -161,6 +161,23 @@ export function enTetesCors(origine, autorisees) {
   };
 }
 
+/* Plafond quotidien pour l'ensemble du site (audit P03) : un script qui imite l'origine du site
+   ne peut plus vider les crédits en une heure. Compteur dans un espace KV Cloudflare, une clé par
+   jour (heure du Québec), effacée après deux jours. KV n'est pas atomique : deux questions
+   simultanées peuvent dépasser le plafond d'une ou deux, ce qui reste négligeable avec la limite
+   globale de 20 par minute. Rend true si la question est permise (et la compte), false sinon. */
+export const PLAFOND_JOUR_PAR_DEFAUT = 150;
+export function cleDuJour(maintenant = new Date()) {
+  return 'questions-' + new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit' }).format(maintenant);
+}
+export async function compterQuestionDuJour(kv, plafond, maintenant = new Date()) {
+  const cle = cleDuJour(maintenant);
+  const deja = Number(await kv.get(cle)) || 0;
+  if (deja >= plafond) return false;
+  await kv.put(cle, String(deja + 1), { expirationTtl: 2 * 24 * 3600 });
+  return true;
+}
+
 const json = (corps, statut, entetes) => new Response(JSON.stringify(corps), {
   status: statut,
   headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...entetes }
@@ -168,7 +185,8 @@ const json = (corps, statut, entetes) => new Response(JSON.stringify(corps), {
 
 /* Point d'entrée testable.
    deps : chargerCatalogue(origine) -> Map url -> guide ; appelerModele(params) ;
-          limiter(cle) -> booléen (par visiteur et global) ; classerErreur(e) -> { statut, message }.
+          limiter(cle) -> booléen (par visiteur et global) ; classerErreur(e) -> { statut, message } ;
+          plafondJour() -> booléen (facultatif : absent tant que l'espace KV n'est pas relié).
    Aucune question n'est journalisée ni conservée. */
 export async function traiter(requete, env, deps) {
   const autorisees = env.ORIGINES ? env.ORIGINES.split(',').map(s => s.trim()).filter(Boolean) : ORIGINES_PAR_DEFAUT;
@@ -189,6 +207,9 @@ export async function traiter(requete, env, deps) {
   const ip = requete.headers.get('CF-Connecting-IP') || 'inconnue';
   if (!(await deps.limiter(ip))) {
     return json({ erreur: 'Trop de questions en peu de temps. Réessayez dans une minute.' }, 429, { ...cors, 'Retry-After': '60' });
+  }
+  if (deps.plafondJour && !(await deps.plafondJour())) {
+    return json({ erreur: 'Le service d’IA a atteint sa limite de questions pour aujourd’hui. La recherche ci-dessus fonctionne toujours.' }, 429, { ...cors, 'Retry-After': '3600' });
   }
 
   try {

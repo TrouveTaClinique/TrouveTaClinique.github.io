@@ -132,7 +132,8 @@ utilisé pour une nouvelle page.
 - Les liens de navigation sont définis par le générateur et ne doivent pas être recopiés à la main
   dans les pages générées.
 - La police principale est Segoe UI avec des polices système de repli. Aucun service de police
-  externe n'est chargé.
+  externe n'est chargé : les cartes Montérégie, Centre et Ouest utilisent Raleway, Lato et
+  Kaushan Script hébergées dans `assets/polices/` (licence SIL OFL, `assets/polices/OFL.txt`).
 
 ## Fichiers à préserver
 
