@@ -151,7 +151,7 @@ function carteGuide(r) {
   const resume = resumeUtile(r);
   return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}>
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
-          <span class="guides-resource-source">${esc(r.org)}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}</span>
+          <span class="guides-resource-source">${esc(r.org)}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}${r.acces === 'pabp' ? ' <span class="guides-acces">Réservé aux participants PABP</span>' : ''}</span>
           <h3>${esc(r.title)}</h3>${resume ? `
           <span class="guides-resource-desc">${esc(resume)}</span>` : ''}
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
@@ -278,11 +278,11 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=109-dossier-premiere-ligne">
-  <script src="/assets/guides-recherche.js?v=109-dossier-premiere-ligne" defer></script>
-  <script src="/assets/guides-cliniques.js?v=109-dossier-premiere-ligne" defer></script>
-  <script src="/assets/guides-installer.js?v=109-dossier-premiere-ligne" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=109-dossier-premiere-ligne" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=110-pabp">
+  <script src="/assets/guides-recherche.js?v=110-pabp" defer></script>
+  <script src="/assets/guides-cliniques.js?v=110-pabp" defer></script>
+  <script src="/assets/guides-installer.js?v=110-pabp" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=110-pabp" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

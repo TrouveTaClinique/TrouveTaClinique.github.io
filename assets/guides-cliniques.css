@@ -249,3 +249,4 @@
   .guides-search-form.guides-form-collant button[type="submit"]{display:none}
   .guides-category,.guides-resultats,.guides-favoris,.guides-consultes{scroll-margin-top:4.5rem}
 }
+.guides-acces{display:inline-block;margin-left:.45rem;padding:0 .4rem;border:1px solid #b45309;border-radius:4px;color:#92400e;background:#fffbeb;font-size:.72rem;font-weight:700;vertical-align:1px}
