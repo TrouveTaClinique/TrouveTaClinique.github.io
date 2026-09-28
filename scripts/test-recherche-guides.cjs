@@ -148,7 +148,7 @@ test('clinique : les guides passent devant les organismes (sevrage alcool)', () 
 });
 
 test('documents pour les patients : benzodiazépines et côlon irritable', () => {
-  assert.ok(contient(parType('sevrage benzodiazépine', 3).map(r => r.title), /somniferes/), parType('sevrage benzodiazépine', 3).map(r => r.title).join(' | '));
+  assert.ok(contient(parType('sevrage benzodiazépine', 4).map(r => r.title), /somniferes/), parType('sevrage benzodiazépine', 4).map(r => r.title).join(' | '));
   assert.ok(contient(parType('côlon irritable', 2).map(r => r.title), /colon irritable/));
 });
 
@@ -226,4 +226,14 @@ test('Masse au sein, mastite et jambes sans repos (ajouts du 28 septembre 2026)'
   assert.ok(contient(titres('mastite'), /mastite/));
   assert.ok(contient(titres('SJSR'), /jambes sans repos/));
   assert.ok(contient(titres('impatiences'), /jambes sans repos/));
+});
+
+test('Dossier ressources de première ligne (28 septembre 2026) : synonymes', () => {
+  assert.ok(contient(titres('SII'), /intestin irritable/));
+  assert.ok(contient(titres('escarre'), /lesions de pression/));
+  assert.ok(contient(titres('TOC'), /toc/));
+  assert.ok(contient(titres('TSPT'), /stress post traumatique/));
+  assert.ok(contient(titres('pierres aux reins'), /calculs/));
+  assert.ok(contient(titres('énurésie'), /enuresie/));
+  assert.ok(!contient(titres('TCCi'), /commotion|traumatisme cranio/), titres('TCCi').join(' | '));
 });
