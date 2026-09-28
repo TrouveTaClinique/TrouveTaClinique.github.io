@@ -154,6 +154,7 @@ function htmlFooterSite() {
       <li><a href="/monteregie-est/amp/">AMP</a></li>
       <li><a href="/guides/">Guides cliniques</a></li>
       <li><a href="/guides/ressources-communautaires/">Ressources communautaires</a></li>
+      <li><a href="/monteregie-est/video/">Vidéo de la carte</a></li>
       <li><a href="/monteregie-est/cliniques/">Cliniques</a></li>
       <li><a href="/monteregie-est/etablissements/">Établissements</a></li>
       <li><a href="/recherche/">Recherche</a></li>
@@ -1163,12 +1164,13 @@ ${items}
     <h2>En résumé</h2>
     ${htmlResumeListe(resumeHrr.points)}
   </section>`
-    : (estHrr ? '' : `
+    : ((estHrr || !rempli(c.infos)) ? '' : `
   <section id="presentation">
     <h2>Présentation du milieu</h2>
-    <p>${esc(textePresentation)}</p>
-${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
+    <p>${esc(c.infos)}</p>
   </section>`);
+  /* 28 sept. 2026 (audit) : le texte de présentation est déjà le chapeau de la fiche (p.lead) ;
+     la section ne le répète plus et ne paraît que si le milieu a transmis des informations (infos). */
 
   /* --- Données structurées : uniquement ce qu'on sait réellement --- */
   const clinique = {
@@ -1272,6 +1274,7 @@ ${rempli(c.infos) ? '    <p>' + esc(c.infos) + '</p>' : ''}
     </div>
   </section>
 ${contact}
+  ${CALLOUT_PATIENTS}
   <section id="renseignements">
     <h2>Renseignements</h2>
     <dl class="fiche">
@@ -1680,7 +1683,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
         '@id': `${url}#organisation`,
         name: 'Trouve ta clinique',
         url,
-        logo: `${SITE}/apple-touch-icon-180.png`,
+        logo: `${SITE}/icon-512.png`,
         founder: { '@id': `${url}#auteur` }
       },
       {
@@ -1742,6 +1745,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
   <a class="banniere reveal" href="/monteregie-est/" aria-label="Ouvrir la carte interactive Montérégie-Est">
     <img src="/assets/banniere-cellulaire-monteregie-est.jpg" alt="Carte interactive Trouve ta clinique · Montérégie-Est" width="1774" height="887">
   </a>
+  <p class="autres" style="margin-top:.8rem"><a class="btn ghost sm" href="/monteregie-est/video/">▶&nbsp;Voir la visite guidée en vidéo (4&nbsp;min)</a></p>
   <h3 class="autres-note" style="font-size:1.05rem;font-weight:700;margin-bottom:.4rem">Autres territoires de la Montérégie</h3>
   <p class="autres-note" style="margin-top:0">Les cartes de la Montérégie, de la Montérégie-Centre et de la Montérégie-Ouest sont disponibles, mais demeurent en construction.</p>
   <div class="autres">
@@ -2043,6 +2047,15 @@ function blocEvenement(c) {
 `;
 }
 /* Balise schema.org Event de l'annonce, pour les moteurs de recherche. */
+/* 28 sept. 2026 (audit) : Google recommande une PostalAddress pour les événements. Si le lieu annoncé est
+   l'adresse du milieu (même code postal), on reprend l'adresse découpée ; sinon, le texte du lieu. */
+function adresseEvenement(c, e) {
+  const a = Object.assign({ '@type': 'PostalAddress' }, decouperAdresse(c.adresse, c.ville));
+  const lieu = String(e.lieu || '').trim();
+  if (!lieu || (a.postalCode && lieu.replace(/\s/g, '').includes(String(a.postalCode).replace(/\s/g, '')))) return a;
+  return lieu;
+}
+
 function jsonLdEvenement(c, url) {
   if (!evenementActif(c)) return null;
   const e = c.evenement;
@@ -2057,8 +2070,9 @@ function jsonLdEvenement(c, url) {
     ...(heures && heures[3] ? { endDate: e.date + t(heures[3], heures[4]) } : {}),
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
-    location: { '@type': 'Place', name: c.nom, address: e.lieu || c.adresse || '' },
-    organizer: { '@type': 'Organization', name: c.nom, url },
+    location: { '@type': 'Place', name: c.nom, address: adresseEvenement(c, e) },
+    organizer: { '@type': 'Organization', name: c.nom, url: urlWebSure(c.site) || url },
+    image: [`${SITE}/assets/og-etablissements.png`],
     url: url + '#evenement-titre'
   };
 }
@@ -2126,6 +2140,11 @@ function calloutMiseAJour(c, url) {
   </section>`;
 }
 
+/* 28 sept. 2026 (audit) : Search Console montre que les fiches ressortent surtout sur des recherches de
+   PATIENTS (« clinique X », « avis », « portail patient »). On les oriente, sans gêner les médecins. */
+const CALLOUT_PATIENTS = '<div class="callout"><strong>Vous êtes un patient&nbsp;?</strong> Cette page s’adresse aux médecins qui cherchent un milieu de pratique&nbsp;: elle ne permet pas de prendre rendez-vous, et le courriel affiché sert uniquement au recrutement médical. Sans médecin de famille, passez par le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-premiere-ligne" rel="noopener">guichet d’accès à la première ligne</a> (811, option&nbsp;3) ou inscrivez-vous au <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d’accès à un médecin de famille</a>. Déjà suivi dans ce milieu&nbsp;: communiquez directement avec lui.</div>';
+/* Variante pour les hôpitaux, CHSLD et CLSC : les patients y cherchent surtout les services de l'installation. */
+const CALLOUT_PATIENTS_ETABLISSEMENT = '<div class="callout"><strong>Vous êtes un patient&nbsp;?</strong> Cette page s’adresse aux médecins qui cherchent un milieu de pratique&nbsp;: pour les services offerts dans cet établissement, consultez le <a href="https://www.santemonteregie.qc.ca/" rel="noopener">Portail Santé Montérégie</a>. Sans médecin de famille, passez par le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-premiere-ligne" rel="noopener">guichet d’accès à la première ligne</a> (811, option&nbsp;3).</div>';
 const CALLOUT_CONTACT_ETABLISSEMENT = '<div class="callout"><strong>Pour joindre ce milieu :</strong> si un nom apparaît sous un secteur, cliquez-le pour lui écrire. Sinon, adressez-vous au recrutement médical de Santé Québec Montérégie-Est.</div>';
 const LIBELLE_CONTACT_SANS_NOM = 'Écrire au recrutement';
 
@@ -2540,6 +2559,7 @@ ${items}
   </section>
 
   ${CALLOUT_CONTACT_ETABLISSEMENT}
+  ${estGmfu(inst.type) ? CALLOUT_PATIENTS : CALLOUT_PATIENTS_ETABLISSEMENT}
 
   <section id="secteurs">
     <h2>${esc(h2)}</h2>
@@ -3583,7 +3603,25 @@ function pageRecherche(cliniques) {
    site, avec les données structurées VideoObject (résultats vidéo de Google). La vidéo et son affiche
    vivent à côté de la page (monteregie-est/video/), déposées à la main ; seule la page est générée.
    VERSION_VIDEO change l'adresse du fichier quand la vidéo est remplacée. */
-const VERSION_VIDEO = 'v6';                  // V6 (28 sept. 2026) : bruitages (clics, apparition et disparition des textes)
+const VERSION_VIDEO = 'v6';
+/* Chapitres de la V6 (début de chaque plan, en secondes) : liste cliquable sur la page et balises Clip
+   (« moments clés » de Google). À refaire si la vidéo change. */
+const DUREE_VIDEO_S = 236;
+const CHAPITRES_VIDEO = [
+  [0, 'Ouverture'],
+  [4, 'La carte des milieux qui recrutent'],
+  [28, 'Les cliniques qui ne recrutent pas actuellement'],
+  [41, 'Filtrer par territoire ou chercher une ville'],
+  [55, 'La fiche complète d’un milieu'],
+  [87, 'Garder ses milieux favoris'],
+  [102, 'Classer ses favoris'],
+  [108, 'Prendre des notes'],
+  [136, 'Comparer ses favoris côte à côte'],
+  [161, 'Les secteurs qui recrutent en établissement'],
+  [198, 'Sur le cellulaire'],
+  [223, 'Scannez le code QR']
+];
+const minutesVideo = t => `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;                  // V6 (28 sept. 2026) : bruitages (clics, apparition et disparition des textes)
 function pageVideoEst() {
   const u = UNIVERS_PAR_REGION.Est;
   const url = `${SITE}${EST_PREFIXE}/video/`;
@@ -3600,6 +3638,11 @@ function pageVideoEst() {
     duration: 'PT3M56S',
     contentUrl: `${url}trouve-ta-clinique-monteregie-est.mp4`,
     embedUrl: url,
+    hasPart: CHAPITRES_VIDEO.map(([debut, nom], i) => ({
+      '@type': 'Clip', name: nom, startOffset: debut,
+      endOffset: i + 1 < CHAPITRES_VIDEO.length ? CHAPITRES_VIDEO[i + 1][0] : DUREE_VIDEO_S,
+      url: `${url}?t=${debut}`
+    })),
     inLanguage: 'fr-CA',
     publisher: { '@type': 'Organization', name: 'Trouve ta clinique', url: `${SITE}/`,
       logo: { '@type': 'ImageObject', url: `${SITE}/assets/logo-128.png` } }
@@ -3620,7 +3663,30 @@ function pageVideoEst() {
     <a class="btn teal" href="${EST_PREFIXE}/">Essayer la carte</a>
     <a class="btn ghost" href="${fichier}" download="trouve-ta-clinique-monteregie-est.mp4">Télécharger la vidéo (MP4, 48 Mo)</a>
   </p>
-</section>`;
+</section>
+<section class="zone" style="padding-top:0">
+  <h2>Dans cette vidéo</h2>
+  <p>En moins de quatre minutes&nbsp;: repérer les cliniques et les établissements qui recrutent des médecins de famille en Montérégie-Est, filtrer par réseau local (RLS) ou par ville, lire la fiche d’un milieu (équipe, horaire, pratiques, DMÉ, frais de bureau, responsable du recrutement), garder et classer ses favoris, prendre des notes, comparer ses favoris côte à côte, puis retrouver tout cela sur son cellulaire.</p>
+  <ol class="chapitres-video" style="list-style:none;padding:0;columns:2 18rem;margin:var(--s-sm) 0 0">
+${CHAPITRES_VIDEO.map(([debut, nom]) => `    <li style="break-inside:avoid;margin:.25rem 0"><a href="?t=${debut}" data-t="${debut}"><strong>${minutesVideo(debut)}</strong> · ${esc(nom)}</a></li>`).join('\n')}
+  </ol>
+  <p style="margin-top:var(--s-sm)">Pour aller plus loin&nbsp;: <a href="${EST_PREFIXE}/ptem/">le PTEM 2027 en médecine familiale</a>, <a href="${EST_PREFIXE}/amp/">les AMP</a> et <a href="${EST_PREFIXE}/cliniques/">la liste des cliniques qui recrutent</a>.</p>
+</section>
+<script>
+(function () {
+  var v = document.querySelector('video');
+  if (!v) return;
+  function aller(t) { t = Number(t); if (!isFinite(t)) return;
+    var go = function () { v.currentTime = t; v.play().catch(function () {}); };
+    if (v.readyState >= 1) go(); else v.addEventListener('loadedmetadata', go, { once: true }); }
+  var t0 = new URLSearchParams(location.search).get('t');
+  if (t0) aller(t0);
+  document.querySelectorAll('.chapitres-video a[data-t]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); aller(a.getAttribute('data-t'));
+      v.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+  });
+})();
+</script>`;
   return page({
     titre, description, url, profondeur: 2, indexable: true, jsonLd, univers: u,
     filDAriane: `<a href="/">Accueil</a> › <a href="${EST_PREFIXE}/">Montérégie-Est</a> › Vidéo`,
@@ -3760,16 +3826,31 @@ function datesReelles(entrees) {
   return entrees;
 }
 
+/* 28 sept. 2026 (audit) : extension vidéo du sitemap pour la page /monteregie-est/video/ (Google Vidéos). */
+function blocVideoSitemap(loc) {
+  if (loc !== `${EST_PREFIXE}/video/`) return '';
+  const base = `${SITE}${EST_PREFIXE}/video/`;
+  return `
+    <video:video>
+      <video:thumbnail_loc>${base}affiche.jpg?v=${VERSION_VIDEO}</video:thumbnail_loc>
+      <video:title>Trouve ta clinique : la carte de la Montérégie-Est en vidéo</video:title>
+      <video:description>Visite guidée de la carte interactive des cliniques et des établissements qui recrutent des médecins de famille en Montérégie-Est.</video:description>
+      <video:content_loc>${base}trouve-ta-clinique-monteregie-est.mp4?v=${VERSION_VIDEO}</video:content_loc>
+      <video:duration>${DUREE_VIDEO_S}</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>`;
+}
+
 function sitemap(entrees) {
   const urls = entrees.map(e => `  <url>
     <loc>${SITE}${e.loc}</loc>
     <lastmod>${e.lastmod}</lastmod>
     <changefreq>${e.changefreq}</changefreq>
-    <priority>${e.priority}</priority>
+    <priority>${e.priority}</priority>${blocVideoSitemap(e.loc)}
   </url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Généré automatiquement par scripts/generer-pages-seo.js — ne pas modifier à la main. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 ${urls}
 </urlset>
 `;
@@ -4191,6 +4272,9 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 - AMP, activités médicales particulières : https://trouvetaclinique.ca/monteregie-est/amp/
 - Guides cliniques, catalogue de guides de pratique, algorithmes et outils pour la médecine familiale en première ligne (liens vers les sources originales) : https://trouvetaclinique.ca/guides/
 - Ressources communautaires, organismes et lignes d'aide vers qui diriger les patients en Montérégie-Est (par ville et par type d'aide) : https://trouvetaclinique.ca/guides/ressources-communautaires/
+
+## Vidéo
+- Visite guidée de la carte de la Montérégie-Est (3 min 56 s) : https://trouvetaclinique.ca/monteregie-est/video/
 
 ## Pour citer ce site
 Nommer « Trouve ta clinique » et lier la page citée. Mentionner la date de mise à jour ci-dessus : les milieux en recrutement changent en cours d'année. Un milieu publié sans mention contraire recrute ; ceux qui ne recrutent pas portent l'indication « Ne recrute pas actuellement ».

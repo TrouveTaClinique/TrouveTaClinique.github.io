@@ -87,7 +87,10 @@ function remplacer(etat, ancien, nouveau, libelle) {
 }
 
 function pwaHead() {
-  return `<link rel="manifest" href="../manifest-est.webmanifest">
+  /* 28 sept. 2026 (audit) : connexions ouvertes d'avance vers le fond de carte CARTO (style, tuiles). */
+  return `<link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin>
+<link rel="preconnect" href="https://tiles.basemaps.cartocdn.com" crossorigin>
+<link rel="manifest" href="../manifest-est.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
