@@ -551,6 +551,16 @@ function descriptionClinique(c) {
     `${c.nom}, ${ville} : ${statut}.`,
     `${type} à ${ville}${rlsCourt} : ${statut}, fiche et contacts.`
   ];
+  /* Bing juge trop courtes les descriptions sous ~110 caractères : on complète la phrase de base
+     par la plus longue précision qui tient dans la cible de 135 caractères. */
+  const complements = recrute(c)
+    ? [' Équipe, horaires, pratique et contacts de recrutement pour votre PTEM (PREM).', ' Équipe, horaires et contacts de recrutement.', ' Fiche et contacts de recrutement.']
+    : [' Équipe, horaires, pratique et coordonnées du milieu.', ' Équipe, horaires et coordonnées.', ' Fiche et coordonnées.'];
+  for (const base of candidats) {
+    if (base.length > META_DESC_CIBLE) continue;
+    const complet = complements.map(x => base + x).find(t => t.length <= META_DESC_CIBLE);
+    if (complet && complet.length >= 110) return controlerMetaDescription(complet, `clinique ${c.id || c.nom}`);
+  }
   const choisi = candidats.find(t => t.length <= META_DESC_CIBLE) || candidats[candidats.length - 1];
   return controlerMetaDescription(choisi, `clinique ${c.id || c.nom}`);
 }
@@ -2205,6 +2215,13 @@ function descriptionEtablissementSeo(inst, typeLib, nSecteurs, contexte) {
     `${typeLib} à ${inst.ville} (${rlsBit}) : ${nSecteurs} secteur${pluriel} en recrutement, fiche et contacts.`,
     `Secteurs en établissement à ${inst.ville} (${rlsBit}) : recrutement médecins de famille, fiche et contacts.`
   ];
+  /* Même principe que les fiches de cliniques : compléter une phrase trop courte pour Bing. */
+  const complements = [' Conditions et contacts pour votre PTEM (PREM).', ' Conditions et personnes-ressources.', ' Fiche et contacts.'];
+  for (const base of candidats) {
+    if (base.length > META_DESC_CIBLE) continue;
+    const complet = complements.map(x => base + x).find(t => t.length <= META_DESC_CIBLE);
+    if (complet && complet.length >= 110) return controlerMetaDescription(complet, contexte);
+  }
   const choisi = candidats.find(t => t.length <= META_DESC_CIBLE) || candidats[candidats.length - 1];
   return controlerMetaDescription(choisi, contexte);
 }
