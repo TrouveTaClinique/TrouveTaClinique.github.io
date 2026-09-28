@@ -218,7 +218,7 @@ jobs:
       - name: Prévenir Bing (IndexNow)
         # Après le push des pages (étape précédente), jamais avant.
         # Le script attend 30 s fixes, journalise statut + corps, et échoue hors 200/202.
-        # Soumission désactivée tant que INDEXNOW_ENABLED=false (403 Bing clé/domaine).
+        # Réactivé le 28 sept. 2026 (nouvelle clé acceptée par Bing, 202) ; INDEXNOW_ENABLED dans le script.
         # Uniquement la branche main (site public) — jamais brouillon/aperçu.
         if: github.ref == 'refs/heads/main'
         run: node scripts/soumettre-indexnow.js
