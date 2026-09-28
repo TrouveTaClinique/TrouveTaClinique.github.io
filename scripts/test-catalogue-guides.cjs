@@ -80,3 +80,16 @@ test('plan Guides (24 à 30) : type de document, pastilles, filtres, actions et 
   assert.equal((guides.match(/data-format="patient"/g) || []).length, guidesSeuls.filter(r => r.format === 'patient').length);
   assert.ok(fs.existsSync(path.join(racine, 'vendor/qrcode-generator.js')) && fs.existsSync(path.join(racine, 'vendor/LICENSE-qrcode-generator.txt')));
 });
+
+test('modules PABP : accès réservé affiché, feuillets hébergés présents', () => {
+  const fs = require('node:fs');
+  const racine = path.join(__dirname, '..');
+  const pabp = ressources.filter(r => r.acces === 'pabp');
+  assert.ok(pabp.length >= 60);
+  assert.ok(pabp.every(r => r.org === 'FMPE (PABP, accès réservé)' && /\(module PABP\)$/.test(r.title)));
+  const page = fs.readFileSync(path.join(racine, 'guides/index.html'), 'utf8');
+  assert.equal((page.match(/class="guides-acces"/g) || []).length, pabp.length);
+  const locaux = ressources.filter(r => r.url.startsWith('https://trouvetaclinique.ca/guides/fmpe/'));
+  assert.ok(locaux.length >= 20);
+  for (const r of locaux) assert.ok(fs.existsSync(path.join(racine, new URL(r.url).pathname)), r.url);
+});
