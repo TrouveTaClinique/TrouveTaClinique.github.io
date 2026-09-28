@@ -8,9 +8,10 @@ Source : audit Main/Brouillon + `data.json` courant.
 La base maître Google contient environ 64 lignes, alors que `data.json` en compte 127
 objets (89 cliniques publiées, 7 établissements, 31 hors publication, plus hôpitaux).
 
-Les **33 cliniques déjà publiées** absentes de la base maître sont listées dans
+Les **33 cliniques déjà publiées** absentes de la base maître étaient listées dans
 `scripts/reconciliation-maitre-33-absents.csv` (identifiants, coordonnées, courriel
-restauré lorsqu’il était connu).
+restauré lorsqu’il était connu). Ce fichier a été retiré du dépôt public le 28 septembre 2026
+(audit) ; il reste dans l'historique git au besoin.
 
 Les IDs **56, 57 et 58** du Sheet sont marqués « Non publiée » et ne doivent **pas**
 être réintroduits automatiquement.

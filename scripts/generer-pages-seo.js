@@ -523,8 +523,19 @@ function presentationDepuisDonnees(c) {
   return phrases.join(' ');
 }
 
+/* Titre d'une fiche de clinique. Un milieu qui recrute l'annonce dans le titre (choix du
+   propriétaire, 28 sept. 2026) : les médecins qui cherchent « GMF X recrutement » tombent mieux,
+   et les patients voient dans Google que la page n'est pas pour eux. Forme la plus longue qui
+   tient en 65 caractères, sinon le titre habituel « Nom : Ville ». */
 function titreClinique(c) {
-  return titrePageMilieu(c.nom, rempli(c.ville) ? c.ville : '');
+  const nom = String(c.nom || '').replace(/\s+/g, ' ').trim();
+  const ville = rempli(c.ville) ? String(c.ville).replace(/\s+/g, ' ').trim() : '';
+  if (recrute(c) && ville) {
+    for (const t of [`${nom} : recrutement en médecine familiale à ${ville}`, `${nom} : recrutement à ${ville}`, `${nom} : recrutement`]) {
+      if (t.length <= 65) return t;
+    }
+  }
+  return titrePageMilieu(nom, ville);
 }
 
 function descriptionClinique(c) {
