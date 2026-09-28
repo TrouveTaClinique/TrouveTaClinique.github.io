@@ -753,3 +753,5 @@ main .cliniques-carte,main .carte-est{
 .contact input:focus,.contact textarea:focus{outline:3px solid rgba(6,156,156,.35);border-color:var(--teal)}
 .contact .btn{justify-self:start;border:0;cursor:pointer;font:inherit;font-weight:650}
 .contact-etat{margin:0;font-size:.93rem;color:var(--ink-60)}
+.contact .piege{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.contact .btn:disabled{opacity:.6;cursor:progress}
