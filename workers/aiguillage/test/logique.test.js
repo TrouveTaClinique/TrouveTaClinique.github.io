@@ -5,6 +5,7 @@ import {
   traiter, indexerCatalogue, retenirCandidats, construireRequete, interpreterReponse, listerCatalogue,
   compterQuestionDuJour, cleDuJour, CANDIDATS_MAX, GUIDES_MAX, SCHEMA
 } from '../src/logique.js';
+import { traiterContact, validerContact, construireCourriel, texteDuCourriel } from '../src/contact.js';
 
 const CATALOGUE = Array.from({ length: 60 }, (_, i) => ({
   title: `Guide ${i}`, org: i % 2 ? 'INESSS' : 'CHU Sainte-Justine', cat: 'Catégorie', tags: 'otite enfant', url: `https://exemple.ca/g${i}`
@@ -174,4 +175,55 @@ test('HTTP : erreur du service transmise proprement', async () => {
   const r = await traiter(requete({ question: 'otite enfant', candidats: [CATALOGUE[0].url] }), {}, deps({ appelerModele: async () => { throw new Error('panne'); } }));
   assert.equal(r.status, 502);
   assert.equal((await r.json()).erreur, 'Erreur du service.');
+});
+
+/* Formulaire « Nous joindre » (route /contact). */
+function requeteContact(corps, { origine = ORIGINE, methode = 'POST' } = {}) {
+  return new Request('https://aiguillage.exemple.workers.dev/contact', {
+    method: methode,
+    headers: { Origin: origine, 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.7' },
+    body: methode === 'POST' ? JSON.stringify(corps) : undefined
+  });
+}
+const ENV_CONTACT = { CONTACT_DESTINATION: 'destination@exemple.ca' };
+const MESSAGE = { nom: 'Dre Test', titre: 'R2', courriel: 'test@exemple.ca', message: 'Bonjour,\nune question sur la carte.' };
+
+test('contact : validation (champs requis, longueurs, retours de ligne, piège)', () => {
+  assert.ok(validerContact(MESSAGE).donnees);
+  assert.match(validerContact({ nom: '', message: 'x' }).erreur, /nom et votre message/);
+  assert.match(validerContact({ ...MESSAGE, message: 'x'.repeat(5001) }).erreur, /trop long/);
+  assert.match(validerContact({ ...MESSAGE, nom: 'A\nBcc: pirate@exemple.ca' }).erreur, /invalide/);
+  assert.match(validerContact({ ...MESSAGE, courriel: 'pas-un-courriel' }).erreur, /courriel/);
+  assert.equal(validerContact({ ...MESSAGE, site: 'http://pourriel' }).robot, true);
+});
+
+test('contact : courriel MIME (en-têtes encodés, réponse au visiteur, corps lisible)', () => {
+  const brut = construireCourriel(MESSAGE, { de: 'formulaire@trouvetaclinique.ca', a: 'destination@exemple.ca', id: 'abc', maintenant: new Date('2026-09-28T12:00:00Z') });
+  assert.match(brut, /^From: =\?UTF-8\?B\?[^?]+\?= <formulaire@trouvetaclinique\.ca>\r\n/);
+  assert.match(brut, /\r\nTo: <destination@exemple\.ca>\r\n/);
+  assert.match(brut, /\r\nReply-To: <test@exemple\.ca>\r\n/);
+  assert.match(brut, /\r\nMessage-ID: <abc@trouvetaclinique\.ca>\r\n/);
+  const corps = brut.split('\r\n\r\n')[1].replace(/\r\n/g, '');
+  assert.equal(Buffer.from(corps, 'base64').toString('utf8'), texteDuCourriel(MESSAGE));
+  assert.match(texteDuCourriel(MESSAGE), /Titre ou fonction : R2/);
+});
+
+test('contact HTTP : repli tant que l’envoi n’est pas configuré, puis envoi', async () => {
+  let r = await traiterContact(requeteContact(MESSAGE), {}, { limiter: async () => true, envoyer: null });
+  assert.equal(r.status, 503);
+  assert.equal((await r.json()).repli, true);
+  const envois = [];
+  const deps = { limiter: async () => true, envoyer: async (de, a, brut) => { envois.push({ de, a, brut }); } };
+  r = await traiterContact(requeteContact(MESSAGE), ENV_CONTACT, deps);
+  assert.equal(r.status, 200);
+  assert.equal(envois.length, 1);
+  assert.equal(envois[0].a, 'destination@exemple.ca');
+  assert.equal(envois[0].de, 'formulaire@trouvetaclinique.ca');
+  assert.equal((await traiterContact(requeteContact(MESSAGE, { origine: 'https://ailleurs.com' }), ENV_CONTACT, deps)).status, 403);
+  assert.equal((await traiterContact(requeteContact({ ...MESSAGE, site: 'x' }), ENV_CONTACT, deps)).status, 200);
+  assert.equal(envois.length, 1, 'le robot ne déclenche aucun envoi');
+  assert.equal((await traiterContact(requeteContact(MESSAGE), ENV_CONTACT, { ...deps, limiter: async () => false })).status, 429);
+  const echec = await traiterContact(requeteContact(MESSAGE), ENV_CONTACT, { ...deps, envoyer: async () => { throw new Error('refus'); } });
+  assert.equal(echec.status, 502);
+  assert.equal((await echec.json()).repli, true);
 });

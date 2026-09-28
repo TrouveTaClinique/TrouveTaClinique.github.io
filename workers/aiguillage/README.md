@@ -84,3 +84,20 @@ npm test
 
 `test/logique.test.js` ne demande aucune installation ; il tourne aussi dans le workflow
 d'aperçu. Aucun test n'appelle la vraie API.
+
+## Formulaire « Nous joindre » (route /contact)
+
+La page `/a-propos/` envoie le formulaire à `https://…workers.dev/contact`. Le service valide les
+champs (nom et message obligatoires, longueurs limitées, champ piège contre les robots), applique
+les mêmes limites de requêtes que l'IA, puis envoie le message par Cloudflare Email Routing. Rien
+n'est conservé. Tant que l'envoi n'est pas configuré, il répond 503 « repli » et la page prépare
+le courriel dans le logiciel du visiteur.
+
+Mise en place (une seule fois) :
+
+1. Cloudflare > zone `trouvetaclinique.ca` > **Email** > **Email Routing** > activer (ajoute les
+   enregistrements MX et TXT). Vérifier d'abord qu'aucune autre boîte n'utilise ce domaine.
+2. **Destination addresses** : ajouter l'adresse qui recevra les messages et cliquer le lien de
+   vérification reçu.
+3. Worker > **Settings** > **Variables and Secrets** : secret `CONTACT_DESTINATION` = cette adresse.
+4. Retirer les « # » du bloc `[[send_email]]` de `wrangler.toml` et publier sur `main`.

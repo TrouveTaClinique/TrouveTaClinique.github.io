@@ -3764,21 +3764,24 @@ ${htmlNousJoindre()}
 }
 
 /* Encadré « Nous joindre » (demande du propriétaire, 28 sept. 2026) : ni nom ni courriel affichés.
-   Le formulaire prépare un courriel dans le logiciel du visiteur ; l'adresse n'est assemblée
-   qu'au moment de l'envoi (en deux morceaux dans la page, pour les robots qui ramassent les
-   adresses). Aucun renseignement ne passe par le site. */
+   Le formulaire part directement par le service Cloudflare (route /contact du Worker d'aiguillage,
+   Cloudflare Email Routing). Si l'envoi direct n'est pas configuré ou échoue, repli : le courriel
+   est préparé dans le logiciel du visiteur ; l'adresse n'est alors assemblée qu'au moment de
+   l'envoi (en deux morceaux dans la page, pour les robots qui ramassent les adresses). */
+const URL_CONTACT = 'https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/contact';
 function htmlNousJoindre() {
   const [boite, domaine] = COURRIEL_MISE_A_JOUR.split('@');
   return `<section class="zone" id="nous-joindre" aria-labelledby="nous-joindre-titre" style="padding-top:0">
   <h2 id="nous-joindre-titre">Nous joindre</h2>
   <p>Une question, une correction, un milieu à ajouter&nbsp;? Écrivez-nous.</p>
-  <form class="contact" id="form-contact" data-a="${esc(boite)}" data-b="${esc(domaine)}" novalidate>
-    <label for="contact-nom"><span>Nom</span><input id="contact-nom" name="nom" autocomplete="name" required></label>
-    <label for="contact-titre"><span>Titre ou fonction <span class="opt">(facultatif)</span></span><input id="contact-titre" name="titre" autocomplete="organization-title" placeholder="Ex. : résidente R2, médecin recruteur, gestionnaire"></label>
-    <label for="contact-courriel"><span>Courriel pour vous répondre <span class="opt">(facultatif)</span></span><input id="contact-courriel" name="courriel" type="email" autocomplete="email"></label>
-    <label for="contact-message"><span>Message</span><textarea id="contact-message" name="message" rows="6" required></textarea></label>
+  <form class="contact" id="form-contact" data-envoi="${esc(URL_CONTACT)}" data-a="${esc(boite)}" data-b="${esc(domaine)}" novalidate>
+    <label for="contact-nom"><span>Nom</span><input id="contact-nom" name="nom" autocomplete="name" maxlength="120" required></label>
+    <label for="contact-titre"><span>Titre ou fonction <span class="opt">(facultatif)</span></span><input id="contact-titre" name="titre" autocomplete="organization-title" maxlength="160" placeholder="Ex. : résidente R2, médecin recruteur, gestionnaire"></label>
+    <label for="contact-courriel"><span>Courriel pour vous répondre <span class="opt">(facultatif)</span></span><input id="contact-courriel" name="courriel" type="email" autocomplete="email" maxlength="200"></label>
+    <label for="contact-message"><span>Message</span><textarea id="contact-message" name="message" rows="6" maxlength="5000" required></textarea></label>
+    <div class="piege" aria-hidden="true"><label for="contact-site">Site Web<input id="contact-site" name="site" tabindex="-1" autocomplete="off"></label></div>
     <button class="btn" type="submit">Envoyer</button>
-    <p class="contact-etat" id="contact-etat" role="status" aria-live="polite">Votre logiciel de courriel s’ouvrira avec le message prêt à envoyer.</p>
+    <p class="contact-etat" id="contact-etat" role="status" aria-live="polite"></p>
   </form>
 </section>
 <script>
@@ -3786,21 +3789,38 @@ function htmlNousJoindre() {
   var f = document.getElementById('form-contact');
   if (!f) return;
   var etat = document.getElementById('contact-etat');
+  var bouton = f.querySelector('button[type="submit"]');
+  var v = function (id) { return (document.getElementById(id).value || '').trim(); };
   f.addEventListener('submit', function (e) {
     e.preventDefault();
-    var v = function (id) { return (document.getElementById(id).value || '').trim(); };
     var nom = v('contact-nom'), titre = v('contact-titre'), courriel = v('contact-courriel'), message = v('contact-message');
     if (!nom || !message) {
       etat.textContent = 'Indiquez au moins votre nom et votre message.';
       (nom ? document.getElementById('contact-message') : document.getElementById('contact-nom')).focus();
       return;
     }
-    var corps = message + '\\n\\n' + 'Nom : ' + nom + (titre ? '\\nTitre ou fonction : ' + titre : '') +
-      (courriel ? '\\nCourriel pour la réponse : ' + courriel : '') + '\\n\\n(Formulaire « Nous joindre » de trouvetaclinique.ca)';
-    var adresse = f.getAttribute('data-a') + '@' + f.getAttribute('data-b');
-    location.href = 'mailto:' + adresse + '?subject=' + encodeURIComponent('Trouve ta clinique : message de ' + nom) +
-      '&body=' + encodeURIComponent(corps);
-    etat.textContent = 'Votre logiciel de courriel devrait s’ouvrir avec le message prêt à envoyer.';
+    function repli() {
+      var corps = message + '\\n\\n' + 'Nom : ' + nom + (titre ? '\\nTitre ou fonction : ' + titre : '') +
+        (courriel ? '\\nCourriel pour la réponse : ' + courriel : '') + '\\n\\n(Formulaire « Nous joindre » de trouvetaclinique.ca)';
+      var adresse = f.getAttribute('data-a') + '@' + f.getAttribute('data-b');
+      location.href = 'mailto:' + adresse + '?subject=' + encodeURIComponent('Trouve ta clinique : message de ' + nom) +
+        '&body=' + encodeURIComponent(corps);
+      etat.textContent = 'Votre logiciel de courriel devrait s’ouvrir avec le message prêt à envoyer.';
+    }
+    var url = f.getAttribute('data-envoi');
+    if (!url || !window.fetch) { repli(); return; }
+    bouton.disabled = true;
+    etat.textContent = 'Envoi en cours…';
+    fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nom: nom, titre: titre, courriel: courriel, message: message, site: v('contact-site') }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, statut: r.status, d: d }; }); })
+      .then(function (x) {
+        if (x.ok) { f.reset(); etat.textContent = 'Merci ! Votre message a été envoyé.'; }
+        /* Champ refusé (400) ou trop de messages (429) : le dire. Tout le reste : repli. */
+        else if (!x.d.repli && (x.statut === 400 || x.statut === 429) && x.d.erreur) { etat.textContent = x.d.erreur; }
+        else { repli(); }
+      }, repli)
+      .then(function () { bouton.disabled = false; });
   });
 })();
 </script>`;
@@ -3826,6 +3846,8 @@ function pageConfidentialite() {
   <p>Le fond de carte est fourni par CARTO, à partir des données d’OpenStreetMap. Pour afficher la carte, votre navigateur télécharge les images de CARTO, qui reçoit donc votre adresse IP, comme pour tout site Web. Les polices de caractères sont hébergées sur le site lui-même.</p>
   <h2>Demander à l’IA quel guide consulter</h2>
   <p>Sur la page des <a href="/guides/">guides cliniques</a>, votre question est transmise à un service de Trouve ta clinique hébergé chez Cloudflare, puis au modèle Claude d’Anthropic, pour choisir des ressources du catalogue. Ce service ne conserve pas les questions. N’y inscrivez aucun renseignement qui permettrait d’identifier un patient. Voir aussi la <a href="https://www.anthropic.com/legal/privacy" rel="noopener">politique de confidentialité d’Anthropic</a>.</p>
+  <h2>Formulaire «&nbsp;Nous joindre&nbsp;»</h2>
+  <p>Votre message est transmis par un service de Trouve ta clinique hébergé chez Cloudflare, qui l’achemine par courriel. Il n’est pas conservé par le site. Si ce service n’est pas disponible, le formulaire prépare plutôt le courriel dans votre propre logiciel.</p>
   <h2>Coordonnées des milieux</h2>
   <p>Les coordonnées affichées sur les fiches servent uniquement au recrutement médical. Un milieu peut demander une correction ou un retrait avec le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche.</p>
   <h2>Nous joindre</h2>

@@ -3,6 +3,7 @@
    Secret requis : ANTHROPIC_API_KEY (Cloudflare > Worker > Settings > Variables and Secrets). */
 import Anthropic from '@anthropic-ai/sdk';
 import { traiter, indexerCatalogue, compterQuestionDuJour, PLAFOND_JOUR_PAR_DEFAUT } from './logique.js';
+import { traiterContact } from './contact.js';
 
 /* Catalogue lu sur le site d'où vient la question (production ou aperçu), gardé 10 minutes. */
 const DUREE_CATALOGUE_MS = 10 * 60 * 1000;
@@ -44,6 +45,20 @@ function classerErreur(e) {
 
 export default {
   async fetch(requete, env) {
+    /* Formulaire « Nous joindre » (page À propos) : envoi par Cloudflare Email Routing. */
+    if (new URL(requete.url).pathname === '/contact') {
+      return traiterContact(requete, env, {
+        limiter: async ip => {
+          if (env.LIMITE_VISITEUR && !(await env.LIMITE_VISITEUR.limit({ key: 'contact:' + ip })).success) return false;
+          if (env.LIMITE_GLOBALE && !(await env.LIMITE_GLOBALE.limit({ key: 'contact' })).success) return false;
+          return true;
+        },
+        envoyer: env.COURRIEL ? async (de, a, brut) => {
+          const { EmailMessage } = await import('cloudflare:email');
+          await env.COURRIEL.send(new EmailMessage(de, a, brut));
+        } : null
+      });
+    }
     const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 25000 });
     return traiter(requete, env, {
       chargerCatalogue,
