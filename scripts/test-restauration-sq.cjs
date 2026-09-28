@@ -63,7 +63,10 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
   }
   assert.match(est, /fetch\('\.\.\/data\.json', \{ cache: 'no-cache' \}\)/);
   assert.match(est, /scope: '\/monteregie-est\/'/);
-  assert.match(lire('sw.js'), /v67-icones-blanc/);
+  /* Historique du cache déplacé dans CHANGELOG.md (audit P29) : la version active reste au moins v67. */
+  const versionCache = Number((lire('sw.js').match(/const CACHE = CACHE_PREFIX \+ 'v(\d+)/) || [])[1]);
+  assert.ok(versionCache >= 67, 'version du cache : ' + versionCache);
+  assert.match(lire('CHANGELOG.md'), /v67-icones-blanc/);
   assert.match(est, /ouverteCommeApplis/);
   assert.match(est, /getInstalledRelatedApps/);
   assert.match(est, /isTelephone/);
