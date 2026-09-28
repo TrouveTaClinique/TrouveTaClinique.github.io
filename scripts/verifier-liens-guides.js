@@ -94,6 +94,9 @@ async function verifier(r) {
   const { code, finale, titre } = res;
   if ([401, 403, 406, 429, 999].includes(code)) return { ...base, etat: 'bloqué', detail: `HTTP ${code}` };
   if (code >= 400) return { ...base, etat: 'brisé', detail: `HTTP ${code}` };
+  /* Ressource à accès réservé (abonnement, PABP) : sans connexion, le site renvoie vers sa page
+     d'abonnement ; seul un lien brisé (4xx) compte. */
+  if (r.acces) return { ...base, etat: 'ok' };
   const depart = new URL(r.url), arrivee = new URL(finale);
   if (TITRE_ERREUR.test(titre) || CHEMIN_ERREUR.test(arrivee.pathname)) return { ...base, etat: 'à vérifier', detail: `page d’erreur probable (« ${titre || arrivee.pathname} »)`, finale };
   if (!ACCUEIL.test(depart.pathname) && ACCUEIL.test(arrivee.pathname) && !arrivee.search) return { ...base, etat: 'à vérifier', detail: 'renvoie vers l’accueil du site', finale };

@@ -88,7 +88,9 @@ test('modules PABP : accès réservé affiché, feuillets hébergés présents',
   assert.ok(pabp.length >= 60);
   assert.ok(pabp.every(r => r.org === 'FMPE (PABP, accès réservé)' && /\(module PABP\)$/.test(r.title)));
   const page = fs.readFileSync(path.join(racine, 'guides/index.html'), 'utf8');
-  assert.equal((page.match(/class="guides-acces"/g) || []).length, pabp.length);
+  const reserves = ressources.filter(r => r.acces && r.type !== 'communautaire');
+  assert.ok(reserves.every(r => ['pabp', 'abonnement'].includes(r.acces)));
+  assert.equal((page.match(/class="guides-acces"/g) || []).length, reserves.length);
   const locaux = ressources.filter(r => r.url.startsWith('https://trouvetaclinique.ca/guides/fmpe/'));
   assert.ok(locaux.length >= 20);
   for (const r of locaux) assert.ok(fs.existsSync(path.join(racine, new URL(r.url).pathname)), r.url);
