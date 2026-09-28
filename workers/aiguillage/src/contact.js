@@ -10,7 +10,9 @@ const CORPS_MAX = 16384;
 const COURRIEL_VALIDE = /^[^\s@<>"(),;:]+@[^\s@<>"(),;:]+\.[^\s@<>"(),;:]+$/;
 export const EXPEDITEUR_PAR_DEFAUT = 'formulaire@trouvetaclinique.ca';
 
-const json = (corps, statut, entetes) => new Response(JSON.stringify(corps), {
+/* Toutes les réponses portent « contact: true » : la page sait qu'elle parle bien à cette route
+   (et non à une ancienne version du service), sinon elle se replie sur le courriel prérempli. */
+const json = (corps, statut, entetes) => new Response(JSON.stringify({ contact: true, ...corps }), {
   status: statut,
   headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...entetes }
 });

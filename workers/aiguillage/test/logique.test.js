@@ -211,7 +211,9 @@ test('contact : courriel MIME (en-têtes encodés, réponse au visiteur, corps l
 test('contact HTTP : repli tant que l’envoi n’est pas configuré, puis envoi', async () => {
   let r = await traiterContact(requeteContact(MESSAGE), {}, { limiter: async () => true, envoyer: null });
   assert.equal(r.status, 503);
-  assert.equal((await r.json()).repli, true);
+  const d503 = await r.json();
+  assert.equal(d503.repli, true);
+  assert.equal(d503.contact, true);
   const envois = [];
   const deps = { limiter: async () => true, envoyer: async (de, a, brut) => { envois.push({ de, a, brut }); } };
   r = await traiterContact(requeteContact(MESSAGE), ENV_CONTACT, deps);

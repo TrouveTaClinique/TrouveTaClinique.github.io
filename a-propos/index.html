@@ -160,7 +160,9 @@
       body: JSON.stringify({ nom: nom, titre: titre, courriel: courriel, message: message, site: v('contact-site') }) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, statut: r.status, d: d }; }); })
       .then(function (x) {
-        if (x.ok) { f.reset(); etat.textContent = 'Merci ! Votre message a été envoyé.'; }
+        /* Seules les réponses de la route « contact » comptent ; toute autre réponse : repli. */
+        if (!x.d || !x.d.contact) { repli(); }
+        else if (x.ok) { f.reset(); etat.textContent = 'Merci ! Votre message a été envoyé.'; }
         /* Champ refusé (400) ou trop de messages (429) : le dire. Tout le reste : repli. */
         else if (!x.d.repli && (x.statut === 400 || x.statut === 429) && x.d.erreur) { etat.textContent = x.d.erreur; }
         else { repli(); }
