@@ -1829,13 +1829,10 @@ ${rlsAutresTheme}
     <p>Ce site s'adresse aux médecins et aux résidents qui cherchent un milieu où pratiquer. Il ne permet pas de prendre rendez-vous ni de s'inscrire auprès d'un médecin de famille.</p>
     <p>Pour trouver une consultation, passez par <a href="https://www.quebec.ca/sante/trouver-une-ressource/medecin-de-famille-prendre-rendez-vous-en-ligne" rel="noopener">Rendez-vous santé Québec</a>, ou composez le <strong>811, option 1</strong> (Info-Santé) pour un avis infirmier. Pour vous inscrire auprès d'un médecin de famille, utilisez le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d'accès à un médecin de famille</a>.</p>
   </aside>
-  <details class="apropos">
-    <summary>D'où viennent ces informations</summary>
-    <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration étroite de Nancy Langlois et du Recrutement médical de Santé Québec - Montérégie-Est. Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par des sources publiques et vérifiés manuellement.</p>
-    <p>Initiative bénévole, indépendante et sans but lucratif.</p>
-    <p>Elle ne remplace aucune démarche officielle.</p>
-    <p class="maj">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time>.</p>
-  </details>
+</section>
+${htmlNousJoindre()}
+<section class="zone" style="padding-top:0">
+  <p class="maj-discret">Données mises à jour le <time datetime="${esc(majDonnees)}">${esc(dateLisibleFr(majDonnees))}</time> · <a href="/a-propos/">À propos de ce site</a></p>
 </section>
 `;
 
@@ -3741,19 +3738,18 @@ function pageAPropos(majDonnees) {
     <li>Des outils pour choisir&nbsp;: favoris, notes et comparatif, sur ordinateur ou sur cellulaire.</li>
     <li>Des guides sur le <a href="${EST_PREFIXE}/ptem/">PTEM 2027</a>, le <a href="${EST_PREFIXE}/ptem-u/">PTEM-U (PREM-U)</a> et les <a href="${EST_PREFIXE}/amp/">AMP</a>, et un <a href="/guides/">catalogue de guides cliniques</a> et de <a href="/guides/ressources-communautaires/">ressources communautaires</a>.</li>
   </ul>
-  <h2>Collaboration</h2>
-  <p>Le volet Montérégie-Est est réalisé en collaboration avec Nancy Langlois et la DSMP de Santé Québec – CISSS de la Montérégie-Est.</p>
+  <h2>Le projet</h2>
+  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration étroite de Nancy Langlois et du Recrutement médical de Santé Québec - Montérégie-Est. C’est une initiative bénévole, indépendante et sans but lucratif.</p>
   <h2>D’où viennent les données</h2>
-  <p>Les fiches regroupent les données du répertoire des milieux, des sources publiques et, lorsqu’elles sont disponibles, des renseignements transmis par les milieux eux-mêmes. En Montérégie-Est, la liste des milieux qui recrutent est validée avec Santé Québec Montérégie-Est. En Montérégie-Centre et en Montérégie-Ouest, elle reprend la dernière mise à jour du répertoire.</p>
+  <p>Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par le répertoire des milieux et des sources publiques, et vérifiés manuellement. En Montérégie-Est, la liste des milieux qui recrutent est validée avec Santé Québec Montérégie-Est. En Montérégie-Centre et en Montérégie-Ouest, elle reprend la dernière mise à jour du répertoire.</p>
   <p>Dernière mise à jour des données&nbsp;: ${htmlDateFr(majDonnees)}. Chaque fiche indique aussi sa propre date.</p>
   <h2>Faire corriger une fiche</h2>
-  <p>Vous travaillez dans un milieu présenté ici&nbsp;? Le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche ouvre un courriel prérempli pour corriger ou compléter les renseignements. Un milieu manque&nbsp;? <a href="#nous-joindre">Écrivez-nous</a>.</p>
+  <p>Vous travaillez dans un milieu présenté ici&nbsp;? Le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche ouvre un courriel prérempli pour corriger ou compléter les renseignements. Un milieu manque&nbsp;? <a href="/#nous-joindre">Écrivez-nous</a>.</p>
   <h2>Ce que le site n’est pas</h2>
   <p>Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Pour toute décision officielle (PTEM, avis de conformité, AMP), validez l’information auprès du milieu, du DTMF ou des sources gouvernementales.</p>
   <p>Vous êtes un patient&nbsp;? Le site ne permet pas de prendre rendez-vous. Sans médecin de famille, passez par le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-premiere-ligne" rel="noopener">guichet d’accès à la première ligne</a> (811, option&nbsp;3).</p>
-</section>
-${htmlNousJoindre()}
-<section class="zone" style="padding-top:0">
+  <h2>Nous joindre</h2>
+  <p>Pour nous écrire, utilisez le <a href="/#nous-joindre">formulaire «&nbsp;Nous joindre&nbsp;»</a> au bas de la page d’accueil.</p>
   <p><a href="/confidentialite/">Confidentialité</a> · <a href="${EST_PREFIXE}/video/">La carte en vidéo</a></p>
 </section>`;
   return page({
@@ -3763,7 +3759,7 @@ ${htmlNousJoindre()}
   });
 }
 
-/* Encadré « Nous joindre » (demande du propriétaire, 28 sept. 2026) : ni nom ni courriel affichés.
+/* Encadré « Nous joindre », au bas de l'accueil (demande du propriétaire, 28 sept. 2026) : ni nom ni courriel affichés.
    Le formulaire part directement par le service Cloudflare (route /contact du Worker d'aiguillage,
    Cloudflare Email Routing). Si l'envoi direct n'est pas configuré ou échoue, repli : le courriel
    est préparé dans le logiciel du visiteur ; l'adresse n'est alors assemblée qu'au moment de
@@ -3776,7 +3772,7 @@ function htmlNousJoindre() {
   <p>Une question, une correction, un milieu à ajouter&nbsp;? Écrivez-nous.</p>
   <form class="contact" id="form-contact" data-envoi="${esc(URL_CONTACT)}" data-a="${esc(boite)}" data-b="${esc(domaine)}" novalidate>
     <label for="contact-nom"><span>Nom</span><input id="contact-nom" name="nom" autocomplete="name" maxlength="120" required></label>
-    <label for="contact-titre"><span>Titre ou fonction <span class="opt">(facultatif)</span></span><input id="contact-titre" name="titre" autocomplete="organization-title" maxlength="160" placeholder="Ex. : résidente R2, médecin recruteur, gestionnaire"></label>
+    <label for="contact-titre"><span>Titre ou fonction <span class="opt">(facultatif)</span></span><input id="contact-titre" name="titre" autocomplete="organization-title" maxlength="160"></label>
     <label for="contact-courriel"><span>Courriel pour vous répondre <span class="opt">(facultatif)</span></span><input id="contact-courriel" name="courriel" type="email" autocomplete="email" maxlength="200"></label>
     <label for="contact-message"><span>Message</span><textarea id="contact-message" name="message" rows="6" maxlength="5000" required></textarea></label>
     <div class="piege" aria-hidden="true"><label for="contact-site">Site Web<input id="contact-site" name="site" tabindex="-1" autocomplete="off"></label></div>
@@ -3853,7 +3849,7 @@ function pageConfidentialite() {
   <h2>Coordonnées des milieux</h2>
   <p>Les coordonnées affichées sur les fiches servent uniquement au recrutement médical. Un milieu peut demander une correction ou un retrait avec le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche.</p>
   <h2>Nous joindre</h2>
-  <p>Pour toute question sur ces renseignements, écrivez-nous avec le <a href="/a-propos/#nous-joindre">formulaire de la page À propos</a>.</p>
+  <p>Pour toute question sur ces renseignements, écrivez-nous avec le <a href="/#nous-joindre">formulaire «&nbsp;Nous joindre&nbsp;»</a> de la page d’accueil.</p>
 </section>`;
   return page({
     titre, description, url, profondeur: 1, indexable: true, jsonLd,
