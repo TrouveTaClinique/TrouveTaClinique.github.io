@@ -56,7 +56,7 @@ const CACHE_PREFIX = 'trouve-clinique-est-';
 // v93-icones-transparentes (26 septembre 2026) : favicons et icônes « any » sans carré blanc
 // (les icônes maskable et apple-touch gardent leur fond blanc).
 // v94-fond-differe (26 septembre 2026) : moteur MapLibre chargé après les épingles.
-const CACHE = CACHE_PREFIX + 'v98-retour-fiche';
+const CACHE = CACHE_PREFIX + 'v99-audit';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
