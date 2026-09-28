@@ -93,7 +93,12 @@ les mêmes limites de requêtes que l'IA, puis envoie le message par Cloudflare 
 n'est conservé. Tant que l'envoi n'est pas configuré, il répond 503 « repli » et la page prépare
 le courriel dans le logiciel du visiteur.
 
-Mise en place (une seule fois) :
+Prérequis : Cloudflare Email Routing exige que le DNS de `trouvetaclinique.ca` soit chez
+Cloudflare. Au 28 septembre 2026, il est chez easyDNS (serveurs de noms et MX easyDNS) : il faut
+d'abord y déplacer le DNS, ou bien adapter `envoyer` dans `index.js` pour un service d'envoi
+(par exemple Resend, clé API en secret et enregistrements DNS chez easyDNS).
+
+Mise en place (une seule fois, DNS chez Cloudflare) :
 
 1. Cloudflare > zone `trouvetaclinique.ca` > **Email** > **Email Routing** > activer (ajoute les
    enregistrements MX et TXT). Vérifier d'abord qu'aucune autre boîte n'utilise ce domaine.

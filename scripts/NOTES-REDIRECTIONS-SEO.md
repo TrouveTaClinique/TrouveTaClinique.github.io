@@ -14,6 +14,11 @@ GitHub Pages / Fastly (pas de `cf-ray` sur les réponses live du 4 septembre 202
 
 ## Cloudflare — 301 réels
 
+Prérequis vérifié le 28 septembre 2026 : le DNS de `trouvetaclinique.ca` est chez easyDNS
+(serveurs de noms `*.easydns.*`, MX easyDNS). Les étapes ci-dessous supposent que la zone a
+d'abord été déplacée chez Cloudflare (serveurs de noms Cloudflare, enregistrements recopiés,
+y compris le MX du transfert de courriels easyDNS).
+
 Le fichier généré `scripts/cloudflare-bulk-redirects.csv` liste **toutes** les
 redirections HTML du dépôt. Format Cloudflare : **pas d’en-tête**, colonnes
 source, cible, 301, conserve la query string, sans sous-domaines, sans sous-chemins.
