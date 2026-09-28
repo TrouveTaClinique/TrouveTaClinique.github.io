@@ -149,7 +149,7 @@ function resumeUtile(r) {
 function carteGuide(r) {
   /* Mots-clés : gardés dans data-tags pour la recherche, plus affichés sous le titre. */
   const resume = resumeUtile(r);
-  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}>
+  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}${r.acces === 'pabp' ? ` data-pabp="${esc(new URL(r.url).hash.slice(1))}"` : ''}>
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">${esc(r.org)}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}${r.acces ? ` <span class="guides-acces">${r.acces === 'pabp' ? 'Réservé aux participants PABP' : 'Abonnement requis'}</span>` : ''}</span>
           <h3>${esc(r.title)}</h3>${resume ? `
@@ -278,11 +278,12 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=88-interface">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=111-abonnements">
-  <script src="/assets/guides-recherche.js?v=111-abonnements" defer></script>
-  <script src="/assets/guides-cliniques.js?v=111-abonnements" defer></script>
-  <script src="/assets/guides-installer.js?v=111-abonnements" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=111-abonnements" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=112-pabp-residents">
+  <script src="/assets/guides-recherche.js?v=112-pabp-residents" defer></script>
+  <script src="/assets/guides-cliniques.js?v=112-pabp-residents" defer></script>
+  <script src="/assets/guides-installer.js?v=112-pabp-residents" defer></script>
+  <script src="/assets/guides-pabp.js?v=112-pabp-residents" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=112-pabp-residents" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
