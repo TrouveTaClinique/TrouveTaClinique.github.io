@@ -3583,7 +3583,7 @@ function pageRecherche(cliniques) {
    site, avec les données structurées VideoObject (résultats vidéo de Google). La vidéo et son affiche
    vivent à côté de la page (monteregie-est/video/), déposées à la main ; seule la page est générée.
    VERSION_VIDEO change l'adresse du fichier quand la vidéo est remplacée. */
-const VERSION_VIDEO = 'v5';
+const VERSION_VIDEO = 'v6';                  // V6 (28 sept. 2026) : bruitages (clics, apparition et disparition des textes)
 function pageVideoEst() {
   const u = UNIVERS_PAR_REGION.Est;
   const url = `${SITE}${EST_PREFIXE}/video/`;
@@ -3596,7 +3596,7 @@ function pageVideoEst() {
     name: 'Trouve ta clinique : la carte de la Montérégie-Est en vidéo',
     description,
     thumbnailUrl: `${url}affiche.jpg`,
-    uploadDate: '2026-09-27',
+    uploadDate: '2026-09-28',
     duration: 'PT3M56S',
     contentUrl: `${url}trouve-ta-clinique-monteregie-est.mp4`,
     embedUrl: url,
@@ -3618,7 +3618,7 @@ function pageVideoEst() {
   </video>
   <p class="cta-row" style="display:flex;flex-wrap:wrap;gap:.8rem;margin-top:var(--s-md)">
     <a class="btn teal" href="${EST_PREFIXE}/">Essayer la carte</a>
-    <a class="btn ghost" href="${fichier}" download="trouve-ta-clinique-monteregie-est.mp4">Télécharger la vidéo (MP4, 47 Mo)</a>
+    <a class="btn ghost" href="${fichier}" download="trouve-ta-clinique-monteregie-est.mp4">Télécharger la vidéo (MP4, 48 Mo)</a>
   </p>
 </section>`;
   return page({
