@@ -220,3 +220,10 @@ test('Plan Guides (20b) : un mot précis introuvable partout est signalé, les a
   assert.deepEqual(R.motsAbsents(index, 'otite chez un enfant allergique'), []);
   assert.deepEqual(R.motsAbsents(index, 'interruption de grossesse'), []);
 });
+
+test('Masse au sein, mastite et jambes sans repos (ajouts du 28 septembre 2026)', () => {
+  assert.ok(contient(titres('bosse au sein'), /investigation d une masse/), titres('bosse au sein').join(' | '));
+  assert.ok(contient(titres('mastite'), /mastite/));
+  assert.ok(contient(titres('SJSR'), /jambes sans repos/));
+  assert.ok(contient(titres('impatiences'), /jambes sans repos/));
+});

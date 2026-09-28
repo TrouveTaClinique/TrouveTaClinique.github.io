@@ -2794,6 +2794,50 @@
     "format": "outil"
   },
   {
+    "title": "Seins : investigation d’une masse ou d’un symptôme mammaire (EN)",
+    "org": "BC Guidelines",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "masse au sein masse mammaire bosse au sein nodule du sein écoulement du mamelon mastalgie douleur au sein kyste mammographie échographie biopsie abcès Breast Disease and Cancer: Diagnosis",
+    "url": "https://www2.gov.bc.ca/assets/gov/health/practitioner-pro/bc-guidelines/brdisease.pdf",
+    "desc": "Investigation d’une masse, d’un écoulement ou d’une douleur au sein selon l’âge, avec algorithmes (guide de la Colombie-Britannique, 2013).",
+    "verifie": "2026-09-28",
+    "ajoute": "2026-09-28",
+    "format": "guide"
+  },
+  {
+    "title": "Allaitement : guide pour les médecins, dont la mastite (EN)",
+    "org": "Interior Health (Colombie-Britannique)",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "mastite abcès du sein engorgement canal bloqué douleur au mamelon allaitement lactation Physician Breastfeeding Guide",
+    "url": "https://breastfeedingchange.ca/wp-content/uploads/2025/02/Physician-Breastfeeding-Guide-digital.pdf",
+    "desc": "Guide 2025 pour les médecins : difficultés d’allaitement courantes, dont la mastite, l’abcès et la douleur au mamelon.",
+    "verifie": "2026-09-28",
+    "ajoute": "2026-09-28",
+    "format": "guide"
+  },
+  {
+    "title": "Mastite : document pour les patientes",
+    "org": "Clinique d’allaitement Goldfarb (CMF Herzl)",
+    "cat": "Documents pour les patients",
+    "tags": "mastite allaitement sein rouge douloureux engorgement abcès",
+    "url": "https://cdn.ciussscentreouest.ca/documents/hgj/pfrc/Breastfeeding_clinic/mastite_info_pour_patients_2022_final.pdf",
+    "desc": "Définition, facteurs de risque, soins et signes qui doivent amener à consulter (2 pages).",
+    "verifie": "2026-09-28",
+    "ajoute": "2026-09-28",
+    "format": "patient"
+  },
+  {
+    "title": "Syndrome des jambes sans repos : fiche de traitement",
+    "org": "A.P.E.S.",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "syndrome des jambes sans repos SJSR impatiences Willis-Ekbom fer ferritine gabapentine prégabaline pramipexole agonistes dopaminergiques augmentation",
+    "url": "https://www.apesquebec.org/system/files?file=2024-01/20230821_RPEG_fiches_jambes_sans_repos.pdf",
+    "desc": "Fiche 2023 des pharmaciens experts en gériatrie : diagnostic, causes à corriger (fer), médicaments aggravants et traitement.",
+    "verifie": "2026-09-28",
+    "ajoute": "2026-09-28",
+    "format": "outil"
+  },
+  {
     "title": "Centre de Crise l’Accès",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
