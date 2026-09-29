@@ -65,7 +65,7 @@ const ancre = texte => 'sujet-' + texte.normalize('NFD').replace(/[\u0300-\u036f
 
 /* Bouton « Proposer un guide ou une ressource » : courriel prérempli, même adresse que
    « Signaler une clinique » (scripts/generer-pages-seo.js). */
-const COURRIEL_PROPOSITION = 'olivier.laplante.med@ssss.gouv.qc.ca';
+const COURRIEL_PROPOSITION = 'contact@trouvetaclinique.ca';
 const PROPOSITION_HREF = 'mailto:' + COURRIEL_PROPOSITION + '?subject=' + encodeURIComponent('Proposition pour le catalogue de guides')
   + '&body=' + encodeURIComponent('Bonjour,\n\nJe propose d’ajouter au catalogue /guides/ :\n\nTitre : \nOrganisme : \nLien : \nPourquoi c’est utile en première ligne : \n\nMerci !');
 

@@ -33,7 +33,7 @@ const ARCHIVES_PRIVEES = /(correctifs|prive|privé).*\.(zip|7z)$/i;
 const SOURCE_TRAVAIL_ETABLISSEMENTS = /(^|[\\/])donnees-etablissements-source\.json$/i;
 
 const ADRESSES_PUBLIQUES_SITE = new Set([
-  'olivier.laplante.med@ssss.gouv.qc.ca',
+  'contact@trouvetaclinique.ca',
   'recrutement_omnis.cisssmo16@ssss.gouv.qc.ca'
 ]);
 

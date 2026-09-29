@@ -3,6 +3,12 @@
 La production est servie depuis `main` sur [trouvetaclinique.ca](https://trouvetaclinique.ca/).
 Ce fichier conserve les jalons utiles. Les archives datées (31 août et étape 4) sont dans `docs/archives/`.
 
+## 29 septembre 2026 : adresse du site
+
+- Adresse dédiée contact@trouvetaclinique.ca (transfert easyDNS) pour « Signaler une clinique »,
+  « Mettre à jour cette fiche », « Signaler une correction » des cartes, « Proposer » des guides et
+  le repli du formulaire « Nous joindre ». Cache de l'app Guides : ttc-guides-v18.
+
 ## 28 septembre 2026 : audit complet
 
 - Vidéo de la carte Est liée depuis l'accueil, le pied de page commun et le menu « i » de la carte ;
@@ -145,3 +151,4 @@ Une ligne par version de `CACHE`, de la plus ancienne à la plus récente.
 - v98-retour-fiche (27 septembre 2026) : fermer une fiche ramène la vue d'ouverture sur ordinateur.
 - v99-audit (28 septembre 2026) : lot de l'audit du 28 septembre (vidéo liée, préconnexion du fond de carte, horaires, HTML valide).
 - v100-fond-images (28 septembre 2026) : fond de carte en images au cellulaire (sans moteur vectoriel), choix du propriétaire.
+- v101-adresse-contact (29 septembre 2026) : liens « Signaler une correction » vers contact@trouvetaclinique.ca.
