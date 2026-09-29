@@ -17,6 +17,7 @@
 
   /* Chaque groupe réunit des expressions équivalentes. Écrire sans accents, en minuscules. */
   const GROUPES = [
+    ['entorse', 'entorses', 'foulure', 'sprain'],
     ['mpoc', 'bpco', 'copd', 'maladie pulmonaire obstructive chronique', 'emphyseme'],
     ['fa', 'fibrillation auriculaire', 'fibrillation atriale', 'atrial fibrillation'],
     ['tvp', 'thrombose veineuse profonde', 'dvt', 'deep vein thrombosis', 'phlebite'],
