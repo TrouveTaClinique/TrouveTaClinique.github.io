@@ -68,7 +68,7 @@ const WORDMARK_HTML = `<span class="wordmark" aria-hidden="true">
       <span class="l2">Clinique</span>
     </span>`;
 
-const SIGNALER_CLINIQUE_HREF = 'mailto:olivier.laplante.med@ssss.gouv.qc.ca?subject=Signaler%20une%20clinique';
+const SIGNALER_CLINIQUE_HREF = 'mailto:contact@trouvetaclinique.ca?subject=Signaler%20une%20clinique';
 
 const NAV_TOGGLE_BOUTON = `<button class="burger" type="button" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
       <svg viewBox="0 0 22 22" width="20" height="20" aria-hidden="true">
@@ -2104,7 +2104,7 @@ function jsonLdEvenement(c, url) {
 /* « Mettre à jour cette fiche » (26 sept. 2026) : courriel prérempli avec les valeurs actuelles
    de la fiche, pour que le milieu corrige ou complète ce qui s'applique. Même adresse que
    « Signaler une clinique ». */
-const COURRIEL_MISE_A_JOUR = 'olivier.laplante.med@ssss.gouv.qc.ca';
+const COURRIEL_MISE_A_JOUR = 'contact@trouvetaclinique.ca';
 function lienMiseAJour(c, url) {
   /* Un courriel « mailto: » ne peut contenir que du texte brut (pas de gras) : la structure
      vient des titres de section en majuscules, des filets et des lignes vides. Une valeur par

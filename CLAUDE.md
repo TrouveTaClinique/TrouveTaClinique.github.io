@@ -103,6 +103,9 @@ dates du sitemap selon le contenu réel des pages).
   ni le courriel du propriétaire dans leur texte (demande du propriétaire). Formulaire
   « Nous joindre » : Worker `/contact`, repli sur un courriel prérempli tant que l'envoi direct
   n'est pas configuré.
+- Adresse publique du site : `contact@trouvetaclinique.ca` (transfert easyDNS vers la boîte du
+  propriétaire, 29 sept. 2026), pour tous les courriels préremplis (signaler, mettre à jour,
+  proposer un guide, repli du formulaire). Ne plus afficher l'adresse du CISSS.
 - Deux PWA indépendantes : `/monteregie-est/` (`sw.js` à la racine) et l'app « Guides »
   (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
   cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
