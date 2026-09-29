@@ -148,7 +148,7 @@ test('clinique : les guides passent devant les organismes (sevrage alcool)', () 
 });
 
 test('documents pour les patients : benzodiazépines et côlon irritable', () => {
-  assert.ok(contient(parType('sevrage benzodiazépine', 4).map(r => r.title), /somniferes/), parType('sevrage benzodiazépine', 4).map(r => r.title).join(' | '));
+  assert.ok(contient(parType('sevrage benzodiazépine', 5).map(r => r.title), /somniferes/), parType('sevrage benzodiazépine', 5).map(r => r.title).join(' | '));
   assert.ok(contient(parType('côlon irritable', 2).map(r => r.title), /colon irritable/));
 });
 
