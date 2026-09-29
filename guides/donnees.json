@@ -17739,5 +17739,72 @@
     "ajoute": "2026-09-29",
     "format": "guide",
     "acces": "abonnement"
+  },
+  {
+    "title": "Plaies et lacérations à l’urgence : guide des pansements",
+    "org": "CISSS de Chaudière-Appalaches",
+    "cat": "Peau et yeux",
+    "tags": "pansement plaie lacération ulcération peau fragile déchirure cutanée brûlure urgence Guide pour les pansements et le soin des plaies à l’urgence Clinique des plaies complexes Hôtel-Dieu de Lévis",
+    "url": "https://www.cisssca.com/clients/CISSSCA/Professionnels__M%C3%A9decins_et_partenaires/Clinique_plaies_complexes/Guide_pansement_urgence_mise_a%CC%80_jour_2017_CISSS.pdf",
+    "desc": "Guide de la Clinique des plaies complexes (Hôtel-Dieu de Lévis, mis à jour en 2017) : choix des pansements selon la plaie, lacérations, peau fragile, guides à imprimer et matériel.",
+    "format": "guide",
+    "verifie": "2026-09-29",
+    "ajoute": "2026-09-29"
+  },
+  {
+    "title": "Entorse : soins à la maison et quand consulter",
+    "org": "Santé Québec",
+    "cat": "Documents pour les patients",
+    "tags": "entorse foulure cheville glace repos bandage élastique béquilles 811 Info-Santé",
+    "url": "https://sante.quebec/conseils-sante/entorse/",
+    "desc": "Conseils pour le patient : reconnaître une entorse, la soigner à la maison et savoir quand consulter.",
+    "format": "patient",
+    "verifie": "2026-09-29",
+    "ajoute": "2026-09-29"
+  },
+  {
+    "title": "Entorse de la cheville : conseils et exercices de physiothérapie",
+    "org": "CISSS de la Gaspésie",
+    "cat": "Documents pour les patients",
+    "tags": "entorse cheville exercices réadaptation physiothérapie proprioception foulure",
+    "url": "https://www.cisss-gaspesie.gouv.qc.ca/wp-content/uploads/2020/11/Entorse-de-la-cheville-2020.pdf",
+    "desc": "Feuillet du département de physiothérapie (2020) : explication de l’entorse, soins des premiers jours et exercices de réadaptation.",
+    "format": "patient",
+    "verifie": "2026-09-29",
+    "ajoute": "2026-09-29"
+  },
+  {
+    "title": "Cheville et pied : règle d’Ottawa pour la radiographie",
+    "org": "CHU Sainte-Justine",
+    "cat": "Urgence et traumatologie",
+    "tags": "règles d’Ottawa Ottawa ankle rules entorse cheville fracture pied radiographie imagerie pédiatrie Sainte-Justine HSJ",
+    "url": "https://www.urgencehsj.ca/referentiels/fracture-de-la-cheville-et-du-pied-regle-dottawa/",
+    "desc": "Référentiel de l’urgence du CHU Sainte-Justine : critères d’Ottawa pour décider d’une radiographie de la cheville ou du pied.",
+    "format": "outil",
+    "verifie": "2026-09-29",
+    "ajoute": "2026-09-29"
+  },
+  {
+    "title": "Fractures chez l’enfant : prise en charge et suivi",
+    "org": "CHU Sainte-Justine",
+    "cat": "Urgence et traumatologie",
+    "tags": "fracture pédiatrique immobilisation attelle plâtre suivi orthopédique entorse enfant Guide de prise en charge et de suivi des fractures Sainte-Justine HSJ",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/guide-fracture-pediatrique-CHU-Sainte-Justine-17-juin-2024.pdf",
+    "desc": "Guide de l’urgence du CHU Sainte-Justine (juin 2024) : immobilisation et suivi des fractures fermées de l’enfant, par région.",
+    "format": "guide",
+    "verifie": "2026-09-29",
+    "ajoute": "2026-09-29"
+  },
+  {
+    "title": "Traumatismes de la main : entorse ou fracture (Le Médecin du Québec)",
+    "org": "Le Médecin du Québec (FMOQ)",
+    "cat": "Os, articulations et douleur",
+    "tags": "entorse doigt pouce du skieur main fracture boxeur traumatisme de la main Entorse ou fracture : évaluation et suivi des traumatismes de la main Médecin du Québec FMOQ",
+    "url": "https://lemedecinduquebec.org/archives/2015/12/formation-continue/1-entorse-ou-fracture/",
+    "desc": "Article de formation continue (décembre 2015) : évaluation et suivi des traumatismes de la main, entorse ou fracture. Réservé aux abonnés.",
+    "format": "guide",
+    "acces": "abonnement",
+    "verifie": "2026-09-29",
+    "ajoute": "2026-09-29"
   }
 ]

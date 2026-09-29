@@ -237,3 +237,7 @@ test('Dossier ressources de première ligne (28 septembre 2026) : synonymes', ()
   assert.ok(contient(titres('énurésie'), /enuresie/));
   assert.ok(!contient(titres('TCCi'), /commotion|traumatisme cranio/), titres('TCCi').join(' | '));
 });
+
+test('« foulure » trouve les entorses', () => {
+  assert.ok(contient(titres('foulure cheville'), /entorse/), titres('foulure cheville').join(' | '));
+});
