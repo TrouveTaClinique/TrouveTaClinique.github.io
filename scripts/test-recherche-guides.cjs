@@ -241,3 +241,17 @@ test('Dossier ressources de première ligne (28 septembre 2026) : synonymes', ()
 test('« foulure » trouve les entorses', () => {
   assert.ok(contient(titres('foulure cheville'), /entorse/), titres('foulure cheville').join(' | '));
 });
+
+/* Abréviations cliniques (29 sept. 2026) : « OMI » et compagnie. */
+test('abréviations cliniques : OMI, SAOS, SUA, SGUM, PPR, MICI, DMO, SCPD', () => {
+  const attendus = { OMI: /oedeme des jambes/, SAOS: /apnee/, SUA: /saignements uterins anormaux/, SGUM: /genito urinaire/,
+    PPR: /pseudopolyarthrite/, MICI: /inflammatoires de l intestin/, DMO: /osteoporose/, SCPD: /scpd/ };
+  for (const [q, motif] of Object.entries(attendus)) {
+    assert.ok(contient(titres(q).slice(0, 3), motif), q + ' : ' + titres(q).slice(0, 3).join(' | '));
+  }
+});
+
+test('« OMI » ne ramène pas l’œdème testiculaire en premier ; « TDM » mène à la dépression', () => {
+  assert.ok(!/testiculaire/.test(R.normaliser(titres('OMI')[0])), titres('OMI').join(' | '));
+  assert.ok(contient(titres('TDM').slice(0, 3), /depression/), titres('TDM').join(' | '));
+});

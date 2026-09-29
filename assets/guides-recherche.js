@@ -18,6 +18,50 @@
   /* Chaque groupe réunit des expressions équivalentes. Écrire sans accents, en minuscules. */
   const GROUPES = [
     ['entorse', 'entorses', 'foulure', 'sprain'],
+    /* Abréviations cliniques courantes au Québec (29 sept. 2026, demande du propriétaire : « OMI »). */
+    ['omi', 'oedeme des membres inferieurs', 'oedeme membre inferieur', 'oedeme des jambes', 'jambes enflees', 'jambe enflee', 'pieds enfles', 'enflure des jambes', 'lymphoedeme'],
+    ['ecg', 'ekg', 'electrocardiogramme', 'holter'],
+    ['fsc', 'formule sanguine', 'formule sanguine complete', 'cbc', 'hemogramme'],
+    ['hba1c', 'a1c', 'hemoglobine glyquee', 'glycemie'],
+    ['dfg', 'dfge', 'debit de filtration glomerulaire', 'egfr', 'clairance de la creatinine', 'creatinine'],
+    ['ira', 'insuffisance renale aigue', 'atteinte renale aigue', 'aki'],
+    ['mcas', 'maladie coronarienne', 'coronaropathie', 'cardiopathie ischemique', 'angine', 'angor'],
+    ['map', 'maladie arterielle peripherique', 'maladie vasculaire peripherique', 'claudication', 'claudication intermittente', 'ischemie des membres inferieurs'],
+    ['saos', 'sahos', 'apnee du sommeil', 'apnee obstructive du sommeil', 'apnee obstructive', 'sleep apnea', 'cpap', 'ppc'],
+    ['sep', 'sclerose en plaques', 'multiple sclerosis'],
+    ['sla', 'sclerose laterale amyotrophique', 'als'],
+    ['polyarthrite rhumatoide', 'arthrite rhumatoide', 'rheumatoid arthritis'],
+    ['ppr', 'pseudopolyarthrite rhizomelique', 'polymyalgia rheumatica', 'pmr', 'polymyalgie rhumatismale'],
+    ['led', 'lupus', 'lupus erythemateux', 'lupus erythemateux dissemine', 'lupus erythemateux systemique'],
+    ['mici', 'mii', 'maladie inflammatoire de l intestin', 'maladies inflammatoires de l intestin', 'maladie de crohn', 'crohn', 'colite ulcereuse', 'ibd'],
+    ['hsa', 'hemorragie sous arachnoidienne', 'hemorragie meningee'],
+    ['ivrs', 'infection des voies respiratoires superieures', 'rhume', 'urti'],
+    ['sua', 'saignement uterin anormal', 'saignements uterins anormaux', 'menorragie', 'menometrorragie', 'metrorragie', 'regles abondantes'],
+    ['sgum', 'syndrome genito urinaire de la menopause', 'atrophie vaginale', 'atrophie vulvovaginale', 'secheresse vaginale', 'vaginite atrophique'],
+    ['vrs', 'rsv', 'virus respiratoire syncytial', 'bronchiolite'],
+    ['asa', 'aspirine', 'acide acetylsalicylique'],
+    ['ieca', 'inhibiteur de l enzyme de conversion', 'inhibiteurs de l enzyme de conversion', 'ramipril', 'perindopril'],
+    ['ara', 'antagoniste des recepteurs de l angiotensine', 'bloqueur des recepteurs de l angiotensine', 'sartan', 'losartan', 'candesartan'],
+    ['isrs', 'ssri', 'inhibiteur selectif du recaptage de la serotonine', 'sertraline', 'escitalopram', 'citalopram', 'fluoxetine', 'paroxetine'],
+    ['irsn', 'snri', 'venlafaxine', 'duloxetine', 'desvenlafaxine'],
+    ['dmo', 'densitometrie', 'densite minerale osseuse', 'osteodensitometrie'],
+    ['vph', 'hpv', 'virus du papillome humain', 'condylome', 'condylomes'],
+    ['hsv', 'herpes', 'herpes simplex', 'feu sauvage', 'herpes genital'],
+    ['sarm', 'mrsa', 'staphylocoque dore resistant'],
+    ['vzv', 'varicelle', 'chickenpox'],
+    ['rro', 'rougeole', 'measles'],
+    ['scpd', 'symptomes comportementaux et psychologiques de la demence', 'agitation', 'comportement difficile'],
+    ['delirium', 'etat confusionnel', 'confusion aigue', 'delire aigu'],
+    ['tomodensitometrie', 'scan', 'ct scan', 'scanner'],
+    ['irm', 'resonance magnetique', 'mri'],
+    ['echographie', 'echo', 'ultrason', 'echographie au chevet', 'pocus'],
+    ['rx', 'radiographie', 'radiographies', 'rayon x', 'rayons x', 'x ray'],
+    ['goutte', 'hyperuricemie', 'acide urique', 'crise de goutte'],
+    ['dermatite atopique', 'eczema', 'eczema atopique', 'atopic dermatitis'],
+    ['diabete gestationnel', 'hgpo', 'hyperglycemie provoquee', 'test de tolerance au glucose'],
+    ['nvg', 'nausees de grossesse', 'nausees et vomissements de la grossesse', 'hyperemese', 'hyperemese gravidique'],
+    ['pqdcs', 'programme quebecois de depistage du cancer du sein'],
+    ['rcr', 'reanimation'],
     ['mpoc', 'bpco', 'copd', 'maladie pulmonaire obstructive chronique', 'emphyseme'],
     ['fa', 'fibrillation auriculaire', 'fibrillation atriale', 'atrial fibrillation'],
     ['tvp', 'thrombose veineuse profonde', 'dvt', 'deep vein thrombosis', 'phlebite'],
@@ -150,6 +194,10 @@
      Contrairement aux GROUPES, la relation est à sens unique : « apixaban » trouve les guides
      sur les anticoagulants, mais « anticoagulant » ne cherche pas « apixaban ». */
   const CONCEPTS = [
+    [['ieca', 'ara', 'inhibiteur de l enzyme de conversion', 'antagoniste des recepteurs de l angiotensine', 'ramipril', 'perindopril', 'sartan', 'losartan', 'candesartan'], ['hypertension', 'insuffisance cardiaque', 'insuffisance renale']],
+    [['irm', 'resonance magnetique', 'tomodensitometrie', 'scan', 'scanner', 'rx', 'radiographie', 'echographie', 'imagerie'], ['imagerie']],
+    [['tdm', 'trouble depressif majeur'], ['depression']],
+    [['ira', 'insuffisance renale aigue', 'atteinte renale aigue'], ['insuffisance renale', 'creatinine']],
     [['apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban', 'eliquis', 'xarelto', 'pradaxa', 'lixiana'], ['anticoagulant', 'anticoagulants oraux directs', 'anticoagulotherapie']],
     [['heparine', 'hbpm', 'enoxaparine', 'tinzaparine', 'dalteparine'], ['anticoagulant', 'heparine']],
     [['coloscopie', 'endoscopie', 'gastroscopie', 'chirurgie', 'intervention', 'operation', 'procedure'], ['chirurgie', 'perioperatoire', 'procedure']],
@@ -208,8 +256,8 @@
   function normaliser(texte) {
     return String(texte || '')
       .normalize('NFD').replace(/[̀-ͯ]/g, '')
-      .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
       .toLowerCase()
+      .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
       .replace(/[^a-z0-9%]+/g, ' ')
       .trim();
   }
