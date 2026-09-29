@@ -5,7 +5,7 @@
 'use strict';
 
 const CACHE_PREFIX = 'trouve-clinique-est-';
-const CACHE = CACHE_PREFIX + 'v101-adresse-contact';
+const CACHE = CACHE_PREFIX + 'v102-repertoire-menu';
 const ANCIEN_PREFIX = 'ptem-2027-';
 
 /* Portée légitime de cette PWA. Toute autre portée (en pratique « / ») vient d'un
