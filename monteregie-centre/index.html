@@ -1185,63 +1185,47 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
 <!-- Orientation d'impression du comparatif, remplie par le script (reste dans l'en-tête : HTML valide). -->
 <style id="cmp-orient"></style>
 <style id="repertoire-territoire-css">
-/* Annuaire sous la carte : visible aux humains (défilement) et aux robots (HTML statique).
-   Annule position:fixed / overflow:hidden des gabarits carte pour que le document défile.
-   Volontairement discret (30 sept. 2026, choix du propriétaire) : barre de défilement de la
-   page masquée, pour qu'on ne devine pas que la page continue sous la carte, et style de
-   « plan du site » en petit texte gris. Le contenu reste un vrai texte visible, pas caché. */
-html { scrollbar-width: none; }
-html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
-html, body {
-  position: static !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  min-height: 100%;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-.layout {
-  height: 100vh !important;
-  height: 100dvh !important;
-  max-height: 100dvh;
-  flex-shrink: 0;
-}
-#repertoire-territoire {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
-  clip: auto !important;
-  position: relative !important;
-  left: auto !important;
-  top: auto !important;
-  z-index: 2;
+/* Répertoire texte des milieux (29 sept. 2026, choix du propriétaire) : présent dans le HTML
+   (lu par les moteurs de recherche sans JavaScript), mais masqué sous la carte, qui ne défile
+   plus. Le lien « Répertoire texte des milieux » du menu « i » l'ouvre par-dessus la carte
+   (#repertoire-territoire:target) ; « Fermer » ou Échap le referme. */
+#repertoire-territoire { display: none; }
+#repertoire-territoire:target {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 2rem;
+  padding: 1.5rem max(1.25rem, calc((100% - 52rem) / 2)) 3rem;
   font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: .78rem;
-  color: #64748b;
-  background: #fff;
-  line-height: 1.45;
+  color: #0f172a;
+  background: #f8fafc;
+  border-top: 4px solid #0080d7;
+  line-height: 1.5;
 }
-#repertoire-territoire h2 { font-size: .85rem; font-weight: 600; margin: 1.1rem 0 .35rem; color: #64748b; }
-#repertoire-territoire > h2:first-of-type { margin-top: 0; }
-#repertoire-territoire p { margin: .4rem 0; }
-#repertoire-territoire .repertoire-liste { margin: .25rem 0 0; padding-left: 1rem; }
-#repertoire-territoire .repertoire-liste li { margin: .1rem 0; }
-#repertoire-territoire a { color: #64748b; }
-#repertoire-territoire .repertoire-meta { color: #94a3b8; font-size: .92em; }
-#repertoire-territoire .repertoire-suite { margin-top: .5rem; }
+#repertoire-territoire:focus { outline: none; }
+#repertoire-territoire .repertoire-fermer {
+  float: right;
+  margin: 0 0 .5rem 1rem;
+  padding: .45rem .9rem;
+  border-radius: 999px;
+  background: #170a72;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+#repertoire-territoire .repertoire-fermer:focus-visible { outline: 3px solid #0080d7; outline-offset: 2px; }
+#repertoire-territoire h2 { font-size: 1.15rem; margin: 1.6rem 0 .6rem; color: #170a72; }
+#repertoire-territoire > h2:first-of-type { margin-top: .3rem; }
+#repertoire-territoire p { margin: .55rem 0; }
+#repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
+#repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
+#repertoire-territoire a { color: #0067ad; }
+#repertoire-territoire a.repertoire-fermer { color: #fff; }
+#repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
+#repertoire-territoire .repertoire-suite { margin-top: .75rem; }
 </style>
 </head>
 <body>
@@ -1321,6 +1305,9 @@ html, body {
     <div class="info-menu" id="info-menu" role="menu" hidden>
       <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/recrutement-dtmf-monteregie" target="_blank" rel="noopener">
         <span class="info-menu-ic">i</span> À propos du recrutement
+      </a>
+      <a class="info-menu-link" role="menuitem" href="#repertoire-territoire">
+        <span class="info-menu-ic">📄</span> Répertoire texte des milieux
       </a>
       <hr>
       <a class="info-menu-link" role="menuitem" href="rls/champlain/">
@@ -4825,7 +4812,8 @@ fetch('../data.json', { cache: 'no-cache' })
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
 
-<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire" tabindex="-1">
+  <a class="repertoire-fermer" href="#">Fermer ✕</a>
   <h2>Répertoire de la Montérégie-Centre</h2>
   <p>La Montérégie-Centre couvre les RLS Champlain et Haut-Richelieu–Rouville. On y trouve 23 cliniques de médecine familiale (16 GMF, 3 GMF-U, 1 GMF-R et 3 cliniques médicales), toutes listées ci-dessous.</p>
 <p>20 d’entre elles recrutent actuellement des médecins de famille, notamment à Saint-Jean-sur-Richelieu, Brossard, Greenfield Park, Saint-Césaire, Saint-Hubert, Chambly, Henryville et Marieville.</p>
@@ -4891,4 +4879,25 @@ fetch('../data.json', { cache: 'no-cache' })
   <p class="repertoire-suite"><a href="etablissements/">Secteurs en établissement →</a></p>
 </section>
 </nav>
+<script>
+/* Répertoire texte : à l'ouverture, referme le menu « i » et place le focus dans le répertoire ;
+   Échap le referme et rend le focus au bouton « i ». */
+(function () {
+  var ouvert = function () { return location.hash === '#repertoire-territoire'; };
+  var bi = document.getElementById('btn-info'), im = document.getElementById('info-menu');
+  window.addEventListener('hashchange', function () {
+    if (ouvert()) {
+      if (im) im.setAttribute('hidden', '');
+      if (bi) bi.setAttribute('aria-expanded', 'false');
+      var r = document.getElementById('repertoire-territoire');
+      if (r) r.focus();
+    } else if (bi) {
+      bi.focus();
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && ouvert()) location.hash = '';
+  });
+})();
+</script>
 </body></html>
