@@ -1185,45 +1185,56 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
 <!-- Orientation d'impression du comparatif, remplie par le script (reste dans l'en-tête : HTML valide). -->
 <style id="cmp-orient"></style>
 <style id="repertoire-territoire-css">
-/* Répertoire texte des milieux (29 sept. 2026, choix du propriétaire) : présent dans le HTML
-   (lu par les moteurs de recherche sans JavaScript), mais masqué sous la carte, qui ne défile
-   plus. Le lien « Répertoire texte des milieux » du menu « i » l'ouvre par-dessus la carte
-   (#repertoire-territoire:target) ; « Fermer » ou Échap le referme. */
-#repertoire-territoire { display: none; }
-#repertoire-territoire:target {
-  display: block;
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+/* Annuaire sous la carte : visible aux humains (défilement) et aux robots (HTML statique).
+   Annule position:fixed / overflow:hidden des gabarits carte pour que le document défile. */
+html, body {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.layout {
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100dvh;
+  flex-shrink: 0;
+}
+#repertoire-territoire {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  clip: auto !important;
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 2;
   box-sizing: border-box;
-  padding: 1.5rem max(1.25rem, calc((100% - 52rem) / 2)) 3rem;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
   font-family: "Segoe UI", system-ui, sans-serif;
   color: #0f172a;
   background: #f8fafc;
   border-top: 4px solid #0080d7;
   line-height: 1.5;
 }
-#repertoire-territoire:focus { outline: none; }
-#repertoire-territoire .repertoire-fermer {
-  float: right;
-  margin: 0 0 .5rem 1rem;
-  padding: .45rem .9rem;
-  border-radius: 999px;
-  background: #170a72;
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-}
-#repertoire-territoire .repertoire-fermer:focus-visible { outline: 3px solid #0080d7; outline-offset: 2px; }
 #repertoire-territoire h2 { font-size: 1.15rem; margin: 1.6rem 0 .6rem; color: #170a72; }
-#repertoire-territoire > h2:first-of-type { margin-top: .3rem; }
+#repertoire-territoire > h2:first-of-type { margin-top: 0; }
 #repertoire-territoire p { margin: .55rem 0; }
 #repertoire-territoire .repertoire-liste { margin: .4rem 0 0; padding-left: 1.2rem; }
 #repertoire-territoire .repertoire-liste li { margin: .25rem 0; }
 #repertoire-territoire a { color: #0067ad; }
-#repertoire-territoire a.repertoire-fermer { color: #fff; }
 #repertoire-territoire .repertoire-meta { color: #64748b; font-size: .92em; }
 #repertoire-territoire .repertoire-suite { margin-top: .75rem; }
 </style>
@@ -1322,9 +1333,6 @@ body[data-mode-carte="etablissements"] .sb-num.sb-num-abbr[data-long="2"] { font
         <span class="info-menu-ic" style="background:#0080d7">📍</span> Carte Montérégie-Ouest
       </a>
       <!-- hors-region:fin -->
-      <a class="info-menu-link" role="menuitem" href="#repertoire-territoire">
-        <span class="info-menu-ic">📄</span> Répertoire texte des milieux
-      </a>
       <hr>
       <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/sites/default/files/2025/06/besoins-etablissement_en-bref_2026v2_0.pdf" target="_blank" rel="noopener">
         <span class="info-menu-ic">⤓</span> Besoins en établissement 2026
@@ -4854,8 +4862,7 @@ fetch('../data.json', { cache: 'no-cache' })
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
 
-<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire" tabindex="-1">
-  <a class="repertoire-fermer" href="#">Fermer ✕</a>
+<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
   <h2>Répertoire de la Montérégie</h2>
   <p>La carte complète regroupe les 9 RLS des trois territoires de la Montérégie (Montérégie-Est, Montérégie-Centre et Montérégie-Ouest). On y trouve 92 cliniques de médecine familiale (56 GMF, 7 GMF-U, 4 GMF-R et 25 cliniques médicales), toutes listées ci-dessous.</p>
 <p>77 d’entre elles recrutent actuellement des médecins de famille, notamment à Saint-Jean-sur-Richelieu, Longueuil, Sorel-Tracy, Châteauguay, Saint-Hyacinthe, Salaberry-de-Valleyfield, Vaudreuil-Dorion et Brossard.</p>
@@ -5061,25 +5068,4 @@ fetch('../data.json', { cache: 'no-cache' })
   <p class="repertoire-suite"><a href="/monteregie-est/etablissements/">Établissements Montérégie-Est</a> · <a href="/monteregie-centre/etablissements/">Montérégie-Centre</a></p>
 </section>
 </nav>
-<script>
-/* Répertoire texte : à l'ouverture, referme le menu « i » et place le focus dans le répertoire ;
-   Échap le referme et rend le focus au bouton « i ». */
-(function () {
-  var ouvert = function () { return location.hash === '#repertoire-territoire'; };
-  var bi = document.getElementById('btn-info'), im = document.getElementById('info-menu');
-  window.addEventListener('hashchange', function () {
-    if (ouvert()) {
-      if (im) im.setAttribute('hidden', '');
-      if (bi) bi.setAttribute('aria-expanded', 'false');
-      var r = document.getElementById('repertoire-territoire');
-      if (r) r.focus();
-    } else if (bi) {
-      bi.focus();
-    }
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && ouvert()) location.hash = '';
-  });
-})();
-</script>
 </body></html>
