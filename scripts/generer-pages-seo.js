@@ -1610,7 +1610,7 @@ const PTEM_STATUT = {
   prochain: 'PTEM 2027',
   periodeProchain: '1er décembre 2026 au 30 novembre 2027',
   cadreProchainOfficiel: true,   // l'Accord régissant le prochain cycle est déjà publié
-  placesProchainPublies: false   // le tableau des places, lui, ne l'est pas encore
+  placesProchainPublies: true    // places par territoire publiées sur Québec.ca (24 sept. 2026)
 };
 
 /* Balises title/description des pages principales.
@@ -1641,7 +1641,8 @@ const DESC_ETABLISSEMENTS_EST = 'Établissements de la Montérégie-Est qui recr
 function phrasePtemCourte() {
   const { enVigueur, finVigueur, prochain, cadreProchainOfficiel, placesProchainPublies } = PTEM_STATUT;
   if (placesProchainPublies) {
-    return `Le ${prochain} est maintenant en vigueur.`;
+    return `Le ${enVigueur} est actuellement en vigueur jusqu'au ${finVigueur}.<br>Les places ${prochain} par territoire `
+      + `sont maintenant publiées. Consultez notre guide pour connaître les places disponibles et les modalités de candidature.`;
   }
   return `Le ${enVigueur} est actuellement en vigueur jusqu'au ${finVigueur}.<br>Le cadre du `
     + `${prochain}${cadreProchainOfficiel ? ' est déjà officiel' : " n'est pas encore officiel"}`
