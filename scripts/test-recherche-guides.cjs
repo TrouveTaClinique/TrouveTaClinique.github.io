@@ -11,7 +11,7 @@ const ressources = require(path.join(__dirname, '..', 'guides', 'donnees.json'))
 // Même indexation que la page (assets/guides-cliniques.js) : pour un organisme, la ville compte comme le nom.
 const index = ressources.map(r => r.type === 'communautaire'
   ? R.preparer({ titre: r.title + ' ' + r.ville, organisme: '', categorie: r.cat + ' ' + r.rubriques.join(' '), motsCles: r.tags, description: r.desc })
-  : R.preparer({ titre: r.title, organisme: r.org, categorie: r.cat, motsCles: r.tags, description: r.desc }));
+  : R.preparer({ titre: r.title, organisme: r.org, categorie: r.cat, motsCles: r.tags, description: r.desc, format: r.format }));
 const titres = requete => R.rechercher(index, requete).map(x => ressources[x.i].title);
 const contient = (liste, motif) => liste.some(t => motif.test(R.normaliser(t)));
 
@@ -276,4 +276,16 @@ test('qualificatifs (« élevé », « bas ») ne suffisent pas à retenir un gu
   assert.ok(!contient(parType('cholestérol élevé', 3).map(r => r.title), /embolie/), parType('cholestérol élevé', 3).map(r => r.title).join(' | '));
   assert.ok(contient(parType('sodium bas', 2).map(r => r.title), /hyponatremie/));
   assert.ok(contient(parType('potassium élevé', 2).map(r => r.title), /hyperkaliemie/));
+});
+
+test('fiches d’exercices : trouvées par la pathologie seule, sans le mot « exercices »', () => {
+  const attendus = { 'cervicalgie': 3, 'canal carpien': 2, 'épicondylite': 2, 'fasciite plantaire': 2, 'entorse cheville': 3, 'plagiocéphalie': 1, 'VPPB': 2, 'douleur genou': 3, 'lombalgie': 8 };
+  for (const [q, n] of Object.entries(attendus)) {
+    assert.ok(parType(q, n).some(r => /Vallée-de-l/.test(r.org)), q + ' : ' + parType(q, n).map(r => r.title).join(' | '));
+  }
+});
+
+test('à score égal, les types de ressource alternent (guide, algorithme, patient)', () => {
+  const formats = parType('lombalgie', 3).map(r => r.format);
+  assert.equal(new Set(formats).size, 3, formats.join(','));
 });

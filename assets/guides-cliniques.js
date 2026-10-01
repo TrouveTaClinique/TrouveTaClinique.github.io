@@ -42,10 +42,10 @@
      de l'autre page, lues dans guides/donnees.json. */
   const preparer = f => moteur.preparer(f.comm
     ? { titre: f.titre + ' ' + f.ville, organisme: '', categorie: 'Ressources communautaires ' + f.rubriques, motsCles: f.tags, description: f.desc }
-    : { titre: f.titre, organisme: f.org, categorie: f.cat, motsCles: f.tags, description: f.desc });
+    : { titre: f.titre, organisme: f.org, categorie: f.cat, motsCles: f.tags, description: f.desc, format: f.format });
   const index = resources.map(r => preparer({
     comm: r.comm, titre: r.el.dataset.title, ville: r.ville, org: r.org, cat: r.category,
-    rubriques: r.el.dataset.rubriquesDetail || '', tags: r.el.dataset.tags, desc: r.el.dataset.desc
+    rubriques: r.el.dataset.rubriquesDetail || '', tags: r.el.dataset.tags, desc: r.el.dataset.desc, format: r.el.dataset.format
   }));
   const communautaires = resources.map(r => r.comm);
   const classer = (requete, seuil) => moteur.rechercherParType(index, communautaires, requete, { seuil });
@@ -395,7 +395,7 @@
       const fiches = liste.filter(f => (f.type === 'communautaire') !== (page === 'communautaire') && !/\(hors territoire\)$/.test(f.ville || ''));
       return fiches.map(f => preparer({
         comm: f.type === 'communautaire', titre: f.title, ville: (f.ville || '').replace(/ \(hors territoire\)$/, ''), org: f.org, cat: f.cat,
-        rubriques: (f.rubriques || []).join(' '), tags: f.tags, desc: f.desc || ''
+        rubriques: (f.rubriques || []).join(' '), tags: f.tags, desc: f.desc || '', format: f.format
       }));
     })
     .catch(() => { autreIndex = null; return []; }));
