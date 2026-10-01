@@ -25,7 +25,7 @@ function intercepter(reponseApi, statutApi = 200) {
 }
 
 const MESSAGE = {
-  id: 'msg_test', type: 'message', role: 'assistant', model: 'claude-sonnet-5', stop_reason: 'end_turn',
+  id: 'msg_test', type: 'message', role: 'assistant', model: 'claude-sonnet-5-5', stop_reason: 'end_turn',
   content: [{ type: 'text', text: JSON.stringify({ guides: [{ numero: 1, raison: 'Évalue l’allergie.' }, { numero: 0, raison: 'Traitement de l’otite.' }], message: '' }) }],
   usage: { input_tokens: 900, output_tokens: 80 }
 };
@@ -35,21 +35,23 @@ const question = candidats => new Request('https://aiguillage.exemple.workers.de
   headers: { Origin: ORIGINE, 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.7' },
   body: JSON.stringify({ question: 'otite chez un enfant allergique', candidats })
 });
-const ENV = { ANTHROPIC_API_KEY: 'sk-test', MODELE: 'claude-sonnet-5', LIMITE_VISITEUR: { limit: async () => ({ success: true }) } };
+const ENV = { ANTHROPIC_API_KEY: 'sk-test', MODELE: 'claude-sonnet-5-5', LIMITE_VISITEUR: { limit: async () => ({ success: true }) } };
 
-test('Sonnet 5 : requête envoyée au bon point d’accès, réponse traduite', { skip: !worker && 'SDK non installé' }, async () => {
+test('Sonnet 5.5 : requête envoyée au bon point d’accès, réponse traduite', { skip: !worker && 'SDK non installé' }, async () => {
   const appels = intercepter(MESSAGE);
   const r = await worker.fetch(question(CATALOGUE.map(g => g.url)), ENV);
   assert.equal(r.status, 200);
   const corps = await r.json();
   assert.deepEqual(corps.guides.map(g => g.titre), ['Allergie aux pénicillines', 'Otite moyenne aiguë']);
   assert.equal(appels.length, 1);
-  assert.match(appels[0].url, /^https:\/\/api\.anthropic\.com\/v1\/messages$/);
+  /* Repli côté serveur : point d'accès bêta, en-tête server-side-fallback. */
+  assert.match(appels[0].url, /^https:\/\/api\.anthropic\.com\/v1\/messages\?beta=true$/);
   assert.equal(appels[0].entetes.get('x-api-key'), 'sk-test');
-  assert.equal(appels[0].corps.model, 'claude-sonnet-5');
+  assert.equal(appels[0].corps.model, 'claude-sonnet-5-5');
   assert.equal(appels[0].corps.output_config.format.type, 'json_schema');
   assert.equal(appels[0].corps.output_config.effort, 'medium');
-  assert.equal(appels[0].corps.fallbacks, undefined);
+  assert.equal(appels[0].corps.fallbacks, 'default');
+  assert.match(appels[0].entetes.get('anthropic-beta') || '', /server-side-fallback-2026-07-01/);
   /* Catalogue complet dans le prompt système, mis en cache une heure. */
   assert.deepEqual(appels[0].corps.system[1].cache_control, { type: 'ephemeral', ttl: '1h' });
   assert.match(appels[0].corps.system[1].text, /\n1 \| Allergie aux pénicillines \| INESSS/);

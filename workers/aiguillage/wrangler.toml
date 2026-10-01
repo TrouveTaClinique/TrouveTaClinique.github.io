@@ -7,8 +7,9 @@ compatibility_date = "2026-06-01"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-# Modèle Claude utilisé. Claude Sonnet 5 : environ 1 ¢ US par question en mode hybride.
-MODELE = "claude-sonnet-5"
+# Modèle Claude utilisé. Claude Sonnet 5.5 (même prix que Sonnet 5, 1er oct. 2026), avec repli
+# automatique côté serveur en cas de refus.
+MODELE = "claude-sonnet-5-5"
 # Sites autorisés à interroger le service.
 ORIGINES = "https://trouvetaclinique.ca,https://apercu.trouvetaclinique.ca"
 # Plafond de questions par jour pour tout le site (heure du Québec). Actif seulement quand

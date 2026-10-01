@@ -7,7 +7,7 @@ jamais le dossier `workers/`.
 ## Ce qu'il fait
 
 1. Le service lit le catalogue publié (`/guides/donnees.json` du site qui pose la question :
-   production ou aperçu) et le donne **en entier** à Claude Sonnet 5, une ligne par ressource
+   production ou aperçu) et le donne **en entier** à Claude Sonnet 5.5, une ligne par ressource
    (environ 29 000 jetons, mis en cache une heure chez Anthropic).
 2. La page envoie aussi les 15 meilleurs résultats de son moteur de mots-clés
    (`assets/guides-recherche.js`), à titre d'indice seulement : un guide que ce moteur a raté
@@ -20,7 +20,7 @@ Aucune question n'est journalisée ni conservée par le service.
 
 ## Coûts et plafond
 
-- Environ 2 ¢ US par question avec Sonnet 5 quand le catalogue est en cache (lecture en cache
+- Environ 2 ¢ US par question avec Sonnet 5.5 (même prix que Sonnet 5) quand le catalogue est en cache (lecture en cache
   à 10 % du prix, plus la réponse) ; l'écriture du cache coûte environ 12 ¢ par heure d'activité.
   Ordre de grandeur : un millier de questions pour 20 $.
 - Le plafond est fixé chez Anthropic : crédits prépayés **sans recharge automatique**. Quand ils
@@ -71,7 +71,7 @@ Tant que cette constante est vide, la boîte n'apparaît pas.
 
 ## Réglages
 
-`wrangler.toml` : `MODELE` (par défaut `claude-sonnet-5`), `ORIGINES` (sites autorisés) et les
+`wrangler.toml` : `MODELE` (par défaut `claude-sonnet-5-5`, avec repli automatique côté serveur `fallbacks: "default"`), `ORIGINES` (sites autorisés) et les
 deux limites de requêtes. Une modification poussée sur `main` redéploie le Worker.
 
 ## Tests

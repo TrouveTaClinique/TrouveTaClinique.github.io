@@ -6,7 +6,7 @@
    jamais du modèle. */
 
 export const ORIGINES_PAR_DEFAUT = ['https://trouvetaclinique.ca', 'https://apercu.trouvetaclinique.ca'];
-export const MODELE_PAR_DEFAUT = 'claude-sonnet-5';
+export const MODELE_PAR_DEFAUT = 'claude-sonnet-5-5';
 export const QUESTION_MIN = 3;
 export const QUESTION_MAX = 400;
 export const CANDIDATS_MAX = 40;
@@ -91,9 +91,11 @@ export function listerCatalogue(liste) {
   }).join('\n');
 }
 
-/* Le repli automatique (fallbacks: "default") n'existe que pour Claude Opus 5 et la famille
-   Fable ; le réglage d'effort n'est pas accepté par Haiku 4.5. */
-const accepteRepli = modele => /^claude-(opus-5|fable-5)/.test(modele);
+/* Le repli automatique côté serveur (fallbacks: "default") existe pour Claude Opus 5, Opus 5.5,
+   Sonnet 5.5 et la famille Fable (pas Sonnet 5) ; le réglage d'effort n'est pas accepté par
+   Haiku 4.5. Sur Sonnet 5.5, le repli reprend sur Sonnet 5 les refus « cyber » et
+   « frontier_llm » ; les autres refus restent traités par interpreterReponse. */
+const accepteRepli = modele => /^claude-(opus-5|fable-5|sonnet-5-5)/.test(modele);
 const accepteEffort = modele => !/^claude-haiku/.test(modele);
 
 /* Page d'où vient la question : oriente l'ordre des types proposés, sans rien exclure.

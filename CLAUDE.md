@@ -80,7 +80,7 @@ dates du sitemap selon le contenu réel des pages).
   (`estCommunautaire`), les guides devant pour une question clinique (`rechercherParType`).
 - Recherche : `assets/guides-recherche.js` (synonymes `GROUPES`, concepts `CONCEPTS`), testée
   par `scripts/test-recherche-guides.cjs`.
-- Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5, crédits prépayés de
+- Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5.5 depuis le 1er oct. 2026, repli automatique côté serveur, crédits prépayés de
   20 $ sans recharge). L'IA reçoit tout le catalogue (une ligne par ressource, mis en cache une
   heure) ; la présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
   des organismes du catalogue, elle ne répond jamais à la question clinique (décision du
