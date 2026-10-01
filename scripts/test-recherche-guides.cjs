@@ -255,3 +255,25 @@ test('« OMI » ne ramène pas l’œdème testiculaire en premier ; « TDM » m
   assert.ok(!/testiculaire/.test(R.normaliser(titres('OMI')[0])), titres('OMI').join(' | '));
   assert.ok(contient(titres('TDM').slice(0, 3), /depression/), titres('TDM').join(' | '));
 });
+
+/* Banc d'essai du 1er oct. 2026 : recherches courantes de première ligne. */
+test('banc d’essai : expressions courantes mènent au bon sujet', () => {
+  const attendus = {
+    'brûlure en urinant': /infection.* urinaire/, 'pression haute': /hypertension/, 'arrêter de fumer': /tabac|tabagique/,
+    'règles douloureuses': /endometriose|saignements uterins/, 'saignement rectal': /anorectaux|colorectal/,
+    'ulcère de jambe': /ulceres veineux/, 'nodule pulmonaire': /decouvertes fortuites|poumon/, 'poux': /pediculose/,
+    'jaunisse nouveau-né': /ictere/, 'idées suicidaires': /suicid/, 'éruption cutanée': /eruptions cutanees/,
+    'mal de tête': /maux de tete|cephalee|migraine/, 'conjonctivite': /blepharite|ophtalmique|oculaire/,
+    'transgenre hormones': /genre/, 'autochtone': /autochtone/, 'CNESST': /cnesst/, 'dyslexie': /apprentissage/,
+    'voyage Afrique': /voyage/
+  };
+  for (const [q, motif] of Object.entries(attendus)) {
+    assert.ok(contient(parType(q, 3).map(r => r.title), motif), q + ' : ' + parType(q, 3).map(r => r.title).join(' | '));
+  }
+});
+
+test('qualificatifs (« élevé », « bas ») ne suffisent pas à retenir un guide', () => {
+  assert.ok(!contient(parType('cholestérol élevé', 3).map(r => r.title), /embolie/), parType('cholestérol élevé', 3).map(r => r.title).join(' | '));
+  assert.ok(contient(parType('sodium bas', 2).map(r => r.title), /hyponatremie/));
+  assert.ok(contient(parType('potassium élevé', 2).map(r => r.title), /hyperkaliemie/));
+});

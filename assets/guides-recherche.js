@@ -68,9 +68,9 @@
     ['ep', 'embolie pulmonaire', 'pulmonary embolism'],
     ['tev', 'thromboembolie veineuse', 'vte'],
     ['ic', 'icc', 'insuffisance cardiaque', 'heart failure'],
-    ['hta', 'hypertension', 'hypertension arterielle', 'haute pression', 'pression arterielle'],
+    ['hta', 'hypertension', 'hypertension arterielle', 'haute pression', 'pression haute', 'pression elevee', 'tension arterielle', 'haute tension', 'pression arterielle'],
     ['itss', 'its', 'ist', 'mts', 'infections transmissibles sexuellement', 'sti', 'std'],
-    ['ivu', 'infection urinaire', 'cystite', 'pyelonephrite', 'uti'],
+    ['ivu', 'infection urinaire', 'cystite', 'pyelonephrite', 'uti', 'dysurie', 'brulure en urinant', 'brulures en urinant', 'douleur en urinant', 'brule en urinant', 'brulure mictionnelle'],
     ['oma', 'otite moyenne aigue', 'otite'],
     ['tdah', 'tda', 'adhd', 'deficit de l attention'],
     ['tcc', 'tccl', 'traumatisme craniocerebral', 'traumatisme cranio cerebral', 'traumatisme cranien', 'commotion cerebrale', 'commotion'],
@@ -106,6 +106,24 @@
     ['dka', 'acidocetose'],
     ['epipen', 'anaphylaxie', 'anaphylactique', 'choc anaphylactique', 'reaction anaphylactique', 'epinephrine', 'adrenaline'],
     ['oeil rouge', 'yeux rouges', 'oeil rouge douloureux', 'conjonctivite', 'red eye'],
+    /* Banc d'essai du 1er oct. 2026 : recherches courantes qui ne trouvaient rien ou le mauvais sujet. */
+    ['cephalee', 'cephalees', 'mal de tete', 'maux de tete'],
+    ['dysmenorrhee', 'regles douloureuses', 'crampes menstruelles', 'douleurs menstruelles', 'menstruations douloureuses'],
+    ['rectorragie', 'rectorragies', 'saignement rectal', 'saignements rectaux', 'sang dans les selles', 'saignement anal'],
+    ['ulcere veineux', 'ulceres veineux', 'ulcere de jambe', 'ulceres de jambe', 'ulcere de la jambe', 'plaie de jambe'],
+    ['saignement postmenopausique', 'saignements postmenopausiques', 'saignement post menopause', 'saignement apres la menopause', 'metrorragie postmenopausique'],
+    ['nodule pulmonaire', 'nodules pulmonaires', 'masse pulmonaire'],
+    ['eruption cutanee', 'eruptions cutanees', 'rash', 'exantheme', 'exanthemes', 'maladies eruptives'],
+    ['poux', 'pediculose', 'poux de tete'],
+    ['onychomycose', 'onychopathie', 'mycose des ongles', 'ongle', 'ongles'],
+    ['autochtone', 'autochtones', 'premieres nations', 'inuit', 'inuits', 'metis', 'securisation culturelle'],
+    ['transgenre', 'trans', 'non binaire', 'affirmation de genre', 'diversite de genre', 'pluralite de genre'],
+    ['voyage', 'voyageur', 'voyageurs', 'sante voyage', 'medecine des voyages', 'consultation prevoyage'],
+    ['retour au travail', 'arret de travail', 'invalidite', 'cnesst', 'accident du travail'],
+    ['trouble d apprentissage', 'troubles d apprentissage', 'dyslexie', 'difficultes scolaires', 'dyscalculie'],
+    ['sante buccodentaire', 'buccodentaire', 'dents', 'dentaire', 'carie', 'caries'],
+    ['ecoresponsable', 'soins durables', 'sante planetaire', 'climat', 'environnement'],
+    ['idees suicidaires', 'risque suicidaire', 'potentiel suicidaire', 'suicide', 'suicidaire'],
     ['epistaxis', 'saignement de nez', 'saignement nasal', 'saignements de nez', 'nez qui saigne'],
     ['benzodiazepine', 'benzo', 'sedatif hypnotique', 'somnifere', 'hypnotique', 'bzra', 'z drug', 'lorazepam', 'ativan', 'clonazepam', 'rivotril', 'alprazolam', 'xanax', 'oxazepam', 'zopiclone', 'imovane'],
     ['tsa', 'autisme', 'trouble du spectre de l autisme', 'asd'],
@@ -154,7 +172,7 @@
     ['urticaire', 'hives'],
     ['ictere', 'jaunisse', 'hyperbilirubinemie', 'bilirubine'],
     ['vaginite', 'vaginose', 'vaginose bacterienne', 'vulvovaginite', 'pertes vaginales', 'candidose vaginale'],
-    ['cessation tabagique', 'arret tabagique', 'arret du tabac', 'renoncement au tabac', 'abandon du tabac', 'j arrete', 'jarrete'],
+    ['cessation tabagique', 'arret tabagique', 'arret du tabac', 'renoncement au tabac', 'abandon du tabac', 'abandon du tabagisme', 'j arrete', 'jarrete', 'arreter de fumer', 'arret de fumer', 'cesser de fumer', 'arreter la cigarette'],
     ['hypothyroidie', 'thyroide', 'tsh', 'levothyroxine', 'synthroid'],
     ['preeclampsie', 'pre eclampsie', 'hypertension gestationnelle'],
     ['hemorroide', 'hemorroides'],
@@ -194,6 +212,12 @@
      Contrairement aux GROUPES, la relation est à sens unique : « apixaban » trouve les guides
      sur les anticoagulants, mais « anticoagulant » ne cherche pas « apixaban ». */
   const CONCEPTS = [
+    [['dysmenorrhee', 'regles douloureuses', 'crampes menstruelles', 'douleurs menstruelles', 'menstruations douloureuses'], ['endometriose', 'douleur pelvienne', 'saignements uterins anormaux']],
+    [['rectorragie', 'rectorragies', 'saignement rectal', 'saignements rectaux', 'sang dans les selles', 'saignement anal'], ['hemorroides', 'anorectaux', 'cancer colorectal', 'cancer du colon']],
+    [['saignement postmenopausique', 'saignements postmenopausiques', 'saignement post menopause', 'saignement apres la menopause', 'metrorragie postmenopausique'], ['cancer de l endometre', 'saignements uterins anormaux']],
+    [['nodule pulmonaire', 'nodules pulmonaires', 'masse pulmonaire'], ['cancer du poumon', 'decouvertes fortuites']],
+    [['engourdissement', 'engourdissements', 'fourmillements', 'paresthesie', 'paresthesies', 'picotements'], ['neuropathie', 'neuropathies']],
+    [['oeil rouge', 'yeux rouges', 'conjonctivite'], ['blepharite', 'zona ophtalmique', 'herpes simplex']],
     [['ieca', 'ara', 'inhibiteur de l enzyme de conversion', 'antagoniste des recepteurs de l angiotensine', 'ramipril', 'perindopril', 'sartan', 'losartan', 'candesartan'], ['hypertension', 'insuffisance cardiaque', 'insuffisance renale']],
     [['irm', 'resonance magnetique', 'tomodensitometrie', 'scan', 'scanner', 'rx', 'radiographie', 'echographie', 'imagerie'], ['imagerie']],
     [['tdm', 'trouble depressif majeur'], ['depression']],
@@ -250,7 +274,7 @@
   /* Mots génériques : utiles pour départager, mais ils ne suffisent jamais seuls à retenir un
      guide quand la question contient aussi un mot précis (« toux chronique » ne doit pas ramener
      « constipation chronique » ; « insuffisance rénale » pas « insuffisance cardiaque »). */
-  const MOTS_GENERIQUES_TEXTE = 'chronique aigu aigue subaigu recidivant recurrent severe grave leger moderee insuffisance douleur mal cancer infection trouble syndrome maladie traitement prise charge guide enfant adulte bebe nourrisson adolescent ado jeune homme femme age agee aine status choc nouveau ne neonatal neonatale arret test examen bilan suivi evaluation diagnostic prevention signe symptome complication';
+  const MOTS_GENERIQUES_TEXTE = 'eleve elevee eleves elevees haut haute bas basse faible faibles augmente augmentee diminue diminuee anormal anormale anormaux chronique aigu aigue subaigu recidivant recurrent severe grave leger moderee insuffisance douleur mal cancer infection trouble syndrome maladie traitement prise charge guide enfant adulte bebe nourrisson adolescent ado jeune homme femme age agee aine status choc nouveau ne neonatal neonatale arret test examen bilan suivi evaluation diagnostic prevention signe symptome complication';
   const POIDS_GENERIQUE = 0.5;
 
   function normaliser(texte) {
@@ -467,7 +491,7 @@
   }
 
   /* Questions qui visent une ressource communautaire plutôt qu'un guide clinique. */
-  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|alimentaires?|nourriture|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|gites?|sans abri|logements?|loyers?|hlm|itinerance|itinerants?|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport adapte|juridique|avocat|impots?|friperies?|vetements?|meubles?|centre d action|emploi|alphabetisation|francisation|lignes? d ecoute|lignes? ecoute|ecoute telephonique|toxicomanie|groupes? de soutien|suicid\w*|9 ?8 ?8|maisons? de soins palliatifs|perinatalite|relevailles|lgbt\w*|interligne|antipoison|centre antipoison)\b/;
+  const COMMUNAUTAIRE = /\b(communautaires?|organismes?|banques? alimentaires?|aide alimentaire|alimentaires?|nourriture|depannage|popotes?|cuisines? collectives?|hebergement|refuges?|gites?|sans abri|logements?|loyers?|hlm|itinerance|itinerants?|repit|proches? aidants?|aidants?|deuil|benevol\w*|entraide|violence|maisons? de la famille|travailleurs? de rue|211|maintien a domicile|soutien a domicile|popote roulante|transport adapte|juridique|avocat|impots?|friperies?|vetements?|meubles?|centre d action|emploi|alphabetisation|francisation|lignes? d ecoute|lignes? ecoute|ecoute telephonique|toxicomanie|groupes? de soutien|9 ?8 ?8|maisons? de soins palliatifs|perinatalite|relevailles|lgbt\w*|interligne|antipoison|centre antipoison)\b/;
   const estCommunautaire = requete => COMMUNAUTAIRE.test(normaliser(requete));
 
   /* Classement selon le type de question : une question communautaire fait passer les
