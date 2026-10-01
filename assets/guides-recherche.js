@@ -409,6 +409,9 @@
     /* « pompe à protons » devient un seul mot dans les guides : « pompe » seul (inhalateur)
        ne ramène donc plus les guides sur les IPP. */
     Object.keys(POIDS).forEach(c => { champs[c] = mots(normaliser(ressource[c]).replace(/\bpompes? a protons?\b/g, 'pompeproton')); });
+    /* Type de ressource (guide, algorithme, patient…) : ne compte pas dans le score, sert
+       seulement à départager les égalités (voir alterner). */
+    champs.format = ressource.format || '';
     return champs;
   }
 
@@ -436,6 +439,30 @@
       total += meilleur;
     }
     return total;
+  }
+
+  /* À pertinence égale (ex. douze fiches « Lombalgie » de même score), alterne les types de
+     ressource (guide, algorithme, document pour le patient) au lieu de garder l'ordre du
+     catalogue : une fiche d'exercices récente ne finit plus derrière tous les guides. */
+  function alterner(resultats, index) {
+    for (let debut = 0; debut < resultats.length;) {
+      let fin = debut + 1;
+      while (fin < resultats.length && Math.abs(resultats[fin].score - resultats[debut].score) <= resultats[debut].score * 1e-9) fin++;
+      if (fin - debut > 2) {
+        const files = new Map();
+        for (const r of resultats.slice(debut, fin)) {
+          const f = (index[r.i] && index[r.i].format) || '';
+          if (!files.has(f)) files.set(f, []);
+          files.get(f).push(r);
+        }
+        if (files.size > 1) {
+          const ordre = [];
+          while (ordre.length < fin - debut) for (const file of files.values()) if (file.length) ordre.push(file.shift());
+          resultats.splice(debut, fin - debut, ...ordre);
+        }
+      }
+      debut = fin;
+    }
   }
 
   /* Classement : chaque terme rapporte selon le champ touché et sa rareté dans le catalogue
@@ -486,6 +513,7 @@
       if (total > 0) resultats.push({ i, score: total * Math.sqrt(couverts / retenus.length) });
     }
     resultats.sort((a, b) => b.score - a.score || a.i - b.i);
+    alterner(resultats, index);
     const seuil = resultats.length ? resultats[0].score * (options.seuil ?? 0.25) : 0;
     return resultats.filter(r => r.score >= seuil);
   }
@@ -502,7 +530,8 @@
     const visee = estCommunautaire(requete);
     const res = rechercher(index, requete, { seuil: 0 })
       .map(x => ({ i: x.i, score: !!communautaires[x.i] === visee ? x.score : x.score * DECOTE_TYPE }))
-      .sort((a, b) => b.score - a.score || a.i - b.i);
+      /* Tri stable : à score égal, garde l'ordre de rechercher (types alternés). */
+      .sort((a, b) => b.score - a.score);
     const min = res.length ? res[0].score * (options.seuil ?? 0.25) : 0;
     return res.filter(x => x.score >= min);
   }
