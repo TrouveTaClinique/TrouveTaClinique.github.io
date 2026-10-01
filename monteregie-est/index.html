@@ -2208,15 +2208,14 @@ L.control.zoom({ position:'topright' }).addTo(map);
    promotionnelle ; remettre true pour réactiver le bloc (voir CLAUDE.md). */
 const CREDITS_BLOC = false;
 if (CREDITS_BLOC) document.documentElement.classList.add('credits-bloc');
-/* Encadré de collaboration (27 sept. 2026), au-dessus de la bande de crédits : remercie
-   Nancy Langlois et la DSMP, sans mention de droits d'auteur. */
-const CREDITS_COLLAB = true;
+/* Encadré de collaboration (27 sept. 2026), au-dessus de la bande de crédits. Désactivé le
+   1er oct. 2026 (demande de retrait du nom de la collaboratrice) ; la légende des RLS revient. */
+const CREDITS_COLLAB = false;
 if (CREDITS_COLLAB && !CREDITS_BLOC) {
   const collab = L.control({ position: 'bottomright' });
   collab.onAdd = function () {
     const d = L.DomUtil.create('div', 'credits-collab');
     d.innerHTML = '<span class="cc-l0">Réalisé en collaboration avec</span>'
-      + '<span class="cc-l1">Nancy Langlois et la DSMP</span>'
       + '<span class="cc-l2">Santé Québec – CISSS de la Montérégie-Est</span>';
     L.DomEvent.disableClickPropagation(d);
     return d;
@@ -2227,7 +2226,7 @@ if (CREDITS_BLOC && map.attributionControl) {
   map.attributionControl.getContainer().classList.add('credits-carte');
   map.attributionControl.setPrefix(
     '<span class="credits-l1">© Santé Québec – CISSS de la Montérégie-Est</span>'
-    + '<span class="credits-l2">Projet réalisé par Olivier Laplante et Nancy Langlois</span>'
+    + '<span class="credits-l2">Projet réalisé par Olivier Laplante</span>'
     + (map.attributionControl.options.prefix || ''));
 }
 
@@ -2486,8 +2485,9 @@ function fondChiffre(c) { return FOND_CHIFFRE[String(c || '').toUpperCase()] || 
 
 // Légende des trois RLS de la carte autonome. Retirée le 27 sept. 2026 (demande du propriétaire) :
 // les boutons de RLS, aux mêmes couleurs que les zones, servent de légende, et le bas de l'écran
-// était trop chargé au cellulaire. LEGENDE_RLS = true la rétablit telle quelle.
-const LEGENDE_RLS = false;
+// était trop chargé au cellulaire. Rétablie le 1er oct. 2026, à la place de l'encadré de
+// collaboration (CREDITS_COLLAB = false).
+const LEGENDE_RLS = true;
 let legendEl = null;
 if (LEGENDE_RLS) (function(){
   const legend = L.control({ position:'bottomleft' });

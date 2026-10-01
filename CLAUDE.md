@@ -114,13 +114,12 @@ dates du sitemap selon le contenu réel des pages).
   et la recherche du site, données structurées VideoObject) ; le fichier `monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4` et son `affiche.jpg`
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)
   et changer `VERSION_VIDEO`. La musique (Mixkit) ne doit jamais être publiée seule.
-- Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`). Depuis le
-  27 sept. 2026, **temporairement `false`** (ancienne bande « © Olivier Laplante », pour une vidéo
-  promotionnelle). Le bloc blanc « © Santé Québec… / Projet réalisé par Olivier Laplante et Nancy
-  Langlois » est conservé : remettre `true` quand le propriétaire le demande, puis
-  `node scripts/publier-regions.js`. Depuis le 27 sept. 2026, un encadré `CREDITS_COLLAB`
-  (« Réalisé en collaboration avec / Nancy Langlois et la DSMP / Santé Québec – CISSS de la
-  Montérégie-Est », sans « © ») s'affiche au-dessus de la bande, en bas à droite.
+- Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`), **`false`**
+  (bande « © OpenStreetMap © CartoDB | © Olivier Laplante »). Le 1er oct. 2026, la collaboratrice
+  a demandé le retrait de son nom du projet (carte, site, vidéo) : ne plus le publier nulle part.
+  `CREDITS_COLLAB` = `false` (encadré « Réalisé en collaboration avec » retiré) et `LEGENDE_RLS`
+  = `true` (légende des 3 RLS rétablie). Le bloc `CREDITS_BLOC` ne nomme plus que le
+  propriétaire. Après tout changement : `node scripts/publier-regions.js`.
 
 ## Notes internes des cliniques (garde-fou du 26 septembre 2026)
 
