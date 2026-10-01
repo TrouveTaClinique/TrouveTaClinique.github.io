@@ -19,7 +19,9 @@ Tu ne réponds pas toi-même à la question : tu indiques seulement quelles ress
 
 - Lis la question comme un clinicien : repère le problème probable derrière les symptômes décrits (ex. essoufflement et œdème des jambes chez un aîné : insuffisance cardiaque ; enfant inattentif à l'école : TDAH ; DFG bas chez un diabétique : diabète et insuffisance rénale). Cherche ensuite dans tout le catalogue, pas seulement dans la présélection par mots-clés, qui n'est qu'un indice et peut être incomplète ou fausse.
 - Propose de 1 à ${GUIDES_MAX} ressources, de la plus utile à la moins utile, désignées par leur numéro dans le catalogue. Varie les types quand c'est utile : guide ou algorithme pour le clinicien d'abord, puis document pour le patient ou organisme si la question s'y prête.
+- Comprends les abréviations et le langage courant des cliniciens québécois (OMI, MPOC, IVRS, SUA, SCPD, DFG, PTEM, « pression haute », « brûlure en urinant »…) et les questions formulées comme des notes cliniques.
 - Quand plusieurs guides couvrent le même sujet, privilégie les sources québécoises (INESSS, MSSS, INSPQ, CIUSSS, CHU Sainte-Justine), puis canadiennes, et le français plutôt que les titres marqués (EN). Tiens compte de l'âge (enfant ou adulte) quand la question le précise.
+- La colonne « type » indique : guide, algorithme, outil, patients (document à remettre au patient) et, le cas échéant, abonnement (accès réservé aux abonnés, ex. Le Médecin du Québec, Omnipratique). À pertinence égale, préfère une ressource en accès libre ; une ressource sur abonnement reste utile si elle est la plus précise sur le sujet, et mérite alors une place parmi les suggestions. Si la question demande un document pour le patient, propose d'abord ceux de type patients.
 - Les ressources communautaires sont des organismes de l'agglomération de Longueuil, de la région de Saint-Hyacinthe et de la Vallée-du-Richelieu (la mention « hors territoire » signale un organisme hors de la Montérégie-Est), et des lignes d'aide provinciales. Propose-les pour un besoin social, matériel ou de soutien (alimentation, hébergement, violence, dépendance, répit, droits, emploi…), en tenant compte de la ville et de la clientèle.
 - Pour chaque ressource, « raison » tient en une phrase courte en français : ce que la ressource couvre qui répond au besoin. N'y mets ni posologie, ni conduite à tenir, ni conseil clinique.
 - « message » reste vide si les ressources proposées couvrent bien la question. Si un aspect important n'est couvert par aucune ressource du catalogue, dis-le en une phrase. Si la question ne relève ni de la pratique médicale ni d'un besoin de soutien d'un patient, ne propose rien et explique-le brièvement.
@@ -53,7 +55,8 @@ export function indexerCatalogue(ressources) {
       categorie: String(r.cat || ''), motsCles: String(r.tags || ''),
       communautaire: r.type === 'communautaire',
       rubriques: Array.isArray(r.rubriques) ? r.rubriques.map(String) : [],
-      ville: String(r.ville || ''), pourQui: String(r.pourQui || '')
+      ville: String(r.ville || ''), pourQui: String(r.pourQui || ''),
+      format: String(r.format || ''), abonnement: r.acces === 'abonnement'
     });
   }
   return parUrl;
@@ -73,8 +76,9 @@ export function retenirCandidats(candidats, parUrl) {
   return retenus;
 }
 
-/* Une ligne par ressource : numéro | titre | organisme | sujet | précisions.
+/* Une ligne par ressource : numéro | titre | organisme | sujet | type | précisions.
    Déterministe (ordre du catalogue publié) pour que le cache du prompt reste valide. */
+const TYPES = { guide: 'guide', algorithme: 'algorithme', outil: 'outil', patient: 'patients' };
 export function listerCatalogue(liste) {
   return liste.map((g, i) => {
     if (g.communautaire) {
@@ -82,7 +86,8 @@ export function listerCatalogue(liste) {
     }
     const deja = `${g.titre} ${g.organisme} ${g.categorie}`.toLowerCase();
     const motsCles = g.motsCles.split(/\s+/).filter(m => m && !deja.includes(m.toLowerCase())).slice(0, 8).join(' ');
-    return [i, g.titre, g.organisme, g.categorie, motsCles].join(' | ');
+    const type = [TYPES[g.format] || 'guide', g.abonnement ? 'abonnement' : ''].filter(Boolean).join(', ');
+    return [i, g.titre, g.organisme, g.categorie, type, motsCles].join(' | ');
   }).join('\n');
 }
 
@@ -108,7 +113,7 @@ export function construireRequete({ modele, catalogue, indices = [], question, p
     system: [
       { type: 'text', text: INSTRUCTIONS },
       /* Catalogue identique d'une question à l'autre : mis en cache une heure. */
-      { type: 'text', text: `Catalogue (numéro | titre | organisme | sujet | précisions) :\n${listerCatalogue(catalogue)}`, cache_control: { type: 'ephemeral', ttl: '1h' } }
+      { type: 'text', text: `Catalogue (numéro | titre | organisme | sujet | type | précisions) :\n${listerCatalogue(catalogue)}`, cache_control: { type: 'ephemeral', ttl: '1h' } }
     ],
     messages: [{ role: 'user', content: `${indice}<question>${question}</question>` }],
     output_config: { format: { type: 'json_schema', schema: SCHEMA } }

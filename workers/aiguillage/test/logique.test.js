@@ -53,7 +53,7 @@ test('requête Sonnet 5 : catalogue complet mis en cache, présélection en indi
   const [consignes, catalogue] = r.system;
   assert.equal(consignes.cache_control, undefined);
   assert.deepEqual(catalogue.cache_control, { type: 'ephemeral', ttl: '1h' });
-  assert.match(catalogue.text, /\n3 \| Guide 3 \| INESSS \| Catégorie \| otite enfant/);
+  assert.match(catalogue.text, /\n3 \| Guide 3 \| INESSS \| Catégorie \| guide \| otite enfant/);
   assert.match(catalogue.text, /\n59 \| Guide 59 /);
   assert.match(r.messages[0].content, /^Présélection du moteur de mots-clés \(indice seulement\) : 3, 7\n\n<question>otite<\/question>$/);
 });
@@ -228,4 +228,14 @@ test('contact HTTP : repli tant que l’envoi n’est pas configuré, puis envoi
   const echec = await traiterContact(requeteContact(MESSAGE), ENV_CONTACT, { ...deps, envoyer: async () => { throw new Error('refus'); } });
   assert.equal(echec.status, 502);
   assert.equal((await echec.json()).repli, true);
+});
+
+test('catalogue : le type (patients, algorithme, abonnement) est indiqué au modèle', () => {
+  const liste = [...indexerCatalogue([
+    { title: 'Feuillet', url: 'https://p.ca', org: 'CHUM', cat: 'Documents pour les patients', format: 'patient' },
+    { title: 'Article', url: 'https://a.ca', org: 'Omnipratique', cat: 'Neurologie', format: 'guide', acces: 'abonnement' }
+  ]).values()];
+  const lignes = listerCatalogue(liste).split('\n');
+  assert.match(lignes[0], /\| patients \|/);
+  assert.match(lignes[1], /\| guide, abonnement \|/);
 });
