@@ -3757,7 +3757,7 @@ function pageAPropos(majDonnees) {
     <li>Des guides sur le <a href="${EST_PREFIXE}/ptem/">PTEM 2027</a>, le <a href="${EST_PREFIXE}/ptem-u/">PTEM-U (PREM-U)</a> et les <a href="${EST_PREFIXE}/amp/">AMP</a>, et un <a href="/guides/">catalogue de guides cliniques</a> et de <a href="/guides/ressources-communautaires/">ressources communautaires</a>.</li>
   </ul>
   <h2>Le projet</h2>
-  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, avec la collaboration étroite de Nancy Langlois et du Recrutement médical de Santé Québec - Montérégie-Est. C’est une initiative bénévole, indépendante et sans but lucratif.</p>
+  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, en collaboration avec les équipes de recrutement médical de la Montérégie-Est. C’est une initiative bénévole, indépendante et sans but lucratif.</p>
   <h2>D’où viennent les données</h2>
   <p>Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par le répertoire des milieux et des sources publiques, et vérifiés manuellement. En Montérégie-Est, la liste des milieux qui recrutent est validée avec Santé Québec Montérégie-Est. En Montérégie-Centre et en Montérégie-Ouest, elle reprend la dernière mise à jour du répertoire.</p>
   <p>Dernière mise à jour des données&nbsp;: ${htmlDateFr(majDonnees)}. Chaque fiche indique aussi sa propre date.</p>
