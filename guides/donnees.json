@@ -17982,5 +17982,181 @@
     "format": "outil",
     "verifie": "2026-10-01",
     "ajoute": "2026-10-01"
+  },
+  {
+    "title": "Exercices : douleur lombaire",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "lombalgie mal de dos dos étirements renforcement exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Douleur-lombaire.pdf",
+    "desc": "Exercices d’étirement et de renforcement pour les maux de dos. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : douleur cervicale",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "cervicalgie cou nuque étirements renforcement exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Douleur-au-cou.pdf",
+    "desc": "Exercices d’étirement et de renforcement pour les douleurs au cou. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : tendinopathie de l’épaule",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "épaule tendinite coiffe des rotateurs renforcement exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Tendinite-de-lepaule.pdf",
+    "desc": "Exercices de renforcement pour une tendinopathie de l’épaule (tendinite). Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : syndrome du tunnel carpien",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "canal carpien poignet main étirements exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Tunnel-carpien.pdf",
+    "desc": "Exercices d’étirement et de renforcement pour le syndrome du tunnel carpien. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : épicondylite (tennis elbow)",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "épicondylite coude tennis elbow avant-bras étirements exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Epicondylite.pdf",
+    "desc": "Exercices d’étirement et de renforcement pour l’épicondylite. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : douleur à la hanche",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "hanche bursite trochantérienne bandelette ilio-tibiale étirements renforcement exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Hanche.pdf",
+    "desc": "Exercices pour la bursite trochantérienne et le syndrome de la bandelette ilio-tibiale. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : douleur au genou",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "genou gonalgie syndrome fémoro-patellaire renforcement quadriceps exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Douleur-au-genou.pdf",
+    "desc": "Exercices de renforcement pour les douleurs au genou. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : entorse de la cheville",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "entorse foulure cheville proprioception réadaptation exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Entorse-cheville.pdf",
+    "desc": "Exercices d’étirement et de renforcement après une entorse de la cheville. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : fasciite plantaire",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "fasciite plantaire talon pied étirements exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Fasciite-plantaire.pdf",
+    "desc": "Exercices d’étirement pour la fasciite plantaire. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : douleur lombaire pendant la grossesse",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "grossesse enceinte lombalgie mal de dos exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Grossesse-douleur-lombaire.pdf",
+    "desc": "Exercices pour les douleurs lombaires pendant la grossesse. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : sciatalgie pendant la grossesse",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "grossesse enceinte sciatique sciatalgie exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Grossesse-sciatalgie.pdf",
+    "desc": "Exercices pour la sciatalgie pendant la grossesse. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : post-partum",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "post-partum après l’accouchement reprise de l’activité physique exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Grossesse-post-partum.pdf",
+    "desc": "Exercices pour les douleurs et la reprise de l’activité après l’accouchement. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : plancher pelvien après l’accouchement",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "plancher pelvien Kegel incontinence post-partum périnée exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Grossesse-plancher-pelvien.pdf",
+    "desc": "Exercices de renforcement du plancher pelvien après l’accouchement. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : torticolis et plagiocéphalie du nourrisson",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "plagiocéphalie tête plate torticolis nourrisson bébé positionnement parents exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2021/04/Torticolis-et-plagiocephalie.pdf",
+    "desc": "Exercices de positionnement pour diminuer le risque de plagiocéphalie (tête plate) chez le nourrisson. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : vertiges",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "vertige VPPB étourdissements exercices vestibulaires positionnement exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2023/09/PEC-vertige.pdf",
+    "desc": "Exercices de positionnement pour diminuer les vertiges. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
+  },
+  {
+    "title": "Exercices : manœuvre d’Epley (vertige positionnel)",
+    "org": "GMF-U de la Vallée-de-l’Or",
+    "cat": "Documents pour les patients",
+    "tags": "vertige positionnel paroxystique bénin VPPB Epley manœuvre de repositionnement exercices physiothérapie à la maison",
+    "url": "https://gmfuvalleedelor.com/wp-content/uploads/2023/09/Manoeuvre-Epley.pdf",
+    "desc": "Manœuvre d’Epley à faire à la maison pour le vertige positionnel paroxystique bénin. Fiche illustrée à remettre au patient.",
+    "verifie": "2026-10-01",
+    "ajoute": "2026-10-01",
+    "format": "patient"
   }
 ]
