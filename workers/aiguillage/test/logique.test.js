@@ -44,12 +44,16 @@ test('candidats : adresses inconnues, doublons et excédent écartés', () => {
 
 const LISTE = [...PAR_URL.values()];
 
-test('requête Sonnet 5 : catalogue complet mis en cache, présélection en indice, sortie JSON', () => {
-  const r = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [3, 7], question: 'otite' });
-  assert.equal(r.model, 'claude-sonnet-5');
+test('requête Sonnet 5.5 : catalogue complet mis en cache, présélection en indice, sortie JSON', () => {
+  const r = construireRequete({ modele: 'claude-sonnet-5-5', catalogue: LISTE, indices: [3, 7], question: 'otite' });
+  assert.equal(r.model, 'claude-sonnet-5-5');
   assert.deepEqual(r.output_config, { format: { type: 'json_schema', schema: SCHEMA }, effort: 'medium' });
-  assert.equal(r.fallbacks, undefined);
-  assert.equal(r.betas, undefined);
+  assert.equal(r.fallbacks, 'default');
+  assert.deepEqual(r.betas, ['server-side-fallback-2026-07-01']);
+  /* Sonnet 5 n'accepte pas le repli côté serveur. */
+  const ancien = construireRequete({ modele: 'claude-sonnet-5', catalogue: LISTE, indices: [], question: 'otite' });
+  assert.equal(ancien.fallbacks, undefined);
+  assert.equal(ancien.betas, undefined);
   const [consignes, catalogue] = r.system;
   assert.equal(consignes.cache_control, undefined);
   assert.deepEqual(catalogue.cache_control, { type: 'ephemeral', ttl: '1h' });
