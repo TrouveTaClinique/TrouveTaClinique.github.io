@@ -41,7 +41,7 @@
   border-radius:999px;padding:.32rem .9rem;font-size:.81rem;font-weight:700}
 .status-note{font-size:.85rem}
 
-.step{margin:1rem 0;padding-left:1rem;border-left:3px solid var(--teal-zone);max-width:none}
+.step{margin:1rem 0;max-width:none;background:#fff;border:1px solid var(--teal-zone);border-radius:12px;box-shadow:inset 3px 0 0 var(--teal)}
 .cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.15rem 0}
 .button{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;text-decoration:none;
   font-weight:650;min-height:46px;padding:.8rem 1.6rem;font-size:.95rem}
