@@ -4046,7 +4046,7 @@ function ecrire(relatif, contenu) {
   if (relatif.endsWith('.html')) {
     // Une page neuve doit charger la même version du CSS et de la recherche,
     // même si le navigateur conserve les fichiers de la publication précédente.
-    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=90-besoins-pem"');
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=91-pem-depliant"');
   }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });
@@ -4112,7 +4112,7 @@ const FAQ_PTEM = {
     {
       '@type': 'Question',
       name: 'Quand déposer une demande PTEM 2027?',
-      acceptedAnswer: { '@type': 'Answer', text: 'La période initiale de dépôt des candidatures se déroule du 1er au 15 décembre, sous réserve de la signature finale de l’accord par le ministre. Les entrevues ont lieu du 5 au 30 janvier, tous les candidats reçoivent une réponse le 30 janvier et la période initiale prend fin le 27 février. Les demandes reçues après le 15 décembre sont traitées à compter du 28 février, selon le principe du premier arrivé, premier servi.' }
+      acceptedAnswer: { '@type': 'Answer', text: 'La période initiale de dépôt des candidatures se déroule du 1er au 15 décembre 2026. Selon la présentation de la FMRQ, les entrevues ont lieu du 5 au 28 janvier 2027. Selon la RAMQ, les DTMF répondent le 29 janvier 2027 et la période initiale prend fin le 26 février 2027 ; les demandes reçues après le 15 décembre sont traitées à compter du 27 février, selon le principe du premier arrivé, premier servi.' }
     }
   ]
 };

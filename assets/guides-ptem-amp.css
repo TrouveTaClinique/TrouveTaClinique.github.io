@@ -338,4 +338,5 @@ main > .hero-guide ~ .toc > strong{border-bottom-color:rgba(6,156,156,.28)}
 .besoins-pem thead th[scope="colgroup"]{text-align:center;border-bottom:2px solid var(--teal)}
 .besoins-pem tbody th{min-width:12rem;font-size:.92rem}
 .besoins-pem .besoin-oui{display:inline-grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--teal);color:#fff;font-weight:700;font-size:.8rem}
+.besoins-pem .besoin-non{display:inline-grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;border:1.5px solid var(--muted,#64748b);color:var(--muted,#64748b);font-weight:700;font-size:.8rem;opacity:.7}
 .besoins-pem td em{font-size:.78rem;color:var(--muted,#64748b);white-space:normal}
