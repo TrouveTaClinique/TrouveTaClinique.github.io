@@ -921,7 +921,7 @@ const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region
 /* Navigation : carte et cliniques suivent le territoire de la page. PTEM/AMP restent
    les guides canoniques de l’Est (les copies Centre/Ouest ne sont que des redirections).
    Le répertoire établissements existe en Montérégie-Est et en Montérégie-Centre.
-   Ne pas ajouter PTEM-U ici : la page existe, mais elle n’est pas dans le menu (6 liens). */
+   Ne pas ajouter PTEM-U ici : la page existe, mais elle n’est pas dans le menu (7 liens, Guides juste avant Rechercher). */
 function liensNav(u) {
   const prefixe = (u && u.regional) ? u.prefixe : EST_PREFIXE;
   const carte = (u && u.regional) ? u.accueil : EST_ACCUEIL;
@@ -937,7 +937,8 @@ function liensNav(u) {
   }
   liens.push(
     [EST_PREFIXE + '/ptem/', 'PTEM', 'ptem'],
-    [EST_PREFIXE + '/amp/', 'AMP', 'amp']
+    [EST_PREFIXE + '/amp/', 'AMP', 'amp'],
+    ['/guides/', 'Guides', 'guides']
   );
   return liens;
 }
@@ -4047,7 +4048,7 @@ function ecrire(relatif, contenu) {
   if (relatif.endsWith('.html')) {
     // Une page neuve doit charger la même version du CSS et de la recherche,
     // même si le navigateur conserve les fichiers de la publication précédente.
-    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=92-etapes-blanches"');
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=93-menu-guides"');
   }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });

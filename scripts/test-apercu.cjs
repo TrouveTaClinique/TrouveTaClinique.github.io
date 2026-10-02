@@ -111,7 +111,7 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   assert.match(lire('monteregie-est/ptem-u/index.html'), /PTEM-U \(PREM-U\) : le PTEM en GMF-U/);
   const navPtemU = lire('monteregie-est/ptem-u/index.html').match(/id="site-nav"[\s\S]*?<\/nav>/);
   assert.ok(navPtemU);
-  assert.equal((navPtemU[0].match(/<a /g) || []).length, 6);
+  assert.equal((navPtemU[0].match(/<a /g) || []).length, 7);
   assert.doesNotMatch(navPtemU[0], /ptem-u/i);
   assert.match(lire('monteregie-est/ptem-u/index.html'), /place réservée aux besoins universitaires/);
   assert.match(fs.readFileSync(path.join(RACINE, 'monteregie-est', 'ptem-u', 'index.html'), 'utf8'), /href="https:\/\/trouvetaclinique\.ca\/monteregie-est\/ptem-u\/"[^>]*rel="canonical"|rel="canonical"[^>]*href="https:\/\/trouvetaclinique\.ca\/monteregie-est\/ptem-u\/"/);

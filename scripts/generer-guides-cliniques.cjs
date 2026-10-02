@@ -277,7 +277,7 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="stylesheet" href="/assets/seo-pages.css?v=92-etapes-blanches">
+  <link rel="stylesheet" href="/assets/seo-pages.css?v=93-menu-guides">
   <link rel="stylesheet" href="/assets/guides-cliniques.css?v=118-exercices-pathologie">
   <script src="/assets/guides-recherche.js?v=118-exercices-pathologie" defer></script>
   <script src="/assets/guides-cliniques.js?v=118-exercices-pathologie" defer></script>
@@ -286,7 +286,7 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
-${header.replace(/ aria-current="page"/g, '')}
+${header.replace(/ aria-current="page"/g, '').replace('<a href="/guides/">', '<a href="/guides/" aria-current="page">')}
 <main id="contenu" class="guides-main">
   <nav class="guides-band guides-onglets" aria-label="Catalogue">${onglets}</nav>
   <section class="guides-band guides-intro">
