@@ -260,6 +260,13 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
 @media (max-width: 360px) {
   .btn-install.show { display: none; }
 }
+/* 2 oct. 2026 : entre 361 et 430 px (iPhone et Android courants), avec le rond « installer »,
+   le bouton « i » sortait encore de 15 à 23 px de l'écran. Titre et sous-titre un peu plus
+   petits à ces largeurs pour que les quatre ronds tiennent. */
+@media (max-width: 430px) {
+  .logo-text strong { font-size: clamp(17px, 4.6vw, 28px); }
+  .logo-text .brand-org { font-size: clamp(10px, 2.6vw, 16px); letter-spacing: .1em; }
+}
 .ios-tip { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
   background: var(--navy); color: #fff; padding: 12px 16px; border-radius: 10px;
   font-size: 14px; line-height: 1.45; max-width: 92%; box-shadow: 0 6px 24px rgba(0,0,0,.3);
@@ -4979,7 +4986,11 @@ fetch('../data.json', { cache: 'no-cache' })
       try { await deferred.userChoice; } catch (e) {}
       deferred = null;
     } else if (isIOS) {
-      showTip("Pour installer\u00a0: touchez le bouton <b>Partager</b> en bas de Safari, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
+      /* iOS 26 : le bouton Partager de Safari est dans le menu « ••• » ; dans Chrome ou
+         Firefox pour iPhone, il est à droite de la barre d'adresse. */
+      showTip(/crios|fxios|edgios/i.test(ua)
+        ? "Pour installer\u00a0: touchez le bouton <b>Partager</b> (carr\u00e9 avec une fl\u00e8che) \u00e0 droite de la barre d\u2019adresse, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>."
+        : "Pour installer\u00a0: touchez le bouton <b>Partager</b> de Safari (carr\u00e9 avec une fl\u00e8che\u00a0; dans le menu <b>\u2022\u2022\u2022</b> sur les versions r\u00e9centes), puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
     } else if (isTelephone) {
       showTip("Pour installer\u00a0: touchez le menu <b>⋮</b> en haut à droite de Chrome, puis <b>\u00ab Installer l\u2019application \u00bb</b> (ou <b>\u00ab Ajouter à l\u2019écran d\u2019accueil \u00bb</b>).");
     } else {

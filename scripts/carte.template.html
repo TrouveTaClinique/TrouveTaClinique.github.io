@@ -4691,7 +4691,9 @@ fetch('../data.json', { cache: 'no-cache' })
       try { await deferred.userChoice; } catch (e) {}
       deferred = null;
     } else if (isIOS) {
-      showTip("Pour installer\u00a0: touchez le bouton <b>Partager</b> en bas de Safari, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
+      showTip(/crios|fxios|edgios/i.test(navigator.userAgent || '')
+        ? "Pour installer\u00a0: touchez le bouton <b>Partager</b> (carr\u00e9 avec une fl\u00e8che) \u00e0 droite de la barre d\u2019adresse, puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>."
+        : "Pour installer\u00a0: touchez le bouton <b>Partager</b> de Safari (carr\u00e9 avec une fl\u00e8che\u00a0; dans le menu <b>\u2022\u2022\u2022</b> sur les versions r\u00e9centes), puis <b>\u00ab Sur l\u2019\u00e9cran d\u2019accueil \u00bb</b>.");
     } else if (isTelephone) {
       showTip("Pour installer\u00a0: touchez le menu <b>⋮</b> en haut à droite de Chrome, puis <b>\u00ab Installer l\u2019application \u00bb</b> (ou <b>\u00ab Ajouter à l\u2019écran d\u2019accueil \u00bb</b>).");
     } else {
