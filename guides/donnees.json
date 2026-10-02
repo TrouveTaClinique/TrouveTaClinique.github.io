@@ -81,9 +81,9 @@
     "org": "INESSS",
     "cat": "Infections et ITSS",
     "tags": "peau dermato infection cutanée cellulite adulte",
-    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Adulte1.pdf",
-    "desc": "Guide d’usage optimal sur la cellulite chez l’adulte.",
-    "verifie": "2026-09-24",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Adulte.pdf",
+    "desc": "Guide d’usage optimal sur la cellulite infectieuse chez l’adulte (version de septembre 2026).",
+    "verifie": "2026-10-02",
     "ajoute": "2026-09-24",
     "format": "guide"
   },
@@ -12803,7 +12803,7 @@
     "title": "Centre d’action bénévole du Bas-Richelieu",
     "org": "Bottin des aînés de la MRC de Pierre-De Saurel (2023)",
     "cat": "Ressources communautaires",
-    "tags": "Aide et soutien à domicile Sorel-Tracy maintien à domicile soutien à domicile aîné ressource communautaire organisme",
+    "tags": "Aide et soutien à domicile Sorel-Tracy maintien à domicile soutien à domicile aîné ressource communautaire organisme aide alimentaire dépannage alimentaire",
     "url": "https://www.cab-basrichelieu.org/fr/",
     "desc": "Accompagnement-transport médical, popote roulante, dépannage alimentaire d’urgence, visites d’amitié, bouton-panique, impôts.",
     "verifie": "2026-10-02",
@@ -12811,7 +12811,8 @@
     "type": "communautaire",
     "rubrique": "Aide et soutien à domicile",
     "rubriques": [
-      "Aide et soutien à domicile"
+      "Aide et soutien à domicile",
+      "Aide alimentaire"
     ],
     "ville": "Sorel-Tracy",
     "adresse": "70, rue Élizabeth, Sorel-Tracy",
@@ -12913,29 +12914,6 @@
     "heures": "",
     "acces": "",
     "sourcePage": "https://www.mrcpierredesaurel.com/wp-content/uploads/2023/03/Bottin-des-ressources.pdf#page=44"
-  },
-  {
-    "title": "Le GESTE (Groupe d’entraide Sorel-Tracy)",
-    "org": "Bottin des aînés de la MRC de Pierre-De Saurel (2023)",
-    "cat": "Ressources communautaires",
-    "tags": "Aide alimentaire Sorel-Tracy aide alimentaire dépannage alimentaire nourriture ressource communautaire organisme",
-    "url": "https://www.legeste.ca/",
-    "desc": "Épicerie communautaire, ateliers de cuisine, paniers de Noël.",
-    "verifie": "2026-09-27",
-    "ajoute": "2026-09-27",
-    "type": "communautaire",
-    "rubrique": "Aide alimentaire",
-    "rubriques": [
-      "Aide alimentaire"
-    ],
-    "ville": "Sorel-Tracy",
-    "adresse": "1225, route Marie-Victorin, Sorel-Tracy",
-    "telephone": "450 746-5611",
-    "pourQui": "",
-    "services": "Épicerie communautaire, ateliers de cuisine, paniers de Noël.",
-    "heures": "",
-    "acces": "",
-    "sourcePage": "https://www.mrcpierredesaurel.com/wp-content/uploads/2023/03/Bottin-des-ressources.pdf#page=35"
   },
   {
     "title": "Carrefour communautaire l’Arc-en-Ciel",
