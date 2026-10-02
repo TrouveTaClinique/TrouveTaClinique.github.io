@@ -294,7 +294,7 @@ ${header.replace(/ aria-current="page"/g, '')}
     <h1>${P.h1}</h1>
     <p class="lead">${P.lead}</p>
     ${cle === 'guides'
-      ? `<p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.<br>${dateVerif ? `Liens vérifiés le ${dateVerif}.<br>` : ''}Ce catalogue ne remplace pas le jugement clinique.</p>`
+      ? `<p class="guides-avis">Les guides appartiennent à leurs organismes et peuvent changer : consultez toujours la version en vigueur sur leur site.${dateVerif ? `<br>Liens vérifiés le ${dateVerif}.` : ''}</p>`
       : `<p class="guides-avis">${NOTE_COMMUNAUTAIRE}</p>`}
     <div class="guides-app" id="guides-app" hidden>
       <button type="button" class="guides-app-bouton" id="guides-app-installer"><img src="/guides/icon-192.png" width="28" height="28" alt=""> Installer l’app Guides</button>
