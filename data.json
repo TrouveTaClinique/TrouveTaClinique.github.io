@@ -164,11 +164,11 @@
         "pec"
       ],
       "niveaux": {
-        "gmf": "17",
+        "gmf": "18",
         "accesReseau": "",
         "gmfu": ""
       },
-      "niveau": "GMF 17",
+      "niveau": "GMF 18",
       "porteOuverte": "16 juillet 2026",
       "region": "Est",
       "infos": "",
@@ -212,17 +212,19 @@
         "pec"
       ],
       "niveaux": {
-        "gmf": "17",
+        "gmf": "18",
         "accesReseau": "",
         "gmfu": ""
       },
-      "niveau": "GMF 17",
+      "niveau": "GMF 18",
       "porteOuverte": "",
       "region": "Est",
       "infos": "",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "",
+      "recrutementActif": false,
+      "statutRecrutement": "Ne recrute pas actuellement"
     },
     {
       "id": 3,
