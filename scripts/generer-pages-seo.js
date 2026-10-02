@@ -1992,7 +1992,7 @@ ${sections}
  * Le crédit public du bloc Accueil « D'où viennent ces informations » est autorisé
  * (18 septembre 2026).
  */
-const DATE_SOURCE_ETABLISSEMENTS = '2026-08-28';
+const DATE_SOURCE_ETABLISSEMENTS = '2026-10-02';
 /* Les 22 installations ont maintenant une description propre, rédigée à partir de leur page
    officielle (voir DESCRIPTIONS_ETABLISSEMENTS plus bas) : le lot couvre donc tout le relevé. */
 const PREMIER_LOT_ETABLISSEMENTS = [
@@ -3008,7 +3008,7 @@ function publierPagesEtablissements(slugsCliniques, entrees, majPagesSeo, cliniq
   return n;
 }
 
-const DATE_SOURCE_ETABLISSEMENTS_CENTRE = 'juin 2026';
+const DATE_SOURCE_ETABLISSEMENTS_CENTRE = '2026-10-02';
 const LOT_ETABLISSEMENTS_CENTRE = [
   'INS-C-001', 'INS-C-002', 'INS-C-003', 'INS-C-004',
   'INS-C-005', 'INS-C-006', 'INS-C-007', 'INS-C-008'
