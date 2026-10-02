@@ -69,7 +69,7 @@ header.site.scrolled{box-shadow:0 3px 16px rgba(18,6,114,.14)}
 .burger{width:46px;height:46px;border-radius:999px;display:grid;place-items:center;background:#fff;
   border:1.5px solid rgba(18,6,114,.25);color:var(--navy);cursor:pointer}
 .burger:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-@media(min-width:1040px){
+@media(min-width:1200px){
   header.site{gap:clamp(.55rem,1vw,1.4rem)}
   .navdesk{
     display:flex;flex:1 1 auto;justify-content:flex-end;align-items:center;flex-wrap:nowrap;
@@ -416,7 +416,7 @@ details.apropos p{font-size:.94rem;max-width:min(72ch,100%);margin-top:.7rem}
 }
 
 /* Menu mobile : .navdesk sous le burger */
-@media(max-width:1039px){
+@media(max-width:1199px){
   .navdesk{
     display:none;flex-direction:column;align-items:stretch;gap:.15rem;
     position:absolute;top:100%;left:0;right:0;
