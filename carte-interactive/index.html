@@ -2145,15 +2145,15 @@ if (CREDITS_BLOC && map.attributionControl) {
 
 /* Découpage et couleurs Santé Québec des trois RLS. */
 const COULEURS_RLS_EST_SQ = {
-  'Pierre-Boucher': '#e6007e',
-  'Richelieu-Yamaska': '#e6007e',
-  'Pierre-De Saurel': '#e6007e',
-  'Champlain': '#43a047',
-  'Haut-Richelieu–Rouville': '#43a047',
-  'Jardins-Roussillon': '#0080d7',
-  'Vaudreuil-Soulanges': '#0080d7',
-  'du Suroît': '#0080d7',
-  'du Haut-Saint-Laurent': '#0080d7'
+  'Pierre-Boucher': '#0080D7',
+  'Richelieu-Yamaska': '#0080D7',
+  'Pierre-De Saurel': '#0080D7',
+  'Champlain': '#08A0A0',
+  'Haut-Richelieu–Rouville': '#08A0A0',
+  'Jardins-Roussillon': '#170A72',
+  'Vaudreuil-Soulanges': '#170A72',
+  'du Suroît': '#170A72',
+  'du Haut-Saint-Laurent': '#170A72'
 };
 const RLS_VERS_REGION = {
   'Pierre-Boucher': 'Est',
@@ -2166,8 +2166,8 @@ const RLS_VERS_REGION = {
   'du Suroît': 'Ouest',
   'du Haut-Saint-Laurent': 'Ouest'
 };
-const COULEURS_TERRITOIRE = { 'Est': '#e6007e', 'Centre': '#43a047', 'Ouest': '#0080d7' };
-const COULEURS_TERRITOIRE_PALES = { 'Est': '#f48cc5', 'Centre': '#aad4ac', 'Ouest': '#8cc6ed' };
+const COULEURS_TERRITOIRE = { 'Est': '#0080D7', 'Centre': '#08A0A0', 'Ouest': '#170A72' };
+const COULEURS_TERRITOIRE_PALES = { 'Est': '#A8DCF4', 'Centre': '#A7DFDC', 'Ouest': '#B8B1DF' };
 const couchesRlsEstOfficielle = new Map();
 function synchroniserOverlaysRlsEstOfficielle() {
   if (!couchesRlsEstOfficielle.size) return;
@@ -2413,32 +2413,32 @@ map.on('locationerror', function () {
 
 /* Palette Santé Québec propre aux trois RLS de la Montérégie-Est. */
 const RLS_COLORS_REGION = {
-  'Pierre-Boucher':    '#e6007e',
-  'Richelieu-Yamaska': '#e6007e',
-  'Pierre-De Saurel':  '#e6007e',
-  'Champlain':         '#43a047',
-  'Haut-Richelieu–Rouville': '#43a047',
-  'Jardins-Roussillon': '#0080d7',
-  'Vaudreuil-Soulanges': '#0080d7',
-  'du Suroît': '#0080d7',
-  'du Haut-Saint-Laurent': '#0080d7',
-  'Régional':          '#e6007e'
+  'Pierre-Boucher':    '#0080D7',
+  'Richelieu-Yamaska': '#0080D7',
+  'Pierre-De Saurel':  '#0080D7',
+  'Champlain':         '#08A0A0',
+  'Haut-Richelieu–Rouville': '#08A0A0',
+  'Jardins-Roussillon': '#170A72',
+  'Vaudreuil-Soulanges': '#170A72',
+  'du Suroît': '#170A72',
+  'du Haut-Saint-Laurent': '#170A72',
+  'Régional':          '#0080D7'
 };
 const RLS_COLORS_PALES_REGION = {
-  'Pierre-Boucher':    '#f48cc5',
-  'Richelieu-Yamaska': '#f48cc5',
-  'Pierre-De Saurel':  '#f48cc5',
-  'Champlain':         '#aad4ac',
-  'Haut-Richelieu–Rouville': '#aad4ac',
-  'Jardins-Roussillon': '#8cc6ed',
-  'Vaudreuil-Soulanges': '#8cc6ed',
-  'du Suroît': '#8cc6ed',
-  'du Haut-Saint-Laurent': '#8cc6ed',
-  'Régional':          '#f48cc5'
+  'Pierre-Boucher':    '#A8DCF4',
+  'Richelieu-Yamaska': '#A8DCF4',
+  'Pierre-De Saurel':  '#A8DCF4',
+  'Champlain':         '#A7DFDC',
+  'Haut-Richelieu–Rouville': '#A7DFDC',
+  'Jardins-Roussillon': '#B8B1DF',
+  'Vaudreuil-Soulanges': '#B8B1DF',
+  'du Suroît': '#B8B1DF',
+  'du Haut-Saint-Laurent': '#B8B1DF',
+  'Régional':          '#A8DCF4'
 };
 function couleurMilieu(g) {
   if (g && COULEURS_TERRITOIRE[g.region]) return COULEURS_TERRITOIRE[g.region];
-  return (g && RLS_COLORS_REGION[g.rls]) || '#e6007e';
+  return (g && RLS_COLORS_REGION[g.rls]) || '#0080D7';
 }
 /* Couleur RÉELLEMENT peinte sur l'épingle et le rond de la liste : identique à couleurMilieu()
    pour un milieu en recrutement, pâlie pour un milieu affiché seulement via « Toutes les
@@ -2453,7 +2453,7 @@ function couleurEpingle(g) {
    secteur et de légende) : une teinte plus foncée quand la couleur du RLS n'atteint pas 4,5:1
    avec le blanc (audit du 27 sept. 2026, WCAG 1.4.3). La couleur d'identité du RLS (zones de la
    carte, boutons de filtre, comparatif, textes du mode sombre) ne change pas. */
-const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4', '#43A047': '#2E7D32' };
+const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4' };
 function fondChiffre(c) { return FOND_CHIFFRE[String(c || '').toUpperCase()] || c; }
 
 // Légende des trois RLS de la carte autonome. Retirée le 27 sept. 2026 (demande du propriétaire) :
@@ -2471,9 +2471,9 @@ if (LEGENDE_RLS) (function(){
     // Contenu initial (mode cliniques) : « Régional » n'est porté par aucune clinique.
     // majLegende() reprend la main dès syncModeCarteUI() — esc() n'existe pas encore ici.
     d.innerHTML = '<div class="rls-legend-title">Région</div>' +
-      ligne('#e6007e', 'Montérégie-Est') +
-      ligne('#43a047', 'Montérégie-Centre') +
-      ligne('#0080d7', 'Montérégie-Ouest');
+      ligne('#0080D7', 'Montérégie-Est') +
+      ligne('#08A0A0', 'Montérégie-Centre') +
+      ligne('#170A72', 'Montérégie-Ouest');
     L.DomEvent.disableClickPropagation(d);
     legendEl = d;
     return d;
@@ -3211,9 +3211,9 @@ function majLegende() {
   const ligne = (couleur, texte) =>
     `<div class="rls-legend-row"><span class="rls-dot" style="background:${fondChiffre(couleur)}"></span>${esc(texte)}</div>`;
   let html = '<div class="rls-legend-title">Région</div>' +
-    ligne('#e6007e', 'Montérégie-Est') +
-    ligne('#43a047', 'Montérégie-Centre') +
-    ligne('#0080d7', 'Montérégie-Ouest');
+    ligne('#0080D7', 'Montérégie-Est') +
+    ligne('#08A0A0', 'Montérégie-Centre') +
+    ligne('#170A72', 'Montérégie-Ouest');
   legendEl.innerHTML = html;
 }
 
