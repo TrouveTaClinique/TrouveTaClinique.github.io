@@ -3732,7 +3732,7 @@ function pageRecherche(cliniques) {
   </form>
   <p class="search-page-status" id="search-page-status">Tapez au moins deux lettres (nom, ville ou secteur).</p>
   <ul class="search-hits" id="search-page-results"></ul>
-  <p class="aide">La recherche couvre les ${cliniquesEst} cliniques et les ${etablissementsEst} établissements de la Montérégie-Est, ainsi que les guides PTEM et AMP.</p>
+  <p class="aide">La recherche couvre les cliniques et les établissements des trois territoires de la Montérégie (Est, Centre et Ouest), ainsi que les guides PTEM et AMP.</p>
 </div>
 
 <section class="zone search-discovery" style="padding-top:var(--s-md)">
@@ -3763,6 +3763,7 @@ function pageRecherche(cliniques) {
       <span class="nom">Réseaux locaux</span><span class="det">Pierre-Boucher, Richelieu-Yamaska, Pierre-De Saurel.</span>
       <span class="go">Parcourir les RLS →</span></a>
   </div>
+  <p class="autres-note" style="margin-top:var(--s-sm)">Ces listes portent sur la Montérégie-Est. Pour le Centre et l’Ouest&nbsp;: <a href="/monteregie-centre/">Montérégie-Centre</a>, <a href="/monteregie-ouest/">Montérégie-Ouest</a> ou la <a href="/monteregie/">carte de toute la Montérégie</a>.</p>
   <aside class="rappel appel reveal"><h3>Vous ne trouvez pas un milieu&nbsp;?</h3>
     <p>Il n’est peut-être pas encore répertorié, ou il figure sous un autre nom. Signalez-le et il sera ajouté.</p>
     <p><a class="btn teal" href="${SIGNALER_CLINIQUE_HREF}">Signaler une clinique</a></p></aside>
