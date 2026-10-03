@@ -12,7 +12,7 @@
   "date": "2026-10-03"
  },
  "/guides/": {
-  "empreinte": "b514d5b9dd259986d31cd327a24a50b09a1bc508",
+  "empreinte": "1ac04d06af154fa3517905fe4d5a3417e9be2472",
   "date": "2026-10-03"
  },
  "/guides/ressources-communautaires/": {
@@ -28,11 +28,11 @@
   "date": "2026-10-03"
  },
  "/monteregie-centre/cliniques/clinique-medicale-du-college-gmf-richelieu-saint-cesaire/": {
-  "empreinte": "5547f335104c5b5d6e43b12fabf3b425dc35491e",
+  "empreinte": "5d5a7563111ecf6754302997bfbecf4e3a6c445f",
   "date": "2026-10-03"
  },
  "/monteregie-centre/cliniques/clinique-medicale-saint-luc-gmf-saint-luc-saint-eugene/": {
-  "empreinte": "3b57185163258e81e5e0769fce11759c71bb7035",
+  "empreinte": "02a0999121a07c77f9ffb1fd884f74300e64e530",
   "date": "2026-10-03"
  },
  "/monteregie-centre/cliniques/clsc-de-henryville/": {
@@ -88,7 +88,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-centre/cliniques/gmf-saint-luc-saint-eugene-clinique-medicale-saint-eugene/": {
-  "empreinte": "6f98389d030895d96adfa6f395cf990140f9db7c",
+  "empreinte": "db48e956001cc205956dcad9e70a255c10d36673",
   "date": "2026-10-03"
  },
  "/monteregie-centre/cliniques/gmf-u-charles-le-moyne/": {
@@ -104,7 +104,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-centre/cliniques/point-de-service-saint-cesaire-gmf-richelieu-saint-cesaire/": {
-  "empreinte": "be2942d7121e4041b31aa3ea23cff9796424f337",
+  "empreinte": "c07e32697fc3b32a1f47297517c0c1be0c4f24fe",
   "date": "2026-10-03"
  },
  "/monteregie-centre/etablissements/": {
@@ -120,7 +120,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-centre/etablissements/clinique-des-jeunes-du-bassin-de-chambly/": {
-  "empreinte": "01e918acdb6f737bc59392896a03805df2f8c63e",
+  "empreinte": "9f20b94c966e6e986d960b8d6d0a1a7870c65ca4",
   "date": "2026-10-03"
  },
  "/monteregie-centre/etablissements/clinique-jeunesse-de-saint-jean-sur-richelieu/": {
@@ -128,7 +128,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-centre/etablissements/clsc-vallee-des-forts-soutien-a-domicile/": {
-  "empreinte": "be2d02169ab7e2ae00a8afe609df2844999fb1cf",
+  "empreinte": "e95c47a605b77c9d80660762ba2bb5e665cd494b",
   "date": "2026-10-03"
  },
  "/monteregie-centre/etablissements/gmf-u-de-saint-jean-sur-richelieu/": {
@@ -144,7 +144,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-centre/rls/": {
-  "empreinte": "e76a624a4b10db164c9753fe6bf3c0a2412f6d86",
+  "empreinte": "a7d1b074afba347a55d08debde0be44bd2c466cd",
   "date": "2026-10-03"
  },
  "/monteregie-centre/rls/champlain/": {
@@ -176,7 +176,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-c-gmf-st-mathieu-de/": {
-  "empreinte": "5cf0c3fff7e6677cf6dcda7a4f09a7770b70033b",
+  "empreinte": "de913ba1e86787cb827f7c12d0a48ae5faac4df0",
   "date": "2026-10-03"
  },
  "/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy/": {
@@ -200,7 +200,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-est/cliniques/gmf-cooperative-de-solidarite-de-sante-de-la-mrc-d-acton/": {
-  "empreinte": "2a8b7dcb665be73ae8e47092e7612ba9cec213bb",
+  "empreinte": "1bf699145e50be783e87068cc85754d357e9df98",
   "date": "2026-10-03"
  },
  "/monteregie-est/cliniques/gmf-des-iles-percees/": {
@@ -284,15 +284,15 @@
   "date": "2026-10-03"
  },
  "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-longueuil/": {
-  "empreinte": "6f33f14731510b0f1c29f06dec2fd90cf7cfe417",
+  "empreinte": "b07fce06a29f8531317c749e807bd14c28ed55fa",
   "date": "2026-10-03"
  },
  "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/": {
-  "empreinte": "f7fdee7958bc44f8277d9790740ec6d4cbdc7b0b",
+  "empreinte": "899f1d643f43ae450a28abfa1b853e3593189577",
   "date": "2026-10-03"
  },
  "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-philippe/": {
-  "empreinte": "8c2352e1f1b124a2ebdfd49157ccde345a95ff2d",
+  "empreinte": "947ab272feba97ec9d8753afb82d8afd809875f5",
   "date": "2026-10-03"
  },
  "/monteregie-est/etablissements/clsc-de-longueuil-ouest/": {
@@ -348,7 +348,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-est/rls/": {
-  "empreinte": "6ee31d8ce6cd02fcd5e6024d6e40b417de22b577",
+  "empreinte": "dcb9a2e32d675f127458b1888ebb51368feaac92",
   "date": "2026-10-03"
  },
  "/monteregie-est/rls/pierre-boucher/": {
@@ -452,7 +452,7 @@
   "date": "2026-10-03"
  },
  "/monteregie-ouest/rls/": {
-  "empreinte": "609beea4c0e42d3cff24d886fcec64dd419da65c",
+  "empreinte": "cf23f68cb079bdce3c1b8913bea554818f2805d9",
   "date": "2026-10-03"
  },
  "/monteregie-ouest/rls/du-haut-saint-laurent/": {
@@ -476,7 +476,7 @@
   "date": "2026-10-03"
  },
  "/recherche/": {
-  "empreinte": "82e130b88345d7a8fefa2ee03e170aaeb4e19150",
+  "empreinte": "6a2d7659100f099aa6bef38ff351d8ec099a116c",
   "date": "2026-10-03"
  }
 }

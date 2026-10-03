@@ -87,7 +87,7 @@ const PAGES = {
     ogAlt: 'Guides pratiques, algorithmes et ressources communautaires · Trouve ta clinique',
     ldDescription: 'Catalogue de guides de pratique, algorithmes et ressources pour la médecine familiale en première ligne.',
     eyebrow: 'Médecine familiale · Première ligne',
-    h1: 'Guides pratiques et ressources cliniques',
+    h1: 'Guides de pratique pour la première ligne',
     lead: 'Retrouvez les guides de pratique, algorithmes et documents pour les patients utiles à la médecine familiale.',
     rechercheTitre: 'Quelle ressource cherchez-vous&nbsp;?',
     rechercheEtiquette: 'Rechercher une ressource clinique',

@@ -528,7 +528,14 @@ function presentationDepuisDonnees(c) {
    propriétaire, 28 sept. 2026) : les médecins qui cherchent « GMF X recrutement » tombent mieux,
    et les patients voient dans Google que la page n'est pas pour eux. Forme la plus longue qui
    tient en 65 caractères, sinon le titre habituel « Nom : Ville ». */
+/* Titres écrits à la main quand le nom ne tient pas sans être coupé (audit SEO du 3 oct. 2026).
+   Garder les mots que les gens cherchent (ici « GMF St-Mathieu de Beloeil »). */
+const TITRES_CLINIQUES = {
+  130: 'Clinique des professionnels Sorel-Tracy : GMF St-Mathieu de Beloeil'
+};
+
 function titreClinique(c) {
+  if (TITRES_CLINIQUES[c.id]) return TITRES_CLINIQUES[c.id];
   const nom = String(c.nom || '').replace(/\s+/g, ' ').trim();
   const ville = rempli(c.ville) ? String(c.ville).replace(/\s+/g, ' ').trim() : '';
   if (recrute(c) && ville) {
@@ -549,7 +556,7 @@ function descriptionClinique(c) {
     `${c.nom} à ${ville}${rlsCourt} : ${statut}.`,
     /* Nom long : on garde le nom, pour que deux milieux de la même ville ne partagent pas la même description. */
     `${c.nom}, ${ville} : ${statut}.`,
-    `${type} à ${ville}${rlsCourt} : ${statut}, fiche et contacts.`
+    `${type} à ${ville}${rlsCourt} : ${statut}.`
   ];
   /* Bing juge trop courtes les descriptions sous ~110 caractères : on complète la phrase de base
      par la plus longue précision qui tient dans la cible de 135 caractères. */
@@ -558,7 +565,8 @@ function descriptionClinique(c) {
     : [' Équipe, horaires, pratique et coordonnées du milieu.', ' Équipe, horaires et coordonnées.', ' Fiche et coordonnées.'];
   for (const base of candidats) {
     if (base.length > META_DESC_CIBLE) continue;
-    const complet = complements.map(x => base + x).find(t => t.length <= META_DESC_CIBLE);
+    const complet = complements.filter(x => !(/fiche et/i.test(base) && /fiche et/i.test(x)))
+      .map(x => base + x).find(t => t.length <= META_DESC_CIBLE);
     if (complet && complet.length >= 110) return controlerMetaDescription(complet, `clinique ${c.id || c.nom}`);
   }
   const choisi = candidats.find(t => t.length <= META_DESC_CIBLE) || candidats[candidats.length - 1];
@@ -1584,8 +1592,8 @@ function pageRlsHubRegion(u, parRls, majDonnees) {
 ${sections}`;
 
   return page({
-    titre: limiterTexte(`RLS de la ${u.nom}`, 58),
-    description: `Les ${rlsPresents.length} RLS de la ${u.nom} et leurs milieux en recrutement de médecins de famille.`,
+    titre: limiterTexte(`RLS de la ${u.nom} : milieux qui recrutent`, 58),
+    description: `Les ${rlsPresents.length} RLS de la ${u.nom} et leurs ${total} milieux qui recrutent des médecins de famille : villes, fiches et contacts de recrutement.`,
     /* Indexable seulement là où le territoire tient aussi ses pages de RLS (voir `canonique`) :
        sinon ce hub renverrait Google vers des pages qu'on a nous-mêmes mises en noindex. */
     url, profondeur: 1, indexable: u.canonique, jsonLd, univers: u, actif: null,
@@ -2355,7 +2363,8 @@ function descriptionEtablissementSeo(inst, typeLib, nSecteurs, contexte) {
   const complements = [' Conditions et contacts pour votre PTEM (PREM).', ' Conditions et personnes-ressources.', ' Fiche et contacts.'];
   for (const base of candidats) {
     if (base.length > META_DESC_CIBLE) continue;
-    const complet = complements.map(x => base + x).find(t => t.length <= META_DESC_CIBLE);
+    const complet = complements.filter(x => !(/fiche et/i.test(base) && /fiche et/i.test(x)))
+      .map(x => base + x).find(t => t.length <= META_DESC_CIBLE);
     if (complet && complet.length >= 110) return controlerMetaDescription(complet, contexte);
   }
   const choisi = candidats.find(t => t.length <= META_DESC_CIBLE) || candidats[candidats.length - 1];
@@ -3698,7 +3707,7 @@ function pageRecherche(cliniques) {
   const url = `${SITE}/recherche/`;
   const titre = 'Rechercher un milieu : Montérégie';
   const description = limiterTexte(
-    'Recherchez une clinique, un établissement, une ville ou un guide (PTEM, AMP) en Montérégie.',
+    'Recherchez une clinique, un établissement, une ville ou un guide (PTEM, AMP) pour pratiquer la médecine familiale en Montérégie.',
     155
   );
   const jsonLd = {
