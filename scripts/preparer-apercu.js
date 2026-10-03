@@ -16,6 +16,7 @@ const DOMAINES_INTERDITS = new Set(['trouvetaclinique.ca', 'www.trouvetaclinique
 const DOSSIERS = new Set([
   'assets', 'vendor', 'amp', 'ptem', 'ptem-u', 'cliniques', 'rls', 'recherche', 'guides',
   'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest',
+  'carte-sante-quebec',
   'a-propos', 'confidentialite'
 ]);
 const FICHIERS = new Set([
