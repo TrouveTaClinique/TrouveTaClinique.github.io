@@ -84,7 +84,8 @@ dates du sitemap selon le contenu réel des pages).
   20 $ sans recharge). L'IA reçoit tout le catalogue (une ligne par ressource, mis en cache une
   heure) ; la présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
   des organismes du catalogue, elle ne répond jamais à la question clinique (décision du
-  propriétaire). Le Worker se déploie depuis `main` (Cloudflare Workers Builds). Plafond de
+  propriétaire). Aucun texte rédigé par l'IA n'est affiché (3 oct. 2026) : seulement les fiches
+  choisies, leur type et une phrase fixe si un aspect n'est couvert par aucune fiche (`lacune`). Le Worker se déploie depuis `main` (Cloudflare Workers Builds). Plafond de
   150 questions par jour (`PLAFOND_JOUR`), compté dans l'espace KV `COMPTEUR` de `wrangler.toml`.
 
 ## Divers
