@@ -69,8 +69,9 @@ test('plan Guides (24 à 30) : type de document, pastilles, filtres, actions et 
   const sujets = new Set(guidesSeuls.map(r => r.cat));
   assert.equal((guides.match(/class="guides-pastille"/g) || []).length, sujets.size);
   assert.ok((comm.match(/class="guides-pastille"/g) || []).length >= 20);
-  assert.ok(guides.includes('data-filtre="format"') && guides.includes('id="guides-fr"'));
-  assert.ok(!comm.includes('data-filtre="format"') && !comm.includes('id="guides-fr"'));
+  assert.ok(guides.includes('data-filtre="format"') && guides.includes('id="guides-fr"') && guides.includes('id="guides-libre"'));
+  assert.equal((guides.match(/data-abo="1"/g) || []).length, ressources.filter(r => r.acces && r.type !== 'communautaire').length);
+  assert.ok(!comm.includes('data-filtre="format"') && !comm.includes('id="guides-fr"') && !comm.includes('id="guides-libre"'));
   for (const page of [guides, comm]) {
     assert.ok(page.includes('class="guides-band guides-consultes"'));
     assert.ok(page.includes('class="btn guides-demander-ia"') && page.includes('class="btn guides-proposer-ce"'));
