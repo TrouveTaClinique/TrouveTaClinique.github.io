@@ -61,7 +61,6 @@ function generer() {
     '.dp-name-display:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }\n</style>',
     '.dp-name-display:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }\n' +
     '.rls-legend { max-height: 46vh; overflow: auto; }\n' +
-    '.fiche-public a { word-break: break-word; }\n' +
     '.reg-filter { display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-top:12px; }\n' +
     '.reg-chip { font-size:12px; font-weight:600; letter-spacing:.02em; padding:8px 4px; border-radius:999px;\n' +
     '  text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\n' +
@@ -500,52 +499,48 @@ function syncRegChips() {
 }`,
     'filtres de la carte générale');
 
-  const aidePublique = `
-let fichesPubliques = { cliniques: {}, etablissements: {}, hopitaux: {} };
-function hotePublic(u) {
-  try { return new URL(u).hostname.replace(/^www\\./, ''); } catch (e) { return 'source'; }
-}
-function htmlRenseignementsPublics(kind, id) {
-  const sac = fichesPubliques && fichesPubliques[kind];
-  const f = sac && sac[String(id)];
-  if (!f) return '';
-  const ligne = (lbl, val) => '<div class="vw-row"><span class="vw-label">' + lbl + '</span><span class="vw-value">' + val + '</span></div>';
-  const bits = [];
-  if (f.telephone) {
-    const digits = String(f.telephone).replace(/[^\\d+]/g, '');
-    bits.push(ligne('Téléphone vérifié', '<a href="tel:' + esc(digits) + '">' + esc(f.telephone) + '</a>'));
-  }
-  if (f.adresse) bits.push(ligne('Adresse vérifiée', esc(f.adresse)));
-  if (f.site) bits.push(ligne('Site vérifié', siteLink(f.site)));
-  if (f.niveauGmf) bits.push(ligne('Niveau GMF', esc(String(f.niveauGmf))));
-  if (f.services && f.services.length) bits.push(ligne('Services', esc(f.services.join(', '))));
-  if (f.recrutement) bits.push(ligne('Recrutement', esc(f.recrutement)));
-  if (!bits.length) return '';
-  const sources = (f.sources || []).filter(Boolean)
-    .map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(hotePublic(u)) + '</a>')
-    .join(', ');
-  return '<div class="vw-sec fiche-public"><div class="vw-sec-title">Renseignements publics</div>'
-    + bits.join('') + (sources ? ligne('Source', sources) : '')
-    + '</div><div class="vw-divider"></div>';
-}
-`;
-  html = uneFois(html, 'function hopitalPopupHtml(h) {', aidePublique + 'function hopitalPopupHtml(h) {', 'aide publique');
+  // Lecture des établissements comme la carte Montérégie : le Centre range le
+  // responsable, le besoin et les précisions sous « recrutement ».
   html = uneFois(html,
-    "${urlWebSure(h.site) ? `<p><a href=\"${esc(urlWebSure(h.site))}\" target=\"_blank\" rel=\"noopener\">Suivre le projet ↗</a></p>` : ''}\n    </div>`;",
-    "${urlWebSure(h.site) ? `<p><a href=\"${esc(urlWebSure(h.site))}\" target=\"_blank\" rel=\"noopener\">Suivre le projet ↗</a></p>` : ''}\n      ${htmlRenseignementsPublics('hopitaux', h.id)}\n    </div>`;",
-    'popup chantier');
+    "    adresse: inst.adresse || '',\n    missionRegionale: !!inst.missionRegionale,",
+    "    adresse: inst.adresse || '',\n    telephone: inst.telephone || '',\n    missionRegionale: !!inst.missionRegionale,",
+    'téléphone lu');
   html = uneFois(html,
-    "${urlWebSure(h.site) ? `<p><a href=\"${esc(urlWebSure(h.site))}\" target=\"_blank\" rel=\"noopener\">Fiche de l'établissement ↗</a></p>` : ''}\n  </div>`;",
-    "${urlWebSure(h.site) ? `<p><a href=\"${esc(urlWebSure(h.site))}\" target=\"_blank\" rel=\"noopener\">Fiche de l'établissement ↗</a></p>` : ''}\n    ${htmlRenseignementsPublics('hopitaux', h.id)}\n  </div>`;",
-    'popup hôpital');
+    "    referenceExistante: inst.referenceExistante || null,\n    _installationEtab: true",
+    "    referenceExistante: inst.referenceExistante || null,\n    coordonneesApproximatives: !!inst.coordonneesApproximatives,\n    _installationEtab: true",
+    'emplacement approximatif lu');
   html = uneFois(html,
-    "${inst.lienWeb ? `<div class=\"vw-row\"><span class=\"vw-label\">Site internet</span><span class=\"vw-value\">${siteLink(inst.lienWeb)}</span></div>` : ''}",
-    "${inst.lienWeb ? `<div class=\"vw-row\"><span class=\"vw-label\">Site internet</span><span class=\"vw-value\">${siteLink(inst.lienWeb)}</span></div>` : ''}\n      ${htmlRenseignementsPublics('etablissements', inst.id)}",
-    'fiche établissement');
+    "      responsableNom: sec.responsableNom || '',\n      responsableCourriel: sec.responsableCourriel || '',\n      _secteurEtab: true",
+    "      responsableNom: sec.responsableNom || (sec.recrutement || {}).responsableNom || '',\n      responsableCourriel: sec.responsableCourriel || (sec.recrutement || {}).responsableCourriel || '',\n      besoinDeclare: (sec.recrutement || {}).besoinDeclare || '',\n      notesPubliques: Array.isArray((sec.recrutement || {}).notesPubliques) ? sec.recrutement.notesPubliques.slice() : [],\n      dme: sec.dme || (sec.recrutement || {}).dme || '',\n      _secteurEtab: true",
+    'secteur lu');
+
   html = uneFois(html,
-    '<div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(g)}</span></div>',
-    '<div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(g)}</span></div>\n      ${htmlRenseignementsPublics(\'cliniques\', g.id)}',
-    'fiche clinique');
+    "  if (g.missionRegionale) return 'Mission régionale';\n  return g.rls ? ('RLS ' + g.rls) : 'À venir';\n}",
+    "  const lieu = g.missionRegionale ? 'Mission régionale' : (g.rls ? ('RLS ' + g.rls) : '');\n  const nom = g.region ? (REGION_LABELS[g.region] || g.region) : '';\n  if (nom) return lieu ? (nom + ' · ' + lieu) : nom;\n  return lieu || 'À venir';\n}",
+    'région devant le RLS');
+  html = uneFois(html,
+    '<div class="vw-sec-title">Secteurs en recrutement (${visibles.length})</div>',
+    '<div class="vw-sec-title">Secteurs (${visibles.length})</div>',
+    'titre des secteurs');
+
+  // Mêmes renseignements que la carte Montérégie (scripts/carte.template.html) :
+  // tout vient de data.json et des fichiers d'établissements, rien d'autre.
+  html = uneFois(html,
+    "      <div class=\"vw-row\"><span class=\"vw-label\">Adresse</span><span class=\"vw-value\">${mapsLink(inst)}</span></div>\n      ${inst.lienWeb ?",
+    "      <div class=\"vw-row\"><span class=\"vw-label\">Adresse</span><span class=\"vw-value\">${mapsLink(inst)}</span></div>\n      ${inst.telephone ? `<div class=\"vw-row\"><span class=\"vw-label\">Téléphone</span><span class=\"vw-value\"><a href=\"tel:${esc(String(inst.telephone).replace(/[^\\d+]/g, ''))}\">${esc(inst.telephone)}</a></span></div>` : ''}\n      ${inst.lienWeb ?",
+    'téléphone de l’établissement');
+  html = uneFois(html,
+    "      ${inst.mentionPublique ? `<div class=\"vw-row\"><span class=\"vw-label\">Note</span><span class=\"vw-value\">${esc(inst.mentionPublique)}</span></div>` : ''}\n",
+    "      ${inst.mentionPublique ? `<div class=\"vw-row\"><span class=\"vw-label\">Note</span><span class=\"vw-value\">${esc(inst.mentionPublique)}</span></div>` : ''}\n      ${inst.coordonneesApproximatives ? `<div class=\"vw-row\"><span class=\"vw-label\">Carte</span><span class=\"vw-value\">Emplacement approximatif (adresse officielle, pin à confirmer).</span></div>` : ''}\n",
+    'emplacement approximatif');
+  html = uneFois(html,
+    "function htmlCorpsSecteur(s) {\n  return `<div class=\"dp-sect-corps\">\n",
+    "function htmlCorpsSecteur(s) {\n  const notes = (s.notesPubliques || []).map(n => `<div class=\"vw-row\"><span class=\"vw-label\">Précision</span><span class=\"vw-value\">${esc(n)}</span></div>`).join('');\n  return `<div class=\"dp-sect-corps\">\n      ${s.besoinDeclare ? `<div class=\"vw-row\"><span class=\"vw-label\">Besoin déclaré</span><span class=\"vw-value\">${esc(s.besoinDeclare)}</span></div>` : ''}\n      ${s.dme ? `<div class=\"vw-row\"><span class=\"vw-label\">Dossier médical</span><span class=\"vw-value\">${esc(s.dme)}</span></div>` : ''}\n",
+    'besoin et dossier médical du secteur');
+  html = uneFois(html,
+    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      <div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
+    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${notes}\n      <div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
+    'précisions du secteur');
 
   html = uneFois(html,
     "const NOTE_KEY  = id => 'dtmf-mtg-note-' + id;\nconst ORDER_KEY = 'dtmf-mtg-ordre';\nconst FAVORDER_KEY = 'dtmf-mtg-ordre-favoris';\nconst FAVORDER_ETAB_KEY = 'dtmf-mtg-ordre-favoris-etablissements';\nconst FAV_KEY   = 'dtmf-mtg-favoris';\nconst FAV_SECTEURS_KEY = 'ttc-est-secteurs-favoris-v1';\nconst NOTE_SECTEUR_KEY = id => 'ttc-est-secteur-note-v1-' + id;",
@@ -599,13 +594,9 @@ fetch('../data.json', { cache: 'no-cache' })
   .then(data => Promise.all([
     data,
     chargerJsonCarte('../data-etablissements.json'),
-    chargerJsonCarte('../data-etablissements-centre.json'),
-    chargerJsonCarte('fiches-publiques.json')
+    chargerJsonCarte('../data-etablissements-centre.json')
   ]))
-  .then(([data, etabEst, etabCentre, fiches]) => {
-    fichesPubliques = fiches || { cliniques: {}, etablissements: {}, hopitaux: {} };
-    return initData(data, fusionnerEtablissements(etabEst, etabCentre));
-  })`,
+  .then(([data, etabEst, etabCentre]) => initData(data, fusionnerEtablissements(etabEst, etabCentre)))`,
     'chargement des trois territoires');
 
   html = uneFois(html, "  var regNom = 'Montérégie-Est';", "  var regNom = 'Montérégie';", 'partage');
@@ -621,7 +612,9 @@ fetch('../data.json', { cache: 'no-cache' })
     throw new Error('Un filtre qui limite la carte à l’Est est resté dans la page.');
   }
   if (!html.includes('data-etablissements-centre.json')) throw new Error('Les établissements du Centre ne sont pas chargés.');
-  if (!html.includes('fiches-publiques.json')) throw new Error('Le fichier de renseignements publics n’est pas chargé.');
+  if (html.includes('fiches-publiques.json') || html.includes('Renseignements publics')) {
+    throw new Error('La carte doit afficher seulement les données de data.json et des établissements.');
+  }
   if (!html.includes('noindex, nofollow')) throw new Error('La page doit rester noindex.');
   if (/kaushan/i.test(html)) throw new Error('Kaushan Script ne doit pas apparaître.');
   if (!html.includes('Segoe UI')) throw new Error('Segoe UI est absente.');
