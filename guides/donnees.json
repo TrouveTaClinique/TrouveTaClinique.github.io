@@ -2992,13 +2992,13 @@
     "format": "algorithme"
   },
   {
-    "title": "Hypertrophie bénigne de la prostate et symptômes urinaires chez l’homme (EN)",
+    "title": "Hypertrophie bénigne de la prostate et symptômes urinaires chez l’homme : guide canadien (mise à jour 2022)",
     "org": "Association des urologues du Canada",
     "cat": "Rein et voies urinaires",
-    "tags": "HBP prostatisme prostate symptômes urinaires nycturie tamsulosine finastéride LUTS",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9343161/",
-    "desc": "Guide canadien (mise à jour 2022) : évaluation et traitement des symptômes du bas appareil urinaire masculin.",
-    "verifie": "2026-10-02",
+    "tags": "HBP prostatisme prostate symptômes urinaires nycturie tamsulosine finastéride LUTS Hypertrophie bénigne de la prostate et symptômes urinaires chez l’homme (EN)",
+    "url": "https://www.cua.org/system/files/Guideline-Files/7906_FR_v3.pdf",
+    "desc": "Guide de l’Association des urologues du Canada (2022), version française : évaluation, traitement médical et orientation.",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-28",
     "format": "guide"
   },
@@ -18199,6 +18199,83 @@
     "url": "https://www.chudequebec.ca/chudequebec.ca/files/68/68dc5efb-1906-4388-98c3-c179a85082cc.pdf",
     "desc": "Feuillet pour le patient : la cataracte, la chirurgie et les choix de lentilles couvertes ou non par la RAMQ.",
     "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Goutte : diagnostic et traitement",
+    "org": "AMRQ",
+    "cat": "Os, articulations et douleur",
+    "tags": "goutte arthrite microcristalline acide urique hyperuricémie allopurinol colchicine crise de goutte podagre",
+    "url": "https://rhumatologie.org/publications/telecharger?publicationId=13",
+    "desc": "Fiche de l’Association des médecins rhumatologues du Québec : diagnostic, traitement de la crise et traitement hypo-uricémiant.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Goutte : vieille maladie, nouveaux défis",
+    "org": "AMRQ",
+    "cat": "Os, articulations et douleur",
+    "tags": "goutte acide urique allopurinol fébuxostat colchicine prophylaxie tophus",
+    "url": "https://rhumatologie.org/publications/telecharger?publicationId=3",
+    "desc": "Numéro du Rhumatologue de l’AMRQ (décembre 2012) sur la goutte : physiopathologie, diagnostic et traitement.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Polyarthrite rhumatoïde : urgence d’agir",
+    "org": "AMRQ",
+    "cat": "Os, articulations et douleur",
+    "tags": "polyarthrite rhumatoïde PAR arthrite inflammatoire synovite diagnostic précoce méthotrexate référence rhumatologie",
+    "url": "https://rhumatologie.org/publications/telecharger?publicationId=14",
+    "desc": "Numéro du Rhumatologue de l’AMRQ (février 2015) : reconnaître tôt la polyarthrite rhumatoïde, l’orienter et la traiter.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Arthrite inflammatoire : agents de rémission et biologiques, ce que tout médecin doit savoir",
+    "org": "AMRQ",
+    "cat": "Os, articulations et douleur",
+    "tags": "polyarthrite rhumatoïde DMARD ARMM méthotrexate biologiques anti-TNF suivi effets secondaires",
+    "url": "https://rhumatologie.org/publications/telecharger?publicationId=4",
+    "desc": "Numéro du Rhumatologue de l’AMRQ (mars 2012) sur les agents de rémission et les biologiques : suivi et effets indésirables.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Dépistage du cancer du sein : information pour les professionnels (PQDCS)",
+    "org": "MSSS",
+    "cat": "Prévention et vaccination",
+    "tags": "cancer du sein dépistage mammographie PQDCS 50 74 ans programme québécois prescription",
+    "url": "https://www.quebec.ca/sante/conseils-et-prevention/depistage-et-offre-de-tests-de-porteur/programme-quebecois-de-depistage-du-cancer-du-sein/professionnels-programme-quebecois-depistage-cancer-sein",
+    "desc": "Information du Programme québécois de dépistage du cancer du sein pour les professionnels : clientèle visée, mammographie, suivi.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Dépistage du cancer du sein : votre décision! (patientes)",
+    "org": "MSSS",
+    "cat": "Documents pour les patients",
+    "tags": "cancer du sein dépistage mammographie PQDCS décision partagée avantages inconvénients",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2023/23-243-05F.pdf",
+    "desc": "Dépliant du MSSS pour aider la patiente à décider de participer au dépistage par mammographie.",
+    "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Syndrome des ovaires polykystiques : diagnostic et prise en charge",
+    "org": "CMAJ",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "SOPK syndrome des ovaires polykystiques hyperandrogénie hirsutisme oligoménorrhée infertilité metformine",
+    "url": "https://www.cmaj.ca/content/196/13/E449",
+    "desc": "Revue canadienne (CMAJ, 2024), en français : critères diagnostiques, bilan et prise en charge du SOPK.",
+    "format": "guide",
     "verifie": "2026-10-03",
     "ajoute": "2026-10-03"
   }
