@@ -231,6 +231,9 @@ ul.sources a{font-weight:650}
 .rappel h3{font-size:1.25rem;margin-bottom:.55rem}
 .rappel p{font-size:.97rem;max-width:none;margin-bottom:.85rem}
 .rappel p:last-child{margin:0}
+.patients-egares{margin:0 0 var(--s-md)}
+.patients-egares h2{font-size:1.25rem;margin:0 0 .55rem}
+.patients-egares ul{margin:.2rem 0 0;padding-left:1.1rem;display:grid;gap:.45rem;font-size:.97rem}
 .maj{font-size:.86rem;opacity:.7;margin-top:var(--s-md)}
 
 /* ── pied ── */
