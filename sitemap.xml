@@ -39,14 +39,14 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/video/</loc>
-    <lastmod>2026-10-02</lastmod>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <video:video>
-      <video:thumbnail_loc>https://trouvetaclinique.ca/monteregie-est/video/affiche.jpg?v=v6</video:thumbnail_loc>
+      <video:thumbnail_loc>https://trouvetaclinique.ca/monteregie-est/video/affiche.jpg?v=v6c</video:thumbnail_loc>
       <video:title>Trouve ta clinique : la carte de la Montérégie-Est en vidéo</video:title>
       <video:description>Visite guidée de la carte interactive des cliniques et des établissements qui recrutent des médecins de famille en Montérégie-Est.</video:description>
-      <video:content_loc>https://trouvetaclinique.ca/monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4?v=v6</video:content_loc>
+      <video:content_loc>https://trouvetaclinique.ca/monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4?v=v6c</video:content_loc>
       <video:duration>236</video:duration>
       <video:family_friendly>yes</video:family_friendly>
     </video:video>

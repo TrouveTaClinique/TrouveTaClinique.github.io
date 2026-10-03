@@ -3662,7 +3662,7 @@ function pageRecherche(cliniques) {
    site, avec les données structurées VideoObject (résultats vidéo de Google). La vidéo et son affiche
    vivent à côté de la page (monteregie-est/video/), déposées à la main ; seule la page est générée.
    VERSION_VIDEO change l'adresse du fichier quand la vidéo est remplacée. */
-const VERSION_VIDEO = 'v6';
+const VERSION_VIDEO = 'v6c';   // 3 oct. 2026 : carton de fin sans la mention de collaboration
 /* Chapitres de la V6 (début de chaque plan, en secondes) : liste cliquable sur la page et balises Clip
    (« moments clés » de Google). À refaire si la vidéo change. */
 const DUREE_VIDEO_S = 236;
