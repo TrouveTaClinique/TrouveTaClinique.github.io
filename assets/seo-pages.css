@@ -753,7 +753,8 @@ main .cliniques-carte,main .carte-est{
 .nous-joindre .nj-tete h2{margin-inline:auto}
 .nous-joindre .nj-tete p{margin-inline:auto}
 .contact,.contact-merci{display:grid;gap:1rem 1.25rem;margin-top:1rem;padding:clamp(1.3rem,3vw,2.2rem);background:var(--teal-pale);border-radius:16px}
-@media(min-width:720px){.contact{grid-template-columns:1fr 1fr}.contact .large{grid-column:1 / -1}}
+/* Une case par ligne, largeur de lecture (3 oct. 2026). */
+.contact,.contact-merci{max-width:48rem;margin-inline:auto}
 .contact[hidden],.contact-merci[hidden]{display:none}
 /* Les champs ne débordent jamais de l'encadré, quel que soit le navigateur (3 oct. 2026). */
 .contact,.contact-merci{width:100%;box-sizing:border-box}
