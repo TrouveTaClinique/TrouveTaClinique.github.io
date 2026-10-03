@@ -4366,7 +4366,7 @@ function openDetail(id) {
   });
   if (!staffCells) staffCells = '<div class="staff-cell" style="grid-column:1 / -1;"><span class="staff-label" style="color:#b8b1a0;">À venir</span></div>';
 
-  const poRaw = datePassee(g.porteOuverte) ? '' : (g.porteOuverte || '').trim();
+  const poRaw = (g.porteOuverte || '').trim();
   const poDisp = !poRaw ? 'À venir'
     : (/^https?:\/\//i.test(poRaw)
         ? `<a href="${esc(poRaw)}" target="_blank" rel="noopener">S'inscrire / détails</a>`

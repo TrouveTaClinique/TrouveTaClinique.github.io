@@ -603,6 +603,13 @@ function syncRegChips() {
     "    params.set('c', String(id));\n  }\n  if (regionFilter.size === 1) params.set('region', Array.from(regionFilter)[0]);\n  const q = params.toString();",
     'territoire dans l’adresse');
 
+  // Portes ouvertes passées : affichées sur cette carte (décision du propriétaire, 3 oct. 2026).
+  // La carte Est continue de les masquer.
+  html = uneFois(html,
+    "  const poRaw = datePassee(g.porteOuverte) ? '' : (g.porteOuverte || '').trim();",
+    "  const poRaw = (g.porteOuverte || '').trim();",
+    'portes ouvertes passées');
+
   // Mêmes renseignements que la carte Montérégie (scripts/carte.template.html) :
   // tout vient de data.json et des fichiers d'établissements, rien d'autre.
   html = uneFois(html,
