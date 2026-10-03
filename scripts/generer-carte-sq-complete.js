@@ -164,8 +164,8 @@ function generer() {
       <button type="button" class="info-menu-link" role="menuitem" id="info-menu-install">
         <span class="info-menu-ic">⤓</span> Installer la carte Montérégie-Est
       </button>`,
-    `      <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/est/recrutement-medical-monteregie-est" target="_blank" rel="noopener">
-        <span class="info-menu-ic">i</span> Recrutement, Montérégie-Est
+    `      <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/qui-sommes-nous-dtmf-monteregie#MenuDTMF" target="_blank" rel="noopener">
+        <span class="info-menu-ic">i</span> DTMF Montérégie
       </a>
       <hr>
       <a class="info-menu-link" role="menuitem" href="/monteregie-est/ptem/">
