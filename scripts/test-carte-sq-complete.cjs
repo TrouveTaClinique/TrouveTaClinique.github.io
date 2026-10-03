@@ -56,7 +56,10 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
   assert.doesNotMatch(page, /h\.region !== 'Est'/);
   assert.match(page, /data-etablissements\.json/);
   assert.match(page, /data-etablissements-centre\.json/);
-  assert.match(page, /fiches-publiques\.json/);
+  assert.doesNotMatch(page, /fiches-publiques\.json|Renseignements publics/);
+  assert.match(page, /vw-label\">Dossier médical/);
+  assert.match(page, /vw-label\">Besoin déclaré/);
+  assert.match(page, /vw-label\">Téléphone/);
   assert.match(page, /ttc-sq-mtg-note-/);
   assert.doesNotMatch(page, /dtmf-mtg-note-/);
   assert.match(page, /trouvetaclinique\.ca\/carte-interactive\//);
@@ -90,49 +93,5 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
     assert.doesNotMatch(lire(path.relative(racine, fichier)), /carte-interactive/, fichier);
   }
   assert.ok(lister(racine).includes('carte-interactive/index.html'));
-  assert.ok(lister(racine).includes('carte-interactive/fiches-publiques.json'));
-});
-
-test('Les fiches publiques couvrent la carte, sans niveau inventé ni note privée', () => {
-  const fiches = JSON.parse(lire('carte-interactive/fiches-publiques.json'));
-  const donnees = JSON.parse(lire('data.json'));
-  const est = JSON.parse(lire('data-etablissements.json'));
-  const centre = JSON.parse(lire('data-etablissements-centre.json'));
-  assert.deepEqual(
-    donnees.cliniques.filter(c => String(c.notes || '').trim()).map(c => c.id),
-    []
-  );
-  assert.doesNotMatch(JSON.stringify(fiches), /@|\u2014/);
-  const ids = {
-    cliniques: donnees.cliniques.filter(c => c.visible !== false).map(c => String(c.id)),
-    etablissements: [...est.installations, ...centre.installations].map(i => String(i.id)),
-    hopitaux: donnees.hopitaux.map(h => String(h.id))
-  };
-  const vides = {};
-  for (const [kind, liste] of Object.entries(ids)) {
-    assert.deepEqual(Object.keys(fiches[kind]).sort(), [...liste].sort());
-    vides[kind] = [];
-    for (const id of liste) {
-      const row = fiches[kind][id];
-      assert.equal(row.niveauGmf, '');
-      assert.ok(Array.isArray(row.lacunes));
-      assert.ok(Array.isArray(row.services));
-      assert.ok(Array.isArray(row.sources));
-      for (const url of row.sources) assert.match(url, /^https?:\/\//);
-      const fait = ['adresse', 'telephone', 'site', 'services', 'recrutement'].some(k => {
-        const v = row[k];
-        return Array.isArray(v) ? v.length > 0 : String(v || '').trim();
-      });
-      if (!fait) vides[kind].push(id);
-    }
-  }
-  assert.deepEqual(vides.cliniques.sort(), ['31', '51', '52', '6', '64']);
-  assert.deepEqual(vides.etablissements.sort(), ['INS-005', 'INS-016', 'INS-C-003', 'INS-C-006']);
-  assert.deepEqual(vides.hopitaux, []);
-  assert.match(fiches.cliniques['1'].adresse, /1471, boulevard Lionel-Boulet/);
-  assert.equal(fiches.cliniques['1'].telephone, '450 652-2222');
-  assert.match(fiches.cliniques['88'].adresse, /300, rue Paradis/);
-  assert.match(fiches.cliniques['72'].adresse, /88, 5e Avenue/);
-  assert.match(fiches.cliniques['19'].recrutement, /Nous recrutons/);
-  assert.match(fiches.cliniques['133'].recrutement, /Nous recrutons/);
+  assert.ok(!lister(racine).includes('carte-interactive/fiches-publiques.json'));
 });

@@ -1539,7 +1539,6 @@ body.cmp-open { overflow:hidden; }
 .sb-ouvrir:focus-visible, .fav-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 .dp-name-display:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .rls-legend { max-height: 46vh; overflow: auto; }
-.fiche-public a { word-break: break-word; }
 .reg-filter { display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-top:12px; }
 .reg-chip { font-size:12px; font-weight:600; letter-spacing:.02em; padding:8px 4px; border-radius:999px;
   text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
@@ -1929,10 +1928,12 @@ function preparerCoucheEtablissements(donneesEtab) {
     lat: Number(inst.lat),
     lng: Number(inst.lng),
     adresse: inst.adresse || '',
+    telephone: inst.telephone || '',
     missionRegionale: !!inst.missionRegionale,
     mentionPublique: inst.mentionPublique || '',
     lienWeb: inst.lienWeb || '',
     referenceExistante: inst.referenceExistante || null,
+    coordonneesApproximatives: !!inst.coordonneesApproximatives,
     _installationEtab: true
   }));
 
@@ -1969,8 +1970,11 @@ function preparerCoucheEtablissements(donneesEtab) {
       termesRecherche: Array.isArray(sec.termesRecherche) ? sec.termesRecherche.slice() : [],
       ancre: sec.ancre || '',
       territoireSource: inst.missionRegionale ? null : (inst.rls || ''),
-      responsableNom: sec.responsableNom || '',
-      responsableCourriel: sec.responsableCourriel || '',
+      responsableNom: sec.responsableNom || (sec.recrutement || {}).responsableNom || '',
+      responsableCourriel: sec.responsableCourriel || (sec.recrutement || {}).responsableCourriel || '',
+      besoinDeclare: (sec.recrutement || {}).besoinDeclare || '',
+      notesPubliques: Array.isArray((sec.recrutement || {}).notesPubliques) ? sec.recrutement.notesPubliques.slice() : [],
+      dme: sec.dme || (sec.recrutement || {}).dme || '',
       _secteurEtab: true
     };
   }).filter(Boolean);
@@ -2023,8 +2027,10 @@ const aucunMode = () => modeCarte === 'etablissements' ? 'Aucun secteur' : 'Aucu
 const voirTousMode = () => modeCarte === 'etablissements' ? '↩ Voir tous les secteurs' : '↩ Voir toutes les cliniques';
 function libelleTerritoireSecteur(g) {
   if (!g) return 'À venir';
-  if (g.missionRegionale) return 'Mission régionale';
-  return g.rls ? ('RLS ' + g.rls) : 'À venir';
+  const lieu = g.missionRegionale ? 'Mission régionale' : (g.rls ? ('RLS ' + g.rls) : '');
+  const nom = g.region ? (REGION_LABELS[g.region] || g.region) : '';
+  if (nom) return lieu ? (nom + ' · ' + lieu) : nom;
+  return lieu || 'À venir';
 }
 function mettreAJourMetaPage() {
   const h1 = document.getElementById('page-h1');
@@ -2801,34 +2807,6 @@ function makeHopitalIcon(h) {
     iconSize:[size,size], iconAnchor:[size/2,size], popupAnchor:[0,-size-2] });
 }
 
-
-let fichesPubliques = { cliniques: {}, etablissements: {}, hopitaux: {} };
-function hotePublic(u) {
-  try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return 'source'; }
-}
-function htmlRenseignementsPublics(kind, id) {
-  const sac = fichesPubliques && fichesPubliques[kind];
-  const f = sac && sac[String(id)];
-  if (!f) return '';
-  const ligne = (lbl, val) => '<div class="vw-row"><span class="vw-label">' + lbl + '</span><span class="vw-value">' + val + '</span></div>';
-  const bits = [];
-  if (f.telephone) {
-    const digits = String(f.telephone).replace(/[^\d+]/g, '');
-    bits.push(ligne('Téléphone vérifié', '<a href="tel:' + esc(digits) + '">' + esc(f.telephone) + '</a>'));
-  }
-  if (f.adresse) bits.push(ligne('Adresse vérifiée', esc(f.adresse)));
-  if (f.site) bits.push(ligne('Site vérifié', siteLink(f.site)));
-  if (f.niveauGmf) bits.push(ligne('Niveau GMF', esc(String(f.niveauGmf))));
-  if (f.services && f.services.length) bits.push(ligne('Services', esc(f.services.join(', '))));
-  if (f.recrutement) bits.push(ligne('Recrutement', esc(f.recrutement)));
-  if (!bits.length) return '';
-  const sources = (f.sources || []).filter(Boolean)
-    .map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(hotePublic(u)) + '</a>')
-    .join(', ');
-  return '<div class="vw-sec fiche-public"><div class="vw-sec-title">Renseignements publics</div>'
-    + bits.join('') + (sources ? ligne('Source', sources) : '')
-    + '</div><div class="vw-divider"></div>';
-}
 function hopitalPopupHtml(h) {
   const tel = String(h.telephone || '').replace(/[^\d+]/g, '');
   const enChantier = estHopitalEnChantier(h);
@@ -2839,7 +2817,6 @@ function hopitalPopupHtml(h) {
       <p>${esc(h.adresse)}${h.ville ? ', ' + esc(h.ville) : ''}</p>
       <p><em>Pas encore ouvert${h.ouverturePrevue ? ' : ouverture prévue ' + esc(h.ouverturePrevue) : ''}. Ne pas s'y présenter en attendant.</em></p>
       ${urlWebSure(h.site) ? `<p><a href="${esc(urlWebSure(h.site))}" target="_blank" rel="noopener">Suivre le projet ↗</a></p>` : ''}
-      ${htmlRenseignementsPublics('hopitaux', h.id)}
     </div>`;
   }
   return `<div class="hosp-popup">
@@ -2848,7 +2825,6 @@ function hopitalPopupHtml(h) {
     <p>${esc(h.adresse)}${h.ville ? ', ' + esc(h.ville) : ''}</p>
     ${h.telephone ? `<p><a href="tel:${esc(tel)}">${esc(h.telephone)}</a></p>` : ''}
     ${urlWebSure(h.site) ? `<p><a href="${esc(urlWebSure(h.site))}" target="_blank" rel="noopener">Fiche de l'établissement ↗</a></p>` : ''}
-    ${htmlRenseignementsPublics('hopitaux', h.id)}
   </div>`;
 }
 
@@ -3035,9 +3011,13 @@ function htmlContactSecteur(s) {
   return 'À venir';
 }
 function htmlCorpsSecteur(s) {
+  const notes = (s.notesPubliques || []).map(n => `<div class="vw-row"><span class="vw-label">Précision</span><span class="vw-value">${esc(n)}</span></div>`).join('');
   return `<div class="dp-sect-corps">
+      ${s.besoinDeclare ? `<div class="vw-row"><span class="vw-label">Besoin déclaré</span><span class="vw-value">${esc(s.besoinDeclare)}</span></div>` : ''}
+      ${s.dme ? `<div class="vw-row"><span class="vw-label">Dossier médical</span><span class="vw-value">${esc(s.dme)}</span></div>` : ''}
       ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
       ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)} <a href="/monteregie-est/ptem-u/">Guide PTEM-U</a></span></div>` : ''}
+      ${notes}
       <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>
       <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
       <div class="notes-sec">
@@ -3105,13 +3085,14 @@ function openFicheEtablissement(installationId, secteurOuvertId) {
       <div class="vw-row"><span class="vw-label">Ville</span><span class="vw-value">${esc(inst.ville)}</span></div>
       <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${esc(libelleTerritoireSecteur(inst))}</span></div>
       <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(inst)}</span></div>
+      ${inst.telephone ? `<div class="vw-row"><span class="vw-label">Téléphone</span><span class="vw-value"><a href="tel:${esc(String(inst.telephone).replace(/[^\d+]/g, ''))}">${esc(inst.telephone)}</a></span></div>` : ''}
       ${inst.lienWeb ? `<div class="vw-row"><span class="vw-label">Site internet</span><span class="vw-value">${siteLink(inst.lienWeb)}</span></div>` : ''}
-      ${htmlRenseignementsPublics('etablissements', inst.id)}
       ${inst.mentionPublique ? `<div class="vw-row"><span class="vw-label">Note</span><span class="vw-value">${esc(inst.mentionPublique)}</span></div>` : ''}
+      ${inst.coordonneesApproximatives ? `<div class="vw-row"><span class="vw-label">Carte</span><span class="vw-value">Emplacement approximatif (adresse officielle, pin à confirmer).</span></div>` : ''}
     </div>
     <div class="vw-divider"></div>
     <div class="vw-sec">
-      <div class="vw-sec-title">Secteurs en recrutement (${visibles.length})</div>
+      <div class="vw-sec-title">Secteurs (${visibles.length})</div>
       <p class="dp-sect-intro">Touchez un secteur pour voir ses modalités, l'ajouter à vos favoris ou y écrire une note.</p>
       <div class="dp-sect-list">${htmlAccordeonSecteurs(visibles, ouvertId)}</div>
       ${nbMasques > 0 ? `<p class="dp-sect-masques">${nbMasques} autre${nbMasques > 1 ? 's' : ''} secteur${nbMasques > 1 ? 's' : ''} de cette installation ${nbMasques > 1 ? 'sont masqués' : 'est masqué'} par vos filtres.</p>` : ''}
@@ -4376,7 +4357,6 @@ function openDetail(id) {
       <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${g.rls && g.rls.trim() ? esc(g.rls) : 'À venir'}</span></div>
       ${niveauRow}
       <div class="vw-row"><span class="vw-label">Adresse</span><span class="vw-value">${mapsLink(g)}</span></div>
-      ${htmlRenseignementsPublics('cliniques', g.id)}
       ${assembler([
         vide(g.site) ? {label:'Site internet', creux:true} : {label:'Site internet', html: ligne('Site internet', siteLink(g.site))},
         d_('DMÉ', g.dme)
@@ -4913,13 +4893,9 @@ fetch('../data.json', { cache: 'no-cache' })
   .then(data => Promise.all([
     data,
     chargerJsonCarte('../data-etablissements.json'),
-    chargerJsonCarte('../data-etablissements-centre.json'),
-    chargerJsonCarte('fiches-publiques.json')
+    chargerJsonCarte('../data-etablissements-centre.json')
   ]))
-  .then(([data, etabEst, etabCentre, fiches]) => {
-    fichesPubliques = fiches || { cliniques: {}, etablissements: {}, hopitaux: {} };
-    return initData(data, fusionnerEtablissements(etabEst, etabCentre));
-  })
+  .then(([data, etabEst, etabCentre]) => initData(data, fusionnerEtablissements(etabEst, etabCentre)))
   .catch(err => {
     console.error('Chargement des données impossible :', err);
     const el = document.getElementById('maj-date');
