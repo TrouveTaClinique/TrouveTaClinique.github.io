@@ -18388,5 +18388,49 @@
     "format": "guide",
     "verifie": "2026-10-03",
     "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Trouble bipolaire : guide de pratique pour le diagnostic et le traitement",
+    "org": "Ngô, Provencher, Goulet et Chaloult",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "trouble bipolaire manie hypomanie dépression bipolaire lithium stabilisateur de l’humeur antipsychotique psychothérapie",
+    "url": "https://tccmontreal.com/wp-content/uploads/2018/09/guidedepratiquemaboct2015-isbn-2018.pdf",
+    "desc": "Guide québécois (2018) : diagnostic, traitement pharmacologique et psychologique du trouble bipolaire.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Œil rouge et urgences oculaires : triage et signes d’alerte",
+    "org": "AIIUQ",
+    "cat": "Peau et yeux",
+    "tags": "œil rouge oeil rouge conjonctivite kératite uvéite glaucome aigu corps étranger trauma oculaire perte de vision triage",
+    "url": "https://aiiuq.qc.ca/wp-content/uploads/2020/11/NOVEMBRE-RevueAIIUQ-ophtalmologie.pdf",
+    "desc": "Article de pratique clinique (Soins d’urgence, 2020) : évaluation d’un problème oculaire et signes qui demandent une consultation urgente.",
+    "format": "outil",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Glaucome : comprendre la maladie (patients)",
+    "org": "Association des optométristes du Québec",
+    "cat": "Documents pour les patients",
+    "tags": "glaucome pression intraoculaire nerf optique dépistage vision périphérique gouttes",
+    "url": "https://www.aoqnet.qc.ca/vision/maladies/glaucome.php",
+    "desc": "Page de l’AOQ pour le patient : glaucome, facteurs de risque, dépistage et traitement.",
+    "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Dégénérescence maculaire liée à l’âge (DMLA) : comprendre la maladie (patients)",
+    "org": "Association des optométristes du Québec",
+    "cat": "Documents pour les patients",
+    "tags": "DMLA dégénérescence maculaire vision centrale grille d’Amsler vitamines injections",
+    "url": "https://www.aoqnet.qc.ca/vision/maladies/dmla.php",
+    "desc": "Page de l’AOQ pour le patient : DMLA sèche et humide, symptômes, suivi et traitement.",
+    "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
   }
 ]
