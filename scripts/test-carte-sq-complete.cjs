@@ -65,9 +65,12 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
   assert.match(page, /id="rls-filter"/);
   assert.doesNotMatch(page, /id="rls-btns"/);
   assert.match(page, /Tous les RLS/);
-  for (const couleur of ['#e6007e', '#43a047', '#0080d7', '#f48cc5', '#aad4ac', '#8cc6ed']) {
-    assert.ok(page.includes(couleur), couleur);
-  }
+  assert.match(page, /'Est': '#0080D7', 'Centre': '#08A0A0', 'Ouest': '#170A72'/);
+  assert.match(page, /'Est': '#A8DCF4', 'Centre': '#A7DFDC', 'Ouest': '#B8B1DF'/);
+  assert.match(page, /ligne\('#0080D7', 'Montérégie-Est'\)/);
+  assert.match(page, /ligne\('#08A0A0', 'Montérégie-Centre'\)/);
+  assert.match(page, /ligne\('#170A72', 'Montérégie-Ouest'\)/);
+  assert.doesNotMatch(page, /#e6007e|#43a047|#f48cc5/);
   for (const inventee of ['#0A6B5C', '#9A4A16', '#1A4578', '#4C3D78', '#8A3050', '#2F5A3C']) {
     assert.equal(page.includes(inventee), false, inventee);
   }

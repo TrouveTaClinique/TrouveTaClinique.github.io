@@ -183,15 +183,15 @@ function generer() {
   'Pierre-De Saurel': '#170A72'
 };`,
     `const COULEURS_RLS_EST_SQ = {
-  'Pierre-Boucher': '#e6007e',
-  'Richelieu-Yamaska': '#e6007e',
-  'Pierre-De Saurel': '#e6007e',
-  'Champlain': '#43a047',
-  '${HRR}': '#43a047',
-  'Jardins-Roussillon': '#0080d7',
-  'Vaudreuil-Soulanges': '#0080d7',
-  '${SUROIT}': '#0080d7',
-  'du Haut-Saint-Laurent': '#0080d7'
+  'Pierre-Boucher': '#0080D7',
+  'Richelieu-Yamaska': '#0080D7',
+  'Pierre-De Saurel': '#0080D7',
+  'Champlain': '#08A0A0',
+  '${HRR}': '#08A0A0',
+  'Jardins-Roussillon': '#170A72',
+  'Vaudreuil-Soulanges': '#170A72',
+  '${SUROIT}': '#170A72',
+  'du Haut-Saint-Laurent': '#170A72'
 };
 const RLS_VERS_REGION = {
   'Pierre-Boucher': 'Est',
@@ -204,8 +204,8 @@ const RLS_VERS_REGION = {
   '${SUROIT}': 'Ouest',
   'du Haut-Saint-Laurent': 'Ouest'
 };
-const COULEURS_TERRITOIRE = { 'Est': '#e6007e', 'Centre': '#43a047', 'Ouest': '#0080d7' };
-const COULEURS_TERRITOIRE_PALES = { 'Est': '#f48cc5', 'Centre': '#aad4ac', 'Ouest': '#8cc6ed' };`,
+const COULEURS_TERRITOIRE = { 'Est': '#0080D7', 'Centre': '#08A0A0', 'Ouest': '#170A72' };
+const COULEURS_TERRITOIRE_PALES = { 'Est': '#A8DCF4', 'Centre': '#A7DFDC', 'Ouest': '#B8B1DF' };`,
     'couleurs des zones');
 
   html = uneFois(html,
@@ -259,28 +259,28 @@ const RLS_COLORS_PALES_REGION = {
   'Régional':          '#C4B5FD'
 };`,
     `const RLS_COLORS_REGION = {
-  'Pierre-Boucher':    '#e6007e',
-  'Richelieu-Yamaska': '#e6007e',
-  'Pierre-De Saurel':  '#e6007e',
-  'Champlain':         '#43a047',
-  '${HRR}': '#43a047',
-  'Jardins-Roussillon': '#0080d7',
-  'Vaudreuil-Soulanges': '#0080d7',
-  '${SUROIT}': '#0080d7',
-  'du Haut-Saint-Laurent': '#0080d7',
-  'Régional':          '#e6007e'
+  'Pierre-Boucher':    '#0080D7',
+  'Richelieu-Yamaska': '#0080D7',
+  'Pierre-De Saurel':  '#0080D7',
+  'Champlain':         '#08A0A0',
+  '${HRR}': '#08A0A0',
+  'Jardins-Roussillon': '#170A72',
+  'Vaudreuil-Soulanges': '#170A72',
+  '${SUROIT}': '#170A72',
+  'du Haut-Saint-Laurent': '#170A72',
+  'Régional':          '#0080D7'
 };
 const RLS_COLORS_PALES_REGION = {
-  'Pierre-Boucher':    '#f48cc5',
-  'Richelieu-Yamaska': '#f48cc5',
-  'Pierre-De Saurel':  '#f48cc5',
-  'Champlain':         '#aad4ac',
-  '${HRR}': '#aad4ac',
-  'Jardins-Roussillon': '#8cc6ed',
-  'Vaudreuil-Soulanges': '#8cc6ed',
-  '${SUROIT}': '#8cc6ed',
-  'du Haut-Saint-Laurent': '#8cc6ed',
-  'Régional':          '#f48cc5'
+  'Pierre-Boucher':    '#A8DCF4',
+  'Richelieu-Yamaska': '#A8DCF4',
+  'Pierre-De Saurel':  '#A8DCF4',
+  'Champlain':         '#A7DFDC',
+  '${HRR}': '#A7DFDC',
+  'Jardins-Roussillon': '#B8B1DF',
+  'Vaudreuil-Soulanges': '#B8B1DF',
+  '${SUROIT}': '#B8B1DF',
+  'du Haut-Saint-Laurent': '#B8B1DF',
+  'Régional':          '#A8DCF4'
 };`,
     'couleurs des épingles');
 
@@ -346,17 +346,12 @@ const RLS_COLORS_PALES_REGION = {
     'zones selon la région');
 
   html = uneFois(html,
-    "const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4' };",
-    "const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4', '#43A047': '#2E7D32' };",
-    'fond des chiffres');
-
-  html = uneFois(html,
     `function couleurMilieu(g) {
   return (g && RLS_COLORS_REGION[g.rls]) || '#08A0A0';
 }`,
     `function couleurMilieu(g) {
   if (g && COULEURS_TERRITOIRE[g.region]) return COULEURS_TERRITOIRE[g.region];
-  return (g && RLS_COLORS_REGION[g.rls]) || '#e6007e';
+  return (g && RLS_COLORS_REGION[g.rls]) || '#0080D7';
 }`,
     'couleur par région');
 
@@ -373,9 +368,9 @@ const RLS_COLORS_PALES_REGION = {
       Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional')
         .map(r => ligne(RLS_COLORS_REGION[r], r)).join('');`,
     `    d.innerHTML = '<div class="rls-legend-title">Région</div>' +
-      ligne('#e6007e', 'Montérégie-Est') +
-      ligne('#43a047', 'Montérégie-Centre') +
-      ligne('#0080d7', 'Montérégie-Ouest');`,
+      ligne('#0080D7', 'Montérégie-Est') +
+      ligne('#08A0A0', 'Montérégie-Centre') +
+      ligne('#170A72', 'Montérégie-Ouest');`,
     'légende initiale');
 
   html = uneFois(html,
@@ -385,9 +380,9 @@ const RLS_COLORS_PALES_REGION = {
   if (etab && hasMissionsRegionales()) html += ligne(RLS_COLORS_REGION['Régional'], TERRITOIRE_MISSIONS);
   legendEl.innerHTML = html;`,
     `  let html = '<div class="rls-legend-title">Région</div>' +
-    ligne('#e6007e', 'Montérégie-Est') +
-    ligne('#43a047', 'Montérégie-Centre') +
-    ligne('#0080d7', 'Montérégie-Ouest');
+    ligne('#0080D7', 'Montérégie-Est') +
+    ligne('#08A0A0', 'Montérégie-Centre') +
+    ligne('#170A72', 'Montérégie-Ouest');
   legendEl.innerHTML = html;`,
     'légende des trois régions');
 
