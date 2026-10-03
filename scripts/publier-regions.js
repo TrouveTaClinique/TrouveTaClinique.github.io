@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /*
- * Fabrique les quatre cartes à partir d'un seul gabarit :
- *   scripts/carte.template.html  →  monteregie/index.html
- *                                →  monteregie-est/index.html
- *                                →  monteregie-centre/index.html
- *                                →  monteregie-ouest/index.html
+ * Fabrique les deux cartes publiques (3 oct. 2026) :
+ *   generer-carte-sq-complete.js (gabarit SQ)        →  monteregie/index.html
+ *   carte.template.html (en-tête) + gabarit SQ Est   →  monteregie-est/index.html
+ * Les adresses /monteregie-centre/ et /monteregie-ouest/ sont des pages de territoire
+ * (texte) écrites par generer-pages-seo.js.
  *
  * La racine / est réservée à la page d'accueil générée par generer-pages-seo.js. Le gabarit
  * n'est jamais servi directement. Les quatre sorties gardent exactement la même application,
@@ -721,23 +721,23 @@ function main() {
   const source = fs.readFileSync(SOURCE, 'utf8').replace(/\r\n/g, '\n');
   verifierCarteGenerale(source);
 
-  // La carte complète n'est pas installable. Les commentaires de substitution sont inoffensifs
-  // et facilitent le contrôle visuel du gabarit; aucune balise manifest ni aucun bouton n'existe.
-  const generale = injecterIndexSeo(
-    source.replace('<html lang="fr-CA">', '<html lang="fr-CA" data-etab-ui="1">'),
-    null
-  );
-  ecrire(SORTIE_GENERALE, generale);
-  console.log('  monteregie/index.html régénéré (carte complète, non installable + index SEO).');
+  // 3 oct. 2026 : la carte de toute la Montérégie est la carte Santé Québec
+  // (generer-carte-sq-complete.js), avec le répertoire texte en dessous. Les anciennes
+  // cartes Centre et Ouest ne sont plus produites : leurs adresses sont des pages de
+  // territoire écrites par generer-pages-seo.js.
+  const sq = require('./generer-carte-sq-complete.js');
+  ecrire(SORTIE_GENERALE, injecterIndexSeo(sq.generer(), null));
+  console.log('  monteregie/index.html régénéré (carte Santé Québec de toute la Montérégie + index SEO).');
+  sq.ecrire();
 
-  for (const t of TERRITOIRES) {
+  for (const t of TERRITOIRES.filter(x => x.app)) {
     let sortie = appliquerIdentiteRegionale(source, t);
     sortie = injecterIndexSeo(sortie, t);
     verifierIsolation(sortie, t);
     ecrire(path.join(RACINE, t.dossier, 'index.html'), sortie);
-    console.log(`  ${t.dossier}/index.html régénéré (${t.rls.length} RLS, ${t.app ? 'PWA' : 'carte seule'} + index SEO).`);
+    console.log(`  ${t.dossier}/index.html régénéré (${t.rls.length} RLS, PWA + index SEO).`);
   }
-  console.log('4 cartes régénérées : gabarit partagé et prototype SQ conservé pour l’Est.');
+  console.log('2 cartes régénérées : Montérégie (Santé Québec) et Montérégie-Est.');
 }
 
 main();

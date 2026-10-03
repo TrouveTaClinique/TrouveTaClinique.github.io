@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /*
- * Carte non répertoriée de toute la Montérégie, dans le thème Santé Québec.
- * Lit le gabarit Est (sans le modifier) et écrit carte-interactive/index.html.
- * Les quatre cartes publiées ne passent pas par ce script.
+ * Carte de toute la Montérégie, dans le thème Santé Québec (3 oct. 2026 : remplace l'ancienne
+ * carte complète et les cartes Centre et Ouest). Lit le gabarit Est (sans le modifier).
+ * publier-regions.js l'écrit dans monteregie/index.html, avec le répertoire texte en dessous.
+ * L'ancienne adresse /carte-interactive/ devient un simple renvoi vers /monteregie/.
  */
 'use strict';
 
@@ -11,7 +12,8 @@ const path = require('path');
 
 const RACINE = path.join(__dirname, '..');
 const GABARIT = path.join(__dirname, 'carte-est-sq.template.html');
-const SORTIE = path.join(RACINE, 'carte-interactive', 'index.html');
+const SORTIE_RENVOI = path.join(RACINE, 'carte-interactive', 'index.html');
+const URL_CARTE = 'https://trouvetaclinique.ca/monteregie/';
 
 const HRR = 'Haut-Richelieu\u2013Rouville';
 const SUROIT = 'du Suro\u00eet';
@@ -28,23 +30,69 @@ function head() {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carte Santé Québec de la Montérégie</title>
-<meta name="description" content="Carte non répertoriée des cliniques et des établissements de la Montérégie, dans le thème Santé Québec. Adresse directe seulement.">
-<meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://trouvetaclinique.ca/carte-interactive/">
+<title>Carte de la Montérégie : cliniques en recrutement</title>
+<meta name="description" content="Carte interactive des cliniques et établissements de la Montérégie (Est, Centre et Ouest), pour préparer votre PTEM 2027.">
+<link rel="canonical" href="${URL_CARTE}">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Trouve ta clinique">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:url" content="https://trouvetaclinique.ca/carte-interactive/">
-<meta property="og:title" content="Carte Santé Québec de la Montérégie">
-<meta property="og:description" content="Carte non répertoriée des cliniques et des établissements de la Montérégie.">
+<meta property="og:url" content="${URL_CARTE}">
+<meta property="og:title" content="Carte de la Montérégie | Trouve ta clinique">
+<meta property="og:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">
+<meta property="og:image" content="https://trouvetaclinique.ca/assets/og-image-accueil.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Carte des cliniques en recrutement de la Montérégie · Trouve ta clinique.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Carte de la Montérégie | Trouve ta clinique">
+<meta name="twitter:description" content="Carte interactive des cliniques en recrutement et des établissements de la Montérégie.">
+<meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-image-accueil.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "${URL_CARTE}#webpage",
+  "name": "Trouve ta clinique · Carte de la Montérégie",
+  "url": "${URL_CARTE}",
+  "inLanguage": "fr-CA",
+  "description": "Carte interactive des cliniques en recrutement médical et des établissements de la Montérégie (Est, Centre et Ouest).",
+  "isPartOf": { "@id": "https://trouvetaclinique.ca/#website" },
+  "about": {
+    "@type": "Place",
+    "name": "Montérégie",
+    "address": { "@type": "PostalAddress", "addressRegion": "QC", "addressCountry": "CA" }
+  }
+}
+</script>
 <meta name="theme-color" content="#170A72">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
 <link rel="stylesheet" href="../leaflet.css">
 <link rel="stylesheet" href="../vendor/maplibre-gl.css">
 <link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin>
 <link rel="preconnect" href="https://tiles.basemaps.cartocdn.com" crossorigin>
+`;
+}
+
+/* Ancienne adresse de la carte : renvoi immédiat, en gardant ?c=, ?mode=, etc. */
+function pageRenvoi() {
+  return `<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carte de la Montérégie | Trouve ta clinique</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="${URL_CARTE}">
+<meta http-equiv="refresh" content="0; url=/monteregie/">
+<script>location.replace('/monteregie/' + location.search + location.hash);</script>
+</head>
+<body>
+<p>La carte a déménagé : <a href="/monteregie/">carte de la Montérégie</a>.</p>
+</body>
+</html>
 `;
 }
 
@@ -121,28 +169,29 @@ function generer() {
       </a>
       <hr>
       <a class="info-menu-link" role="menuitem" href="/monteregie-est/ptem/">
-        <span class="info-menu-ic">📘</span> Guide PTEM, Montérégie-Est
-      </a>
-      <a class="info-menu-link" role="menuitem" href="/monteregie-centre/ptem/">
-        <span class="info-menu-ic">📘</span> Guide PTEM, Montérégie-Centre
-      </a>
-      <a class="info-menu-link" role="menuitem" href="/monteregie-ouest/ptem/">
-        <span class="info-menu-ic">📘</span> Guide PTEM, Montérégie-Ouest
+        <span class="info-menu-ic">📘</span> Guide PTEM 2027
       </a>
       <a class="info-menu-link" role="menuitem" href="/monteregie-est/amp/">
-        <span class="info-menu-ic">📗</span> Guide des AMP, Montérégie-Est
+        <span class="info-menu-ic">📗</span> Guide des AMP
       </a>
-      <a class="info-menu-link" role="menuitem" href="/monteregie-centre/amp/">
-        <span class="info-menu-ic">📗</span> Guide des AMP, Montérégie-Centre
+      <a class="info-menu-link" role="menuitem" href="/guides/">
+        <span class="info-menu-ic">📚</span> Guides cliniques
       </a>
-      <a class="info-menu-link" role="menuitem" href="/monteregie-ouest/amp/">
-        <span class="info-menu-ic">📗</span> Guide des AMP, Montérégie-Ouest
+      <hr>
+      <a class="info-menu-link" role="menuitem" href="/monteregie-est/">
+        <span class="info-menu-ic" style="background:#0080D7">🗺</span> Carte Montérégie-Est
+      </a>
+      <a class="info-menu-link" role="menuitem" href="/monteregie-centre/">
+        <span class="info-menu-ic" style="background:#08A0A0">📋</span> Territoire Montérégie-Centre
+      </a>
+      <a class="info-menu-link" role="menuitem" href="/monteregie-ouest/">
+        <span class="info-menu-ic" style="background:#170A72">📋</span> Territoire Montérégie-Ouest
       </a>`,
     'menu');
 
   html = uneFois(html,
     '<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie-Est</h1>\n<p class="sr-only" id="page-desc">\n  Carte interactive des cliniques et points de service qui recrutent des médecins de famille\n  en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu :\n  coordonnées, type de clinique, réseau local de services, pratiques offertes, horaires et\n  personne-ressource pour le recrutement.\n</p>',
-    '<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie</h1>\n<p class="sr-only" id="page-desc">\n  Carte non répertoriée des cliniques et des établissements de la Montérégie\n  (Est, Centre et Ouest), dans le thème Santé Québec.\n</p>',
+    '<h1 class="sr-only" id="page-h1">Trouve ta clinique · Cliniques en recrutement en Montérégie</h1>\n<p class="sr-only" id="page-desc">\n  Carte interactive des cliniques et des établissements de la Montérégie (Est, Centre et Ouest).\n  Pour chaque milieu : coordonnées, type de clinique, réseau local de services, pratiques offertes,\n  horaires et personne-ressource pour le recrutement.\n</p>',
     'titre accessible');
 
   html = uneFois(html,
@@ -160,7 +209,7 @@ function generer() {
     'h1 établissements');
   html = uneFois(html,
     "if (desc) desc.textContent = 'Carte interactive des secteurs en recrutement en établissement en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel, et en mission régionale.';",
-    "if (desc) desc.textContent = 'Carte non répertoriée des secteurs en établissement de la Montérégie (Est, Centre et Ouest).';",
+    "if (desc) desc.textContent = 'Carte interactive des secteurs en établissement de la Montérégie (Est, Centre et Ouest).';",
     'description établissements');
   html = uneFois(html,
     "document.title = prefix + 'Cliniques en recrutement : Montérégie-Est | Trouve ta clinique';",
@@ -172,7 +221,7 @@ function generer() {
     'h1 cliniques');
   html = uneFois(html,
     "if (desc) desc.textContent = 'Carte interactive des cliniques et points de service qui recrutent des médecins de famille en Montérégie-Est, dans les réseaux locaux de services Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. Pour chaque milieu : coordonnées, type de clinique, réseau local de services, pratiques offertes, horaires et personne-ressource pour le recrutement.';",
-    "if (desc) desc.textContent = 'Carte non répertoriée des cliniques de la Montérégie (Est, Centre et Ouest), dans le thème Santé Québec.';",
+    "if (desc) desc.textContent = 'Carte interactive des cliniques de la Montérégie (Est, Centre et Ouest).';",
     'description cliniques');
 
   html = uneFois(html,
@@ -459,6 +508,11 @@ function syncRegChips() {
   syncPanneauTerritoire();
 }`,
     `function buildFilters() {
+  if (!buildFilters.lu) {
+    buildFilters.lu = true;
+    const reg = new URLSearchParams(location.search).get('region');
+    if (reg && COULEURS_TERRITOIRE[reg]) regionFilter.add(reg);
+  }
   populateActiviteButtons();
   const wrap = document.getElementById('reg-filter');
   if (wrap) {
@@ -603,7 +657,7 @@ fetch('../data.json', { cache: 'no-cache' })
   html = uneFois(html, "  var TITRE = 'Trouve ta clinique · Montérégie-Est';", "  var TITRE = 'Trouve ta clinique · Montérégie';", 'titre de partage');
   html = uneFois(html,
     '<div class="cmp-qrurl">trouvetaclinique.ca/monteregie-est/</div>',
-    '<div class="cmp-qrurl">trouvetaclinique.ca/carte-interactive/</div>',
+    '<div class="cmp-qrurl">trouvetaclinique.ca/monteregie/</div>',
     'adresse imprimée');
 
   html = html.replace('<!-- PWA_SERVICE_WORKER -->', '');
@@ -615,7 +669,7 @@ fetch('../data.json', { cache: 'no-cache' })
   if (html.includes('fiches-publiques.json') || html.includes('Renseignements publics')) {
     throw new Error('La carte doit afficher seulement les données de data.json et des établissements.');
   }
-  if (!html.includes('noindex, nofollow')) throw new Error('La page doit rester noindex.');
+  if (html.includes('noindex')) throw new Error('La carte de la Montérégie doit être indexable.');
   if (/kaushan/i.test(html)) throw new Error('Kaushan Script ne doit pas apparaître.');
   if (!html.includes('Segoe UI')) throw new Error('Segoe UI est absente.');
   if (!html.includes('max-width: 860px')) throw new Error('Le seuil cellulaire de 860 px est absent.');
@@ -624,12 +678,11 @@ fetch('../data.json', { cache: 'no-cache' })
 }
 
 function ecrire() {
-  const html = generer();
-  fs.mkdirSync(path.dirname(SORTIE), { recursive: true });
-  fs.writeFileSync(SORTIE, html, 'utf8');
-  console.log('carte-interactive/index.html écrit (' + html.length + ' caractères).');
+  fs.mkdirSync(path.dirname(SORTIE_RENVOI), { recursive: true });
+  fs.writeFileSync(SORTIE_RENVOI, pageRenvoi(), 'utf8');
+  console.log('carte-interactive/index.html écrit (renvoi vers /monteregie/).');
 }
 
-module.exports = { generer, ecrire };
+module.exports = { generer, pageRenvoi, ecrire };
 
 if (require.main === module) ecrire();

@@ -9,7 +9,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const racine = path.join(__dirname, '..');
 const lire = p => fs.readFileSync(path.join(racine, p), 'utf8');
-const CARTES = ['monteregie/index.html', 'monteregie-est/index.html', 'monteregie-centre/index.html', 'monteregie-ouest/index.html'];
+const CARTES = ['monteregie/index.html', 'monteregie-est/index.html'];
 
 // Extrait le texte source entre deux marqueurs (inclus / exclu).
 const extraire = (src, debut, fin) => {

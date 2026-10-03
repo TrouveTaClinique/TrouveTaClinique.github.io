@@ -114,8 +114,8 @@ jobs:
       - name: Fabriquer la carte complète et les trois cartes régionales
         run: node scripts/publier-regions.js
 
-      - name: Fabriquer la carte Santé Québec non répertoriée
-        # URL directe seulement. Hors sitemap et hors menus. Le gabarit Est n'est pas modifié.
+      - name: Renvoi de l'ancienne adresse /carte-interactive/
+        # 3 oct. 2026 : la carte Santé Québec est publiée à /monteregie/ par publier-regions.js.
         run: node scripts/generer-carte-sq-complete.js
 
       - name: Vérifier les polices selon le périmètre visuel approuvé
@@ -124,7 +124,7 @@ jobs:
         # prototype Santé Québec de l'Est, qui utilise Segoe UI exclusivement.
         run: |
           set -e
-          if grep -riIl "kaushan" scripts/carte-est-sq.template.html monteregie-est/index.html carte-interactive/index.html 2>/dev/null; then
+          if grep -riIl "kaushan" scripts/carte-est-sq.template.html monteregie-est/index.html monteregie/index.html 2>/dev/null; then
             echo "::error::Police à lettres attachées détectée dans le thème Santé Québec de l'Est. Publication annulée."
             exit 1
           fi
@@ -136,8 +136,8 @@ jobs:
             echo "::error::« Segoe UI » est absente du gabarit SQ Est. Publication annulée."
             exit 1
           fi
-          if ! grep -q "Segoe UI" carte-interactive/index.html; then
-            echo "::error::« Segoe UI » est absente de la carte Santé Québec non répertoriée. Publication annulée."
+          if ! grep -q "Segoe UI" monteregie/index.html; then
+            echo "::error::« Segoe UI » est absente de la carte Santé Québec de la Montérégie. Publication annulée."
             exit 1
           fi
           echo "Vérification polices (Kaushan hors Est, Segoe UI présent) : ok."
