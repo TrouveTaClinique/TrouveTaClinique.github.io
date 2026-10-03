@@ -26,7 +26,7 @@ function deps(extra = {}) {
   return {
     appels,
     chargerCatalogue: async () => PAR_URL,
-    appelerModele: async params => { appels.push(params); return reponseModele({ guides: [{ numero: 1, raison: 'Couvre le sujet.' }], message: '' }); },
+    appelerModele: async params => { appels.push(params); return reponseModele({ guides: [{ numero: 1 }], lacune: false }); },
     limiter: async () => true,
     classerErreur: () => ({ statut: 502, message: 'Erreur du service.' }),
     ...extra
@@ -94,19 +94,22 @@ test('requête Opus 5 : repli automatique ; Haiku 4.5 : sans effort', () => {
 
 test('réponse : seuls les numéros valides, sans doublon, au plus 5', () => {
   const candidats = retenirCandidats(CATALOGUE.slice(0, 10).map(r => r.url), PAR_URL);
-  const guides = [99, -1, 1.5, 2, 2, 3, 4, 5, 6, 7].map(numero => ({ numero, raison: ' Raison. ' }));
-  const res = interpreterReponse(reponseModele({ guides, message: '' }), candidats);
+  const guides = [99, -1, 1.5, 2, 2, 3, 4, 5, 6, 7].map(numero => ({ numero }));
+  const res = interpreterReponse(reponseModele({ guides, lacune: true }), candidats);
   assert.equal(res.guides.length, GUIDES_MAX);
   assert.deepEqual(res.guides.map(g => g.titre), ['Guide 2', 'Guide 3', 'Guide 4', 'Guide 5', 'Guide 6']);
-  assert.equal(res.guides[0].raison, 'Raison.');
+  assert.equal(res.lacune, true);
+  assert.deepEqual(Object.keys(res.guides[0]).sort(), ['categorie', 'organisme', 'titre', 'url'], 'aucun texte du modèle');
   assert.equal(res.guides[0].url, 'https://exemple.ca/g2');
 });
 
 test('réponse : refus, JSON illisible, aucun guide', () => {
-  assert.equal(interpreterReponse({ stop_reason: 'refusal', content: [] }, []).guides.length, 0);
+  assert.equal(interpreterReponse({ stop_reason: 'refusal', content: [] }, []).refus, true);
   assert.throws(() => interpreterReponse({ stop_reason: 'end_turn', content: [{ type: 'text', text: 'pas du JSON' }] }, []), /illisible/);
   assert.throws(() => interpreterReponse({ stop_reason: 'max_tokens', content: [] }, []), /incomplète/);
-  assert.match(interpreterReponse(reponseModele({ guides: [], message: '' }), []).message, /Aucune ressource/);
+  const vide = interpreterReponse(reponseModele({ guides: [], lacune: false, message: 'Texte libre ignoré.' }), []);
+  assert.equal(vide.guides.length, 0);
+  assert.equal(vide.message, undefined, 'aucun texte libre transmis');
 });
 
 test('HTTP : origine inconnue refusée, préflight accepté, GET refusé', async () => {
@@ -166,7 +169,7 @@ test('HTTP : sans présélection valide, le modèle cherche quand même dans tou
 });
 
 test('HTTP : parcours complet, numéros du catalogue complet, titres et liens tirés du catalogue', async () => {
-  const d = deps({ appelerModele: async params => { d.appels.push(params); return reponseModele({ guides: [{ numero: 42, raison: 'Couvre le sujet.' }], message: '' }); } });
+  const d = deps({ appelerModele: async params => { d.appels.push(params); return reponseModele({ guides: [{ numero: 42 }], lacune: false }); } });
   const r = await traiter(requete({ question: '  otite   chez un enfant ', candidats: [CATALOGUE[0].url, CATALOGUE[7].url] }), { MODELE: 'claude-sonnet-5' }, d);
   assert.equal(r.status, 200);
   assert.equal(r.headers.get('Access-Control-Allow-Origin'), ORIGINE);

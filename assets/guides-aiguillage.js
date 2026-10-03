@@ -60,17 +60,31 @@
       el.append(a);
       return el;
     })();
-    const raison = document.createElement('p');
-    raison.className = 'guides-ia-raison';
-    const b = document.createElement('strong'); b.textContent = 'Pourquoi : ';
-    raison.append(b, guide.raison);
-    li.querySelector('.guides-resource-link').after(raison);
+    /* Ligne fixe tirée du catalogue (type de fiche) : aucun texte rédigé par l'IA n'est affiché. */
+    li.querySelector('.guides-resource-link').after(paragraphe('guides-ia-raison', typeDeFiche(li, guide)));
     return li;
   }
 
+  const TYPES = { guide: 'Guide clinique', algorithme: 'Algorithme', outil: 'Outil clinique', patient: 'Document pour le patient' };
+  function typeDeFiche(li, guide) {
+    if (li.dataset.type === 'communautaire' || guide.categorie === 'Ressources communautaires') {
+      const ville = (li.dataset.ville || '').trim();
+      return 'Organisme communautaire' + (ville ? ' · ' + ville : '');
+    }
+    return TYPES[li.dataset.format] || 'Guide clinique';
+  }
+
+  /* Phrases fixes seulement : le texte libre éventuel du service (ancienne version) est ignoré. */
   function afficher(donnees) {
     zone.replaceChildren();
-    if (donnees.message) zone.append(paragraphe('guides-ia-message', donnees.message));
+    const n0 = (donnees.guides || []).length;
+    if (!n0) {
+      zone.append(paragraphe('guides-ia-message', donnees.refus
+        ? 'Cette question ne peut pas être traitée. Reformulez-la ou utilisez la recherche par mots-clés.'
+        : 'Aucune fiche du catalogue ne couvre cette question. Essayez la recherche par mots-clés ou proposez une ressource.'));
+    } else if (donnees.lacune === true || (donnees.lacune === undefined && donnees.message)) {
+      zone.append(paragraphe('guides-ia-message', 'Aucune fiche du catalogue ne couvre tous les aspects de la question.'));
+    }
     if (donnees.guides && donnees.guides.length) {
       const n = donnees.guides.length;
       zone.append(paragraphe('guides-ia-compte', n + ' suggestion' + (n > 1 ? 's' : '')));
@@ -86,7 +100,7 @@
 
   /* Attente animée : points qui rebondissent et étapes qui défilent. Le lecteur d'écran
      n'annonce qu'une phrase ; les étapes visibles lui sont masquées. */
-  const ETAPES = ['L’IA lit le catalogue…', 'Analyse de la situation…', 'Choix des ressources les plus utiles…', 'Rédaction des explications…'];
+  const ETAPES = ['L’IA lit le catalogue…', 'Analyse de la situation…', 'Choix des ressources les plus utiles…', 'Vérification des fiches…'];
   let minuterieEtapes = null;
   function attendre() {
     const el = (tag, classe) => { const e = document.createElement(tag); e.className = classe; return e; };
