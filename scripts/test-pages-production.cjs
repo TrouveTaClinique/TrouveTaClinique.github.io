@@ -18,6 +18,7 @@ test('L\'artefact de production n\'inclut pas la source de travail ni de noindex
     assert.ok(fs.existsSync(path.join(destination, 'sitemap.xml')));
     assert.ok(fs.existsSync(path.join(destination, 'data-etablissements.json')));
     assert.equal(fs.existsSync(path.join(destination, 'scripts')), false);
+    assert.equal(fs.existsSync(path.join(destination, 'ecoute-ems-7k3p')), false);
     assert.equal(
       fs.existsSync(path.join(destination, 'scripts', 'donnees-etablissements-source.json')),
       false

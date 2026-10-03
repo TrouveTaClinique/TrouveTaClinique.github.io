@@ -13,11 +13,14 @@ const ORIGINE = 'https://apercu.trouvetaclinique.ca';
 const ORIGINE_PROJET = 'https://trouvetaclinique.github.io/apercu';
 const CNAME_APERCU = 'apercu.trouvetaclinique.ca';
 const DOMAINES_INTERDITS = new Set(['trouvetaclinique.ca', 'www.trouvetaclinique.ca']);
+/* Lecture audio personnelle, aperçu seulement. Adresse non listée, absente du site public. */
+const DOSSIER_ECOUTE = 'ecoute-ems-7k3p';
 const DOSSIERS = new Set([
   'assets', 'vendor', 'amp', 'ptem', 'ptem-u', 'cliniques', 'rls', 'recherche', 'guides',
   'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest',
   'carte-interactive',
-  'a-propos', 'confidentialite'
+  'a-propos', 'confidentialite',
+  DOSSIER_ECOUTE
 ]);
 const FICHIERS = new Set([
   'index.html', '404.html', 'data.json', 'data-etablissements.json', 'data-etablissements-centre.json', 'leaflet.css', 'leaflet.js',
@@ -40,6 +43,12 @@ const TEXTE = new Set(['.html', '.css', '.js', '.json', '.webmanifest', '.svg'])
 /* Fichiers de travail jamais publiés, même dans un dossier autorisé (audit du 25 septembre 2026). */
 const EXCLUS = new Set(['assets/source', 'assets/banniere_qr.png']);
 
+function autorise(fichier) {
+  const extension = path.extname(fichier);
+  if (FICHIERS.has(fichier) || EXTENSIONS.has(extension)) return true;
+  return extension === '.mp3' && fichier.startsWith(DOSSIER_ECOUTE + '/');
+}
+
 function lister(racine, relatif = '') {
   const resultat = [];
   for (const entree of fs.readdirSync(path.join(racine, relatif), { withFileTypes: true })) {
@@ -49,7 +58,7 @@ function lister(racine, relatif = '') {
     if (!relatif && !DOSSIERS.has(entree.name) && !FICHIERS.has(entree.name)) continue;
     if (entree.isSymbolicLink()) throw new Error('Lien symbolique interdit : ' + fichier);
     if (entree.isDirectory()) resultat.push(...lister(racine, fichier));
-    else if (entree.isFile() && (FICHIERS.has(fichier) || EXTENSIONS.has(path.extname(fichier)))) {
+    else if (entree.isFile() && autorise(fichier)) {
       resultat.push(fichier);
     }
   }
@@ -187,6 +196,7 @@ module.exports = {
   adapterHtml,
   verifierConfigurationPages,
   lister,
+  DOSSIER_ECOUTE,
   RACINE,
   ORIGINE,
   ORIGINE_PROJET,
