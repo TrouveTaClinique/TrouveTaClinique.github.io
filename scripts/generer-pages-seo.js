@@ -1675,13 +1675,25 @@ ${sectionsRls}${etablissements}
     <p class="rep-lien"><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a> · <a href="${EST_PREFIXE}/amp/">Les activités médicales particulières (AMP)</a></p>
   </section>`;
 
+  /* Anciennes adresses de la carte du territoire (?c=, ?mode=, ?installation=, ?secteur=) :
+     signets et résultats déjà indexés ouvrent la carte de la Montérégie au même endroit. */
+  const renvoiCarte = `
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (!q.has('c') && !q.has('mode') && !q.has('installation') && !q.has('secteur')) return;
+  if (!q.has('region')) q.set('region', '${u.region}');
+  location.replace('${CARTE_MONTEREGIE}?' + q.toString() + location.hash);
+})();
+</script>`;
+
   return page({
     titre: limiterTexte(`Médecine familiale en ${u.nom} : cliniques et RLS`, 60),
     description: `Les RLS, cliniques et milieux en recrutement de médecins de famille en ${u.nom}, avec la carte interactive de la Montérégie.`,
     url, profondeur: 1, indexable: u.canonique, jsonLd, univers: u, actif: null,
     ogImageOverride: OG_PAGES.cliniques,
     filDAriane: `<a href="/">Accueil</a> › ${esc(u.nom)}`,
-    corps
+    corps: renvoiCarte + '\n' + corps
   });
 }
 
@@ -3583,7 +3595,7 @@ function pageRepertoireEtablissementsCentre(donnees, majPagesSeo) {
     const meta = [typeEtablissementLibelle(inst.type), inst.ville, listeSecteursHumaine(secteurs)].filter(Boolean).join(' · ');
     return `      <li>
         <a href="${esc(href)}"><strong>${esc(inst.nom)}</strong></a>
-        <span class="rep-meta">${esc(meta)} · ${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''}</span>
+        <span class="rep-meta">${esc(meta)} · ${secteurs.length ? `${secteurs.length} secteur${secteurs.length > 1 ? 's' : ''}` : 'aucun secteur en recrutement'}</span>
       </li>`;
   }).join('\n');
   const jsonLd = {
@@ -3599,7 +3611,7 @@ function pageRepertoireEtablissementsCentre(donnees, majPagesSeo) {
     <p class="lead">Hôpital, GMF-U, CHSLD, soutien à domicile, cliniques jeunesse et pédiatrie sociale du RLS Haut-Richelieu–Rouville.</p>
     <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS_CENTRE)}.</p>
     <div class="cta-row">
-      <a class="button primary" href="${CENTRE_PREFIXE}/?mode=etablissements">Explorer sur la carte interactive</a>
+      <a class="button primary" href="${CARTE_MONTEREGIE}?mode=etablissements&amp;region=Centre">Explorer sur la carte interactive</a>
       <a class="button secondary" href="${CENTRE_PREFIXE}/cliniques/">Cliniques de la Montérégie-Centre</a>
     </div>
   </section>

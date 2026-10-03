@@ -512,7 +512,7 @@ function htmlIntroTerritoire(t, cliniques, etablissements) {
 
   let p1 = t
     ? `La ${nom} couvre ${nRls === 1 ? 'le' : 'les'} RLS ${nomsRls}.`
-    : `La carte complète regroupe les ${nRls} RLS des trois territoires de la Montérégie (${phraseVilles(TERRITOIRES.map((x) => x.nom))}).`;
+    : `Cette carte regroupe les ${nRls} RLS des trois territoires de la Montérégie (${phraseVilles(TERRITOIRES.map((x) => x.nom))}).`;
   if (nTotal) {
     p1 += ` On y trouve ${nTotal} clinique${nTotal > 1 ? 's' : ''} de médecine familiale`;
     if (composition) p1 += ` (${composition})`;

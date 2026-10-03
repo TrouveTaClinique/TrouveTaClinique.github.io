@@ -58,7 +58,8 @@ test('La carte de la Montérégie est indexée et charge toute la Montérégie',
   assert.match(page, /max-width: 860px/);
   assert.doesNotMatch(page, /kaushan/i);
   assert.doesNotMatch(page, /rel="manifest"/);
-  assert.doesNotMatch(page, /serviceWorker/);
+  assert.doesNotMatch(page, /serviceWorker\.register/);
+  assert.match(page, /enr\.unregister\(\)/);
   assert.doesNotMatch(page, /g\.region === 'Est'/);
   assert.doesNotMatch(page, /h\.region !== 'Est'/);
   assert.match(page, /data-etablissements\.json/);

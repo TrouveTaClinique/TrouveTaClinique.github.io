@@ -120,6 +120,15 @@
 <main id="contenu">
   <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Montérégie-Centre</nav>
 
+
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (!q.has('c') && !q.has('mode') && !q.has('installation') && !q.has('secteur')) return;
+  if (!q.has('region')) q.set('region', 'Centre');
+  location.replace('/monteregie/?' + q.toString() + location.hash);
+})();
+</script>
   <section class="hero">
     <p class="eyebrow">Territoire · Montérégie-Centre</p>
     <h1>Médecine familiale en Montérégie-Centre</h1>
