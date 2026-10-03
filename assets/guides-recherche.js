@@ -70,7 +70,7 @@
     ['ic', 'icc', 'insuffisance cardiaque', 'heart failure'],
     ['hta', 'hypertension', 'hypertension arterielle', 'haute pression', 'pression haute', 'pression elevee', 'tension arterielle', 'haute tension', 'pression arterielle'],
     ['itss', 'its', 'ist', 'mts', 'infections transmissibles sexuellement', 'sti', 'std'],
-    ['ivu', 'infection urinaire', 'cystite', 'pyelonephrite', 'uti', 'dysurie', 'brulure en urinant', 'brulures en urinant', 'douleur en urinant', 'brule en urinant', 'brulure mictionnelle'],
+    ['ivu', 'infection urinaire', 'cystite', 'pyelonephrite', 'uti', 'dysurie', 'brulure en urinant', 'brulures en urinant', 'douleur en urinant', 'brule en urinant', 'brulure mictionnelle', 'brulement mictionnel', 'brulements mictionnels', 'brulement en urinant', 'brulements en urinant'],
     ['oma', 'otite moyenne aigue', 'otite'],
     ['tdah', 'tda', 'adhd', 'deficit de l attention'],
     ['tcc', 'tccl', 'traumatisme craniocerebral', 'traumatisme cranio cerebral', 'traumatisme cranien', 'commotion cerebrale', 'commotion'],
@@ -230,6 +230,8 @@
     [['toux'], ['bronchite', 'respiratoire']],
     [['essoufflement', 'dyspnee'], ['mpoc', 'asthme', 'insuffisance cardiaque']],
     [['dysurie', 'brulure mictionnelle', 'brulures mictionnelles'], ['infection urinaire']],
+    /* Audit du 3 oct. 2026 : « cervicite » trouvait la colonne cervicale. */
+    [['cervicite', 'cervicites', 'uretrite', 'uretrites', 'ecoulement vaginal', 'pertes vaginales'], ['chlamydia', 'gonorrhoeae', 'itss']],
     [['mal d oreille', 'otalgie'], ['otite']],
     [['amoxicilline', 'amoxil', 'cephalosporine', 'cephalexine'], ['penicilline', 'beta lactamine', 'antibiotique']],
     [['metformine', 'insuline', 'sglt2', 'glp1', 'hba1c', 'glycemie'], ['diabete']],
