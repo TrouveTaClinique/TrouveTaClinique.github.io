@@ -3787,7 +3787,7 @@ function pageAPropos(majDonnees) {
    alias aléatoire à mettre dans ALIAS_FORMSUBMIT pour ne plus exposer l'adresse. En cas d'échec
    (service indisponible, formulaire pas encore activé), repli : courriel prérempli dans le
    logiciel du visiteur. */
-const ALIAS_FORMSUBMIT = '';
+const ALIAS_FORMSUBMIT = 'c5846193e48144fa0356df3d47d6aceb';
 function htmlNousJoindre() {
   const [boite, domaine] = COURRIEL_MISE_A_JOUR.split('@');
   return `<section class="zone nous-joindre" id="nous-joindre" aria-labelledby="nous-joindre-titre">
