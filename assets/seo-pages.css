@@ -748,13 +748,17 @@ main .cliniques-carte,main .carte-est{
 }
 
 /* ── Nous joindre (page À propos, 28 sept. 2026) ── */
-.nous-joindre{max-width:56rem;margin-inline:auto;padding-top:0}
+.nous-joindre{padding-top:0}
 .nous-joindre .nj-tete{text-align:center;margin-bottom:.4rem}
 .nous-joindre .nj-tete h2{margin-inline:auto}
 .nous-joindre .nj-tete p{margin-inline:auto}
 .contact,.contact-merci{display:grid;gap:1rem 1.25rem;margin-top:1rem;padding:clamp(1.3rem,3vw,2.2rem);background:var(--teal-pale);border-radius:16px}
 @media(min-width:720px){.contact{grid-template-columns:1fr 1fr}.contact .large{grid-column:1 / -1}}
 .contact[hidden],.contact-merci[hidden]{display:none}
+/* Les champs ne débordent jamais de l'encadré, quel que soit le navigateur (3 oct. 2026). */
+.contact,.contact-merci{width:100%;box-sizing:border-box}
+.contact>*,.contact label{min-width:0}
+.contact input,.contact textarea{width:100%;max-width:100%;box-sizing:border-box;min-width:0}
 .contact-pied{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem}
 .contact-merci{text-align:center;justify-items:center}
 .contact-merci .cm-titre{font-size:1.25rem;font-weight:700;color:var(--navy);margin:0}

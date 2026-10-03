@@ -278,7 +278,7 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="stylesheet" href="/assets/seo-pages.css?v=95-patients-egares">
+  <link rel="stylesheet" href="/assets/seo-pages.css?v=96-contact-pleine-largeur">
   <link rel="stylesheet" href="/assets/guides-cliniques.css?v=122-synonymes-audit">
   <script src="/assets/guides-recherche.js?v=122-synonymes-audit" defer></script>
   <script src="/assets/guides-cliniques.js?v=122-synonymes-audit" defer></script>
