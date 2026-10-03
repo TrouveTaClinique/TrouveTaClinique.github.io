@@ -18278,5 +18278,115 @@
     "format": "guide",
     "verifie": "2026-10-03",
     "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Bronchiolite : diagnostic, surveillance et prise en charge (1 à 24 mois)",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "bronchiolite VRS nourrisson détresse respiratoire saturation hospitalisation salbutamol",
+    "url": "https://cps.ca/fr/documents/position/bronchiolitis1",
+    "desc": "Document de principes de la SCP : diagnostic clinique, critères d’hospitalisation et traitements à éviter.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Trouble du spectre de l’autisme : dépistage précoce chez les jeunes enfants",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "autisme TSA dépistage M-CHAT signes précoces retard de langage développement",
+    "url": "https://cps.ca/fr/documents/position/tsa-le-depistage-precoce",
+    "desc": "Document de principes de la SCP : signes précoces, outils de dépistage et orientation.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Trouble du spectre de l’autisme : prise en charge et suivi après le diagnostic",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "autisme TSA suivi comorbidités sommeil comportement intervention",
+    "url": "https://cps.ca/fr/documents/position/tsa-la-prise-en-charge-et-le-suivi",
+    "desc": "Document de principes de la SCP : suivi médical, comorbidités et soutien de la famille.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Délirium : outil d’aide à la prise en charge chez la personne âgée à l’urgence",
+    "org": "INESSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "délirium delirium confusion aiguë personne âgée CAM prévention antipsychotique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/INESSS_Delirium_Outil_prise_charge_VF.pdf",
+    "desc": "Outil de l’INESSS : repérage, causes, prévention et traitement du délirium chez la personne âgée.",
+    "format": "outil",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Délirium : fiche clinique de l’approche adaptée à la personne âgée",
+    "org": "MSSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "délirium delirium AAPA état cognitif confusion personne âgée interventions non pharmacologiques",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2012/12-830-08W.pdf",
+    "desc": "Fiche clinique du MSSS (AAPA) : démarche en quatre étapes, interventions prioritaires.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Coliques : pleurs excessifs du jeune bébé (parents)",
+    "org": "CHU Sainte-Justine",
+    "cat": "Documents pour les patients",
+    "tags": "coliques pleurs excessifs nourrisson bébé qui pleure syndrome du bébé secoué",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/0dbe460d-d29b-41a7-8212-5ddcd91fbc52.pdf",
+    "desc": "Feuillet pour les parents : pleurs normaux, coliques, trucs pour calmer le bébé et quand consulter.",
+    "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Maltraitance des enfants : responsabilités et devoirs des médecins",
+    "org": "Collège des médecins du Québec",
+    "cat": "Pédiatrie",
+    "tags": "maltraitance enfant abus négligence signalement DPJ protection de la jeunesse secret professionnel",
+    "url": "https://www.cmq.org/fr/actualites/maltraitance-enfants-medecins",
+    "desc": "Rappel du CMQ : obligation de signaler à la DPJ et rôle du médecin.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Maltraitance des enfants : évaluation médicale d’un trauma crânien soupçonné",
+    "org": "Société canadienne de pédiatrie",
+    "cat": "Pédiatrie",
+    "tags": "maltraitance trauma crânien bébé secoué ecchymoses enfant abus évaluation",
+    "url": "https://cps.ca/fr/documents/position/evaluation-medicale-du-TC-ME",
+    "desc": "Document de principes de la SCP : quand soupçonner un trauma crânien infligé et quel bilan faire.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Maltraitance envers les personnes aînées : outil de repérage",
+    "org": "MSSS",
+    "cat": "Gériatrie et troubles neurocognitifs",
+    "tags": "maltraitance aînés abus financier négligence violence personne âgée repérage",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2023/23-819-15F.pdf",
+    "desc": "Outil du MSSS pour repérer les situations de maltraitance envers une personne aînée et savoir comment agir.",
+    "format": "outil",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Violence conjugale : savoir la dépister et intervenir",
+    "org": "Collège des médecins du Québec",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "violence conjugale violence familiale dépistage femme victime sécurité",
+    "url": "https://www.cmq.org/fr/actualites/violence-conjugale-depister-intervenir",
+    "desc": "Article du CMQ : repérer la violence conjugale en consultation et orienter la personne.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
   }
 ]
