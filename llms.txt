@@ -16,6 +16,9 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 
 ## Cartes interactives
 - Montérégie-Est : https://trouvetaclinique.ca/monteregie-est/
+- Toute la Montérégie (Est, Centre et Ouest) : https://trouvetaclinique.ca/monteregie/
+
+## Territoires
 - Montérégie-Centre : https://trouvetaclinique.ca/monteregie-centre/
 - Montérégie-Ouest : https://trouvetaclinique.ca/monteregie-ouest/
 

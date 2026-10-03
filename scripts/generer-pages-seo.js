@@ -853,6 +853,7 @@ function analyserPlages(texte) {
 const EST_PREFIXE = '/monteregie-est';
 const EST_ACCUEIL = EST_PREFIXE + '/';
 const CENTRE_PREFIXE = '/monteregie-centre';
+const CARTE_MONTEREGIE = '/monteregie/';
 
 function estGmfu(valeur) {
   return String(valeur || '').toLowerCase() === 'gmf-u';
@@ -876,6 +877,7 @@ const UNIVERS_GENERAL = {
   nom: 'Montérégie-Est',
   prefixe: '',
   accueil: EST_ACCUEIL,
+  carte: EST_ACCUEIL,
   dossier: '',
   canonique: true,
   banniere: { fichier: BANNIERE_EST_FICHIER, largeur: BANNIERE_EST_LARGEUR, hauteur: BANNIERE_EST_HAUTEUR }
@@ -912,8 +914,16 @@ const UNIVERS_REGIONS = [
 ].map(u => Object.assign({
   regional: true,
   prefixe: '/' + u.dossier,
-  accueil: '/' + u.dossier + '/'
+  accueil: '/' + u.dossier + '/',
+  /* 3 oct. 2026 : seule l'Est garde sa carte. Centre et Ouest pointent vers la carte
+     Santé Québec de toute la Montérégie (/monteregie/) ; leur accueil devient une page texte. */
+  carte: u.region === 'Est' ? '/' + u.dossier + '/' : CARTE_MONTEREGIE
 }, u));
+
+/* Lien vers la carte d'un univers, filtrée sur le territoire quand c'est la carte commune. */
+function lienCarte(u) {
+  return u.carte === CARTE_MONTEREGIE ? `${CARTE_MONTEREGIE}?region=${u.region}` : u.carte;
+}
 
 /* Accès par territoire : UNIVERS_PAR_REGION['Est'] → l'univers de la Montérégie-Est. */
 const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region, u]));
@@ -924,7 +934,7 @@ const UNIVERS_PAR_REGION = Object.fromEntries(UNIVERS_REGIONS.map(u => [u.region
    Ne pas ajouter PTEM-U ici : la page existe, mais elle n’est pas dans le menu (7 liens, Guides juste avant Rechercher). */
 function liensNav(u) {
   const prefixe = (u && u.regional) ? u.prefixe : EST_PREFIXE;
-  const carte = (u && u.regional) ? u.accueil : EST_ACCUEIL;
+  const carte = (u && u.regional) ? lienCarte(u) : EST_ACCUEIL;
   const liens = [
     ['/', 'Accueil', 'accueil'],
     [carte, 'Carte interactive', 'carte'],
@@ -1284,7 +1294,7 @@ ${items}
     : PUBLIER_COURRIELS
     ? ''
     : `
-  <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> les coordonnées de la personne-ressource sont affichées dans la fiche de la clinique sur la carte interactive. <a href="${u.accueil}?c=${c.id}">Ouvrir la fiche de ${esc(c.nom)} sur la carte →</a></div>`;
+  <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> les coordonnées de la personne-ressource sont affichées dans la fiche de la clinique sur la carte interactive. <a href="${u.carte}?c=${c.id}">Ouvrir la fiche de ${esc(c.nom)} sur la carte →</a></div>`;
 
   const corps = `${blocPatientsEgares(c)}${blocEvenement(c)}  <section class="hero">
     <p class="eyebrow">${esc(c.type)}${rempli(c.rls) ? ' · RLS ' + esc(c.rls) : ''}${enRecrutement ? '' : ' · Ne recrute pas actuellement'}</p>
@@ -1292,7 +1302,7 @@ ${items}
     <p class="lead">${esc(textePresentation)}</p>
     <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
     <div class="cta-row">
-      <a class="button primary" href="${u.accueil}?c=${c.id}">Voir sur la carte interactive</a>
+      <a class="button primary" href="${u.carte}?c=${c.id}">Voir sur la carte interactive</a>
       ${rempli(c.rls)
         ? `<a class="button secondary" href="${(u.regional ? u.prefixe : (uRegion ? uRegion.prefixe : EST_PREFIXE))}/rls/${slugifier(c.rls)}/">Autres cliniques du RLS ${esc(c.rls)}</a>`
         : `<a class="button secondary" href="${EST_PREFIXE}/cliniques/">Toutes les cliniques</a>`}
@@ -1320,7 +1330,7 @@ ${calloutMiseAJour(c, canonical || url)}
       ${String(c.id) === '45' ? `<li><a href="${CENTRE_PREFIXE}/etablissements/gmf-u-de-saint-jean-sur-richelieu/">Secteurs en établissement du GMF-U</a></li>` : ''}
       <li><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM et l’avis de conformité</a></li>${estGmfu(c.type) ? LI_PTEM_U : ''}
       <li><a href="${EST_PREFIXE}/amp/">Comprendre les activités médicales particulières (AMP)</a></li>
-      <li><a href="${u.accueil}?c=${c.id}">Fiche complète et itinéraire sur la carte interactive</a></li>
+      <li><a href="${u.carte}?c=${c.id}">Fiche complète et itinéraire sur la carte interactive</a></li>
     </ul>
   </section>`;
 
@@ -1444,7 +1454,7 @@ function pageRls(rls, liste, slugs, majDonnees, u = UNIVERS_GENERAL, etablisseme
     <p class="lead">${actifs.length} milieu${actifs.length > 1 ? 'x' : ''} du réseau local de services ${esc(rls)} recrute${actifs.length > 1 ? 'nt' : ''} actuellement des médecins de famille, réparti${actifs.length > 1 ? 's' : ''} dans ${villesActifs.length} municipalité${villesActifs.length > 1 ? 's' : ''} : ${esc(villesActifs.join(', '))}.${inactifs.length ? `<br>Le RLS compte aussi ${inactifs.length} autre${inactifs.length > 1 ? 's' : ''} milieu${inactifs.length > 1 ? 'x' : ''} publié${inactifs.length > 1 ? 's' : ''} à titre de référence, qui ${inactifs.length > 1 ? 'ne recrutent' : 'ne recrute'} pas actuellement.` : ''}</p>
     <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
     <div class="cta-row">
-      <a class="button primary" href="${u.accueil}">Voir ce RLS sur la carte</a>
+      <a class="button primary" href="${lienCarte(u)}">Voir ce RLS sur la carte</a>
       ${u.regional
         ? `<a class="button secondary" href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a>`
         : `<a class="button secondary" href="${EST_PREFIXE}/cliniques/">Toutes les cliniques</a>`}
@@ -1566,7 +1576,7 @@ function pageRlsHubRegion(u, parRls, majDonnees) {
     <p class="lead">Le territoire de la ${esc(u.nom)} compte <strong>${rlsPresents.length} ${rlsPresents.length > 1 ? 'réseaux locaux' : 'réseau local'} de services</strong>, avec au total ${total} milieu${total > 1 ? 'x' : ''} actuellement en recrutement de médecins de famille.</p>
     <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
     <div class="cta-row">
-      <a class="button primary" href="${u.accueil}">Voir sur la carte interactive</a>
+      <a class="button primary" href="${lienCarte(u)}">Voir sur la carte interactive</a>
       <a class="button secondary" href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a>
     </div>
   </section>
@@ -1581,6 +1591,96 @@ ${sections}`;
     url, profondeur: 1, indexable: u.canonique, jsonLd, univers: u, actif: null,
     ogImageOverride: OG_PAGES.cliniques,
     filDAriane: `<a href="${u.accueil}">${esc(u.nom)}</a> › RLS`,
+    corps
+  });
+}
+
+/* Page de territoire /monteregie-centre/ et /monteregie-ouest/ (3 oct. 2026) : ces adresses
+   portaient une carte régionale ; elles présentent maintenant le territoire en texte et
+   renvoient vers la carte Santé Québec de toute la Montérégie, filtrée sur le territoire. */
+function pageTerritoire(u, cliniquesRegion, slugs, majDonnees) {
+  const url = `${SITE}${u.accueil}`;
+  const rangRls = rls => { const i = u.ordreRls.indexOf(rls); return i === -1 ? 99 : i; };
+  const parRls = new Map();
+  for (const c of cliniquesRegion) {
+    if (!c.rls) continue;
+    if (!parRls.has(c.rls)) parRls.set(c.rls, []);
+    parRls.get(c.rls).push(c);
+  }
+  const rlsPresents = [...parRls.keys()].sort((a, b) => rangRls(a) - rangRls(b) || a.localeCompare(b, 'fr'));
+  const enRecrutement = cliniquesRegion.filter(recrute).length;
+  const pluriel = (n, mot, motPl) => `${n} ${n > 1 ? (motPl || mot + 's') : mot}`;
+
+  const sectionsRls = rlsPresents.map(rls => {
+    const liste = parRls.get(rls);
+    const actifs = liste.filter(recrute).length;
+    const items = [...liste].sort((a, b) => a.nom.localeCompare(b.nom, 'fr')).map(c => {
+      const slug = slugs[String(c.id)];
+      const nom = slug ? `<a href="${hrefFicheMilieu(c, slug, u.prefixe)}">${esc(c.nom)}</a>` : esc(c.nom);
+      return `      <li>${nom}${c.ville ? ` <span class="rep-lien">· ${esc(c.ville)}</span>` : ''}${recrute(c) ? '' : ' <span class="rep-lien">(ne recrute pas actuellement)</span>'}</li>`;
+    }).join('\n');
+    return `  <section id="rls-${slugifier(rls)}">
+    <h2>RLS ${esc(rls)} <span class="compte">${liste.length}</span></h2>
+    <p class="rep-lien">${pluriel(liste.length, 'milieu', 'milieux')} répertorié${liste.length > 1 ? 's' : ''}, dont ${actifs} en recrutement.</p>
+    <ul>
+${items}
+    </ul>
+    <p class="rep-lien"><a href="${u.prefixe}/rls/${slugifier(rls)}/">Le RLS ${esc(rls)} en détail →</a></p>
+  </section>`;
+  }).join('\n\n');
+
+  const etablissements = u.region === 'Centre'
+    ? `\n\n  <section id="etablissements">
+    <h2>Secteurs en établissement</h2>
+    <p class="rep-lien">Hôpitaux, CHSLD, CLSC et GMF-U du territoire : secteurs et modalités de recrutement.</p>
+    <p class="rep-lien"><a href="${u.prefixe}/etablissements/">Voir les secteurs en établissement de la ${esc(u.nom)} →</a></p>
+  </section>`
+    : '';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage', '@id': url + '#webpage', url,
+        name: `Médecine familiale en ${u.nom}`,
+        inLanguage: 'fr-CA', dateModified: majDonnees,
+        isPartOf: { '@id': SITE + '/#website' },
+        about: { '@type': 'Place', name: u.nom, address: { '@type': 'PostalAddress', addressRegion: 'QC', addressCountry: 'CA' } }
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE + '/' },
+          { '@type': 'ListItem', position: 2, name: u.nom, item: url }
+        ]
+      }
+    ]
+  };
+
+  const corps = `  <section class="hero">
+    <p class="eyebrow">Territoire · ${esc(u.nom)}</p>
+    <h1>Médecine familiale en ${esc(u.nom)}</h1>
+    <p class="lead">La ${esc(u.nom)} compte <strong>${pluriel(rlsPresents.length, 'réseau local de services', 'réseaux locaux de services')}</strong> (${rlsPresents.map(esc).join(', ')}) et ${pluriel(cliniquesRegion.length, 'milieu répertorié', 'milieux répertoriés')}, dont ${enRecrutement} en recrutement de médecins de famille.</p>
+    <p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>
+    <div class="cta-row">
+      <a class="button primary" href="${lienCarte(u)}">Voir la ${esc(u.nom)} sur la carte</a>
+      <a class="button secondary" href="${u.prefixe}/cliniques/">Toutes les cliniques du territoire</a>
+    </div>
+  </section>
+
+${sectionsRls}${etablissements}
+
+  <section id="ptem">
+    <h2>Préparer sa pratique</h2>
+    <p class="rep-lien"><a href="${EST_PREFIXE}/ptem/">Comprendre le PTEM</a> · <a href="${EST_PREFIXE}/amp/">Les activités médicales particulières (AMP)</a></p>
+  </section>`;
+
+  return page({
+    titre: limiterTexte(`Médecine familiale en ${u.nom} : cliniques et RLS`, 60),
+    description: `Les RLS, cliniques et milieux en recrutement de médecins de famille en ${u.nom}, avec la carte interactive de la Montérégie.`,
+    url, profondeur: 1, indexable: u.canonique, jsonLd, univers: u, actif: null,
+    ogImageOverride: OG_PAGES.cliniques,
+    filDAriane: `<a href="/">Accueil</a> › ${esc(u.nom)}`,
     corps
   });
 }
@@ -1776,12 +1876,10 @@ function pageAccueil(toutesEntrees, majDonnees) {
   </a>
   <p class="autres" style="margin-top:1rem"><a class="btn teal" href="/monteregie-est/">Ouvrir la carte Montérégie-Est&nbsp;→</a></p>
   <p class="autres" style="margin-top:.6rem"><a class="btn ghost sm" href="/monteregie-est/video/">▶&nbsp;Voir la visite guidée en vidéo (4&nbsp;min)</a></p>
-  <h3 class="autres-note" style="font-size:1.05rem;font-weight:700;margin-bottom:.4rem">Autres territoires de la Montérégie</h3>
-  <p class="autres-note" style="margin-top:0">Les cartes de la Montérégie, de la Montérégie-Centre et de la Montérégie-Ouest sont disponibles, mais demeurent en construction.</p>
+  <h3 class="autres-note" style="font-size:1.05rem;font-weight:700;margin-bottom:.4rem">Vous visez la Montérégie-Centre ou la Montérégie-Ouest&nbsp;?</h3>
+  <p class="autres-note" style="margin-top:0">La carte de toute la Montérégie présente aussi les milieux du Centre et de l'Ouest.</p>
   <div class="autres">
-    <a class="btn teal sm" href="/monteregie/">Montérégie</a>
-    <a class="btn ghost sm" href="/monteregie-centre/">Montérégie-Centre</a>
-    <a class="btn ghost sm" href="/monteregie-ouest/">Montérégie-Ouest</a>
+    <a class="btn ghost sm" href="/monteregie/">Ouvrir la carte de la Montérégie&nbsp;→</a>
   </div>
 </section>
 
@@ -1908,7 +2006,7 @@ ${items}
     ]
   };
 
-  const accueilCarte = u ? u.accueil : UNIVERS_GENERAL.accueil;
+  const accueilCarte = u ? lienCarte(u) : UNIVERS_GENERAL.carte;
   const titreRepertoire = `Cliniques en recrutement en ${nomTerritoire}`;
   const leadRepertoire = `<p class="lead"><strong>${enRecrutementTotal} milieu${enRecrutementTotal > 1 ? 'x' : ''} en recrutement actif</strong> de médecins de famille, sur ${cliniques.length} milieux publiés au total dans le répertoire, répartis dans <strong>${parRls.size} RLS</strong> et ${villes.size} municipalités.${enRecrutementTotal < cliniques.length ? `<br>Les autres milieux publiés le sont à titre de référence et ne recrutent pas actuellement.` : ''}<br>Chaque fiche permet de comparer les caractéristiques disponibles; la <a href="${accueilCarte}">carte interactive</a> ajoute les filtres et la vue géographique.</p>`;
   const majRepertoire = `<p class="updated"><strong>Données mises à jour le :</strong> ${htmlDateFr(majDonnees)}.</p>`;
@@ -3258,7 +3356,7 @@ function indexerEtablissementsParRls() {
 }
 
 function lienCarteInstallationCentre(id) {
-  return `${CENTRE_PREFIXE}/?mode=etablissements&installation=${encodeURIComponent(id)}`;
+  return `${CARTE_MONTEREGIE}?mode=etablissements&installation=${encodeURIComponent(id)}`;
 }
 
 function htmlExtraSeoRlsHrr() {
@@ -3577,8 +3675,9 @@ const PAGES_FIXES = [
   { loc: '/monteregie-est/video/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
   { loc: '/a-propos/', lastmod: null, changefreq: 'monthly', priority: '0.4' },
   { loc: '/confidentialite/', lastmod: null, changefreq: 'yearly', priority: '0.2' },
-  /* /monteregie/ (carte des 3 territoires) reste en ligne pour les humains mais n’est plus
-     dans le sitemap : elle concurrence l’accueil et /monteregie-est/. */
+  /* /monteregie/ : carte Santé Québec de toute la Montérégie, indexée depuis le 3 oct. 2026.
+     /monteregie-centre/ et /monteregie-ouest/ : pages de territoire (texte). */
+  { loc: '/monteregie/', lastmod: null, changefreq: 'weekly', priority: '0.8' },
   { loc: '/monteregie-centre/', lastmod: null, changefreq: 'monthly', priority: '0.6' },
   { loc: '/monteregie-ouest/', lastmod: null, changefreq: 'monthly', priority: '0.6' }
 ];
@@ -3933,8 +4032,9 @@ function construireIndexRecherche(cliniques, slugs) {
     { nom: 'Accueil', url: '/', extra: 'accueil trouve ta clinique' },
     { nom: 'Carte interactive Montérégie-Est', url: '/monteregie-est/', extra: 'carte interactive est' },
     { nom: 'Vidéo : la carte de la Montérégie-Est', url: '/monteregie-est/video/', extra: 'video presentation visite guidee demonstration tutoriel' },
-    { nom: 'Carte interactive Montérégie-Centre', url: '/monteregie-centre/', extra: 'carte centre' },
-    { nom: 'Carte interactive Montérégie-Ouest', url: '/monteregie-ouest/', extra: 'carte ouest' },
+    { nom: 'Carte interactive de la Montérégie', url: '/monteregie/', extra: 'carte monteregie centre ouest sante quebec' },
+    { nom: 'Territoire Montérégie-Centre', url: '/monteregie-centre/', extra: 'centre champlain haut-richelieu rouville' },
+    { nom: 'Territoire Montérégie-Ouest', url: '/monteregie-ouest/', extra: 'ouest jardins-roussillon vaudreuil-soulanges suroit haut-saint-laurent' },
     { nom: 'Cliniques de la Montérégie-Est', url: '/monteregie-est/cliniques/', extra: 'repertoire cliniques' },
     { nom: 'Cliniques de la Montérégie-Centre', url: '/monteregie-centre/cliniques/', extra: 'repertoire cliniques centre' },
     { nom: 'Cliniques de la Montérégie-Ouest', url: '/monteregie-ouest/cliniques/', extra: 'repertoire cliniques ouest' },
@@ -4503,6 +4603,9 @@ Site d'information pour les médecins de famille et les résidents qui cherchent
 
 ## Cartes interactives
 - Montérégie-Est : https://trouvetaclinique.ca/monteregie-est/
+- Toute la Montérégie (Est, Centre et Ouest) : https://trouvetaclinique.ca/monteregie/
+
+## Territoires
 - Montérégie-Centre : https://trouvetaclinique.ca/monteregie-centre/
 - Montérégie-Ouest : https://trouvetaclinique.ca/monteregie-ouest/
 
@@ -4694,6 +4797,9 @@ function main() {
     copiesRegionales++;
     if (u.canonique) {
       entrees.push({ loc: `${u.prefixe}/cliniques/`, lastmod: majPagesSeo, changefreq: 'weekly', priority: '0.8' });
+    }
+    if (u.carte !== u.accueil) {
+      ecrire(path.join(u.dossier, 'index.html'), pageTerritoire(u, cliniquesRegion, slugs, majDonnees));
     }
     const hub = pageRlsHubRegion(u, parRls, majDonnees);
     ecrire(path.join(u.dossier, 'rls', 'index.html'), hub);

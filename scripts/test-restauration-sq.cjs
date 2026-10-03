@@ -77,28 +77,29 @@ test('Les scripts de la carte compilent et les dépendances/PWA gardent les bonn
 
 test('La génération est stable et ne change ni données ni autres cartes', () => {
   const fichiers = ['data.json', 'monteregie/index.html', 'monteregie-est/index.html',
-    'monteregie-centre/index.html', 'monteregie-ouest/index.html'];
+    'carte-interactive/index.html', 'monteregie-centre/index.html', 'monteregie-ouest/index.html'];
   const empreinte = p => h(finsDeLigneUnix(lire(p)));
   const avant = fichiers.map(empreinte);
   execFileSync(process.execPath, [path.join(__dirname, 'publier-regions.js')], { cwd: racine });
   assert.deepEqual(fichiers.map(empreinte), avant);
   assert.ok(lire('scripts/carte.template.html').includes('--cream: #f8f6f1'));
-  for (const p of ['monteregie/index.html', 'monteregie-centre/index.html', 'monteregie-ouest/index.html']) {
-    assert.ok(!lire(p).includes('PROTOTYPE SANTÉ QUÉBEC'));
-  }
   assert.ok(lire('README.md').includes('[Voir le site](https://trouvetaclinique.ca/)'));
   assert.ok(lire('README.md').includes('apercu.trouvetaclinique.ca'));
   const complete = finsDeLigneUnix(lire('monteregie/index.html'));
   const estApres = finsDeLigneUnix(lire('monteregie-est/index.html'));
+  // 3 oct. 2026 : Centre et Ouest sont des pages de territoire (texte), sans carte.
   const centre = finsDeLigneUnix(lire('monteregie-centre/index.html'));
   const ouest = finsDeLigneUnix(lire('monteregie-ouest/index.html'));
   assert.match(complete, /id="repertoire-etablissements"/);
   assert.match(estApres, /id="repertoire-etablissements"/);
-  assert.match(centre, /id="repertoire-etablissements"/);
   assert.match(estApres, /etablissements\/hopital-pierre-boucher\//);
-  assert.match(centre, /etablissements\/hopital-du-haut-richelieu\//);
+  assert.match(complete, /etablissements\/hopital-du-haut-richelieu\//);
+  assert.match(centre, /href="\/monteregie-centre\/etablissements\/"/);
+  assert.match(centre, /href="\/monteregie\/\?region=Centre"/);
+  assert.match(ouest, /href="\/monteregie\/\?region=Ouest"/);
   assert.match(ouest, /cliniques\/chsld-et-clsc-de-coteau-du-lac\//);
   assert.doesNotMatch(ouest, /cliniques\/clsc-de-coteau-du-lac\//);
+  for (const p of [centre, ouest]) assert.doesNotMatch(p, /maplibre|leaflet\.css/);
   assert.doesNotMatch(complete, /\/cliniques\/gmf-hudson\//);
   assert.match(complete, /\/cliniques\/gmf-hudson-hudson-medicentre\//);
 });

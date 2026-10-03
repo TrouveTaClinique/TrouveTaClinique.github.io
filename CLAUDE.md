@@ -21,7 +21,8 @@ par les scripts. Modifier plutôt :
 
 - `data.json` (cliniques, établissements), `guides/donnees.json` (catalogue de guides) ;
 - `scripts/sources/*.html` (pages PTEM, PTEM-U, AMP) ;
-- `scripts/carte.template.html`, `scripts/carte-est-sq.template.html` (cartes) ;
+- `scripts/carte-est-sq.template.html` (cartes Est et Montérégie), `scripts/generer-carte-sq-complete.js`
+  (transformations de la carte Montérégie), `scripts/carte.template.html` (en-tête de la carte Est) ;
 - `scripts/generer-pages-seo.js`, `scripts/generer-guides-cliniques.cjs`, `scripts/publier-regions.js`.
 
 Puis : `node scripts/generer-pages-seo.js` et, pour les cartes, `node scripts/publier-regions.js`.
@@ -89,6 +90,12 @@ dates du sitemap selon le contenu réel des pages).
   150 questions par jour (`PLAFOND_JOUR`), compté dans l'espace KV `COMPTEUR` de `wrangler.toml`.
 
 ## Divers
+
+- Cartes (3 oct. 2026) : deux cartes seulement. `/monteregie-est/` en avant-plan, et `/monteregie/`,
+  carte Santé Québec de toute la Montérégie (indexée, filtre `?region=Centre|Ouest`). Les fiches,
+  RLS et répertoires du Centre et de l'Ouest y renvoient. `/monteregie-centre/` et `/monteregie-ouest/`
+  sont des pages texte de territoire (`pageTerritoire()`), plus des cartes. `/carte-interactive/`
+  renvoie vers `/monteregie/`.
 
 - Ce qui est publié est défini par la liste blanche de `scripts/preparer-apercu.js` (dossiers,
   fichiers, extensions, exclusions), plus les extras de `scripts/preparer-pages-production.js`.

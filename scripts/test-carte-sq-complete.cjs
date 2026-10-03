@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { Script } = require('node:vm');
-const { generer } = require('./generer-carte-sq-complete.js');
+const { generer, pageRenvoi } = require('./generer-carte-sq-complete.js');
 const { lister } = require('./preparer-apercu.js');
 
 const racine = path.join(__dirname, '..');
@@ -32,21 +32,28 @@ function htmlHorsPage(dir, acc) {
 test('La page est produite par le script, deux fois de suite à l’identique', () => {
   const page = generer();
   assert.equal(generer(), page);
-  assert.equal(lire('carte-interactive/index.html'), page);
+  // publier-regions.js ajoute le répertoire texte sous la carte.
+  const publie = lire('monteregie/index.html')
+    .replace(/<style id="repertoire-territoire-css">[\s\S]*?<\/style>\n/, '')
+    .replace(/\n<nav id="repertoire-territoire"[\s\S]*?<\/nav>\n/, '');
+  assert.equal(publie, page);
+  assert.equal(lire('carte-interactive/index.html'), pageRenvoi());
 });
 
 test('Le bloc prototype, l’épingle et le logo restent ceux du gabarit Est', () => {
   const gabarit = lire('scripts/carte-est-sq.template.html').replace(/\r\n/g, '\n');
-  const page = lire('carte-interactive/index.html');
+  const page = lire('monteregie/index.html');
   assert.equal(tranche(page), tranche(gabarit));
   assert.equal(page.match(/--app-pin:[^\n]*/)[0], gabarit.match(/--app-pin:[^\n]*/)[0]);
   assert.equal(page.match(/--app-logo:[^\n]*/)[0], gabarit.match(/--app-logo:[^\n]*/)[0]);
 });
 
-test('La page reste non répertoriée et charge toute la Montérégie', () => {
-  const page = lire('carte-interactive/index.html');
+test('La carte de la Montérégie est indexée et charge toute la Montérégie', () => {
+  const page = generer();
   assert.match(page, /<html lang="fr-CA" data-region="Est">/);
-  assert.match(page, /name="robots" content="noindex, nofollow"/);
+  assert.match(page, /name="robots" content="index,follow/);
+  assert.match(page, /rel="canonical" href="https:\/\/trouvetaclinique\.ca\/monteregie\/"/);
+  assert.match(page, /get\('region'\)/);
   assert.match(page, /Segoe UI/);
   assert.match(page, /max-width: 860px/);
   assert.doesNotMatch(page, /kaushan/i);
@@ -62,7 +69,8 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
   assert.match(page, /vw-label\">Téléphone/);
   assert.match(page, /ttc-sq-mtg-note-/);
   assert.doesNotMatch(page, /dtmf-mtg-note-/);
-  assert.match(page, /trouvetaclinique\.ca\/carte-interactive\//);
+  assert.match(page, /cmp-qrurl">trouvetaclinique\.ca\/monteregie\//);
+  assert.match(page, /href="\/monteregie-centre\/"/);
   assert.doesNotMatch(page, /trouvetaclinique\.ca\/monteregie-est\//);
   assert.match(page, /id="reg-filter"/);
   assert.match(page, /id="rls-filter"/);
@@ -78,7 +86,7 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
     assert.equal(page.includes(inventee), false, inventee);
   }
   assert.equal((page.match(/name="robots"/g) || []).length, 1);
-  const re = /<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
+  const re = /<script\b(?![^>]*\b(?:src=|type="application\/ld\+json"))[^>]*>([\s\S]*?)<\/script>/gi;
   let m;
   while ((m = re.exec(page))) {
     if (m[1].trim()) new Script(m[1]);
@@ -93,5 +101,7 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
     assert.doesNotMatch(lire(path.relative(racine, fichier)), /carte-interactive/, fichier);
   }
   assert.ok(lister(racine).includes('carte-interactive/index.html'));
+  assert.match(lire('carte-interactive/index.html'), /location\.replace\('\/monteregie\/' \+ location\.search/);
+  assert.match(lire('sitemap.xml'), /<loc>https:\/\/trouvetaclinique\.ca\/monteregie\/<\/loc>/);
   assert.ok(!lister(racine).includes('carte-interactive/fiches-publiques.json'));
 });
