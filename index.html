@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-accueil.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="/assets/seo-pages.css?v=93-menu-guides">
+  <link rel="stylesheet" href="/assets/seo-pages.css?v=94-nous-joindre">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -241,26 +241,41 @@
     <p>Pour trouver une consultation, passez par <a href="https://www.quebec.ca/sante/trouver-une-ressource/medecin-de-famille-prendre-rendez-vous-en-ligne" rel="noopener">Rendez-vous santé Québec</a>, ou composez le <strong>811, option 1</strong> (Info-Santé) pour un avis infirmier. Pour vous inscrire auprès d'un médecin de famille, utilisez le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d'accès à un médecin de famille</a>.</p>
   </aside>
 </section>
-<section class="zone" id="nous-joindre" aria-labelledby="nous-joindre-titre" style="padding-top:0">
-  <h2 id="nous-joindre-titre">Nous joindre</h2>
-  <p>Une question, une correction, un milieu à ajouter&nbsp;? Écrivez-nous.</p>
-  <form class="contact" id="form-contact" data-envoi="https://trouvetaclinique-aiguillage.o-laplante27.workers.dev/contact" data-a="contact" data-b="trouvetaclinique.ca" novalidate>
+<section class="zone nous-joindre" id="nous-joindre" aria-labelledby="nous-joindre-titre">
+  <div class="nj-tete">
+    <h2 id="nous-joindre-titre">Nous joindre</h2>
+    <p>Une question, une correction, un milieu à ajouter&nbsp;? Écrivez-nous.</p>
+  </div>
+  <form class="contact" id="form-contact" data-alias="" data-a="contact" data-b="trouvetaclinique.ca" novalidate>
     <label for="contact-nom"><span>Nom</span><input id="contact-nom" name="nom" autocomplete="name" maxlength="120" required></label>
     <label for="contact-titre"><span>Titre ou fonction <span class="opt">(facultatif)</span></span><input id="contact-titre" name="titre" autocomplete="organization-title" maxlength="160"></label>
-    <label for="contact-courriel"><span>Courriel pour vous répondre <span class="opt">(facultatif)</span></span><input id="contact-courriel" name="courriel" type="email" autocomplete="email" maxlength="200"></label>
-    <label for="contact-message"><span>Message</span><textarea id="contact-message" name="message" rows="6" maxlength="5000" required></textarea></label>
+    <label class="large" for="contact-courriel"><span>Courriel pour vous répondre <span class="opt">(facultatif)</span></span><input id="contact-courriel" name="courriel" type="email" autocomplete="email" maxlength="200"></label>
+    <label class="large" for="contact-message"><span>Message</span><textarea id="contact-message" name="message" rows="6" maxlength="5000" required></textarea></label>
     <div class="piege" aria-hidden="true"><label for="contact-site">Site Web<input id="contact-site" name="site" tabindex="-1" autocomplete="off"></label></div>
-    <button class="btn" type="submit">Envoyer</button>
-    <p class="contact-etat" id="contact-etat" role="status" aria-live="polite"></p>
+    <div class="contact-pied large">
+      <button class="btn" type="submit">Envoyer</button>
+      <p class="contact-etat" id="contact-etat" role="status" aria-live="polite"></p>
+    </div>
   </form>
+  <div class="contact-merci" id="contact-merci" tabindex="-1" hidden>
+    <p class="cm-titre">Merci&nbsp;! Votre message a bien été envoyé.</p>
+    <p id="contact-merci-suite"></p>
+    <button class="btn ghost sm" type="button" id="contact-autre">Écrire un autre message</button>
+  </div>
 </section>
 <script>
 (function () {
   var f = document.getElementById('form-contact');
   if (!f) return;
   var etat = document.getElementById('contact-etat');
+  var merci = document.getElementById('contact-merci');
   var bouton = f.querySelector('button[type="submit"]');
   var v = function (id) { return (document.getElementById(id).value || '').trim(); };
+  var adresse = function () { return f.getAttribute('data-a') + '@' + f.getAttribute('data-b'); };
+  document.getElementById('contact-autre').addEventListener('click', function () {
+    merci.hidden = true; f.hidden = false; etat.textContent = '';
+    document.getElementById('contact-nom').focus();
+  });
   f.addEventListener('submit', function (e) {
     e.preventDefault();
     var nom = v('contact-nom'), titre = v('contact-titre'), courriel = v('contact-courriel'), message = v('contact-message');
@@ -269,29 +284,37 @@
       (nom ? document.getElementById('contact-message') : document.getElementById('contact-nom')).focus();
       return;
     }
+    if (courriel && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(courriel)) {
+      etat.textContent = 'L’adresse courriel semble invalide.';
+      document.getElementById('contact-courriel').focus();
+      return;
+    }
+    if (v('contact-site')) { f.reset(); return; }
+    function reussi() {
+      f.reset(); f.hidden = true; merci.hidden = false;
+      document.getElementById('contact-merci-suite').textContent = courriel
+        ? 'Nous vous répondrons à l’adresse ' + courriel + '.'
+        : 'Vous n’avez pas laissé de courriel : nous ne pourrons pas vous répondre directement.';
+      merci.focus();
+    }
     function repli() {
       var corps = message + '\n\n' + 'Nom : ' + nom + (titre ? '\nTitre ou fonction : ' + titre : '') +
         (courriel ? '\nCourriel pour la réponse : ' + courriel : '') + '\n\n(Formulaire « Nous joindre » de trouvetaclinique.ca)';
-      var adresse = f.getAttribute('data-a') + '@' + f.getAttribute('data-b');
-      location.href = 'mailto:' + adresse + '?subject=' + encodeURIComponent('Trouve ta clinique : message de ' + nom) +
+      location.href = 'mailto:' + adresse() + '?subject=' + encodeURIComponent('Trouve ta clinique : message de ' + nom) +
         '&body=' + encodeURIComponent(corps);
-      etat.textContent = 'Votre logiciel de courriel devrait s’ouvrir avec le message prêt à envoyer.';
+      etat.textContent = 'L’envoi direct n’a pas fonctionné : votre logiciel de courriel devrait s’ouvrir avec le message prêt à envoyer.';
     }
-    var url = f.getAttribute('data-envoi');
-    if (!url || !window.fetch) { repli(); return; }
+    if (!window.fetch) { repli(); return; }
     bouton.disabled = true;
     etat.textContent = 'Envoi en cours…';
-    fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nom: nom, titre: titre, courriel: courriel, message: message, site: v('contact-site') }) })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, statut: r.status, d: d }; }); })
-      .then(function (x) {
-        /* Seules les réponses de la route « contact » comptent ; toute autre réponse : repli. */
-        if (!x.d || !x.d.contact) { repli(); }
-        else if (x.ok) { f.reset(); etat.textContent = 'Merci ! Votre message a été envoyé.'; }
-        /* Champ refusé (400) ou trop de messages (429) : le dire. Tout le reste : repli. */
-        else if (!x.d.repli && (x.statut === 400 || x.statut === 429) && x.d.erreur) { etat.textContent = x.d.erreur; }
-        else { repli(); }
-      }, repli)
+    var donnees = { 'Nom': nom, 'Titre ou fonction': titre || '(non indiqué)', 'Message': message,
+      _subject: 'Trouve ta clinique : message de ' + nom, _template: 'box', _captcha: 'false' };
+    if (courriel) { donnees.email = courriel; donnees._replyto = courriel; }
+    fetch('https://formsubmit.co/ajax/' + (f.getAttribute('data-alias') || adresse()), {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(donnees) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && String(d.success) === 'true') { etat.textContent = ''; reussi(); } else { repli(); } }, repli)
       .then(function () { bouton.disabled = false; });
   });
 })();
@@ -377,7 +400,7 @@ document.querySelectorAll('.brand').forEach(function (b) {
 })();
 </script>
 <script src="/assets/theme.js" defer></script>
-<script src="/assets/recherche.js?v=93-menu-guides" defer></script>
+<script src="/assets/recherche.js?v=94-nous-joindre" defer></script>
 <script>
 (function () {
   if (!('serviceWorker' in navigator)) return;
