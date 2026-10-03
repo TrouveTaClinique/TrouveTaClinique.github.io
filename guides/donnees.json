@@ -18124,5 +18124,82 @@
     "verifie": "2026-10-02",
     "ajoute": "2026-10-01",
     "format": "patient"
+  },
+  {
+    "title": "Rougeole : gestion des cas, des contacts et des éclosions",
+    "org": "MSSS",
+    "cat": "Infections et ITSS",
+    "tags": "rougeole measles éruption fièvre toux contacts éclosion déclaration MADO vaccin RRO immunoglobulines exclusion",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2023/23-271-07W.pdf",
+    "desc": "Fiche technique du MSSS (février 2024) : définition de cas, tests, déclaration, prise en charge des contacts et des éclosions.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Rougeole : affiche « Alerte! Rougeole! » pour les milieux de soins",
+    "org": "MSSS",
+    "cat": "Infections et ITSS",
+    "tags": "rougeole measles précautions aériennes triage masque éruption fièvre",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2023/23-271-10W.pdf",
+    "desc": "Affiche d’une page : hygiène et étiquette respiratoires, signes, tests et déclaration d’un cas soupçonné.",
+    "format": "outil",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Rougeole : description de la maladie (Protocole d’immunisation du Québec)",
+    "org": "MSSS",
+    "cat": "Prévention et vaccination",
+    "tags": "rougeole measles PIQ vaccination RRO RRO-Var épidémiologie complications",
+    "url": "https://msss.gouv.qc.ca/professionnels/vaccination/piq-description-des-maladies-evitables-par-la-vaccination/rougeole/",
+    "desc": "Description clinique et épidémiologique de la rougeole, tirée du Protocole d’immunisation du Québec.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Coqueluche : guide d’intervention (mise à jour 2026)",
+    "org": "MSSS",
+    "cat": "Infections et ITSS",
+    "tags": "coqueluche pertussis toux quintes nourrisson femme enceinte antibiotique prophylaxie contacts exclusion",
+    "url": "https://publications.msss.gouv.qc.ca/msss/fichiers/2025/25-271-06W.pdf",
+    "desc": "Guide du MSSS : diagnostic, traitement, prophylaxie des contacts, protection des nourrissons de moins de 12 mois et des femmes enceintes.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Coqueluche : description de la maladie (Protocole d’immunisation du Québec)",
+    "org": "MSSS",
+    "cat": "Prévention et vaccination",
+    "tags": "coqueluche pertussis PIQ vaccination dcaT grossesse",
+    "url": "https://msss.gouv.qc.ca/professionnels/vaccination/piq-description-des-maladies-evitables-par-la-vaccination/coqueluche/",
+    "desc": "Description clinique et épidémiologique de la coqueluche, tirée du Protocole d’immunisation du Québec.",
+    "format": "guide",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Décollement du vitré : corps flottants et éclairs lumineux (patients)",
+    "org": "CHU de Québec",
+    "cat": "Documents pour les patients",
+    "tags": "corps flottants mouches volantes myodésopsies flashes éclairs décollement du vitré décollement de rétine signes d’alerte œil",
+    "url": "https://www.chudequebec.ca/chudequebec.ca/files/44/44ce518b-17ba-4ecc-89c8-b8285f78d4fc.pdf",
+    "desc": "Feuillet pour le patient : corps flottants, éclairs, et signes qui demandent une consultation rapide.",
+    "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Cataracte : comprendre l’opération et le choix des lentilles (patients)",
+    "org": "CHU de Québec",
+    "cat": "Documents pour les patients",
+    "tags": "cataracte cristallin chirurgie lentille intraoculaire vision embrouillée œil",
+    "url": "https://www.chudequebec.ca/chudequebec.ca/files/68/68dc5efb-1906-4388-98c3-c179a85082cc.pdf",
+    "desc": "Feuillet pour le patient : la cataracte, la chirurgie et les choix de lentilles couvertes ou non par la RAMQ.",
+    "format": "patient",
+    "verifie": "2026-10-03",
+    "ajoute": "2026-10-03"
   }
 ]
