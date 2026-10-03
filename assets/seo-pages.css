@@ -745,7 +745,18 @@ main .cliniques-carte,main .carte-est{
 }
 
 /* ── Nous joindre (page À propos, 28 sept. 2026) ── */
-.contact{display:grid;gap:.95rem;max-width:min(40rem,100%);margin-top:1rem;padding:1.3rem 1.4rem;background:var(--teal-pale);border-radius:16px}
+.nous-joindre{max-width:56rem;margin-inline:auto;padding-top:0}
+.nous-joindre .nj-tete{text-align:center;margin-bottom:.4rem}
+.nous-joindre .nj-tete h2{margin-inline:auto}
+.nous-joindre .nj-tete p{margin-inline:auto}
+.contact,.contact-merci{display:grid;gap:1rem 1.25rem;margin-top:1rem;padding:clamp(1.3rem,3vw,2.2rem);background:#fff;border:1px solid var(--rule);border-radius:16px;box-shadow:inset 3px 0 0 var(--teal),0 8px 24px rgba(18,6,114,.06)}
+@media(min-width:720px){.contact{grid-template-columns:1fr 1fr}.contact .large{grid-column:1 / -1}}
+.contact[hidden],.contact-merci[hidden]{display:none}
+.contact-pied{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem}
+.contact-merci{text-align:center;justify-items:center}
+.contact-merci .cm-titre{font-size:1.25rem;font-weight:700;color:var(--navy);margin:0}
+.contact-merci p{margin:0}
+.contact-merci .btn{border:2px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer;font:inherit;font-weight:650}
 .contact label{display:grid;gap:.35rem;font-weight:650;color:var(--navy)}
 .contact .opt{font-weight:400;color:var(--ink-60)}
 .contact input,.contact textarea{font:inherit;font-weight:400;color:var(--navy);background:#fff;border:1.5px solid var(--rule);border-radius:12px;padding:.7rem .9rem;min-height:48px}
