@@ -3,6 +3,11 @@
 La production est servie depuis `main` sur [trouvetaclinique.ca](https://trouvetaclinique.ca/).
 Ce fichier conserve les jalons utiles. Les archives datées (31 août et étape 4) sont dans `docs/archives/`.
 
+## 3 octobre 2026 : vidéo de la carte Est
+
+- Vidéo de /monteregie-est/video/ remplacée (v6c) : carton de fin sans la mention de collaboration ;
+  images, musique et bruitages identiques à la v6.
+
 ## 29 septembre 2026 : adresse du site
 
 - Adresse dédiée contact@trouvetaclinique.ca (transfert easyDNS) pour « Signaler une clinique »,
