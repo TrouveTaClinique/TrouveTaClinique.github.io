@@ -61,7 +61,17 @@ function generer() {
     '.dp-name-display:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }\n</style>',
     '.dp-name-display:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }\n' +
     '.rls-legend { max-height: 46vh; overflow: auto; }\n' +
-    '.fiche-public a { word-break: break-word; }\n</style>',
+    '.fiche-public a { word-break: break-word; }\n' +
+    '.reg-filter { display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-top:12px; }\n' +
+    '.reg-chip { font-size:12px; font-weight:600; letter-spacing:.02em; padding:8px 4px; border-radius:999px;\n' +
+    '  text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;\n' +
+    '  border:1.5px solid var(--c); color:var(--c); background:var(--champ); cursor:pointer; font-family: var(--sq-font); transition:all .15s; }\n' +
+    '.reg-chip:hover { opacity:.72; }\n' +
+    '.reg-chip.on { background:color-mix(in srgb, var(--c) 78%, #000); color:#fff; }\n' +
+    '.rls-filter { margin-top:8px; width:100%; box-sizing:border-box; padding:8px 10px; border:1.5px solid var(--navy);\n' +
+    '  border-radius:9px; font-family: var(--sq-font); font-size:13px; background:var(--champ); color:var(--texte); cursor:pointer; }\n' +
+    '.rls-filter:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(0,128,215,.16); }\n' +
+    '</style>',
     'légende');
 
   html = uneFois(html,
@@ -173,16 +183,29 @@ function generer() {
   'Pierre-De Saurel': '#170A72'
 };`,
     `const COULEURS_RLS_EST_SQ = {
-  'Pierre-Boucher': '#0080D7',
-  'Richelieu-Yamaska': '#08A0A0',
-  'Pierre-De Saurel': '#170A72',
-  'Champlain': '#0A6B5C',
-  '${HRR}': '#9A4A16',
-  'Jardins-Roussillon': '#1A4578',
-  'Vaudreuil-Soulanges': '#4C3D78',
-  '${SUROIT}': '#8A3050',
-  'du Haut-Saint-Laurent': '#2F5A3C'
-};`,
+  'Pierre-Boucher': '#e6007e',
+  'Richelieu-Yamaska': '#e6007e',
+  'Pierre-De Saurel': '#e6007e',
+  'Champlain': '#43a047',
+  '${HRR}': '#43a047',
+  'Jardins-Roussillon': '#0080d7',
+  'Vaudreuil-Soulanges': '#0080d7',
+  '${SUROIT}': '#0080d7',
+  'du Haut-Saint-Laurent': '#0080d7'
+};
+const RLS_VERS_REGION = {
+  'Pierre-Boucher': 'Est',
+  'Richelieu-Yamaska': 'Est',
+  'Pierre-De Saurel': 'Est',
+  'Champlain': 'Centre',
+  '${HRR}': 'Centre',
+  'Jardins-Roussillon': 'Ouest',
+  'Vaudreuil-Soulanges': 'Ouest',
+  '${SUROIT}': 'Ouest',
+  'du Haut-Saint-Laurent': 'Ouest'
+};
+const COULEURS_TERRITOIRE = { 'Est': '#e6007e', 'Centre': '#43a047', 'Ouest': '#0080d7' };
+const COULEURS_TERRITOIRE_PALES = { 'Est': '#f48cc5', 'Centre': '#aad4ac', 'Ouest': '#8cc6ed' };`,
     'couleurs des zones');
 
   html = uneFois(html,
@@ -236,28 +259,28 @@ const RLS_COLORS_PALES_REGION = {
   'Régional':          '#C4B5FD'
 };`,
     `const RLS_COLORS_REGION = {
-  'Pierre-Boucher':    '#0080D7',
-  'Richelieu-Yamaska': '#08A0A0',
-  'Pierre-De Saurel':  '#170A72',
-  'Champlain':         '#0A6B5C',
-  '${HRR}': '#9A4A16',
-  'Jardins-Roussillon': '#1A4578',
-  'Vaudreuil-Soulanges': '#4C3D78',
-  '${SUROIT}': '#8A3050',
-  'du Haut-Saint-Laurent': '#2F5A3C',
-  'Régional':          '#6D28D9'
+  'Pierre-Boucher':    '#e6007e',
+  'Richelieu-Yamaska': '#e6007e',
+  'Pierre-De Saurel':  '#e6007e',
+  'Champlain':         '#43a047',
+  '${HRR}': '#43a047',
+  'Jardins-Roussillon': '#0080d7',
+  'Vaudreuil-Soulanges': '#0080d7',
+  '${SUROIT}': '#0080d7',
+  'du Haut-Saint-Laurent': '#0080d7',
+  'Régional':          '#e6007e'
 };
 const RLS_COLORS_PALES_REGION = {
-  'Pierre-Boucher':    '#A8DCF4',
-  'Richelieu-Yamaska': '#A7DFDC',
-  'Pierre-De Saurel':  '#B8B1DF',
-  'Champlain':         '#B7E0D6',
-  '${HRR}': '#F0CDB8',
-  'Jardins-Roussillon': '#C5D4EA',
-  'Vaudreuil-Soulanges': '#D4CCE8',
-  '${SUROIT}': '#F0C9D6',
-  'du Haut-Saint-Laurent': '#C9E0CF',
-  'Régional':          '#C4B5FD'
+  'Pierre-Boucher':    '#f48cc5',
+  'Richelieu-Yamaska': '#f48cc5',
+  'Pierre-De Saurel':  '#f48cc5',
+  'Champlain':         '#aad4ac',
+  '${HRR}': '#aad4ac',
+  'Jardins-Roussillon': '#8cc6ed',
+  'Vaudreuil-Soulanges': '#8cc6ed',
+  '${SUROIT}': '#8cc6ed',
+  'du Haut-Saint-Laurent': '#8cc6ed',
+  'Régional':          '#f48cc5'
 };`,
     'couleurs des épingles');
 
@@ -265,6 +288,222 @@ const RLS_COLORS_PALES_REGION = {
     "const REGION_LABELS = { 'Est': 'Montérégie-Est' };",
     "const REGION_LABELS = { 'Est': 'Montérégie-Est', 'Centre': 'Montérégie-Centre', 'Ouest': 'Montérégie-Ouest' };",
     'libellés de région');
+
+  html = uneFois(html,
+    "let rlsFilter = '';",
+    "let rlsFilter = '';\nlet regionFilter = new Set();",
+    'filtre de région');
+
+  html = uneFois(html,
+    `    rls: inst.missionRegionale ? 'Régional' : (inst.territoireSource || ''),
+    ville: inst.ville || '',`,
+    `    rls: inst.missionRegionale ? 'Régional' : (inst.territoireSource || ''),
+    region: inst.missionRegionale ? 'Est' : (RLS_VERS_REGION[inst.territoireSource] || ''),
+    ville: inst.ville || '',`,
+    'région des installations');
+
+  html = uneFois(html,
+    `      rls: inst.rls,
+      ville: inst.ville,`,
+    `      rls: inst.rls,
+      region: inst.region,
+      ville: inst.ville,`,
+    'région des secteurs');
+
+  html = uneFois(html,
+    `  if (rlsFilter) {
+    const g = byId(id);
+    if (!g) return false;
+    if (modeCarte === 'etablissements' && g._secteurEtab) {`,
+    `  if (regionFilter.size) {
+    const g = byId(id);
+    if (!regionFilter.has(g && g.region)) return false;
+  }
+  if (rlsFilter) {
+    const g = byId(id);
+    if (!g) return false;
+    if (modeCarte === 'etablissements' && g._secteurEtab) {`,
+    'filtre région des milieux');
+
+  html = uneFois(html,
+    `  if (rlsFilter && (h.rls || '') !== rlsFilter) return false;
+  return true;
+}`,
+    `  if (regionFilter.size && !regionFilter.has(h.region)) return false;
+  if (rlsFilter && (h.rls || '') !== rlsFilter) return false;
+  return true;
+}`,
+    'filtre région des hôpitaux');
+
+  html = uneFois(html,
+    `    const doitEtreVisible = rlsFilter === TERRITOIRE_MISSIONS
+      ? false
+      : (!rlsFilter || rlsFilter === nomRls);`,
+    `    const regionOk = !regionFilter.size || regionFilter.has(RLS_VERS_REGION[nomRls]);
+    const doitEtreVisible = rlsFilter === TERRITOIRE_MISSIONS
+      ? false
+      : regionOk && (!rlsFilter || rlsFilter === nomRls);`,
+    'zones selon la région');
+
+  html = uneFois(html,
+    "const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4' };",
+    "const FOND_CHIFFRE = { '#08A0A0': '#067A7A', '#0080D7': '#0075C4', '#43A047': '#2E7D32' };",
+    'fond des chiffres');
+
+  html = uneFois(html,
+    `function couleurMilieu(g) {
+  return (g && RLS_COLORS_REGION[g.rls]) || '#08A0A0';
+}`,
+    `function couleurMilieu(g) {
+  if (g && COULEURS_TERRITOIRE[g.region]) return COULEURS_TERRITOIRE[g.region];
+  return (g && RLS_COLORS_REGION[g.rls]) || '#e6007e';
+}`,
+    'couleur par région');
+
+  html = uneFois(html,
+    `  return RLS_COLORS_PALES_REGION[g.rls] || couleurMilieu(g);
+}`,
+    `  if (g && COULEURS_TERRITOIRE_PALES[g.region]) return COULEURS_TERRITOIRE_PALES[g.region];
+  return RLS_COLORS_PALES_REGION[g.rls] || couleurMilieu(g);
+}`,
+    'couleur pâle par région');
+
+  html = uneFois(html,
+    `    d.innerHTML = '<div class="rls-legend-title">Réseau local (RLS)</div>' +
+      Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional')
+        .map(r => ligne(RLS_COLORS_REGION[r], r)).join('');`,
+    `    d.innerHTML = '<div class="rls-legend-title">Région</div>' +
+      ligne('#e6007e', 'Montérégie-Est') +
+      ligne('#43a047', 'Montérégie-Centre') +
+      ligne('#0080d7', 'Montérégie-Ouest');`,
+    'légende initiale');
+
+  html = uneFois(html,
+    `  let html = \`<div class="rls-legend-title">\${etab ? 'Territoire' : 'Réseau local (RLS)'}</div>\` +
+    Object.keys(RLS_COLORS_REGION).filter(r => r !== 'Régional')
+      .map(r => ligne(RLS_COLORS_REGION[r], r)).join('');
+  if (etab && hasMissionsRegionales()) html += ligne(RLS_COLORS_REGION['Régional'], TERRITOIRE_MISSIONS);
+  legendEl.innerHTML = html;`,
+    `  let html = '<div class="rls-legend-title">Région</div>' +
+    ligne('#e6007e', 'Montérégie-Est') +
+    ligne('#43a047', 'Montérégie-Centre') +
+    ligne('#0080d7', 'Montérégie-Ouest');
+  legendEl.innerHTML = html;`,
+    'légende des trois régions');
+
+  html = uneFois(html,
+    '          <div class="rls-btns" id="rls-btns" role="group" aria-label="Filtrer par RLS"></div>',
+    `          <div class="reg-filter" id="reg-filter" role="group" aria-label="Filtrer par région"></div>
+          <select class="rls-filter" id="rls-filter" aria-label="Filtrer par RLS"></select>`,
+    'boutons de région et menu des RLS');
+
+  html = uneFois(html,
+    `      <div class="vw-row"><span class="vw-label">Région</span><span class="vw-value"><span class="rls-dot" style="background:#170A72"></span>\${REGION_LABELS[g.region] || 'À venir'}</span></div>`,
+    `      <div class="vw-row"><span class="vw-label">Région</span><span class="vw-value"><span class="rls-dot" style="background:\${couleurMilieu(g)}"></span>\${REGION_LABELS[g.region] || 'À venir'}</span></div>`,
+    'pastille de région');
+
+  html = uneFois(html,
+    '  if (shown === 0 && (favOnly || rlsFilter || activiteFilters.size || searchQuery)) {',
+    '  if (shown === 0 && (favOnly || regionFilter.size || rlsFilter || activiteFilters.size || searchQuery)) {',
+    'liste vide');
+
+  html = uneFois(html,
+    `function rlsForRegions() {
+  const set = new Set();
+  gmfs.forEach(g => {
+    if (modeCarte === 'etablissements' && g._secteurEtab) {
+      if (g.missionRegionale) return;
+      if (g.rls && String(g.rls).trim()) set.add(String(g.rls).trim());
+    } else if (g.rls && String(g.rls).trim()) {
+      set.add(String(g.rls).trim());
+    }
+  });
+  return Array.from(set).sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+}`,
+    `function rlsForRegions() {
+  const set = new Set();
+  gmfs.forEach(g => {
+    if (regionFilter.size && !regionFilter.has(g.region)) return;
+    if (modeCarte === 'etablissements' && g._secteurEtab) {
+      if (g.missionRegionale) return;
+      if (g.rls && String(g.rls).trim()) set.add(String(g.rls).trim());
+    } else if (g.rls && String(g.rls).trim()) {
+      set.add(String(g.rls).trim());
+    }
+  });
+  return Array.from(set).sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+}
+function populateRlsSelect() {
+  const sel = document.getElementById('rls-filter');
+  if (!sel) return;
+  const opts = rlsForRegions();
+  const prev = rlsFilter;
+  let choix = '<option value="">Tous les RLS</option>' +
+    opts.map(r => '<option value="' + esc(r) + '">' + esc(r) + '</option>').join('');
+  const missions = modeCarte === 'etablissements' && gmfs.some(g => g._secteurEtab && g.missionRegionale && (!regionFilter.size || regionFilter.has(g.region)));
+  if (missions) choix += '<option value="' + esc(TERRITOIRE_MISSIONS) + '">' + esc(TERRITOIRE_MISSIONS) + '</option>';
+  sel.innerHTML = choix;
+  const permis = prev && (opts.indexOf(prev) !== -1 || (missions && prev === TERRITOIRE_MISSIONS));
+  if (permis) sel.value = prev;
+  else { rlsFilter = ''; sel.value = ''; }
+}
+function syncRegChips() {
+  const toutes = regionFilter.size === 0;
+  document.querySelectorAll('#reg-filter .reg-chip').forEach(b => {
+    const on = toutes || regionFilter.has(b.dataset.reg);
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}`,
+    'menu déroulant des RLS');
+
+  html = uneFois(html,
+    `function buildFilters() {
+  populateActiviteButtons();
+  const btnWrap = document.getElementById('rls-btns');
+  if (btnWrap) populateRlsButtons();
+  syncPanneauTerritoire();
+}`,
+    `function buildFilters() {
+  populateActiviteButtons();
+  const wrap = document.getElementById('reg-filter');
+  if (wrap) {
+    wrap.innerHTML = '';
+    ['Est', 'Centre', 'Ouest'].forEach(key => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'reg-chip';
+      b.textContent = key;
+      b.dataset.reg = key;
+      b.title = REGION_LABELS[key];
+      b.style.setProperty('--c', COULEURS_TERRITOIRE[key]);
+      b.setAttribute('aria-label', 'Filtrer : ' + REGION_LABELS[key]);
+      b.addEventListener('click', () => {
+        if (regionFilter.has(key)) regionFilter.delete(key); else regionFilter.add(key);
+        syncRegChips();
+        populateRlsSelect();
+        synchroniserOverlaysRlsEstOfficielle();
+        if (modeCarte === 'etablissements') populateActiviteButtons();
+        renderSidebar(); updateMarkerVisibility(); fitToVisible();
+      });
+      wrap.appendChild(b);
+    });
+    syncRegChips();
+  }
+  const sel = document.getElementById('rls-filter');
+  if (sel && !sel.dataset.branche) {
+    sel.dataset.branche = '1';
+    sel.addEventListener('change', () => {
+      rlsFilter = sel.value;
+      synchroniserOverlaysRlsEstOfficielle();
+      if (modeCarte === 'etablissements') populateActiviteButtons();
+      renderSidebar(); updateMarkerVisibility(); fitToVisible();
+    });
+  }
+  populateRlsSelect();
+  syncPanneauTerritoire();
+}`,
+    'filtres de la carte générale');
 
   const aidePublique = `
 let fichesPubliques = { cliniques: {}, etablissements: {}, hopitaux: {} };
