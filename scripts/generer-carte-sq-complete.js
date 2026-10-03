@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * Carte non répertoriée de toute la Montérégie, dans le thème Santé Québec.
- * Lit le gabarit Est (sans le modifier) et écrit carte-sante-quebec/index.html.
+ * Lit le gabarit Est (sans le modifier) et écrit carte-interactive/index.html.
  * Les quatre cartes publiées ne passent pas par ce script.
  */
 'use strict';
@@ -11,7 +11,7 @@ const path = require('path');
 
 const RACINE = path.join(__dirname, '..');
 const GABARIT = path.join(__dirname, 'carte-est-sq.template.html');
-const SORTIE = path.join(RACINE, 'carte-sante-quebec', 'index.html');
+const SORTIE = path.join(RACINE, 'carte-interactive', 'index.html');
 
 const HRR = 'Haut-Richelieu\u2013Rouville';
 const SUROIT = 'du Suro\u00eet';
@@ -31,11 +31,11 @@ function head() {
 <title>Carte Santé Québec de la Montérégie</title>
 <meta name="description" content="Carte non répertoriée des cliniques et des établissements de la Montérégie, dans le thème Santé Québec. Adresse directe seulement.">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://trouvetaclinique.ca/carte-sante-quebec/">
+<link rel="canonical" href="https://trouvetaclinique.ca/carte-interactive/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Trouve ta clinique">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:url" content="https://trouvetaclinique.ca/carte-sante-quebec/">
+<meta property="og:url" content="https://trouvetaclinique.ca/carte-interactive/">
 <meta property="og:title" content="Carte Santé Québec de la Montérégie">
 <meta property="og:description" content="Carte non répertoriée des cliniques et des établissements de la Montérégie.">
 <meta name="theme-color" content="#170A72">
@@ -378,7 +378,7 @@ fetch('../data.json', { cache: 'no-cache' })
   html = uneFois(html, "  var TITRE = 'Trouve ta clinique · Montérégie-Est';", "  var TITRE = 'Trouve ta clinique · Montérégie';", 'titre de partage');
   html = uneFois(html,
     '<div class="cmp-qrurl">trouvetaclinique.ca/monteregie-est/</div>',
-    '<div class="cmp-qrurl">trouvetaclinique.ca/carte-sante-quebec/</div>',
+    '<div class="cmp-qrurl">trouvetaclinique.ca/carte-interactive/</div>',
     'adresse imprimée');
 
   html = html.replace('<!-- PWA_SERVICE_WORKER -->', '');
@@ -400,7 +400,7 @@ function ecrire() {
   const html = generer();
   fs.mkdirSync(path.dirname(SORTIE), { recursive: true });
   fs.writeFileSync(SORTIE, html, 'utf8');
-  console.log('carte-sante-quebec/index.html écrit (' + html.length + ' caractères).');
+  console.log('carte-interactive/index.html écrit (' + html.length + ' caractères).');
 }
 
 module.exports = { generer, ecrire };

@@ -21,7 +21,7 @@ function tranche(html) {
 
 function htmlHorsPage(dir, acc) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (ent.name === '.git' || ent.name === 'node_modules' || ent.name === 'carte-sante-quebec') continue;
+    if (ent.name === '.git' || ent.name === 'node_modules' || ent.name === 'carte-interactive') continue;
     const p = path.join(dir, ent.name);
     if (ent.isDirectory()) htmlHorsPage(p, acc);
     else if (ent.name.endsWith('.html')) acc.push(p);
@@ -32,19 +32,19 @@ function htmlHorsPage(dir, acc) {
 test('La page est produite par le script, deux fois de suite à l’identique', () => {
   const page = generer();
   assert.equal(generer(), page);
-  assert.equal(lire('carte-sante-quebec/index.html'), page);
+  assert.equal(lire('carte-interactive/index.html'), page);
 });
 
 test('Le bloc prototype, l’épingle et le logo restent ceux du gabarit Est', () => {
   const gabarit = lire('scripts/carte-est-sq.template.html').replace(/\r\n/g, '\n');
-  const page = lire('carte-sante-quebec/index.html');
+  const page = lire('carte-interactive/index.html');
   assert.equal(tranche(page), tranche(gabarit));
   assert.equal(page.match(/--app-pin:[^\n]*/)[0], gabarit.match(/--app-pin:[^\n]*/)[0]);
   assert.equal(page.match(/--app-logo:[^\n]*/)[0], gabarit.match(/--app-logo:[^\n]*/)[0]);
 });
 
 test('La page reste non répertoriée et charge toute la Montérégie', () => {
-  const page = lire('carte-sante-quebec/index.html');
+  const page = lire('carte-interactive/index.html');
   assert.match(page, /<html lang="fr-CA" data-region="Est">/);
   assert.match(page, /name="robots" content="noindex, nofollow"/);
   assert.match(page, /Segoe UI/);
@@ -59,7 +59,7 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
   assert.match(page, /fiches-publiques\.json/);
   assert.match(page, /ttc-sq-mtg-note-/);
   assert.doesNotMatch(page, /dtmf-mtg-note-/);
-  assert.match(page, /trouvetaclinique\.ca\/carte-sante-quebec\//);
+  assert.match(page, /trouvetaclinique\.ca\/carte-interactive\//);
   assert.doesNotMatch(page, /trouvetaclinique\.ca\/monteregie-est\//);
   assert.equal((page.match(/name="robots"/g) || []).length, 1);
   const re = /<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
@@ -67,21 +67,21 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
   while ((m = re.exec(page))) {
     if (m[1].trim()) new Script(m[1]);
   }
-  assert.doesNotMatch(lire('sitemap.xml'), /carte-sante-quebec/);
-  assert.doesNotMatch(lire('recherche/donnees.json'), /carte-sante-quebec/);
-  assert.doesNotMatch(lire('scripts/generer-pages-seo.js'), /carte-sante-quebec/);
+  assert.doesNotMatch(lire('sitemap.xml'), /carte-interactive/);
+  assert.doesNotMatch(lire('recherche/donnees.json'), /carte-interactive/);
+  assert.doesNotMatch(lire('scripts/generer-pages-seo.js'), /carte-interactive/);
   const robots = lire('robots.txt');
   assert.match(robots, /^User-agent: \*\nAllow: \/\n/);
-  assert.doesNotMatch(robots, /Disallow|carte-sante-quebec/);
+  assert.doesNotMatch(robots, /Disallow|carte-interactive/);
   for (const fichier of htmlHorsPage(racine, [])) {
-    assert.doesNotMatch(lire(path.relative(racine, fichier)), /carte-sante-quebec/, fichier);
+    assert.doesNotMatch(lire(path.relative(racine, fichier)), /carte-interactive/, fichier);
   }
-  assert.ok(lister(racine).includes('carte-sante-quebec/index.html'));
-  assert.ok(lister(racine).includes('carte-sante-quebec/fiches-publiques.json'));
+  assert.ok(lister(racine).includes('carte-interactive/index.html'));
+  assert.ok(lister(racine).includes('carte-interactive/fiches-publiques.json'));
 });
 
 test('Les fiches publiques couvrent la carte, sans niveau inventé ni note privée', () => {
-  const fiches = JSON.parse(lire('carte-sante-quebec/fiches-publiques.json'));
+  const fiches = JSON.parse(lire('carte-interactive/fiches-publiques.json'));
   const donnees = JSON.parse(lire('data.json'));
   const est = JSON.parse(lire('data-etablissements.json'));
   const centre = JSON.parse(lire('data-etablissements-centre.json'));
