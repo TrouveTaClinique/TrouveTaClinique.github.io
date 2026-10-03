@@ -1,6 +1,6 @@
 # Régénération automatique des pages du site à partir de data.json et des gabarits
 # ================================================================================
-# Mis en place le 19 août 2026. Étendu le 31 août 2026 aux quatre cartes et aux trois régions.
+# Mis en place le 19 août 2026. Depuis le 3 oct. 2026 : deux cartes (/monteregie-est/ et /monteregie/).
 #
 # CE QUE ÇA FAIT
 #   Dès que data.json est modifié sur GitHub (par le crayon « modifier » du site web, par un
@@ -10,8 +10,8 @@
 #     3. publie le résultat directement sur le site ;
 #     4. prévient Bing (IndexNow) APRÈS le push des pages, uniquement depuis main ;
 #        le job échoue si IndexNow répond hors 200/202 (plus de continue-on-error).
-#   Dès que scripts/carte.template.html est modifié, ce robot refabrique aussi /monteregie/
-#   et les trois cartes régionales (avec
+#   Dès qu'un gabarit de carte est modifié, ce robot refabrique aussi /monteregie/
+#   et /monteregie-est/ (avec
 #   le <head> — titre/description/canonical/Open Graph — et le nom du territoire adaptés ;
 #   voir scripts/publier-regions.js). C'est la même application, les mêmes données : les trois
 #   cartes régionales ne sont jamais maintenues à la main.
@@ -111,7 +111,7 @@ jobs:
       - name: Régénérer les pages et le sitemap
         run: node scripts/generer-pages-seo.js
 
-      - name: Fabriquer la carte complète et les trois cartes régionales
+      - name: Fabriquer la carte de la Montérégie (Santé Québec) et la carte Est
         run: node scripts/publier-regions.js
 
       - name: Renvoi de l'ancienne adresse /carte-interactive/
@@ -170,7 +170,7 @@ jobs:
           echo "Vérification que le générateur n'a pas modifié data.json après sa datation..."
           sha256sum -c "$RUNNER_TEMP/data-json-apres-date.sha256"
           echo "Vérification de l'architecture accueil/carte et de la PWA Est..."
-          # Accueil recentré sur l'Est (plus de lien principal vers /monteregie/).
+          # Accueil : la carte Est d'abord ; la carte /monteregie/ vient en second (3 oct. 2026).
           grep -q 'href="/monteregie-est/"' index.html
           grep -q 'canonical" href="https://trouvetaclinique.ca/"' index.html
           grep -q 'canonical" href="https://trouvetaclinique.ca/monteregie/"' monteregie/index.html

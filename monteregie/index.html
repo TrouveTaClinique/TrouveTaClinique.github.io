@@ -39,6 +39,16 @@
 }
 </script>
 <meta name="theme-color" content="#170A72">
+<script>
+// Pas de PWA ici : retire un ancien service worker de portée « / » qui contrôlerait la page.
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (liste) {
+    liste.forEach(function (enr) {
+      try { if (new URL(enr.scope).pathname === '/') enr.unregister(); } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
@@ -3053,6 +3063,7 @@ function urlEtat(id) {
   } else if (id !== undefined && id !== null) {
     params.set('c', String(id));
   }
+  if (regionFilter.size === 1) params.set('region', Array.from(regionFilter)[0]);
   const q = params.toString();
   return location.pathname + (q ? '?' + q : '') + location.hash;
 }
@@ -3364,7 +3375,7 @@ function activerModeCarte(prochainMode) {
   updateMarkerVisibility();
   refreshMarkerIcons();
   synchroniserOverlaysRlsEstOfficielle();
-  fitToData();
+  if (regionFilter.size) fitToVisible(); else fitToData();
   try { history.replaceState({}, '', urlEtat()); } catch (e) {}
   annoncerA11y(gmfs.length + ' ' + libelleMode(true) + (modeCarte === 'etablissements' ? ' affichés.' : ' affichées.'));
   mettreAJourMetaPage();
@@ -4259,6 +4270,7 @@ function buildFilters() {
       b.addEventListener('click', () => {
         if (regionFilter.has(key)) regionFilter.delete(key); else regionFilter.add(key);
         syncRegChips();
+        try { history.replaceState(history.state, '', urlEtat(activeId)); } catch (e) {}
         populateRlsSelect();
         synchroniserOverlaysRlsEstOfficielle();
         if (modeCarte === 'etablissements') populateActiviteButtons();
@@ -4949,7 +4961,7 @@ function initData(data, etabData) {
   updateMarkerVisibility();
   showUpdateDate();
   showBanner();
-  fitToData();
+  if (regionFilter.size) fitToVisible(); else fitToData();
   if (appliquerCibleUrl(paramsInit)) return;
   // Aucune géolocalisation automatique au chargement : le navigateur ne doit jamais
   // demander l'autorisation de position tant que l'usager n'a pas cliqué lui-même sur
@@ -5208,7 +5220,7 @@ fetch('../data.json', { cache: 'no-cache' })
 
 <nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
   <h2>Répertoire de la Montérégie</h2>
-  <p>La carte complète regroupe les 9 RLS des trois territoires de la Montérégie (Montérégie-Est, Montérégie-Centre et Montérégie-Ouest). On y trouve 92 cliniques de médecine familiale (56 GMF, 7 GMF-U, 4 GMF-R et 25 cliniques médicales), toutes listées ci-dessous.</p>
+  <p>Cette carte regroupe les 9 RLS des trois territoires de la Montérégie (Montérégie-Est, Montérégie-Centre et Montérégie-Ouest). On y trouve 92 cliniques de médecine familiale (56 GMF, 7 GMF-U, 4 GMF-R et 25 cliniques médicales), toutes listées ci-dessous.</p>
 <p>76 d’entre elles recrutent actuellement des médecins de famille, notamment à Saint-Jean-sur-Richelieu, Longueuil, Sorel-Tracy, Châteauguay, Saint-Hyacinthe, Salaberry-de-Valleyfield, Vaudreuil-Dorion et Brossard.</p>
 <p>30 établissements (hôpitaux, CHSLD, GMF-U et autres) affichent aussi des secteurs en recrutement sur ce territoire.</p>
   

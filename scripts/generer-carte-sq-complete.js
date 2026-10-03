@@ -66,6 +66,16 @@ function head() {
 }
 </script>
 <meta name="theme-color" content="#170A72">
+<script>
+// Pas de PWA ici : retire un ancien service worker de portée « / » qui contrôlerait la page.
+if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations) {
+  navigator.serviceWorker.getRegistrations().then(function (liste) {
+    liste.forEach(function (enr) {
+      try { if (new URL(enr.scope).pathname === '/') enr.unregister(); } catch (e) {}
+    });
+  }).catch(function () {});
+}
+</script>
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png">
 <link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
@@ -529,6 +539,7 @@ function syncRegChips() {
       b.addEventListener('click', () => {
         if (regionFilter.has(key)) regionFilter.delete(key); else regionFilter.add(key);
         syncRegChips();
+        try { history.replaceState(history.state, '', urlEtat(activeId)); } catch (e) {}
         populateRlsSelect();
         synchroniserOverlaysRlsEstOfficielle();
         if (modeCarte === 'etablissements') populateActiviteButtons();
@@ -576,6 +587,21 @@ function syncRegChips() {
     '<div class="vw-sec-title">Secteurs en recrutement (${visibles.length})</div>',
     '<div class="vw-sec-title">Secteurs (${visibles.length})</div>',
     'titre des secteurs');
+
+  // Filtre de territoire (?region=) : gardé dans l'adresse et suivi par le cadrage
+  // (audit du 3 oct. 2026). Le gabarit Est n'est pas modifié.
+  html = uneFois(html,
+    "  showBanner();\n  fitToData();\n  if (appliquerCibleUrl(paramsInit)) return;",
+    "  showBanner();\n  if (regionFilter.size) fitToVisible(); else fitToData();\n  if (appliquerCibleUrl(paramsInit)) return;",
+    'cadrage initial du territoire');
+  html = uneFois(html,
+    "  synchroniserOverlaysRlsEstOfficielle();\n  fitToData();\n  try { history.replaceState({}, '', urlEtat()); } catch (e) {}",
+    "  synchroniserOverlaysRlsEstOfficielle();\n  if (regionFilter.size) fitToVisible(); else fitToData();\n  try { history.replaceState({}, '', urlEtat()); } catch (e) {}",
+    'cadrage au changement de mode');
+  html = uneFois(html,
+    "    params.set('c', String(id));\n  }\n  const q = params.toString();",
+    "    params.set('c', String(id));\n  }\n  if (regionFilter.size === 1) params.set('region', Array.from(regionFilter)[0]);\n  const q = params.toString();",
+    'territoire dans l’adresse');
 
   // Mêmes renseignements que la carte Montérégie (scripts/carte.template.html) :
   // tout vient de data.json et des fichiers d'établissements, rien d'autre.
