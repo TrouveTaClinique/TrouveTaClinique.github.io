@@ -149,7 +149,7 @@ function resumeUtile(r) {
 function carteGuide(r) {
   /* Mots-clés : gardés dans data-tags pour la recherche, plus affichés sous le titre. */
   const resume = resumeUtile(r);
-  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}>
+  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}${r.acces ? ' data-abo="1"' : ''}>
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
           <span class="guides-resource-source">${esc(r.org)}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}${r.acces ? ` <span class="guides-acces">${r.acces === 'pabp' ? 'Réservé aux participants PABP' : 'Abonnement requis'}</span>` : ''}</span>
           <h3>${esc(r.title)}</h3>${resume ? `
@@ -199,7 +199,8 @@ function genererGuidesCliniques(racine = path.resolve(__dirname, '..')) {
   const filtresGuides = `<label class="guides-select"><span>Sujet</span><select id="guides-filtre-sujet" data-filtre="category"><option value="">Tous les sujets</option>${sujets.map(c => option(c, c, parSujet.get(c))).join('')}</select></label>
         <label class="guides-select"><span>Organisme</span><select id="guides-filtre-organisme" data-filtre="org"><option value="">Tous les organismes</option>${trierFr([...parOrganisme.keys()]).map(o => option(o, o, parOrganisme.get(o))).join('')}</select></label>
         <label class="guides-select"><span>Type</span><select id="guides-filtre-format" data-filtre="format"><option value="">Tous les types</option>${Object.keys(FORMATS).filter(k => parFormat.get(k)).map(k => option(k, FORMATS[k], parFormat.get(k))).join('')}</select></label>
-        <label class="guides-case"><input type="checkbox" id="guides-fr"> Français seulement (masque ${guides.filter(estAnglais).length} documents en anglais)</label>`;
+        <div class="guides-cases"><label class="guides-case"><input type="checkbox" id="guides-fr"> Français seulement (masque ${guides.filter(estAnglais).length} documents en anglais)</label>
+        <label class="guides-case"><input type="checkbox" id="guides-libre"> Accès libre seulement (masque ${guides.filter(r => r.acces).length} documents sur abonnement)</label></div>`;
   const parRubrique = new Map();
   organismes.forEach(r => [...new Set((r.rubriques || [r.rubrique]).map(x => x.split(' · ')[0]))].forEach(k => parRubrique.set(k, (parRubrique.get(k) || 0) + 1)));
   const villesEst = compter(organismes.filter(r => r.ville && !estHors(r)), villeDe);
@@ -278,11 +279,11 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=94-nous-joindre">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=119-ia-sans-texte">
-  <script src="/assets/guides-recherche.js?v=119-ia-sans-texte" defer></script>
-  <script src="/assets/guides-cliniques.js?v=119-ia-sans-texte" defer></script>
-  <script src="/assets/guides-installer.js?v=119-ia-sans-texte" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=119-ia-sans-texte" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=121-acces-libre">
+  <script src="/assets/guides-recherche.js?v=121-acces-libre" defer></script>
+  <script src="/assets/guides-cliniques.js?v=121-acces-libre" defer></script>
+  <script src="/assets/guides-installer.js?v=121-acces-libre" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=121-acces-libre" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

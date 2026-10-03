@@ -644,7 +644,7 @@
     "tags": "TVP thrombose veineuse profonde DVT AOD anticoagulation",
     "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=FR_THROMBOSEVEINEUSEPROFONDETRAIT",
     "desc": "Guide clinique de Thrombose Canada sur le traitement de la TVP.",
-    "verifie": "2026-10-02",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-25",
     "format": "guide"
   },
@@ -655,7 +655,7 @@
     "tags": "EP embolie pulmonaire PE anticoagulation",
     "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=101",
     "desc": "Guide clinique de Thrombose Canada sur le traitement de l’embolie pulmonaire.",
-    "verifie": "2026-10-02",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-25",
     "format": "guide"
   },
@@ -666,7 +666,7 @@
     "tags": "EP embolie pulmonaire massive thrombolyse risque élevé",
     "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=133",
     "desc": "Guide clinique de Thrombose Canada sur l’EP à risque élevé ou intermédiaire.",
-    "verifie": "2026-10-02",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-25",
     "format": "guide"
   },
@@ -677,7 +677,7 @@
     "tags": "thrombophlébite superficielle TVS veine superficielle",
     "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=110",
     "desc": "Guide clinique de Thrombose Canada sur la thrombophlébite superficielle.",
-    "verifie": "2026-10-02",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-25",
     "format": "guide"
   },
@@ -688,7 +688,7 @@
     "tags": "FA fibrillation auriculaire SCA ICP antiplaquettaire double thérapie",
     "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=121",
     "desc": "Guide clinique de Thrombose Canada sur l’association anticoagulant et antiplaquettaire.",
-    "verifie": "2026-10-02",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-25",
     "format": "guide"
   },
@@ -699,7 +699,7 @@
     "tags": "DAPT double antiagrégation clopidogrel ASA aspirine",
     "url": "https://thrombosiscanada.ca/hcp/practice/clinical_guides?language=fr-ca&guideID=123",
     "desc": "Guide clinique de Thrombose Canada sur la durée de la double antiagrégation.",
-    "verifie": "2026-10-02",
+    "verifie": "2026-10-03",
     "ajoute": "2026-09-25",
     "format": "guide"
   },

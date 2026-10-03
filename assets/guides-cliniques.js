@@ -28,6 +28,7 @@
   const filtres = Array.from(document.querySelectorAll('select[data-filtre]'));
   const caseHors = document.getElementById('guides-hors');
   const caseFr = document.getElementById('guides-fr');   // « Français seulement » (plan Guides, 25)
+  const caseLibre = document.getElementById('guides-libre');   // « Accès libre seulement » (3 oct. 2026)
   const SANS_ADRESSE = '(sans adresse)';
   const effacerFiltres = document.querySelector('.guides-filtres-reset');
   const resSection = document.querySelector('.guides-resultats');
@@ -278,6 +279,7 @@
       if (!filtres.every(s => correspond(r, s.dataset.filtre, s.value))) return;
       if (!horsVisible(r)) { horsMasques++; return; }
       if (caseFr && caseFr.checked && r.el.dataset.en === '1') return;
+      if (caseLibre && caseLibre.checked && r.el.dataset.abo === '1') return;
       retenus.set(r.id, score);
     });
     const count = retenus.size;
@@ -325,8 +327,9 @@
     if (consSection) consSection.hidden = !replier || !consList.children.length;
     if (communautaire) communautaire.hidden = !moteur.estCommunautaire(requete);
     const francais = !!(caseFr && caseFr.checked);
-    effacerFiltres.hidden = !actifs.length && !francais;
-    const libelles = actifs.map(s => s.value === SANS_ADRESSE ? 'lignes d’aide et services à distance' : (s.selectedOptions[0] ? s.selectedOptions[0].textContent.replace(/ \(\d+\)$/, '') : s.value)).concat(francais ? ['en français'] : []).join(' · ');
+    const libre = !!(caseLibre && caseLibre.checked);
+    effacerFiltres.hidden = !actifs.length && !francais && !libre;
+    const libelles = actifs.map(s => s.value === SANS_ADRESSE ? 'lignes d’aide et services à distance' : (s.selectedOptions[0] ? s.selectedOptions[0].textContent.replace(/ \(\d+\)$/, '') : s.value)).concat(francais ? ['en français'] : []).concat(libre ? ['en accès libre'] : []).join(' · ');
     status.textContent = pluriel(count, MOT) + (libelles ? ' · ' + libelles : '') + (requete ? ' pour « ' + requete + ' »' : ' dans le catalogue')
       + (horsMasques ? ' (' + horsMasques + ' hors territoire masqué' + (horsMasques > 1 ? 's' : '') + ')' : '');
     signalerAutrePage(requete);
@@ -440,11 +443,13 @@
   filtres.forEach(sel => sel.addEventListener('change', render));
   if (caseHors) caseHors.addEventListener('change', render);
   if (caseFr) caseFr.addEventListener('change', render);
-  effacerFiltres.addEventListener('click', () => { filtres.forEach(s => { s.value = ''; }); if (caseFr) caseFr.checked = false; render(); filtres[0].focus(); });
+  if (caseLibre) caseLibre.addEventListener('change', render);
+  effacerFiltres.addEventListener('click', () => { filtres.forEach(s => { s.value = ''; }); if (caseFr) caseFr.checked = false; if (caseLibre) caseLibre.checked = false; render(); filtres[0].focus(); });
   document.querySelector('.guides-reset').addEventListener('click', () => {
     input.value = ''; filtres.forEach(s => { s.value = ''; });
     if (caseHors) caseHors.checked = true;
     if (caseFr) caseFr.checked = false;
+    if (caseLibre) caseLibre.checked = false;
     render(); majAdresse(); input.focus();
   });
   /* Pour l'aiguillage IA (guides-aiguillage.js) : présélection par le moteur du site et
