@@ -1286,7 +1286,7 @@ ${items}
     : `
   <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> les coordonnées de la personne-ressource sont affichées dans la fiche de la clinique sur la carte interactive. <a href="${u.accueil}?c=${c.id}">Ouvrir la fiche de ${esc(c.nom)} sur la carte →</a></div>`;
 
-  const corps = `${blocEvenement(c)}  <section class="hero">
+  const corps = `${blocPatientsEgares(c)}${blocEvenement(c)}  <section class="hero">
     <p class="eyebrow">${esc(c.type)}${rempli(c.rls) ? ' · RLS ' + esc(c.rls) : ''}${enRecrutement ? '' : ' · Ne recrute pas actuellement'}</p>
     <h1>${esc(c.nom)}${badgeVerif(c)}</h1>
     <p class="lead">${esc(textePresentation)}</p>
@@ -2027,6 +2027,29 @@ function evenementActif(c) {
   const e = c && c.evenement;
   return !!(e && /^\d{4}-\d{2}-\d{2}$/.test(e.date || '') && e.date >= aujourdhuiQuebec());
 }
+/* Encadré pour les patients arrivés par erreur sur la fiche d'une clinique (demande du propriétaire,
+   3 oct. 2026 : Clinique médicale Les 2 Chênes). Clé : id de la clinique dans data.json. */
+const PATIENTS_EGARES = {
+  17: { telephone: '450 550-2680' }
+};
+function blocPatientsEgares(c) {
+  const p = PATIENTS_EGARES[c.id];
+  if (!p) return '';
+  const tel = p.telephone ? `<p><strong>Joindre la clinique&nbsp;:</strong> <a href="tel:+1${p.telephone.replace(/\D/g, '')}">${esc(p.telephone)}</a>.</p>` : '';
+  return `<aside class="rappel doux patients-egares" aria-labelledby="patients-egares-titre">
+    <h2 id="patients-egares-titre">Vous êtes patient de la ${esc(c.nom)}&nbsp;?</h2>
+    <p>Ce site aide les médecins à trouver un milieu de travail. Il ne prend aucun rendez-vous et ne transmet aucun message à la clinique.</p>
+    ${tel}
+    <ul>
+      <li><strong>Besoin d’un rendez-vous&nbsp;?</strong> <a href="https://www.quebec.ca/sante/trouver-une-ressource/medecin-de-famille-prendre-rendez-vous-en-ligne" rel="noopener">Rendez-vous santé Québec</a>.</li>
+      <li><strong>Vous n’avez pas de médecin de famille&nbsp;?</strong> Inscrivez-vous au <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille" rel="noopener">guichet d’accès à un médecin de famille</a>.<br>Pour un problème de santé ponctuel, le <a href="https://www.santemonteregie.qc.ca/services/guichet-dacces-la-premiere-ligne-gap-monteregie" rel="noopener">guichet d’accès à la première ligne (GAP)</a> répond au <strong>811, option 3</strong>.</li>
+      <li><strong>Une question de santé&nbsp;?</strong> Info-Santé, <strong>811, option 1</strong>, ou votre pharmacien.</li>
+      <li><strong>Urgence&nbsp;:</strong> composez le <strong>911</strong>.</li>
+    </ul>
+  </aside>
+`;
+}
+
 function blocEvenement(c) {
   if (!evenementActif(c)) return '';
   const e = c.evenement;
@@ -4074,7 +4097,7 @@ function ecrire(relatif, contenu) {
   if (relatif.endsWith('.html')) {
     // Une page neuve doit charger la même version du CSS et de la recherche,
     // même si le navigateur conserve les fichiers de la publication précédente.
-    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=94-nous-joindre"');
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=95-patients-egares"');
   }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });
