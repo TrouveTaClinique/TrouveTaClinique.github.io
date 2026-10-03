@@ -1,0 +1,2942 @@
+{
+  "maj": "2026-10-03",
+  "note": "Renseignements lus le 3 octobre 2026 sur le répertoire des ressources du MSSS (sante.gouv.qc.ca), les pages d'installation du CISSS de la Montérégie ou le site du milieu. Un champ vide n'a pas pu être vérifié. Le niveau de GMF n'est pas indiqué dans ce répertoire.",
+  "cliniques": {
+    "1": {
+      "adresse": "1471, boulevard Lionel-Boulet, bureau 21, Varennes (Québec) J3X 1P7",
+      "telephone": "450 652-2222",
+      "site": "http://www.gmfdupetitbois.ca/wp/",
+      "niveauGmf": "",
+      "services": [
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Omnipratique",
+        "Physiothérapie",
+        "Pose et/ou retrait d'un stérilet",
+        "Soins infirmiers",
+        "Test Pap",
+        "Traitement des verrues plantaires",
+        "Travail social"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=30055",
+        "http://www.gmfdupetitbois.ca/wp/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "2": {
+      "adresse": "1144, rue Saint-Laurent Ouest, bureau 100, Longueuil (Québec) J4K 1E2",
+      "telephone": "450 969-6977",
+      "site": "https://www.cliniquecamu.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Contraception",
+        "Dépistage",
+        "Gastroentérologie",
+        "Gynécologie",
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Omnipratique",
+        "Pose et/ou retrait d'un stérilet (des frais sont exigés)",
+        "Prélèvements (des frais sont exigés)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=45507",
+        "https://cliniquecamu.ca/",
+        "https://www.cliniquecamu.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "5": {
+      "adresse": "303, boulevard de la Marine, bureau 101, Varennes (Québec) J3X 2G6",
+      "telephone": "450 652-9616",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=33194",
+      "niveauGmf": "",
+      "services": [
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Psychologie",
+        "Test de cholestérol sans ordonnance ( capillaire par bandelettes )"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=33194"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "6": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "7": {
+      "adresse": "20, boulevard de Mortagne, unité N, Boucherville (Québec) J4B 5K6",
+      "telephone": "450 468-5511",
+      "site": "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes-anciennement-centre-medical-longueuil",
+      "niveauGmf": "",
+      "services": [
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Pharmacologie",
+        "Physiothérapie",
+        "Travail social"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1102032",
+        "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes",
+        "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes-anciennement-centre-medical-longueuil"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "8": {
+      "adresse": "600, boulevard du Fort-Saint-Louis, bureau 201, Boucherville (Québec) J4B 1S7",
+      "telephone": "450 655-7321",
+      "site": "https://www.gmfip.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Allergologie",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Du lundi au samedi",
+        "Contraception",
+        "Dermatologie",
+        "Diététique",
+        "Gynécologie",
+        "Immunologie clinique",
+        "Médecine esthétique",
+        "Médecine familiale"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=37573",
+        "https://www.gmfip.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "9": {
+      "adresse": "2220, boulevard René-Gaultier, Varennes (Québec) J3X 1E3",
+      "telephone": "450 468-8459",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=800180",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Rendez-vous prioritaires",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Médecine familiale",
+        "Omnipratique",
+        "Prise en charge de nouveaux usagers pour du suivi",
+        "Soins infirmiers",
+        "Soins palliatifs / Soins de fin de vie",
+        "Test Pap",
+        "Travail social"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=800180"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "10": {
+      "adresse": "2105, boulevard Armand-Frappier, bureau 301, Sainte-Julie (Québec) J3E 3R6",
+      "telephone": "450 649-2490",
+      "site": "https://gmfmd.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Audiologie",
+        "Changement et/ou suivi de pansement (des frais sont exigés)",
+        "Chirurgie",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Consulter le site : https://www.rvsq.gouv.qc.ca",
+        "Contraception (des frais sont exigés)",
+        "Contraception orale d'urgence",
+        "Dentisterie",
+        "Dermatologie",
+        "Diététique",
+        "Désintoxication",
+        "Gestion des traitements liés à l'usage des opiacés (Méthadone, Suboxone, Kadian, etc.)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=52405",
+        "https://gmfmd.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "11": {
+      "adresse": "286, rue de Normandie, Sainte-Julie (Québec) J3E 1A7",
+      "telephone": "450 649-1593",
+      "site": "https://www.cliniquemedicalesaintejulie.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Cardiologie",
+        "Chirurgie",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Dentisterie",
+        "Endocrinologie",
+        "Gynécologie",
+        "Infirmier/Infirmière auxiliaire",
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Médecine interne",
+        "Neurologie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=43763",
+        "https://www.cliniquemedicalesaintejulie.ca/fr/",
+        "https://www.cliniquemedicalesaintejulie.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "14": {
+      "adresse": "1021, rue Gauthier, Saint-Hyacinthe (Québec) J2S 8T2",
+      "telephone": "450 771-3558",
+      "site": "https://www.santemonteregie.qc.ca/installations/groupe-de-medecine-de-famille-universitaire-richelieu-yamaska-gmf-u",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Cholestérol – Consultation pour le suivi",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Diététique",
+        "Dépistage streptocoque groupe A / strep test avec ordonnance",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Interprète",
+        "Lavage d'oreilles"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=814483",
+        "https://www.santemonteregie.qc.ca/installations/groupe-de-medecine-de-famille-universitaire-richelieu-yamaska-gmf-u"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "15": {
+      "adresse": "1220, boulevard Casavant Est, bureau 302, Saint-Hyacinthe (Québec) J2S 0L6",
+      "telephone": "450 385-0505",
+      "site": "https://gmfmaska.com/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Clientèle inscrite",
+        "Contraception",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Nutrition",
+        "Omnipratique",
+        "Pharmacologie",
+        "Pose et/ou retrait d'un stérilet",
+        "Prélèvements (des frais sont exigés)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=909594",
+        "https://gmfmaska.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "16": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.horizonclinique.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.horizonclinique.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "17": {
+      "adresse": "4605, chemin du Crépuscule, unité 210, Saint-Mathieu-de-Beloeil (Québec) J3G 0R2",
+      "telephone": "450 550-2680",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=830112",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Si non comblées les plages horaires restantes seront octroyées à la clientèle non inscrite.",
+        "Contraception",
+        "Gynécologie",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Obstétrique",
+        "Omnipratique"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=830112"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "18": {
+      "adresse": "665, boulevard Sir-Wilfrid-Laurier, Beloeil (Québec) J3G 4J1",
+      "telephone": "450 467-0088",
+      "site": "https://www.carrefourmedical.com/",
+      "niveauGmf": "",
+      "services": [
+        "Allergologie",
+        "Audiologie",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Dermatologie",
+        "Endocrinologie",
+        "Fauteuil roulant (location)",
+        "Gynécologie",
+        "Médecine d'urgence",
+        "Médecine familiale"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47733",
+        "https://www.carrefourmedical.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "19": {
+      "adresse": "275, boulevard Sir-Wilfrid-Laurier, unité 101, Saint-Basile-le-Grand (Québec) J3N 1V6",
+      "telephone": "450 653-7323",
+      "site": "https://bonjour-sante.ca/uno/clinique/stbasile",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Médecine familiale",
+        "Nutrition",
+        "Omnipratique",
+        "Pharmacologie",
+        "Pose et/ou retrait d'un stérilet (des frais sont exigés)",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers"
+      ],
+      "recrutement": "Nous recrutons présentement des médecins de famille, à temps plein ou à temps partiel.",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=43385",
+        "https://www.centremedicalsaintbasile.org/",
+        "https://bonjour-sante.ca/uno/clinique/stbasile"
+      ],
+      "lacunes": [
+        "niveauGmf"
+      ]
+    },
+    "20": {
+      "adresse": "2955, boulevard Laframboise, Saint-Hyacinthe (Québec) J2S 4Z3",
+      "telephone": "450 774-4611",
+      "site": "https://gmflaframboise.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie mineure (des frais sont exigés)",
+        "Contraception",
+        "Infirmier/Infirmière auxiliaire",
+        "Médecine familiale",
+        "Omnipratique",
+        "Physiothérapie",
+        "Pose et/ou retrait d'un stérilet",
+        "Psychologie",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Test Pap",
+        "Pour les clientes inscrites à la clinique seulement"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=49786",
+        "https://gmflaframboise.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "21": {
+      "adresse": "88, chemin De La Rabastalière Ouest, bureau 201, en haut de la pharmacie Uniprix, Saint-Bruno-de-Montarville (Québec) J3V 1Y8",
+      "telephone": "450 690-3690",
+      "site": "https://cliniquemedicalelesentier.com/",
+      "niveauGmf": "",
+      "services": [
+        "Anesthésiologie (des frais sont exigés)",
+        "Clinique d'infiltration musculo-squelettique, AVEC RÉFÉRENCE SEULEMENT, frais à prévoir pour certains injectables non co",
+        "Anticoagulothérapie - Ajustement d'ordonnance",
+        "Cardiologie",
+        "Cessation tabagisme (des frais sont exigés)",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure (des frais sont exigés)",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception (des frais sont exigés)",
+        "Dermatologie",
+        "Dépistage"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=792538",
+        "https://cliniquemedicalelesentier.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "22": {
+      "adresse": "755, rue de Roxton, Acton Vale (Québec) J0H 1A0",
+      "telephone": "450 546-3245",
+      "site": "https://coopsanteacton.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Contraception",
+        "Gynécologie",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Orthopédie",
+        "Orthésiste",
+        "PFSI – Programme Fédéral de Santé Intérimaire (des frais sont exigés)",
+        "Pose et/ou retrait d'un stérilet",
+        "Prise en charge de nouveaux usagers pour du suivi"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=39971",
+        "https://coopsanteacton.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "24": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://cliniquemedicalesorel-tracy.ca/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://cliniquemedicalesorel-tracy.ca/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    },
+    "25": {
+      "adresse": "500, route Marie-Victorin, bureau 200, Sorel-Tracy (Québec) J3R 1K7",
+      "telephone": "450 742-5638",
+      "site": "https://gmfrichelieu.com/",
+      "niveauGmf": "",
+      "services": [
+        "Allergologie",
+        "Contraception",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Obstétrique",
+        "Omnipratique",
+        "Ressources ITSS sur le portail citoyen",
+        "SIDEP - Service intégré de dépistage et de prévention des ITSS",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Travail social",
+        "Électrocardiogramme (ECG)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=32182",
+        "https://gmfrichelieu.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "26": {
+      "adresse": "575, rue Saint-Charles Est, Longueuil (Québec) J4H 1B8",
+      "telephone": "450 332-9833",
+      "site": "https://lautremaison.ca",
+      "niveauGmf": "",
+      "services": [
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Pédiatriques",
+        "Contraception",
+        "Ergothérapie",
+        "Gynécologie",
+        "Médecine familiale",
+        "Omnipratique",
+        "Physiothérapie",
+        "Pose et/ou retrait d'un stérilet (des frais sont exigés)",
+        "Prise en charge de nouveaux usagers pour du suivi",
+        "Prélèvements (des frais sont exigés)",
+        "Pédiatrie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=484966",
+        "https://lautremaison.ca/2020/",
+        "https://lautremaison.ca"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "27": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.letraitdunion.ca/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.letraitdunion.ca/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "28": {
+      "adresse": "230, boulevard Brisebois, unité 310B, Châteauguay (Québec) J6K 0J6",
+      "telephone": "450 699-2083",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-de-services-ambulatoires-et-groupe-de-medecine-de-famille-universitaire",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Patients en provenance du GAMF seulement",
+        "Contraception",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Gynécologie",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Inhalothérapie",
+        "À partir du 2025-05-01",
+        "Médecine familiale",
+        "Nutrition"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=670332",
+        "https://www.santemonteregie.qc.ca/installations/centre-de-services-ambulatoires-et-groupe-de-medecine-de-famille-universitaire"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "29": {
+      "adresse": "464, boulevard Saint-Jean-Baptiste, bureau 101, suite 101, Mercier (Québec) J6R 2B1",
+      "telephone": "450 699-0539",
+      "site": "http://www.gmf-mercier.ca",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Gastroentérologie",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Médecine interne",
+        "Obstétrique",
+        "Omnipratique",
+        "Pneumologie",
+        "Travail social",
+        "Vaccination"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=33742",
+        "https://gmfmercier.ca/fr/",
+        "http://www.gmf-mercier.ca"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "30": {
+      "adresse": "509, rue Saint-Jacques, Napierville (Québec) J0J 1L0",
+      "telephone": "844 429-3358",
+      "site": "https://www.santemonteregie.qc.ca/services/centres-dabandon-du-tabagisme",
+      "niveauGmf": "",
+      "services": [
+        "Cessation tabagisme",
+        "Cessation vapotage",
+        "Conseil en cessation du tabagisme et du vapotage"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1163974",
+        "https://www.santemonteregie.qc.ca/services/centres-dabandon-du-tabagisme"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "31": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "32": {
+      "adresse": "288, boulevard D'Anjou, unité 220, Châteauguay (Québec) J6K 1C6",
+      "telephone": "450 691-8191",
+      "site": "https://gmfrl.com/",
+      "niveauGmf": "",
+      "services": [
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Omnipratique",
+        "Prélèvements",
+        "Vaccination",
+        "Santé voyage, régulière, enfants et saisonnière pour la clientèle inscrite seulement"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=56728",
+        "https://gmfrl.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "33": {
+      "adresse": "113, rue Saint-Pierre, bureau 102, Saint-Constant (Québec) J5A 0M3",
+      "telephone": "450 632-1630",
+      "site": "https://www.cliniquemedicalest-constant.com/",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Contraception",
+        "Diététique",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Nutrition",
+        "Omnipratique",
+        "Pose et/ou retrait d'un stérilet",
+        "Prélèvements (des frais sont exigés)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=671719",
+        "https://www.cliniquemedicalest-constant.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "34": {
+      "adresse": "227, rue Sainte-Catherine, bureau 102, Saint-Constant (Québec) J5A 2J5",
+      "telephone": "450 632-2245",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=48730",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Contraception",
+        "Dermatologie",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "PFSI – Programme Fédéral de Santé Intérimaire",
+        "Pose et/ou retrait d'un stérilet",
+        "Pédiatrie",
+        "Service de prise de tension artérielle",
+        "Vaccination",
+        "Saisonnière"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=48730"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "35": {
+      "adresse": "10, river Rd, Kahnawake (Québec) J0L 1B0",
+      "telephone": "450 638-3930",
+      "site": "https://kmhc.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Adaptation sociale",
+        "Dentisterie",
+        "Diététique",
+        "Ergothérapie",
+        "Hébergement",
+        "Médecine familiale",
+        "Omnipratique",
+        "Ophtalmologie",
+        "Optométrie",
+        "PFSI – Programme Fédéral de Santé Intérimaire (des frais sont exigés)",
+        "Physiothérapie",
+        "Psychiatrie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1144636",
+        "https://kmhc.ca/"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "36": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://centremedicalst-hubert.ca/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://centremedicalst-hubert.ca/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "37": {
+      "adresse": "299, boulevard Sir-Wilfrid-Laurier, bureau 201, Saint-Lambert (Québec) J4R 2L1",
+      "telephone": "450 466-5630",
+      "site": "https://www.santemonteregie.qc.ca/installations/gmf-u-charles-le-moyne",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Rendez-vous d'urgence mineure",
+        "Contraception",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Désintoxication",
+        "Traitement de dépendance aux opiacés",
+        "Gestion des traitements liés à l'usage des opiacés (Méthadone, Suboxone, Kadian, etc.)",
+        "Médecine familiale",
+        "Médecine sportive",
+        "Obstétrique"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=32035",
+        "https://www.santemonteregie.qc.ca/installations/gmf-u-charles-le-moyne"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "38": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.cliniqueazur.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.cliniqueazur.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "39": {
+      "adresse": "5811, boulevard Taschereau, Brossard (Québec) J4Z 1A5",
+      "telephone": "450 445-4452",
+      "site": "https://www.santemonteregie.qc.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Physiothérapie",
+        "Pose et/ou retrait d'un stérilet",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Soins palliatifs / Soins de fin de vie",
+        "Travail social"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=937022",
+        "https://www.santemonteregie.qc.ca/installations/clsc-samuel-de-champlain",
+        "https://www.santemonteregie.qc.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "40": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://santedix30.com/fr/accueil-la-clinique-de-sante-dix30-des-medecins-dedies-la-sante-de-votre-famille/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://santedix30.com/fr/accueil-la-clinique-de-sante-dix30-des-medecins-dedies-la-sante-de-votre-famille/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "41": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.gmflacigogne.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.gmflacigogne.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "42": {
+      "adresse": "2424, boulevard Lapinière, suite 001 clinique sans rendez-vous, Brossard (Québec) J4Z 2K9",
+      "telephone": "450 465-5379",
+      "site": "https://clinique-lapiniere.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Cardiologie",
+        "Chirurgie",
+        "Chirurgie cardiaque",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Dermatologie",
+        "Diététique",
+        "Gastroentérologie",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=34730",
+        "https://clinique-lapiniere.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "43": {
+      "adresse": "6800, boulevard Cousineau, Longueuil (Québec) J3Y 8Z4",
+      "telephone": "450 443-7400",
+      "site": "https://www.santemonteregie.qc.ca/installations/gmf-u-de-saint-hubert",
+      "niveauGmf": "",
+      "services": [
+        "Anticoagulothérapie - Ajustement d'ordonnance",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Dépistage streptocoque groupe A / strep test avec ordonnance",
+        "Gynécologie",
+        "Infiltration cortisone",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=540355",
+        "https://www.santemonteregie.qc.ca/installations/gmf-u-de-saint-hubert"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "44": {
+      "adresse": "235, 2e Avenue, bureau 101, Saint-Jean-sur-Richelieu (Québec) J2X 2B2",
+      "telephone": "450 347-5548",
+      "site": "https://www.cmiberville.com/",
+      "niveauGmf": "",
+      "services": [
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Médecine familiale",
+        "Obstétrique",
+        "Omnipratique",
+        "Pose et/ou retrait d'un stérilet",
+        "Prélèvements",
+        "Soins infirmiers",
+        "Traitement des verrues plantaires",
+        "Visites à domicile"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=33249",
+        "https://www.cmiberville.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "45": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "46": {
+      "adresse": "440, boulevard Saint-Luc, suite 100, Saint-Jean-sur-Richelieu (Québec) J2W 0E2",
+      "telephone": "450 359-6819",
+      "site": "https://www.cliniquemedicaleducoteau.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Gynécologie",
+        "Inhalothérapie",
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Obstétrique",
+        "Omnipratique",
+        "Pharmacologie",
+        "Pose et/ou retrait d'un stérilet"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=45652",
+        "https://www.cliniquemedicaleducoteau.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "47": {
+      "adresse": "383, boulevard du Séminaire Nord, unité 120, Saint-Jean-sur-Richelieu (Québec) J3B 8C5",
+      "telephone": "450 349-5555",
+      "site": "https://www.medisoleil.com/",
+      "niveauGmf": "",
+      "services": [
+        "Adaptation sociale",
+        "Cessation tabagisme",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Chirurgie vasculaire",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Coroner",
+        "Dermatologie",
+        "Désintoxication",
+        "Fauteuil roulant (location)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=36874",
+        "https://www.medisoleil.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "48": {
+      "adresse": "1101, boulevard Brassard, bureau 205, Chambly (Québec) J3L 5R4",
+      "telephone": "450 658-6000",
+      "site": "https://www.lacliniquefortchambly.com/",
+      "niveauGmf": "",
+      "services": [
+        "Acupuncture",
+        "Sur l'étage",
+        "Adaptation sociale",
+        "Audiologie",
+        "Sur l'étage",
+        "Cardiologie",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Site web après 08h00 s'il reste de la place"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50590",
+        "https://www.lacliniquefortchambly.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "49": {
+      "adresse": "610, boulevard du Séminaire Nord, Saint-Jean-sur-Richelieu (Québec) J3B 7B4",
+      "telephone": "450 348-9218",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=34989",
+      "niveauGmf": "",
+      "services": [
+        "Avortement - Renseignements et références",
+        "Avortement- Interruption volontaire de grossesse (IVG)",
+        "Chirurgie",
+        "sur référence à notre clientèle inscrite seulement",
+        "Chirurgie mineure",
+        "sur référence pour clientèle inscrite seulement",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Physiothérapie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=34989"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "50": {
+      "adresse": "1344, rue du Pont, Marieville (Québec) J3M 1G2",
+      "telephone": "450 708-2911",
+      "site": "https://cliniquemarieville.com/",
+      "niveauGmf": "",
+      "services": [
+        "Béquilles (location) (des frais sont exigés)",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Contraception",
+        "Diététique",
+        "Fauteuil roulant (location)",
+        "À l'entrée",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Marchette/déambulateur (location) (des frais sont exigés)"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=736172",
+        "https://cliniquemarieville.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "51": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "52": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "53": {
+      "adresse": "1396, rue Notre-Dame, Saint-Césaire (Québec) J0L 1T0",
+      "telephone": "450 469-0505",
+      "site": "https://bonjour-sante.ca/uno/clinique/gmfrsc",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Médecine familiale",
+        "Omnipratique"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=116297",
+        "https://bonjour-sante.ca/uno/clinique/gmfrsc"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "54": {
+      "adresse": "397, rue Jacques-Cartier Sud, Saint-Jean-sur-Richelieu (Québec) J3B 7T1",
+      "telephone": "450 347-3748",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47617",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Pose et/ou retrait d'un stérilet",
+        "Prélèvements (des frais sont exigés)",
+        "$ Avec rendez-vous",
+        "Service de prise de tension artérielle"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47617"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "55": {
+      "adresse": "247, boulevard Saint-Luc, unité 204, Saint-Jean-sur-Richelieu (Québec) J2W 0J3",
+      "telephone": "450 348-6124",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50518",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Contraception",
+        "Hypertension – Consultation pour le suivi",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Médecine familiale",
+        "Omnipratique",
+        "Pose et/ou retrait d'un stérilet",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Test Pap"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50518"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "59": {
+      "adresse": "5300, boulevard Saint-Laurent, bureau 140, Sainte-Catherine (Québec) J5C 1A8",
+      "telephone": "450 638-6383",
+      "site": "https://www.gmfcarrefoursante.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Anesthésiologie",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Service GAP offert, clientèle sans médecin de famille - 811-3",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Neurologie",
+        "Nutrition",
+        "Néphrologie",
+        "ORL - Oto-rhino-laryngologie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=40443",
+        "https://www.gmfcarrefoursante.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "60": {
+      "adresse": "343, rue Saint-Jacques, Napierville (Québec) J0J 1L0",
+      "telephone": "450 245-0081",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=35330",
+      "niveauGmf": "",
+      "services": [
+        "Audiologie",
+        "Audioprothésie",
+        "Massothérapie",
+        "Omnipratique",
+        "Psychologie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=35330"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "61": {
+      "adresse": "640, rang Saint-Régis, bureau 8, Saint-Isidore (Québec) J0L 2A0",
+      "telephone": "450 992-0558",
+      "site": "https://coopsantesaintisidore.org/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Infirmière praticienne spécialisée en soins de première ligne (IPSPL)",
+        "Médecine familiale",
+        "Médecine interne",
+        "Omnipratique",
+        "Prélèvements",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Traitement des verrues plantaires"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=491961",
+        "https://coopsantesaintisidore.org/"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "62": {
+      "adresse": "72, boulevard Saint-Jean-Baptiste, Châteauguay (Québec) J6K 4Y7",
+      "telephone": "450 800-0073",
+      "site": "https://cliniquemedicalelesoleil.ca",
+      "niveauGmf": "",
+      "services": [
+        "Allergologie",
+        "Dépistage ITSS avec symptômes",
+        "Endocrinologie",
+        "Infirmier/Infirmière auxiliaire",
+        "Médecine d'urgence",
+        "Médecine familiale",
+        "Prélèvements sanguins / Prise de sang",
+        "Ressources ITSS sur le portail citoyen",
+        "Rhumatologie",
+        "Vaccination"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1165024",
+        "https://cliniquemedicalelesoleil.ca"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "63": {
+      "adresse": "95, avenue de la Verdure, Châteauguay (Québec) J6K 0E8",
+      "telephone": "450 699-3333",
+      "site": "https://www.santemonteregie.qc.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Aide aux aînés victimes d'abus",
+        "Cessation tabagisme",
+        "Centre d'arrêt tabagique disponible",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Information sur la sexualité",
+        "Clinique de santé sexuelle",
+        "Récupération des seringues et des aiguilles usagées",
+        "Salle d'allaitement",
+        "Soutien à domicile",
+        "Numéro général :"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1232",
+        "https://www.santemonteregie.qc.ca/"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "64": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "services",
+        "recrutement"
+      ]
+    },
+    "65": {
+      "adresse": "1, rue de l'Hôtel-de-Ville, Rigaud (Québec) J0P 1P0",
+      "telephone": "450 451-5336",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=36497",
+      "niveauGmf": "",
+      "services": [
+        "Audioprothésie",
+        "Chirurgie mineure",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Médecine familiale",
+        "Pour les patients inscrits",
+        "Omnipratique",
+        "Pour les patients inscrits",
+        "Pose et/ou retrait d'un stérilet",
+        "Pour les patientes inscrites seulement avec rendez-vous",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=36497"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "66": {
+      "adresse": "59, rue Saint-Viateur, Rigaud (Québec) J0P 1P0",
+      "telephone": "450 451-6609",
+      "site": "https://www.santemonteregie.qc.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Adaptation sociale",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Information sur la sexualité",
+        "Récupération des seringues et des aiguilles usagées",
+        "Salle d'allaitement",
+        "Soins palliatifs / Soins de fin de vie",
+        "Soins à domicile",
+        "Soutien à domicile",
+        "prendre un rendez-vous :"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1267",
+        "https://www.santemonteregie.qc.ca/"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "67": {
+      "adresse": "465, rue Main, suite 200, Hudson (Québec) J0P 1H0",
+      "telephone": "450 458-5393",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50729",
+      "niveauGmf": "",
+      "services": [
+        "Audioprothésie",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Contraception",
+        "Médecine familiale",
+        "Médecine interne",
+        "Omnipratique",
+        "Orthopédie",
+        "Physiatrie",
+        "Pédiatrique",
+        "Pneumologie",
+        "Soins infirmiers"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50729"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "68": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.santesteangelique.ca/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santesteangelique.ca/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "69": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-multiservices-de-sante-et-de-services-sociaux-de-vaudreuil-dorion",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-multiservices-de-sante-et-de-services-sociaux-de-vaudreuil-dorion"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    },
+    "70": {
+      "adresse": "3031, boulevard de la Gare, Vaudreuil-Dorion (Québec) J7V 9R2",
+      "telephone": "450 455-6171",
+      "site": "https://www.mcgill.ca/familymed/fr/formation/sites-denseignement/umf/gmf-u-de-vaudreuil-soulanges",
+      "niveauGmf": "",
+      "services": [
+        "Bilan sanguin",
+        "Bilan santé / Examen annuel",
+        "Cessation tabagisme",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Cholestérol – Consultation pour le suivi",
+        "Colle tissulaire",
+        "Contraception",
+        "Diabète - Test capillaire Hémoglobine glyquée (HbA1C)",
+        "Doppler",
+        "Dépistage des symptômes de l'infection urinaire"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=547027",
+        "https://www.mcgill.ca/familymed/fr/formation/sites-denseignement/umf/gmf-u-de-vaudreuil-soulanges"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "71": {
+      "adresse": "600, boulevard Harwood, bureau 10, Vaudreuil-Dorion (Québec) J7V 6A3",
+      "telephone": "450 455-9301",
+      "site": "https://polycliniquemedicalevaudreuil.com/en/medical-clinic-gmf-vaudreuil-dorion/",
+      "niveauGmf": "",
+      "services": [
+        "Cardiologie",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Dentisterie",
+        "Fauteuil roulant (location)",
+        "Infirmier/Infirmière auxiliaire",
+        "Mammographie",
+        "Médecine familiale",
+        "Neurologie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=45268",
+        "https://polycliniquemedicalevaudreuil.com/en/medical-clinic-gmf-vaudreuil-dorion/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "72": {
+      "adresse": "88, 5e Avenue, Pincourt (Québec) J7W 5K7",
+      "telephone": "514 425-1000",
+      "site": "https://www.gmfpincourt.com/home",
+      "niveauGmf": "",
+      "services": [
+        "Audioprothésie",
+        "Changement et/ou suivi de pansement (des frais sont exigés)",
+        "Chirurgie mineure",
+        "Contraception",
+        "Gynécologie",
+        "Infirmier/Infirmière auxiliaire",
+        "Médecine familiale",
+        "Neurologie",
+        "Obstétrique",
+        "Omnipratique",
+        "Pose et/ou retrait d'un stérilet (des frais sont exigés)",
+        "Prise en charge de nouveaux usagers pour du suivi"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=50474",
+        "https://gmfpincourt.com/",
+        "https://www.gmfpincourt.com/home"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "73": {
+      "adresse": "65, boulevard de la Cité-des-Jeunes, bureau 300, Vaudreuil-Dorion (Québec) J7V 8C1",
+      "telephone": "450 455-3322",
+      "site": "https://gmfdestroislacs.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "Contraception",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmière praticienne spécialisée en soins aux adultes (IPSSA)",
+        "Médecine familiale",
+        "Omnipratique",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Travail social"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=35000",
+        "https://gmfdestroislacs.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "74": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.santemonteregie.qc.ca/installations/chsld-et-clsc-de-coteau-du-lac",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/chsld-et-clsc-de-coteau-du-lac"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    },
+    "75": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-et-groupe-de-medecine-de-famille-universitaire-de-saint-polycarpe",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-et-groupe-de-medecine-de-famille-universitaire-de-saint-polycarpe"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    },
+    "76": {
+      "adresse": "521, boulevard du Havre, bureau Secretariat, Salaberry-de-Valleyfield (Québec) J6S 4Z5",
+      "telephone": "450 371-6444",
+      "site": "https://www.havresante.com/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "N/A",
+        "Dépistage",
+        "Pour patients inscrit - sur reference du MD.",
+        "Infirmier/Infirmière auxiliaire",
+        "N/A",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Kinésiologie",
+        "Clinique Havre-Santé - Non membre du GMF",
+        "Massothérapie",
+        "Clinique Havre-Santé - Non membre du GMF",
+        "Médecine d'urgence"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=45746",
+        "https://www.havresante.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "77": {
+      "adresse": "408, rue Jeanne-Mance, bureau 100, Salaberry-de-Valleyfield (Québec) J6T 4G1",
+      "telephone": "450 370-3387",
+      "site": "http://medival.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Soins infirmiers",
+        "Test Pap",
+        "Pour les clientes inscrites à la clinique seulement",
+        "Travail social",
+        "Vaccination"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=51465",
+        "https://medival.ca/",
+        "http://medival.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "78": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://cmbatisseurs.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://cmbatisseurs.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "79": {
+      "adresse": "400, boulevard de Melocheville, bureau 1, Beauharnois (Québec) J6N 0M6",
+      "telephone": "450 395-3990",
+      "site": "https://beauharnoisensante.com/",
+      "niveauGmf": "",
+      "services": [
+        "Audiologie",
+        "Audioprothésie",
+        "Changement et/ou suivi de pansement",
+        "Chiropratique",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Diététique",
+        "Ergothérapie",
+        "Gastroentérologie",
+        "Infirmier/Infirmière auxiliaire"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=855824",
+        "https://beauharnoisensante.com/"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "80": {
+      "adresse": "71, rue Maden, bureau 200, Salaberry-de-Valleyfield (Québec) J6S 3V4",
+      "telephone": "450 371-0143",
+      "site": "https://santemonteregie.qc.ca/installations/clsc-de-salaberry-de-valleyfield#block-views-block-service-offering-block-by-installation-heading",
+      "niveauGmf": "",
+      "services": [
+        "Accompagnement - Démarches problème de bail / recherche de logement",
+        "Services hébergement - Guichet d'accès",
+        "Adaptation sociale",
+        "Services sociaux généraux ou Guichet d'accès (SAD)",
+        "Aide alimentaire / Repas-collations dans les écoles / Banque alimentaire",
+        "Femme enceinte jeunes de moins de 18 ans/Guichet d'accès en santé mentale jeunesse",
+        "Aide aux aînés victimes d'abus",
+        "Guichet d'accès - Soutien à domicile (SAD)",
+        "Aide aux victimes d'actes criminels",
+        "Anticoagulothérapie - Ajustement d'ordonnance",
+        "Suivi INR",
+        "Cessation tabagisme"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1229",
+        "https://www.santemonteregie.qc.ca/installations/clsc-de-salaberry-de-valleyfield",
+        "https://santemonteregie.qc.ca/installations/clsc-de-salaberry-de-valleyfield#block-views-block-service-offering-block-by-installation-heading"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "81": {
+      "adresse": "142, rue Saint-Laurent (Beauharnois), Beauharnois (Québec) J6N 1V9",
+      "telephone": "450 429-6455",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-beauharnois",
+      "niveauGmf": "",
+      "services": [
+        "Accompagnement",
+        "Ce service requiers un RDV. Un coût est relié à ce service.",
+        "Aide aux aînés victimes d'abus",
+        "Physique, psychologique",
+        "Cessation tabagisme",
+        "Centre d'arrêt tabagique disponible",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure (des frais sont exigés)",
+        "Un coût est relié à ce service",
+        "Consultation d'une infirmière",
+        "Contraception",
+        "Cours prénataux"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1633",
+        "https://www.santemonteregie.qc.ca/installations/clsc-de-beauharnois"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "82": {
+      "adresse": "60, rue F.-Cleyn, bureau 204, Huntingdon (Québec) J0S 1H0",
+      "telephone": "450 264-6101",
+      "site": "https://complexedesantehuntingdon.ca/fr/centre-medical-huntingdon/",
+      "niveauGmf": "",
+      "services": [
+        "Audioprothésie",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Pharmacologie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=42453",
+        "https://complexedesantehuntingdon.ca/fr/centre-medical-huntingdon/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "83": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://ormstownmedicalclinic.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://ormstownmedicalclinic.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "84": {
+      "adresse": "10, rue King, bureau 200, Huntingdon (Québec) J0S 1H0",
+      "telephone": "450 829-2321",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-huntingdon-huntingdon-clsc",
+      "niveauGmf": "",
+      "services": [
+        "Aide aux aînés victimes d'abus",
+        "Cessation tabagisme",
+        "Centre d'arrêt tabagique pour la clientèle atteinte de la maladie",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Cours prénataux",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Ressources ITSS sur le portail citoyen",
+        "Récupération des seringues et des aiguilles usagées",
+        "SIRSAU",
+        "SIDEP - Service intégré de dépistage et de prévention des ITSS",
+        "Soins palliatifs / Soins de fin de vie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1123",
+        "https://www.santemonteregie.qc.ca/installations/clsc-de-huntingdon-huntingdon-clsc"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "85": {
+      "adresse": "21, rang Sainte-Anne, Saint-Chrysostome (Québec) J0S 1R0",
+      "telephone": "450 829-2321",
+      "site": "https://www.santemonteregie.qc.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Aide aux aînés victimes d'abus",
+        "Aide aux victimes d'actes criminels",
+        "Cessation tabagisme",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Cours prénataux",
+        "Cuisine collective",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Ressources ITSS sur le portail citoyen",
+        "Récupération des seringues et des aiguilles usagées",
+        "SIDEP - Service intégré de dépistage et de prévention des ITSS",
+        "Salle d'allaitement"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1565",
+        "https://www.santemonteregie.qc.ca/installations/clsc-de-saint-chrysostome",
+        "https://www.santemonteregie.qc.ca/"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "86": {
+      "adresse": "300, rue Paradis, Sorel-Tracy (Québec) J3P 3G6",
+      "telephone": "450 742-0485",
+      "site": "https://gmfrichelieu.com/",
+      "niveauGmf": "",
+      "services": [
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Omnipratique",
+        "Soins infirmiers",
+        "Travail social"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=191829",
+        "https://gmfrichelieu.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "88": {
+      "adresse": "300, rue Paradis, Sorel-Tracy (Québec) J3P 3G6",
+      "telephone": "450 742-8110",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=37699",
+      "niveauGmf": "",
+      "services": [
+        "Médecine familiale",
+        "Omnipratique"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=37699"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "96": {
+      "adresse": "2035, avenue Sainte-Anne, bureau 200, Saint-Hyacinthe (Québec) J2S 5H3",
+      "telephone": "450 773-6023",
+      "site": "https://www.cliniquefusion.ca",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Contraception",
+        "Gynécologie",
+        "Hypertension – Consultation pour le suivi",
+        "Infirmier/Infirmière auxiliaire",
+        "Médecine familiale",
+        "Nutrition",
+        "Obstétrique",
+        "Omnipratique",
+        "PFSI – Programme Fédéral de Santé Intérimaire (des frais sont exigés)",
+        "Pharmacologie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=49069",
+        "https://www.cliniquefusion.ca/",
+        "https://www.cliniquefusion.ca"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "103": {
+      "adresse": "365, boulevard Sir-Wilfrid-Laurier, unité 101, Beloeil (Québec) J3G 4T2",
+      "telephone": "450 281-2098",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1036670",
+      "niveauGmf": "",
+      "services": [
+        "Contraception",
+        "Dépistage",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Service de prise de tension artérielle",
+        "Soins infirmiers",
+        "Test Pap",
+        "Clientes inscrite à la clinique seulement",
+        "Visites à domicile"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1036670"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "104": {
+      "adresse": "169, rue du Prince-Albert, Otterburn Park (Québec) J3H 1L4",
+      "telephone": "450 446-7333",
+      "site": "https://www.gmfdelarive.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Consultations médicales le jour même ou dans les jours suivants (pour tous)",
+        "quand disponibilité pour patient orphelin et offre de service au GAP",
+        "Contraception",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Pharmacologie",
+        "Pose et/ou retrait d'un stérilet",
+        "pour les patientes inscrites seulement"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=33148",
+        "https://www.gmfdelarive.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "105": {
+      "adresse": "77, boulevard Sir-Wilfrid-Laurier, bureau 200A, Mont-Saint-Hilaire (Québec) J3H 3N3",
+      "telephone": "450 527-7873",
+      "site": "https://purecliniquemedicale.com/",
+      "niveauGmf": "",
+      "services": [
+        "Chirurgie",
+        "générale (pour ta clientèle qui a une référence de son médecin)",
+        "Chirurgie mineure",
+        "Chirurgie plastique",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Contraception orale d'urgence",
+        "Gynécologie",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine esthétique",
+        "Médecine familiale",
+        "Médecine sportive"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=835540",
+        "https://purecliniquemedicale.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "114": {
+      "adresse": "1750, boulevard Marie-Victorin, unité 285, Longueuil (Québec) J4G 1A5",
+      "telephone": "450 442-9531",
+      "site": "https://www.lemedical.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Audioprothésie",
+        "Chirurgie",
+        "Consultation en chirurgie générale",
+        "Diététique",
+        "Médecine familiale",
+        "Consultation en médecine générale",
+        "Nutrition (des frais sont exigés)",
+        "Omnipratique",
+        "Psychologie (des frais sont exigés)",
+        "Test Pap",
+        "Évaluation de la conduite automobile SAAQ"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=38997",
+        "https://www.lemedical.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "119": {
+      "adresse": "1260, rue Sainte-Hélène, Longueuil (Québec) J4K 3S6",
+      "telephone": "450 670-7700",
+      "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47991",
+      "niveauGmf": "",
+      "services": [
+        "Contraception",
+        "Contraception orale d'urgence (des frais sont exigés)",
+        "$ Avec rendez-vous",
+        "Médecine familiale",
+        "Omnipratique",
+        "Pédiatrie",
+        "Service de prise de tension artérielle",
+        "Vaccination",
+        "Évaluation de la conduite automobile SAAQ"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47991"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "127": {
+      "adresse": "3090, chemin de Chambly, bureau 101, Longueuil (Québec) J4L 4N5",
+      "telephone": "450 670-5700",
+      "site": "https://www.gmf3090.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Anesthésiologie",
+        "Chirurgie",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Physiatrie",
+        "Soins infirmiers",
+        "Clinicienne"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47398",
+        "https://www.gmf3090.ca/accueil",
+        "https://www.gmf3090.ca/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "128": {
+      "adresse": "4915, route Marie-Victorin, Contrecoeur (Québec) J0L 1C0",
+      "telephone": "450 587-2667",
+      "site": "https://coopcontrecoeur.com/",
+      "niveauGmf": "",
+      "services": [
+        "Chiropratique",
+        "Consultations médicales le jour même ou dans les jours suivants (pour les patients inscrits)",
+        "Contraception",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Médecine familiale",
+        "Omnipratique",
+        "Orthothérapie",
+        "Physiothérapie",
+        "Pose et/ou retrait d'un stérilet (des frais sont exigés)",
+        "Prélèvements (des frais sont exigés)",
+        "Service de prise de tension artérielle"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=52307",
+        "https://www.gmfcontrecoeur.com/",
+        "https://coopcontrecoeur.com/"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "recrutement"
+      ]
+    },
+    "129": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://cliniquemedicalesorel-tracy.ca/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://cliniquemedicalesorel-tracy.ca/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    },
+    "130": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://cliniquemedicalesorel-tracy.ca/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://cliniquemedicalesorel-tracy.ca/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "132": {
+      "adresse": "125, rue de l'Église, Henryville (Québec) J0J 1E0",
+      "telephone": "450 299-2828",
+      "site": "https://santemonteregie.qc.ca/node/17",
+      "niveauGmf": "",
+      "services": [
+        "Accompagnement",
+        "Distribution de matériel d'injection neuf aux personnes qui consomment des drogues (service gratuit)",
+        "Récupération des seringues et des aiguilles usagées",
+        "Soutien à domicile",
+        "Prendre un rendez-vous :"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1064",
+        "https://www.santemonteregie.qc.ca/installations/clsc-de-henryville",
+        "https://santemonteregie.qc.ca/node/17"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "133": {
+      "adresse": "211, 16e Avenue Ouest, bureau 100, Venise-en-Québec (Québec) J0J 2K0",
+      "telephone": "450 244-5350",
+      "site": "https://coopsantelacchamplain.ca/",
+      "niveauGmf": "",
+      "services": [
+        "Béquilles (location) (des frais sont exigés)",
+        "Changement et/ou suivi de pansement",
+        "Chirurgie mineure",
+        "Consultation d'une infirmière",
+        "Contraception",
+        "Dépistage",
+        "Fauteuil roulant (location) (des frais sont exigés)",
+        "Infiltration cortisone",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière clinicienne",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Lavage d'oreilles"
+      ],
+      "recrutement": "Nous recrutons des médecins de famille.",
+      "sources": [
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=168171",
+        "https://coopsantelacchamplain.ca/"
+      ],
+      "lacunes": []
+    },
+    "134": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://coopsantesaintblaise.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://coopsantesaintblaise.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    }
+  },
+  "etablissements": {
+    "INS-003": {
+      "adresse": "Coordonnées: 4700, route Marie-Victorin Contrecoeur QC J0L 1C0 Canada <sec",
+      "telephone": "450 468-8410",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-contrecoeur",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-contrecoeur"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-002": {
+      "adresse": "Coordonnées: 151, rue De Muy Boucherville QC J4B4W7 Canada <section class=",
+      "telephone": "450 468-0590",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-jeanne-crevier",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-jeanne-crevier"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-004": {
+      "adresse": "Coordonnées: 201, boulevard Curé-Poirier Ouest Longueuil QC J4J 2G4",
+      "telephone": "450 651-9830",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-longueuil-ouest",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-de-longueuil-ouest"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-005": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-020": {
+      "adresse": "Coordonnées: 1303, boulevard Jacques-Cartier Est Longueuil QC J4M 2Y8 Canada </d",
+      "telephone": "450 463-2850",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-simonne-monet-chartrand",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-simonne-monet-chartrand"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-022": {
+      "adresse": "Coordonnées: 20-N, boulevard de Mortagne Dans l'ancien cinéma (entre le Madame Bovary et le salon de quilles) Boucherville QC J4B 5K6 Canada </di",
+      "telephone": "450 468-5511",
+      "site": "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-001": {
+      "adresse": "Coordonnées: 1333, boulevard Jacques-Cartier Est Longueuil QC J4M 2A5 Canada </di",
+      "telephone": "450 468-8111",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-pierre-boucher",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-pierre-boucher"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-014": {
+      "adresse": "Coordonnées: 40, rue de Ramezay Sorel-Tracy QC J3P 3Y7 Canada <section cla",
+      "telephone": "450 742-5936",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-j-arsene-parenteau",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-j-arsene-parenteau"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-013": {
+      "adresse": "Coordonnées: 151, rue George Sorel-Tracy QC J3P 1C8 Canada <section class=",
+      "telephone": "450 746-5555",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-elisabeth-lafrance",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-elisabeth-lafrance"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-015": {
+      "adresse": "Coordonnées: 30, rue Ferland Sorel-Tracy QC J3P 3C7 Canada <section class",
+      "telephone": "450 746-4545",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-gaston-belanger",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-gaston-belanger"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-012": {
+      "adresse": "Coordonnées: 400, avenue de l'Hôtel-Dieu Sorel-Tracy QC J3P 1N5 Canada </div",
+      "telephone": "450 746-6000",
+      "site": "https://www.santemonteregie.qc.ca/installations/hotel-dieu-de-sorel",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hotel-dieu-de-sorel"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-007": {
+      "adresse": "Coordonnées: 1800, rue Dessaulles Saint-Hyacinthe QC J2S 2T2 Canada <secti",
+      "telephone": "450 771-3200",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-lhotel-dieu-de-saint-hyacinthe",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-lhotel-dieu-de-saint-hyacinthe"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-008": {
+      "adresse": "Coordonnées: 265, boulevard Seigneurial Ouest Saint-Bruno-de-Montarville QC J3V 2H4",
+      "telephone": "450 461-2650",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-montarville",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-de-montarville"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-009": {
+      "adresse": "Coordonnées: 425, rue Hubert Beloeil QC J3G 2T1 Canada <section class=\"vie",
+      "telephone": "450 467-1631",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-marguerite-adam",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-dhebergement-marguerite-adam"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-010": {
+      "adresse": "Coordonnées: 1015, rue Gauthier Saint-Hyacinthe QC J2S 8T2 Canada <sectio",
+      "telephone": "450 778-2572",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-des-maskoutains",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-des-maskoutains"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-011": {
+      "adresse": "Coordonnées: 300 Rue Serge-Pepin Beloeil QC J3G 0B8 Canada <section class=",
+      "telephone": "450 536-2572",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-des-patriotes",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-des-patriotes"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-021": {
+      "adresse": "Coordonnées: 1021, rue Gauthier Saint-Hyacinthe QC J2S 8T2 Canada <section",
+      "telephone": "450 771-3558",
+      "site": "https://www.santemonteregie.qc.ca/installations/groupe-de-medecine-de-famille-universitaire-richelieu-yamaska-gmf-u",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/groupe-de-medecine-de-famille-universitaire-richelieu-yamaska-gmf-u"
+      ],
+      "lacunes": [
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-006": {
+      "adresse": "Coordonnées: 2750, boulevard Laframboise Saint-Hyacinthe QC J2S 4Y8 Canada </div",
+      "telephone": "450 771-3333",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-honore-mercier",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-honore-mercier"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-016": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-017": {
+      "adresse": "Coordonnées: 2115, boulevard Casavant Ouest bureau 202 Saint-Hyacinthe QC J2S 7E5",
+      "telephone": "450 771-6622",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-hyacinthe",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-hyacinthe"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-019": {
+      "adresse": "Coordonnées: 1525, rue Joliette Longueuil QC J4K 4W4 Canada <section class",
+      "telephone": "450 651-3113",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-la-rue-joliette",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-la-rue-joliette"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-018": {
+      "adresse": "Coordonnées: 6, rue Foucreault Saint-Philippe QC J0L 2K0 Canada <section c",
+      "telephone": "450 659-8911",
+      "site": "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-philippe-saint-philippe-addiction",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/centre-de-readaptation-en-dependance-de-saint-philippe-saint-philippe-addiction"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-001": {
+      "adresse": "Coordonnées: 920 boulevard du Séminaire Nord Saint-Jean-sur-Richelieu QC J3A 1B7 Canada </d",
+      "telephone": "T%C3%A9l%C3%A9phone%3A%C2%A0450359-5000%2Cposte6396",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-du-haut-richelieu",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-du-haut-richelieu"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-002": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "niveauGmf",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-003": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-004": {
+      "adresse": "Coordonnées: 650, rue Sénécal Chambly QC J3L1N9 Canada <section class=\"vie",
+      "telephone": "450 658-2016",
+      "site": "https://www.santemonteregie.qc.ca/installations/clinique-des-jeunes-du-bassin-de-chambly",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clinique-des-jeunes-du-bassin-de-chambly"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-005": {
+      "adresse": "Coordonnées: 185, rue Champlain Saint-Jean-sur-Richelieu QC J3B 6V5",
+      "telephone": "450 358-8922",
+      "site": "https://www.santemonteregie.qc.ca/installations/clsc-et-aire-ouverte-de-la-rue-champlain-clinique-jeunesse-12-25-ans",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/clsc-et-aire-ouverte-de-la-rue-champlain-clinique-jeunesse-12-25-ans"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-006": {
+      "adresse": "",
+      "telephone": "",
+      "site": "",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "site",
+        "services",
+        "recrutement"
+      ]
+    },
+    "INS-C-007": {
+      "adresse": "40, rue Labrèche, Saint-Jean-sur-Richelieu (Québec) J3B 0J3",
+      "telephone": "450 529-7646",
+      "site": "https://www.chslddesaint-jean-sur-richelieu.com/",
+      "niveauGmf": "",
+      "services": [
+        "Accompagnement",
+        "Accompagnement - Démarches pour porter plainte",
+        "Dentisterie",
+        "Denturologie",
+        "Ergothérapie",
+        "Fauteuil roulant (location)",
+        "Hébergement",
+        "Infirmier/Infirmière auxiliaire",
+        "Infirmier/Infirmière praticienne spécialisée",
+        "Musicothérapie",
+        "Nutrition",
+        "Omnipratique"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://www.chslddesaint-jean-sur-richelieu.com/",
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1138741"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    },
+    "INS-C-008": {
+      "adresse": "125, rue Daigneault, Chambly (Québec) J3L 1G7",
+      "telephone": "450 658-4441",
+      "site": "https://www.manoirsoleil.com/",
+      "niveauGmf": "",
+      "services": [
+        "Ergothérapie",
+        "Fauteuil roulant (location)",
+        "Gériatrie",
+        "Hébergement",
+        "Infirmier/Infirmière auxiliaire",
+        "Intervenant",
+        "Intervenante sociale",
+        "Loisir",
+        "Musicothérapie",
+        "(Nathalie Albert)",
+        "Omnipratique",
+        "Physiothérapie"
+      ],
+      "recrutement": "",
+      "sources": [
+        "https://www.manoirsoleil.com/",
+        "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1138736"
+      ],
+      "lacunes": [
+        "recrutement"
+      ]
+    }
+  },
+  "hopitaux": {
+    "1": {
+      "adresse": "Coordonnées: 1333, boulevard Jacques-Cartier Est Longueuil QC J4M 2A5 Canada </di",
+      "telephone": "450 468-8111",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-pierre-boucher",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-pierre-boucher"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "2": {
+      "adresse": "Coordonnées: 2750, boulevard Laframboise Saint-Hyacinthe QC J2S 4Y8 Canada </div",
+      "telephone": "450 771-3333",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-honore-mercier",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-honore-mercier"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "3": {
+      "adresse": "Coordonnées: 400, avenue de l'Hôtel-Dieu Sorel-Tracy QC J3P 1N5 Canada </div",
+      "telephone": "450 746-6000",
+      "site": "https://www.santemonteregie.qc.ca/installations/hotel-dieu-de-sorel",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hotel-dieu-de-sorel"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "4": {
+      "adresse": "Coordonnées: 3120, boulevard Taschereau Greenfield Park QC J4V 2H1",
+      "telephone": "450466-5000%2Cposte2510",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-charles-le-moyne",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-charles-le-moyne"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "5": {
+      "adresse": "Coordonnées: 920 boulevard du Séminaire Nord Saint-Jean-sur-Richelieu QC J3A 1B7 Canada </d",
+      "telephone": "T%C3%A9l%C3%A9phone%3A%C2%A0450359-5000%2Cposte6396",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-du-haut-richelieu",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-du-haut-richelieu"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "6": {
+      "adresse": "Coordonnées: 200, boulevard Brisebois Châteauguay QC J6K 4W8 Canada <secti",
+      "telephone": "450 699-2425",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-anna-laberge",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-anna-laberge"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "7": {
+      "adresse": "Coordonnées: 150, rue Saint-Thomas Salaberry-de-Valleyfield QC J6T 6C1 Canada </d",
+      "telephone": "450 371-9920",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-du-suroit",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-du-suroit"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "8": {
+      "adresse": "Coordonnées: 28, rue Gale Ormstown QC J0S 1K0 Canada <section class=\"views",
+      "telephone": "450 829-2321",
+      "site": "https://www.santemonteregie.qc.ca/installations/hopital-barrie-memorial-barrie-memorial-hospital",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://www.santemonteregie.qc.ca/installations/hopital-barrie-memorial-barrie-memorial-hospital"
+      ],
+      "lacunes": [
+        "services",
+        "recrutement"
+      ]
+    },
+    "9": {
+      "adresse": "",
+      "telephone": "",
+      "site": "https://hopitalvaudreuilsoulanges.com/",
+      "niveauGmf": "",
+      "services": [],
+      "recrutement": "",
+      "sources": [
+        "https://hopitalvaudreuilsoulanges.com/"
+      ],
+      "lacunes": [
+        "adresse",
+        "telephone",
+        "services",
+        "recrutement"
+      ]
+    }
+  }
+}
