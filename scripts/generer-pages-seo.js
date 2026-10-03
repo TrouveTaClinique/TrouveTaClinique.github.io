@@ -4353,7 +4353,14 @@ ${navGuide}
   sortie = sortie.replace(/property="og:image:height" content="341"/g, `property="og:image:height" content="${ogGuideH}"`);
   sortie = sortie.replace(/content="[^"]*" property="og:image:alt"/g, `content="${ogGuideAlt}" property="og:image:alt"`);
   sortie = sortie.replace(/property="og:image:alt" content="[^"]*"/g, `property="og:image:alt" content="${ogGuideAlt}"`);
-  sortie = sortie.replace(/"dateModified": "[0-9]{4}-[0-9]{2}-[0-9]{2}"/g, '"dateModified": "2026-09-04"');
+  /* Date des données structurées = date du bandeau « Sources vérifiées » / « Mise à jour factuelle »
+     de la source (audit du 3 oct. 2026), pour ne pas déclarer une date plus ancienne que la page. */
+  const dateGuide = (() => {
+    const bandeau = (html.match(/<div class="status-line">[\s\S]*?<\/div>/) || [''])[0].replace(/<sup>er<\/sup>/g, '');
+    const m = bandeau.match(/(\d{1,2}) (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre) (\d{4})/);
+    return m ? `${m[3]}-${String(MOIS_FR_SEO.indexOf(m[2]) + 1).padStart(2, '0')}-${m[1].padStart(2, '0')}` : '2026-09-04';
+  })();
+  sortie = sortie.replace(/"dateModified": "[0-9]{4}-[0-9]{2}-[0-9]{2}"/g, `"dateModified": "${dateGuide}"`);
   sortie = sortie.replace(/<meta name="google-site-verification"[^>]*>\s*/g, '');
 
   if (nom === 'amp') {
