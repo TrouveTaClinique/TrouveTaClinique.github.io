@@ -61,6 +61,16 @@ test('La page reste non répertoriée et charge toute la Montérégie', () => {
   assert.doesNotMatch(page, /dtmf-mtg-note-/);
   assert.match(page, /trouvetaclinique\.ca\/carte-interactive\//);
   assert.doesNotMatch(page, /trouvetaclinique\.ca\/monteregie-est\//);
+  assert.match(page, /id="reg-filter"/);
+  assert.match(page, /id="rls-filter"/);
+  assert.doesNotMatch(page, /id="rls-btns"/);
+  assert.match(page, /Tous les RLS/);
+  for (const couleur of ['#e6007e', '#43a047', '#0080d7', '#f48cc5', '#aad4ac', '#8cc6ed']) {
+    assert.ok(page.includes(couleur), couleur);
+  }
+  for (const inventee of ['#0A6B5C', '#9A4A16', '#1A4578', '#4C3D78', '#8A3050', '#2F5A3C']) {
+    assert.equal(page.includes(inventee), false, inventee);
+  }
   assert.equal((page.match(/name="robots"/g) || []).length, 1);
   const re = /<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
   let m;
