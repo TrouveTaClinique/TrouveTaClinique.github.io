@@ -749,7 +749,7 @@ main .cliniques-carte,main .carte-est{
 .nous-joindre .nj-tete{text-align:center;margin-bottom:.4rem}
 .nous-joindre .nj-tete h2{margin-inline:auto}
 .nous-joindre .nj-tete p{margin-inline:auto}
-.contact,.contact-merci{display:grid;gap:1rem 1.25rem;margin-top:1rem;padding:clamp(1.3rem,3vw,2.2rem);background:#fff;border:1px solid var(--rule);border-radius:16px;box-shadow:inset 3px 0 0 var(--teal),0 8px 24px rgba(18,6,114,.06)}
+.contact,.contact-merci{display:grid;gap:1rem 1.25rem;margin-top:1rem;padding:clamp(1.3rem,3vw,2.2rem);background:var(--teal-pale);border-radius:16px}
 @media(min-width:720px){.contact{grid-template-columns:1fr 1fr}.contact .large{grid-column:1 / -1}}
 .contact[hidden],.contact-merci[hidden]{display:none}
 .contact-pied{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem}
