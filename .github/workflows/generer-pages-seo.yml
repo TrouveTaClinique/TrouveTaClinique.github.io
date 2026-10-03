@@ -54,6 +54,7 @@ on:
       - '.github/workflows/generer-pages-seo.yml'
       - 'scripts/carte.template.html'
       - 'scripts/carte-est-sq.template.html'
+      - 'scripts/generer-carte-sq-complete.js'
       # /ptem/ et /amp/ sont écrites à la main, mais leurs copies étanches de l'univers
       # Montérégie-Est en sont dérivées : si on les modifie, les copies doivent suivre.
       - 'ptem/index.html'
@@ -113,13 +114,17 @@ jobs:
       - name: Fabriquer la carte complète et les trois cartes régionales
         run: node scripts/publier-regions.js
 
+      - name: Fabriquer la carte Santé Québec non répertoriée
+        # URL directe seulement. Hors sitemap et hors menus. Le gabarit Est n'est pas modifié.
+        run: node scripts/generer-carte-sq-complete.js
+
       - name: Vérifier les polices selon le périmètre visuel approuvé
         # 2 septembre 2026 : Kaushan Script reste autorisé sur les cartes historiques
         # (complète, Centre, Ouest) via carte.template.html. Elle est interdite sur le
         # prototype Santé Québec de l'Est, qui utilise Segoe UI exclusivement.
         run: |
           set -e
-          if grep -riIl "kaushan" scripts/carte-est-sq.template.html monteregie-est/index.html 2>/dev/null; then
+          if grep -riIl "kaushan" scripts/carte-est-sq.template.html monteregie-est/index.html carte-sante-quebec/index.html 2>/dev/null; then
             echo "::error::Police à lettres attachées détectée dans le thème Santé Québec de l'Est. Publication annulée."
             exit 1
           fi
@@ -129,6 +134,10 @@ jobs:
           fi
           if ! grep -q "Segoe UI" scripts/carte-est-sq.template.html; then
             echo "::error::« Segoe UI » est absente du gabarit SQ Est. Publication annulée."
+            exit 1
+          fi
+          if ! grep -q "Segoe UI" carte-sante-quebec/index.html; then
+            echo "::error::« Segoe UI » est absente de la carte Santé Québec non répertoriée. Publication annulée."
             exit 1
           fi
           echo "Vérification polices (Kaushan hors Est, Segoe UI présent) : ok."
@@ -191,7 +200,7 @@ jobs:
           set -e
           git config user.name  "Robot Trouve ta clinique"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json index.html cliniques rls sitemap.xml scripts/slugs.json scripts/lastmod.json monteregie monteregie-est monteregie-centre monteregie-ouest recherche guides llms.txt
+          git add data.json index.html cliniques rls sitemap.xml scripts/slugs.json scripts/lastmod.json monteregie monteregie-est monteregie-centre monteregie-ouest carte-sante-quebec recherche guides llms.txt
           if git diff --cached --quiet ; then
             echo "Les pages étaient déjà à jour : rien à publier."
             exit 0
