@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="stylesheet" href="/assets/seo-pages.css?v=97-contact-une-colonne">
+  <link rel="stylesheet" href="/assets/seo-pages.css?v=99-hero-lieu">
   <link rel="stylesheet" href="/assets/guides-cliniques.css?v=122-synonymes-audit">
   <script src="/assets/guides-recherche.js?v=122-synonymes-audit" defer></script>
   <script src="/assets/guides-cliniques.js?v=122-synonymes-audit" defer></script>
@@ -5710,6 +5710,80 @@
 </footer>
 
 <script>
+(function () {
+  var hero = document.querySelector('.hero-carrousel');
+  if (!hero) return;
+  var diapos = [].slice.call(hero.querySelectorAll('.hb-diapo'));
+  if (diapos.length < 2) return;
+  var credit = hero.querySelector('.hb-credit');
+  var prec = hero.querySelector('.hb-prec');
+  var suiv = hero.querySelector('.hb-suiv');
+  var commandes = hero.querySelector('.hb-commandes');
+  var points = [].slice.call(hero.querySelectorAll('.hb-point'));
+  var pause = hero.querySelector('.hb-pause');
+  var delai = parseInt(hero.getAttribute('data-delai'), 10) || 6000;
+  var reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var actif = 0, minuterie = null, enPause = reduit;
+  function afficher(n) {
+    actif = (n + diapos.length) % diapos.length;
+    diapos.forEach(function (img, i) {
+      var oui = i === actif;
+      img.classList.toggle('est-active', oui);
+      if (oui) { img.removeAttribute('aria-hidden'); } else { img.setAttribute('aria-hidden', 'true'); }
+    });
+    points.forEach(function (p, i) {
+      if (i === actif) { p.setAttribute('aria-current', 'true'); } else { p.removeAttribute('aria-current'); }
+    });
+    if (credit) {
+      /* Nom du lieu (facultatif) au-dessus de la ville. */
+      credit.textContent = '';
+      var lieu = diapos[actif].getAttribute('data-lieu');
+      if (lieu) {
+        var l = document.createElement('span');
+        l.className = 'hb-lieu';
+        l.textContent = lieu;
+        credit.appendChild(l);
+      }
+      credit.appendChild(document.createTextNode(diapos[actif].getAttribute('data-credit') || ''));
+    }
+  }
+  function arreter() { if (minuterie) { clearInterval(minuterie); minuterie = null; } }
+  function demarrer() {
+    arreter();
+    if (enPause || document.hidden) return;
+    minuterie = setInterval(function () { afficher(actif + 1); }, delai);
+  }
+  function aller(n) { afficher(n); demarrer(); }
+  function majPause() {
+    pause.setAttribute('aria-pressed', enPause ? 'true' : 'false');
+    pause.setAttribute('aria-label', enPause ? 'Reprendre le défilement des photos' : 'Mettre le défilement des photos en pause');
+    hero.classList.toggle('hb-en-pause', enPause);
+  }
+  prec.addEventListener('click', function () { aller(actif - 1); });
+  suiv.addEventListener('click', function () { aller(actif + 1); });
+  points.forEach(function (p, i) { p.addEventListener('click', function () { aller(i); }); });
+  pause.addEventListener('click', function () { enPause = !enPause; majPause(); demarrer(); });
+  hero.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { aller(actif - 1); } else if (e.key === 'ArrowRight') { aller(actif + 1); }
+  });
+  var x0 = null, y0 = null;
+  hero.addEventListener('touchstart', function (e) {
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive: true });
+  hero.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) aller(actif + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  document.addEventListener('visibilitychange', demarrer);
+  prec.hidden = false; suiv.hidden = false; commandes.hidden = false;
+  majPause();
+  afficher(0);
+  demarrer();
+})();
+</script>
+<script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {
     b.classList.remove('tapped');
@@ -5742,7 +5816,7 @@ document.querySelectorAll('.brand').forEach(function (b) {
 })();
 </script>
 <script src="/assets/theme.js" defer></script>
-<script src="/assets/recherche.js?v=97-contact-une-colonne" defer></script>
+<script src="/assets/recherche.js?v=99-hero-lieu" defer></script>
 <script>
 (function () {
   if (!('serviceWorker' in navigator)) return;
