@@ -213,6 +213,125 @@ const VIDEO_HERO_SCRIPT = `<script>
 })();
 </script>`;
 
+/* Héros de l'accueil : carrousel de photos (6 oct. 2026 ; deux photos, choix du propriétaire).
+   La première diapo est la photo d'origine : elle reste l'image principale (LCP), chargée en
+   priorité. Les suivantes arrivent en basse priorité. Sans JavaScript, seule la première est
+   visible et les commandes restent masquées. Défilement automatique toutes les HERO_DELAI_MS,
+   flèches sur les côtés de la photo, points, glissement du doigt, flèches du clavier et bouton
+   pause (aucun défilement automatique si le visiteur a demandé de réduire les animations).
+   pos / posCell : cadrage (object-position) à l'ordinateur et au cellulaire (620 px et moins). */
+const HERO_ACCUEIL_DIAPOS = [
+  { base: 'hero-monteregie', alt: 'Le fleuve Saint-Laurent bordant la Montérégie, vu du ciel',
+    credit: 'Verchères, Qc', pos: '46% 42%', posCell: '42% 47%' },
+  { base: 'hero-boucherville-stationnement', alt: "Le GMF-U des Montérégiennes à Boucherville et les arbres d'automne, vus du ciel",
+    credit: 'Boucherville, Qc', pos: '50% 58%', posCell: '63% 50%' }
+];
+const HERO_DELAI_MS = 6000;
+
+const CHEVRON_GAUCHE = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHEVRON_DROITE = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function htmlDiapoHero(d, i) {
+  const premiere = i === 0;
+  const priorite = premiere
+    ? ' fetchpriority="high"'
+    : ' loading="lazy" decoding="async" fetchpriority="low" aria-hidden="true"';
+  return `  <img class="hb-diapo${premiere ? ' est-active' : ''}" src="/assets/${d.base}-1600.jpg"
+       srcset="/assets/${d.base}-800.webp 800w,
+               /assets/${d.base}-1200.webp 1200w,
+               /assets/${d.base}-1600.webp 1600w,
+               /assets/${d.base}-2400.webp 2400w"
+       sizes="100vw"
+       alt="${esc(d.alt)}"
+       width="1600" height="900" style="--hb-pos:${d.pos};--hb-pos-cell:${d.posCell}"
+       data-credit="${esc(d.credit)}"${priorite}>`;
+}
+
+function htmlHeroAccueil() {
+  const diapos = HERO_ACCUEIL_DIAPOS;
+  const points = diapos.map((d, i) =>
+    `    <button type="button" class="hb-point" aria-label="Photo ${i + 1} sur ${diapos.length}"${i === 0 ? ' aria-current="true"' : ''}></button>`).join('\n');
+  return `<section class="hero-b hero-carrousel" aria-roledescription="carrousel" aria-label="Photos de la Montérégie" data-delai="${HERO_DELAI_MS}">
+${diapos.map(htmlDiapoHero).join('\n')}
+  <p class="eyebrow hb-sur">Médecine familiale</p>
+  <h1 class="hb-titre">
+    <span class="hg">Choisis ta pratique</span>
+    <span class="bd">Montérégie‑Est</span>
+  </h1>
+  <p class="hb-credit">${esc(diapos[0].credit)}</p>
+  <button type="button" class="hb-cote hb-prec" aria-label="Photo précédente" hidden>${CHEVRON_GAUCHE}</button>
+  <button type="button" class="hb-cote hb-suiv" aria-label="Photo suivante" hidden>${CHEVRON_DROITE}</button>
+  <div class="hb-commandes" hidden>
+${points}
+    <button type="button" class="hb-pause" aria-pressed="false" aria-label="Mettre le défilement des photos en pause"><span aria-hidden="true"></span></button>
+  </div>
+</section>`;
+}
+
+const HERO_CARROUSEL_SCRIPT = `<script>
+(function () {
+  var hero = document.querySelector('.hero-carrousel');
+  if (!hero) return;
+  var diapos = [].slice.call(hero.querySelectorAll('.hb-diapo'));
+  if (diapos.length < 2) return;
+  var credit = hero.querySelector('.hb-credit');
+  var prec = hero.querySelector('.hb-prec');
+  var suiv = hero.querySelector('.hb-suiv');
+  var commandes = hero.querySelector('.hb-commandes');
+  var points = [].slice.call(hero.querySelectorAll('.hb-point'));
+  var pause = hero.querySelector('.hb-pause');
+  var delai = parseInt(hero.getAttribute('data-delai'), 10) || 6000;
+  var reduit = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var actif = 0, minuterie = null, enPause = reduit;
+  function afficher(n) {
+    actif = (n + diapos.length) % diapos.length;
+    diapos.forEach(function (img, i) {
+      var oui = i === actif;
+      img.classList.toggle('est-active', oui);
+      if (oui) { img.removeAttribute('aria-hidden'); } else { img.setAttribute('aria-hidden', 'true'); }
+    });
+    points.forEach(function (p, i) {
+      if (i === actif) { p.setAttribute('aria-current', 'true'); } else { p.removeAttribute('aria-current'); }
+    });
+    if (credit) credit.textContent = diapos[actif].getAttribute('data-credit') || '';
+  }
+  function arreter() { if (minuterie) { clearInterval(minuterie); minuterie = null; } }
+  function demarrer() {
+    arreter();
+    if (enPause || document.hidden) return;
+    minuterie = setInterval(function () { afficher(actif + 1); }, delai);
+  }
+  function aller(n) { afficher(n); demarrer(); }
+  function majPause() {
+    pause.setAttribute('aria-pressed', enPause ? 'true' : 'false');
+    pause.setAttribute('aria-label', enPause ? 'Reprendre le défilement des photos' : 'Mettre le défilement des photos en pause');
+    hero.classList.toggle('hb-en-pause', enPause);
+  }
+  prec.addEventListener('click', function () { aller(actif - 1); });
+  suiv.addEventListener('click', function () { aller(actif + 1); });
+  points.forEach(function (p, i) { p.addEventListener('click', function () { aller(i); }); });
+  pause.addEventListener('click', function () { enPause = !enPause; majPause(); demarrer(); });
+  hero.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { aller(actif - 1); } else if (e.key === 'ArrowRight') { aller(actif + 1); }
+  });
+  var x0 = null, y0 = null;
+  hero.addEventListener('touchstart', function (e) {
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive: true });
+  hero.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) aller(actif + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  document.addEventListener('visibilitychange', demarrer);
+  prec.hidden = false; suiv.hidden = false; commandes.hidden = false;
+  majPause();
+  afficher(0);
+  demarrer();
+})();
+</script>`;
+
 /* Migration v52 : l'ancienne application générale enregistrait un service worker de portée
    « / ». La PWA étant désormais réservée à Montérégie-Est, toutes les pages de contenu retirent
    cette ancienne inscription si elle existe. La PWA Est, de portée /monteregie-est/, est
@@ -1085,7 +1204,7 @@ ${filDAriane ? `  <nav class="breadcrumbs" aria-label="Fil d’Ariane">${filDAri
 ${corps}
 </main>`}
 ${htmlFooterSite()}
-${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${corps.includes('video-hero') ? VIDEO_HERO_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
+${corps.includes('badge-verif') ? BADGE_VERIF_SCRIPT + '\n' : ''}${corps.includes('video-hero') ? VIDEO_HERO_SCRIPT + '\n' : ''}${corps.includes('hero-carrousel') ? HERO_CARROUSEL_SCRIPT + '\n' : ''}${BRAND_TAP_SCRIPT}
 ${NAV_TOGGLE_SCRIPT}
 ${THEME_SCRIPT}
 ${SEARCH_SCRIPT}
@@ -1860,22 +1979,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
     `    <a href="${href}">${esc(nom)} <span class="fl">→</span></a>`).join('\n');
 
   const corps = `
-<section class="hero-b">
-  <img src="/assets/hero-monteregie-1600.jpg"
-       srcset="/assets/hero-monteregie-800.webp 800w,
-               /assets/hero-monteregie-1200.webp 1200w,
-               /assets/hero-monteregie-1600.webp 1600w,
-               /assets/hero-monteregie-2400.webp 2400w"
-       sizes="100vw"
-       alt="Le fleuve Saint-Laurent bordant la Montérégie, vu du ciel"
-       width="1600" height="900" fetchpriority="high">
-  <p class="eyebrow hb-sur">Médecine familiale</p>
-  <h1 class="hb-titre">
-    <span class="hg">Choisis ta pratique</span>
-    <span class="bd">Montérégie‑Est</span>
-  </h1>
-  <p class="hb-credit">Verchères, Qc</p>
-</section>
+${htmlHeroAccueil()}
 
 <div class="wrap intro">
   <p class="hook"><span class="hook-stat"><strong>${totalGeneral} milieux de pratique répertoriés en Montérégie.</strong></span><span class="hook-stat">${totalEstRecrutement} recrutent activement en Montérégie-Est.</span></p>
@@ -4219,7 +4323,7 @@ function ecrire(relatif, contenu) {
   if (relatif.endsWith('.html')) {
     // Une page neuve doit charger la même version du CSS et de la recherche,
     // même si le navigateur conserve les fichiers de la publication précédente.
-    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=97-contact-une-colonne"');
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=98-hero-carrousel"');
   }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });
