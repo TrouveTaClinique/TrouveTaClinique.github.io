@@ -224,7 +224,7 @@ const HERO_ACCUEIL_DIAPOS = [
   { base: 'hero-monteregie', alt: 'Le fleuve Saint-Laurent bordant la Montérégie, vu du ciel',
     credit: 'Verchères, Qc', pos: '46% 42%', posCell: '42% 47%' },
   { base: 'hero-boucherville-stationnement', alt: "Le GMF-U des Montérégiennes à Boucherville et les arbres d'automne, vus du ciel",
-    credit: 'Boucherville, Qc', pos: '50% 58%', posCell: '63% 50%' }
+    lieu: 'GMF-U des Montérégiennes', credit: 'Boucherville, Qc', pos: '50% 58%', posCell: '63% 50%' }
 ];
 const HERO_DELAI_MS = 6000;
 
@@ -244,7 +244,7 @@ function htmlDiapoHero(d, i) {
        sizes="100vw"
        alt="${esc(d.alt)}"
        width="1600" height="900" style="--hb-pos:${d.pos};--hb-pos-cell:${d.posCell}"
-       data-credit="${esc(d.credit)}"${priorite}>`;
+       data-credit="${esc(d.credit)}"${d.lieu ? ` data-lieu="${esc(d.lieu)}"` : ''}${priorite}>`;
 }
 
 function htmlHeroAccueil() {
@@ -258,7 +258,7 @@ ${diapos.map(htmlDiapoHero).join('\n')}
     <span class="hg">Choisis ta pratique</span>
     <span class="bd">Montérégie‑Est</span>
   </h1>
-  <p class="hb-credit">${esc(diapos[0].credit)}</p>
+  <p class="hb-credit">${diapos[0].lieu ? `<span class="hb-lieu">${esc(diapos[0].lieu)}</span>` : ''}${esc(diapos[0].credit)}</p>
   <button type="button" class="hb-cote hb-prec" aria-label="Photo précédente" hidden>${CHEVRON_GAUCHE}</button>
   <button type="button" class="hb-cote hb-suiv" aria-label="Photo suivante" hidden>${CHEVRON_DROITE}</button>
   <div class="hb-commandes" hidden>
@@ -293,7 +293,18 @@ const HERO_CARROUSEL_SCRIPT = `<script>
     points.forEach(function (p, i) {
       if (i === actif) { p.setAttribute('aria-current', 'true'); } else { p.removeAttribute('aria-current'); }
     });
-    if (credit) credit.textContent = diapos[actif].getAttribute('data-credit') || '';
+    if (credit) {
+      /* Nom du lieu (facultatif) au-dessus de la ville. */
+      credit.textContent = '';
+      var lieu = diapos[actif].getAttribute('data-lieu');
+      if (lieu) {
+        var l = document.createElement('span');
+        l.className = 'hb-lieu';
+        l.textContent = lieu;
+        credit.appendChild(l);
+      }
+      credit.appendChild(document.createTextNode(diapos[actif].getAttribute('data-credit') || ''));
+    }
   }
   function arreter() { if (minuterie) { clearInterval(minuterie); minuterie = null; } }
   function demarrer() {
@@ -4323,7 +4334,7 @@ function ecrire(relatif, contenu) {
   if (relatif.endsWith('.html')) {
     // Une page neuve doit charger la même version du CSS et de la recherche,
     // même si le navigateur conserve les fichiers de la publication précédente.
-    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=98-hero-carrousel"');
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=99-hero-lieu"');
   }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });
