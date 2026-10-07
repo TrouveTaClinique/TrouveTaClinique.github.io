@@ -176,7 +176,7 @@ function appliquerIdentiteRegionale(source, t) {
     '      <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/sites/default/files/2025/06/besoins-etablissement_en-bref_2026v2_0.pdf" target="_blank" rel="noopener">\n' +
     '        <span class="info-menu-ic">⤓</span> Besoins en établissement 2026\n' +
     '      </a>\n' +
-    '      <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/sites/default/files/2025/11/amp-2025_maj-octobre-2025.pdf" target="_blank" rel="noopener">\n' +
+    '      <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/sites/default/files/2026/09/amp_maj-septembre-2026.pdf" target="_blank" rel="noopener">\n' +
     '        <span class="info-menu-ic">⤓</span> Activités médicales particulières (AMP)\n' +
     '      </a>',
     '      <hr>\n' + menuRls(t) + '\n' +
