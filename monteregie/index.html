@@ -2214,7 +2214,8 @@ L.control.zoom({ position:'topright' }).addTo(map);
 /* Crédits de la carte : deux versions, choisies par CREDITS_BLOC.
    - true  : bloc blanc du 22 sept. 2026 (Santé Québec, réalisation du projet, puis
              Leaflet | OpenStreetMap | CartoDB), légende alignée avec lui sur cellulaire.
-   - false : ancienne bande de crédits en bas, « © OpenStreetMap © CartoDB | © Olivier Laplante ».
+   - false : ancienne bande de crédits en bas, « © OpenStreetMap © CartoDB | © année · Trouve ta clinique »
+             (nom du propriétaire retiré des mentions de copyright le 8 oct. 2026, à sa demande).
    27 sept. 2026 : retour TEMPORAIRE à l'ancienne bande pour l'enregistrement d'une vidéo
    promotionnelle ; remettre true pour réactiver le bloc (voir CLAUDE.md). */
 const CREDITS_BLOC = false;
@@ -2237,7 +2238,7 @@ if (CREDITS_BLOC && map.attributionControl) {
   map.attributionControl.getContainer().classList.add('credits-carte');
   map.attributionControl.setPrefix(
     '<span class="credits-l1">© Santé Québec – CISSS de la Montérégie-Est</span>'
-    + '<span class="credits-l2">Projet réalisé par Olivier Laplante</span>'
+    + '<span class="credits-l2">Un projet Trouve ta clinique</span>'
     + (map.attributionControl.options.prefix || ''));
 }
 
@@ -2395,7 +2396,7 @@ map.on('locationerror', function () {
   // docs.carto.com/faqs/carto-basemaps) ne sert plus que de solution de secours pour les
   // navigateurs sans WebGL.
   var ATTR = CREDITS_BLOC ? '© OpenStreetMap © CartoDB'
-    : '© OpenStreetMap © CartoDB<span class="credit-perso"> | © Olivier Laplante</span>';
+    : '© OpenStreetMap © CartoDB<span class="credit-perso"> | © ' + new Date().getFullYear() + ' · Trouve ta clinique</span>';
   // Clé API CARTO (exigée depuis le 27 août 2026). Même clé pour les
   // styles vectoriels et pour le repli raster.
   var CARTO_KEY = 'cb1_29ok_1_b602e4a604176e32ebdf7824';

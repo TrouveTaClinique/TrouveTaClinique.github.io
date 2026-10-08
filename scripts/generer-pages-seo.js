@@ -175,7 +175,7 @@ function htmlFooterSite() {
   </div>
   <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
   <p class="avis avis-liens"><a href="/a-propos/">À propos</a> · <a href="/confidentialite/">Confidentialité</a></p>
-  <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© ${new Date().getFullYear()} Olivier Laplante · Trouve ta clinique</p>
+  <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© ${new Date().getFullYear()} · Trouve ta clinique</p>
 </footer>`;
 }
 
