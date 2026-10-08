@@ -12,7 +12,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { lister, RACINE, donneesPubliques } = require('./preparer-apercu.js');
+const { lister, RACINE, donneesPubliques, FICHIERS_DONNEES } = require('./preparer-apercu.js');
 
 const CNAME_PRODUCTION = 'trouvetaclinique.ca';
 const ORIGINE = 'https://trouvetaclinique.ca';
@@ -49,7 +49,7 @@ function preparerPagesProduction(racine, destination) {
   for (const fichier of fichiers) {
     const sortie = path.join(destination, fichier);
     fs.mkdirSync(path.dirname(sortie), { recursive: true });
-    if (fichier === 'data.json') {
+    if (FICHIERS_DONNEES.has(fichier)) {
       fs.writeFileSync(sortie, donneesPubliques(fs.readFileSync(path.join(racine, fichier), 'utf8')));
     } else {
       fs.copyFileSync(path.join(racine, fichier), sortie);

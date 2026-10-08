@@ -27,7 +27,7 @@
  *   3. Une CLINIQUE "visible: false" est ignorée dans les pages et le sitemap. Une fiche dont
  *      `categorie` vaut "etablissement" n'a pas de page SEO clinique. Les pages
  *      /monteregie-est/etablissements/ sont générées depuis data-etablissements.json.
- *   4. Les courriels de recrutement SONT publiés (voir PUBLIER_COURRIELS, décision du 2 sept. 2026).
+ *   4. Les courriels NE SONT PLUS publiés depuis le 8 oct. 2026 : « À venir » (masquer-courriels.js).
  *   5. On ne copie jamais le HTML de la fiche de l'application (#dp-body / exportFiche) : cette
  *      fiche contient des éléments propres à l'app (notes, boutons). Les pages ci-dessous sont
  *      construites à partir des DONNÉES, pas de l'affichage.
@@ -37,6 +37,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { masquerCourriels, PUBLIER_COURRIELS: COURRIELS_EN_LIGNE } = require('./masquer-courriels.js');
 
 const RACINE = path.join(__dirname, '..');
 const SITE = 'https://trouvetaclinique.ca';
@@ -423,8 +424,9 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')document.que
 
 /*
  * Publier ou non les courriels de recrutement sur les pages indexables et la carte.
- * Décision du 2 septembre 2026 : OUI. Les adresses fournies pour le recrutement sont
- * affichées sur les fiches (carte et pages SEO), conformément au formulaire public.
+ * Décision du 2 septembre 2026 : OUI. Depuis le 8 oct. 2026, les données sont filtrées par
+ * masquer-courriels.js (adresses remplacées par « À venir ») : ce drapeau ne fait plus
+ * qu'afficher la ligne « Contact recrutement », qui vaut donc « À venir ».
  */
 const PUBLIER_COURRIELS = true;
 
@@ -2487,7 +2489,7 @@ function descriptionEtablissementSeo(inst, typeLib, nSecteurs, contexte) {
 }
 
 function chargerDonneesEtablissements() {
-  return JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements.json'), 'utf8'));
+  return masquerCourriels(JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements.json'), 'utf8')));
 }
 
 function slugEtablissement(inst) {
@@ -3453,7 +3455,7 @@ const POINTS_AUTRES_MILIEUX_HRR = [
 ];
 
 function chargerDonneesEtablissementsCentre() {
-  return JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements-centre.json'), 'utf8'));
+  return masquerCourriels(JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements-centre.json'), 'utf8')));
 }
 
 /** Indexe les fiches SEO d'établissements par RLS (Est + Centre) pour le maillage des pages RLS. */
@@ -4764,7 +4766,7 @@ Ne pas utiliser ce site pour prendre rendez-vous comme patient : Rendez-vous san
 }
 
 function main() {
-  const donnees = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
+  const donnees = masquerCourriels(JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8')));
   const majDonnees = donnees.miseAJour || new Date().toISOString().slice(0, 10);
 
   /* Date du dernier changement de gabarit (texte/CSS des pages, indépendant des données de clinique).
@@ -5009,7 +5011,7 @@ function main() {
   console.log(`Sitemap            : ${entrees.length} URL`);
   console.log(`Redirections CF    : ${nRedirCf} (scripts/cloudflare-bulk-redirects.csv)`);
   console.log(`GMF-U canoniques   : ${Object.keys(HREF_GMFU_ETABLISSEMENT).length} fiches cliniques redirigées vers /etablissements/`);
-  console.log(`Courriels publiés  : ${PUBLIER_COURRIELS ? 'OUI (décision du 2 sept. 2026)' : 'non'}`);
+  console.log(`Courriels publiés  : ${COURRIELS_EN_LIGNE ? 'OUI' : 'non, remplacés par « À venir » (8 oct. 2026, masquer-courriels.js)'}`);
   if (nouveaux.length) {
     console.log(`\nNouveaux slugs attribués (${nouveaux.length}) — désormais figés :`);
     nouveaux.forEach(n => console.log(`  id ${n.id} → /cliniques/${n.slug}/   (${n.nom})`));
