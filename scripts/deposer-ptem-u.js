@@ -331,7 +331,7 @@ const PAGE_SOURCE = `<!DOCTYPE html>
 </ul>
 </section>
 </main>
-<footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Pour toute décision officielle liée au PTEM ou aux AMP, validez l’information auprès du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 Olivier Laplante · Trouve ta clinique</div></div></footer>
+<footer class="site-footer"><div class="site-footer__inner">Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Pour toute décision officielle liée au PTEM ou aux AMP, validez l’information auprès du DTMF ou des sources gouvernementales compétentes.<div class="site-footer__copyright">© 2026 · Trouve ta clinique</div></div></footer>
 <script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {
