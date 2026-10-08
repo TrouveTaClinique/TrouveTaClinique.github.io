@@ -23,7 +23,7 @@ const DOSSIERS = new Set([
 const FICHIERS = new Set([
   'index.html', '404.html', 'data.json', 'data-etablissements.json', 'data-etablissements-centre.json', 'leaflet.css', 'leaflet.js',
   'territoires-monteregie.js', 'territoires-rls-est.js', 'territoires-rls-centre-ouest.js',
-  'sw.js', 'manifest-est.webmanifest', 'manifest.json', 'LICENSE',
+  'sw.js', 'manifest-est.webmanifest', 'manifest.json',
   'apple-touch-icon-180.png', 'apple-touch-icon-est.png',
   'favicon-16.png', 'favicon-32.png', 'favicon-48.png',
   'icon-192.png', 'icon-512.png', 'icon-192-maskable.png', 'icon-512-maskable.png',

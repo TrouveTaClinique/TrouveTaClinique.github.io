@@ -130,13 +130,14 @@ dates du sitemap selon le contenu réel des pages).
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)
   et changer `VERSION_VIDEO`. La musique (Mixkit) ne doit jamais être publiée seule.
 - Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`), **`false`**
-  (bande « © OpenStreetMap © CartoDB | © année · Trouve ta clinique »). Le 1er oct. 2026, la collaboratrice
+  (bande « © OpenStreetMap © CartoDB | © Olivier Laplante »). Le 1er oct. 2026, la collaboratrice
   a demandé le retrait de son nom du projet (carte, site, vidéo) : ne plus le publier nulle part.
   `CREDITS_COLLAB` = `false` (encadré « Réalisé en collaboration avec » retiré) et `LEGENDE_RLS`
-  = `true` (légende des 3 RLS rétablie). Le 8 oct. 2026, le propriétaire a demandé le retrait de son nom des
-  mentions de copyright : pied de page « © année · Trouve ta clinique » (`generer-pages-seo.js` et
-  `scripts/sources/*.html`), bande des cartes « © OpenStreetMap © CartoDB | © année · Trouve ta clinique »,
-  bloc `CREDITS_BLOC` « Un projet Trouve ta clinique » (vérifié par `scripts/test-pages-info.cjs`). Après tout changement : `node scripts/publier-regions.js`.
+  = `true` (légende des 3 RLS rétablie). Le 8 oct. 2026, le propriétaire a demandé que son nom reste sur les
+  cartes seulement (bande ci-dessus et bloc `CREDITS_BLOC`) et disparaisse du reste du site : pied de
+  page « © année · Trouve ta clinique » (`generer-pages-seo.js`, `scripts/sources/*.html`), `LICENSE`
+  gardé dans le dépôt mais plus publié, données structurées de l'accueil sans fondateur nommé
+  (vérifié par `scripts/test-pages-info.cjs`). Après tout changement : `node scripts/publier-regions.js`.
 
 ## Notes internes des cliniques (garde-fou du 26 septembre 2026)
 

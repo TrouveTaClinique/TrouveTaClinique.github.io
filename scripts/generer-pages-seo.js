@@ -1964,8 +1964,7 @@ function pageAccueil(toutesEntrees, majDonnees) {
         '@id': `${url}#organisation`,
         name: 'Trouve ta clinique',
         url,
-        logo: `${SITE}/icon-512.png`,
-        founder: { '@id': `${url}#auteur` }
+        logo: `${SITE}/icon-512.png`
       },
       {
         '@type': 'WebSite', '@id': `${url}#website`, name: 'Trouve ta clinique', url,
@@ -1977,8 +1976,6 @@ function pageAccueil(toutesEntrees, majDonnees) {
           'query-input': 'required name=search_term_string'
         }
       },
-      { '@type': 'Person', '@id': `${url}#auteur`, name: 'Olivier Laplante',
-        jobTitle: 'Résident en médecine familiale', url },
       { '@type': 'WebPage', '@id': `${url}#accueil`, url, name: titre, description,
         isPartOf: { '@id': `${url}#website` },
         about: { '@type': 'Place', name: 'Montérégie, Québec' },

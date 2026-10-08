@@ -41,18 +41,16 @@ test('Pied de page commun : liens vers À propos et Confidentialité', () => {
   }
 });
 
-test('Mentions de copyright : « © année · Trouve ta clinique », sans le nom du propriétaire (8 oct. 2026)', () => {
+test('Nom du propriétaire : sur les cartes seulement, nulle part ailleurs sur le site (8 oct. 2026)', () => {
   const { lister } = require('./preparer-apercu.js');
-  const fautifs = [];
-  for (const p of lister(racine)) {
-    if (!/\.(html|js|json|xml|txt|webmanifest)$/.test(p)) continue;
-    if (/©[^<\n'"]{0,25}Laplante|réalisé par Olivier Laplante/i.test(lire(p))) fautifs.push(p);
-  }
+  const CARTES = new Set(['monteregie-est/index.html', 'monteregie/index.html']);
+  const publies = lister(racine);
+  assert.ok(!publies.includes('LICENSE'), 'LICENSE reste dans le dépôt, pas sur le site');
+  const fautifs = publies.filter(p => /\.(html|js|json|xml|txt|webmanifest)$/.test(p) && !CARTES.has(p) &&
+    /Olivier Laplante/.test(lire(p)));
   assert.deepEqual(fautifs, []);
   for (const p of ['index.html', 'monteregie-est/ptem/index.html', 'guides/index.html']) {
     assert.match(lire(p), /© \d{4} · Trouve ta clinique/, p);
   }
-  for (const p of ['monteregie-est/index.html', 'monteregie/index.html']) {
-    assert.match(lire(p), /credit-perso"> \| © ' \+ new Date\(\)\.getFullYear\(\) \+ ' · Trouve ta clinique/, p);
-  }
+  for (const p of CARTES) assert.match(lire(p), /credit-perso"> \| © Olivier Laplante/, p);
 });
