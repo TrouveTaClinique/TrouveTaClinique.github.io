@@ -16,6 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { masquerCourriels } = require('./masquer-courriels.js');
 
 const RACINE = path.join(__dirname, '..');
 const SOURCE = path.join(__dirname, 'carte.template.html');
@@ -334,7 +335,7 @@ function coordsValides(g) {
 }
 
 function chargerJson(relatif) {
-  return JSON.parse(fs.readFileSync(path.join(RACINE, relatif), 'utf8'));
+  return masquerCourriels(JSON.parse(fs.readFileSync(path.join(RACINE, relatif), 'utf8')));
 }
 
 function chargerSlugsCliniques() {

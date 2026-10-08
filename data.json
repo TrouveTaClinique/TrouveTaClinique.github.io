@@ -3,7 +3,7 @@
   "annonce": {
     "titre": "GMF-U des Montérégiennes",
     "texte": "**PORTES OUVERTES**\n**Jeudi 1er octobre 2026, de 18 h à 20 h**\n20-N, boulevard de Mortagne, Boucherville",
-    "lien": "mailto:gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca?subject=Inscription%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20du%20jeudi%201er%20octobre%202026&body=Bonjour%2C%0A%0AJe%20souhaite%20m%E2%80%99inscrire%20%C3%A0%20%3A%20Soir%C3%A9e%20portes%20ouvertes%20(GMF-U%20des%20Mont%C3%A9r%C3%A9giennes).%0A%0ANom%20%3A%20%0AAnn%C3%A9e%20de%20r%C3%A9sidence%20et%20programme%20%3A%20%0ACourriel%20ou%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%20!",
+    "lien": "",
     "lienCarte": "https://www.google.com/maps/dir/?api=1&destination=20-N%2C%20boulevard%20de%20Mortagne%2C%20Boucherville%20(Qu%C3%A9bec)%20J4B%205K6",
     "dateFin": "2026-10-01",
     "region": "Est"
@@ -133,7 +133,7 @@
       "lat": 45.63115,
       "lng": -73.38804,
       "site": "http://www.gmfdupetitbois.ca/",
-      "personneRessource": "info@cliniquelareleve.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Stéphanie Gervais",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -187,7 +187,7 @@
       "lat": 45.522551,
       "lng": -73.512763,
       "site": "https://cliniquecamu.ca/",
-      "personneRessource": "badr.jouwad.gmf16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Hadj Omar",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -237,7 +237,7 @@
       "lat": 45.53628,
       "lng": -73.45844,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-simonne-monet-chartrand",
-      "personneRessource": "angela.leach.orts.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Angela Leach Orts",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -291,7 +291,7 @@
       "lat": 45.527516,
       "lng": -73.483193,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-longueuil-ouest",
-      "personneRessource": "angela.leach.orts.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Angela Leach Orts",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -344,7 +344,7 @@
       "lat": 45.65728,
       "lng": -73.423218,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=33194",
-      "personneRessource": "annie.chagnon.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Annie Chagnon",
       "dme": "À compléter",
       "horaire": {
@@ -396,7 +396,7 @@
       "lat": 45.540442,
       "lng": -73.456062,
       "site": "https://macliniquepierreboucher.ca/",
-      "personneRessource": "andre.bernikoff.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dr André Berdnikoff",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -449,7 +449,7 @@
       "lat": 45.568534,
       "lng": -73.447808,
       "site": "https://www.santemonteregie.qc.ca/installations/gmf-u-des-monteregiennes",
-      "personneRessource": "elise.ocarroll.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Elise O’Carroll",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -494,7 +494,7 @@
         "texte": "L’équipe du GMF-U des Montérégiennes invite les résidents à venir découvrir son milieu clinique et à discuter avec l’équipe.",
         "lieu": "20-N, boulevard de Mortagne, Boucherville (Québec) J4B 5K6",
         "telephone": "450 468-5511",
-        "courriel": "gmfu.monteregiennes.cisssme16@ssss.gouv.qc.ca"
+        "courriel": ""
       },
       "region": "Est",
       "infos": "",
@@ -513,7 +513,7 @@
       "lat": 45.61173,
       "lng": -73.451706,
       "site": "https://www.gmfip.ca/",
-      "personneRessource": "lucie.brault.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Lucie Brault",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -565,7 +565,7 @@
       "lat": 45.68248,
       "lng": -73.43608,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=800180",
-      "personneRessource": "ignace.adah.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dr Ignace Adah",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -615,7 +615,7 @@
       "lat": 45.578188,
       "lng": -73.344655,
       "site": "https://gmfmd.ca",
-      "personneRessource": "mathilde.bourdua.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Mathilde Bourdua",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -668,7 +668,7 @@
       "lat": 45.58474,
       "lng": -73.32714,
       "site": "https://www.cliniquemedicalesaintejulie.ca/fr/",
-      "personneRessource": "gmfsainte-julie@outlook.com",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Kim Lévesque",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -720,7 +720,7 @@
       "lat": 45.590953,
       "lng": -73.199961,
       "site": "",
-      "personneRessource": "Claire.wadoux.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Claire Wadoux",
       "dme": "",
       "horaire": {
@@ -773,7 +773,7 @@
       "lat": 45.636887,
       "lng": -72.959969,
       "site": "",
-      "personneRessource": "julie.gagnon.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Julie Gagnon",
       "dme": "",
       "horaire": {
@@ -826,7 +826,7 @@
       "lat": 45.637442,
       "lng": -72.959092,
       "site": "",
-      "personneRessource": "philippe.imbeault.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dr Philippe Imbeault",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -878,7 +878,7 @@
       "lat": 45.646528,
       "lng": -72.953404,
       "site": "https://gmfmaska.com",
-      "personneRessource": "lena.wognin.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Lena Wognin",
       "dme": "Ofys",
       "horaire": {
@@ -930,7 +930,7 @@
       "lat": 45.784229,
       "lng": -73.160552,
       "site": "https://www.horizonclinique.com",
-      "personneRessource": "julie.lafrenaye.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Julie Lafrenaye",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -983,7 +983,7 @@
       "lat": 45.588271,
       "lng": -73.283206,
       "site": "",
-      "personneRessource": "elizabeth.dougherty.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Elizabeth Dougherty",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -1035,7 +1035,7 @@
       "lat": 45.563983,
       "lng": -73.205364,
       "site": "https://www.carrefourmedical.com/",
-      "personneRessource": "michel.beaudoin.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dr Michel Beaudoin",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -1087,7 +1087,7 @@
       "lat": 45.524871,
       "lng": -73.302459,
       "site": "https://centremedicalsaintbasile.org",
-      "personneRessource": "pierre-olivier.barrette.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Eliane Lemire",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -1139,7 +1139,7 @@
       "lat": 45.634383,
       "lng": -72.963842,
       "site": "https://gmflaframboise.ca",
-      "personneRessource": "josee-maude.lambert.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Josée-Maude Lambert",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -1191,7 +1191,7 @@
       "lat": 45.526285,
       "lng": -73.343315,
       "site": "https://cliniquemedicalelesentier.com",
-      "personneRessource": "sarah.bedard.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Sarah Bédard",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -1243,7 +1243,7 @@
       "lat": 45.644863,
       "lng": -72.570897,
       "site": "https://coopsanteacton.ca",
-      "personneRessource": "marilou.desmarais-noiseux.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Marilou Desmarais-Noiseaux",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -1295,7 +1295,7 @@
       "lat": 46.045153,
       "lng": -73.093733,
       "site": "",
-      "personneRessource": "mathieu.galfard.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dr Mathieu Galfard",
       "dme": "",
       "horaire": {
@@ -1402,7 +1402,7 @@
       "lat": 46.039998,
       "lng": -73.124233,
       "site": "https://gmfrichelieu.com",
-      "personneRessource": "claudia.morneau.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Claudia Morneau",
       "dme": "Medesync (Telus)",
       "horaire": {
@@ -1458,7 +1458,7 @@
       "lat": 45.547229,
       "lng": -73.502286,
       "site": "https://lautremaison.ca",
-      "personneRessource": "mariam-edith.colbert.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "responsableNom": "Dre Mariam Colbert",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
@@ -2330,7 +2330,7 @@
       "lat": 45.30398,
       "lng": -73.237494,
       "site": "https://www.cmiberville.com/",
-      "personneRessource": "camille.latreille.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 17h00",
@@ -2384,7 +2384,7 @@
       "lat": 45.34011,
       "lng": -73.283997,
       "site": "https://enseignement-mc.ca/enseignement-et-recherche/les-gmf-u-groupes-de-medecine-familiale-universitaire/gmf-u-saint-jean-sur-richelieu/",
-      "personneRessource": "joannie.ponton.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
@@ -2444,7 +2444,7 @@
       "lat": 45.362116,
       "lng": -73.306479,
       "site": "https://www.cliniquemedicaleducoteau.ca/",
-      "personneRessource": "roxannegosselin1@gmail.com",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 21h00",
@@ -2497,7 +2497,7 @@
       "lat": 45.31035,
       "lng": -73.264862,
       "site": "https://www.medisoleil.com/",
-      "personneRessource": "noemie.lacroix-faucher@usherbrooke.ca alexandre.prudhomme.delage@gmail.com",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {},
       "personnel": {
@@ -2546,7 +2546,7 @@
       "lat": 45.443408,
       "lng": -73.302981,
       "site": "https://www.lacliniquefortchambly.com/",
-      "personneRessource": "veronique.montpetit@outlook.com",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 20h45",
@@ -2602,7 +2602,7 @@
       "lat": 45.318722,
       "lng": -73.264207,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=34989",
-      "personneRessource": "julie.robitaille.med@ssss.gouv.qc.ca catherine.gohier.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
@@ -2652,7 +2652,7 @@
       "lat": 45.432177,
       "lng": -73.161912,
       "site": "https://cliniquemarieville.com/",
-      "personneRessource": "sacha.lajoie.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
@@ -2709,7 +2709,7 @@
       "lat": 45.436544,
       "lng": -73.24467,
       "site": "",
-      "personneRessource": "isabelle.raymond.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h00 – 20h45",
@@ -2766,7 +2766,7 @@
       "lat": 45.408375,
       "lng": -73.002202,
       "site": "",
-      "personneRessource": "isabelle.raymond.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h00 – 16h00",
@@ -2797,7 +2797,7 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "Téléphone : 450 469-0269. Recrutement : Dre Isabelle Raymond, 450 684-1989, isabelle.raymond.med@ssss.gouv.qc.ca. Infirmière GMF 4 jours/semaine.",
+      "infos": "Téléphone : 450 469-0269. Recrutement : Dre Isabelle Raymond, 450 684-1989, À venir. Infirmière GMF 4 jours/semaine.",
       "gardeUrgence": "",
       "gardeAutre": "",
       "presentation": "Point de service du GMF Richelieu – Saint-Césaire, rattaché au CLSC. Trois médecins sur place. Aucun frais de bureau.",
@@ -2816,7 +2816,7 @@
       "lat": 45.409078,
       "lng": -73.002991,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=116297",
-      "personneRessource": "isabelle.raymond.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h00 – 17h00",
@@ -2848,7 +2848,7 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "Téléphone de la clinique : 450 469-0505. Contact sur place : Dr Nicolas Bouchard, 438 393-7363. Recrutement du GMF : Dre Isabelle Raymond, isabelle.raymond.med@ssss.gouv.qc.ca. Frais : montant fixe.",
+      "infos": "Téléphone de la clinique : 450 469-0505. Contact sur place : Dr Nicolas Bouchard, 438 393-7363. Recrutement du GMF : Dre Isabelle Raymond, À venir. Frais : montant fixe.",
       "gardeUrgence": "",
       "gardeAutre": "",
       "presentation": "Troisième site du GMF Richelieu – Saint-Césaire. Trois médecins. Infirmière GMF un matin par semaine. Néphrologue et chirurgien une fois par mois.",
@@ -2867,7 +2867,7 @@
       "lat": 45.277937,
       "lng": -73.256719,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=47617",
-      "personneRessource": "ferdais.hudon@sympatico.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h00 – 20h30",
@@ -2921,7 +2921,7 @@
       "lat": 45.352316,
       "lng": -73.293606,
       "site": "https://cliniquestluc.com/",
-      "personneRessource": "stephane.bastarache.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h30 – 17h00",
@@ -2971,7 +2971,7 @@
       "alias": "Henryville CLSC Vallée-des-Forts VDF",
       "visible": true,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-henryville",
-      "personneRessource": "emilie.gemme.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "9h00 – 12h00 / 13h00 – 17h00",
@@ -3003,7 +3003,7 @@
       "niveau": "",
       "porteOuverte": "",
       "region": "Centre",
-      "infos": "Téléphone : 450 299-2828. Recrutement : Dre Emilie Gemme, emilie.gemme.med@ssss.gouv.qc.ca. Un bureau partagé est indiqué comme disponible.",
+      "infos": "Téléphone : 450 299-2828. Recrutement : Dre Emilie Gemme, À venir. Un bureau partagé est indiqué comme disponible.",
       "gardeUrgence": "",
       "gardeAutre": "",
       "presentation": "Cinq médecins. Possibilité de soins à domicile. Aucun frais de bureau.",
@@ -3022,7 +3022,7 @@
       "alias": "Coop santé Lac Champlain Venise-en-Québec Venise",
       "visible": true,
       "site": "https://coopsantelacchamplain.ca/",
-      "personneRessource": "stephanie.demers.med1@ssss.gouv.qc.ca marie-claude.duchesneau.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "8h00 – 16h30",
@@ -3077,7 +3077,7 @@
       "alias": "Coop Saint-Blaise St-Blaise santé",
       "visible": true,
       "site": "https://coopsantesaintblaise.com/",
-      "personneRessource": "josef.e.moser.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Medesync (Telus)",
       "horaire": {
         "Lundi": "8h00 – 12h00 / 13h00 – 16h00",
@@ -3370,7 +3370,7 @@
       "lat": 45.47632,
       "lng": -74.30447,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=36497",
-      "personneRessource": "gmfrigaud@hotmail.com",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "",
@@ -3422,7 +3422,7 @@
       "lat": 45.4758451,
       "lng": -74.2995497,
       "site": "https://sante.gouv.qc.ca/repertoire-ressources/ressource/?nofiche=1267",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -3468,7 +3468,7 @@
       "lat": 45.45868,
       "lng": -74.14127,
       "site": "https://sante.gouv.qc.ca/en/repertoire-ressources/ressource/?nofiche=50729",
-      "personneRessource": "gabrielle.gregoire.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "9h00 – 18h00",
@@ -3514,7 +3514,7 @@
       "lat": 45.3999252,
       "lng": -74.1352233,
       "site": "https://www.santesteangelique.ca/",
-      "personneRessource": "Marie-eve.chicoine.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h00 – 18h30",
@@ -3567,7 +3567,7 @@
       "lat": 45.3942417,
       "lng": -74.0539194,
       "site": "https://www.santemonteregie.qc.ca/installations/centre-multiservices-de-sante-et-de-services-sociaux-de-vaudreuil-dorion",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -3609,7 +3609,7 @@
       "lat": 45.3942417,
       "lng": -74.0539194,
       "site": "https://www.mcgill.ca/familymed/fr/formation/sites-denseignement/umf/gmf-u-de-vaudreuil-soulanges",
-      "personneRessource": "alexandra.massicotte.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "",
@@ -3657,7 +3657,7 @@
       "lat": 45.37701,
       "lng": -74.02291,
       "site": "https://polycliniquemedicalevaudreuil.com/en/medical-clinic-gmf-vaudreuil-dorion/",
-      "personneRessource": "Francine.tremblay.gmf16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "8h00 – 20h00",
@@ -3704,7 +3704,7 @@
       "lat": 45.3811,
       "lng": -73.99262,
       "site": "https://gmfpincourt.com/",
-      "personneRessource": "simona-iuliana.dospinescu.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "8h00 – 21h00",
@@ -3750,7 +3750,7 @@
       "lat": 45.40293,
       "lng": -74.03721,
       "site": "https://gmfdestroislacs.ca/",
-      "personneRessource": "sophie.maurice.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "8h00 – 20h00",
@@ -3800,7 +3800,7 @@
       "lat": 45.2917019,
       "lng": -74.1755368,
       "site": "https://www.santemonteregie.qc.ca/installations/chsld-et-clsc-de-coteau-du-lac",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -3842,7 +3842,7 @@
       "lat": 45.3002496,
       "lng": -74.2989667,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-et-groupe-de-medecine-de-famille-universitaire-de-saint-polycarpe",
-      "personneRessource": "Doan-trang-lam.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Myle (Medfar Solutions)",
       "horaire": {
         "Lundi": "",
@@ -3888,7 +3888,7 @@
       "lat": 45.26616,
       "lng": -74.12666,
       "site": "https://www.havresante.com/",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "8h00 – 17h00",
@@ -3938,7 +3938,7 @@
       "lat": 45.24261,
       "lng": -74.1257,
       "site": "https://medival.ca/",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "8h00 – 18h00",
@@ -3988,7 +3988,7 @@
       "lat": 45.234626,
       "lng": -74.1198936,
       "site": "https://cmbatisseurs.com/",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Medfar",
       "horaire": {
         "Lundi": "8h00 – 21h00",
@@ -4038,7 +4038,7 @@
       "lat": 45.31349,
       "lng": -73.87598,
       "site": "https://beauharnoisensante.com/",
-      "personneRessource": "beauharnoisensante@hotmail.com",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "8h00 – 12h00 / 13h00 – 16h00",
@@ -4085,7 +4085,7 @@
       "lat": 45.26469,
       "lng": -74.13015,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-salaberry-de-valleyfield",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -4127,7 +4127,7 @@
       "lat": 45.31451,
       "lng": -73.87746,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-beauharnois",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -4169,7 +4169,7 @@
       "lat": 45.094037,
       "lng": -74.177756,
       "site": "https://complexedesantehuntingdon.ca/fr/centre-medical-huntingdon/",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Ofys",
       "horaire": {
         "Lundi": "8h30 – 18h00",
@@ -4216,7 +4216,7 @@
       "lat": 45.1188659,
       "lng": -73.9869003,
       "site": "https://ormstownmedicalclinic.com/",
-      "personneRessource": "admin@cliniquemedicaleormstown.ca",
+      "personneRessource": "À venir",
       "dme": "Ofys",
       "horaire": {
         "Lundi": "8h00 – 18h00",
@@ -4265,7 +4265,7 @@
       "lat": 45.0888197,
       "lng": -74.1735774,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-huntingdon-huntingdon-clsc",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -4307,7 +4307,7 @@
       "lat": 45.10563,
       "lng": -73.76236,
       "site": "https://www.santemonteregie.qc.ca/installations/clsc-de-saint-chrysostome",
-      "personneRessource": "recrutement_omnis.cisssmo16@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "",
       "horaire": {
         "Lundi": "",
@@ -6555,7 +6555,7 @@
       "lat": 46.046109,
       "lng": -73.097161,
       "site": "https://cliniquemedicalesorel-tracy.ca",
-      "personneRessource": "emilie.boisvert.med@ssss.gouv.qc.ca",
+      "personneRessource": "À venir",
       "dme": "Omnimed",
       "horaire": {
         "Lundi": "8h30 – 16h30",

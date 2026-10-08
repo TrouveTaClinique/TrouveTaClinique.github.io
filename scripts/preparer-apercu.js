@@ -5,6 +5,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
+const { masquerCourriels } = require('./masquer-courriels.js');
 
 const RACINE = path.resolve(__dirname, '..');
 const DEPOT_SOURCE = 'TrouveTaClinique/TrouveTaClinique.github.io';
@@ -126,10 +127,13 @@ async function verifierPagesEnLigne() {
 /* data.json publié : le champ « notes » des cliniques reste privé (notes de travail). Il est
    retiré de la copie publique ; la carte ne s'en sert pas. Même traitement pour la production. */
 const CHAMPS_PRIVES_CLINIQUES = ['notes'];
+/* Fichiers de données lus par les cartes : notes retirées et courriels masqués (8 oct. 2026,
+   voir masquer-courriels.js). Même traitement pour la production. */
+const FICHIERS_DONNEES = new Set(['data.json', 'data-etablissements.json', 'data-etablissements-centre.json']);
 function donneesPubliques(texte) {
   const donnees = JSON.parse(texte);
   for (const c of donnees.cliniques || []) for (const champ of CHAMPS_PRIVES_CLINIQUES) delete c[champ];
-  return JSON.stringify(donnees, null, 2) + '\n';
+  return JSON.stringify(masquerCourriels(donnees), null, 2) + '\n';
 }
 
 function preparerApercu(racine, destination, options = {}) {
@@ -157,7 +161,7 @@ function preparerApercu(racine, destination, options = {}) {
         manifeste.short_name = 'PTEM 2027';
         texte = JSON.stringify(manifeste, null, 2) + '\n';
       }
-      if (fichier === 'data.json') texte = donneesPubliques(texte);
+      if (FICHIERS_DONNEES.has(fichier)) texte = donneesPubliques(texte);
       if (fichier === 'sw.js') texte = texte.replace("'trouve-clinique-est-'", "'trouve-clinique-est-brouillon-'");
       contenu = Buffer.from(texte);
     }
@@ -192,6 +196,7 @@ function preparerApercu(racine, destination, options = {}) {
 module.exports = {
   preparerApercu,
   donneesPubliques,
+  FICHIERS_DONNEES,
   CHAMPS_PRIVES_CLINIQUES,
   adapterHtml,
   verifierConfigurationPages,

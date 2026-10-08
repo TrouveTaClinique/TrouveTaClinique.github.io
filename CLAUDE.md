@@ -117,7 +117,12 @@ dates du sitemap selon le contenu réel des pages).
 - Deux PWA indépendantes : `/monteregie-est/` (`sw.js` à la racine) et l'app « Guides »
   (`guides/sw.js`, portée `/guides/`, `guides/manifest.webmanifest`). Augmenter la version du
   cache (`CACHE`) du service worker concerné quand une ressource mise en cache change.
-- Les courriels de recrutement sont publiés volontairement (`PUBLIER_COURRIELS = true`).
+- Courriels retirés du site le 8 oct. 2026, « jusqu'à nouvel ordre » (une médecin a demandé le retrait
+  de son courriel personnel) : `scripts/masquer-courriels.js` (`PUBLIER_COURRIELS = false`) remplace
+  chaque adresse par « À venir » à la génération des pages et dans les JSON publiés (`donneesPubliques`),
+  même si l'export du classeur en remet dans `data.json`. Seule exception : `contact@trouvetaclinique.ca`.
+  Vérifié par `scripts/test-courriels-masques.cjs` (aucun autre courriel dans les fichiers publiés,
+  catalogue de guides compris). Ne rien republier sans l'accord explicite du propriétaire.
 - Vidéo promotionnelle : page `/monteregie-est/video/` (générée par `pageVideoEst()`, indexée, dans le sitemap
   et la recherche du site, données structurées VideoObject) ; le fichier `monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4` et son `affiche.jpg`
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)
