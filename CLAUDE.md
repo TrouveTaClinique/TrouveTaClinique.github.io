@@ -122,7 +122,9 @@ dates du sitemap selon le contenu réel des pages).
   chaque adresse par « À venir » à la génération des pages et dans les JSON publiés (`donneesPubliques`),
   même si l'export du classeur en remet dans `data.json`. Seule exception : `contact@trouvetaclinique.ca`.
   Vérifié par `scripts/test-courriels-masques.cjs` (aucun autre courriel dans les fichiers publiés,
-  catalogue de guides compris). Ne rien republier sans l'accord explicite du propriétaire.
+  catalogue de guides compris). L'export du classeur (`PTEM2027_v2.gs` v4-2026-10-08,
+  `publierCourriels: false`) écrit aussi « À venir » : la copie du classeur doit être cette version.
+  Ne rien republier sans l'accord explicite du propriétaire.
 - Vidéo promotionnelle : page `/monteregie-est/video/` (générée par `pageVideoEst()`, indexée, dans le sitemap
   et la recherche du site, données structurées VideoObject) ; le fichier `monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4` et son `affiche.jpg`
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)

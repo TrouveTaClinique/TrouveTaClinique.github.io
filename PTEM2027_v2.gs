@@ -23,10 +23,18 @@
  * publics) ; numéro de version v3-2026-09-26, visible dans le menu, pour reconnaître d'un coup d'œil
  * une ancienne copie du script (qui remettrait les notes dans l'export). Le formulaire et ses
  * réponses ne sont pas touchés : le script les lit dans le classeur, comme avant.
+ *
+ * Correctifs du 8 octobre 2026 : courriels retirés du site « jusqu'à nouvel ordre » (une médecin a
+ * demandé le retrait de son courriel personnel). L'export remplace chaque adresse par « À venir »
+ * (masquerCourrielsExport_, mêmes règles que scripts/masquer-courriels.js du dépôt) ; le classeur
+ * garde les vraies adresses. Numéro de version v4-2026-10-08 : une copie plus ancienne du script
+ * remettrait les courriels dans data.json, donc dans le dépôt public.
  */
 
 var PTEM2 = {
-  version: 'v3-2026-09-26',
+  version: 'v4-2026-10-08',
+  // Courriels retirés du site le 8 oct. 2026, jusqu'à nouvel ordre. true pour les republier.
+  publierCourriels: false,
   titreClasseur: 'PTEM 2027 — Base maître des cliniques de la Montérégie',
   sourceDataJson: 'https://raw.githubusercontent.com/TrouveTaClinique/TrouveTaClinique.github.io/main/data.json',
   propVersion: 'PTEM2027_V2_VERSION',
@@ -1244,7 +1252,8 @@ function versCarte_(r, gabaritPersonnel) {
     lat: (r.latitude === '' || r.latitude === null) ? null : Number(r.latitude),
     lng: (r.longitude === '' || r.longitude === null) ? null : Number(r.longitude),
     site: txt_(r.q12_website),
-    // Courriel de recrutement : publié volontairement sur le site (décision du 2 sept. 2026).
+    // Courriel de recrutement : remplacé par « À venir » à l'export depuis le 8 oct. 2026
+    // (masquerCourrielsExport_, dans genererDataJson_). Le classeur garde l'adresse.
     personneRessource: txt_(r.q19_recruit_email),
     dme: r.q26_emrs ? chercher_(inverser_(DME), r.q26_emrs, String(r.q26_emrs)) : '',
     horaire: vide ? {} : horaire,
@@ -1518,6 +1527,8 @@ function genererDataJson_(ss) {
     throw new Error('Export refusé : le data.json de référence ne contient pas le tableau hopitaux. '
       + 'Corrigez la référence avant de préparer un export.');
   }
+  var courriels = {n: 0};
+  sortie = masquerCourrielsExport_(sortie, '', courriels);
   var json = JSON.stringify(sortie, null, 2);
   var court = fiches.length + ' fiches prêtes. Rien n’a été publié.';
   var rapport = [
@@ -1526,12 +1537,47 @@ function genererDataJson_(ss) {
     'Hôpitaux conservés : ' + sortie.hopitaux.length,
     'Caractères : ' + json.length,
     'Tous les garde-fous sont passés.',
+    PTEM2.publierCourriels ? 'Courriels publiés.' :
+      'Courriels remplacés par « À venir » (retirés du site jusqu’à nouvel ordre) : ' + courriels.n,
     exclues.length ? 'ABSENTES de data.json (Non publiée) : ' + exclues.join(', ') : 'Aucune fiche retirée.',
     masquees.length ? 'MASQUÉES sur la carte (visible = false) : ' + masquees.join(', ') : 'Aucune fiche masquée.',
     avis.length ? 'À VÉRIFIER :\n  - ' + avis.join('\n  - ') : 'Aucun avertissement.',
     'AUCUNE PUBLICATION : copiez le contenu de A5 dans data.json du dépôt vous-même.'
   ].join('\n');
   return {json:json, rapport:rapport, court:court, fiches:fiches};
+}
+
+/* Courriels retirés du site le 8 oct. 2026, « jusqu'à nouvel ordre ». Le dépôt et data.json sont
+   publics : chaque adresse devient « À venir », avec les règles de scripts/masquer-courriels.js :
+   personneRessource → « À venir » ; champ finissant par « courriel » → vide ; lien mailto: → vide ;
+   autre texte → l'adresse seule est remplacée. L'adresse du site n'est jamais touchée. */
+var RE_COURRIEL_ = /(?:mailto:)?[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+var COURRIELS_PERMIS_ = ['contact@trouvetaclinique.ca'];
+
+function courrielPermis_(m) {
+  return COURRIELS_PERMIS_.indexOf(String(m).replace(/^mailto:/i, '').toLowerCase()) !== -1;
+}
+
+function masquerCourrielsExport_(valeur, cle, compteur) {
+  if (PTEM2.publierCourriels) return valeur;
+  if (typeof valeur === 'string') {
+    var trouves = (valeur.match(RE_COURRIEL_) || []).filter(function(m) { return !courrielPermis_(m); });
+    if (!trouves.length) return valeur;
+    compteur.n += trouves.length;
+    if (cle === 'personneRessource') return 'À venir';
+    if (/courriel$/i.test(cle || '')) return '';
+    if (cle === 'lien' && /^\s*mailto:/i.test(valeur)) return '';
+    return valeur.replace(RE_COURRIEL_, function(m) { return courrielPermis_(m) ? m : 'À venir'; });
+  }
+  if (Array.isArray(valeur)) {
+    return valeur.map(function(v) { return masquerCourrielsExport_(v, cle, compteur); });
+  }
+  if (valeur && typeof valeur === 'object') {
+    var sortie = {};
+    Object.keys(valeur).forEach(function(k) { sortie[k] = masquerCourrielsExport_(valeur[k], k, compteur); });
+    return sortie;
+  }
+  return valeur;
 }
 
 /* =====================================================================
