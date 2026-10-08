@@ -3,7 +3,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://trouvetaclinique.ca/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -53,7 +53,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/a-propos/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -71,13 +71,13 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -107,7 +107,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/cliniques/gmf-lapiniere/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -119,25 +119,25 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-roger-laberge/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-u-jardins-roussillon/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-r-le-trait-d-union/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/cliniques/gmf-r-clinique-azur/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -185,7 +185,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-mercier/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -245,7 +245,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-saint-constant-de-la-gare/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -257,13 +257,13 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/cliniques/gmf-centre-medical-st-hubert/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/cliniques/gmf-u-saint-hubert/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -323,7 +323,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/cliniques/gmf-u-charles-le-moyne/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -341,7 +341,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/gmf-carrefour-sante-le-saint-laurent/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -377,13 +377,13 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-b/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -437,181 +437,181 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/rls/richelieu-yamaska/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/rls/du-suroit/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/rls/pierre-boucher/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/rls/champlain/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/rls/jardins-roussillon/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/rls/haut-richelieu-rouville/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/rls/vaudreuil-soulanges/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/rls/du-haut-saint-laurent/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/rls/pierre-de-saurel/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hopital-pierre-boucher/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-jeanne-crevier/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-de-contrecoeur/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-de-longueuil-ouest/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-des-seigneuries/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hopital-honore-mercier/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-de-l-hotel-dieu-de-saint-hyacinthe/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-de-montarville/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-marguerite-adam/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-des-maskoutains/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-des-patriotes/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/hotel-dieu-de-sorel/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-elisabeth-lafrance/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-d-hebergement-j-arsene-parenteau/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-gaston-belanger/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-detention/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-philippe/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/centre-de-readaptation-en-dependance-longueuil/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/etablissements/clsc-simonne-monet-chartrand/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -647,13 +647,13 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/etablissements/clsc-vallee-des-forts-soutien-a-domicile/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/etablissements/clinique-des-jeunes-du-bassin-de-chambly/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -665,7 +665,7 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/etablissements/centre-de-pediatrie-sociale-l-etoile/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -677,43 +677,43 @@
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/etablissements/manoir-soleil/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/cliniques/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-est/rls/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/cliniques/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-centre/rls/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/cliniques/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trouvetaclinique.ca/monteregie-ouest/rls/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
