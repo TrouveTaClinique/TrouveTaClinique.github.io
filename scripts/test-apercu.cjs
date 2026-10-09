@@ -6,7 +6,8 @@ const path = require('node:path');
 const os = require('node:os');
 const { createHash } = require('node:crypto');
 const {
-  preparerApercu, adapterHtml, verifierConfigurationPages, lister, RACINE, ORIGINE, ORIGINE_PROJET, CNAME_APERCU
+  preparerApercu, adapterHtml, verifierConfigurationPages, lister, RACINE, ORIGINE, ORIGINE_PROJET, CNAME_APERCU,
+  donneesPubliques
 } = require('./preparer-apercu.js');
 
 test('Pages apercu accepte le CNAME apercu et refuse la production', () => {
@@ -68,10 +69,13 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   for (const fichier of ['leaflet.js', 'territoires-rls-est.js', 'assets/seo-pages.css']) {
     assert.deepEqual(fs.readFileSync(path.join(destination, fichier)), fs.readFileSync(path.join(RACINE, fichier)));
   }
-  /* data.json : identique, sauf les notes de travail des cliniques, jamais publiées. */
-  const source = JSON.parse(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8'));
-  source.cliniques.forEach(c => { delete c.notes; });
-  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(destination, 'data.json'), 'utf8')), source);
+  /* data.json : la version de donneesPubliques (notes de travail, fiches masquées, sources internes,
+     « infos » HRR et numéros personnels retirés, 9 oct. 2026) ; toutes les fiches visibles restent. */
+  const brut = fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8');
+  const publie = JSON.parse(fs.readFileSync(path.join(destination, 'data.json'), 'utf8'));
+  assert.deepEqual(publie, JSON.parse(donneesPubliques(brut)));
+  assert.deepEqual(publie.cliniques.map(c => c.id),
+    JSON.parse(brut).cliniques.filter(c => c.visible !== false).map(c => c.id));
   for (const fichier of [
     '.github', 'scripts', 'PTEM2027_v2.gs', '_apercu-accueil',
     'README.md', 'CHANGELOG.md', 'docs', 'sitemap.xml', 'google0e6f553795bbb4a9.html',

@@ -117,13 +117,35 @@ async function verifierPagesEnLigne() {
 
 /* data.json publié : le champ « notes » des cliniques reste privé (notes de travail). Il est
    retiré de la copie publique ; la carte ne s'en sert pas. Même traitement pour la production. */
-const CHAMPS_PRIVES_CLINIQUES = ['notes'];
+const CHAMPS_PRIVES_CLINIQUES = ['notes', 'sourceRepertoire', 'raisonMasquage'];
+/* 9 oct. 2026 (audit des données sensibles, décision du propriétaire) : ce que les cartes ne lisent
+   pas ne sort plus dans les JSON publiés.
+   - fiches masquées (visible: false) : retirées, la carte ne les affiche jamais ;
+   - « infos » des fiches du Centre tirées du document HRR : jamais affichées (même critère que estHrr
+     dans generer-pages-seo.js), elles contenaient des numéros personnels ;
+   - sources internes (nom du document reçu, dates de réception) et notes de travail de « meta ». */
+const CHAMPS_INTERNES_META = ['sourceDocument', 'champsRetires', 'projectionPublique', 'statutValidation'];
+const CHAMPS_INTERNES_POLITIQUE = ['note', 'champsInternes'];
+function estFicheHrr(c) {
+  return c.region === 'Centre' && c.rls === 'Haut-Richelieu–Rouville';
+}
 /* Fichiers de données lus par les cartes : notes retirées et courriels masqués (8 oct. 2026,
    voir masquer-courriels.js). Même traitement pour la production. */
 const FICHIERS_DONNEES = new Set(['data.json', 'data-etablissements.json', 'data-etablissements-centre.json']);
 function donneesPubliques(texte) {
   const donnees = JSON.parse(texte);
-  for (const c of donnees.cliniques || []) for (const champ of CHAMPS_PRIVES_CLINIQUES) delete c[champ];
+  if (Array.isArray(donnees.cliniques)) {
+    donnees.cliniques = donnees.cliniques.filter(c => c.visible !== false);
+    for (const c of donnees.cliniques) {
+      for (const champ of CHAMPS_PRIVES_CLINIQUES) delete c[champ];
+      if (estFicheHrr(c)) delete c.infos;
+    }
+  }
+  if (donnees.meta && typeof donnees.meta === 'object') {
+    for (const champ of CHAMPS_INTERNES_META) delete donnees.meta[champ];
+    const politique = donnees.meta.politiqueAffichage;
+    if (politique) for (const champ of CHAMPS_INTERNES_POLITIQUE) delete politique[champ];
+  }
   return JSON.stringify(masquerCourriels(donnees), null, 2) + '\n';
 }
 

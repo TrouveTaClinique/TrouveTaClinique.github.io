@@ -109,3 +109,63 @@ test('secteur SEC-C-010 : contact retiré dans les données, sur la fiche et sur
     assert.match(html, /\$\{s\.contactMasque \? '' : `<div class="vw-row"><span class="vw-label">Contact<\/span>/, carte);
   }
 });
+
+/* Audit des données sensibles (9 oct. 2026, décisions du propriétaire). */
+test('numéros : seule la ligne principale d’une clinique reste dans les textes libres', () => {
+  const { masquerTelephones, PUBLIER_TELEPHONES } = require('./masquer-courriels.js');
+  assert.equal(PUBLIER_TELEPHONES, false);
+  assert.equal(masquerTelephones('Téléphone de la clinique : 450 347-5548. Recrutement : Dre X, 438 497-1537.'),
+    'Téléphone de la clinique : 450 347-5548. Recrutement : Dre X, À venir.');
+  assert.equal(masquerTelephones('Téléphone : 450 244-5350. Cellulaire : (514) 293-8000 poste 12'),
+    'Téléphone : 450 244-5350. Cellulaire : À venir');
+  const apres = masquerCourriels({ telephone: '450 468-5511', site: 'https://exemple.ca/4503475548', infos: 'Dr Y, 514-555-1234' });
+  assert.equal(apres.telephone, '450 468-5511');
+  assert.equal(apres.site, 'https://exemple.ca/4503475548');
+  assert.equal(apres.infos, 'Dr Y, À venir');
+});
+
+test('JSON publiés : ni fiches masquées, ni numéros personnels, ni traces internes', () => {
+  const { masquerTelephones } = require('./masquer-courriels.js');
+  const publie = nom => donneesPubliques(fs.readFileSync(path.join(RACINE, nom), 'utf8'));
+  const data = JSON.parse(publie('data.json'));
+  assert.ok(data.cliniques.length > 50);
+  for (const c of data.cliniques) {
+    assert.notEqual(c.visible, false, `fiche masquée publiée : ${c.id}`);
+    for (const champ of ['notes', 'sourceRepertoire', 'raisonMasquage']) assert.ok(!(champ in c), `${champ} publié : ${c.id}`);
+    if (c.region === 'Centre' && c.rls === 'Haut-Richelieu–Rouville') assert.ok(!('infos' in c), `infos HRR publiées : ${c.id}`);
+  }
+  for (const nom of FICHIERS_DONNEES) {
+    const texte = publie(nom);
+    assert.doesNotMatch(texte, /Olivier/, nom);
+    const restes = [];
+    const parcourir = (o, cle) => {
+      if (typeof o === 'string') {
+        if (cle !== 'telephone' && !/^\s*https?:\/\//i.test(o) && masquerTelephones(o) !== o) restes.push(o.slice(0, 80));
+      } else if (Array.isArray(o)) o.forEach(v => parcourir(v, cle));
+      else if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) parcourir(v, k);
+    };
+    const json = JSON.parse(texte);
+    parcourir(json, '');
+    assert.deepEqual(restes, [], nom);
+    if (json.meta) {
+      for (const champ of ['sourceDocument', 'champsRetires', 'projectionPublique', 'statutValidation']) assert.ok(!(champ in json.meta), `${nom} : meta.${champ}`);
+      const pol = json.meta.politiqueAffichage || {};
+      assert.ok(!('note' in pol) && !('champsInternes' in pol), `${nom} : notes de politiqueAffichage`);
+      assert.ok('afficherResponsableNom' in pol, `${nom} : réglages d'affichage gardés pour la carte`);
+    }
+  }
+});
+
+test('export du classeur (PTEM2027_v2.gs) : courriels et numéros personnels remplacés', () => {
+  const vm = require('node:vm');
+  const ctx = { console };
+  vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(RACINE, 'PTEM2027_v2.gs'), 'utf8'), ctx);
+  assert.match(ctx.PTEM2.version, /^v5-/);
+  assert.equal(ctx.PTEM2.publierTelephones, false);
+  const compte = { n: 0, tel: 0 };
+  const r = ctx.masquerCourrielsExport_({ infos: 'Téléphone : 450 244-5350. Recrutement : Dre X, 438 497-1537, x@y.ca', evenement: { telephone: '450 468-5511' } }, '', compte);
+  assert.equal(r.infos, 'Téléphone : 450 244-5350. Recrutement : Dre X, À venir, À venir');
+  assert.equal(r.evenement.telephone, '450 468-5511');
+  assert.deepEqual({ n: compte.n, tel: compte.tel }, { n: 1, tel: 1 });
+});
