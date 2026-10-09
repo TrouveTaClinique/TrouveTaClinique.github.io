@@ -23,12 +23,21 @@
  * Centre) perd son nom, son courriel et son téléphone dans tout ce qui est publié, même si on les
  * y remet un jour. Cette règle s'applique toujours, quel que soit PUBLIER_COURRIELS ; la fiche et
  * les cartes n'affichent alors aucune ligne « Contact » pour ce secteur.
+ *
+ * Numéros personnels (9 oct. 2026, audit des données sensibles) : dans les textes libres
+ * (« infos », etc.), tout numéro de téléphone devient « À venir », sauf la ligne principale d'une
+ * clinique, écrite « Téléphone : … » ou « Téléphone de la clinique : … ». Les champs « telephone »
+ * eux-mêmes (lignes d'établissement ou d'événement) et les adresses web ne sont pas touchés.
+ * Pour republier ces numéros un jour : PUBLIER_TELEPHONES = true.
  */
 const PUBLIER_COURRIELS = false;
+const PUBLIER_TELEPHONES = false;
 const A_VENIR = 'À venir';
 const EXEMPTES = new Set(['contact@trouvetaclinique.ca']);
 const RE_COURRIEL = /(?:mailto:)?[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const CHAMPS_CONTACT = ['responsableNom', 'responsableCourriel', 'personneRessource', 'telephone'];
+const RE_TELEPHONE = /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?:\s*(?:poste|p\.|ext\.?)\s*\d{1,5})?/g;
+const RE_LIGNE_PRINCIPALE = /T[ée]l[ée]phone(?:\s+de\s+la\s+clinique)?\s*:\s*$/i;
 
 function adresse(m) {
   return m.replace(/^mailto:/i, '').toLowerCase();
@@ -43,8 +52,18 @@ function masquerTexte(texte) {
   return String(texte).replace(RE_COURRIEL, m => (EXEMPTES.has(adresse(m)) ? m : A_VENIR));
 }
 
+function masquerTelephones(texte) {
+  return String(texte).replace(RE_TELEPHONE, (m, position, tout) => {
+    if (/\d/.test(tout.charAt(position - 1)) || /\d/.test(tout.charAt(position + m.length))) return m;
+    return RE_LIGNE_PRINCIPALE.test(tout.slice(Math.max(0, position - 40), position)) ? m : A_VENIR;
+  });
+}
+
 function masquerCourriels(valeur, cle = '') {
   if (typeof valeur === 'string') {
+    if (!PUBLIER_TELEPHONES && cle !== 'telephone' && !/^\s*https?:\/\//i.test(valeur)) {
+      valeur = masquerTelephones(valeur);
+    }
     if (PUBLIER_COURRIELS || !contientCourriel(valeur)) return valeur;
     if (cle === 'personneRessource') return A_VENIR;
     if (/courriel$/i.test(cle)) return '';
@@ -63,4 +82,7 @@ function masquerCourriels(valeur, cle = '') {
   return valeur;
 }
 
-module.exports = { PUBLIER_COURRIELS, A_VENIR, EXEMPTES, RE_COURRIEL, CHAMPS_CONTACT, contientCourriel, masquerCourriels, masquerTexte };
+module.exports = {
+  PUBLIER_COURRIELS, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL, RE_TELEPHONE, CHAMPS_CONTACT,
+  contientCourriel, masquerCourriels, masquerTexte, masquerTelephones
+};

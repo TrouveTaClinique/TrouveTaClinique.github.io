@@ -122,9 +122,16 @@ dates du sitemap selon le contenu réel des pages).
   chaque adresse par « À venir » à la génération des pages et dans les JSON publiés (`donneesPubliques`),
   même si l'export du classeur en remet dans `data.json`. Seule exception : `contact@trouvetaclinique.ca`.
   Vérifié par `scripts/test-courriels-masques.cjs` (aucun autre courriel dans les fichiers publiés,
-  catalogue de guides compris). L'export du classeur (`PTEM2027_v2.gs` v4-2026-10-08,
-  `publierCourriels: false`) écrit aussi « À venir » : la copie du classeur doit être cette version.
+  catalogue de guides compris). L'export du classeur (`PTEM2027_v2.gs` v5-2026-10-09,
+  `publierCourriels: false`, `publierTelephones: false`) écrit aussi « À venir » : la copie du classeur
+  doit être cette version.
   Ne rien republier sans l'accord explicite du propriétaire.
+- Audit des données sensibles (9 oct. 2026, décisions du propriétaire) : numéros de téléphone des textes
+  libres remplacés par « À venir » sauf la ligne principale d'une clinique (« Téléphone : … »), dans le
+  même filtre (`PUBLIER_TELEPHONES = false`) ; JSON publiés sans fiches masquées (`visible: false`), sans
+  « infos » des fiches HRR du Centre (jamais affichées), sans sources internes (`sourceRepertoire`,
+  `meta.sourceDocument`, notes de `politiqueAffichage`) : `donneesPubliques` de `preparer-apercu.js`.
+  Les noms des responsables du recrutement restent publiés (choix du propriétaire).
 - Contacts retirés à la demande de la personne (9 oct. 2026) : `contactMasque: true` dans l'objet qui
   porte le nom (pour le Centre : `recrutement` du secteur). Nom vidé dans les données, filtre commun de
   `masquer-courriels.js` (nom, courriel, téléphone retirés de tout ce qui est publié), aucune ligne

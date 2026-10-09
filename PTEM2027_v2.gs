@@ -29,12 +29,19 @@
  * (masquerCourrielsExport_, mêmes règles que scripts/masquer-courriels.js du dépôt) ; le classeur
  * garde les vraies adresses. Numéro de version v4-2026-10-08 : une copie plus ancienne du script
  * remettrait les courriels dans data.json, donc dans le dépôt public.
+ *
+ * Correctifs du 9 octobre 2026 (audit des données sensibles) : l'export remplace aussi par
+ * « À venir » tout numéro de téléphone écrit dans un texte libre, sauf la ligne principale d'une
+ * clinique (« Téléphone : … » ou « Téléphone de la clinique : … »), comme masquerTelephones de
+ * scripts/masquer-courriels.js. Numéro de version v5-2026-10-09.
  */
 
 var PTEM2 = {
-  version: 'v4-2026-10-08',
+  version: 'v5-2026-10-09',
   // Courriels retirés du site le 8 oct. 2026, jusqu'à nouvel ordre. true pour les republier.
   publierCourriels: false,
+  // Numéros personnels (textes libres) retirés le 9 oct. 2026. true pour les republier.
+  publierTelephones: false,
   titreClasseur: 'PTEM 2027 — Base maître des cliniques de la Montérégie',
   sourceDataJson: 'https://raw.githubusercontent.com/TrouveTaClinique/TrouveTaClinique.github.io/main/data.json',
   propVersion: 'PTEM2027_V2_VERSION',
@@ -1527,7 +1534,7 @@ function genererDataJson_(ss) {
     throw new Error('Export refusé : le data.json de référence ne contient pas le tableau hopitaux. '
       + 'Corrigez la référence avant de préparer un export.');
   }
-  var courriels = {n: 0};
+  var courriels = {n: 0, tel: 0};
   sortie = masquerCourrielsExport_(sortie, '', courriels);
   var json = JSON.stringify(sortie, null, 2);
   var court = fiches.length + ' fiches prêtes. Rien n’a été publié.';
@@ -1539,6 +1546,8 @@ function genererDataJson_(ss) {
     'Tous les garde-fous sont passés.',
     PTEM2.publierCourriels ? 'Courriels publiés.' :
       'Courriels remplacés par « À venir » (retirés du site jusqu’à nouvel ordre) : ' + courriels.n,
+    PTEM2.publierTelephones ? 'Numéros personnels publiés.' :
+      'Numéros personnels remplacés par « À venir » : ' + courriels.tel,
     exclues.length ? 'ABSENTES de data.json (Non publiée) : ' + exclues.join(', ') : 'Aucune fiche retirée.',
     masquees.length ? 'MASQUÉES sur la carte (visible = false) : ' + masquees.join(', ') : 'Aucune fiche masquée.',
     avis.length ? 'À VÉRIFIER :\n  - ' + avis.join('\n  - ') : 'Aucun avertissement.',
@@ -1553,14 +1562,28 @@ function genererDataJson_(ss) {
    autre texte → l'adresse seule est remplacée. L'adresse du site n'est jamais touchée. */
 var RE_COURRIEL_ = /(?:mailto:)?[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 var COURRIELS_PERMIS_ = ['contact@trouvetaclinique.ca'];
+var RE_TELEPHONE_ = /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}(?:\s*(?:poste|p\.|ext\.?)\s*\d{1,5})?/g;
+var RE_LIGNE_PRINCIPALE_ = /T[ée]l[ée]phone(?:\s+de\s+la\s+clinique)?\s*:\s*$/i;
 
 function courrielPermis_(m) {
   return COURRIELS_PERMIS_.indexOf(String(m).replace(/^mailto:/i, '').toLowerCase()) !== -1;
 }
 
+function masquerTelephonesExport_(texte, compteur) {
+  return String(texte).replace(RE_TELEPHONE_, function(m, position, tout) {
+    if (/\d/.test(tout.charAt(position - 1)) || /\d/.test(tout.charAt(position + m.length))) return m;
+    if (RE_LIGNE_PRINCIPALE_.test(tout.slice(Math.max(0, position - 40), position))) return m;
+    compteur.tel = (compteur.tel || 0) + 1;
+    return 'À venir';
+  });
+}
+
 function masquerCourrielsExport_(valeur, cle, compteur) {
-  if (PTEM2.publierCourriels) return valeur;
   if (typeof valeur === 'string') {
+    if (!PTEM2.publierTelephones && cle !== 'telephone' && !/^\s*https?:\/\//i.test(valeur)) {
+      valeur = masquerTelephonesExport_(valeur, compteur);
+    }
+    if (PTEM2.publierCourriels) return valeur;
     var trouves = (valeur.match(RE_COURRIEL_) || []).filter(function(m) { return !courrielPermis_(m); });
     if (!trouves.length) return valeur;
     compteur.n += trouves.length;
