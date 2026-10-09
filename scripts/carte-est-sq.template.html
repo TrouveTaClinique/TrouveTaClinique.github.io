@@ -1941,6 +1941,7 @@ function preparerCoucheEtablissements(donneesEtab) {
       territoireSource: inst.missionRegionale ? null : (inst.rls || ''),
       responsableNom: sec.responsableNom || '',
       responsableCourriel: sec.responsableCourriel || '',
+      contactMasque: !!(sec.contactMasque || (sec.recrutement || {}).contactMasque),
       _secteurEtab: true
     };
   }).filter(Boolean);
@@ -2914,7 +2915,7 @@ function htmlCorpsSecteur(s) {
   return `<div class="dp-sect-corps">
       ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
       ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)} <a href="/monteregie-est/ptem-u/">Guide PTEM-U</a></span></div>` : ''}
-      <div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>
+      ${s.contactMasque ? '' : `<div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>`}
       <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
       <div class="notes-sec">
         <div class="vw-sec-title">Mes notes sur ce secteur</div>

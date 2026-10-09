@@ -2691,6 +2691,7 @@ function chapeauEtablissement(inst, secteurs) {
 }
 
 function htmlLigneContactEst(s, politique) {
+  if (s.contactMasque || (s.recrutement || {}).contactMasque) return '';
   const pol = politique || {};
   const nom = String(s.responsableNom || '').trim();
   const courrielBrut = String(s.responsableCourriel || '').trim();
@@ -3534,7 +3535,7 @@ function paragraphesSecteurCentre(s, politique) {
   }
   blocs.push(htmlResumeListe(points));
   if (s.categorieActivite === 'gmf-u') blocs.push(`<p>${htmlGmfuConditionSeo()}</p><p>${LIEN_PTEM_U}</p>`);
-  const contact = htmlContactSecteurSeo(s, politique);
+  const contact = rec.contactMasque ? '' : htmlContactSecteurSeo(s, politique);
   if (contact) blocs.push(`<p>Contact : ${contact}.</p>`);
   if (s.dme) blocs.push(`<p>Dossier médical électronique : ${esc(s.dme)}.</p>`);
   return blocs.filter(Boolean).join('\n    ');
