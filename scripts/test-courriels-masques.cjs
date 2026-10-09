@@ -77,3 +77,35 @@ test('les JSON publiés ne gardent aucun courriel, même si data.json en recevai
     assert.doesNotMatch(publie, /quelquun@gmail\.com/, fichier);
   }
 });
+
+/* Contacts retirés à la demande de la personne (9 oct. 2026) : « contactMasque: true ». Le test
+   nomme le secteur par son identifiant seulement ; ne jamais écrire le nom retiré dans le dépôt. */
+test('contactMasque : nom, courriel et téléphone retirés de tout ce qui est publié', () => {
+  const apres = masquerCourriels({ secteurs: [
+    { id: 'X', recrutement: { responsableNom: 'Dre Une Telle', responsableCourriel: 'une.telle@exemple.ca',
+      telephone: '450 555-0000', besoinDeclare: '1 poste', contactMasque: true } },
+    { id: 'Y', recrutement: { responsableNom: 'Dr Autre', contactMasque: false } }
+  ] });
+  const [x, y] = apres.secteurs;
+  assert.equal(x.recrutement.responsableNom, '');
+  assert.equal(x.recrutement.responsableCourriel, '');
+  assert.equal(x.recrutement.telephone, '');
+  assert.equal(x.recrutement.besoinDeclare, '1 poste');
+  assert.equal(y.recrutement.responsableNom, 'Dr Autre');
+});
+
+test('secteur SEC-C-010 : contact retiré dans les données, sur la fiche et sur les cartes', () => {
+  const centre = JSON.parse(fs.readFileSync(path.join(RACINE, 'data-etablissements-centre.json'), 'utf8'));
+  const sec = centre.secteurs.find(s => s.id === 'SEC-C-010');
+  assert.equal(sec.recrutement.contactMasque, true);
+  assert.equal(sec.recrutement.responsableNom, '');
+  const inst = centre.installations.find(i => i.id === sec.installationId);
+  assert.ok(inst, 'installation du secteur');
+  const fiche = fs.readFileSync(path.join(RACINE, 'monteregie-centre/etablissements/clinique-jeunesse-de-saint-jean-sur-richelieu/index.html'), 'utf8');
+  assert.doesNotMatch(fiche, /<p>Contact :/);
+  for (const carte of ['monteregie/index.html', 'monteregie-est/index.html']) {
+    const html = fs.readFileSync(path.join(RACINE, carte), 'utf8');
+    assert.match(html, /contactMasque: !!\(sec\.contactMasque \|\| \(sec\.recrutement \|\| \{\}\)\.contactMasque\)/, carte);
+    assert.match(html, /\$\{s\.contactMasque \? '' : `<div class="vw-row"><span class="vw-label">Contact<\/span>/, carte);
+  }
+});

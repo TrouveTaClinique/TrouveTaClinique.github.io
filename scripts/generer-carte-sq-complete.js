@@ -575,8 +575,8 @@ function syncRegChips() {
     "    referenceExistante: inst.referenceExistante || null,\n    coordonneesApproximatives: !!inst.coordonneesApproximatives,\n    _installationEtab: true",
     'emplacement approximatif lu');
   html = uneFois(html,
-    "      responsableNom: sec.responsableNom || '',\n      responsableCourriel: sec.responsableCourriel || '',\n      _secteurEtab: true",
-    "      responsableNom: sec.responsableNom || (sec.recrutement || {}).responsableNom || '',\n      responsableCourriel: sec.responsableCourriel || (sec.recrutement || {}).responsableCourriel || '',\n      besoinDeclare: (sec.recrutement || {}).besoinDeclare || '',\n      notesPubliques: Array.isArray((sec.recrutement || {}).notesPubliques) ? sec.recrutement.notesPubliques.slice() : [],\n      dme: sec.dme || (sec.recrutement || {}).dme || '',\n      _secteurEtab: true",
+    "      responsableNom: sec.responsableNom || '',\n      responsableCourriel: sec.responsableCourriel || '',\n      contactMasque: !!(sec.contactMasque || (sec.recrutement || {}).contactMasque),\n      _secteurEtab: true",
+    "      responsableNom: sec.responsableNom || (sec.recrutement || {}).responsableNom || '',\n      responsableCourriel: sec.responsableCourriel || (sec.recrutement || {}).responsableCourriel || '',\n      besoinDeclare: (sec.recrutement || {}).besoinDeclare || '',\n      notesPubliques: Array.isArray((sec.recrutement || {}).notesPubliques) ? sec.recrutement.notesPubliques.slice() : [],\n      dme: sec.dme || (sec.recrutement || {}).dme || '',\n      contactMasque: !!(sec.contactMasque || (sec.recrutement || {}).contactMasque),\n      _secteurEtab: true",
     'secteur lu');
 
   html = uneFois(html,
@@ -625,8 +625,8 @@ function syncRegChips() {
     "function htmlCorpsSecteur(s) {\n  const notes = (s.notesPubliques || []).map(n => `<div class=\"vw-row\"><span class=\"vw-label\">Précision</span><span class=\"vw-value\">${esc(n)}</span></div>`).join('');\n  return `<div class=\"dp-sect-corps\">\n      ${s.besoinDeclare ? `<div class=\"vw-row\"><span class=\"vw-label\">Besoin déclaré</span><span class=\"vw-value\">${esc(s.besoinDeclare)}</span></div>` : ''}\n      ${s.dme ? `<div class=\"vw-row\"><span class=\"vw-label\">Dossier médical</span><span class=\"vw-value\">${esc(s.dme)}</span></div>` : ''}\n",
     'besoin et dossier médical du secteur');
   html = uneFois(html,
-    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      <div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
-    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${notes}\n      <div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
+    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${s.contactMasque ? '' : `<div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
+    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${notes}\n      ${s.contactMasque ? '' : `<div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
     'précisions du secteur');
 
   html = uneFois(html,

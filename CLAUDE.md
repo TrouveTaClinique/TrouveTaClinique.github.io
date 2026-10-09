@@ -125,6 +125,11 @@ dates du sitemap selon le contenu réel des pages).
   catalogue de guides compris). L'export du classeur (`PTEM2027_v2.gs` v4-2026-10-08,
   `publierCourriels: false`) écrit aussi « À venir » : la copie du classeur doit être cette version.
   Ne rien republier sans l'accord explicite du propriétaire.
+- Contacts retirés à la demande de la personne (9 oct. 2026) : `contactMasque: true` dans l'objet qui
+  porte le nom (pour le Centre : `recrutement` du secteur). Nom vidé dans les données, filtre commun de
+  `masquer-courriels.js` (nom, courriel, téléphone retirés de tout ce qui est publié), aucune ligne
+  « Contact » sur la fiche ni sur les cartes. Secteur concerné : SEC-C-010. Ne jamais remettre ce nom ni
+  l'écrire ailleurs dans le dépôt (tests et notes : identifiant seulement).
 - Vidéo promotionnelle : page `/monteregie-est/video/` (générée par `pageVideoEst()`, indexée, dans le sitemap
   et la recherche du site, données structurées VideoObject) ; le fichier `monteregie-est/video/trouve-ta-clinique-monteregie-est.mp4` et son `affiche.jpg`
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)

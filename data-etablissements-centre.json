@@ -494,7 +494,8 @@
         "statutDeclare": "actif",
         "dateInformation": "2026-06-01",
         "besoinDeclare": "1 poste, 5 jours par semaine",
-        "responsableNom": "Dre Jessica Boucher",
+        "responsableNom": "",
+        "contactMasque": true,
         "responsableCourriel": "",
         "telephone": null,
         "notesPubliques": []
