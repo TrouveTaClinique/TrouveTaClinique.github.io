@@ -127,18 +127,19 @@ dates du sitemap selon le contenu réel des pages).
   `recrutement_omnis.cisssmo16@…` (Ouest). Deux interrupteurs dans `masquer-courriels.js` :
   `PUBLIER_COURRIELS_SITE` (pages) et `PUBLIER_COURRIELS_CARTE` (JSON publiés et pages des cartes).
   Vérifié par `scripts/test-courriels-masques.cjs` (aucun autre courriel dans les fichiers publiés,
-  catalogue de guides compris ; les tests suivent les interrupteurs). L'export du classeur (`PTEM2027_v2.gs` v5-2026-10-09,
-  `publierCourriels: false`, `publierTelephones: false`) écrit aussi « À venir » : la copie du classeur
-  doit être cette version.
+  catalogue de guides compris ; les tests suivent les interrupteurs). Le classeur et son export (`PTEM2027_v2.gs`, v5 : courriels et numéros
+  masqués) ne servent plus depuis le 10 oct. 2026 (voir « Notes internes des cliniques »).
   Ne rien republier sans l'accord explicite du propriétaire.
 - Réafficher les courriels des responsables sur la carte (en attente du « ok » du propriétaire ; rien
   ne bloque, simulation faite le 10 oct. 2026) : 1) `PUBLIER_COURRIELS_CARTE = true` dans
-  `masquer-courriels.js` ; 2) `publierCourriels: true` dans `PTEM2027_v2.gs` (dépôt et copie du classeur),
-  puis export du classeur : `data.json` reprend les courriels du classeur ; 3) Centre :
-  `node scripts/restaurer-courriels-centre.js --appliquer` (5 courriels vidés le 8 oct. ; SEC-C-010 reste
-  masqué) ; 4) régénérer et tester. Les fiches de l'Est du site gardent l'adresse du CISSS. Établissements
-  de l'Est : leurs courriels ne sont plus dans les données depuis le 2 sept. (décision antérieure,
-  `afficherResponsableCourriel: false`) ; il faudrait le répertoire source pour les remettre.
+  `masquer-courriels.js` ; 2) `node scripts/restaurer-courriels.js --appliquer` : remet les courriels
+  retirés le 8 oct. (62 fiches de `data.json`, 5 secteurs du Centre ; SEC-C-010 et toute fiche
+  `contactMasque` restent masqués), puis ajouter à la main ceux reçus depuis par le formulaire ;
+  3) régénérer et tester. Les fiches de l'Est du site gardent l'adresse du CISSS. D'ici là, ne pas
+  inscrire dans `data.json` (dépôt public) les courriels reçus par le formulaire : ils restent dans les
+  réponses du formulaire. Établissements de l'Est : leurs courriels ne sont plus dans les données depuis
+  le 2 sept. (décision antérieure, `afficherResponsableCourriel: false`) ; il faudrait le répertoire
+  source pour les remettre.
 - Audit des données sensibles (9 oct. 2026, décisions du propriétaire) : numéros de téléphone des textes
   libres remplacés par « À venir » sauf la ligne principale d'une clinique (« Téléphone : … »), dans le
   même filtre (`PUBLIER_TELEPHONES = false`) ; JSON publiés sans fiches masquées (`visible: false`), sans
@@ -168,6 +169,12 @@ dates du sitemap selon le contenu réel des pages).
 
 Le dépôt et `data.json` sont publics : le champ `notes` des cliniques doit rester **vide**.
 Les notes de travail restent dans le classeur Google Sheets (colonne « [carte] notes »).
+
+**Depuis le 10 oct. 2026, le classeur et son export automatique ne servent plus** (décision du
+propriétaire) : `data.json` se met à jour à la main, avec Claude, à partir des réponses au formulaire.
+Les modifications faites directement dans `data.json` ne seront donc plus écrasées par un export. Le
+script `PTEM2027_v2.gs` reste dans le dépôt au cas où on le reprendrait ; ce qui suit ne vaut alors
+que pour lui. Les garde-fous restent actifs.
 
 - `data.json` est exporté du classeur par `PTEM2027_v2.gs` (Apps Script), qui écrit maintenant
   toujours `notes: ''`. **La copie de ce script dans le classeur doit être la version du dépôt** :
