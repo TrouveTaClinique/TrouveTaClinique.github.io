@@ -3,22 +3,30 @@
    Le test lit les fichiers tels qu'ils sont publiés (liste blanche de preparer-apercu.js, JSON de
    données filtrés par donneesPubliques) : un export du classeur qui remettrait des courriels dans
    data.json ne bloque donc pas le robot, mais une page ou un fichier publié qui en afficherait un,
-   oui. Seule adresse permise : celle du site. */
+   oui. Adresses permises : celle du site et les deux adresses génériques de recrutement des CISSS
+   (Est : fiches de l'Est et page PTEM ; Ouest : page PTEM), décision du 10 oct. 2026.
+   Les tests suivent les interrupteurs PUBLIER_COURRIELS_SITE et PUBLIER_COURRIELS_CARTE : le jour où
+   le propriétaire donne son accord pour réafficher les courriels sur la carte, mettre
+   PUBLIER_COURRIELS_CARTE à true suffit, aucun test ne bloque (voir CLAUDE.md). */
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 const {
-  PUBLIER_COURRIELS, A_VENIR, masquerCourriels, masquerTexte, contientCourriel
+  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, A_VENIR, masquer, masquerCourriels, masquerTexte, contientCourriel
 } = require('./masquer-courriels.js');
 const { lister, donneesPubliques, FICHIERS_DONNEES, RACINE } = require('./preparer-apercu.js');
 
-const PERMISES = new Set(['contact@trouvetaclinique.ca']);
+const COURRIEL_CISSS_EST = 'recrutement.md.cisssme16@ssss.gouv.qc.ca';
+const COURRIEL_CISSS_OUEST = 'recrutement_omnis.cisssmo16@ssss.gouv.qc.ca';
+const PERMISES = new Set(['contact@trouvetaclinique.ca', COURRIEL_CISSS_EST, COURRIEL_CISSS_OUEST]);
+const PAGES_CARTES = new Set(['monteregie-est/index.html', 'monteregie/index.html']);
 const RE_COURRIEL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const TEXTE = /\.(html|json|js|xml|txt|webmanifest|css|csv|md)$/i;
 
-test('les courriels restent retirés jusqu\'à nouvel ordre', () => {
-  assert.equal(PUBLIER_COURRIELS, false);
+test('interrupteurs des courriels : site et carte réglés séparément', () => {
+  assert.equal(typeof PUBLIER_COURRIELS_SITE, 'boolean');
+  assert.equal(typeof PUBLIER_COURRIELS_CARTE, 'boolean');
 });
 
 test('masquerCourriels : chaque champ reçoit la bonne valeur', () => {
@@ -36,7 +44,7 @@ test('masquerCourriels : chaque champ reçoit la bonne valeur', () => {
     }],
     etablissements: [{ responsable: 'Dr Untel', responsableCourriel: 'untel@gmail.com' }]
   };
-  const apres = masquerCourriels(avant);
+  const apres = masquer(avant, '', false);
   const [c1, c2] = apres.cliniques;
   assert.equal(c1.personneRessource, A_VENIR);
   assert.equal(c1.infos, `Écrire à ${A_VENIR} ou à contact@trouvetaclinique.ca.`);
@@ -50,12 +58,15 @@ test('masquerCourriels : chaque champ reçoit la bonne valeur', () => {
   assert.equal(avant.cliniques[0].personneRessource, 'prenom.nom@gmail.com', 'l’original n’est pas modifié');
   assert.equal(masquerTexte('mailto:a.b@c.ca'), A_VENIR);
   assert.equal(contientCourriel('contact@trouvetaclinique.ca'), false);
+  assert.equal(masquer(avant, '', true).cliniques[0].personneRessource, 'prenom.nom@gmail.com', 'interrupteur ouvert : courriel gardé');
 });
 
-test('aucun fichier publié ne contient un autre courriel que celui du site', () => {
+test('aucun fichier publié ne contient d’autre courriel que ceux permis (selon les interrupteurs)', () => {
   const trouves = [];
   for (const fichier of lister(RACINE)) {
     if (!TEXTE.test(fichier)) continue;
+    const cote = FICHIERS_DONNEES.has(fichier) || PAGES_CARTES.has(fichier) ? PUBLIER_COURRIELS_CARTE : PUBLIER_COURRIELS_SITE;
+    if (cote) continue;
     let texte = fs.readFileSync(path.join(RACINE, fichier), 'utf8');
     if (FICHIERS_DONNEES.has(fichier)) texte = donneesPubliques(texte);
     for (const m of texte.match(RE_COURRIEL) || []) {
@@ -67,7 +78,7 @@ test('aucun fichier publié ne contient un autre courriel que celui du site', ()
   assert.deepEqual(trouves, []);
 });
 
-test('les JSON publiés ne gardent aucun courriel, même si data.json en recevait', () => {
+test('les JSON publiés ne gardent aucun courriel, même si data.json en recevait', { skip: PUBLIER_COURRIELS_CARTE && 'courriels réaffichés sur la carte' }, () => {
   for (const fichier of FICHIERS_DONNEES) {
     const brut = JSON.parse(fs.readFileSync(path.join(RACINE, fichier), 'utf8'));
     if (brut.cliniques) brut.cliniques[0].personneRessource = 'quelquun@gmail.com';
@@ -81,11 +92,11 @@ test('les JSON publiés ne gardent aucun courriel, même si data.json en recevai
 /* Contacts retirés à la demande de la personne (9 oct. 2026) : « contactMasque: true ». Le test
    nomme le secteur par son identifiant seulement ; ne jamais écrire le nom retiré dans le dépôt. */
 test('contactMasque : nom, courriel et téléphone retirés de tout ce qui est publié', () => {
-  const apres = masquerCourriels({ secteurs: [
+  const apres = masquer({ secteurs: [
     { id: 'X', recrutement: { responsableNom: 'Dre Une Telle', responsableCourriel: 'une.telle@exemple.ca',
       telephone: '450 555-0000', besoinDeclare: '1 poste', contactMasque: true } },
     { id: 'Y', recrutement: { responsableNom: 'Dr Autre', contactMasque: false } }
-  ] });
+  ] }, '', true);
   const [x, y] = apres.secteurs;
   assert.equal(x.recrutement.responsableNom, '');
   assert.equal(x.recrutement.responsableCourriel, '');
@@ -165,7 +176,36 @@ test('export du classeur (PTEM2027_v2.gs) : courriels et numéros personnels rem
   assert.equal(ctx.PTEM2.publierTelephones, false);
   const compte = { n: 0, tel: 0 };
   const r = ctx.masquerCourrielsExport_({ infos: 'Téléphone : 450 244-5350. Recrutement : Dre X, 438 497-1537, x@y.ca', evenement: { telephone: '450 468-5511' } }, '', compte);
-  assert.equal(r.infos, 'Téléphone : 450 244-5350. Recrutement : Dre X, À venir, À venir');
+  /* publierCourriels: true (accord du propriétaire pour la carte) : l'export garde les courriels. */
+  const courriels = ctx.PTEM2.publierCourriels;
+  assert.equal(r.infos, 'Téléphone : 450 244-5350. Recrutement : Dre X, À venir, ' + (courriels ? 'x@y.ca' : 'À venir'));
   assert.equal(r.evenement.telephone, '450 468-5511');
-  assert.deepEqual({ n: compte.n, tel: compte.tel }, { n: 1, tel: 1 });
+  assert.deepEqual({ n: compte.n, tel: compte.tel }, { n: courriels ? 0 : 1, tel: 1 });
+});
+
+/* 10 oct. 2026 (décision du propriétaire) : adresse du recrutement médical du CISSS de la
+   Montérégie-Est sur les fiches de l'Est du site ; la carte n'est pas touchée. */
+test('Est : adresse du recrutement médical du CISSS sur toutes les fiches de cliniques et d’établissements', () => {
+  /* Toutes les fiches de cliniques de l'Est (les GMF-U, dont la page renvoie vers leur fiche
+     d'établissement, sont vérifiées avec les établissements ci-dessous). */
+  const fiches = fs.readdirSync(path.join(RACINE, 'monteregie-est/cliniques'))
+    .map(d => path.join(RACINE, 'monteregie-est/cliniques', d, 'index.html'))
+    .filter(f => fs.existsSync(f))
+    .map(f => fs.readFileSync(f, 'utf8'))
+    .filter(h => !h.includes('Page déplacée'));
+  assert.ok(fiches.length >= 25, `${fiches.length} fiches de cliniques de l'Est`);
+  for (const h of fiches) assert.match(h, new RegExp(`<dt>Contact recrutement</dt><dd><a href="mailto:${COURRIEL_CISSS_EST.replace(/\./g, '\\.')}">`));
+  const etabs = fs.readdirSync(path.join(RACINE, 'monteregie-est/etablissements'))
+    .map(d => path.join(RACINE, 'monteregie-est/etablissements', d, 'index.html'))
+    .filter(f => fs.existsSync(f))
+    .flatMap(f => fs.readFileSync(f, 'utf8').match(/<p>Contact :[^\n]*<\/p>/g) || []);
+  assert.ok(etabs.length > 0);
+  for (const ligne of etabs) assert.ok(ligne.includes(`mailto:${COURRIEL_CISSS_EST}`) && !ligne.includes(A_VENIR), ligne);
+  const ptem = fs.readFileSync(path.join(RACINE, 'monteregie-est/ptem/index.html'), 'utf8');
+  assert.ok(ptem.includes(`mailto:${COURRIEL_CISSS_EST}`) && ptem.includes(`mailto:${COURRIEL_CISSS_OUEST}`), 'page PTEM');
+  if (!PUBLIER_COURRIELS_CARTE) {
+    for (const fichier of FICHIERS_DONNEES) {
+      assert.doesNotMatch(donneesPubliques(fs.readFileSync(path.join(RACINE, fichier), 'utf8')), /@ssss\.gouv\.qc\.ca/, `${fichier} : la carte reste sans courriel`);
+    }
+  }
 });

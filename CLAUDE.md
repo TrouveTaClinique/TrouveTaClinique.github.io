@@ -120,12 +120,25 @@ dates du sitemap selon le contenu réel des pages).
 - Courriels retirés du site le 8 oct. 2026, « jusqu'à nouvel ordre » (une médecin a demandé le retrait
   de son courriel personnel) : `scripts/masquer-courriels.js` (`PUBLIER_COURRIELS = false`) remplace
   chaque adresse par « À venir » à la génération des pages et dans les JSON publiés (`donneesPubliques`),
-  même si l'export du classeur en remet dans `data.json`. Seule exception : `contact@trouvetaclinique.ca`.
+  même si l'export du classeur en remet dans `data.json`. Exceptions : `contact@trouvetaclinique.ca` et,
+  depuis le 10 oct. 2026, les adresses génériques de recrutement des CISSS : `recrutement.md.cisssme16@…`
+  sur toutes les fiches de cliniques et d'établissements de l'Est du site (`COURRIEL_RECRUTEMENT_EST`,
+  `generer-pages-seo.js`, hors données : la carte n'est pas touchée) et sur la page PTEM, avec
+  `recrutement_omnis.cisssmo16@…` (Ouest). Deux interrupteurs dans `masquer-courriels.js` :
+  `PUBLIER_COURRIELS_SITE` (pages) et `PUBLIER_COURRIELS_CARTE` (JSON publiés et pages des cartes).
   Vérifié par `scripts/test-courriels-masques.cjs` (aucun autre courriel dans les fichiers publiés,
-  catalogue de guides compris). L'export du classeur (`PTEM2027_v2.gs` v5-2026-10-09,
+  catalogue de guides compris ; les tests suivent les interrupteurs). L'export du classeur (`PTEM2027_v2.gs` v5-2026-10-09,
   `publierCourriels: false`, `publierTelephones: false`) écrit aussi « À venir » : la copie du classeur
   doit être cette version.
   Ne rien republier sans l'accord explicite du propriétaire.
+- Réafficher les courriels des responsables sur la carte (en attente du « ok » du propriétaire ; rien
+  ne bloque, simulation faite le 10 oct. 2026) : 1) `PUBLIER_COURRIELS_CARTE = true` dans
+  `masquer-courriels.js` ; 2) `publierCourriels: true` dans `PTEM2027_v2.gs` (dépôt et copie du classeur),
+  puis export du classeur : `data.json` reprend les courriels du classeur ; 3) Centre :
+  `node scripts/restaurer-courriels-centre.js --appliquer` (5 courriels vidés le 8 oct. ; SEC-C-010 reste
+  masqué) ; 4) régénérer et tester. Les fiches de l'Est du site gardent l'adresse du CISSS. Établissements
+  de l'Est : leurs courriels ne sont plus dans les données depuis le 2 sept. (décision antérieure,
+  `afficherResponsableCourriel: false`) ; il faudrait le répertoire source pour les remettre.
 - Audit des données sensibles (9 oct. 2026, décisions du propriétaire) : numéros de téléphone des textes
   libres remplacés par « À venir » sauf la ligne principale d'une clinique (« Téléphone : … »), dans le
   même filtre (`PUBLIER_TELEPHONES = false`) ; JSON publiés sans fiches masquées (`visible: false`), sans

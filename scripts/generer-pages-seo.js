@@ -27,7 +27,8 @@
  *   3. Une CLINIQUE "visible: false" est ignorée dans les pages et le sitemap. Une fiche dont
  *      `categorie` vaut "etablissement" n'a pas de page SEO clinique. Les pages
  *      /monteregie-est/etablissements/ sont générées depuis data-etablissements.json.
- *   4. Les courriels NE SONT PLUS publiés depuis le 8 oct. 2026 : « À venir » (masquer-courriels.js).
+ *   4. Les courriels NE SONT PLUS publiés depuis le 8 oct. 2026 : « À venir » (masquer-courriels.js),
+ *      sauf l'adresse du recrutement médical du CISSS de la Montérégie-Est sur les fiches de l'Est.
  *   5. On ne copie jamais le HTML de la fiche de l'application (#dp-body / exportFiche) : cette
  *      fiche contient des éléments propres à l'app (notes, boutons). Les pages ci-dessous sont
  *      construites à partir des DONNÉES, pas de l'affichage.
@@ -37,7 +38,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { masquerCourriels, PUBLIER_COURRIELS: COURRIELS_EN_LIGNE } = require('./masquer-courriels.js');
+const { masquerCourriels, PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE } = require('./masquer-courriels.js');
 
 const RACINE = path.join(__dirname, '..');
 const SITE = 'https://trouvetaclinique.ca';
@@ -429,6 +430,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')document.que
  * qu'afficher la ligne « Contact recrutement », qui vaut donc « À venir ».
  */
 const PUBLIER_COURRIELS = true;
+/* Recrutement médical du CISSS de la Montérégie-Est (10 oct. 2026, décision du propriétaire) :
+   adresse institutionnelle affichée sur toutes les fiches de cliniques de l'Est, qu'elles recrutent
+   ou non, et sur les fiches d'établissements de l'Est à la place de « À venir ». Elle ne passe pas
+   par les données : la carte n'est pas touchée. */
+const COURRIEL_RECRUTEMENT_EST = 'recrutement.md.cisssme16@ssss.gouv.qc.ca';
+const LIBELLE_RECRUTEMENT_EST = 'recrutement médical du CISSS de la Montérégie-Est';
+function lienRecrutementEst() {
+  return `<a href="mailto:${COURRIEL_RECRUTEMENT_EST}">${COURRIEL_RECRUTEMENT_EST}</a>`;
+}
 
 /*
  * JSON-LD JobPosting sur les fiches (cliniques et GMF-U). Coupé le 4 septembre 2026 :
@@ -1284,7 +1294,9 @@ function pageClinique(c, slug, majDonnees, u = UNIVERS_GENERAL) {
   if (rempli(c.responsableNom)) {
     ajouter('Responsable', esc(c.responsableNom));
   }
-  if (enRecrutement && PUBLIER_COURRIELS && rempli(c.personneRessource)) {
+  if (c.region === 'Est') {
+    ajouter('Contact recrutement', `${lienRecrutementEst()} (${LIBELLE_RECRUTEMENT_EST})`);
+  } else if (enRecrutement && PUBLIER_COURRIELS && rempli(c.personneRessource)) {
     ajouter('Contact recrutement', lienCourrielRecrutement(c.personneRessource));
   }
   if (rempli(c.medecinsRecherches)) {
@@ -1375,8 +1387,15 @@ ${items}
     }
     if (specs.length) clinique.openingHoursSpecification = specs;
   }
-  /* Contact de recrutement : nom et, si publié, courriel(s). */
-  if (rempli(c.responsableNom) || (PUBLIER_COURRIELS && rempli(c.personneRessource))) {
+  /* Contact de recrutement : nom et, si publié, courriel(s). Est : recrutement médical du CISSS. */
+  if (c.region === 'Est') {
+    clinique.contactPoint = [{
+      '@type': 'ContactPoint',
+      contactType: 'recrutement médical',
+      name: 'Recrutement médical, CISSS de la Montérégie-Est',
+      email: COURRIEL_RECRUTEMENT_EST
+    }];
+  } else if (rempli(c.responsableNom) || (PUBLIER_COURRIELS && rempli(c.personneRessource))) {
     const point = {
       '@type': 'ContactPoint',
       contactType: 'recrutement médical'
@@ -1428,6 +1447,9 @@ ${items}
   const contact = !enRecrutement
     ? `
   <div class="callout"><strong>Ne recrute pas actuellement :</strong> ce milieu est publié à titre de référence dans le répertoire. Consultez la carte interactive pour connaître les milieux du secteur qui recrutent actuellement.</div>`
+    : c.region === 'Est'
+    ? `
+  <div class="callout"><strong>Pour le recrutement dans ce milieu :</strong> ${boutonCourrielRecrutement(COURRIEL_RECRUTEMENT_EST)} (${LIBELLE_RECRUTEMENT_EST})</div>`
     : (PUBLIER_COURRIELS && rempli(c.personneRessource))
     ? `
   <div class="callout"><strong>Pour joindre ce milieu au sujet du recrutement :</strong> ${boutonCourrielRecrutement(c.personneRessource)}</div>`
@@ -2697,21 +2719,19 @@ function htmlLigneContactEst(s, politique) {
   const courrielBrut = String(s.responsableCourriel || '').trim();
   const nomOk = pol.afficherResponsableNom !== false && nom;
   const courriel = pol.afficherResponsableCourriel === true ? courrielBrut : '';
-  const remplacement = String(pol.contactAffiche || '').trim();
+  /* 10 oct. 2026 : à défaut du courriel du responsable, le recrutement médical du CISSS de la
+     Montérégie-Est plutôt que « À venir ». */
+  const remplacement = `${LIBELLE_RECRUTEMENT_EST.replace(/^./, l => l.toUpperCase())} : ${lienRecrutementEst()}`;
   if (nomOk && courriel) {
     return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(nom)}</a>.</p>`;
   }
-  if (nomOk && remplacement && remplacement !== 'source') {
-    return `<p>Contact : ${esc(nom)}. ${esc(remplacement)}.</p>`;
+  if (nomOk) {
+    return `<p>Contact : ${esc(nom)}. ${remplacement}.</p>`;
   }
-  if (nomOk) return `<p>Contact : ${esc(nom)}.</p>`;
   if (courriel) {
     return `<p>Contact : <a href="mailto:${esc(courriel)}">${esc(LIBELLE_CONTACT_SANS_NOM)}</a>.</p>`;
   }
-  if (remplacement && remplacement !== 'source') {
-    return `<p>Contact : ${esc(remplacement)}.</p>`;
-  }
-  return '';
+  return `<p>Contact : ${remplacement}.</p>`;
 }
 
 function pageEtablissement(inst, secteurs, majPagesSeo, cliniqueLiee = null, politique = {}) {
@@ -5009,7 +5029,7 @@ function main() {
   console.log(`Sitemap            : ${entrees.length} URL`);
   console.log(`Redirections CF    : ${nRedirCf} (scripts/cloudflare-bulk-redirects.csv)`);
   console.log(`GMF-U canoniques   : ${Object.keys(HREF_GMFU_ETABLISSEMENT).length} fiches cliniques redirigées vers /etablissements/`);
-  console.log(`Courriels publiés  : ${COURRIELS_EN_LIGNE ? 'OUI' : 'non, remplacés par « À venir » (8 oct. 2026, masquer-courriels.js)'}`);
+  console.log(`Courriels publiés  : site ${PUBLIER_COURRIELS_SITE ? 'OUI' : 'non'}, carte ${PUBLIER_COURRIELS_CARTE ? 'OUI' : 'non'} (masquer-courriels.js) ; Est : recrutement médical du CISSS`);
   if (nouveaux.length) {
     console.log(`\nNouveaux slugs attribués (${nouveaux.length}) — désormais figés :`);
     nouveaux.forEach(n => console.log(`  id ${n.id} → /cliniques/${n.slug}/   (${n.nom})`));

@@ -16,7 +16,12 @@
  *   - tout autre texte (infos, etc.)             → chaque adresse remplacée par « À venir ».
  * L'adresse du site (contact@trouvetaclinique.ca) n'est jamais touchée.
  *
- * Pour republier les courriels un jour : PUBLIER_COURRIELS = true, puis régénérer.
+ * Deux interrupteurs réglés séparément (10 oct. 2026) :
+ *   - PUBLIER_COURRIELS_SITE : pages générées par generer-pages-seo.js (masquerCourriels) ;
+ *   - PUBLIER_COURRIELS_CARTE : JSON publiés que lisent les cartes et pages des cartes
+ *     (masquerPourCarte : donneesPubliques de preparer-apercu.js, publier-regions.js).
+ * Pour réafficher les courriels des responsables sur la carte, voir CLAUDE.md (« Réafficher les
+ * courriels sur la carte »). Les fiches de l'Est affichent de toute façon l'adresse du CISSS.
  *
  * Contacts retirés à la demande de la personne (9 oct. 2026) : un objet qui porte
  * « contactMasque: true » (le même objet que le nom, p. ex. « recrutement » d'un secteur du
@@ -30,7 +35,8 @@
  * eux-mêmes (lignes d'établissement ou d'événement) et les adresses web ne sont pas touchés.
  * Pour republier ces numéros un jour : PUBLIER_TELEPHONES = true.
  */
-const PUBLIER_COURRIELS = false;
+const PUBLIER_COURRIELS_SITE = false;
+const PUBLIER_COURRIELS_CARTE = false;
 const PUBLIER_TELEPHONES = false;
 const A_VENIR = 'À venir';
 const EXEMPTES = new Set(['contact@trouvetaclinique.ca']);
@@ -59,21 +65,21 @@ function masquerTelephones(texte) {
   });
 }
 
-function masquerCourriels(valeur, cle = '') {
+function masquer(valeur, cle, publierCourriels) {
   if (typeof valeur === 'string') {
     if (!PUBLIER_TELEPHONES && cle !== 'telephone' && !/^\s*https?:\/\//i.test(valeur)) {
       valeur = masquerTelephones(valeur);
     }
-    if (PUBLIER_COURRIELS || !contientCourriel(valeur)) return valeur;
+    if (publierCourriels || !contientCourriel(valeur)) return valeur;
     if (cle === 'personneRessource') return A_VENIR;
     if (/courriel$/i.test(cle)) return '';
     if (cle === 'lien' && /^\s*mailto:/i.test(valeur)) return '';
     return masquerTexte(valeur);
   }
-  if (Array.isArray(valeur)) return valeur.map(v => masquerCourriels(v, cle));
+  if (Array.isArray(valeur)) return valeur.map(v => masquer(v, cle, publierCourriels));
   if (valeur && typeof valeur === 'object') {
     const sortie = {};
-    for (const [k, v] of Object.entries(valeur)) sortie[k] = masquerCourriels(v, k);
+    for (const [k, v] of Object.entries(valeur)) sortie[k] = masquer(v, k, publierCourriels);
     if (sortie.contactMasque === true) {
       for (const k of CHAMPS_CONTACT) if (k in sortie) sortie[k] = typeof sortie[k] === 'string' ? '' : null;
     }
@@ -82,7 +88,18 @@ function masquerCourriels(valeur, cle = '') {
   return valeur;
 }
 
+/* Pages du site (generer-pages-seo.js). */
+function masquerCourriels(valeur, cle = '') {
+  return masquer(valeur, cle, PUBLIER_COURRIELS_SITE);
+}
+
+/* JSON publiés lus par les cartes et pages des cartes (donneesPubliques, publier-regions.js). */
+function masquerPourCarte(valeur) {
+  return masquer(valeur, '', PUBLIER_COURRIELS_CARTE);
+}
+
 module.exports = {
-  PUBLIER_COURRIELS, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL, RE_TELEPHONE, CHAMPS_CONTACT,
-  contientCourriel, masquerCourriels, masquerTexte, masquerTelephones
+  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL,
+  RE_TELEPHONE, CHAMPS_CONTACT, contientCourriel, masquer, masquerCourriels, masquerPourCarte, masquerTexte,
+  masquerTelephones
 };
