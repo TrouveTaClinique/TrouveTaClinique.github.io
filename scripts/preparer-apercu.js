@@ -5,7 +5,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
-const { masquerCourriels } = require('./masquer-courriels.js');
+const { masquerPourCarte } = require('./masquer-courriels.js');
 
 const RACINE = path.resolve(__dirname, '..');
 const DEPOT_SOURCE = 'TrouveTaClinique/TrouveTaClinique.github.io';
@@ -146,7 +146,7 @@ function donneesPubliques(texte) {
     const politique = donnees.meta.politiqueAffichage;
     if (politique) for (const champ of CHAMPS_INTERNES_POLITIQUE) delete politique[champ];
   }
-  return JSON.stringify(masquerCourriels(donnees), null, 2) + '\n';
+  return JSON.stringify(masquerPourCarte(donnees), null, 2) + '\n';
 }
 
 function preparerApercu(racine, destination, options = {}) {
