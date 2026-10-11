@@ -94,8 +94,8 @@ const PAGES = {
     placeholder: 'Sujet, organisme ou mot-clé…',
     aide: 'Mots-clés ou phrase complète, par exemple : MPOC, otite chez un enfant allergique, patient sous apixaban. Les abréviations, synonymes et fautes de frappe courantes sont reconnus.',
     catalogueTitre: 'Parcourir par sujet',
-    iaTitre: 'Demandez à l’IA quel guide consulter',
-    iaIntro: 'Décrivez la situation en quelques mots.',
+    iaTitre: 'Décrivez la situation en quelques mots',
+    iaIntro: '',
     iaExemple: 'Ex. : toux depuis 4 semaines chez un fumeur de 60 ans',
     proposerTexte: 'Proposez un guide de pratique, un outil clinique ou un document pour les patients utile en première ligne : il sera vérifié avant d’être ajouté au catalogue.'
   },
@@ -329,8 +329,7 @@ ${cle === 'guides' ? `    <div class="guides-communautaire" hidden>
 ${URL_AIGUILLAGE ? `  <section class="guides-band guides-ia" aria-labelledby="guides-ia-titre" data-url="${esc(URL_AIGUILLAGE)}" data-page="${cle}" hidden>
     <p class="guides-ia-pastille"><span aria-hidden="true">✦</span> Nouveau : recherche assistée par IA</p>
     <h2 id="guides-ia-titre">${P.iaTitre}</h2>
-    <p class="guides-ia-intro">${P.iaIntro}</p>
-    <form class="guides-ia-form">
+${P.iaIntro ? `    <p class="guides-ia-intro">${P.iaIntro}</p>\n` : ''}    <form class="guides-ia-form">
       <label class="visually-hidden" for="guides-ia-question">Situation ou question</label>
       <textarea id="guides-ia-question" name="question" rows="1" maxlength="400" enterkeyhint="send" placeholder="${P.iaExemple}" aria-describedby="guides-ia-avis" required></textarea>
       <button type="submit">Obtenir des suggestions</button>
