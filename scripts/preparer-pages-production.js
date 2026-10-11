@@ -12,7 +12,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { lister, RACINE, donneesPubliques, FICHIERS_DONNEES, DOSSIER_ECOUTE } = require('./preparer-apercu.js');
+const { lister, RACINE, donneesPubliques, FICHIERS_DONNEES, reserveApercu } = require('./preparer-apercu.js');
 
 const CNAME_PRODUCTION = 'trouvetaclinique.ca';
 const ORIGINE = 'https://trouvetaclinique.ca';
@@ -34,8 +34,8 @@ function preparerPagesProduction(racine, destination) {
   if (fs.existsSync(destination) && (fs.lstatSync(destination).isSymbolicLink() || fs.readdirSync(destination).length)) {
     throw new Error('La destination doit être un dossier vide.');
   }
-  /* La lecture audio personnelle reste sur l'aperçu. Elle n'entre pas dans le site public. */
-  const fichiers = lister(racine).filter(f => f !== DOSSIER_ECOUTE && !f.startsWith(DOSSIER_ECOUTE + '/'));
+  /* Lecture audio personnelle et résumés PABP : aperçu seulement, pas le site public. */
+  const fichiers = lister(racine).filter(f => !reserveApercu(f));
   for (const extra of EXTRAS) {
     if (fs.existsSync(path.join(racine, extra))) fichiers.push(extra);
   }

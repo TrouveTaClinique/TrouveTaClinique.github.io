@@ -16,12 +16,15 @@ const CNAME_APERCU = 'apercu.trouvetaclinique.ca';
 const DOMAINES_INTERDITS = new Set(['trouvetaclinique.ca', 'www.trouvetaclinique.ca']);
 /* Lecture audio personnelle, aperçu seulement. Adresse non listée, absente du site public. */
 const DOSSIER_ECOUTE = 'ecoute-ems-7k3p';
+/* Résumés audio PABP, aperçu seulement. Pas de lien dans les menus, absents du site public. */
+const DOSSIER_PABP = 'audio-pabp';
 const DOSSIERS = new Set([
   'assets', 'vendor', 'amp', 'ptem', 'ptem-u', 'cliniques', 'rls', 'recherche', 'guides',
   'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest',
   'carte-interactive',
   'a-propos', 'confidentialite',
-  DOSSIER_ECOUTE
+  DOSSIER_ECOUTE,
+  DOSSIER_PABP
 ]);
 const FICHIERS = new Set([
   'index.html', '404.html', 'data.json', 'data-etablissements.json', 'data-etablissements-centre.json', 'leaflet.css', 'leaflet.js',
@@ -44,10 +47,15 @@ const TEXTE = new Set(['.html', '.css', '.js', '.json', '.webmanifest', '.svg'])
 /* Fichiers de travail jamais publiés, même dans un dossier autorisé (audit du 25 septembre 2026). */
 const EXCLUS = new Set(['assets/source', 'assets/banniere_qr.png']);
 
+function reserveApercu(fichier) {
+  return fichier === DOSSIER_ECOUTE || fichier.startsWith(DOSSIER_ECOUTE + '/')
+    || fichier === DOSSIER_PABP || fichier.startsWith(DOSSIER_PABP + '/');
+}
+
 function autorise(fichier) {
   const extension = path.extname(fichier);
   if (FICHIERS.has(fichier) || EXTENSIONS.has(extension)) return true;
-  return extension === '.mp3' && fichier.startsWith(DOSSIER_ECOUTE + '/');
+  return extension === '.mp3' && reserveApercu(fichier);
 }
 
 function lister(racine, relatif = '') {
@@ -223,7 +231,9 @@ module.exports = {
   adapterHtml,
   verifierConfigurationPages,
   lister,
+  reserveApercu,
   DOSSIER_ECOUTE,
+  DOSSIER_PABP,
   RACINE,
   ORIGINE,
   ORIGINE_PROJET,

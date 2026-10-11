@@ -125,6 +125,10 @@ test('Le site complet garde ses données, ses fonctions et les sources intactes'
   const navAccueil = lire('index.html').match(/id="site-nav"[\s\S]*?<\/nav>/);
   assert.ok(navAccueil);
   assert.doesNotMatch(navAccueil[0], /ptem-u/);
+  assert.doesNotMatch(navAccueil[0], /audio-pabp/);
+  assert.ok(fs.existsSync(path.join(destination, 'audio-pabp', 'PABP-Douleurs-prurit-vulvaires.mp3')));
+  assert.ok(fs.existsSync(path.join(destination, 'audio-pabp', 'PABP-Endometriose.mp3')));
+  assert.match(lire('audio-pabp/index.html'), /noindex, nofollow, noarchive/);
   assert.match(lire('monteregie-est/etablissements/gmf-u-des-monteregiennes/index.html'), /\/monteregie-est\/ptem-u\//);
   assert.throws(() => preparerApercu(RACINE, destination), /vide/);
 });
