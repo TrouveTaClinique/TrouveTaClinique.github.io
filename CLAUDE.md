@@ -104,6 +104,11 @@ dates du sitemap selon le contenu réel des pages).
 - Cartes : fond vectoriel (MapLibre) à l'ordinateur, fond CARTO en images au cellulaire
   (≤ 860 px, choix du propriétaire, 28 sept. 2026). Polices des cartes Montérégie, Centre et
   Ouest hébergées dans `assets/polices/` : aucun service de police externe.
+- Cartes et répertoire écrit (11 oct. 2026, choix du propriétaire) : effet aimant. Un petit défilement
+  ramène la page sur la carte ; au-delà de 60 % de l'écran, elle va au début du répertoire, qui défile
+  ensuite librement. Aimantation CSS (`scroll-snap`, proximité) et script `repertoire-aimant`, ajoutés
+  par `publier-regions.js` avec le répertoire. Le répertoire reste visible et dans le HTML (rien de masqué,
+  pour Google).
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
