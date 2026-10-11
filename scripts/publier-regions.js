@@ -657,6 +657,14 @@ html, body {
   overflow-x: hidden !important;
   overflow-y: auto !important;
 }
+/* 11 oct. 2026, effet aimant (choix du propriétaire) : un petit défilement accidentel ramène
+   la page sur la carte ; un geste franc descend au répertoire. Rien n'est masqué : le
+   répertoire reste visible et dans le HTML. Seule la fenêtre défile : si le corps était aussi
+   un conteneur de défilement, il capterait les points d'aimantation sans jamais défiler.
+   76px : hauteur de l'en-tête fixe, pour que le haut du répertoire ne se glisse pas dessous. */
+body { overflow: visible !important; }
+html { scroll-snap-type: y proximity; scroll-padding-top: 76px; }
+.layout, #repertoire-territoire { scroll-snap-align: start; }
 .layout {
   height: 100vh !important;
   height: 100dvh !important;
@@ -703,6 +711,33 @@ html, body {
   ${htmlBlocRls(t)}
   ${htmlBlocCliniques(t, cliniques, gmfuMap)}
   ${htmlBlocEtablissements(t, etablissements)}
+<script id="repertoire-aimant">
+/* Effet aimant (11 oct. 2026, choix du propriétaire) : la page ne reste pas à mi-chemin entre
+   la carte et le répertoire. Quand le défilement s'arrête alors que plus des deux cinquièmes
+   de la carte restent visibles, on revient sur la carte ; sinon, on va au début du répertoire.
+   Le répertoire défile librement. Complète l'aimantation CSS (scroll-snap, proximité). */
+(function () {
+  var rep = document.getElementById('repertoire-territoire');
+  if (!rep || !window.addEventListener) return;
+  var EN_TETE = 76, SEUIL = 0.6, appui = false, minuterie = 0;
+  var doux = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function aimanter() {
+    if (appui) return;
+    var y = window.scrollY;
+    var haut = rep.getBoundingClientRect().top + y - EN_TETE;
+    if (haut <= 0 || y <= 1 || y >= haut - 1) return;
+    window.scrollTo({ top: y < haut * SEUIL ? 0 : haut, behavior: doux ? 'smooth' : 'auto' });
+  }
+  function plusTard() { clearTimeout(minuterie); minuterie = setTimeout(aimanter, 200); }
+  addEventListener('scroll', plusTard, { passive: true });
+  ['touchstart', 'pointerdown'].forEach(function (n) {
+    addEventListener(n, function () { appui = true; }, { passive: true });
+  });
+  ['touchend', 'touchcancel', 'pointerup', 'pointercancel'].forEach(function (n) {
+    addEventListener(n, function () { appui = false; plusTard(); }, { passive: true });
+  });
+})();
+</script>
 </nav>` };
 }
 
