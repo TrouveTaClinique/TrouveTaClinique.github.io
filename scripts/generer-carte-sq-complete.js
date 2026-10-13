@@ -146,29 +146,11 @@ function generer() {
     '',
     'bouton installer');
 
+  // Depuis le 13 oct. 2026, la carte Est n'a plus de liens vers le reste du site (carte
+  // hermétique, choix du propriétaire) : cette carte-ci garde les siens, remis ici et plus bas.
   html = uneFois(html,
     `      <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/est/recrutement-medical-monteregie-est" target="_blank" rel="noopener">
         <span class="info-menu-ic">i</span> À propos du recrutement
-      </a>
-      <hr>
-      <a class="info-menu-link" role="menuitem" href="rls/pierre-boucher/">
-        <span class="info-menu-ic" style="background:#0080D7">📋</span> Cliniques : RLS Pierre-Boucher
-      </a>
-      <a class="info-menu-link" role="menuitem" href="rls/richelieu-yamaska/">
-        <span class="info-menu-ic" style="background:#08A0A0">📋</span> Cliniques : RLS Richelieu-Yamaska
-      </a>
-      <a class="info-menu-link" role="menuitem" href="rls/pierre-de-saurel/">
-        <span class="info-menu-ic" style="background:#170A72">📋</span> Cliniques : RLS Pierre-De Saurel
-      </a>
-      <hr>
-      <a class="info-menu-link" role="menuitem" href="ptem/">
-        <span class="info-menu-ic">📘</span> Guide PTEM 2027
-      </a>
-      <a class="info-menu-link" role="menuitem" href="amp/">
-        <span class="info-menu-ic">📗</span> Guide des AMP
-      </a>
-      <a class="info-menu-link" role="menuitem" href="video/">
-        <span class="info-menu-ic">▶</span> La carte en vidéo (4 min)
       </a>
       <hr>
       <button type="button" class="info-menu-link" role="menuitem" id="info-menu-install">
@@ -625,9 +607,14 @@ function syncRegChips() {
     "function htmlCorpsSecteur(s) {\n  const notes = (s.notesPubliques || []).map(n => `<div class=\"vw-row\"><span class=\"vw-label\">Précision</span><span class=\"vw-value\">${esc(n)}</span></div>`).join('');\n  return `<div class=\"dp-sect-corps\">\n      ${s.besoinDeclare ? `<div class=\"vw-row\"><span class=\"vw-label\">Besoin déclaré</span><span class=\"vw-value\">${esc(s.besoinDeclare)}</span></div>` : ''}\n      ${s.dme ? `<div class=\"vw-row\"><span class=\"vw-label\">Dossier médical</span><span class=\"vw-value\">${esc(s.dme)}</span></div>` : ''}\n",
     'besoin et dossier médical du secteur');
   html = uneFois(html,
-    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${s.contactMasque ? '' : `<div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
-    "<a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${notes}\n      ${s.contactMasque ? '' : `<div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
-    'précisions du secteur');
+    "${esc(GMFU_CONDITION)}</span></div>` : ''}\n      ${s.contactMasque ? '' : `<div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
+    "${esc(GMFU_CONDITION)} <a href=\"/monteregie-est/ptem-u/\">Guide PTEM-U</a></span></div>` : ''}\n      ${notes}\n      ${s.contactMasque ? '' : `<div class=\"vw-row\"><span class=\"vw-label\">Contact</span>",
+    'précisions du secteur et guide PTEM-U');
+  html = uneFois(html,
+    "      <div class=\"vw-row\"><span class=\"vw-label\">Type</span><span class=\"vw-value\">${g.type && g.type.trim() ? esc(g.type) : 'À venir'}</span></div>\n",
+    "      <div class=\"vw-row\"><span class=\"vw-label\">Type</span><span class=\"vw-value\">${g.type && g.type.trim() ? esc(g.type) : 'À venir'}</span></div>\n" +
+    "      ${String(g.type || '').toUpperCase() === 'GMF-U' ? `<div class=\"vw-row\"><span class=\"vw-label\">PTEM-U</span><span class=\"vw-value\"><a href=\"/monteregie-est/ptem-u/\">Guide du recrutement en GMF-U</a></span></div>` : ''}\n",
+    'guide PTEM-U des fiches GMF-U');
 
   html = uneFois(html,
     "const NOTE_KEY  = id => 'dtmf-mtg-note-' + id;\nconst ORDER_KEY = 'dtmf-mtg-ordre';\nconst FAVORDER_KEY = 'dtmf-mtg-ordre-favoris';\nconst FAVORDER_ETAB_KEY = 'dtmf-mtg-ordre-favoris-etablissements';\nconst FAV_KEY   = 'dtmf-mtg-favoris';\nconst FAV_SECTEURS_KEY = 'ttc-est-secteurs-favoris-v1';\nconst NOTE_SECTEUR_KEY = id => 'ttc-est-secteur-note-v1-' + id;",

@@ -92,7 +92,9 @@ test('La génération est stable et ne change ni données ni autres cartes', () 
   const ouest = finsDeLigneUnix(lire('monteregie-ouest/index.html'));
   assert.match(complete, /id="repertoire-etablissements"/);
   assert.match(estApres, /id="repertoire-etablissements"/);
-  assert.match(estApres, /etablissements\/hopital-pierre-boucher\//);
+  // 13 oct. 2026 : carte Est hermétique, son répertoire nomme les établissements sans lien.
+  assert.match(estApres, /<li>Hôpital Pierre-Boucher <span class="repertoire-meta">/);
+  assert.doesNotMatch(estApres, /etablissements\/hopital-pierre-boucher\//);
   assert.match(complete, /etablissements\/hopital-du-haut-richelieu\//);
   assert.match(centre, /href="\/monteregie-centre\/etablissements\/"/);
   assert.match(centre, /href="\/monteregie\/\?region=Centre"/);
