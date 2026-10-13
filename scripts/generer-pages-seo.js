@@ -38,7 +38,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { masquerCourriels, PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE } = require('./masquer-courriels.js');
+const { masquerCourriels, PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE } = require('./masquer-courriels.js');
 
 const RACINE = path.join(__dirname, '..');
 const SITE = 'https://trouvetaclinique.ca';
@@ -5029,7 +5029,7 @@ function main() {
   console.log(`Sitemap            : ${entrees.length} URL`);
   console.log(`Redirections CF    : ${nRedirCf} (scripts/cloudflare-bulk-redirects.csv)`);
   console.log(`GMF-U canoniques   : ${Object.keys(HREF_GMFU_ETABLISSEMENT).length} fiches cliniques redirigées vers /etablissements/`);
-  console.log(`Courriels publiés  : site ${PUBLIER_COURRIELS_SITE ? 'OUI' : 'non'}, carte ${PUBLIER_COURRIELS_CARTE ? 'OUI' : 'non'} (masquer-courriels.js) ; Est : recrutement médical du CISSS`);
+  console.log(`Courriels publiés  : site ${PUBLIER_COURRIELS_SITE ? 'OUI' : 'non'}, carte ${PUBLIER_COURRIELS_CARTE ? 'OUI' : (REGIONS_COURRIELS_CARTE.length ? 'cliniques ' + REGIONS_COURRIELS_CARTE.join(', ') + ' seulement' : 'non')} (masquer-courriels.js) ; Est : recrutement médical du CISSS`);
   if (nouveaux.length) {
     console.log(`\nNouveaux slugs attribués (${nouveaux.length}) — désormais figés :`);
     nouveaux.forEach(n => console.log(`  id ${n.id} → /cliniques/${n.slug}/   (${n.nom})`));

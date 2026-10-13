@@ -7,13 +7,17 @@
    (Est : fiches de l'Est et page PTEM ; Ouest : page PTEM), décision du 10 oct. 2026.
    Les tests suivent les interrupteurs PUBLIER_COURRIELS_SITE et PUBLIER_COURRIELS_CARTE : le jour où
    le propriétaire donne son accord pour réafficher les courriels sur la carte, mettre
-   PUBLIER_COURRIELS_CARTE à true suffit, aucun test ne bloque (voir CLAUDE.md). */
+   PUBLIER_COURRIELS_CARTE à true suffit, aucun test ne bloque (voir CLAUDE.md).
+   13 oct. 2026 (accord du propriétaire) : les cliniques des régions de REGIONS_COURRIELS_CARTE (l'Est)
+   gardent leurs courriels dans les JSON publiés, donc sur les deux cartes ; tout le reste des données
+   et toutes les pages du site restent vérifiés comme avant. */
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 const {
-  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, A_VENIR, masquer, masquerCourriels, masquerTexte, contientCourriel
+  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE, A_VENIR, masquer, masquerCourriels, masquerTexte,
+  contientCourriel
 } = require('./masquer-courriels.js');
 const { lister, donneesPubliques, FICHIERS_DONNEES, RACINE } = require('./preparer-apercu.js');
 
@@ -23,10 +27,18 @@ const PERMISES = new Set(['contact@trouvetaclinique.ca', COURRIEL_CISSS_EST, COU
 const PAGES_CARTES = new Set(['monteregie-est/index.html', 'monteregie/index.html']);
 const RE_COURRIEL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const TEXTE = /\.(html|json|js|xml|txt|webmanifest|css|csv|md)$/i;
+const regionPubliee = c => REGIONS_COURRIELS_CARTE.includes(c && c.region);
+/* JSON publié sans les cliniques dont les courriels sont permis sur les cartes. */
+function publieHorsExceptions(texte) {
+  const json = JSON.parse(donneesPubliques(texte));
+  if (Array.isArray(json.cliniques)) json.cliniques = json.cliniques.filter(c => !regionPubliee(c));
+  return JSON.stringify(json, null, 2);
+}
 
 test('interrupteurs des courriels : site et carte réglés séparément', () => {
   assert.equal(typeof PUBLIER_COURRIELS_SITE, 'boolean');
   assert.equal(typeof PUBLIER_COURRIELS_CARTE, 'boolean');
+  assert.ok(Array.isArray(REGIONS_COURRIELS_CARTE) && REGIONS_COURRIELS_CARTE.every(r => typeof r === 'string'));
 });
 
 test('masquerCourriels : chaque champ reçoit la bonne valeur', () => {
@@ -68,7 +80,7 @@ test('aucun fichier publié ne contient d’autre courriel que ceux permis (selo
     const cote = FICHIERS_DONNEES.has(fichier) || PAGES_CARTES.has(fichier) ? PUBLIER_COURRIELS_CARTE : PUBLIER_COURRIELS_SITE;
     if (cote) continue;
     let texte = fs.readFileSync(path.join(RACINE, fichier), 'utf8');
-    if (FICHIERS_DONNEES.has(fichier)) texte = donneesPubliques(texte);
+    if (FICHIERS_DONNEES.has(fichier)) texte = publieHorsExceptions(texte);
     for (const m of texte.match(RE_COURRIEL) || []) {
       const adresse = m.toLowerCase();
       if (PERMISES.has(adresse) || /\.(png|jpe?g|webp|svg|gif|js|css)$/.test(adresse)) continue;
@@ -81,7 +93,7 @@ test('aucun fichier publié ne contient d’autre courriel que ceux permis (selo
 test('les JSON publiés ne gardent aucun courriel, même si data.json en recevait', { skip: PUBLIER_COURRIELS_CARTE && 'courriels réaffichés sur la carte' }, () => {
   for (const fichier of FICHIERS_DONNEES) {
     const brut = JSON.parse(fs.readFileSync(path.join(RACINE, fichier), 'utf8'));
-    if (brut.cliniques) brut.cliniques[0].personneRessource = 'quelquun@gmail.com';
+    if (brut.cliniques) brut.cliniques.find(c => !regionPubliee(c)).personneRessource = 'quelquun@gmail.com';
     if (brut.secteurs) brut.secteurs[0].recrutement = { responsableCourriel: 'quelquun@gmail.com' };
     brut.meta = { ...(brut.meta || {}), note: 'Écrire à quelquun@gmail.com' };
     const publie = donneesPubliques(JSON.stringify(brut));
@@ -205,7 +217,30 @@ test('Est : adresse du recrutement médical du CISSS sur toutes les fiches de cl
   assert.ok(ptem.includes(`mailto:${COURRIEL_CISSS_EST}`) && ptem.includes(`mailto:${COURRIEL_CISSS_OUEST}`), 'page PTEM');
   if (!PUBLIER_COURRIELS_CARTE) {
     for (const fichier of FICHIERS_DONNEES) {
-      assert.doesNotMatch(donneesPubliques(fs.readFileSync(path.join(RACINE, fichier), 'utf8')), /@ssss\.gouv\.qc\.ca/, `${fichier} : la carte reste sans courriel`);
+      assert.doesNotMatch(publieHorsExceptions(fs.readFileSync(path.join(RACINE, fichier), 'utf8')), /@ssss\.gouv\.qc\.ca/, `${fichier} : la carte reste sans courriel`);
     }
   }
+});
+
+/* 13 oct. 2026 (accord du propriétaire) : courriels des responsables du recrutement réaffichés pour
+   les cliniques de l'Est, sur les deux cartes ; Centre et Ouest gardent « À venir ». Le test compte
+   les fiches, il n'écrit aucune adresse. */
+test('cartes : courriels des cliniques de l’Est publiés, aucun pour les autres régions', () => {
+  const data = JSON.parse(donneesPubliques(fs.readFileSync(path.join(RACINE, 'data.json'), 'utf8')));
+  const avec = c => contientCourriel(JSON.stringify(c));
+  const est = data.cliniques.filter(regionPubliee);
+  const autres = data.cliniques.filter(c => !regionPubliee(c));
+  assert.ok(est.filter(avec).length >= 20, `${est.filter(avec).length} cliniques de l'Est avec un courriel publié`);
+  assert.deepEqual(autres.filter(avec).map(c => c.id), [], 'cliniques hors Est avec un courriel publié');
+  const injecte = masquer({ cliniques: [{ region: 'Est', personneRessource: 'a@exemple.ca' }] }, '', false);
+  assert.equal(injecte.cliniques[0].personneRessource, A_VENIR, 'masquer seul ne connaît pas l’exception');
+  const { masquerPourCarte } = require('./masquer-courriels.js');
+  const carte = masquerPourCarte({ annonce: { lien: 'mailto:b@exemple.ca' }, cliniques: [
+    { region: 'Est', personneRessource: 'a@exemple.ca' }, { region: 'Centre', personneRessource: 'c@exemple.ca' },
+    { region: 'Est', personneRessource: 'd@exemple.ca', contactMasque: true }] });
+  assert.equal(carte.cliniques[0].personneRessource, PUBLIER_COURRIELS_CARTE || regionPubliee({ region: 'Est' }) ? 'a@exemple.ca' : A_VENIR);
+  assert.equal(carte.cliniques[1].personneRessource, PUBLIER_COURRIELS_CARTE ? 'c@exemple.ca' : A_VENIR);
+  assert.equal(carte.cliniques[2].personneRessource, '', 'contactMasque l’emporte toujours');
+  assert.equal(carte.annonce.lien, PUBLIER_COURRIELS_CARTE ? 'mailto:b@exemple.ca' : '', 'annonce : interrupteur général');
+  assert.deepEqual(Object.keys(carte), ['annonce', 'cliniques'], 'ordre des clés gardé');
 });
