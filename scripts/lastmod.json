@@ -1,11 +1,11 @@
 {
  "/": {
-  "empreinte": "3726a610a66cfb7467a84c5875e3a8da887c64e4",
-  "date": "2026-10-10"
+  "empreinte": "d9357d1c550964c99a4baae81bb8b51749e41589",
+  "date": "2026-10-13"
  },
  "/a-propos/": {
-  "empreinte": "b5cefc32bb0bf5f6dda9a83d7bb7fba78123f8a7",
-  "date": "2026-10-10"
+  "empreinte": "dcdc306ff0d0304696759073b153a5e641f584bf",
+  "date": "2026-10-13"
  },
  "/confidentialite/": {
   "empreinte": "bec9da76eff8c24266b69001a08460780d12e5c4",
@@ -20,140 +20,140 @@
   "date": "2026-10-08"
  },
  "/monteregie-centre/": {
-  "empreinte": "59902b61e1f88ed2d412adfd4ca0e4c90efcb345",
-  "date": "2026-10-10"
+  "empreinte": "ff29500bbbe82ac7cd823590ddac5773a4f54636",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/": {
-  "empreinte": "7cc3325100ec61a5fa27706f4e5b91a77dca4b69",
-  "date": "2026-10-10"
+  "empreinte": "58726eefa113d2b580b6f28e71bcc31fb77493bc",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/clinique-medicale-du-college-gmf-richelieu-saint-cesaire/": {
-  "empreinte": "f5060dcd248579a72554392bf47e27fe167cdc89",
-  "date": "2026-10-10"
+  "empreinte": "d61998fc33670beb5a6182d4808a2a3c67683a99",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/clinique-medicale-saint-luc-gmf-saint-luc-saint-eugene/": {
-  "empreinte": "d1db71b628d8b7cf005ff288ef3068de56e44d95",
-  "date": "2026-10-10"
+  "empreinte": "92a40f06507f44e583b2211d3e53a7c2af5a02b3",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/clsc-de-henryville/": {
-  "empreinte": "8f18349d57394406192d3372b1225e5c28f2f290",
-  "date": "2026-10-10"
+  "empreinte": "85e15167b901ee7e92085fe4bc34f6075af6e3d5",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/cooperative-de-sante-lac-champlain/": {
-  "empreinte": "fe6c951e2543a125f1394a6f979837a593d3bdce",
-  "date": "2026-10-10"
+  "empreinte": "74784ce6144fc3e8c41160fa89e6df21915e82d0",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/cooperative-solidarite-sante-saint-blaise-sur-richelieu/": {
-  "empreinte": "6a08ef1254c8e912d8da1bd427009bdbf3341f01",
-  "date": "2026-10-10"
+  "empreinte": "75b4046d90ee8ff41260a212a296a6ee7cff2a6f",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-centre-medical-iberville/": {
-  "empreinte": "063bbe254d78a3c4267ceb190a7da54abec4991c",
-  "date": "2026-10-10"
+  "empreinte": "6cbdc67eb28dda0f1768c27bd15823478d69045b",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-centre-medical-st-hubert/": {
-  "empreinte": "c18f2a46cf5e9c6530c8dca82e31ac567d13bc1c",
-  "date": "2026-10-10"
+  "empreinte": "8b9b0a2be2c279d7fd0e50bded92492f3305e76f",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-du-coteau/": {
-  "empreinte": "753471a76d79d22173ba2bda721f91b217a78d0e",
-  "date": "2026-10-10"
+  "empreinte": "ea597f781df5edfd0ce132dc46eb7f34a6438517",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-haut-richelieu/": {
-  "empreinte": "7bff950edbb114825a1dd2da14ec246accdd2925",
-  "date": "2026-10-10"
+  "empreinte": "c7810b5786527015ecab5815c448539cb5e10df3",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-la-clinique-fort-chambly/": {
-  "empreinte": "cb09f2e40e7a453fc6cf08d648564345442a2aa6",
-  "date": "2026-10-10"
+  "empreinte": "431ccb59a4387f0b1fc696636ef50461eca0ce81",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-lapiniere/": {
-  "empreinte": "ed261b03651ef91a353bbfce05c56ee80b7a6822",
-  "date": "2026-10-10"
+  "empreinte": "3ed5aad493c8f046033c67a1971ed6677f7ddc6d",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-medicentre-saint-jean/": {
-  "empreinte": "7aa7cc7514f01d76f1e471fb42c575a166e26ed6",
-  "date": "2026-10-10"
+  "empreinte": "0a9bc87dd3c1611710d0c65a0af80bbf56f8ae18",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-pro-sante-marieville/": {
-  "empreinte": "0ae4686df813f22dd6369c3922c3e271f113e2ad",
-  "date": "2026-10-10"
+  "empreinte": "50286d15f0cb12bab81947d82a6a3bca8eb8a557",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-r-clinique-azur/": {
-  "empreinte": "ba3707b9c47b0770534426ed66f0c2a146878de6",
-  "date": "2026-10-10"
+  "empreinte": "de15a3c74b8039bb25f76eade719f6feea7877cd",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-richelieu-saint-cesaire-clsc-du-richelieu/": {
-  "empreinte": "ca591c688f1e9e609801be182e8924ea66d56532",
-  "date": "2026-10-10"
+  "empreinte": "ceefb5184bc201f519c5d2f9568be47270d129ca",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-saint-luc-saint-eugene-clinique-medicale-saint-eugene/": {
-  "empreinte": "2a7f290493fa2293b20883fa3376abfbdc8cfab2",
-  "date": "2026-10-10"
+  "empreinte": "4fef7f6d8fdc4e5d210e23a652211cdd19f66e71",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-u-charles-le-moyne/": {
-  "empreinte": "ae423dc3513e48bebb0a74bf364521ec40132a77",
-  "date": "2026-10-10"
+  "empreinte": "4da434a8642587ae130a593567dbd15023bc85a5",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-u-de-saint-jean-sur-richelieu/": {
-  "empreinte": "63f82604624a5be0952a4905d3a29c654bbb95ac",
-  "date": "2026-10-10"
+  "empreinte": "39f742bcdcb3c427ad14a1efe772b54d9f824795",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/gmf-u-saint-hubert/": {
-  "empreinte": "0f05b9629d3e02c1a27d478f54b8050b1a132b47",
-  "date": "2026-10-10"
+  "empreinte": "f0cd1efd22bcec4d36a53afae5e65ba5c126d321",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/cliniques/point-de-service-saint-cesaire-gmf-richelieu-saint-cesaire/": {
-  "empreinte": "d6b0e043100cacbd616901aa5235fe0c33b9c9cd",
-  "date": "2026-10-10"
+  "empreinte": "9c5ae04894d75d7067a43b0ebc486b362a014116",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/": {
   "empreinte": "51797d096c77a30176122deac9d20482ead2e257",
   "date": "2026-10-08"
  },
  "/monteregie-centre/etablissements/centre-de-pediatrie-sociale-l-etoile/": {
-  "empreinte": "242ad62fa1d5c5f30e6b39f8d3e2b6ab264f4c27",
-  "date": "2026-10-10"
+  "empreinte": "200d2a83fb29afc8af7e33d4d1a26c8168f417ac",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/chsld-de-saint-jean-sur-richelieu/": {
-  "empreinte": "cb2cf8563c670aa0f40ea9acede22ca662d9fb77",
-  "date": "2026-10-10"
+  "empreinte": "c2758b0dfaf706c5c0e1fd3b3456d62a11eadb26",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/clinique-des-jeunes-du-bassin-de-chambly/": {
-  "empreinte": "54b0208ea3c9724013198272a8aa97ba0efa3e01",
-  "date": "2026-10-10"
+  "empreinte": "9b41797ab6492053c68d82d487d2e5add9b82918",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/clinique-jeunesse-de-saint-jean-sur-richelieu/": {
-  "empreinte": "1072b6f4a031c06e4c35b0e4fa42f789bd7e1b23",
-  "date": "2026-10-10"
+  "empreinte": "011ed4c46c8b6864fdcc3404d7a2f8d616754280",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/clsc-vallee-des-forts-soutien-a-domicile/": {
-  "empreinte": "8d5b6d48a57023899d698c655b8bff4cd20b2e18",
-  "date": "2026-10-10"
+  "empreinte": "0a5d67a682140b6e4e8ee28a10b59be51d90ed00",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/gmf-u-de-saint-jean-sur-richelieu/": {
-  "empreinte": "db64ecfca117b1054fc8420a3d4161fa29e9bd6c",
-  "date": "2026-10-10"
+  "empreinte": "88f879b679082852c214fb124b74461727b6bfbc",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/hopital-du-haut-richelieu/": {
-  "empreinte": "e63ba2a57e8f4b1c1735fd40c3bb10ea262f3087",
-  "date": "2026-10-10"
+  "empreinte": "ebd84e6ed4cdf8d60a6e8f3a3ebfbba251557540",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/etablissements/manoir-soleil/": {
-  "empreinte": "5a2707cc8c455cb67b20379ca4bf84befb6d0911",
-  "date": "2026-10-10"
+  "empreinte": "b87ca00f1439d20e18a15f537e66df0c42c18082",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/rls/": {
-  "empreinte": "5509df48bf2190aa159e2071d74a9ae78cdcf0dc",
-  "date": "2026-10-10"
+  "empreinte": "f830f9ef0cb01f4bde436eec17be77f51dba331d",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/rls/champlain/": {
-  "empreinte": "87ee12dbb8fdd6faaf217e90edb0a7198c393dca",
-  "date": "2026-10-10"
+  "empreinte": "80dc2c6f3a554c081c43e557c669fa6d1cdfe811",
+  "date": "2026-10-13"
  },
  "/monteregie-centre/rls/haut-richelieu-rouville/": {
-  "empreinte": "3813561dc33dc93e2b3adb4c62636d40d84a4a86",
-  "date": "2026-10-10"
+  "empreinte": "6008f818ca816bb4bd8af09207275fc286947ea3",
+  "date": "2026-10-13"
  },
  "/monteregie-est/": {
   "empreinte": "2f2d780492167766286f9b281b8342f263e08ffc",
@@ -164,180 +164,180 @@
   "date": "2026-10-08"
  },
  "/monteregie-est/cliniques/": {
-  "empreinte": "16216ffb3a7b87ff571df86ba7948e4eb2270060",
-  "date": "2026-10-10"
+  "empreinte": "6dee00463c9cb87257595bc63b6abb33ba477848",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/camu-longueuil-gmf-petit-bois/": {
-  "empreinte": "20cddbf9641b2a30ea5188574a14a844b6048c8a",
-  "date": "2026-10-10"
+  "empreinte": "072fadb0b37b25d386c070d04716edef6c92a7a0",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-b/": {
-  "empreinte": "4564900f81b3599269cdbe77d31a8ccf6033d217",
-  "date": "2026-10-10"
+  "empreinte": "a20c406b69c084b3843b3330c50743d4a611e42c",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-c-gmf-st-mathieu-de/": {
-  "empreinte": "3eff9682495ac8f26186454d181685b2d60c9fb6",
-  "date": "2026-10-10"
+  "empreinte": "1d0cd4664277d0d672d0b3a93e01553ca3fd2bd3",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy/": {
-  "empreinte": "4a42da4e5d735c5fefd71387bb99099e6c01beab",
-  "date": "2026-10-10"
+  "empreinte": "23d83ca3d3b27a0de07082675a9e4922d76c1a54",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/clinique-la-releve-gmf-petit-bois/": {
-  "empreinte": "8f5b8ed6a1f159ce41a1dad5ba2173fb604aa895",
-  "date": "2026-10-10"
+  "empreinte": "e82355862422fc7cdc0121c06f0800600061b28c",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/clinique-medicale-les-2-chenes/": {
-  "empreinte": "4a53b0a37bc03490d9dc55eac93863f07e801529",
-  "date": "2026-10-10"
+  "empreinte": "dd68d3258ef889362c5ea3016fade445b9a7598a",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-3090-saint-basile/": {
-  "empreinte": "fed5f524c86de1d88c09a4545ee06cdd388875b4",
-  "date": "2026-10-10"
+  "empreinte": "7eccd044b61e1cce4715938a587fc6a8272d1868",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-carrefour-de-la-vallee/": {
-  "empreinte": "545e76fe88ce891ac830625b5ee17723ad3225c0",
-  "date": "2026-10-10"
+  "empreinte": "a880179f80e48a032b5eb41a1a48d57c65316e49",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-cooperative-de-solidarite-de-sante-de-la-mrc-d-acton/": {
-  "empreinte": "0320e7ca025b3b7eb8daedca1b92be115d493cb8",
-  "date": "2026-10-10"
+  "empreinte": "aba9c58290bc50288cf3cfaa971e0438f240a1a5",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-des-iles-percees/": {
-  "empreinte": "dce398c0433202107950ba73e010abf019fcebbb",
-  "date": "2026-10-10"
+  "empreinte": "f100b315c6a203b5b440d5eae0c758b295c11ff2",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-des-patriotes-horizon/": {
-  "empreinte": "b649e9b17a17c4e8b8535cecc23094cd3a1512d4",
-  "date": "2026-10-10"
+  "empreinte": "1892965ac60e631a200ca22006e2b891fe46bc0e",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-des-seigneuries/": {
-  "empreinte": "f448ef6dedd0b255d68961ba72b590c03fa19711",
-  "date": "2026-10-10"
+  "empreinte": "935094af9b33670af3cb9da3bb7e5f5bab08a01e",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-l-autre-maison/": {
-  "empreinte": "b56e65a4228c45a21a72865196609e9f3d3ce603",
-  "date": "2026-10-10"
+  "empreinte": "3a71ef0dce640a236d352b572829c612d98f4674",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-laframboise/": {
-  "empreinte": "058c127ec4068042017edb692f6c1b44d0c767fb",
-  "date": "2026-10-10"
+  "empreinte": "6d4d112e1ed8242d454b4d1897e064ee1f68cec2",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-le-sentier/": {
-  "empreinte": "fcba4ca9cc6ffe99811b5a0cd568ec789abf5c0e",
-  "date": "2026-10-10"
+  "empreinte": "68d3ee447fa789b6c18b497e903874e76cae05f3",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-marguerite-d-youville/": {
-  "empreinte": "142391609988a95b837110b79e5a9e9b625632c1",
-  "date": "2026-10-10"
+  "empreinte": "eaf55b6b1b857219512ad6c1744bd11271c4834c",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-maska/": {
-  "empreinte": "4bef25ca981d1eb4967e20e52e53d507d5d7e92b",
-  "date": "2026-10-10"
+  "empreinte": "9a57fbc889004b9f3130e57791c02d522b38832c",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-r-pierre-boucher/": {
-  "empreinte": "28c43eec8ca796cdf0ace6873e36c06936f62383",
-  "date": "2026-10-10"
+  "empreinte": "c1bca65c0da909578c969e9eb91873787e4ac80a",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-richelieu/": {
-  "empreinte": "57dd56cdacec0ea7f8c96226da9250f79d63b9c8",
-  "date": "2026-10-10"
+  "empreinte": "c4c0c6d4b1312dcd8c8a2ffeefc6b41b73dcaf78",
+  "date": "2026-10-13"
  },
  "/monteregie-est/cliniques/gmf-sainte-julie/": {
-  "empreinte": "acdcb6528e25b8bfa694971b50a523275d37bfee",
-  "date": "2026-10-10"
+  "empreinte": "fe64421b1893779d864087aff0e59b6b86e662f0",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/": {
-  "empreinte": "dd766e523a0f247d801107ccae5c5c346c4b7001",
-  "date": "2026-10-10"
+  "empreinte": "94290b2ae0fa035d9cae427b3abde31ebede6584",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-de-contrecoeur/": {
-  "empreinte": "0ace7e53c0deeb4fd25169b1fb60784045621ca9",
-  "date": "2026-10-10"
+  "empreinte": "459fbeec7a80c522b654db6703ea645461bda188",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-de-l-hotel-dieu-de-saint-hyacinthe/": {
-  "empreinte": "83f3cc03bd2102e8971b9760ef5f2c7bd6247f92",
-  "date": "2026-10-10"
+  "empreinte": "4cd180659a05f98ecea9e14c162596826fdbf0f1",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-de-montarville/": {
-  "empreinte": "bf1a45bcfddfb401dbfa0efd3e1ab7b8ab2c348c",
-  "date": "2026-10-10"
+  "empreinte": "a51a7efbaba48c6093c9f814316e7ef684b5826f",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-elisabeth-lafrance/": {
-  "empreinte": "ee09952e29c225e6c75c7554a536786b3cee300d",
-  "date": "2026-10-10"
+  "empreinte": "1acc7d3f51552238ac02c96b83e58276672fe1cc",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-j-arsene-parenteau/": {
-  "empreinte": "a6fd40bad1decf79f805d3eb2e563a77e858041a",
-  "date": "2026-10-10"
+  "empreinte": "1273652f3597166400accf83b8c0cb9688350813",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-jeanne-crevier/": {
-  "empreinte": "6f0f683c6e0a7e70dffbf890ec26453e6cb9e0e2",
-  "date": "2026-10-10"
+  "empreinte": "870c5a41b08fcb4033bd3b119d664a0c789dba77",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-d-hebergement-marguerite-adam/": {
-  "empreinte": "37b5f5cd738de1651dda47db0be67ce7a3ac3e16",
-  "date": "2026-10-10"
+  "empreinte": "a36056ba15feba8e3916356118e16141e9e2c06e",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-de-detention/": {
-  "empreinte": "a59ca9f9b927566e5320c9fcbc9a14de85dadee3",
-  "date": "2026-10-10"
+  "empreinte": "d8122c10f966376e37013f06ec27a04138bf631e",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-longueuil/": {
-  "empreinte": "c6424539c2c88c2c99bccee750274eaf7a2fb055",
-  "date": "2026-10-10"
+  "empreinte": "a09793f48f1f4522126b2709bede525ee47a8b36",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/": {
-  "empreinte": "dc2f68aa566053452ecd632a8f8ac9ac671b1b97",
-  "date": "2026-10-10"
+  "empreinte": "a8bec8d0ef86065f8c3be3e8c149f24a1c4b5d57",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/centre-de-readaptation-en-dependance-saint-philippe/": {
-  "empreinte": "5490abc2fea72aca86796cfd6b82d1dd7b81018e",
-  "date": "2026-10-10"
+  "empreinte": "d129dda6181abf7ce75c87dc7b19e15d2b7a4953",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/clsc-de-longueuil-ouest/": {
-  "empreinte": "a039a5b539d0cf63819d4b8604f5105fa43e4ad3",
-  "date": "2026-10-10"
+  "empreinte": "8b67fe96b11636f34b0eb9e37fb6cd9272edf898",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/clsc-des-maskoutains/": {
-  "empreinte": "86375fc0cb0fa6f936cd59b5aca51ba65eb40408",
-  "date": "2026-10-10"
+  "empreinte": "971da21c452a5094ba90fe4d72b467142c1a4f67",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/clsc-des-patriotes/": {
-  "empreinte": "ca77247b7eef16a218e19e0777e0f05310f043b8",
-  "date": "2026-10-10"
+  "empreinte": "118b35c9a0f9609fed44473c0792599c74d1cb88",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/clsc-des-seigneuries/": {
-  "empreinte": "d358dec4932822854497dd731fc74245010662e6",
-  "date": "2026-10-10"
+  "empreinte": "dd170cc2fa2aeed44123261a7b6d76b0cdbd8bc7",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/clsc-gaston-belanger/": {
-  "empreinte": "8ac203be99cf3d0998d4bbba32d5e0bcec8baf75",
-  "date": "2026-10-10"
+  "empreinte": "aeb1121bc32e5a1cc08a5e72dbc8f0626e3bea01",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/clsc-simonne-monet-chartrand/": {
-  "empreinte": "876b8cd70b402ad6d88c51659f88bfcc96033091",
-  "date": "2026-10-10"
+  "empreinte": "f1964fd73a1913a3ed064a1a44008f61fe71968d",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/gmf-u-des-monteregiennes/": {
-  "empreinte": "83756ba8f8412b02d6046206f8145d1fe59751c2",
-  "date": "2026-10-10"
+  "empreinte": "b102f1730bfa2a63dff3001c0cb5beba07ec849c",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/gmf-u-richelieu-yamaska/": {
-  "empreinte": "d476580153cdcc8f957a65864dd2da7f8aff928e",
-  "date": "2026-10-10"
+  "empreinte": "7a1b54311857b84013c2455fb03328f5b9728c65",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/hopital-honore-mercier/": {
-  "empreinte": "ceda3493ef5140b5740087834bdeec615fa9ec77",
-  "date": "2026-10-10"
+  "empreinte": "109d1295747191af7fbff9192ae5098bf4ce569a",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/hopital-pierre-boucher/": {
-  "empreinte": "24faaf665e55c69eed775c88238cdb74c6242d26",
-  "date": "2026-10-10"
+  "empreinte": "19fd39186823fec9c7d1bb6d7559eecc54fdaf8d",
+  "date": "2026-10-13"
  },
  "/monteregie-est/etablissements/hotel-dieu-de-sorel/": {
-  "empreinte": "ada0cab3c7f96ab4f938d503c0bd30d660d68c64",
-  "date": "2026-10-10"
+  "empreinte": "3c4296330abab19da68f1b9b9b93d96e3e9c46bc",
+  "date": "2026-10-13"
  },
  "/monteregie-est/ptem-u/": {
   "empreinte": "3cc6592513e1c9688d75010f6c8bf237b63b9f8d",
@@ -348,128 +348,128 @@
   "date": "2026-10-10"
  },
  "/monteregie-est/rls/": {
-  "empreinte": "7679c4f488544584dcf25a1dc19808c7ebf17380",
-  "date": "2026-10-10"
+  "empreinte": "93df8df259301d85d3b04febe1ff383a9bcba515",
+  "date": "2026-10-13"
  },
  "/monteregie-est/rls/pierre-boucher/": {
-  "empreinte": "a3778664de573888e9b03549739eb9249697ea92",
-  "date": "2026-10-10"
+  "empreinte": "cb87d26cae5d828acbe963079e5d07eeacc214bb",
+  "date": "2026-10-13"
  },
  "/monteregie-est/rls/pierre-de-saurel/": {
-  "empreinte": "23130d7a33c8e625ebd80e804c598f030209a859",
-  "date": "2026-10-10"
+  "empreinte": "24b16dd07978e6d6dd43892b9ab320cc336c43ea",
+  "date": "2026-10-13"
  },
  "/monteregie-est/rls/richelieu-yamaska/": {
-  "empreinte": "8ea71f16cac7bd88290f15d9d070111bd72ed911",
-  "date": "2026-10-10"
+  "empreinte": "0fcf13abf23dd91b36b84e094ba4894e8c561034",
+  "date": "2026-10-13"
  },
  "/monteregie-est/video/": {
   "empreinte": "45699d9027fb75e99ebafcef4c2c501bd54df157",
   "date": "2026-10-08"
  },
  "/monteregie-ouest/": {
-  "empreinte": "0930ba5cc8fcf8764a5bb2ab6dfaa0d71dcd9959",
-  "date": "2026-10-10"
+  "empreinte": "767ad3be146d668f4134ac4a80802b666166f525",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/": {
-  "empreinte": "b1b9e07e48defc44ad76aad34af93613f1dcf4e2",
-  "date": "2026-10-10"
+  "empreinte": "8531b705fa78bfe241e6a16625a6c5dbdaae9478",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/beauharnois-en-sante-cooperative-de-solidarite/": {
-  "empreinte": "486affb57f652070e2900a306bdc939d7c6f834f",
-  "date": "2026-10-10"
+  "empreinte": "043b5382cec97a4ffabf3478c8cbe28be57df7aa",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/centre-de-sante-medicentre-pincourt-gmf/": {
-  "empreinte": "f94dcfe02054b1ae838edbc25708e5342a44cdaf",
-  "date": "2026-10-10"
+  "empreinte": "aa6bfad8651cfb4e1eae45b4842fdd5fc123bfdd",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/centre-medical-des-trois-lacs-gmf-des-trois-lacs/": {
-  "empreinte": "362471cedef819bfcd7abdc859196f8b54c5e93b",
-  "date": "2026-10-10"
+  "empreinte": "4a61dc8d364693dbc9b7689da482c1bfc4f67459",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/clinique-medicale-des-batisseurs-gmf-des-batisseurs/": {
-  "empreinte": "1111041ee4ab57b4a94868534fe8c5867c895241",
-  "date": "2026-10-10"
+  "empreinte": "f8a5e93888e690317d26b23d6889cd6aa53a18c4",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-carrefour-sante-le-saint-laurent/": {
-  "empreinte": "8eaf0a1fa275ae512574adbe0a137e78b45c3ccf",
-  "date": "2026-10-10"
+  "empreinte": "a4b3bf6184a96306e2b0b187b90f8f15ff26e78a",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-du-haut-saint-laurent-centre-medical-huntingdon/": {
-  "empreinte": "83607eebe1dc12602d357d8425bcb3f400242f13",
-  "date": "2026-10-10"
+  "empreinte": "9628e93d8ce980d9cf66dc45faac58bae6d1ae64",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-du-lac-saint-francois-clinique-medicale-havre-sante/": {
-  "empreinte": "c2c86ce04254e7f9ca7bf614d011d0301f5c83d3",
-  "date": "2026-10-10"
+  "empreinte": "7e915aa904828f9c8715b9b97a6032f6f526223f",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-gmf-r-vaudreuil-dorion-polyclinique-medicale-vaudreuil/": {
-  "empreinte": "a77fab405a91982078234aff5872b269f251973d",
-  "date": "2026-10-10"
+  "empreinte": "82929dc2bf3e675dd62f3f5fae6f59eb7a22e550",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-hudson-hudson-medicentre/": {
-  "empreinte": "b2628ab9273e0656b0d5c334829614b926327727",
-  "date": "2026-10-10"
+  "empreinte": "25ae1c5f5fbed86fbe528532cfbe1293e7d57e78",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-mercier/": {
-  "empreinte": "755f8928ae31591e80cc310987c8751ae65e80a1",
-  "date": "2026-10-10"
+  "empreinte": "f480346553af773f530b7562b68e540cc4c0ac38",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-ormstown-clinique-medicale-ormstown/": {
-  "empreinte": "799a363026a8669c4153b4c05b9299c2d9b3dc95",
-  "date": "2026-10-10"
+  "empreinte": "cad85d002271bdc4306faf743839afb946104fb5",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-r-le-trait-d-union/": {
-  "empreinte": "f446629ac5879dd45449e8aa5d53138fbcd1d9e1",
-  "date": "2026-10-10"
+  "empreinte": "372ab0b93a274c3762313ac4acce74cadaedd9d3",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-rigaud-centre-de-sante-de-rigaud/": {
-  "empreinte": "c9d633b1defa1b3369cd484ea470d3fc640b98ce",
-  "date": "2026-10-10"
+  "empreinte": "4df518a9a046c6b44961792b9d067e814c9f80bd",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-roger-laberge/": {
-  "empreinte": "caa36ed87e92e3e65d9ba410285c0fe62adf6539",
-  "date": "2026-10-10"
+  "empreinte": "655d0fbe5bec17bfcce83ba258be69a44722f717",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-saint-constant-de-la-gare/": {
-  "empreinte": "27096e9c714cd36896264fc660c427fe8b89d02d",
-  "date": "2026-10-10"
+  "empreinte": "75a25344200ad6205e7b3327ed7ddb591879b271",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-salaberry-clinique-medi-val/": {
-  "empreinte": "3d22251ec01a22ac840333e0edaec408a7110a53",
-  "date": "2026-10-10"
+  "empreinte": "9b9dfb52726dee092dfb149a53450bf226291691",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-u-de-vaudreuil-soulanges/": {
-  "empreinte": "581f714b1a2f4b0f4a0de5a8881a96df7dabde75",
-  "date": "2026-10-10"
+  "empreinte": "2cf79304ef72fe2736ca1b78a598de7fd5f92873",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/gmf-u-jardins-roussillon/": {
-  "empreinte": "ec9b730cf0ee1a9b772cb79b2b5d3441ccefe5d9",
-  "date": "2026-10-10"
+  "empreinte": "36fa8466b3d15fa6aec4f6994ce4982c81cdbe47",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/cliniques/groupe-de-medecine-familiale-sante-ste-angelique/": {
-  "empreinte": "8dee62a90b020f128ee193afe8e55cd5a09770c0",
-  "date": "2026-10-10"
+  "empreinte": "de1b0a936fa0467c1c99e228714462c2f44f8d38",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/rls/": {
-  "empreinte": "ba2851e6e54f55b842f4b8a893a6e9f2466b1dfa",
-  "date": "2026-10-10"
+  "empreinte": "385a6a53f9d6128bafaf547c0c0ae47741729626",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/rls/du-haut-saint-laurent/": {
-  "empreinte": "a15f3294b9379ff9892326697826254a62674f50",
-  "date": "2026-10-10"
+  "empreinte": "764b19438af38adfc77dcea3784e1d239bb37843",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/rls/du-suroit/": {
-  "empreinte": "fdbdda818f097345e1b3e515f23bd1362d644356",
-  "date": "2026-10-10"
+  "empreinte": "f145c0ddc36a068e4a614b43d850bbd83ec0a02b",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/rls/jardins-roussillon/": {
-  "empreinte": "68b052af4dac23ea5c160a482beb53d2c3cd1b99",
-  "date": "2026-10-10"
+  "empreinte": "ccb4185e2f08b863baa8a01f56dfac9d50b69caf",
+  "date": "2026-10-13"
  },
  "/monteregie-ouest/rls/vaudreuil-soulanges/": {
-  "empreinte": "f508c9127fd612ef462b88c67e41d388af4b8481",
-  "date": "2026-10-10"
+  "empreinte": "0d35cbbf3a6da30357240e902dceba66bb5770dc",
+  "date": "2026-10-13"
  },
  "/monteregie/": {
   "empreinte": "e5d1d486c430e5fe056b74753183b0991872a99e",
