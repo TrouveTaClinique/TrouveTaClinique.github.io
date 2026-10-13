@@ -23,6 +23,11 @@
  * Pour réafficher les courriels des responsables sur la carte, voir CLAUDE.md (« Réafficher les
  * courriels sur la carte »). Les fiches de l'Est affichent de toute façon l'adresse du CISSS.
  *
+ * Exception par région (13 oct. 2026, accord du propriétaire) : les cliniques des régions de
+ * REGIONS_COURRIELS_CARTE gardent leurs courriels dans les JSON publiés, donc sur les deux cartes.
+ * Le reste (cliniques des autres régions, établissements, annonce) suit PUBLIER_COURRIELS_CARTE, et
+ * les pages du site suivent PUBLIER_COURRIELS_SITE.
+ *
  * Contacts retirés à la demande de la personne (9 oct. 2026) : un objet qui porte
  * « contactMasque: true » (le même objet que le nom, p. ex. « recrutement » d'un secteur du
  * Centre) perd son nom, son courriel et son téléphone dans tout ce qui est publié, même si on les
@@ -37,6 +42,7 @@
  */
 const PUBLIER_COURRIELS_SITE = false;
 const PUBLIER_COURRIELS_CARTE = false;
+const REGIONS_COURRIELS_CARTE = Object.freeze(['Est']);
 const PUBLIER_TELEPHONES = false;
 const A_VENIR = 'À venir';
 const EXEMPTES = new Set(['contact@trouvetaclinique.ca']);
@@ -93,13 +99,20 @@ function masquerCourriels(valeur, cle = '') {
   return masquer(valeur, cle, PUBLIER_COURRIELS_SITE);
 }
 
-/* JSON publiés lus par les cartes et pages des cartes (donneesPubliques, publier-regions.js). */
+/* JSON publiés lus par les cartes et pages des cartes (donneesPubliques, publier-regions.js).
+   Les cliniques des régions de REGIONS_COURRIELS_CARTE gardent leurs courriels. */
 function masquerPourCarte(valeur) {
+  if (valeur && typeof valeur === 'object' && !Array.isArray(valeur) && Array.isArray(valeur.cliniques)) {
+    const sortie = masquer({ ...valeur, cliniques: [] }, '', PUBLIER_COURRIELS_CARTE);
+    sortie.cliniques = valeur.cliniques.map(c =>
+      masquer(c, '', PUBLIER_COURRIELS_CARTE || REGIONS_COURRIELS_CARTE.includes(c && c.region)));
+    return sortie;
+  }
   return masquer(valeur, '', PUBLIER_COURRIELS_CARTE);
 }
 
 module.exports = {
-  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL,
+  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL,
   RE_TELEPHONE, CHAMPS_CONTACT, contientCourriel, masquer, masquerCourriels, masquerPourCarte, masquerTexte,
   masquerTelephones
 };

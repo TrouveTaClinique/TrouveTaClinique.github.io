@@ -13,6 +13,9 @@
  *   node scripts/restaurer-courriels.js              aperçu, rien n'est écrit
  *   node scripts/restaurer-courriels.js --appliquer  écrit les fichiers
  *   --depuis=<commit>                                autre version de référence
+ *   --region=Est                                     cliniques de cette région seulement (13 oct. 2026 :
+ *                                                    l'Est) ; les secteurs du Centre ne sont alors
+ *                                                    touchés que si la région est Centre
  *
  * Une fiche ou un secteur marqué « contactMasque: true » (retrait demandé par la personne) n'est
  * jamais restauré. Le script n'affiche que des identifiants, jamais d'adresses.
@@ -25,6 +28,7 @@ const RACINE = path.resolve(__dirname, '..');
 const option = nom => (process.argv.find(a => a.startsWith(`--${nom}=`)) || '').split('=').slice(1).join('=');
 const REF = option('depuis') || 'f524ca5e~1';
 const APPLIQUER = process.argv.includes('--appliquer');
+const REGION = option('region');
 const A_VENIR = 'À venir';
 
 const versionAvant = fichier =>
@@ -36,6 +40,7 @@ const donnees = JSON.parse(fs.readFileSync(fichierData, 'utf8'));
 const avantData = new Map(versionAvant('data.json').cliniques.map(c => [c.id, c]));
 const cliniques = [];
 for (const c of donnees.cliniques) {
+  if (REGION && c.region !== REGION) continue;
   if (c.contactMasque === true || String(c.personneRessource || '').trim() !== A_VENIR) continue;
   const ancien = String((avantData.get(c.id) || {}).personneRessource || '').trim();
   if (!ancien.includes('@')) continue;
@@ -49,7 +54,7 @@ let texteCentre = fs.readFileSync(fichierCentre, 'utf8');
 const avantCentre = versionAvant('data-etablissements-centre.json');
 const secteurs = [];
 const ignores = [];
-for (const s of JSON.parse(texteCentre).secteurs) {
+for (const s of (REGION && REGION !== 'Centre') ? [] : JSON.parse(texteCentre).secteurs) {
   const rec = s.recrutement || {};
   const ancien = ((avantCentre.secteurs.find(x => x.id === s.id) || {}).recrutement || {}).responsableCourriel;
   if (!ancien || String(rec.responsableCourriel || '').trim()) continue;
@@ -64,7 +69,7 @@ for (const s of JSON.parse(texteCentre).secteurs) {
 }
 JSON.parse(texteCentre);
 
-console.log(`Référence : ${REF}`);
+console.log(`Référence : ${REF}${REGION ? ` ; région : ${REGION}` : ''}`);
 console.log(`data.json : ${cliniques.length} courriel(s) de cliniques à remettre${cliniques.length ? ' (fiches ' + cliniques.join(', ') + ')' : ''}`);
 console.log(`Centre : ${secteurs.length} courriel(s) de secteurs à remettre (${secteurs.join(', ') || 'aucun'})`);
 if (ignores.length) console.log(`Jamais restaurés (contactMasque) : ${ignores.join(', ')}`);

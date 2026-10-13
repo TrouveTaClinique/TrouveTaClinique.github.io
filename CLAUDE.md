@@ -135,16 +135,17 @@ dates du sitemap selon le contenu réel des pages).
   catalogue de guides compris ; les tests suivent les interrupteurs). Le classeur et son export (`PTEM2027_v2.gs`, v5 : courriels et numéros
   masqués) ne servent plus depuis le 10 oct. 2026 (voir « Notes internes des cliniques »).
   Ne rien republier sans l'accord explicite du propriétaire.
-- Réafficher les courriels des responsables sur la carte (en attente du « ok » du propriétaire ; rien
-  ne bloque, simulation faite le 10 oct. 2026) : 1) `PUBLIER_COURRIELS_CARTE = true` dans
-  `masquer-courriels.js` ; 2) `node scripts/restaurer-courriels.js --appliquer` : remet les courriels
-  retirés le 8 oct. (62 fiches de `data.json`, 5 secteurs du Centre ; SEC-C-010 et toute fiche
-  `contactMasque` restent masqués), puis ajouter à la main ceux reçus depuis par le formulaire ;
-  3) régénérer et tester. Les fiches de l'Est du site gardent l'adresse du CISSS. D'ici là, ne pas
-  inscrire dans `data.json` (dépôt public) les courriels reçus par le formulaire : ils restent dans les
-  réponses du formulaire. Établissements de l'Est : leurs courriels ne sont plus dans les données depuis
-  le 2 sept. (décision antérieure, `afficherResponsableCourriel: false`) ; il faudrait le répertoire
-  source pour les remettre.
+- Courriels sur les cartes (13 oct. 2026, accord du propriétaire) : réaffichés pour les cliniques de l'Est
+  seulement, sur les deux cartes (`REGIONS_COURRIELS_CARTE = ['Est']` dans `masquer-courriels.js`, appliqué
+  par `masquerPourCarte`). Les 26 adresses d'avant le 8 oct. ont été remises avec
+  `node scripts/restaurer-courriels.js --region=Est --appliquer`. Centre et Ouest : « À venir » (en attente).
+  Pour eux un jour : ajouter la région à `REGIONS_COURRIELS_CARTE`, puis `restaurer-courriels.js --region=…
+  --appliquer` (SEC-C-010 et toute fiche `contactMasque` restent masqués). Les fiches du site gardent
+  l'adresse du CISSS (`PUBLIER_COURRIELS_SITE = false`). Courriels reçus par le formulaire : dans `data.json`
+  (dépôt public) seulement sur demande du propriétaire, et jamais pour le Centre ou l'Ouest d'ici leur accord.
+  Vérifié par `scripts/test-courriels-masques.cjs`. Établissements de l'Est : leurs courriels ne sont plus dans
+  les données depuis le 2 sept. (décision antérieure, `afficherResponsableCourriel: false`) ; il faudrait le
+  répertoire source pour les remettre.
 - Audit des données sensibles (9 oct. 2026, décisions du propriétaire) : numéros de téléphone des textes
   libres remplacés par « À venir » sauf la ligne principale d'une clinique (« Téléphone : … »), dans le
   même filtre (`PUBLIER_TELEPHONES = false`) ; JSON publiés sans fiches masquées (`visible: false`), sans
