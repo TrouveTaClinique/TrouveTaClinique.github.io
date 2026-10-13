@@ -1717,22 +1717,12 @@ html { scroll-snap-type: y proximity; scroll-padding-top: 76px; }
      jusqu'ici. Le texte décrit fidèlement ce que la page contient : pas de mots-clés
      ajoutés qui ne correspondraient à rien de visible. -->
 
-<!-- La liste des 61 cliniques qui vivait ici (bloc .sr-only, 18 août) a été RETIRÉE le 19 août
-     2026 : elle dupliquait data.json à la main et devait être refaite à chaque changement. Le
-     même contenu, en mieux et sans copie manuelle, vit maintenant sur de vraies pages visibles
-     générées automatiquement depuis data.json — /cliniques/ et une page par clinique — liées
-     depuis la rangée d'icônes #docs-row du panneau latéral (voir plus bas). Le <h1> et le
-     paragraphe descriptif ci-dessus restent : ils décrivent CETTE page et servent aussi aux
-     lecteurs d'écran. -->
-
-<!-- Les liens vers /ptem/, /amp/ et /cliniques/ vivent dans la rangée d'icônes #docs-row du menu
-     latéral : visibles et cliquables dans l'interface, pas seulement cachés pour les moteurs de
-     recherche — remplace le bloc <nav class="sr-only"> qui faisait la même chose de façon
-     invisible (retiré le 19 août pour éviter de maintenir 2 copies des mêmes liens). Depuis le
-     20 août, les 2 PDF officiels externes (moins consultés) ont été déplacés dans le menu du
-     bouton « i » de l'en-tête (#info-menu) pour alléger #docs-row à 3 icônes rondes (option « C3 »
-     retenue). Le contenu de #docs-row et #info-menu est présent dans le HTML dès le
-     chargement, donc toujours lisible par Google sans exécuter le JS. -->
+<!-- Carte Montérégie-Est hermétique (13 oct. 2026, choix du propriétaire) : aucun lien vers les
+     autres pages du site. Restent les liens externes (CISSS, sites des cliniques, Google Maps,
+     portes ouvertes), les courriels et les téléphones. Le menu « i » ne garde que la page de
+     recrutement du CISSS ; le répertoire écrit sous la carte (publier-regions.js) donne les noms
+     des milieux, sans liens. Vérifié par scripts/verifier-navigation-est.js. La carte de toute
+     la Montérégie (generer-carte-sq-complete.js) remet ses propres liens. -->
 
 <div id="app-loader" aria-hidden="true">
   <!-- Conservé. Masqué pour le moment (CSS + AFFICHER_ECRAN_CHARGEMENT). -->
@@ -1787,26 +1777,6 @@ html { scroll-snap-type: y proximity; scroll-padding-top: 76px; }
     <div class="info-menu" id="info-menu" role="menu" hidden>
       <a class="info-menu-link" role="menuitem" href="https://www.santemonteregie.qc.ca/est/recrutement-medical-monteregie-est" target="_blank" rel="noopener">
         <span class="info-menu-ic">i</span> À propos du recrutement
-      </a>
-      <hr>
-      <a class="info-menu-link" role="menuitem" href="rls/pierre-boucher/">
-        <span class="info-menu-ic" style="background:#0080D7">📋</span> Cliniques : RLS Pierre-Boucher
-      </a>
-      <a class="info-menu-link" role="menuitem" href="rls/richelieu-yamaska/">
-        <span class="info-menu-ic" style="background:#08A0A0">📋</span> Cliniques : RLS Richelieu-Yamaska
-      </a>
-      <a class="info-menu-link" role="menuitem" href="rls/pierre-de-saurel/">
-        <span class="info-menu-ic" style="background:#170A72">📋</span> Cliniques : RLS Pierre-De Saurel
-      </a>
-      <hr>
-      <a class="info-menu-link" role="menuitem" href="ptem/">
-        <span class="info-menu-ic">📘</span> Guide PTEM 2027
-      </a>
-      <a class="info-menu-link" role="menuitem" href="amp/">
-        <span class="info-menu-ic">📗</span> Guide des AMP
-      </a>
-      <a class="info-menu-link" role="menuitem" href="video/">
-        <span class="info-menu-ic">▶</span> La carte en vidéo (4 min)
       </a>
       <hr>
       <button type="button" class="info-menu-link" role="menuitem" id="info-menu-install">
@@ -3050,7 +3020,7 @@ function htmlContactSecteur(s) {
 function htmlCorpsSecteur(s) {
   return `<div class="dp-sect-corps">
       ${s.regroupe ? `<div class="vw-row"><span class="vw-label">Modalités</span><span class="vw-value">Besoin regroupé ; modalités à préciser avec le milieu.</span></div>` : ''}
-      ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)} <a href="/monteregie-est/ptem-u/">Guide PTEM-U</a></span></div>` : ''}
+      ${s.categorieActivite === 'gmf-u' ? `<div class="vw-row"><span class="vw-label">Admissibilité</span><span class="vw-value dp-gmf-condition">${esc(GMFU_CONDITION)}</span></div>` : ''}
       ${s.contactMasque ? '' : `<div class="vw-row"><span class="vw-label">Contact</span><span class="vw-value">${htmlContactSecteur(s)}</span></div>`}
       <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(s.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(s.id) ? '★ Retirer ce secteur des favoris' : '☆ Ajouter ce secteur aux favoris'}</button></div>
       <div class="notes-sec">
@@ -4326,7 +4296,6 @@ function openDetail(id) {
     <div class="vw-sec">
       <div class="vw-sec-title">Informations générales</div>
       <div class="vw-row"><span class="vw-label">Type</span><span class="vw-value">${g.type && g.type.trim() ? esc(g.type) : 'À venir'}</span></div>
-      ${String(g.type || '').toUpperCase() === 'GMF-U' ? `<div class="vw-row"><span class="vw-label">PTEM-U</span><span class="vw-value"><a href="/monteregie-est/ptem-u/">Guide du recrutement en GMF-U</a></span></div>` : ''}
       <div class="vw-row"><span class="vw-label">Région</span><span class="vw-value"><span class="rls-dot" style="background:#170A72"></span>${REGION_LABELS[g.region] || 'À venir'}</span></div>
       <div class="vw-row"><span class="vw-label">Réseau (RLS)</span><span class="vw-value">${g.rls && g.rls.trim() ? esc(g.rls) : 'À venir'}</span></div>
       ${niveauRow}
@@ -5102,7 +5071,7 @@ if ('serviceWorker' in navigator) {
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"ceb6d077f71c46ffa566fe67de3eb336"}'></script>
 <!-- End Cloudflare Web Analytics -->
 
-<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+<section id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
   <h2>Répertoire de la Montérégie-Est</h2>
   <p>La Montérégie-Est couvre les RLS Pierre-Boucher, Richelieu-Yamaska et Pierre-De Saurel. On y trouve 33 cliniques de médecine familiale (23 GMF, 2 GMF-U, 1 GMF-R et 7 cliniques médicales), toutes listées ci-dessous.</p>
 <p>20 d’entre elles recrutent actuellement des médecins de famille, notamment à Longueuil, Sorel-Tracy, Saint-Hyacinthe, Varennes, Beloeil, Boucherville, Sainte-Julie et Acton Vale.</p>
@@ -5111,92 +5080,89 @@ if ('serviceWorker' in navigator) {
 <section class="repertoire-section" id="repertoire-rls">
   <h2>Réseaux locaux de services</h2>
   <ul class="repertoire-liste">
-  <li><a href="rls/pierre-boucher/">RLS Pierre-Boucher</a></li>
-  <li><a href="rls/richelieu-yamaska/">RLS Richelieu-Yamaska</a></li>
-  <li><a href="rls/pierre-de-saurel/">RLS Pierre-De Saurel</a></li>
+  <li>RLS Pierre-Boucher</li>
+  <li>RLS Richelieu-Yamaska</li>
+  <li>RLS Pierre-De Saurel</li>
 </ul>
-  <p class="repertoire-suite"><a href="rls/">Parcourir les pages RLS de Montérégie-Est →</a></p>
 </section>
   
 <section class="repertoire-section" id="repertoire-cliniques-est-pierre-boucher">
   <h2>Cliniques · RLS Pierre-Boucher</h2>
   <ul class="repertoire-liste">
-  <li><a href="cliniques/camu-longueuil-gmf-petit-bois/">CAMU Longueuil (GMF Petit-Bois)</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/clinique-la-releve-gmf-petit-bois/">Clinique La Relève (GMF Petit-Bois)</a> <span class="repertoire-meta">Varennes</span></li>
-  <li><a href="cliniques/clinique-le-medical/">Clinique le Médical</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/clinique-medicale-de-la-marine/">Clinique Médicale de la Marine</a> <span class="repertoire-meta">Varennes</span></li>
-  <li><a href="cliniques/clinique-medicale-sainte-helene/">Clinique Médicale Sainte-Hélène</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-3090-clinique-medicale-chemin-chambly/">GMF 3090 (Clinique Médicale Chemin Chambly)</a> <span class="repertoire-meta">Longueuil</span></li>
-  <li><a href="cliniques/gmf-contrecoeur-cooperative-sante-contrecoeur/">GMF Contrecœur (Coopérative Santé Contrecœur)</a> <span class="repertoire-meta">Contrecœur · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-des-iles-percees/">GMF des Îles-Percées</a> <span class="repertoire-meta">Boucherville</span></li>
-  <li><a href="cliniques/gmf-des-seigneuries/">GMF des Seigneuries</a> <span class="repertoire-meta">Varennes</span></li>
-  <li><a href="cliniques/gmf-l-autre-maison/">GMF L'Autre Maison</a> <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-marguerite-d-youville/">GMF Marguerite d'Youville</a> <span class="repertoire-meta">Sainte-Julie · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-sainte-julie/">GMF Sainte-Julie</a> <span class="repertoire-meta">Sainte-Julie</span></li>
-  <li><a href="cliniques/gmf-r-pierre-boucher/">GMF-R Pierre-Boucher</a> <span class="repertoire-meta">Longueuil</span></li>
-  <li><a href="etablissements/gmf-u-des-monteregiennes/">GMF-U des Montérégiennes</a> <span class="repertoire-meta">Boucherville</span></li>
+  <li>CAMU Longueuil (GMF Petit-Bois) <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li>Clinique La Relève (GMF Petit-Bois) <span class="repertoire-meta">Varennes</span></li>
+  <li>Clinique le Médical <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li>Clinique Médicale de la Marine <span class="repertoire-meta">Varennes</span></li>
+  <li>Clinique Médicale Sainte-Hélène <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li>GMF 3090 (Clinique Médicale Chemin Chambly) <span class="repertoire-meta">Longueuil</span></li>
+  <li>GMF Contrecœur (Coopérative Santé Contrecœur) <span class="repertoire-meta">Contrecœur · ne recrute pas actuellement</span></li>
+  <li>GMF des Îles-Percées <span class="repertoire-meta">Boucherville</span></li>
+  <li>GMF des Seigneuries <span class="repertoire-meta">Varennes</span></li>
+  <li>GMF L'Autre Maison <span class="repertoire-meta">Longueuil · ne recrute pas actuellement</span></li>
+  <li>GMF Marguerite d'Youville <span class="repertoire-meta">Sainte-Julie · ne recrute pas actuellement</span></li>
+  <li>GMF Sainte-Julie <span class="repertoire-meta">Sainte-Julie</span></li>
+  <li>GMF-R Pierre-Boucher <span class="repertoire-meta">Longueuil</span></li>
+  <li>GMF-U des Montérégiennes <span class="repertoire-meta">Boucherville</span></li>
 </ul>
 </section>
 
 <section class="repertoire-section" id="repertoire-cliniques-est-richelieu-yamaska">
   <h2>Cliniques · RLS Richelieu-Yamaska</h2>
   <ul class="repertoire-liste">
-  <li><a href="cliniques/centre-medical-fusion/">Centre Médical Fusion</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
-  <li><a href="cliniques/clinique-medicale-les-2-chenes/">Clinique médicale Les 2 Chênes</a> <span class="repertoire-meta">Saint-Mathieu-de-Beloeil</span></li>
-  <li><a href="cliniques/gmf-3090-saint-basile/">GMF 3090 (Saint-Basile)</a> <span class="repertoire-meta">Saint-Basile-le-Grand</span></li>
-  <li><a href="cliniques/gmf-carrefour-de-la-vallee/">GMF Carrefour de la Vallée</a> <span class="repertoire-meta">Beloeil</span></li>
-  <li><a href="cliniques/gmf-cooperative-de-solidarite-de-sante-de-la-mrc-d-acton/">GMF Coopérative de Solidarité de Santé de la MRC d'Acton</a> <span class="repertoire-meta">Acton Vale</span></li>
-  <li><a href="cliniques/gmf-de-la-montagne-clinique-du-docteur-jean-charbonneau/">GMF de la Montagne (clinique du Docteur Jean Charbonneau)</a> <span class="repertoire-meta">Beloeil · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-de-la-rive-clinique-medicale-de-la-rive/">GMF de la Rive (Clinique Médicale de la Rive)</a> <span class="repertoire-meta">Otterburn Park · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-des-patriotes-horizon/">GMF des Patriotes - Horizon</a> <span class="repertoire-meta">Saint-Denis-sur-Richelieu</span></li>
-  <li><a href="cliniques/gmf-des-patriotes-pure-clinique-medicale/">GMF des Patriotes (Pure Clinique Médicale)</a> <span class="repertoire-meta">Mont-Saint-Hilaire · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-laframboise/">GMF Laframboise</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
-  <li><a href="cliniques/gmf-le-sentier/">GMF Le Sentier</a> <span class="repertoire-meta">Saint-Bruno-de-Montarville</span></li>
-  <li><a href="cliniques/gmf-maska/">GMF Maska</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
-  <li><a href="etablissements/gmf-u-richelieu-yamaska/">GMF-U Richelieu-Yamaska</a> <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li>Centre Médical Fusion <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li>Clinique médicale Les 2 Chênes <span class="repertoire-meta">Saint-Mathieu-de-Beloeil</span></li>
+  <li>GMF 3090 (Saint-Basile) <span class="repertoire-meta">Saint-Basile-le-Grand</span></li>
+  <li>GMF Carrefour de la Vallée <span class="repertoire-meta">Beloeil</span></li>
+  <li>GMF Coopérative de Solidarité de Santé de la MRC d'Acton <span class="repertoire-meta">Acton Vale</span></li>
+  <li>GMF de la Montagne (clinique du Docteur Jean Charbonneau) <span class="repertoire-meta">Beloeil · ne recrute pas actuellement</span></li>
+  <li>GMF de la Rive (Clinique Médicale de la Rive) <span class="repertoire-meta">Otterburn Park · ne recrute pas actuellement</span></li>
+  <li>GMF des Patriotes - Horizon <span class="repertoire-meta">Saint-Denis-sur-Richelieu</span></li>
+  <li>GMF des Patriotes (Pure Clinique Médicale) <span class="repertoire-meta">Mont-Saint-Hilaire · ne recrute pas actuellement</span></li>
+  <li>GMF Laframboise <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li>GMF Le Sentier <span class="repertoire-meta">Saint-Bruno-de-Montarville</span></li>
+  <li>GMF Maska <span class="repertoire-meta">Saint-Hyacinthe</span></li>
+  <li>GMF-U Richelieu-Yamaska <span class="repertoire-meta">Saint-Hyacinthe</span></li>
 </ul>
 </section>
 
 <section class="repertoire-section" id="repertoire-cliniques-est-pierre-de-saurel">
   <h2>Cliniques · RLS Pierre-De Saurel</h2>
   <ul class="repertoire-liste">
-  <li><a href="cliniques/clinique-de-medecine-familiale-sorel-tracy/">Clinique de Médecine Familiale Sorel-Tracy</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy/">Clinique des professionnels de la santé Sorel-Tracy (clinique A)</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-b/">Clinique des professionnels de la santé Sorel-Tracy (clinique B)</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/clinique-des-professionnels-de-la-sante-sorel-tracy-clinique-c-gmf-st-mathieu-de/">Clinique des professionnels de la santé Sorel-Tracy (clinique C – GMF St-Mathieu de Beloeil)</a> <span class="repertoire-meta">Sorel-Tracy</span></li>
-  <li><a href="cliniques/clinique-medicale-marie-victorin/">Clinique Médicale Marie-Victorin</a> <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
-  <li><a href="cliniques/gmf-richelieu/">GMF Richelieu</a> <span class="repertoire-meta">Sorel-Tracy</span></li>
+  <li>Clinique de Médecine Familiale Sorel-Tracy <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li>Clinique des professionnels de la santé Sorel-Tracy (clinique A) <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li>Clinique des professionnels de la santé Sorel-Tracy (clinique B) <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li>Clinique des professionnels de la santé Sorel-Tracy (clinique C – GMF St-Mathieu de Beloeil) <span class="repertoire-meta">Sorel-Tracy</span></li>
+  <li>Clinique Médicale Marie-Victorin <span class="repertoire-meta">Sorel-Tracy · ne recrute pas actuellement</span></li>
+  <li>GMF Richelieu <span class="repertoire-meta">Sorel-Tracy</span></li>
 </ul>
 </section>
-<p class="repertoire-suite"><a href="cliniques/">Répertoire des cliniques de Montérégie-Est →</a></p>
   
 <section class="repertoire-section" id="repertoire-etablissements">
   <h2>Établissements</h2>
   <ul class="repertoire-liste">
-  <li><a href="etablissements/centre-d-hebergement-de-contrecoeur/">Centre d'hébergement de Contrecoeur</a> <span class="repertoire-meta">Contrecoeur · Pierre-Boucher</span></li>
-  <li><a href="etablissements/centre-d-hebergement-de-l-hotel-dieu-de-saint-hyacinthe/">Centre d'hébergement de l'Hôtel-Dieu-de-Saint-Hyacinthe</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/centre-d-hebergement-de-montarville/">Centre d'hébergement de Montarville</a> <span class="repertoire-meta">Saint-Bruno-de-Montarville · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/centre-d-hebergement-elisabeth-lafrance/">Centre d'hébergement Élisabeth-Lafrance</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
-  <li><a href="etablissements/centre-d-hebergement-j-arsene-parenteau/">Centre d'hébergement J.-Arsène-Parenteau</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
-  <li><a href="etablissements/centre-d-hebergement-jeanne-crevier/">Centre d'hébergement Jeanne-Crevier</a> <span class="repertoire-meta">Boucherville · Pierre-Boucher</span></li>
-  <li><a href="etablissements/centre-d-hebergement-marguerite-adam/">Centre d'hébergement Marguerite-Adam</a> <span class="repertoire-meta">Beloeil · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/centre-de-detention/">Centre de détention</a> <span class="repertoire-meta">Sorel-Tracy · Mission régionale</span></li>
-  <li><a href="etablissements/centre-de-readaptation-en-dependance-longueuil/">Centre de réadaptation en dépendance Longueuil</a> <span class="repertoire-meta">Longueuil · Mission régionale</span></li>
-  <li><a href="etablissements/centre-de-readaptation-en-dependance-saint-hyacinthe/">Centre de réadaptation en dépendance Saint-Hyacinthe</a> <span class="repertoire-meta">Saint-Hyacinthe · Mission régionale</span></li>
-  <li><a href="etablissements/centre-de-readaptation-en-dependance-saint-philippe/">Centre de réadaptation en dépendance Saint-Philippe</a> <span class="repertoire-meta">Saint-Philippe · Mission régionale</span></li>
-  <li><a href="etablissements/clsc-de-longueuil-ouest/">CLSC de Longueuil-Ouest</a> <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
-  <li><a href="etablissements/clsc-des-maskoutains/">CLSC des Maskoutains</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/clsc-des-patriotes/">CLSC des Patriotes</a> <span class="repertoire-meta">Beloeil · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/clsc-des-seigneuries/">CLSC des Seigneuries</a> <span class="repertoire-meta">Varennes · Pierre-Boucher</span></li>
-  <li><a href="etablissements/clsc-gaston-belanger/">CLSC Gaston-Bélanger</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
-  <li><a href="etablissements/clsc-simonne-monet-chartrand/">CLSC Simonne-Monet-Chartrand</a> <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
-  <li><a href="etablissements/gmf-u-des-monteregiennes/">GMF-U des Montérégiennes</a> <span class="repertoire-meta">Boucherville · Pierre-Boucher</span></li>
-  <li><a href="etablissements/gmf-u-richelieu-yamaska/">GMF-U Richelieu-Yamaska</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/hopital-honore-mercier/">Hôpital Honoré-Mercier</a> <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
-  <li><a href="etablissements/hopital-pierre-boucher/">Hôpital Pierre-Boucher</a> <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
-  <li><a href="etablissements/hotel-dieu-de-sorel/">Hôtel-Dieu de Sorel</a> <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li>Centre d'hébergement de Contrecoeur <span class="repertoire-meta">Contrecoeur · Pierre-Boucher</span></li>
+  <li>Centre d'hébergement de l'Hôtel-Dieu-de-Saint-Hyacinthe <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li>Centre d'hébergement de Montarville <span class="repertoire-meta">Saint-Bruno-de-Montarville · Richelieu-Yamaska</span></li>
+  <li>Centre d'hébergement Élisabeth-Lafrance <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li>Centre d'hébergement J.-Arsène-Parenteau <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li>Centre d'hébergement Jeanne-Crevier <span class="repertoire-meta">Boucherville · Pierre-Boucher</span></li>
+  <li>Centre d'hébergement Marguerite-Adam <span class="repertoire-meta">Beloeil · Richelieu-Yamaska</span></li>
+  <li>Centre de détention <span class="repertoire-meta">Sorel-Tracy · Mission régionale</span></li>
+  <li>Centre de réadaptation en dépendance Longueuil <span class="repertoire-meta">Longueuil · Mission régionale</span></li>
+  <li>Centre de réadaptation en dépendance Saint-Hyacinthe <span class="repertoire-meta">Saint-Hyacinthe · Mission régionale</span></li>
+  <li>Centre de réadaptation en dépendance Saint-Philippe <span class="repertoire-meta">Saint-Philippe · Mission régionale</span></li>
+  <li>CLSC de Longueuil-Ouest <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
+  <li>CLSC des Maskoutains <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li>CLSC des Patriotes <span class="repertoire-meta">Beloeil · Richelieu-Yamaska</span></li>
+  <li>CLSC des Seigneuries <span class="repertoire-meta">Varennes · Pierre-Boucher</span></li>
+  <li>CLSC Gaston-Bélanger <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
+  <li>CLSC Simonne-Monet-Chartrand <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
+  <li>GMF-U des Montérégiennes <span class="repertoire-meta">Boucherville · Pierre-Boucher</span></li>
+  <li>GMF-U Richelieu-Yamaska <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li>Hôpital Honoré-Mercier <span class="repertoire-meta">Saint-Hyacinthe · Richelieu-Yamaska</span></li>
+  <li>Hôpital Pierre-Boucher <span class="repertoire-meta">Longueuil · Pierre-Boucher</span></li>
+  <li>Hôtel-Dieu de Sorel <span class="repertoire-meta">Sorel-Tracy · Pierre-De Saurel</span></li>
 </ul>
-  <p class="repertoire-suite"><a href="etablissements/">Secteurs en établissement →</a></p>
 </section>
 <script id="repertoire-aimant">
 /* Effet aimant (11 oct. 2026, choix du propriétaire) : la page ne reste pas à mi-chemin entre
@@ -5225,5 +5191,5 @@ if ('serviceWorker' in navigator) {
   });
 })();
 </script>
-</nav>
+</section>
 </body></html>

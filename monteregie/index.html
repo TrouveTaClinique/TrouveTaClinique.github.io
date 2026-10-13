@@ -1711,22 +1711,12 @@ html { scroll-snap-type: y proximity; scroll-padding-top: 76px; }
      jusqu'ici. Le texte décrit fidèlement ce que la page contient : pas de mots-clés
      ajoutés qui ne correspondraient à rien de visible. -->
 
-<!-- La liste des 61 cliniques qui vivait ici (bloc .sr-only, 18 août) a été RETIRÉE le 19 août
-     2026 : elle dupliquait data.json à la main et devait être refaite à chaque changement. Le
-     même contenu, en mieux et sans copie manuelle, vit maintenant sur de vraies pages visibles
-     générées automatiquement depuis data.json — /cliniques/ et une page par clinique — liées
-     depuis la rangée d'icônes #docs-row du panneau latéral (voir plus bas). Le <h1> et le
-     paragraphe descriptif ci-dessus restent : ils décrivent CETTE page et servent aussi aux
-     lecteurs d'écran. -->
-
-<!-- Les liens vers /ptem/, /amp/ et /cliniques/ vivent dans la rangée d'icônes #docs-row du menu
-     latéral : visibles et cliquables dans l'interface, pas seulement cachés pour les moteurs de
-     recherche — remplace le bloc <nav class="sr-only"> qui faisait la même chose de façon
-     invisible (retiré le 19 août pour éviter de maintenir 2 copies des mêmes liens). Depuis le
-     20 août, les 2 PDF officiels externes (moins consultés) ont été déplacés dans le menu du
-     bouton « i » de l'en-tête (#info-menu) pour alléger #docs-row à 3 icônes rondes (option « C3 »
-     retenue). Le contenu de #docs-row et #info-menu est présent dans le HTML dès le
-     chargement, donc toujours lisible par Google sans exécuter le JS. -->
+<!-- Carte Montérégie-Est hermétique (13 oct. 2026, choix du propriétaire) : aucun lien vers les
+     autres pages du site. Restent les liens externes (CISSS, sites des cliniques, Google Maps,
+     portes ouvertes), les courriels et les téléphones. Le menu « i » ne garde que la page de
+     recrutement du CISSS ; le répertoire écrit sous la carte (publier-regions.js) donne les noms
+     des milieux, sans liens. Vérifié par scripts/verifier-navigation-est.js. La carte de toute
+     la Montérégie (generer-carte-sq-complete.js) remet ses propres liens. -->
 
 <div id="app-loader" aria-hidden="true">
   <!-- Conservé. Masqué pour le moment (CSS + AFFICHER_ECRAN_CHARGEMENT). -->

@@ -17,6 +17,7 @@
 const fs = require('fs');
 const path = require('path');
 const { masquerPourCarte } = require('./masquer-courriels.js');
+const { liensVersLeSite } = require('./verifier-navigation-est.js');
 
 const RACINE = path.join(__dirname, '..');
 const SOURCE = path.join(__dirname, 'carte.template.html');
@@ -27,6 +28,9 @@ const TERRITOIRES = [
   {
     dossier: 'monteregie-est', nom: 'Montérégie-Est', mot: 'Est', region: 'Est',
     accent: '#e6007e', app: true,
+    // 13 oct. 2026 (choix du propriétaire) : carte hermétique, aucun lien vers le reste du site.
+    // Le répertoire sous la carte garde son texte, sans liens (vérifié par verifierIsolation).
+    hermetique: true,
     recrutement: 'https://www.santemonteregie.qc.ca/est/recrutement-medical-monteregie-est',
     rls: [
       ['Pierre-Boucher', '#ee2d62', 'pierre-boucher'],
@@ -282,6 +286,11 @@ function verifierIsolation(sortie, t) {
     throw new Error(`${t.nom} contient des liens hors territoire : ` +
       fuites.map(([, libelle]) => libelle).join(', '));
   }
+  const versLeSite = t.hermetique ? liensVersLeSite(sortie) : [];
+  if (versLeSite.length) {
+    throw new Error(`${t.nom} est une carte hermétique, mais mène vers d'autres pages du site : ` +
+      versLeSite.join(', '));
+  }
 }
 
 function ecrire(cible, contenu) {
@@ -464,10 +473,10 @@ function phraseVilles(villes) {
   return copie.join(', ') + ' et ' + dernier;
 }
 
-function htmlListeLiens(items) {
+function htmlListe(items, avecLiens) {
   if (!items.length) return '';
   return '<ul class="repertoire-liste">\n' + items.map((it) =>
-    `  <li><a href="${escHtml(it.href)}">${escHtml(it.label)}</a>` +
+    '  <li>' + (avecLiens ? `<a href="${escHtml(it.href)}">${escHtml(it.label)}</a>` : escHtml(it.label)) +
     (it.meta ? ` <span class="repertoire-meta">${escHtml(it.meta)}</span>` : '') +
     '</li>'
   ).join('\n') + '\n</ul>';
@@ -537,7 +546,7 @@ function htmlIntroTerritoire(t, cliniques, etablissements) {
   return `<p>${escHtml(p1)}</p>\n<p>${escHtml(p2)}</p>` + (p3 ? `\n<p>${escHtml(p3)}</p>` : '');
 }
 
-function htmlBlocRls(t) {
+function htmlBlocRls(t, avecLiens) {
   const lignes = [];
   const territoires = t ? [t] : TERRITOIRES;
   for (const ter of territoires) {
@@ -551,18 +560,18 @@ function htmlBlocRls(t) {
       });
     }
   }
-  const more = t
+  const more = !avecLiens ? ''
+    : t
     ? `<p class="repertoire-suite"><a href="rls/">Parcourir les pages RLS de ${escHtml(t.nom)} →</a></p>`
     : `<p class="repertoire-suite"><a href="/monteregie-est/rls/">RLS Montérégie-Est</a> · <a href="/monteregie-centre/rls/">Montérégie-Centre</a> · <a href="/monteregie-ouest/rls/">Montérégie-Ouest</a></p>`;
   return `
 <section class="repertoire-section" id="repertoire-rls">
   <h2>Réseaux locaux de services</h2>
-  ${htmlListeLiens(lignes)}
-  ${more}
+  ${htmlListe(lignes, avecLiens)}${more ? `\n  ${more}` : ''}
 </section>`;
 }
 
-function htmlBlocCliniques(t, cliniques, gmfuMap) {
+function htmlBlocCliniques(t, cliniques, gmfuMap, avecLiens) {
   const territoires = t ? [t] : TERRITOIRES;
   const sections = [];
   for (const ter of territoires) {
@@ -578,6 +587,8 @@ function htmlBlocCliniques(t, cliniques, gmfuMap) {
     for (const rlsNom of ordre) {
       const liste = parRls.get(rlsNom) || [];
       const items = liste.map((c) => {
+        const meta = [c.ville, c.recrute ? null : 'ne recrute pas actuellement'].filter(Boolean).join(' · ');
+        if (!avecLiens) return { label: c.nom, meta };
         const dossier = t ? t.dossier : dossierDeRegion(c.region);
         const slugEtab = gmfuMap.get(String(c.id));
         let href;
@@ -590,11 +601,7 @@ function htmlBlocCliniques(t, cliniques, gmfuMap) {
         } else {
           throw new Error('Page clinique introuvable pour « ' + c.nom + ' » (slug canonique ' + c.slug + ').');
         }
-        return {
-          href,
-          label: c.nom,
-          meta: [c.ville, c.recrute ? null : 'ne recrute pas actuellement'].filter(Boolean).join(' · ')
-        };
+        return { href, label: c.nom, meta };
       });
       const titre = t
         ? `Cliniques · RLS ${rlsNom}`
@@ -602,24 +609,26 @@ function htmlBlocCliniques(t, cliniques, gmfuMap) {
       sections.push(`
 <section class="repertoire-section" id="repertoire-cliniques-${slugifier(ter.region + '-' + rlsNom)}">
   <h2>${escHtml(titre)}</h2>
-  ${htmlListeLiens(items)}
+  ${htmlListe(items, avecLiens)}
 </section>`);
     }
   }
-  const more = t
+  const more = !avecLiens ? ''
+    : t
     ? `<p class="repertoire-suite"><a href="cliniques/">Répertoire des cliniques de ${escHtml(t.nom)} →</a></p>`
     : `<p class="repertoire-suite"><a href="/monteregie-est/cliniques/">Répertoire Montérégie-Est</a> · <a href="/monteregie-centre/cliniques/">Montérégie-Centre</a> · <a href="/monteregie-ouest/cliniques/">Montérégie-Ouest</a></p>`;
-  return sections.join('\n') + '\n' + more;
+  return sections.join('\n') + (more ? '\n' + more : '');
 }
 
-function htmlBlocEtablissements(t, etablissements) {
+function htmlBlocEtablissements(t, etablissements, avecLiens) {
   if (!etablissements.length) return '';
   const items = etablissements.map((e) => ({
     href: t ? `etablissements/${e.slug}/` : `/${e.dossier}/etablissements/${e.slug}/`,
     label: e.nom,
     meta: [e.ville, e.rls].filter(Boolean).join(' · ')
   }));
-  const more = t
+  const more = !avecLiens ? ''
+    : t
     ? (t.region === 'Ouest'
       ? ''
       : `<p class="repertoire-suite"><a href="etablissements/">Secteurs en établissement →</a></p>`)
@@ -627,8 +636,7 @@ function htmlBlocEtablissements(t, etablissements) {
   return `
 <section class="repertoire-section" id="repertoire-etablissements">
   <h2>Établissements</h2>
-  ${htmlListeLiens(items)}
-  ${more}
+  ${htmlListe(items, avecLiens)}${more ? `\n  ${more}` : ''}
 </section>`;
 }
 
@@ -636,6 +644,10 @@ function htmlIndexSeoTerritoire(t) {
   const cliniques = cliniquesCarte(t ? t.region : null);
   const etablissements = etablissementsCarte(t);
   const gmfuMap = gmfuVersEtablissement();
+  /* Carte hermétique (Est) : le même texte, sans aucun lien. Sans liens, ce n'est plus une
+     navigation : <section> plutôt que <nav>. */
+  const avecLiens = !(t && t.hermetique);
+  const balise = avecLiens ? 'nav' : 'section';
   const titre = t
     ? `Répertoire de la ${t.nom}`
     : 'Répertoire de la Montérégie';
@@ -705,12 +717,12 @@ html { scroll-snap-type: y proximity; scroll-padding-top: 76px; }
   /* La feuille de style va dans l'en-tête (une <style> dans le corps n'est pas du HTML valide),
      juste avant </head> : après la feuille principale, donc même ordre de cascade qu'avant. */
   return { style, nav: `
-<nav id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
+<${balise} id="repertoire-territoire" aria-label="Répertoire des milieux du territoire">
   <h2>${escHtml(titre)}</h2>
   ${htmlIntroTerritoire(t, cliniques, etablissements)}
-  ${htmlBlocRls(t)}
-  ${htmlBlocCliniques(t, cliniques, gmfuMap)}
-  ${htmlBlocEtablissements(t, etablissements)}
+  ${htmlBlocRls(t, avecLiens)}
+  ${htmlBlocCliniques(t, cliniques, gmfuMap, avecLiens)}
+  ${htmlBlocEtablissements(t, etablissements, avecLiens)}
 <script id="repertoire-aimant">
 /* Effet aimant (11 oct. 2026, choix du propriétaire) : la page ne reste pas à mi-chemin entre
    la carte et le répertoire. Quand le défilement s'arrête alors que plus des deux cinquièmes
@@ -738,7 +750,7 @@ html { scroll-snap-type: y proximity; scroll-padding-top: 76px; }
   });
 })();
 </script>
-</nav>` };
+</${balise}>` };
 }
 
 function injecterIndexSeo(html, t) {
@@ -749,7 +761,10 @@ function injecterIndexSeo(html, t) {
   /* Remplace un ancien bloc s’il existe (renommage index-seo → repertoire). */
   let out = html
     .replace(/<style id="(?:seo-index|repertoire)-territoire-css">[\s\S]*?<\/style>\s*/g, '')
-    .replace(/<nav id="(?:index-seo|repertoire)-territoire"[\s\S]*?<\/nav>\s*/g, '');
+    .replace(/<nav id="(?:index-seo|repertoire)-territoire"[\s\S]*?<\/nav>\s*/g, '')
+    /* Version sans liens : ses sous-sections s'arrêteraient au premier </section> ; le bloc
+       se termine par le script de l'effet aimant. */
+    .replace(/<section id="repertoire-territoire"[\s\S]*?<\/script>\s*<\/section>\s*/g, '');
   return out.replace('</head>', `${bloc.style.trim()}\n</head>`).replace('</body>', `${bloc.nav}\n</body>`);
 }
 

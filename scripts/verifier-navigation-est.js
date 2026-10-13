@@ -16,6 +16,101 @@ const CIBLES = [
   'monteregie-est/etablissements'
 ];
 
+/* Carte Montérégie-Est hermétique (13 oct. 2026, choix du propriétaire) : aucun lien vers une
+   autre page du site, ni dans le HTML ni dans les fiches que le JavaScript construit. Restent
+   permis : liens externes, courriels (mailto:), téléphones (tel:) et liens vers la carte
+   elle-même (#…). Une adresse calculée (href="${…}", x.href = variable) doit être l'une des
+   formes connues ci-dessous, toutes externes : un nouveau lien calculé est à vérifier, puis à
+   ajouter ici. */
+const CARTE_HERMETIQUE = 'monteregie-est/';
+const LIENS_CALCULES_EXTERNES = Object.freeze([
+  '${esc(urlWebSure(h.site))}', // établissement : site web (http ou https seulement)
+  '${esc(href)}',               // siteLink() : site web de la clinique (urlWebSure)
+  '${url}',                     // mapsLink() : Google Maps
+  '${esc(poRaw)}',              // porte ouverte : adresse https
+  '${reportHref}'               // « Signaler une correction » : mailto:
+]);
+const ADRESSES_AFFECTEES_EXTERNES = Object.freeze([
+  'lien',      // annonce : inscription (https par urlWebSure, ou mailto:)
+  'lienCarte'  // annonce : itinéraire (https par urlWebSure)
+]);
+/* Champs des données que la carte Est transforme en liens. */
+const CHAMPS_LIENS = Object.freeze({
+  cliniques: ['site', 'porteOuverte'],
+  hopitaux: ['site'],
+  annonce: ['lien', 'lienCarte'],
+  installations: ['lienWeb']
+});
+const ADRESSE_DU_SITE = /(?:^|[\/.])trouvetaclinique\.ca(?![\w-])/i;
+
+/* Vrai si l'adresse mène à une autre page du site que la carte Est. */
+function menerAuSite(href) {
+  const h = String(href).trim();
+  if (h.startsWith('${')) return !LIENS_CALCULES_EXTERNES.includes(h);
+  let u;
+  try { u = new URL(h, 'https://trouvetaclinique.ca/' + CARTE_HERMETIQUE); } catch { return true; }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
+  if (!/(?:^|\.)trouvetaclinique\.ca$/i.test(u.hostname)) return false;
+  return u.pathname.replace(/index\.html$/, '') !== '/' + CARTE_HERMETIQUE;
+}
+
+/* Liens de la carte Est vers le reste du site (liste vide : carte hermétique). */
+function liensVersLeSite(html) {
+  const texte = String(html);
+  const fautes = [];
+  for (const m of texte.matchAll(/<(?:a|area)\b[^>]*?\bhref\s*=\s*(["'])(.*?)\1/gi)) {
+    if (menerAuSite(m[2])) fautes.push(m[2]);
+  }
+  for (const m of texte.matchAll(/<form\b[^>]*?\baction\s*=\s*(["'])(.*?)\1/gi)) {
+    if (menerAuSite(m[2])) fautes.push('action=' + m[2]);
+  }
+  for (const m of texte.matchAll(/\.href\s*=(?!=)\s*([^;\n]+)/g)) {
+    const valeur = m[1].trim();
+    const litteral = valeur.match(/^(["'`])(.*)\1$/);
+    if (litteral ? menerAuSite(litteral[2]) : !ADRESSES_AFFECTEES_EXTERNES.includes(valeur)) {
+      fautes.push('.href = ' + valeur);
+    }
+  }
+  for (const m of texte.matchAll(/\blocation\s*=(?!=)|\blocation\.(?:assign|replace)\s*\(|\bwindow\.open\s*\(/g)) {
+    fautes.push(m[0]);
+  }
+  return fautes;
+}
+
+/* Adresses du site dans les champs que la carte Est transforme en liens (Est seulement). */
+function adressesDuSiteDansLesDonnees(donnees, etablissements) {
+  const fautes = [];
+  const verifier = (objet, champs, libelle) => {
+    for (const champ of champs) {
+      const valeur = objet && objet[champ];
+      if (typeof valeur === 'string' && ADRESSE_DU_SITE.test(valeur)) {
+        fautes.push(libelle + ' : ' + champ + ' = ' + valeur);
+      }
+    }
+  };
+  const d = donnees || {};
+  for (const c of d.cliniques || []) {
+    if (c.region === 'Est') verifier(c, CHAMPS_LIENS.cliniques, 'clinique ' + c.id);
+  }
+  for (const h of d.hopitaux || []) {
+    if (h.region === 'Est') verifier(h, CHAMPS_LIENS.hopitaux, 'hôpital ' + h.id);
+  }
+  verifier(d.annonce, CHAMPS_LIENS.annonce, 'annonce');
+  for (const i of (etablissements && etablissements.installations) || []) {
+    verifier(i, CHAMPS_LIENS.installations, 'installation ' + i.id);
+  }
+  return fautes;
+}
+
+function verifierCarteHermetique(racine) {
+  const lireJson = rel => JSON.parse(fs.readFileSync(path.join(racine, rel), 'utf8'));
+  const page = path.join(racine, CARTE_HERMETIQUE, 'index.html');
+  return [
+    ...liensVersLeSite(fs.readFileSync(page, 'utf8')),
+    ...adressesDuSiteDansLesDonnees(lireJson('data.json'), lireJson('data-etablissements.json'))
+  ];
+}
+
 function horsPiedCommun(html) {
   return String(html).replace(PIED_COMMUN, '');
 }
@@ -50,27 +145,40 @@ function verifierPagesEst(racine) {
   return fautes;
 }
 
-function rapporter(fautes) {
+function rapporter(fautes, fautesCarte = []) {
+  let code = 0;
   if (!fautes.length) {
     console.log('Navigation Est : les liens vers Centre, Ouest ou la carte complète restent dans le pied de page commun.');
-    return 0;
+  } else {
+    console.error('::error::Un lien de navigation Est vers Centre, Ouest ou la carte complète se trouve hors du pied de page commun. Publication annulée.');
+    for (const faute of fautes) {
+      console.error(faute.fichier + ' : ' + faute.liens.join(', '));
+    }
+    code = 1;
   }
-  console.error('::error::Un lien de navigation Est vers Centre, Ouest ou la carte complète se trouve hors du pied de page commun. Publication annulée.');
-  for (const faute of fautes) {
-    console.error(faute.fichier + ' : ' + faute.liens.join(', '));
+  if (!fautesCarte.length) {
+    console.log('Carte Montérégie-Est hermétique : aucun lien vers le reste du site.');
+  } else {
+    console.error('::error::La carte Montérégie-Est mène vers une autre page du site (carte hermétique depuis le 13 oct. 2026). Publication annulée.');
+    for (const faute of fautesCarte) console.error(CARTE_HERMETIQUE + 'index.html : ' + faute);
+    code = 1;
   }
-  return 1;
+  return code;
 }
 
 module.exports = {
   CLASSE_PIED,
+  CARTE_HERMETIQUE,
   horsPiedCommun,
   liensInterditsHorsPied,
+  liensVersLeSite,
+  adressesDuSiteDansLesDonnees,
   verifierPagesEst,
+  verifierCarteHermetique,
   rapporter
 };
 
 if (require.main === module) {
   const racine = path.join(__dirname, '..');
-  process.exit(rapporter(verifierPagesEst(racine)));
+  process.exit(rapporter(verifierPagesEst(racine), verifierCarteHermetique(racine)));
 }

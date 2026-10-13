@@ -109,6 +109,15 @@ dates du sitemap selon le contenu réel des pages).
   ensuite librement. Aimantation CSS (`scroll-snap`, proximité) et script `repertoire-aimant`, ajoutés
   par `publier-regions.js` avec le répertoire. Le répertoire reste visible et dans le HTML (rien de masqué,
   pour Google).
+- Carte Est hermétique (13 oct. 2026, choix du propriétaire) : `/monteregie-est/` ne mène à aucune autre
+  page du site. Menu « i » : seulement la page de recrutement du CISSS (plus l'installation de l'app) ;
+  fiches GMF-U sans lien vers le guide PTEM-U ; répertoire sous la carte en texte sans liens
+  (`hermetique: true` dans `publier-regions.js`, `<section>` au lieu de `<nav>`). Restent les liens
+  externes (sites des cliniques, Google Maps, portes ouvertes), les courriels et les téléphones. La carte
+  `/monteregie/` garde ses liens (`generer-carte-sq-complete.js` les remet). Garde-fou : `liensVersLeSite`
+  (`scripts/verifier-navigation-est.js`, page et champs des données qui deviennent des liens) bloque la
+  génération et la publication ; un nouveau lien calculé (`href="${…}"`) doit être vérifié, puis ajouté à
+  `LIENS_CALCULES_EXTERNES`.
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
