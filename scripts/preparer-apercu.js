@@ -18,6 +18,7 @@ const DOSSIERS = new Set([
   'assets', 'vendor', 'amp', 'ptem', 'ptem-u', 'cliniques', 'rls', 'recherche', 'guides',
   'monteregie', 'monteregie-est', 'monteregie-centre', 'monteregie-ouest',
   'carte-interactive',
+  'carte-recrutement-est',
   'a-propos', 'confidentialite'
 ]);
 const FICHIERS = new Set([

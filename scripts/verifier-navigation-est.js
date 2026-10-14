@@ -23,6 +23,8 @@ const CIBLES = [
    formes connues ci-dessous, toutes externes : un nouveau lien calculé est à vérifier, puis à
    ajouter ici. */
 const CARTE_HERMETIQUE = 'monteregie-est/';
+/* 14 oct. 2026 : version autonome publiée sur une page non répertoriée, hermétique elle aussi. */
+const PAGES_HERMETIQUES = Object.freeze([CARTE_HERMETIQUE, 'carte-recrutement-est/']);
 const LIENS_CALCULES_EXTERNES = Object.freeze([
   '${esc(urlWebSure(h.site))}', // établissement : site web (http ou https seulement)
   '${esc(href)}',               // siteLink() : site web de la clinique (urlWebSure)
@@ -43,31 +45,31 @@ const CHAMPS_LIENS = Object.freeze({
 });
 const ADRESSE_DU_SITE = /(?:^|[\/.])trouvetaclinique\.ca(?![\w-])/i;
 
-/* Vrai si l'adresse mène à une autre page du site que la carte Est. */
-function menerAuSite(href) {
+/* Vrai si l'adresse mène à une autre page du site que la carte elle-même. */
+function menerAuSite(href, page = CARTE_HERMETIQUE) {
   const h = String(href).trim();
   if (h.startsWith('${')) return !LIENS_CALCULES_EXTERNES.includes(h);
   let u;
-  try { u = new URL(h, 'https://trouvetaclinique.ca/' + CARTE_HERMETIQUE); } catch { return true; }
+  try { u = new URL(h, 'https://trouvetaclinique.ca/' + page); } catch { return true; }
   if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
   if (!/(?:^|\.)trouvetaclinique\.ca$/i.test(u.hostname)) return false;
-  return u.pathname.replace(/index\.html$/, '') !== '/' + CARTE_HERMETIQUE;
+  return u.pathname.replace(/index\.html$/, '') !== '/' + page;
 }
 
 /* Liens de la carte Est vers le reste du site (liste vide : carte hermétique). */
-function liensVersLeSite(html) {
+function liensVersLeSite(html, page = CARTE_HERMETIQUE) {
   const texte = String(html);
   const fautes = [];
   for (const m of texte.matchAll(/<(?:a|area)\b[^>]*?\bhref\s*=\s*(["'])(.*?)\1/gi)) {
-    if (menerAuSite(m[2])) fautes.push(m[2]);
+    if (menerAuSite(m[2], page)) fautes.push(m[2]);
   }
   for (const m of texte.matchAll(/<form\b[^>]*?\baction\s*=\s*(["'])(.*?)\1/gi)) {
-    if (menerAuSite(m[2])) fautes.push('action=' + m[2]);
+    if (menerAuSite(m[2], page)) fautes.push('action=' + m[2]);
   }
   for (const m of texte.matchAll(/\.href\s*=(?!=)\s*([^;\n]+)/g)) {
     const valeur = m[1].trim();
     const litteral = valeur.match(/^(["'`])(.*)\1$/);
-    if (litteral ? menerAuSite(litteral[2]) : !ADRESSES_AFFECTEES_EXTERNES.includes(valeur)) {
+    if (litteral ? menerAuSite(litteral[2], page) : !ADRESSES_AFFECTEES_EXTERNES.includes(valeur)) {
       fautes.push('.href = ' + valeur);
     }
   }
@@ -104,9 +106,14 @@ function adressesDuSiteDansLesDonnees(donnees, etablissements) {
 
 function verifierCarteHermetique(racine) {
   const lireJson = rel => JSON.parse(fs.readFileSync(path.join(racine, rel), 'utf8'));
-  const page = path.join(racine, CARTE_HERMETIQUE, 'index.html');
+  const liens = [];
+  for (const page of PAGES_HERMETIQUES) {
+    const fichier = path.join(racine, page, 'index.html');
+    if (!fs.existsSync(fichier)) continue;
+    for (const faute of liensVersLeSite(fs.readFileSync(fichier, 'utf8'), page)) liens.push(page + 'index.html : ' + faute);
+  }
   return [
-    ...liensVersLeSite(fs.readFileSync(page, 'utf8')),
+    ...liens,
     ...adressesDuSiteDansLesDonnees(lireJson('data.json'), lireJson('data-etablissements.json'))
   ];
 }
@@ -157,10 +164,10 @@ function rapporter(fautes, fautesCarte = []) {
     code = 1;
   }
   if (!fautesCarte.length) {
-    console.log('Carte Montérégie-Est hermétique : aucun lien vers le reste du site.');
+    console.log('Cartes hermétiques (Montérégie-Est et version autonome) : aucun lien vers le reste du site.');
   } else {
     console.error('::error::La carte Montérégie-Est mène vers une autre page du site (carte hermétique depuis le 13 oct. 2026). Publication annulée.');
-    for (const faute of fautesCarte) console.error(CARTE_HERMETIQUE + 'index.html : ' + faute);
+    for (const faute of fautesCarte) console.error(faute);
     code = 1;
   }
   return code;
@@ -169,6 +176,7 @@ function rapporter(fautes, fautesCarte = []) {
 module.exports = {
   CLASSE_PIED,
   CARTE_HERMETIQUE,
+  PAGES_HERMETIQUES,
   horsPiedCommun,
   liensInterditsHorsPied,
   liensVersLeSite,
