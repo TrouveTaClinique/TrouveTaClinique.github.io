@@ -16,7 +16,7 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 const {
-  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE, A_VENIR, masquer, masquerCourriels, masquerTexte,
+  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE, REGIONS_COURRIELS_SECTEURS_CARTE, A_VENIR, masquer, masquerCourriels, masquerTexte,
   contientCourriel
 } = require('./masquer-courriels.js');
 const { lister, donneesPubliques, FICHIERS_DONNEES, RACINE } = require('./preparer-apercu.js');
@@ -28,10 +28,12 @@ const PAGES_CARTES = new Set(['monteregie-est/index.html', 'monteregie/index.htm
 const RE_COURRIEL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const TEXTE = /\.(html|json|js|xml|txt|webmanifest|css|csv|md)$/i;
 const regionPubliee = c => REGIONS_COURRIELS_CARTE.includes(c && c.region);
-/* JSON publié sans les cliniques dont les courriels sont permis sur les cartes. */
+const secteursPublies = d => REGIONS_COURRIELS_SECTEURS_CARTE.includes(d && d.regionApplication);
+/* JSON publié sans les cliniques ni les secteurs dont les courriels sont permis sur les cartes. */
 function publieHorsExceptions(texte) {
   const json = JSON.parse(donneesPubliques(texte));
   if (Array.isArray(json.cliniques)) json.cliniques = json.cliniques.filter(c => !regionPubliee(c));
+  if (Array.isArray(json.secteurs) && secteursPublies(json)) json.secteurs = [];
   return JSON.stringify(json, null, 2);
 }
 
@@ -94,7 +96,7 @@ test('les JSON publiés ne gardent aucun courriel, même si data.json en recevai
   for (const fichier of FICHIERS_DONNEES) {
     const brut = JSON.parse(fs.readFileSync(path.join(RACINE, fichier), 'utf8'));
     if (brut.cliniques) brut.cliniques.find(c => !regionPubliee(c)).personneRessource = 'quelquun@gmail.com';
-    if (brut.secteurs) brut.secteurs[0].recrutement = { responsableCourriel: 'quelquun@gmail.com' };
+    if (brut.secteurs && !secteursPublies(brut)) brut.secteurs[0].recrutement = { responsableCourriel: 'quelquun@gmail.com' };
     brut.meta = { ...(brut.meta || {}), note: 'Écrire à quelquun@gmail.com' };
     const publie = donneesPubliques(JSON.stringify(brut));
     assert.doesNotMatch(publie, /quelquun@gmail\.com/, fichier);
@@ -256,4 +258,27 @@ test('carte /monteregie/ : adresse générale du recrutement pour les contacts d
   assert.match(mtg, /if \(c\.region === 'Est' && !c\.contactMasque\) c\.personneRessource = COURRIEL_RECRUTEMENT_EST;/);
   assert.match(mtg, /sec\.responsableCourriel = COURRIEL_RECRUTEMENT_EST;/);
   assert.doesNotMatch(est, /courrielsGenerauxEst|COURRIEL_RECRUTEMENT_EST/, 'la carte de l’Est garde les courriels');
+});
+
+/* 14 oct. 2026 (accord explicite du propriétaire) : courriels des départements de l'Est, transmis
+   par le recrutement médical de Santé Québec Montérégie-Est, publiés dans les données de la carte.
+   Les fiches du site gardent l'adresse générale (test plus haut). Le test compte, sans écrire
+   d'adresse. */
+test('carte de l’Est : courriels des secteurs de l’Est publiés, aucun pour le Centre', () => {
+  const est = JSON.parse(donneesPubliques(fs.readFileSync(path.join(RACINE, 'data-etablissements.json'), 'utf8')));
+  const centre = JSON.parse(donneesPubliques(fs.readFileSync(path.join(RACINE, 'data-etablissements-centre.json'), 'utf8')));
+  assert.equal(est.regionApplication, 'Est');
+  assert.equal(est.meta.politiqueAffichage.afficherResponsableCourriel, true);
+  const avec = est.secteurs.filter(s => contientCourriel(s.responsableCourriel || ''));
+  assert.equal(avec.length, est.secteurs.length, 'chaque secteur de l’Est a une adresse');
+  const generale = avec.filter(s => s.responsableCourriel === COURRIEL_CISSS_EST).length;
+  assert.ok(generale >= 1 && generale < avec.length / 2, `${generale} secteurs à l’adresse générale`);
+  assert.doesNotMatch(JSON.stringify(est.installations), /@/, 'installations sans courriel');
+  assert.doesNotMatch(JSON.stringify(centre.secteurs), /@/, 'secteurs du Centre sans courriel');
+  const { masquerPourCarte } = require('./masquer-courriels.js');
+  const essai = masquerPourCarte({ regionApplication: 'Est', meta: { note: 'a@exemple.ca' },
+    secteurs: [{ responsableCourriel: 'b@exemple.ca' }, { responsableCourriel: 'c@exemple.ca', contactMasque: true }] });
+  assert.equal(essai.secteurs[0].responsableCourriel, 'b@exemple.ca');
+  assert.equal(essai.secteurs[1].responsableCourriel, '', 'contactMasque l’emporte toujours');
+  assert.doesNotMatch(JSON.stringify(essai.meta), /a@exemple\.ca/, 'le reste du fichier reste masqué');
 });

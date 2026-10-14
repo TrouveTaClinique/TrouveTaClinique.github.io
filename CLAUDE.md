@@ -160,10 +160,12 @@ dates du sitemap selon le contenu réel des pages).
   Vérifié par `scripts/test-courriels-masques.cjs`. Établissements de l'Est : leurs courriels ne sont plus dans
   les données depuis le 2 sept. (décision antérieure, `afficherResponsableCourriel: false`). Le 14 oct. 2026,
   le recrutement médical de Santé Québec Montérégie-Est a transmis la liste des courriels des départements et
-  demandé leur ajout sur la carte ; le propriétaire a accepté (carte de l'Est seulement, adresse générale pour
-  les secteurs absents de la liste). Pas encore fait : il faut lever le garde-fou
-  `verifier-fuites-etablissements.js` pour ces adresses dans `data-etablissements.json` seulement, ce qui
-  demande une autorisation explicite.
+  demandé leur ajout sur la carte ; le propriétaire a accepté explicitement (carte de l'Est seulement, adresse
+  générale pour les secteurs absents de la liste). Fait le 14 oct. : `responsableCourriel` des 31 secteurs de
+  `data-etablissements.json` (politique `afficherResponsableCourriel: true`), exception
+  `REGIONS_COURRIELS_SECTEURS_CARTE` de `masquer-courriels.js`, garde-fou `verifier-fuites-etablissements.js`
+  (`contexteAutoriseEst`) qui permet ces adresses dans `data-etablissements.json` seulement et les interdit
+  toujours dans les pages du site. Sur la carte, le contact d'un secteur montre le nom et l'adresse.
 - Audit des données sensibles (9 oct. 2026, décisions du propriétaire) : numéros de téléphone des textes
   libres remplacés par « À venir » sauf la ligne principale d'une clinique (« Téléphone : … »), dans le
   même filtre (`PUBLIER_TELEPHONES = false`) ; JSON publiés sans fiches masquées (`visible: false`), sans

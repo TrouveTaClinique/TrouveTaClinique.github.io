@@ -26,7 +26,10 @@
  * Exception par région (13 oct. 2026, accord du propriétaire) : les cliniques des régions de
  * REGIONS_COURRIELS_CARTE gardent leurs courriels dans les JSON publiés. Depuis le 14 oct. 2026, seule
  * la carte de l'Est les affiche : la carte /monteregie/ montre l'adresse générale du recrutement de
- * l'Est (courrielsGenerauxEst, generer-carte-sq-complete.js).
+ * l'Est (courrielsGenerauxEst, generer-carte-sq-complete.js). Depuis le 14 oct. 2026 aussi, les
+ * secteurs d'établissement des fichiers dont la région (regionApplication) est dans
+ * REGIONS_COURRIELS_SECTEURS_CARTE gardent leurs courriels (courriels des départements, à la
+ * demande du recrutement médical de Santé Québec Montérégie-Est, accord explicite du propriétaire).
  * Le reste (cliniques des autres régions, établissements, annonce) suit PUBLIER_COURRIELS_CARTE, et
  * les pages du site suivent PUBLIER_COURRIELS_SITE.
  *
@@ -45,6 +48,7 @@
 const PUBLIER_COURRIELS_SITE = false;
 const PUBLIER_COURRIELS_CARTE = false;
 const REGIONS_COURRIELS_CARTE = Object.freeze(['Est']);
+const REGIONS_COURRIELS_SECTEURS_CARTE = Object.freeze(['Est']);
 const PUBLIER_TELEPHONES = false;
 const A_VENIR = 'À venir';
 const EXEMPTES = new Set(['contact@trouvetaclinique.ca']);
@@ -102,8 +106,15 @@ function masquerCourriels(valeur, cle = '') {
 }
 
 /* JSON publiés lus par les cartes et pages des cartes (donneesPubliques, publier-regions.js).
-   Les cliniques des régions de REGIONS_COURRIELS_CARTE gardent leurs courriels. */
+   Les cliniques des régions de REGIONS_COURRIELS_CARTE et les secteurs des fichiers d'établissements
+   des régions de REGIONS_COURRIELS_SECTEURS_CARTE gardent leurs courriels. */
 function masquerPourCarte(valeur) {
+  if (valeur && typeof valeur === 'object' && !Array.isArray(valeur) && Array.isArray(valeur.secteurs)
+    && !PUBLIER_COURRIELS_CARTE && REGIONS_COURRIELS_SECTEURS_CARTE.includes(valeur.regionApplication)) {
+    const sortie = masquer({ ...valeur, secteurs: [] }, '', false);
+    sortie.secteurs = valeur.secteurs.map(s => masquer(s, '', true));
+    return sortie;
+  }
   if (valeur && typeof valeur === 'object' && !Array.isArray(valeur) && Array.isArray(valeur.cliniques)) {
     const sortie = masquer({ ...valeur, cliniques: [] }, '', PUBLIER_COURRIELS_CARTE);
     sortie.cliniques = valeur.cliniques.map(c =>
@@ -114,7 +125,7 @@ function masquerPourCarte(valeur) {
 }
 
 module.exports = {
-  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL,
+  PUBLIER_COURRIELS_SITE, PUBLIER_COURRIELS_CARTE, REGIONS_COURRIELS_CARTE, REGIONS_COURRIELS_SECTEURS_CARTE, PUBLIER_TELEPHONES, A_VENIR, EXEMPTES, RE_COURRIEL,
   RE_TELEPHONE, CHAMPS_CONTACT, contientCourriel, masquer, masquerCourriels, masquerPourCarte, masquerTexte,
   masquerTelephones
 };

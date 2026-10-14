@@ -3003,19 +3003,13 @@ function basculerSecteurFiche(secteurId) {
    en ferait la première ligne de tout corps de secteur, pour rien. */
 function htmlContactSecteur(s) {
   const pol = (dataEtabMeta && dataEtabMeta.politiqueAffichage) || {};
-  const nomOk = pol.afficherResponsableNom !== false && s.responsableNom;
-  const courrielOk = !!s.responsableCourriel;
-  if (nomOk && courrielOk) {
-    return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableNom)}</a>`;
-  }
-  if (nomOk) return esc(s.responsableNom);
-  if (courrielOk) {
-    if (pol.afficherResponsableCourriel !== false) {
-      return `<a href="mailto:${esc(s.responsableCourriel)}">${esc(s.responsableCourriel)}</a>`;
-    }
-    return `<a href="mailto:${esc(s.responsableCourriel)}">Écrire au recrutement</a>`;
-  }
-  return 'À venir';
+  // 14 oct. 2026 : nom et adresse visibles, comme le contact d'une clinique.
+  const nom = pol.afficherResponsableNom !== false && s.responsableNom ? esc(s.responsableNom) : '';
+  const courriel = s.responsableCourriel
+    ? `<a href="mailto:${esc(s.responsableCourriel)}">${pol.afficherResponsableCourriel !== false ? esc(s.responsableCourriel) : 'Écrire au recrutement'}</a>`
+    : '';
+  if (nom && courriel) return nom + '<br>' + courriel;
+  return nom || courriel || 'À venir';
 }
 function htmlCorpsSecteur(s) {
   return `<div class="dp-sect-corps">
