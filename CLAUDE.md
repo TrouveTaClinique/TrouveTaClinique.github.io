@@ -118,6 +118,15 @@ dates du sitemap selon le contenu réel des pages).
   (`scripts/verifier-navigation-est.js`, page et champs des données qui deviennent des liens) bloque la
   génération et la publication ; un nouveau lien calculé (`href="${…}"`) doit être vérifié, puis ajouté à
   `LIENS_CALCULES_EXTERNES`.
+- Version autonome de la carte Est (14 oct. 2026, demande du propriétaire, pour le site du recrutement de
+  Santé Québec Montérégie-Est) : page non répertoriée `/carte-recrutement-est/` (noindex, hors plan du site,
+  aucune page du site n'y renvoie, hermétique : `PAGES_HERMETIQUES` de `verifier-navigation-est.js`, tests de
+  `test-navigation-est.cjs`). Bannière actuelle avec « RECRUTEMENT MÉDICAL » au lieu du nom du site, sans
+  commentaires internes, sans PWA ni mesure d'audience, fond de carte OpenFreeMap sans clé (la clé CARTO du
+  site n'y figure pas). Elle lit `../data.json` et `../data-etablissements.json` : ses données suivent celles
+  du site. Page statique produite par l'outil de version autonome, gardé hors du dépôt avec le zip remis au
+  CISSS : la reproduire après un changement du gabarit Est. Le nom du propriétaire figure dans ses crédits
+  (c'est une carte, `test-pages-info.cjs`).
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.

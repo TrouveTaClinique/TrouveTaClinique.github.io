@@ -92,3 +92,22 @@ test('la carte de toute la Montérégie garde ses liens vers le site', () => {
   }
   assert.equal(page.split('href="/monteregie-est/ptem-u/"').length - 1, 2);
 });
+
+/* 14 oct. 2026 : version autonome de la carte de l'Est, publiée sur une page non répertoriée
+   (carte-recrutement-est/). Hermétique, non indexée, absente du plan du site et de tout lien. */
+test('page autonome non répertoriée : hermétique, non indexée, sans lien qui y mène', () => {
+  const page = lire('carte-recrutement-est/index.html');
+  assert.deepEqual(liensVersLeSite(page, 'carte-recrutement-est/'), []);
+  assert.match(page, /<meta name="robots" content="noindex">/);
+  assert.doesNotMatch(page, /rel="canonical"|rel="manifest"|serviceWorker\.register|cloudflareinsights/);
+  assert.doesNotMatch(page, /Trouve ta clinique|trouvetaclinique\.ca/i);
+  assert.match(page, /<span class="brand-org">RECRUTEMENT MÉDICAL<\/span>/);
+  assert.doesNotMatch(page, /<!--|cb1_[0-9a-z_]+/i, 'ni commentaire interne ni clé de fond de carte');
+  assert.doesNotMatch(lire('sitemap.xml'), /carte-recrutement-est/);
+  const { lister } = require('./preparer-apercu.js');
+  const publies = lister(racine);
+  assert.ok(publies.includes('carte-recrutement-est/index.html'), 'page publiée');
+  const renvois = publies.filter(p => p.endsWith('.html') && p !== 'carte-recrutement-est/index.html'
+    && /carte-recrutement-est/.test(lire(p)));
+  assert.deepEqual(renvois, [], 'aucune page du site n’y renvoie');
+});

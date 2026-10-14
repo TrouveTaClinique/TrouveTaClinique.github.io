@@ -43,7 +43,7 @@ test('Pied de page commun : liens vers À propos et Confidentialité', () => {
 
 test('Nom du propriétaire : sur les cartes seulement, nulle part ailleurs sur le site (8 oct. 2026)', () => {
   const { lister } = require('./preparer-apercu.js');
-  const CARTES = new Set(['monteregie-est/index.html', 'monteregie/index.html']);
+  const CARTES = new Set(['monteregie-est/index.html', 'monteregie/index.html', 'carte-recrutement-est/index.html']);
   const publies = lister(racine);
   assert.ok(!publies.includes('LICENSE'), 'LICENSE reste dans le dépôt, pas sur le site');
   const fautifs = publies.filter(p => /\.(html|js|json|xml|txt|webmanifest)$/.test(p) && !CARTES.has(p) &&
