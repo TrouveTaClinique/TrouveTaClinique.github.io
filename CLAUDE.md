@@ -122,7 +122,9 @@ dates du sitemap selon le contenu réel des pages).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
 - Pages `/a-propos/` et `/confidentialite/` : liens seulement dans le pied de page ; ni le nom
-  ni le courriel du propriétaire dans leur texte (demande du propriétaire). Formulaire
+  ni le courriel du propriétaire dans leur texte (demande du propriétaire). Depuis le 14 oct. 2026, plus de
+  mention d'une collaboration avec le recrutement médical de la Montérégie-Est, et le site se dit
+  « indépendant du gouvernement du Québec, de Santé Québec et des DTMF » (accueil, À propos, guides). Formulaire
   « Nous joindre » : Worker `/contact`, repli sur un courriel prérempli tant que l'envoi direct
   n'est pas configuré.
 - Adresse publique du site : `contact@trouvetaclinique.ca` (transfert easyDNS vers la boîte du
@@ -145,16 +147,23 @@ dates du sitemap selon le contenu réel des pages).
   masqués) ne servent plus depuis le 10 oct. 2026 (voir « Notes internes des cliniques »).
   Ne rien republier sans l'accord explicite du propriétaire.
 - Courriels sur les cartes (13 oct. 2026, accord du propriétaire) : réaffichés pour les cliniques de l'Est
-  seulement, sur les deux cartes (`REGIONS_COURRIELS_CARTE = ['Est']` dans `masquer-courriels.js`, appliqué
-  par `masquerPourCarte`). Les 26 adresses d'avant le 8 oct. ont été remises avec
+  seulement (`REGIONS_COURRIELS_CARTE = ['Est']` dans `masquer-courriels.js`, appliqué par
+  `masquerPourCarte`). Depuis le 14 oct. 2026 (choix du propriétaire, après le courriel du recrutement médical
+  de Santé Québec Montérégie-Est), seule la carte de l'Est les affiche : la carte `/monteregie/` remplace, au
+  chargement, les contacts des cliniques et des secteurs de l'Est par l'adresse générale du recrutement
+  (`courrielsGenerauxEst`, `generer-carte-sq-complete.js`). Les 26 adresses d'avant le 8 oct. ont été remises avec
   `node scripts/restaurer-courriels.js --region=Est --appliquer`. Centre et Ouest : « À venir » (en attente).
   Pour eux un jour : ajouter la région à `REGIONS_COURRIELS_CARTE`, puis `restaurer-courriels.js --region=…
   --appliquer` (SEC-C-010 et toute fiche `contactMasque` restent masqués). Les fiches du site gardent
   l'adresse du CISSS (`PUBLIER_COURRIELS_SITE = false`). Courriels reçus par le formulaire : dans `data.json`
   (dépôt public) seulement sur demande du propriétaire, et jamais pour le Centre ou l'Ouest d'ici leur accord.
   Vérifié par `scripts/test-courriels-masques.cjs`. Établissements de l'Est : leurs courriels ne sont plus dans
-  les données depuis le 2 sept. (décision antérieure, `afficherResponsableCourriel: false`) ; il faudrait le
-  répertoire source pour les remettre.
+  les données depuis le 2 sept. (décision antérieure, `afficherResponsableCourriel: false`). Le 14 oct. 2026,
+  le recrutement médical de Santé Québec Montérégie-Est a transmis la liste des courriels des départements et
+  demandé leur ajout sur la carte ; le propriétaire a accepté (carte de l'Est seulement, adresse générale pour
+  les secteurs absents de la liste). Pas encore fait : il faut lever le garde-fou
+  `verifier-fuites-etablissements.js` pour ces adresses dans `data-etablissements.json` seulement, ce qui
+  demande une autorisation explicite.
 - Audit des données sensibles (9 oct. 2026, décisions du propriétaire) : numéros de téléphone des textes
   libres remplacés par « À venir » sauf la ligne principale d'une clinique (« Téléphone : … »), dans le
   même filtre (`PUBLIER_TELEPHONES = false`) ; JSON publiés sans fiches masquées (`visible: false`), sans

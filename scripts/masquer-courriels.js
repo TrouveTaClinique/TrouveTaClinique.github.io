@@ -24,7 +24,9 @@
  * courriels sur la carte »). Les fiches de l'Est affichent de toute façon l'adresse du CISSS.
  *
  * Exception par région (13 oct. 2026, accord du propriétaire) : les cliniques des régions de
- * REGIONS_COURRIELS_CARTE gardent leurs courriels dans les JSON publiés, donc sur les deux cartes.
+ * REGIONS_COURRIELS_CARTE gardent leurs courriels dans les JSON publiés. Depuis le 14 oct. 2026, seule
+ * la carte de l'Est les affiche : la carte /monteregie/ montre l'adresse générale du recrutement de
+ * l'Est (courrielsGenerauxEst, generer-carte-sq-complete.js).
  * Le reste (cliniques des autres régions, établissements, annonce) suit PUBLIER_COURRIELS_CARTE, et
  * les pages du site suivent PUBLIER_COURRIELS_SITE.
  *

@@ -14,6 +14,9 @@ const RACINE = path.join(__dirname, '..');
 const GABARIT = path.join(__dirname, 'carte-est-sq.template.html');
 const SORTIE_RENVOI = path.join(RACINE, 'carte-interactive', 'index.html');
 const URL_CARTE = 'https://trouvetaclinique.ca/monteregie/';
+// Adresse générale du recrutement médical de l'Est (même adresse que COURRIEL_RECRUTEMENT_EST de
+// generer-pages-seo.js), affichée sur cette carte à la place des courriels des responsables de l'Est.
+const COURRIEL_RECRUTEMENT_EST = 'recrutement.md.cisssme16@ssss.gouv.qc.ca';
 
 const HRR = 'Haut-Richelieu\u2013Rouville';
 const SUROIT = 'du Suro\u00eet';
@@ -645,7 +648,19 @@ function syncRegChips() {
       .catch(() => null)
   ]))
   .then(([data, etabData]) => initData(data, etabData))`,
-    `function fusionnerEtablissements(estData, centreData) {
+    `/* Courriels des responsables de l'Est : sur la carte de l'Est seulement (14 oct. 2026, choix du
+   propriétaire). Ici, comme sur les fiches du site, l'adresse générale du recrutement de l'Est. */
+const COURRIEL_RECRUTEMENT_EST = '${COURRIEL_RECRUTEMENT_EST}';
+function courrielsGenerauxEst(data) {
+  ((data && data.cliniques) || []).forEach(c => {
+    if (c.region === 'Est' && !c.contactMasque) c.personneRessource = COURRIEL_RECRUTEMENT_EST;
+  });
+  return data;
+}
+function fusionnerEtablissements(estData, centreData) {
+  ((estData && estData.secteurs) || []).forEach(sec => {
+    if (!sec.contactMasque && !(sec.recrutement || {}).contactMasque) sec.responsableCourriel = COURRIEL_RECRUTEMENT_EST;
+  });
   const lots = [estData, centreData].filter(Boolean);
   const installations = [];
   const secteurs = [];
@@ -670,7 +685,7 @@ fetch('../data.json', { cache: 'no-cache' })
     chargerJsonCarte('../data-etablissements.json'),
     chargerJsonCarte('../data-etablissements-centre.json')
   ]))
-  .then(([data, etabEst, etabCentre]) => initData(data, fusionnerEtablissements(etabEst, etabCentre)))`,
+  .then(([data, etabEst, etabCentre]) => initData(courrielsGenerauxEst(data), fusionnerEtablissements(etabEst, etabCentre)))`,
     'chargement des trois territoires');
 
   html = uneFois(html, "  var regNom = 'Montérégie-Est';", "  var regNom = 'Montérégie';", 'partage');
