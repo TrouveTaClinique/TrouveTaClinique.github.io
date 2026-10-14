@@ -9,8 +9,8 @@
    le propriétaire donne son accord pour réafficher les courriels sur la carte, mettre
    PUBLIER_COURRIELS_CARTE à true suffit, aucun test ne bloque (voir CLAUDE.md).
    13 oct. 2026 (accord du propriétaire) : les cliniques des régions de REGIONS_COURRIELS_CARTE (l'Est)
-   gardent leurs courriels dans les JSON publiés, donc sur les deux cartes ; tout le reste des données
-   et toutes les pages du site restent vérifiés comme avant. */
+   gardent leurs courriels dans les JSON publiés ; tout le reste des données et toutes les pages du
+   site restent vérifiés comme avant. 14 oct. 2026 : seule la carte de l'Est les affiche. */
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
@@ -243,4 +243,17 @@ test('cartes : courriels des cliniques de l’Est publiés, aucun pour les autre
   assert.equal(carte.cliniques[2].personneRessource, '', 'contactMasque l’emporte toujours');
   assert.equal(carte.annonce.lien, PUBLIER_COURRIELS_CARTE ? 'mailto:b@exemple.ca' : '', 'annonce : interrupteur général');
   assert.deepEqual(Object.keys(carte), ['annonce', 'cliniques'], 'ordre des clés gardé');
+});
+
+/* 14 oct. 2026 (choix du propriétaire) : les courriels des responsables de l'Est s'affichent sur la
+   carte de l'Est seulement. La carte /monteregie/ remplace, au chargement des données, ceux des
+   cliniques et des secteurs de l'Est par l'adresse générale du recrutement de l'Est. */
+test('carte /monteregie/ : adresse générale du recrutement pour les contacts de l’Est', () => {
+  const mtg = fs.readFileSync(path.join(RACINE, 'monteregie/index.html'), 'utf8');
+  const est = fs.readFileSync(path.join(RACINE, 'monteregie-est/index.html'), 'utf8');
+  assert.ok(mtg.includes(`const COURRIEL_RECRUTEMENT_EST = '${COURRIEL_CISSS_EST}';`));
+  assert.match(mtg, /initData\(courrielsGenerauxEst\(data\), fusionnerEtablissements\(etabEst, etabCentre\)\)/);
+  assert.match(mtg, /if \(c\.region === 'Est' && !c\.contactMasque\) c\.personneRessource = COURRIEL_RECRUTEMENT_EST;/);
+  assert.match(mtg, /sec\.responsableCourriel = COURRIEL_RECRUTEMENT_EST;/);
+  assert.doesNotMatch(est, /courrielsGenerauxEst|COURRIEL_RECRUTEMENT_EST/, 'la carte de l’Est garde les courriels');
 });

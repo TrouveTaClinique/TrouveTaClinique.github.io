@@ -174,7 +174,7 @@ function htmlFooterSite() {
       <li><a href="/monteregie-ouest/rls/du-haut-saint-laurent/">du Haut-Saint-Laurent</a></li>
     </ul></div>
   </div>
-  <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
+  <p class="avis">Trouve ta clinique est un outil d'information et de comparaison, indépendant du gouvernement du Québec, de Santé Québec et des DTMF. Les fiches regroupent les données du répertoire, des sources publiques et, lorsqu'elles sont disponibles, des informations communiquées par les milieux. Ces renseignements peuvent changer&nbsp;; pour toute décision officielle, validez l'information auprès du milieu, du DTMF ou des sources gouvernementales compétentes.</p>
   <p class="avis avis-liens"><a href="/a-propos/">À propos</a> · <a href="/confidentialite/">Confidentialité</a></p>
   <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© ${new Date().getFullYear()} · Trouve ta clinique</p>
 </footer>`;
@@ -4038,14 +4038,14 @@ function pageAPropos(majDonnees) {
     <li>Des guides sur le <a href="${EST_PREFIXE}/ptem/">PTEM 2027</a>, le <a href="${EST_PREFIXE}/ptem-u/">PTEM-U (PREM-U)</a> et les <a href="${EST_PREFIXE}/amp/">AMP</a>, et un <a href="/guides/">catalogue de guides cliniques</a> et de <a href="/guides/ressources-communautaires/">ressources communautaires</a>.</li>
   </ul>
   <h2>Le projet</h2>
-  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale, en collaboration avec les équipes de recrutement médical de la Montérégie-Est. C’est une initiative bénévole, indépendante et sans but lucratif.</p>
+  <p>Ce projet est développé et tenu à jour par un résident en médecine familiale. C’est une initiative bénévole, indépendante et sans but lucratif.</p>
   <h2>D’où viennent les données</h2>
   <p>Les fiches sont constituées à partir des renseignements transmis par les cliniques elles-mêmes, complétés par le répertoire des milieux et des sources publiques, et vérifiés manuellement. En Montérégie-Est, la liste des milieux qui recrutent est validée avec Santé Québec Montérégie-Est. En Montérégie-Centre et en Montérégie-Ouest, elle reprend la dernière mise à jour du répertoire.</p>
   <p>Dernière mise à jour des données&nbsp;: ${htmlDateFr(majDonnees)}. Chaque fiche indique aussi sa propre date.</p>
   <h2>Faire corriger une fiche</h2>
   <p>Vous travaillez dans un milieu présenté ici&nbsp;? Le bouton «&nbsp;Vous travaillez dans ce milieu&nbsp;?&nbsp;» de sa fiche ouvre un courriel prérempli pour corriger ou compléter les renseignements. Un milieu manque&nbsp;? <a href="/#nous-joindre">Écrivez-nous</a>.</p>
   <h2>Ce que le site n’est pas</h2>
-  <p>Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec et des DTMF. Pour toute décision officielle (PTEM, avis de conformité, AMP), validez l’information auprès du milieu, du DTMF ou des sources gouvernementales.</p>
+  <p>Trouve ta clinique est un outil d’information et de comparaison, indépendant du gouvernement du Québec, de Santé Québec et des DTMF. Pour toute décision officielle (PTEM, avis de conformité, AMP), validez l’information auprès du milieu, du DTMF ou des sources gouvernementales.</p>
   <p>Vous êtes un patient&nbsp;? Le site ne permet pas de prendre rendez-vous. Sans médecin de famille, passez par le <a href="https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-premiere-ligne" rel="noopener">guichet d’accès à la première ligne</a> (811, option&nbsp;3).</p>
   <h2>Nous joindre</h2>
   <p>Pour nous écrire, utilisez le <a href="/#nous-joindre">formulaire «&nbsp;Nous joindre&nbsp;»</a> au bas de la page d’accueil.</p>
