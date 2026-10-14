@@ -224,3 +224,40 @@ test('source de travail scripts/donnees-etablissements-source.json dans l\'artef
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+/* 14 oct. 2026 (accord explicite du propriétaire) : avec afficherResponsableCourriel: true, les
+   courriels des secteurs de l'Est sont permis dans data-etablissements.json (données de la carte),
+   mais restent interdits dans les pages du site. */
+function artefactEstPublie(dir) {
+  const emp = artefactSain(dir);
+  const prive = sourceEst();
+  prive.meta.politiqueAffichage.afficherResponsableCourriel = true;
+  ecrireJson(dir, 'data-etablissements.json', projeter(prive));
+  return emp;
+}
+
+test('Est publié : courriel permis dans les données de la carte', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ttc-fuite-est-ok-'));
+  try {
+    const emp = artefactEstPublie(dir);
+    assert.ok(fs.readFileSync(path.join(dir, 'data-etablissements.json'), 'utf8').includes(SYNTH_EST));
+    assert.equal(controler(dir, emp).ok, true);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('Est publié : le même courriel reste interdit dans une fiche du site', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ttc-fuite-est-fiche-'));
+  try {
+    const emp = artefactEstPublie(dir);
+    fs.writeFileSync(
+      path.join(dir, 'monteregie-est', 'etablissements', 'hopital-synthetique', 'index.html'),
+      `<p><a href="mailto:${SYNTH_EST}">x</a></p>\n`,
+      'utf8'
+    );
+    assert.equal(controler(dir, emp).ok, false);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

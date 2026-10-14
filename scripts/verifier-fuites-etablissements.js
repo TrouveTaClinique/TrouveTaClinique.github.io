@@ -172,9 +172,34 @@ function contexteAutoriseCentre(relatifFichier, adresse, courrielsCentreAutorise
     || /(^|\/)data-etablissements-centre\.json$/.test(relatifFichier);
 }
 
-function contexteAutorise(relatifFichier, adresse, courrielsCliniques, courrielsCentreAutorises) {
+/* 14 oct. 2026 (accord explicite du propriétaire) : courriels des départements de l'Est, à la
+   demande du recrutement médical de Santé Québec Montérégie-Est. Permis seulement dans les données
+   de la carte (data-etablissements.json, politique Est afficherResponsableCourriel: true) ; jamais
+   dans les pages du site, qui gardent l'adresse générale du recrutement. */
+function contexteAutoriseEst(relatifFichier, adresse, courrielsEstAutorises) {
+  return !!courrielsEstAutorises && courrielsEstAutorises.has(adresse)
+    && /(^|\/)data-etablissements\.json$/.test(relatifFichier);
+}
+
+function contexteAutorise(relatifFichier, adresse, courrielsCliniques, courrielsCentreAutorises, courrielsEstAutorises) {
   return contexteAutoriseClinique(relatifFichier, adresse, courrielsCliniques)
-    || contexteAutoriseCentre(relatifFichier, adresse, courrielsCentreAutorises);
+    || contexteAutoriseCentre(relatifFichier, adresse, courrielsCentreAutorises)
+    || contexteAutoriseEst(relatifFichier, adresse, courrielsEstAutorises);
+}
+
+/* Courriels de responsables qu'une politique d'affichage permet de publier. */
+function courrielsPermisParPolitique(donnees) {
+  const permis = new Set();
+  if (politiqueDe(donnees).afficherResponsableCourriel !== true) return permis;
+  (function collecter(v) {
+    if (Array.isArray(v)) { v.forEach(collecter); return; }
+    if (!v || typeof v !== 'object') return;
+    if (typeof v.responsableCourriel === 'string' && v.responsableCourriel.trim()) {
+      permis.add(v.responsableCourriel.trim().toLowerCase());
+    }
+    Object.values(v).forEach(collecter);
+  })(donnees);
+  return permis;
 }
 
 function verifier(options = {}) {
@@ -197,6 +222,7 @@ function verifier(options = {}) {
   }
 
   const cheminDonneesEst = path.join(sortie, 'data-etablissements.json');
+  let courrielsEstAutorises = new Set();
   if (!fs.existsSync(cheminDonneesEst)) {
     fuites.push({
       fichier: 'data-etablissements.json', champ: '(fichier)', entree: '(racine)',
@@ -212,6 +238,7 @@ function verifier(options = {}) {
     } else {
       const aRetirer = champsARetirer(donnees);
       parcourirChampsInterdits(donnees, aRetirer, null, fuites, 'data-etablissements.json');
+      courrielsEstAutorises = courrielsPermisParPolitique(donnees);
     }
   }
 
@@ -289,7 +316,7 @@ function verifier(options = {}) {
     const trouvees = courrielsDansTexte(texte);
     for (const adresse of trouvees) {
       if (ADRESSES_PUBLIQUES_SITE.has(adresse)) continue;
-      if (contexteAutorise(rel, adresse, courrielsCliniques, courrielsCentreAutorises)) continue;
+      if (contexteAutorise(rel, adresse, courrielsCliniques, courrielsCentreAutorises, courrielsEstAutorises)) continue;
       if (empreintesEst.includes(empreinteCourriel(adresse))) {
         fuites.push({
           fichier: rel, champ: 'responsableCourriel',
@@ -310,7 +337,7 @@ function verifier(options = {}) {
         const texte = decoderTexte(fs.readFileSync(f, 'utf8'));
         for (const [valeur, meta] of interdites) {
           if (meta.champ === 'responsableCourriel'
-            && contexteAutorise(rel, valeur.toLowerCase(), courrielsCliniques, courrielsCentreAutorises)) {
+            && contexteAutorise(rel, valeur.toLowerCase(), courrielsCliniques, courrielsCentreAutorises, courrielsEstAutorises)) {
             continue;
           }
           if (texte.includes(valeur)) {
