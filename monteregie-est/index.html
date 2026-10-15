@@ -2216,6 +2216,9 @@ if (CREDITS_BLOC && map.attributionControl) {
     + '<span class="credits-l2">Projet réalisé par Olivier Laplante</span>'
     + (map.attributionControl.options.prefix || ''));
 }
+/* 15 oct. 2026 (choix du propriétaire) : sans la mention « Leaflet », facultative (sa licence est
+   fournie avec ses fichiers), pour que la bande de crédits tienne sur une ligne au cellulaire. */
+if (!CREDITS_BLOC && map.attributionControl) map.attributionControl.setPrefix(false);
 
 /* Découpage et couleurs Santé Québec des trois RLS. */
 const COULEURS_RLS_EST_SQ = {

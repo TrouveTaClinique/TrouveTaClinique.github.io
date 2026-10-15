@@ -123,7 +123,8 @@ dates du sitemap selon le contenu réel des pages).
   aucune page du site n'y renvoie, hermétique : `PAGES_HERMETIQUES` de `verifier-navigation-est.js`, tests de
   `test-navigation-est.cjs`). Bannière actuelle avec « RECRUTEMENT MÉDICAL » au lieu du nom du site, sans
   commentaires internes, sans PWA ni mesure d'audience, fond de carte OpenFreeMap sans clé (la clé CARTO du
-  site n'y figure pas). Elle lit `../data.json` et `../data-etablissements.json` : ses données suivent celles
+  site n'y figure pas ; crédits « © OpenMapTiles © OpenStreetMap | © Olivier Laplante », OpenFreeMap n'exigeant pas
+  sa propre mention). Elle lit `../data.json` et `../data-etablissements.json` : ses données suivent celles
   du site. Page statique produite par l'outil de version autonome, gardé hors du dépôt avec le zip remis au
   CISSS : la reproduire après un changement du gabarit Est. Le nom du propriétaire figure dans ses crédits
   (c'est une carte, `test-pages-info.cjs`).
@@ -191,7 +192,8 @@ dates du sitemap selon le contenu réel des pages).
   sont déposés à la main. Pour remplacer la vidéo : écraser le fichier (moins de 50 Mo, `-movflags +faststart`)
   et changer `VERSION_VIDEO`. La musique (Mixkit) ne doit jamais être publiée seule.
 - Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`), **`false`**
-  (bande « © OpenStreetMap © CartoDB | © Olivier Laplante »). Le 1er oct. 2026, la collaboratrice
+  (bande « © OpenStreetMap © CartoDB | © Olivier Laplante », sans le préfixe « Leaflet » depuis le 15 oct. 2026 pour
+  tenir sur une ligne au cellulaire : `setPrefix(false)`, même gabarit pour `/monteregie/`). Le 1er oct. 2026, la collaboratrice
   a demandé le retrait de son nom du projet (carte, site, vidéo) : ne plus le publier nulle part.
   `CREDITS_COLLAB` = `false` (encadré « Réalisé en collaboration avec » retiré) et `LEGENDE_RLS`
   = `true` (légende des 3 RLS rétablie). Le 8 oct. 2026, le propriétaire a demandé que son nom reste sur les
