@@ -286,7 +286,7 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
 #map { flex: 1; cursor: default; }
 .leaflet-control-attribution.author-credit { font-size: 10px; color: var(--muted);
   background: rgba(255,255,255,.8); padding: 2px 6px; }
-@media (max-width: 380px) {
+@media (max-width: 319px) {
   .leaflet-control-attribution .credit-perso { display: none; }
 }
 .leaflet-top, .leaflet-bottom { z-index: 800; }
@@ -1401,7 +1401,7 @@ body.cmp-open { overflow:hidden; }
           <path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g>
       </svg>
     </button>
-    <button class="btn-share" id="btn-share" title="Partager le lien de l'application" aria-label="Partager le lien de l'application">
+    <button class="btn-share" id="btn-share" title="Partager le lien de la carte" aria-label="Partager le lien de la carte">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M8.4 10.7 15.6 6.8M8.4 13.3 15.6 17.2"/>
         <circle cx="18" cy="5.4" r="2.7"/><circle cx="6" cy="12" r="2.7"/><circle cx="18" cy="18.6" r="2.7"/>
@@ -2037,7 +2037,7 @@ map.on('locationerror', (function() {
   }
   function coucheRasterRepli(sombre) {
     if (!AVEC_CARTO) return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: ATTR,
+      attribution: '© OpenStreetMap<span class="credit-perso"> | © Olivier Laplante</span>',
       maxZoom: 19
     });
     return L.tileLayer('https://basemaps.cartocdn.com/rastertiles/' + (sombre ? 'dark_all' : 'light_all') + '/{z}/{x}/{y}{r}.png?key=' + encodeURIComponent(CARTO_KEY), {
@@ -2054,11 +2054,31 @@ map.on('locationerror', (function() {
       }
     });
   }
+  var NOM_FR = [ 'coalesce', [ 'get', 'name:fr' ], [ 'get', 'name' ] ];
+  var NOM_FR_TEXTE = JSON.stringify(NOM_FR);
+  function nomsEnFrancais(carteGl) {
+    var enCours = false;
+    carteGl.on('styledata', (function() {
+      if (enCours) return;
+      enCours = true;
+      try {
+        var style = carteGl.getStyle();
+        (style && style.layers || []).forEach((function(couche) {
+          if (couche.type !== 'symbol') return;
+          var champ = JSON.stringify(carteGl.getLayoutProperty(couche.id, 'text-field') || '');
+          if (champ.indexOf('name') < 0 || champ === NOM_FR_TEXTE) return;
+          carteGl.setLayoutProperty(couche.id, 'text-field', NOM_FR);
+        }));
+      } catch (e) {}
+      enCours = false;
+    }));
+  }
   function ajouterCouche(sombre) {
     if (vectorielDisponible) {
       try {
         var vectorielle = coucheVectorielle(sombre);
         vectorielle.addTo(map);
+        if (vectorielle.getMaplibreMap && vectorielle.getMaplibreMap()) nomsEnFrancais(vectorielle.getMaplibreMap());
         return vectorielle;
       } catch (e) {
         vectorielDisponible = false;
@@ -4582,7 +4602,7 @@ fetch('../data.json', {
     }
   }
   function inviter(p) {
-    window.prompt('Copiez le lien de l\'application :', p.url);
+    window.prompt('Copiez le lien de la carte :', p.url);
   }
 })();
 </script>

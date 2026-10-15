@@ -419,10 +419,11 @@ header::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; h
 #map { flex: 1; cursor: default; }
 .leaflet-control-attribution.author-credit { font-size: 10px; color: var(--muted);
   background: rgba(255,255,255,.8); padding: 2px 6px; }
-/* Sous 380px, le crédit personnel (non requis par la licence, contrairement à
-   OSM/CartoDB) disparaît pour éviter le passage à 2 lignes qui, à 320px,
-   faisait recouvrir la bande de crédits sur la 3e ligne de la légende. */
-@media (max-width: 380px) {
+/* Le crédit personnel (non requis par la licence, contrairement à OSM/CartoDB) disparaît
+   seulement sous 320px, où la bande passerait à 2 lignes et recouvrirait la légende. Il était
+   masqué dès 380px tant que la bande commençait par « Leaflet » ; sans elle (15 oct. 2026),
+   elle tient sur une ligne jusqu'à 320px. */
+@media (max-width: 319px) {
   .leaflet-control-attribution .credit-perso { display: none; }
 }
 /* La légende, le tiroir et la fiche sont l'interface de l'application ; les
@@ -2453,11 +2454,35 @@ map.on('locationerror', function () {
     });
   }
 
+  /* Noms de lieux en français (15 oct. 2026) : les styles du fond affichent le nom anglais aux
+     petits zooms (« Montreal », « Island of Montreal »). Chaque étiquette prend le nom français,
+     sinon le nom local (français au Québec), à chaque chargement de style (clair ou sombre). */
+  var NOM_FR = ['coalesce', ['get', 'name:fr'], ['get', 'name']];
+  var NOM_FR_TEXTE = JSON.stringify(NOM_FR);
+  function nomsEnFrancais(carteGl) {
+    var enCours = false;
+    carteGl.on('styledata', function () {
+      if (enCours) return;
+      enCours = true;
+      try {
+        var style = carteGl.getStyle();
+        ((style && style.layers) || []).forEach(function (couche) {
+          if (couche.type !== 'symbol') return;
+          var champ = JSON.stringify(carteGl.getLayoutProperty(couche.id, 'text-field') || '');
+          if (champ.indexOf('name') < 0 || champ === NOM_FR_TEXTE) return;
+          carteGl.setLayoutProperty(couche.id, 'text-field', NOM_FR);
+        });
+      } catch (e) { /* style pas encore prêt : l'événement suivant s'en charge */ }
+      enCours = false;
+    });
+  }
+
   function ajouterCouche(sombre) {
     if (vectorielDisponible) {
       try {
         var vectorielle = coucheVectorielle(sombre);
         vectorielle.addTo(map);
+        if (vectorielle.getMaplibreMap && vectorielle.getMaplibreMap()) nomsEnFrancais(vectorielle.getMaplibreMap());
         return vectorielle;
       } catch (e) {
         vectorielDisponible = false;

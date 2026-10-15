@@ -127,7 +127,12 @@ dates du sitemap selon le contenu réel des pages).
   sa propre mention). Elle lit `../data.json` et `../data-etablissements.json` : ses données suivent celles
   du site. Page statique produite par l'outil de version autonome, gardé hors du dépôt avec le zip remis au
   CISSS : la reproduire après un changement du gabarit Est. Le nom du propriétaire figure dans ses crédits
-  (c'est une carte, `test-pages-info.cjs`).
+  (c'est une carte, `test-pages-info.cjs`). Audit final du zip (15 oct. 2026) : le serveur du CISSS (Drupal 10
+  derrière Cloudflare) garde les fichiers statiques un an, donc le zip charge `reglages.js` et `donnees/*.js` avec
+  un numéro qui change toutes les 5 minutes ; données du zip sans les champs non affichés (`infos`,
+  `statutRecrutement`, `evenement`, `horaireSource`, `posApprox`) ; vérificateur qui donne la ligne d'une erreur
+  (fichier glissé dans la page, Chrome cachant le détail des erreurs en local) et repère un fichier non UTF-8 ;
+  mode d'emploi en deux parties (service informatique, mise à jour sans connaissances techniques).
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
@@ -193,7 +198,9 @@ dates du sitemap selon le contenu réel des pages).
   et changer `VERSION_VIDEO`. La musique (Mixkit) ne doit jamais être publiée seule.
 - Crédits de la carte Est : `CREDITS_BLOC` (`scripts/carte-est-sq.template.html`), **`false`**
   (bande « © OpenStreetMap © CartoDB | © Olivier Laplante », sans le préfixe « Leaflet » depuis le 15 oct. 2026 pour
-  tenir sur une ligne au cellulaire : `setPrefix(false)`, même gabarit pour `/monteregie/`). Le 1er oct. 2026, la collaboratrice
+  tenir sur une ligne au cellulaire : `setPrefix(false)`, même gabarit pour `/monteregie/` ; le nom n'est plus masqué
+  qu'au-dessous de 320 px, au lieu de 380 px). Noms de lieux du fond vectoriel en français (`nomsEnFrancais`, nom
+  français sinon local, 15 oct. 2026). Le 1er oct. 2026, la collaboratrice
   a demandé le retrait de son nom du projet (carte, site, vidéo) : ne plus le publier nulle part.
   `CREDITS_COLLAB` = `false` (encadré « Réalisé en collaboration avec » retiré) et `LEGENDE_RLS`
   = `true` (légende des 3 RLS rétablie). Le 8 oct. 2026, le propriétaire a demandé que son nom reste sur les
