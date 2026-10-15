@@ -1882,6 +1882,8 @@ if (CREDITS_BLOC && map.attributionControl) {
   map.attributionControl.setPrefix('<span class="credits-l1">© Santé Québec – CISSS de la Montérégie-Est</span>' + '<span class="credits-l2">Projet réalisé par Olivier Laplante</span>' + (map.attributionControl.options.prefix || ''));
 }
 
+if (!CREDITS_BLOC && map.attributionControl) map.attributionControl.setPrefix(false);
+
 const COULEURS_RLS_EST_SQ = {
   'Pierre-Boucher': '#0080D7',
   'Richelieu-Yamaska': '#08A0A0',
@@ -2002,7 +2004,7 @@ map.on('locationerror', (function() {
 
 (function() {
   var AVEC_CARTO = !!(window.REGLAGES_CARTE || {}).cleCarto;
-  var ATTR = (AVEC_CARTO ? '© OpenStreetMap © CartoDB' : '© OpenFreeMap © OpenMapTiles © OpenStreetMap') + '<span class="credit-perso"> | © Olivier Laplante</span>';
+  var ATTR = (AVEC_CARTO ? '© OpenStreetMap © CartoDB' : '© OpenMapTiles © OpenStreetMap') + '<span class="credit-perso"> | © Olivier Laplante</span>';
   var CARTO_KEY = (window.REGLAGES_CARTE || {}).cleCarto || '';
   var STYLE_CLAIR = AVEC_CARTO ? 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json' : 'https://tiles.openfreemap.org/styles/positron';
   var STYLE_SOMBRE = AVEC_CARTO ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json' : 'https://tiles.openfreemap.org/styles/dark';
