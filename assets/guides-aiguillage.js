@@ -139,6 +139,21 @@
 
   const erreur = texte => { zone.replaceChildren(paragraphe('guides-ia-erreur', texte)); };
 
+  /* Une nouvelle recherche par mots-clés, la réinitialisation ou la question effacée retirent les
+     suggestions de l'IA (16 oct. 2026) : elles répondaient à la question précédente. Une réponse
+     encore attendue est abandonnée, sans message d'erreur. */
+  let enCours = null;
+  function effacerSuggestions() {
+    if (enCours) { enCours.efface = true; enCours.abort(); }
+    clearInterval(minuterieEtapes);
+    if (zone.firstChild) zone.replaceChildren();
+  }
+  const rechercheMotsCles = document.getElementById('guide-search');
+  if (rechercheMotsCles) rechercheMotsCles.addEventListener('input', effacerSuggestions);
+  const reinitialiser = document.querySelector('.guides-reset');
+  if (reinitialiser) reinitialiser.addEventListener('click', effacerSuggestions);
+  champ.addEventListener('input', () => { if (!champ.value.trim()) effacerSuggestions(); });
+
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const question = champ.value.replace(/\s+/g, ' ').trim();
@@ -154,6 +169,7 @@
        onglet en arrière-plan gèle les minuteries : au retour sur la page, on vérifie aussi
        l'heure pour ne jamais laisser l'attente tourner indéfiniment. */
     const controleur = new AbortController();
+    enCours = controleur;
     const debut = Date.now();
     const minuterie = setTimeout(() => controleur.abort(), DELAI_MAX);
     const auRetour = () => { if (Date.now() - debut > DELAI_MAX) controleur.abort(); };
@@ -167,6 +183,7 @@
         signal: controleur.signal
       });
       const donnees = await reponse.json().catch(e => { if (controleur.signal.aborted) throw e; return {}; });
+      if (controleur.efface) return;
       if (!reponse.ok) {
         erreur(donnees.erreur || 'Le service est indisponible pour le moment. La recherche ci-dessus fonctionne toujours.');
       } else {
@@ -175,8 +192,9 @@
         if (note) zone.prepend(note);
       }
     } catch (e) {
-      erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
+      if (!controleur.efface) erreur('Le service n’a pas répondu. Vérifiez votre connexion ou réessayez dans un moment ; la recherche ci-dessus fonctionne toujours.');
     } finally {
+      if (enCours === controleur) enCours = null;
       clearTimeout(minuterie);
       document.removeEventListener('visibilitychange', auRetour);
       window.removeEventListener('focus', auRetour);

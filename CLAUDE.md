@@ -80,7 +80,9 @@ dates du sitemap selon le contenu réel des pages).
   La recherche fait passer les organismes devant pour une question communautaire
   (`estCommunautaire`), les guides devant pour une question clinique (`rechercherParType`).
 - Recherche : `assets/guides-recherche.js` (synonymes `GROUPES`, concepts `CONCEPTS`), testée
-  par `scripts/test-recherche-guides.cjs`.
+  par `scripts/test-recherche-guides.cjs`. Requête surprise (16 oct. 2026, demande du propriétaire, avec
+  l'accord de la personne) : un mot-clé reconnu seulement par son empreinte (`SURPRISE`) affiche la
+  balanoposthite puis les guides ITSS. Ne jamais écrire ce mot-clé en clair dans le dépôt.
 - Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5.5 depuis le 1er oct. 2026, repli automatique côté serveur, crédits prépayés de
   20 $ sans recharge). L'IA reçoit tout le catalogue (une ligne par ressource, mis en cache une
   heure) ; la présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
@@ -88,6 +90,8 @@ dates du sitemap selon le contenu réel des pages).
   propriétaire). Aucun texte rédigé par l'IA n'est affiché (3 oct. 2026) : seulement les fiches
   choisies, leur type et une phrase fixe si un aspect n'est couvert par aucune fiche (`lacune`). Le Worker se déploie depuis `main` (Cloudflare Workers Builds). Plafond de
   150 questions par jour (`PLAFOND_JOUR`), compté dans l'espace KV `COMPTEUR` de `wrangler.toml`.
+  Une nouvelle recherche par mots-clés, « Tout afficher » ou la question effacée retirent les suggestions
+  de l'IA, et une réponse encore attendue est abandonnée (`effacerSuggestions`, `assets/guides-aiguillage.js`).
 
 ## Divers
 

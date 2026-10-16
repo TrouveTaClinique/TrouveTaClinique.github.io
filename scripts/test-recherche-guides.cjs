@@ -289,3 +289,11 @@ test('à score égal, les types de ressource alternent (guide, algorithme, patie
   const formats = parType('lombalgie', 3).map(r => r.format);
   assert.equal(new Set(formats).size, 3, formats.join(','));
 });
+
+test('requête surprise : balanoposthite puis guides ITSS, sans toucher aux autres requêtes', () => {
+  const res = R.resultatsSurprise(index).map(x => ressources[x.i]);
+  assert.match(R.normaliser(res[0].title), /balanoposthite/);
+  assert.ok(res.slice(1).every(r => r.cat === 'Infections et ITSS'), 'seulement des guides ITSS ensuite');
+  assert.ok(res.length >= 10, res.length + ' résultats');
+  for (const q of ['syphilis', 'balanite', 'itss', 'chlamydia gonorrhee']) assert.equal(R.estSurprise(q), false, q);
+});
