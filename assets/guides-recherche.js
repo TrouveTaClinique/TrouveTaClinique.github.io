@@ -467,10 +467,39 @@
     }
   }
 
+  /* Requête surprise (16 oct. 2026, demande du propriétaire, avec l'accord de la personne visée) :
+     reconnue seulement par son empreinte, pour que le mot-clé ne figure nulle part en clair. Elle
+     affiche la balanoposthite, puis les guides sur les ITSS. */
+  function empreinte(texte) {
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let k = 0; k < texte.length; k++) {
+      const c = texte.charCodeAt(k);
+      h1 = Math.imul(h1 ^ c, 2654435761);
+      h2 = Math.imul(h2 ^ c, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+  }
+  const SURPRISE = 6363129772513994;
+  const estSurprise = requete => empreinte(normaliser(requete).split(' ').filter(Boolean).sort().join(' ')) === SURPRISE;
+  const MOTS_ITSS = /^(itss|chlamydia|gonorrhoeae|gonorrhee|syphilis|herpes|condylomes?|trichomonas|mycoplasma|vih|doxy)$/;
+  function resultatsSurprise(index) {
+    const balanites = [], itss = [];
+    index.forEach((champs, i) => {
+      if (champs.titre.some(m => m.startsWith('balan'))) balanites.push(i);
+      else if (champs.categorie.includes('itss') && champs.titre.concat(champs.motsCles).some(m => MOTS_ITSS.test(m))) itss.push(i);
+    });
+    /* Scores presque égaux et décroissants : l'ordre est gardé et aucun seuil n'en écarte. */
+    const ordre = balanites.concat(itss);
+    return ordre.map((i, rang) => ({ i, score: 1 + (ordre.length - rang) / (10 * ordre.length) }));
+  }
+
   /* Classement : chaque terme rapporte selon le champ touché et sa rareté dans le catalogue
      (IDF) ; un guide qui couvre plus de termes de la question passe devant. Par défaut, on
      garde les guides qui atteignent au moins le quart du meilleur score (options.seuil). */
   function rechercher(index, requete, options = {}) {
+    if (estSurprise(requete)) return resultatsSurprise(index);
     const termes = analyserRequete(requete);
     if (!termes.length) return index.map((r, i) => ({ i, score: 0 }));
     const N = index.length;
@@ -542,6 +571,7 @@
      Guides, 20b) : la page le signale au-dessus des résultats, qui ne reposent alors que sur les
      autres mots. Les mots génériques (« chronique », « enfant ») ne sont pas signalés. */
   function motsAbsents(index, requete) {
+    if (estSurprise(requete)) return [];
     const termes = analyserRequete(requete);
     if (termes.length < 2) return [];
     return termes.filter(t => {
@@ -551,7 +581,7 @@
     }).map(t => t.saisie.join(' '));
   }
 
-  const api = { estCommunautaire, rechercherParType, normaliser, mots, analyserRequete, preparer, score, rechercher, motsAbsents, distance, GROUPES };
+  const api = { estCommunautaire, rechercherParType, normaliser, mots, analyserRequete, preparer, score, rechercher, motsAbsents, distance, GROUPES, estSurprise, resultatsSurprise };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else racine.GuidesRecherche = api;
 })(typeof window !== 'undefined' ? window : globalThis);
