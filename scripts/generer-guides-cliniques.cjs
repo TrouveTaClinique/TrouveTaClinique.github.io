@@ -279,11 +279,11 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=99-hero-lieu">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=122-synonymes-audit">
-  <script src="/assets/guides-recherche.js?v=122-synonymes-audit" defer></script>
-  <script src="/assets/guides-cliniques.js?v=122-synonymes-audit" defer></script>
-  <script src="/assets/guides-installer.js?v=122-synonymes-audit" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=122-synonymes-audit" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=123-ia-allegee">
+  <script src="/assets/guides-recherche.js?v=123-ia-allegee" defer></script>
+  <script src="/assets/guides-cliniques.js?v=123-ia-allegee" defer></script>
+  <script src="/assets/guides-installer.js?v=123-ia-allegee" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=123-ia-allegee" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

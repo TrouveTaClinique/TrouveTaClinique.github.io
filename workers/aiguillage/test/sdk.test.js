@@ -52,8 +52,8 @@ test('Sonnet 5.5 : requête envoyée au bon point d’accès, réponse traduite'
   assert.equal(appels[0].corps.output_config.effort, 'medium');
   assert.equal(appels[0].corps.fallbacks, 'default');
   assert.match(appels[0].entetes.get('anthropic-beta') || '', /server-side-fallback-2026-07-01/);
-  /* Catalogue complet dans le prompt système, mis en cache une heure. */
-  assert.deepEqual(appels[0].corps.system[1].cache_control, { type: 'ephemeral', ttl: '1h' });
+  /* Catalogue complet dans le prompt système, mis en cache cinq minutes. */
+  assert.deepEqual(appels[0].corps.system[1].cache_control, { type: 'ephemeral' });
   assert.match(appels[0].corps.system[1].text, /\n1 \| Allergie aux pénicillines \| INESSS/);
 });
 

@@ -84,8 +84,11 @@ dates du sitemap selon le contenu réel des pages).
   l'accord de la personne) : un mot-clé reconnu seulement par son empreinte (`SURPRISE`) affiche la
   balanoposthite puis les guides ITSS. Ne jamais écrire ce mot-clé en clair dans le dépôt.
 - Aiguillage IA : Worker Cloudflare `workers/aiguillage` (Claude Sonnet 5.5 depuis le 1er oct. 2026, repli automatique côté serveur, crédits prépayés de
-  20 $ sans recharge). L'IA reçoit tout le catalogue (une ligne par ressource, mis en cache une
-  heure) ; la présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
+  20 $ sans recharge). L'IA reçoit le catalogue (une ligne par ressource, mis en cache cinq
+  minutes depuis le 17 oct. 2026 : le cache d'une heure coûtait le double à l'écriture) ; pour une question
+  clinique de la page des guides (la page envoie `communautaire: false`), sans les organismes communautaires
+  sauf les lignes d'urgence et d'écoute (`catalogueSelonPage`, environ 30 % de jetons en moins). Coût estimé
+  d'une question isolée : environ 12 ¢ (README du Worker). La présélection du moteur de mots-clés n'est qu'un indice. Elle suggère des guides ou
   des organismes du catalogue, elle ne répond jamais à la question clinique (décision du
   propriétaire). Aucun texte rédigé par l'IA n'est affiché (3 oct. 2026) : seulement les fiches
   choisies, leur type et une phrase fixe si un aspect n'est couvert par aucune fiche (`lacune`). Le Worker se déploie depuis `main` (Cloudflare Workers Builds). Plafond de

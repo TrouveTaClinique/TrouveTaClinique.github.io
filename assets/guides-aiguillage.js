@@ -1,6 +1,8 @@
 /* Boîte « Demander à l'IA » de /guides/ et de /guides/ressources-communautaires/.
    L'IA parcourt tout le catalogue ; la page d'où vient la question (data-page) oriente
-   seulement l'ordre des types proposés.
+   seulement l'ordre des types proposés. Exception (17 oct. 2026) : sur la page des guides, une
+   question que le moteur ne juge pas communautaire part avec communautaire: false, et le service
+   retire alors les organismes du catalogue, sauf les lignes d'urgence et d'écoute (coût réduit).
    Le service d'aiguillage parcourt tout le catalogue ; le moteur du site lui envoie en indice
    ses 15 meilleurs résultats (window.GuidesCatalogue, dans guides-cliniques.js) ;
    le service d'aiguillage (workers/aiguillage) en choisit au plus 5 et explique chaque choix.
@@ -179,7 +181,7 @@
       const reponse = await fetch(section.dataset.url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question, candidats, page: section.dataset.page || '' }),
+        body: JSON.stringify({ question, candidats, page: section.dataset.page || '', communautaire: !!communautaire }),
         signal: controleur.signal
       });
       const donnees = await reponse.json().catch(e => { if (controleur.signal.aborted) throw e; return {}; });

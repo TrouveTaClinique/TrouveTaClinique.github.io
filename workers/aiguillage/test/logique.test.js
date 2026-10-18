@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   traiter, indexerCatalogue, retenirCandidats, construireRequete, interpreterReponse, listerCatalogue,
-  compterQuestionDuJour, cleDuJour, CANDIDATS_MAX, GUIDES_MAX, SCHEMA
+  catalogueSelonPage, compterQuestionDuJour, cleDuJour, CANDIDATS_MAX, GUIDES_MAX, SCHEMA
 } from '../src/logique.js';
 import { traiterContact, validerContact, construireCourriel, texteDuCourriel } from '../src/contact.js';
 
@@ -56,7 +56,7 @@ test('requête Sonnet 5.5 : catalogue complet mis en cache, présélection en in
   assert.equal(ancien.betas, undefined);
   const [consignes, catalogue] = r.system;
   assert.equal(consignes.cache_control, undefined);
-  assert.deepEqual(catalogue.cache_control, { type: 'ephemeral', ttl: '1h' });
+  assert.deepEqual(catalogue.cache_control, { type: 'ephemeral' }, 'cache de cinq minutes');
   assert.match(catalogue.text, /\n3 \| Guide 3 \| INESSS \| Catégorie \| guide \| otite enfant/);
   assert.match(catalogue.text, /\n59 \| Guide 59 /);
   assert.match(r.messages[0].content, /^Présélection du moteur de mots-clés \(indice seulement\) : 3, 7\n\n<question>otite<\/question>$/);
@@ -77,6 +77,67 @@ test('requête : la page d’origine oriente les types sans toucher au cache', (
   assert.match(guides.messages[0].content, /^La question vient de la page des guides cliniques/);
   assert.match(inconnue.messages[0].content, /^Le moteur de mots-clés/);
   assert.deepEqual(comm.system, guides.system);
+});
+
+/* Catalogue mixte : 3 guides, 2 organismes, 1 ligne d'urgence et d'écoute. */
+const MIXTE = indexerCatalogue([
+  { title: 'Otite', url: 'https://g.ca/otite', org: 'INESSS', cat: 'Pédiatrie', tags: 'otite' },
+  { title: 'Banque alimentaire', url: 'https://o.ca/banque', cat: 'Ressources communautaires', type: 'communautaire', rubriques: ['Aide alimentaire'], ville: 'Longueuil' },
+  { title: 'Insuffisance cardiaque', url: 'https://g.ca/ic', org: 'INESSS', cat: 'Cardiovasculaire', tags: 'oedème' },
+  { title: '9-8-8 : ligne d’aide en cas de crise de suicide', url: 'https://o.ca/988', cat: 'Ressources communautaires', type: 'communautaire', rubriques: ['Urgence et lignes d’écoute'] },
+  { title: 'Hébergement', url: 'https://o.ca/abri', cat: 'Ressources communautaires', type: 'communautaire', rubriques: ['Hébergement'], ville: 'Beloeil' },
+  { title: 'TDAH', url: 'https://g.ca/tdah', org: 'CHU Sainte-Justine', cat: 'Santé mentale', tags: 'attention' }
+]);
+
+test('catalogue selon la page : allégé seulement pour une question clinique de la page des guides', () => {
+  const liste = [...MIXTE.values()];
+  const allege = catalogueSelonPage(liste, { page: 'guides', communautaire: false });
+  assert.equal(allege.allege, true);
+  assert.deepEqual(allege.catalogue.map(g => g.titre), ['Otite', 'Insuffisance cardiaque', '9-8-8 : ligne d’aide en cas de crise de suicide', 'TDAH'], 'lignes d’urgence et d’écoute gardées');
+  for (const contexte of [{ page: 'guides', communautaire: true }, { page: 'guides' }, { page: 'communautaire', communautaire: false }, {}]) {
+    const r = catalogueSelonPage(liste, contexte);
+    assert.equal(r.allege, false, JSON.stringify(contexte));
+    assert.equal(r.catalogue.length, liste.length, JSON.stringify(contexte));
+  }
+});
+
+test('requête allégée : en-tête et consigne de page propres, cache distinct du catalogue complet', () => {
+  const liste = [...MIXTE.values()];
+  const { catalogue } = catalogueSelonPage(liste, { page: 'guides', communautaire: false });
+  const allegee = construireRequete({ modele: 'claude-sonnet-5-5', catalogue, question: 'otite', page: 'guides', allege: true });
+  const complete = construireRequete({ modele: 'claude-sonnet-5-5', catalogue: liste, question: 'otite', page: 'guides' });
+  assert.match(allegee.system[1].text, /^Catalogue \(numéro \| titre \| organisme \| sujet \| type \| précisions\) ; les organismes communautaires s'y limitent aux lignes d'urgence et d'écoute :\n0 \| Otite /);
+  assert.doesNotMatch(allegee.system[1].text, /Banque alimentaire|Hébergement/);
+  assert.match(allegee.messages[0].content, /^La question vient de la page des guides cliniques : propose des guides, algorithmes ou documents pour les patients ; une ligne d'urgence ou d'écoute seulement/);
+  assert.match(complete.messages[0].content, /un organisme communautaire seulement si la question porte sur un besoin de soutien/);
+  assert.deepEqual(allegee.system[1].cache_control, { type: 'ephemeral' });
+  assert.notDeepEqual(allegee.system, complete.system);
+});
+
+test('HTTP : question clinique de la page des guides, catalogue allégé, numéros et indices sur la liste envoyée', async () => {
+  const appels = [];
+  const d = deps({
+    chargerCatalogue: async () => MIXTE,
+    /* Numéro 1 de la liste allégée : Insuffisance cardiaque (numéro 2 du catalogue complet). */
+    appelerModele: async params => { appels.push(params); return reponseModele({ guides: [{ numero: 1 }, { numero: 2 }], lacune: false }); }
+  });
+  const r = await traiter(requete({ question: 'essoufflement et oedème', page: 'guides', communautaire: false, candidats: ['https://o.ca/banque', 'https://g.ca/ic', 'https://g.ca/tdah'] }), { MODELE: 'claude-sonnet-5-5' }, d);
+  assert.equal(r.status, 200);
+  assert.deepEqual((await r.json()).guides.map(g => g.titre), ['Insuffisance cardiaque', '9-8-8 : ligne d’aide en cas de crise de suicide']);
+  assert.doesNotMatch(appels[0].system[1].text, /Banque alimentaire/);
+  assert.match(appels[0].messages[0].content, /indice seulement\) : 1, 3\n\n/, 'l’organisme retiré est écarté des indices');
+});
+
+test('HTTP : question communautaire ou page sans indication, catalogue complet', async () => {
+  for (const corps of [{ page: 'guides', communautaire: true }, { page: 'guides' }, { page: 'communautaire', communautaire: false }]) {
+    const appels = [];
+    const d = deps({ chargerCatalogue: async () => MIXTE, appelerModele: async params => { appels.push(params); return reponseModele({ guides: [{ numero: 1 }], lacune: false }); } });
+    const r = await traiter(requete({ question: 'aide alimentaire', candidats: ['https://o.ca/banque'], ...corps }), {}, d);
+    assert.equal(r.status, 200, JSON.stringify(corps));
+    assert.deepEqual((await r.json()).guides.map(g => g.titre), ['Banque alimentaire'], JSON.stringify(corps));
+    assert.match(appels[0].system[1].text, /Banque alimentaire/);
+    assert.match(appels[0].messages[0].content, /indice seulement\) : 1\n\n/);
+  }
 });
 
 test('catalogue : ligne propre aux ressources communautaires', () => {
