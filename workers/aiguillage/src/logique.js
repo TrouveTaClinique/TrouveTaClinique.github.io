@@ -1,6 +1,7 @@
 /* Aiguillage IA du catalogue /guides/ : logique pure, sans réseau ni SDK (testable).
-   Le modèle reçoit le catalogue publié au complet (une ligne par ressource, mis en cache une
-   heure chez Anthropic) et choisit au plus 5 ressources, désignées par leur numéro. Aucun texte
+   Le modèle reçoit le catalogue publié (une ligne par ressource, mis en cache cinq minutes chez
+   Anthropic ; sans les organismes communautaires pour une question clinique de la page des
+   guides, voir catalogueSelonPage) et choisit au plus 5 ressources, désignées par leur numéro. Aucun texte
    rédigé par le modèle n'est affiché (décision du propriétaire, 3 oct. 2026) : seulement les
    fiches choisies et un indicateur « lacune » quand un aspect n'est couvert par aucune fiche. La présélection du moteur de mots-clés de la page n'est qu'un indice : un
    guide qu'elle a raté reste trouvable. Titres et liens renvoyés viennent du catalogue,
@@ -77,6 +78,17 @@ export function retenirCandidats(candidats, parUrl) {
   return retenus;
 }
 
+/* Question clinique posée sur la page des guides (la page l'indique par communautaire: false) :
+   catalogue sans les organismes communautaires, sauf les lignes d'urgence et d'écoute (9-8-8,
+   Info-Social 811, Centre antipoison…), soit environ 30 % de jetons en moins (17 oct. 2026).
+   Sans cette indication (page plus ancienne), pour une question communautaire ou sur la page des
+   ressources communautaires, le catalogue reste complet. */
+export const RUBRIQUE_LIGNES = 'Urgence et lignes d’écoute';
+export function catalogueSelonPage(liste, { page = '', communautaire } = {}) {
+  if (page !== 'guides' || communautaire !== false) return { catalogue: liste, allege: false };
+  return { catalogue: liste.filter(g => !g.communautaire || g.rubriques.includes(RUBRIQUE_LIGNES)), allege: true };
+}
+
 /* Une ligne par ressource : numéro | titre | organisme | sujet | type | précisions.
    Déterministe (ordre du catalogue publié) pour que le cache du prompt reste valide. */
 const TYPES = { guide: 'guide', algorithme: 'algorithme', outil: 'outil', patient: 'patients' };
@@ -105,9 +117,12 @@ const PAGES = {
   guides: 'La question vient de la page des guides cliniques : propose d\'abord des guides, algorithmes ou documents pour les patients ; un organisme communautaire seulement si la question porte sur un besoin de soutien.\n\n',
   communautaire: 'La question vient de la page des ressources communautaires : propose d\'abord des organismes communautaires ou des lignes d\'aide ; un guide clinique seulement si la question est surtout clinique.\n\n'
 };
+const PAGE_GUIDES_ALLEGE = 'La question vient de la page des guides cliniques : propose des guides, algorithmes ou documents pour les patients ; une ligne d\'urgence ou d\'écoute seulement si la situation s\'y prête.\n\n';
+const ENTETE = 'Catalogue (numéro | titre | organisme | sujet | type | précisions) :';
+const ENTETE_ALLEGE = 'Catalogue (numéro | titre | organisme | sujet | type | précisions) ; les organismes communautaires s\'y limitent aux lignes d\'urgence et d\'écoute :';
 
-export function construireRequete({ modele, catalogue, indices = [], question, page = '' }) {
-  const indice = (PAGES[page] || '') + (indices.length
+export function construireRequete({ modele, catalogue, indices = [], question, page = '', allege = false }) {
+  const indice = ((allege ? PAGE_GUIDES_ALLEGE : PAGES[page]) || '') + (indices.length
     ? `Présélection du moteur de mots-clés (indice seulement) : ${indices.join(', ')}\n\n`
     : 'Le moteur de mots-clés n\'a rien présélectionné : cherche dans tout le catalogue.\n\n');
   const requete = {
@@ -115,8 +130,10 @@ export function construireRequete({ modele, catalogue, indices = [], question, p
     max_tokens: 8000,
     system: [
       { type: 'text', text: INSTRUCTIONS },
-      /* Catalogue identique d'une question à l'autre : mis en cache une heure. */
-      { type: 'text', text: `Catalogue (numéro | titre | organisme | sujet | type | précisions) :\n${listerCatalogue(catalogue)}`, cache_control: { type: 'ephemeral', ttl: '1h' } }
+      /* Catalogue identique d'une question à l'autre (une version complète, une allégée) : mis en
+         cache cinq minutes. Le cache d'une heure coûtait le double à l'écriture et ne profitait
+         qu'aux questions rapprochées, rares sur le site (17 oct. 2026). */
+      { type: 'text', text: `${allege ? ENTETE_ALLEGE : ENTETE}\n${listerCatalogue(catalogue)}`, cache_control: { type: 'ephemeral' } }
     ],
     messages: [{ role: 'user', content: `${indice}<question>${question}</question>` }],
     output_config: { format: { type: 'json_schema', schema: SCHEMA } }
@@ -221,10 +238,12 @@ export async function traiter(requete, env, deps) {
 
   try {
     const parUrl = await deps.chargerCatalogue(origine);
-    const catalogue = [...parUrl.values()];
+    const page = String(corps.page || '');
+    const { catalogue, allege } = catalogueSelonPage([...parUrl.values()], { page, communautaire: corps.communautaire });
+    /* Numéros et indices sur la liste envoyée au modèle ; un candidat retiré (organisme) est écarté. */
     const numeros = new Map(catalogue.map((g, i) => [g.url, i]));
-    const indices = retenirCandidats(corps.candidats, parUrl).slice(0, INDICES_MAX).map(g => numeros.get(g.url));
-    const reponse = await deps.appelerModele(construireRequete({ modele: env.MODELE || MODELE_PAR_DEFAUT, catalogue, indices, question, page: String(corps.page || '') }));
+    const indices = retenirCandidats(corps.candidats, parUrl).map(g => numeros.get(g.url)).filter(n => n !== undefined).slice(0, INDICES_MAX);
+    const reponse = await deps.appelerModele(construireRequete({ modele: env.MODELE || MODELE_PAR_DEFAUT, catalogue, indices, question, page, allege }));
     return json(interpreterReponse(reponse, catalogue), 200, cors);
   } catch (e) {
     const { statut, message } = e instanceof ErreurAiguillage ? { statut: e.statut, message: e.message } : deps.classerErreur(e);
