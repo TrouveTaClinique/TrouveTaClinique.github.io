@@ -140,6 +140,11 @@ dates du sitemap selon le contenu réel des pages).
   `statutRecrutement`, `evenement`, `horaireSource`, `posApprox`) ; vérificateur qui donne la ligne d'une erreur
   (fichier glissé dans la page, Chrome cachant le détail des erreurs en local) et repère un fichier non UTF-8 ;
   mode d'emploi en deux parties (service informatique, mise à jour sans connaissances techniques).
+- Méga audit avec Cursor (28 oct. 2026, demande du propriétaire, audit seulement) : dossier `audit-cursor/`
+  (mode d'emploi `LISEZ-MOI.md`, règles communes `REGLES.md`, 19 missions, outils `etat-initial.mjs` et
+  `assembler-rapports.mjs`). Non publié (hors liste blanche). Les rapports restent sur l'ordinateur du
+  propriétaire (`audit-cursor/rapports/`, ignoré par git, dépôt public) ; il transmet `AUDIT-COMPLET.md`, puis
+  les corrections se font ici avec son accord.
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
