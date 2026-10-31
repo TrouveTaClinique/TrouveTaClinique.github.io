@@ -5,6 +5,8 @@ Cursor observe, mesure et écrit des rapports ; il ne modifie rien au projet. En
 transmets les rapports à Claude, vous les triez ensemble, et Claude applique les corrections que
 tu valides (sur `brouillon`, puis sur `main` avec ton accord).
 
+Tout est aussi réuni dans un seul document, au contenu identique : `AUDIT-CURSOR.md`.
+
 ## Avant de commencer (10 minutes)
 
 1. Ouvre le dossier du projet dans Cursor. S'il n'est pas encore sur ton ordinateur : dans

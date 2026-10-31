@@ -142,7 +142,8 @@ dates du sitemap selon le contenu réel des pages).
   mode d'emploi en deux parties (service informatique, mise à jour sans connaissances techniques).
 - Méga audit avec Cursor (28 oct. 2026, demande du propriétaire, audit seulement) : dossier `audit-cursor/`
   (mode d'emploi `LISEZ-MOI.md`, règles communes `REGLES.md`, 19 missions, outils `etat-initial.mjs` et
-  `assembler-rapports.mjs`). Non publié (hors liste blanche). Les rapports restent sur l'ordinateur du
+  `assembler-rapports.mjs` ; le tout réuni le 31 oct. dans un document unique, `AUDIT-CURSOR.md`, à garder
+  identique aux fichiers séparés). Non publié (hors liste blanche). Les rapports restent sur l'ordinateur du
   propriétaire (`audit-cursor/rapports/`, ignoré par git, dépôt public) ; il transmet `AUDIT-COMPLET.md`, puis
   les corrections se font ici avec son accord.
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
