@@ -82,15 +82,117 @@ test('plan Guides (24 à 30) : type de document, pastilles, filtres, actions et 
   assert.ok(fs.existsSync(path.join(racine, 'vendor/qrcode-generator.js')) && fs.existsSync(path.join(racine, 'vendor/LICENSE-qrcode-generator.txt')));
 });
 
-test('accès réservé affiché ; feuillets FMPE hébergés présents, sans module PABP', () => {
+// Olivier a confirmé l’accord de la FMPE le 31 octobre 2026 : seuls les modules
+// PABP complets de MODULES_PABP_AUTORISES peuvent être hébergés. Ne pas élargir
+// ces listes à d’autres fichiers protégés.
+const FEUILLETS_FMPE = new Set([
+  'abandon-tabac.pdf',
+  'acne.pdf',
+  'allergies-alimentaires-enfant.pdf',
+  'constipation-enfant.pdf',
+  'diabete-type-2.pdf',
+  'douleurs-prurit-vulvaires.pdf',
+  'dysfonction-erectile.pdf',
+  'exercices-kegel.pdf',
+  'insuffisance-cardiaque.pdf',
+  'lombalgie-chronique.pdf',
+  'osteoporose.pdf',
+  'rgo-bebe.pdf',
+  'risque-cardiovasculaire.pdf',
+  'sante-mentale-ados.pdf',
+  'soins-ongles.pdf',
+  'syncope-vasovagale.pdf',
+  'synovite-transitoire.pdf',
+  'testosterone.pdf',
+  'vaginite-chronique.pdf',
+  'voyage.pdf',
+  'vulvodynie.pdf'
+]);
+const MODULES_PABP_AUTORISES = new Set([
+  'pabp-abandon-tabac.pdf',
+  'pabp-acne.pdf',
+  'pabp-affections-multiples.pdf',
+  'pabp-allergies-alimentaires.pdf',
+  'pabp-anemie.pdf',
+  'pabp-apercus-pediatriques.pdf',
+  'pabp-apnee-sommeil.pdf',
+  'pabp-asthme-adulte.pdf',
+  'pabp-asthme-enfant.pdf',
+  'pabp-autisme.pdf',
+  'pabp-boiterie-enfant.pdf',
+  'pabp-cephalees.pdf',
+  'pabp-colon-irritable.pdf',
+  'pabp-commotions.pdf',
+  'pabp-comportement-enfant.pdf',
+  'pabp-contraception.pdf',
+  'pabp-demence-parcours.pdf',
+  'pabp-demence-reperage.pdf',
+  'pabp-depistage-cancer.pdf',
+  'pabp-diabete-type-2.pdf',
+  'pabp-dyslipidemies.pdf',
+  'pabp-hematurie.pdf',
+  'pabp-hypertension.pdf',
+  'pabp-infertilite.pdf',
+  'pabp-insomnie-prise-en-charge.pdf',
+  'pabp-insuffisance-cardiaque.pdf',
+  'pabp-insulinotherapie.pdf',
+  'pabp-integration-connaissances-2022.pdf',
+  'pabp-lombalgie.pdf',
+  'pabp-menopause.pdf',
+  'pabp-mpoc.pdf',
+  'pabp-nephropathie.pdf',
+  'pabp-neuropathie.pdf',
+  'pabp-nodules-thyroidiens.pdf',
+  'pabp-onychopathies.pdf',
+  'pabp-orl.pdf',
+  'pabp-osteoporose.pdf',
+  'pabp-plaies.pdf',
+  'pabp-plancher-pelvien.pdf',
+  'pabp-prevention-cardiovasculaire.pdf',
+  'pabp-prurit.pdf',
+  'pabp-retour-travail.pdf',
+  'pabp-sante-bucco-dentaire.pdf',
+  'pabp-sante-gynecologique.pdf',
+  'pabp-sante-masculine.pdf',
+  'pabp-sante-mentale-ados.pdf',
+  'pabp-scpd.pdf',
+  'pabp-soins-environnement.pdf',
+  'pabp-soins-transgenres.pdf',
+  'pabp-steatose.pdf',
+  'pabp-syncope.pdf',
+  'pabp-tdah-enfant.pdf',
+  'pabp-thyroide.pdf',
+  'pabp-toux.pdf',
+  'pabp-troubles-apprentissage.pdf',
+  'pabp-troubles-vulvaires.pdf'
+]);
+
+test('accès réservé affiché ; feuillets FMPE hébergés ; modules PABP autorisés le 31 oct. 2026', () => {
   const fs = require('node:fs');
   const racine = path.join(__dirname, '..');
-  assert.equal(ressources.filter(r => r.acces === 'pabp').length, 0, 'modules PABP retirés (pas d’accord de la FMPE)');
+  assert.equal(ressources.filter(r => r.acces === 'pabp').length, 0, 'aucun accès « pabp » : les modules autorisés sont hébergés, tout autre fichier protégé reste exclu');
   const page = fs.readFileSync(path.join(racine, 'guides/index.html'), 'utf8');
   const reserves = ressources.filter(r => r.acces && r.type !== 'communautaire');
   assert.ok(reserves.every(r => ['pabp', 'abonnement'].includes(r.acces)));
   assert.equal((page.match(/class="guides-acces"/g) || []).length, reserves.length);
   const locaux = ressources.filter(r => r.url.startsWith('https://trouvetaclinique.ca/guides/fmpe/'));
-  assert.ok(locaux.length >= 20);
-  for (const r of locaux) assert.ok(fs.existsSync(path.join(racine, new URL(r.url).pathname)), r.url);
+  const parNom = new Map(locaux.map(r => [new URL(r.url).pathname.split('/').pop(), r]));
+  assert.equal(parNom.size, locaux.length, 'deux fiches pour le même PDF FMPE');
+  assert.equal(parNom.size, FEUILLETS_FMPE.size + MODULES_PABP_AUTORISES.size);
+  for (const [nom, r] of parNom) {
+    assert.ok(FEUILLETS_FMPE.has(nom) || MODULES_PABP_AUTORISES.has(nom), 'PDF FMPE non autorisé : ' + nom);
+    assert.ok(fs.existsSync(path.join(racine, 'guides', 'fmpe', nom)), r.url);
+  }
+  for (const nom of FEUILLETS_FMPE) assert.ok(parNom.has(nom), 'feuillet FMPE manquant : ' + nom);
+  for (const nom of MODULES_PABP_AUTORISES) {
+    const r = parNom.get(nom);
+    assert.ok(r, 'module PABP autorisé absent : ' + nom);
+    assert.equal(r.org, 'FMPE', nom);
+    assert.equal(r.ajoute, '2026-10-31', nom);
+    assert.match(r.title, / : .+ \(PABP\)$/, r.title);
+    assert.ok(/\bPABP\b/.test(r.tags) && /\bFMPE\b/.test(r.tags), nom);
+    assert.ok(r.format === 'guide' || r.format === 'outil', nom);
+    assert.equal(r.acces, undefined, nom);
+  }
+  assert.deepEqual(ressources.filter(r => /members\.fmpe\.org|fmpe\.org\/fr\/modules/.test(r.url)).map(r => r.title), []);
 });
