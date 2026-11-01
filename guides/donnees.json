@@ -18454,5 +18454,82 @@
     "format": "patient",
     "verifie": "2026-10-03",
     "ajoute": "2026-10-03"
+  },
+  {
+    "title": "Examen médical périodique : fiche de contrôle (femmes)",
+    "org": "Collège des médecins de famille du Canada",
+    "cat": "Prévention et vaccination",
+    "tags": "examen médical périodique examen périodique bilan de santé soins préventifs dépistage femme GECSSP CMFC Soins préventifs, fiche de contrôle, femmes",
+    "url": "https://www.cfpc.ca/CFPC/media/ressources/Examens-m%C3%A9dicaux-p%C3%A9riodiques/PreventiveCareChecklistFemaleFrench2019.pdf",
+    "desc": "Fiche de deux pages du CMFC pour l’examen périodique d’une femme à risque moyen. Les recommandations en gras suivent le Groupe d’étude canadien sur les soins de santé préventifs.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Examen médical périodique : fiche de contrôle (hommes)",
+    "org": "Collège des médecins de famille du Canada",
+    "cat": "Prévention et vaccination",
+    "tags": "examen médical périodique examen périodique bilan de santé soins préventifs dépistage homme GECSSP CMFC Soins préventifs, fiche de contrôle, hommes",
+    "url": "https://www.cfpc.ca/CFPC/media/ressources/Examens-m%C3%A9dicaux-p%C3%A9riodiques/PreventiveCareChecklistMaleFrench2019.pdf",
+    "desc": "Fiche de deux pages du CMFC pour l’examen périodique d’un homme à risque moyen. Les recommandations en gras suivent le Groupe d’étude canadien sur les soins de santé préventifs.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Colique biliaire : algorithme d’accueil clinique",
+    "org": "CIUSSS de l’Ouest-de-l’Île-de-Montréal",
+    "cat": "Digestif et foie",
+    "tags": "colique biliaire lithiase biliaire vésicule cholécystite Murphy accueil clinique LaSalle Algorithme, colique biliaire",
+    "url": "https://cdn.ciusss-ouestmtl.gouv.qc.ca/Fichiers_Sante_Quebec_ODIM/Zone_des_professionnels/Accueil_clinique/LaSalle/Algo_Colique_biliaire_juin_2021_FR.pdf",
+    "desc": "Algorithme d’une page de l’accueil clinique de LaSalle pour une colique biliaire : critères d’inclusion, prélèvements et signes qui mènent à l’urgence.",
+    "format": "algorithme",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Hernie incarcérée : protocole d’accueil clinique",
+    "org": "CISSS de Lanaudière",
+    "cat": "Digestif et foie",
+    "tags": "hernie incarcérée hernie inguinale hernie étranglée chirurgie accueil clinique Protocole, hernie incarcérée symptomatique",
+    "url": "https://www.cisss-lanaudiere.gouv.qc.ca/fileadmin/internet/cisss_lanaudiere/Professionnels/Accueil_clinique/Accueil_clinique_Sud/Les_algorithmes/Chirurgie_generale/CH_-_Hernie_incarceree_symptomatique__10032017.pdf",
+    "desc": "Protocole d’une page de l’accueil clinique du CISSS de Lanaudière pour une hernie incarcérée symptomatique : signes d’urgence et délai de consultation en chirurgie.",
+    "format": "algorithme",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Saignement du premier trimestre : algorithme",
+    "org": "CIUSSS de l’Ouest-de-l’Île-de-Montréal",
+    "cat": "Santé des femmes et grossesse",
+    "tags": "saignement vaginal premier trimestre grossesse ectopique GEU fausse couche bêta-hCG WinRho anti-D Algorithme, saignement vaginal du premier trimestre",
+    "url": "https://cdn.ciusss-ouestmtl.gouv.qc.ca/Fichiers_Sante_Quebec_ODIM/Zone_des_professionnels/Accueil_clinique/LaSalle/Algorithme_SAIGNEMENT_VAGINAL_1ER_TRIMESTRE_GROSSESSE_FR.pdf",
+    "desc": "Algorithme d’une page de l’accueil clinique de LaSalle pour un saignement vaginal avant 13 semaines : bêta-hCG, échographie et immunoglobuline anti-D.",
+    "format": "algorithme",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Prophylaxie antitétanique : aide à la décision",
+    "org": "MSSS",
+    "cat": "Prévention et vaccination",
+    "tags": "tétanos prophylaxie plaie blessure vaccin dcaT immunoglobuline PIQ Aide à la décision pour la prophylaxie antitétanique",
+    "url": "https://msss.gouv.qc.ca/aide-decision-app/etape.php?situation=Tetanos",
+    "desc": "Outil interactif du Protocole d’immunisation du Québec : questions sur l’âge, la plaie et les vaccins reçus, puis la conduite pour le tétanos.",
+    "format": "algorithme",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Hésitation vaccinale : aide-mémoire pour le clinicien",
+    "org": "Association canadienne de santé publique",
+    "cat": "Prévention et vaccination",
+    "tags": "hésitation vaccinale réticence vaccin CANVax aide-mémoire clinicien Aide-mémoire : surmonter l’hésitation vaccinale",
+    "url": "https://www.canvax.ca/sites/default/files/2019-10/Aide%20Memoire%20HCP_Addressing%20Vaccine%20Hesitancy%20FR_2019.pdf",
+    "desc": "Aide-mémoire de deux pages de CANVax (Association canadienne de santé publique, 2019) pour répondre à l’hésitation vaccinale en consultation.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
   }
 ]
