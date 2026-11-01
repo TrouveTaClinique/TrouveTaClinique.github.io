@@ -18531,5 +18531,104 @@
     "format": "outil",
     "verifie": "2026-11-01",
     "ajoute": "2026-10-31"
+  },
+  {
+    "title": "TDAH chez l’adulte : questionnaires de repérage (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "TDAH adulte ASRS WFIRS questionnaire dépistage symptômes ADHD in Adults PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/ADHD-Adults-page-7.pdf",
+    "desc": "Extrait d’une page du module PABP « ADHD in Adults » (février 2023), en anglais : ASRS-v1.1 et WFIRS-S pour repérer le TDAH chez l’adulte et en suivre l’impact.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "TDAH chez l’adulte : mésusage des stimulants (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "TDAH adulte stimulants méthylphénidate amphétamine mésusage détournement ADHD misuse PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/ADHD-Adults-page-14.pdf",
+    "desc": "Encadré d’une page du module PABP « ADHD in Adults » (février 2023), en anglais : qui est à risque de mésusage des stimulants et comment en parler.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "TDAH chez l’adulte : traitements pharmacologiques (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "TDAH adulte CADDRA méthylphénidate amphétamine atomoxétine guanfacine pharmacothérapie ADHD pharmacologic PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/ADHD-Adults-page-26.pdf",
+    "desc": "Annexe d’une page du module PABP « ADHD in Adults » (février 2023), en anglais : tableau CADDRA des médicaments du TDAH au Canada, doses et titration.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Ostéoporose : dépistage du risque de fracture après 65 ans (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Os, articulations et douleur",
+    "tags": "ostéoporose FRAX fracture de fragilité ostéodensitométrie femmes 65 ans Osteoporosis screening PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/Osteoporosis-page-22.pdf",
+    "desc": "Algorithme d’une page du module PABP sur l’ostéoporose (février 2024), en anglais : FRAX sans ostéodensitométrie, puis conduite chez les femmes de 65 ans et plus.",
+    "format": "algorithme",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Hyponatrémie : médicaments en cause (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Rein et voies urinaires",
+    "tags": "hyponatrémie sodium SIADH thiazide ISRS médicaments Sodium Abnormalities in Adults PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/Sodium-Abnormalities-in-Adults-page-5.pdf",
+    "desc": "Tableau d’une page du module PABP « Sodium Abnormalities in Adults » (février 2023), en anglais : médicaments associés à l’hyponatrémie.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Hyponatrémie : démarche d’évaluation (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Rein et voies urinaires",
+    "tags": "hyponatrémie sodium bilan volémie SIADH algorithme Sodium Abnormalities in Adults PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/Sodium-Abnormalities-in-Adults-page-18.pdf",
+    "desc": "Algorithme d’une page du module PABP « Sodium Abnormalities in Adults » (février 2023), en anglais : démarche devant un sodium sous 135 mmol/L.",
+    "format": "algorithme",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Hyperplasie bénigne de la prostate : discuter du PSA (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Rein et voies urinaires",
+    "tags": "HBP prostate PSA symptômes urinaires LUTS toucher rectal Benign Prostatic Hyperplasia PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/Benign-Prostatic-Hyperplasia-page-6.pdf",
+    "desc": "Encadré d’une page du module PABP « Benign Prostatic Hyperplasia » (août 2023), en anglais : comment parler du PSA devant des symptômes urinaires.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Hyperplasie bénigne de la prostate : score IPSS (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Rein et voies urinaires",
+    "tags": "HBP prostate IPSS symptômes urinaires nycturie jet faible Benign Prostatic Hyperplasia PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/Benign-Prostatic-Hyperplasia-page-18.pdf",
+    "desc": "Annexe d’une page du module PABP « Benign Prostatic Hyperplasia » (août 2023), en anglais : questionnaire IPSS des symptômes urinaires.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
+  },
+  {
+    "title": "Anxiété liée à la santé : phrases utiles en consultation (extrait PABP) (EN)",
+    "org": "FMPE",
+    "cat": "Santé mentale, dépendances et sommeil",
+    "tags": "anxiété de santé hypocondrie inquiétude maladie talking tips Health Anxiety PABP",
+    "url": "https://fmpe.org/wp-content/uploads/2024/10/Health-Anxiety-page-18.pdf",
+    "desc": "Encadré d’une page du module PABP sur l’anxiété liée à la santé (février 2024), en anglais : phrases pour valider l’inquiétude et recadrer la consultation.",
+    "format": "outil",
+    "verifie": "2026-11-01",
+    "ajoute": "2026-10-31"
   }
 ]
