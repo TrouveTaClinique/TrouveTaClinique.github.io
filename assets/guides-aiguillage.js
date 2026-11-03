@@ -67,7 +67,7 @@
     return li;
   }
 
-  const TYPES = { guide: 'Guide clinique', algorithme: 'Algorithme', outil: 'Outil clinique', patient: 'Document pour le patient' };
+  const TYPES = { guide: 'Guide clinique', algorithme: 'Algorithme', 'aide-memoire': 'Aide-mémoire (antibiotiques)', outil: 'Outil clinique', patient: 'Document pour le patient' };
   function typeDeFiche(li, guide) {
     if (li.dataset.type === 'communautaire' || guide.categorie === 'Ressources communautaires') {
       const ville = (li.dataset.ville || '').trim();

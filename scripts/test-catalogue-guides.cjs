@@ -61,7 +61,7 @@ test('plan Guides (24 à 30) : type de document, pastilles, filtres, actions et 
   const fs = require('node:fs');
   const racine = path.join(__dirname, '..');
   const guidesSeuls = ressources.filter(r => r.type !== 'communautaire');
-  const FORMATS = ['guide', 'algorithme', 'patient', 'outil'];
+  const FORMATS = ['guide', 'algorithme', 'aide-memoire', 'patient', 'outil'];
   assert.deepEqual(guidesSeuls.filter(r => !FORMATS.includes(r.format)).map(r => r.title), [], 'champ « format » manquant ou inconnu');
   assert.ok(ressources.filter(r => r.type === 'communautaire').every(r => r.format === undefined), 'les organismes n’ont pas de format');
   const guides = fs.readFileSync(path.join(racine, 'guides/index.html'), 'utf8');
@@ -196,3 +196,20 @@ test('accès réservé affiché ; feuillets FMPE hébergés ; modules PABP autor
   }
   assert.deepEqual(ressources.filter(r => /members\.fmpe\.org|fmpe\.org\/fr\/modules/.test(r.url)).map(r => r.title), []);
 });
+
+test('aide-mémoires d’antibiotiques : doses dans la fiche, lien vers la page du guide, source INESSS d’abord', () => {
+  const fs = require('node:fs');
+  const aides = ressources.filter(r => r.format === 'aide-memoire');
+  assert.ok(aides.length >= 20, 'au moins 20 aide-mémoires');
+  for (const r of aides) {
+    assert.ok(Array.isArray(r.traitement) && r.traitement.length && r.traitement.every(t => typeof t === 'string' && /\d/.test(t) || /aucun antibiotique/i.test(t)), r.title);
+    assert.match(r.url, /#page=\d+$/, r.title);
+    assert.ok(['INESSS', 'Hôpital Charles-Le Moyne'].includes(r.org), r.title);
+    assert.match(r.title, / : anti(biotiques|viraux|viral) de 1re ligne$/, r.title);
+    assert.ok(!/—/.test(r.traitement.join(' ') + (r.attention || '')), r.title);
+  }
+  const html = fs.readFileSync(path.join(__dirname, '..', 'guides/index.html'), 'utf8');
+  assert.equal((html.match(/class="guides-aide"/g) || []).length, aides.length);
+  assert.ok(html.includes('Non compliquée : nitrofurantoïne (monohydrate/macrocristaux) 100 mg PO BID × 5 jours'));
+});
+

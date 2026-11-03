@@ -91,7 +91,7 @@ export function catalogueSelonPage(liste, { page = '', communautaire } = {}) {
 
 /* Une ligne par ressource : numéro | titre | organisme | sujet | type | précisions.
    Déterministe (ordre du catalogue publié) pour que le cache du prompt reste valide. */
-const TYPES = { guide: 'guide', algorithme: 'algorithme', outil: 'outil', patient: 'patients' };
+const TYPES = { guide: 'guide', algorithme: 'algorithme', 'aide-memoire': 'aide-mémoire', outil: 'outil', patient: 'patients' };
 export function listerCatalogue(liste) {
   return liste.map((g, i) => {
     if (g.communautaire) {
