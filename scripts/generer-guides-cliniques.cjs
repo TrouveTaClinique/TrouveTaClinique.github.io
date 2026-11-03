@@ -132,7 +132,20 @@ const NOTE_COMMUNAUTAIRE = `Organismes de l’agglomération de Longueuil, de la
 const SANS_ADRESSE = '(sans adresse)';
 
 /* Types de documents (champ « format » des guides) : filtre « Type » (plan Guides, 25). */
-const FORMATS = { guide: 'Guide ou ligne directrice', algorithme: 'Algorithme', patient: 'Document pour le patient', outil: 'Formulaire ou outil' };
+const FORMATS = { guide: 'Guide ou ligne directrice', algorithme: 'Algorithme', 'aide-memoire': 'Aide-mémoire (antibiotiques et doses)', patient: 'Document pour le patient', outil: 'Formulaire ou outil' };
+/* Aide-mémoire (3 nov. 2026, demande du propriétaire) : antibiotiques de 1re ligne et doses affichés dans la fiche,
+   recopiés mot pour mot de l'INESSS (sinon du guide de l'Hôpital Charles-Le Moyne), avec le lien vers la page du guide. */
+const pageDe = url => (String(url).match(/#page=(\d+)/) || [])[1];
+function blocAideMemoire(r) {
+  if (!Array.isArray(r.traitement) || !r.traitement.length) return '';
+  const page = pageDe(r.url);
+  return `
+        <div class="guides-aide">
+          <ul>${r.traitement.map(t => `<li>${esc(t)}</li>`).join('')}</ul>${r.attention ? `
+          <p class="guides-aide-attention">${esc(r.attention)}</p>` : ''}
+          <p class="guides-aide-pied">Vérifiez allergies, grossesse et fonction rénale. Détails dans le guide${page ? `, page ${page}` : ''} (lien du titre).</p>
+        </div>`;
+}
 const estPdf = url => /\.pdf(?:$|[?#])/i.test(url);
 const estAnglais = r => /\(EN\)$/.test(r.title.trim());
 /* Résumé d'une ligne sous le titre (plan Guides, 26) : seulement s'il apprend quelque chose de plus que
@@ -148,15 +161,16 @@ function resumeUtile(r) {
 
 function carteGuide(r) {
   /* Mots-clés : gardés dans data-tags pour la recherche, plus affichés sous le titre. */
-  const resume = resumeUtile(r);
-  return `<li class="guides-resource" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}${r.acces ? ' data-abo="1"' : ''}>
+  const aide = blocAideMemoire(r);
+  const resume = aide ? '' : resumeUtile(r);
+  return `<li class="guides-resource${aide ? ' guides-resource--aide' : ''}" data-tags="${esc(r.tags)}" data-id="${esc(r.url)}" data-title="${esc(r.title)}" data-org="${esc(r.org)}" data-desc="${esc(r.desc || '')}" data-category="${esc(r.cat)}" data-format="${esc(r.format || 'guide')}"${estAnglais(r) ? ' data-en="1"' : ''}${r.acces ? ' data-abo="1"' : ''}>
         <a class="guides-resource-link" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
-          <span class="guides-resource-source">${esc(r.org)}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}${r.acces ? ` <span class="guides-acces">${r.acces === 'pabp' ? 'Réservé aux participants PABP' : 'Abonnement requis'}</span>` : ''}</span>
+          <span class="guides-resource-source">${esc(r.org)}${aide ? ' <span class="guides-aide-badge">Aide-mémoire</span>' : ''}${estPdf(r.url) ? ' <span class="guides-pdf">PDF</span>' : ''}${r.acces ? ` <span class="guides-acces">${r.acces === 'pabp' ? 'Réservé aux participants PABP' : 'Abonnement requis'}</span>` : ''}</span>
           <h3>${esc(r.title)}</h3>${resume ? `
           <span class="guides-resource-desc">${esc(resume)}</span>` : ''}
           <span class="guides-resource-arrow" aria-hidden="true">↗</span>
           <span class="visually-hidden"> (nouvel onglet)</span>
-        </a>
+        </a>${aide}
       </li>`;
 }
 
@@ -279,11 +293,11 @@ ${l.map(r => `        <li><a href="${esc(r.url)}" target="_blank" rel="noopener 
   <meta name="apple-mobile-web-app-title" content="Guides">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="/assets/seo-pages.css?v=99-hero-lieu">
-  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=123-ia-allegee">
-  <script src="/assets/guides-recherche.js?v=123-ia-allegee" defer></script>
-  <script src="/assets/guides-cliniques.js?v=123-ia-allegee" defer></script>
-  <script src="/assets/guides-installer.js?v=123-ia-allegee" defer></script>${URL_AIGUILLAGE ? `
-  <script src="/assets/guides-aiguillage.js?v=123-ia-allegee" defer></script>` : ''}
+  <link rel="stylesheet" href="/assets/guides-cliniques.css?v=124-aide-memoire">
+  <script src="/assets/guides-recherche.js?v=124-aide-memoire" defer></script>
+  <script src="/assets/guides-cliniques.js?v=124-aide-memoire" defer></script>
+  <script src="/assets/guides-installer.js?v=124-aide-memoire" defer></script>${URL_AIGUILLAGE ? `
+  <script src="/assets/guides-aiguillage.js?v=124-aide-memoire" defer></script>` : ''}
 </head>
 <body class="guides-page" data-page="${cle}" data-mot="${P.mot}" data-autre-page="${autre.chemin}" data-courriel="${esc(COURRIEL_PROPOSITION)}">
 <a class="skip-link" href="#contenu">Aller au contenu</a>

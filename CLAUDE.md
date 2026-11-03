@@ -68,6 +68,11 @@ dates du sitemap selon le contenu réel des pages).
   sujet doit y être ajouté (vérifié par `scripts/test-catalogue-guides.cjs`).
 - Titres : « Sujet : précision », sans trait d'union collé comme séparateur ; l'ancien titre
   va dans `tags` pour rester trouvable.
+- Aide-mémoires d'antibiotiques (3 nov. 2026, demande du propriétaire) : fiches `format: "aide-memoire"`, champ
+  `traitement` (antibiotiques de 1re ligne et doses, affichés dans la fiche hors du lien) et `attention` (une ligne,
+  seulement si essentiel). Source : INESSS d'abord, guide de l'Hôpital Charles-Le Moyne (7e éd., mai 2023, non
+  approuvé, sur l'intranet) seulement si l'INESSS ne couvre pas le cas (grossesse) ; doses recopiées mot pour mot ;
+  lien vers la page du guide (`#page=N`). Vérifié par `scripts/test-catalogue-guides.cjs`.
 - Liens vérifiés chaque lundi par `.github/workflows/verifier-liens-guides.yml`
   (`scripts/verifier-liens-guides.js`), qui ouvre un ticket s'il y a lieu.
 - Ressources communautaires : fiches `type: "communautaire"` de `guides/donnees.json`, sujet

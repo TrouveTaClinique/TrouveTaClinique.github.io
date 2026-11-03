@@ -252,3 +252,10 @@
   .guides-category,.guides-resultats,.guides-favoris,.guides-consultes{scroll-margin-top:4.5rem}
 }
 .guides-acces{display:inline-block;margin-left:.45rem;padding:0 .4rem;border:1px solid #b45309;border-radius:4px;color:#92400e;background:#fffbeb;font-size:.72rem;font-weight:700;vertical-align:1px}
+/* Aide-mémoire d'antibiotiques (3 nov. 2026) : liste sous le titre, hors du lien. */
+.guides-aide-badge{display:inline-block;margin-left:.45rem;padding:0 .4rem;border-radius:4px;background:var(--teal-pale);color:var(--navy);border:1px solid var(--teal-texte);font-size:.72rem;font-weight:700;vertical-align:1px}
+.guides-aide{padding:0 1rem 1.2rem .15rem;color:var(--navy);font-size:.98rem;line-height:1.5}
+.guides-aide ul{margin:-.3rem 0 0;padding-left:1.15rem}
+.guides-aide li{margin:.2rem 0}
+.guides-aide-attention{margin:.5rem 0 0;font-weight:650}
+.guides-aide-pied{margin:.45rem 0 0;font-size:.86rem;opacity:.8}

@@ -4233,6 +4233,326 @@
     "acces": "abonnement"
   },
   {
+    "title": "Cystite chez la femme : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "cystite non compliquée compliquée infection urinaire IU IVU brûlure mictionnelle brûlement dysurie Macrobid nitrofurantoïne Septra Bactrim TMP-SMX fosfomycine Monurol antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_InfectionUrinaire.pdf#page=8",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 8). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Non compliquée : nitrofurantoïne (monohydrate/macrocristaux) 100 mg PO BID × 5 jours",
+      "ou TMP-SMX 160/800 mg PO BID × 3 jours",
+      "ou fosfomycine 3 g PO, dose unique",
+      "Compliquée ou à risque de l’être : mêmes antibiotiques × 7 jours (7 à 10) ; fosfomycine 3 g PO, 3 doses espacées de 48 h"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Cystite chez l’homme : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "infection urinaire IU IVU homme masculin dysurie Septra Bactrim TMP-SMX ciprofloxacine Cipro lévofloxacine fluoroquinolone antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_InfectionUrinaire.pdf#page=9",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 9). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "TMP-SMX 160/800 mg PO BID × 7 jours (7 à 10)",
+      "ou ciprofloxacine 500 mg PO BID (XL 1 000 mg PO DIE) × 7 jours",
+      "ou lévofloxacine 500 mg PO DIE × 7 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Pyélonéphrite traitée par voie orale : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "pyélonéphrite pyélo infection urinaire haute IU fièvre lombaire Septra TMP-SMX ciprofloxacine lévofloxacine fluoroquinolone antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_InfectionUrinaire.pdf#page=10",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 10). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "TMP-SMX 160/800 mg PO BID × 10 jours (7 à 14)",
+      "ou ciprofloxacine 500 mg PO BID (XL 1 000 mg PO DIE) : femme 7 jours, homme 10 jours",
+      "ou lévofloxacine 500 mg PO DIE : femme 7 jours, homme 10 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Infection urinaire pendant la grossesse : antibiotiques de 1re ligne",
+    "org": "Hôpital Charles-Le Moyne",
+    "cat": "Infections et ITSS",
+    "tags": "grossesse enceinte femme enceinte bactériurie asymptomatique cystite infection urinaire IU céfadroxil nitrofurantoïne Macrobid fosfomycine antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://intranetcisssmc.rtss.qc.ca/fileadmin/documents/Guide_utilisation_antibiotiques_Hopital_Charles_le_Moyne_7e_edition_mai2023.pdf#page=100",
+    "desc": "Cystite ou bactériurie asymptomatique pendant la grossesse, d’après le guide d’utilisation des antibiotiques de l’Hôpital Charles-Le Moyne (7e édition, mai 2023, page 100) : le guide de l’INESSS ne couvre pas la grossesse.",
+    "traitement": [
+      "Céfadroxil 500 mg PO BID × 5 à 7 jours",
+      "ou nitrofurantoïne 100 mg PO BID × 5 à 7 jours (éviter à terme)",
+      "ou fosfomycine 3 g PO, dose unique"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Pharyngite-amygdalite à streptocoque : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "pharyngite amygdalite angine mal de gorge streptocoque strep SGA streptococcie pénicilline amoxicilline enfant adulte antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-PharyngiteAmygdalite.pdf#page=4",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 4). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Adulte : pénicilline V 600 mg PO BID × 10 jours",
+      "ou amoxicilline 500 mg PO BID ou 1 000 mg PO DIE × 10 jours",
+      "Enfant : pénicilline V 50 mg/kg/jour PO ÷ BID (max 600 mg BID) × 10 jours",
+      "ou amoxicilline 50 mg/kg/jour PO ÷ BID ou 50 mg/kg PO DIE (max 500 mg BID ou 1 000 mg DIE) × 10 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Otite moyenne aiguë chez l’enfant : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "otite moyenne aiguë OMA oreille enfant pédiatrie amoxicilline Clavulin amoxicilline-clavulanate antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-Otite-Enfant.pdf#page=3",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 3). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Amoxicilline 90 mg/kg/jour PO ÷ BID (max 2 000 mg BID)",
+      "Durée : moins de 2 ans, 10 jours ; 2 ans et plus, 5 à 7 jours (10 jours si sévère)",
+      "Antibiotique dans les 30 derniers jours ou conjonctivite purulente : amoxicilline-clavulanate 7:1, 90 mg/kg/jour PO ÷ BID (max 1 500 mg BID)"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Rhinosinusite aiguë bactérienne chez l’adulte : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "sinusite rhinosinusite sinus adulte amoxicilline Clavulin amoxicilline-clavulanate antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide-Rhinosinusite-Adulte.pdf#page=3",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 3). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Amoxicilline 500 mg PO TID × 5 jours",
+      "Résistance probable, immunosuppression, sinusite frontale ou sphénoïdale : amoxicilline-clavulanate 875/125 mg PO BID (ou 500/125 mg TID) × 7 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Pneumonie acquise en communauté chez l’adulte : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "pneumonie PAC pneumopathie infection pulmonaire adulte amoxicilline doxycycline clarithromycine Biaxin azithromycine Zithromax Clavulin antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/Guide_Pneumo_Web.pdf#page=3",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 3). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "En santé : amoxicilline 1 000 mg PO TID × 7 jours",
+      "ou doxycycline 100 mg PO BID × 7 jours, ou clarithromycine 500 mg PO BID × 7 jours",
+      "ou azithromycine 500 mg PO le 1er jour, puis 250 mg PO DIE du 2e au 5e jour",
+      "Comorbidités importantes ou antibiotique depuis 3 mois : amoxicilline 1 000 mg PO TID ou amoxicilline-clavulanate 875/125 mg PO BID, + clarithromycine 500 mg PO BID, azithromycine ou doxycycline 100 mg PO BID × 7 jours (azithromycine 5 jours)"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Exacerbation aiguë de la MPOC : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Respiratoire",
+    "tags": "EAMPOC MPOC BPCO COPD exacerbation bronchite chronique amoxicilline doxycycline TMP-SMX clarithromycine azithromycine Clavulin lévofloxacine antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/CDM/UsageOptimal/Guides-serieI/INESSS_GUO_EAMPOC.pdf#page=5",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 5). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Risque faible : amoxicilline 1 000 mg PO TID, doxycycline 100 mg PO BID, TMP-SMX 160/800 mg PO BID, clarithromycine 500 mg PO BID ou azithromycine 500 mg le 1er jour puis 250 mg du 2e au 5e jour × 5 jours",
+      "Risque élevé : amoxicilline-clavulanate 875/125 mg PO BID × 5 jours",
+      "P. aeruginosa suspecté : lévofloxacine 750 mg PO DIE × 5 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Cellulite infectieuse chez l’adulte : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "cellulite érysipèle infection de la peau peau rouge céfadroxil Duricef céphalexine Keflex cloxacilline antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Adulte.pdf#page=5",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 5). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Céfadroxil 500 à 1 000 mg PO BID × 5 jours (5 à 10)",
+      "ou céphalexine 500 à 1 000 mg PO QID × 5 jours (5 à 10)",
+      "ou cloxacilline 500 mg PO QID × 5 jours (5 à 10)"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Cellulite purulente avec SARM suspecté : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "SARM SARM-AC MRSA abcès furoncle pus purulente staphylocoque doxycycline TMP-SMX Septra clindamycine Dalacin antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Adulte.pdf#page=13",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 13). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Doxycycline 100 mg PO BID × 5 jours (5 à 10)",
+      "ou TMP-SMX 160/800 à 320/1 600 mg PO BID × 5 jours (5 à 10)",
+      "ou clindamycine 300 à 600 mg PO TID × 5 jours (5 à 10)"
+    ],
+    "attention": "Seulement si le SARM est confirmé, ou en présence de pus et de facteurs de risque de SARM.",
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Morsure humaine ou animale : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "morsure chien chat animal humaine bagarre prophylaxie Clavulin amoxicilline-clavulanate antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/GUO/Cellulite/INESSS-GUO_Cellulite_Adulte.pdf#page=6",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 6). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Amoxicilline-clavulanate 875/125 mg PO BID",
+      "Prophylaxie : 3 à 5 jours ; cellulite après une morsure : 5 à 7 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Pied diabétique infecté léger : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Cardiovasculaire et métabolique",
+    "tags": "pied diabétique ulcère diabétique plaie diabète infection céfadroxil céphalexine Clavulin antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/GUO_pied_diabetique_INESSS_VF.pdf#page=9",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 9). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Céfadroxil 1 000 mg PO BID ou céphalexine 500 mg PO QID × 5 jours (5 à 7)",
+      "Flore mixte suspectée : amoxicilline-clavulanate 875/125 mg PO BID × 5 jours (5 à 7)",
+      "Infection plus étendue : amoxicilline-clavulanate 875/125 mg PO BID × 7 à 10 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Chlamydia : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "chlamydia ITSS ITS MTS urétrite cervicite partenaire doxycycline azithromycine antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS-Chlamydia_gonorrhoeae.pdf#page=2",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 2). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Doxycycline 100 mg PO BID × 7 jours",
+      "2e choix : azithromycine 1 g PO, dose unique",
+      "Grossesse : azithromycine 1 g PO, dose unique"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Gonorrhée : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "gonorrhée gonocoque Neisseria ITSS ITS MTS urétrite cervicite partenaire ceftriaxone céfixime azithromycine antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/Guide_ITSS-Chlamydia_gonorrhoeae.pdf#page=3",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 3). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Ceftriaxone 500 mg IM, dose unique",
+      "2e choix : céfixime 800 mg PO + azithromycine 2 g PO, dose unique"
+    ],
+    "attention": "Traiter aussi la chlamydia si elle n’est pas exclue par un test négatif.",
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Diverticulite non compliquée : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "diverticulite diverticule douleur fosse iliaque gauche Clavulin céfuroxime métronidazole Flagyl antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Aide-Memoire_Diverticulite.pdf#page=1",
+    "desc": "Antibiotiques de 1re intention et doses, tirés de l’aide-mémoire de l’INESSS (août 2024). Facteurs de risque et forme compliquée dans l’aide-mémoire.",
+    "traitement": [
+      "Sans facteur de risque : aucun antibiotique",
+      "Avec facteur de risque : amoxicilline-clavulanate 875/125 mg PO BID × 5 jours",
+      "ou céfuroxime 500 mg PO BID + métronidazole 500 mg PO TID × 5 jours"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Infection à C. difficile, premier épisode : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "Clostridioides difficile Clostridium C diff colite diarrhée vancomycine fidaxomicine Dificid adulte antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Traitement/Guide_Cdifficile_FINAL.pdf#page=4",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 4). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Vancomycine 125 mg PO QID × 10 jours",
+      "ou fidaxomicine 200 mg PO BID × 10 jours (médicament d’exception, code AI582)"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Maladie de Lyme, érythème migrant : antibiotiques de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "Lyme érythème migrant tique borréliose adulte doxycycline amoxicilline céfuroxime antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Biologie_medicale/Lyme_Diag-traitement/Guide_Lyme-adulte_web_FR.pdf#page=3",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 3). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Doxycycline 100 mg PO BID : 10 jours (érythème isolé sans symptômes généraux), 14 jours (avec symptômes ou érythèmes multiples)",
+      "Si la doxycycline est impossible : amoxicilline 500 mg PO TID ou céfuroxime 500 mg PO BID × 14 jours"
+    ],
+    "attention": "Doxycycline contre-indiquée pendant la grossesse.",
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Herpès génital : antiviraux de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "herpès génital HSV ITSS ITS antiviral valacyclovir Valtrex acyclovir Zovirax famciclovir antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Outils/Guides_ITSS/INESSS_GUIDE_ITSS_Herpes_genital_GUO.pdf#page=4",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 4). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Épisode initial : valacyclovir 1 000 mg PO BID × 10 jours",
+      "Récurrence : valacyclovir 500 mg PO BID × 3 jours (dès le prodrome)"
+    ],
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
+    "title": "Influenza : antiviral de 1re ligne",
+    "org": "INESSS",
+    "cat": "Infections et ITSS",
+    "tags": "influenza grippe antiviral oseltamivir Tamiflu prophylaxie adulte antibiotique antibiothérapie aide-mémoire dose doses posologie première ligne 1re intention traitement",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Guide_Influenza_enfant_adulte_web_FR_01.pdf#page=5",
+    "desc": "Antibiotiques de 1re intention et doses, tirés du guide d’usage optimal de l’INESSS (page 5). Détails et cas particuliers dans le guide.",
+    "traitement": [
+      "Traitement : oseltamivir 75 mg PO BID × 5 jours",
+      "Prophylaxie : oseltamivir 75 mg PO DIE × 10 jours"
+    ],
+    "attention": "Réduire la dose si la clairance de la créatinine est de 60 mL/min ou moins (voir le guide).",
+    "verifie": "2026-11-03",
+    "ajoute": "2026-11-03",
+    "format": "aide-memoire"
+  },
+  {
     "title": "Centre de Crise l’Accès",
     "org": "Réseau d’habitations chez soi (bottin 2023)",
     "cat": "Ressources communautaires",
