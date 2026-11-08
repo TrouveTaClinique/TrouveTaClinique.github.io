@@ -144,7 +144,7 @@
 
   <section class="hero">
     <p class="eyebrow">GMF-U · RLS Pierre-Boucher</p>
-    <h1>GMF-U des Montérégiennes : secteurs en recrutement</h1>
+    <h1>GMF-U des Montérégiennes : secteurs en recrutement<button type="button" class="badge-verif" title="Informations confirmées par la clinique via le formulaire. Dernière validation : 8 novembre 2026." aria-label="Informations confirmées par la clinique via le formulaire. Dernière validation : 8 novembre 2026."><span class="badge-verif-tip" aria-hidden="true">Informations confirmées par la clinique via le formulaire. Dernière validation : 8 novembre 2026.</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></button></h1>
     <p class="lead">Le GMF-U des Montérégiennes est un groupe de médecine de famille universitaire situé à Boucherville, dans le RLS Pierre-Boucher, anciennement le Centre Médical Longueuil.<br>Il a pour mission d’enseigner aux professionnels de la santé de première ligne tout en soignant des usagers et en favorisant la recherche en première ligne.<br>Il assure la prise en charge de clientèles de tous âges, le suivi de maladies chroniques, le suivi de grossesse, des chirurgies mineures et des visites à domicile.<br>Le secteur d’activité en recrutement : GMF-U.</p>
     <p class="updated"><strong>Informations à jour au :</strong> <time datetime="2026-10-02">2 octobre 2026</time>.</p>
     <div class="cta-row">
@@ -280,6 +280,10 @@
   <p class="avis avis-liens"><a href="/a-propos/">À propos</a> · <a href="/confidentialite/">Confidentialité</a></p>
   <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© 2026 · Trouve ta clinique</p>
 </footer>
+<script>
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.badge-verif');document.querySelectorAll('.badge-verif.show').forEach(function(x){if(x!==b)x.classList.remove('show')});if(b){e.stopPropagation();b.classList.toggle('show')}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.badge-verif.show').forEach(function(b){b.classList.remove('show')})});
+</script>
 <script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {

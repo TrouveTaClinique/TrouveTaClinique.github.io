@@ -500,7 +500,11 @@
       "infos": "",
       "gardeUrgence": "",
       "gardeAutre": "",
-      "presentation": ""
+      "presentation": "",
+      "validation": {
+        "statut": "valide",
+        "date": "2026-11-08"
+      }
     },
     {
       "id": 8,
