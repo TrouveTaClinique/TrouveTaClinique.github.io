@@ -2860,7 +2860,7 @@ ${items}
     : '';
   const corps = `${cliniqueLiee ? blocEvenement(cliniqueLiee) : ''}  <section class="hero">
     <p class="eyebrow">${esc(eyebrowEtablissement(inst))}</p>
-    <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
+    <h1>${esc(inst.nom)} : secteurs en recrutement${cliniqueLiee ? badgeVerif(cliniqueLiee) : ''}</h1>
     <p class="lead">${chapeauEtablissement(inst, secteurs)}</p>
     <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS)}.</p>
     <div class="cta-row">
@@ -3677,7 +3677,7 @@ function pageEtablissementCentre(inst, secteurs, majPagesSeo, cliniqueLiee, poli
   const ligneTel = inst.telephone ? `      <dt>Téléphone</dt><dd>${esc(inst.telephone)}</dd>\n` : '';
   const corps = `${cliniqueLiee ? blocEvenement(cliniqueLiee) : ''}  <section class="hero">
     <p class="eyebrow">${esc(typeLib)} · RLS ${esc(inst.territoireSource || '')}</p>
-    <h1>${esc(inst.nom)} : secteurs en recrutement</h1>
+    <h1>${esc(inst.nom)} : secteurs en recrutement${cliniqueLiee ? badgeVerif(cliniqueLiee) : ''}</h1>
     <p class="lead">${chapeau}</p>
     <p class="updated"><strong>Informations à jour au :</strong> ${htmlDateFr(DATE_SOURCE_ETABLISSEMENTS_CENTRE)}.</p>
     <div class="cta-row">
