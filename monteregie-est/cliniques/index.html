@@ -144,7 +144,7 @@
         <span class="rep-meta">Boucherville · GMF</span>
       </li>
       <li>
-        <a href="/monteregie-est/etablissements/gmf-u-des-monteregiennes/"><strong>GMF-U des Montérégiennes</strong></a><button type="button" class="badge-verif" title="Informations confirmées par la clinique." aria-label="Informations confirmées par la clinique."><span class="badge-verif-tip" aria-hidden="true">Informations confirmées par la clinique.</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></button>
+        <a href="/monteregie-est/etablissements/gmf-u-des-monteregiennes/"><strong>GMF-U des Montérégiennes</strong></a>
         <span class="rep-meta">Boucherville · GMF-U</span>
       </li>
       <li>
@@ -333,12 +333,6 @@
   <p class="avis avis-liens"><a href="/a-propos/">À propos</a> · <a href="/confidentialite/">Confidentialité</a></p>
   <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© 2026 · Trouve ta clinique</p>
 </footer>
-<script>
-function placerInfobulle(b){var t=b.querySelector('.badge-verif-tip');if(!t)return;var z=b.parentElement;while(z&&z!==document.body&&getComputedStyle(z).overflow==='visible')z=z.parentElement;var l=document.documentElement.clientWidth,zr=z&&z!==document.body?z.getBoundingClientRect():{top:0,left:0,right:l},r=b.getBoundingClientRect();b.classList.toggle('bas',r.top-Math.max(zr.top,0)<t.offsetHeight+12);var demi=t.offsetWidth/2,c=r.left+r.width/2,min=Math.max(zr.left,0)+8,max=Math.min(zr.right,l)-8,d=0;if(c+demi>max)d=max-(c+demi);else if(c-demi<min)d=min-(c-demi);t.style.setProperty('--decalage',d+'px')}
-['mouseover','focusin'].forEach(function(type){document.addEventListener(type,function(e){var b=e.target.closest&&e.target.closest('.badge-verif');if(b)placerInfobulle(b)})});
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.badge-verif');document.querySelectorAll('.badge-verif.show').forEach(function(x){if(x!==b)x.classList.remove('show')});if(b){e.stopPropagation();placerInfobulle(b);b.classList.toggle('show')}});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.badge-verif.show').forEach(function(b){b.classList.remove('show')})});
-</script>
 <script>
 document.querySelectorAll('.brand').forEach(function (b) {
   b.addEventListener('click', function () {

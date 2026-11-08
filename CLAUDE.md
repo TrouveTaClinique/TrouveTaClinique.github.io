@@ -147,7 +147,8 @@ dates du sitemap selon le contenu réel des pages).
   mode d'emploi en deux parties (service informatique, mise à jour sans connaissances techniques).
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
 - Badge « Vérifié » (8 nov. 2026) : `validation: { statut: 'valide', date }` sur une clinique de `data.json`, posé
-  à la main avec l'accord du propriétaire (GMF-U des Montérégiennes depuis le 8 nov. 2026). La page
+  à la main avec l'accord du propriétaire (GMF-U des Montérégiennes le 8 nov. 2026, retiré le jour même à la
+  demande du propriétaire : aucune clinique ne l'a pour l'instant). La page
   d'établissement d'un GMF-U montre le badge de sa clinique liée. Infobulle placée par `placerInfobulle` (gabarits
   des cartes, version autonome et `BADGE_VERIF_SCRIPT` du site) : vers le bas quand la place manque au-dessus,
   décalée sur un côté au besoin, dans la zone qui la coupe (panneau, liste).
