@@ -415,7 +415,9 @@ const SERVICE_WORKER_CLEANUP = `<script>
  * l'usage de cette constante dans page() plus bas).
  */
 const BADGE_VERIF_SCRIPT = `<script>
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.badge-verif');document.querySelectorAll('.badge-verif.show').forEach(function(x){if(x!==b)x.classList.remove('show')});if(b){e.stopPropagation();b.classList.toggle('show')}});
+function placerInfobulle(b){var t=b.querySelector('.badge-verif-tip');if(!t)return;var z=b.parentElement;while(z&&z!==document.body&&getComputedStyle(z).overflow==='visible')z=z.parentElement;var l=document.documentElement.clientWidth,zr=z&&z!==document.body?z.getBoundingClientRect():{top:0,left:0,right:l},r=b.getBoundingClientRect();b.classList.toggle('bas',r.top-Math.max(zr.top,0)<t.offsetHeight+12);var demi=t.offsetWidth/2,c=r.left+r.width/2,min=Math.max(zr.left,0)+8,max=Math.min(zr.right,l)-8,d=0;if(c+demi>max)d=max-(c+demi);else if(c-demi<min)d=min-(c-demi);t.style.setProperty('--decalage',d+'px')}
+['mouseover','focusin'].forEach(function(type){document.addEventListener(type,function(e){var b=e.target.closest&&e.target.closest('.badge-verif');if(b)placerInfobulle(b)})});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.badge-verif');document.querySelectorAll('.badge-verif.show').forEach(function(x){if(x!==b)x.classList.remove('show')});if(b){e.stopPropagation();placerInfobulle(b);b.classList.toggle('show')}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.badge-verif.show').forEach(function(b){b.classList.remove('show')})});
 </script>`;
 
@@ -4354,7 +4356,7 @@ function ecrire(relatif, contenu) {
   if (relatif.endsWith('.html')) {
     // Une page neuve doit charger la même version du CSS et de la recherche,
     // même si le navigateur conserve les fichiers de la publication précédente.
-    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=99-hero-lieu"');
+    contenu = contenu.replace(/((?:href|src)="[^"]*\/assets\/(?:seo-pages\.css|guides-ptem-amp\.css|recherche\.js))(?:\?[^"\s]*)?"/g, '$1?v=100-infobulle-badge"');
   }
   const cible = path.join(RACINE, relatif);
   fs.mkdirSync(path.dirname(cible), { recursive: true });

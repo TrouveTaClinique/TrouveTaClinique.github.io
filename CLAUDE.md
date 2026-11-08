@@ -152,6 +152,11 @@ dates du sitemap selon le contenu réel des pages).
   propriétaire (`audit-cursor/rapports/`, ignoré par git, dépôt public) ; il transmet `AUDIT-COMPLET.md`, puis
   les corrections se font ici avec son accord.
 - IndexNow actif : une seule clé `<32 hex>.txt` à la racine (Bing refusait l'ancienne clé).
+- Badge « Vérifié » (8 nov. 2026) : `validation: { statut: 'valide', date }` sur une clinique de `data.json`, posé
+  à la main avec l'accord du propriétaire (GMF-U des Montérégiennes depuis le 8 nov. 2026). La page
+  d'établissement d'un GMF-U montre le badge de sa clinique liée. Infobulle placée par `placerInfobulle` (gabarits
+  des cartes, version autonome et `BADGE_VERIF_SCRIPT` du site) : vers le bas quand la place manque au-dessus,
+  décalée sur un côté au besoin, dans la zone qui la coupe (panneau, liste).
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
 - Pages `/a-propos/` et `/confidentialite/` : liens seulement dans le pied de page ; ni le nom

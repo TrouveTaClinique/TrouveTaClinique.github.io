@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://trouvetaclinique.ca/assets/og-etablissements.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png">
-  <link rel="stylesheet" href="/assets/seo-pages.css?v=99-hero-lieu">
+  <link rel="stylesheet" href="/assets/seo-pages.css?v=100-infobulle-badge">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -281,7 +281,9 @@
   <p class="avis" style="border:0;padding-top:0;margin-top:.4rem">© 2026 · Trouve ta clinique</p>
 </footer>
 <script>
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.badge-verif');document.querySelectorAll('.badge-verif.show').forEach(function(x){if(x!==b)x.classList.remove('show')});if(b){e.stopPropagation();b.classList.toggle('show')}});
+function placerInfobulle(b){var t=b.querySelector('.badge-verif-tip');if(!t)return;var z=b.parentElement;while(z&&z!==document.body&&getComputedStyle(z).overflow==='visible')z=z.parentElement;var l=document.documentElement.clientWidth,zr=z&&z!==document.body?z.getBoundingClientRect():{top:0,left:0,right:l},r=b.getBoundingClientRect();b.classList.toggle('bas',r.top-Math.max(zr.top,0)<t.offsetHeight+12);var demi=t.offsetWidth/2,c=r.left+r.width/2,min=Math.max(zr.left,0)+8,max=Math.min(zr.right,l)-8,d=0;if(c+demi>max)d=max-(c+demi);else if(c-demi<min)d=min-(c-demi);t.style.setProperty('--decalage',d+'px')}
+['mouseover','focusin'].forEach(function(type){document.addEventListener(type,function(e){var b=e.target.closest&&e.target.closest('.badge-verif');if(b)placerInfobulle(b)})});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.badge-verif');document.querySelectorAll('.badge-verif.show').forEach(function(x){if(x!==b)x.classList.remove('show')});if(b){e.stopPropagation();placerInfobulle(b);b.classList.toggle('show')}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.badge-verif.show').forEach(function(b){b.classList.remove('show')})});
 </script>
 <script>
@@ -317,7 +319,7 @@ document.querySelectorAll('.brand').forEach(function (b) {
 })();
 </script>
 <script src="/assets/theme.js" defer></script>
-<script src="/assets/recherche.js?v=99-hero-lieu" defer></script>
+<script src="/assets/recherche.js?v=100-infobulle-badge" defer></script>
 <script>
 (function () {
   if (!('serviceWorker' in navigator)) return;

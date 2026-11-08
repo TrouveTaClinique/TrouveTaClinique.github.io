@@ -559,18 +559,24 @@ body.fiche-open .leaflet-control-zoom, body.fiche-open .locate-ctrl { display: n
   height: 18px; padding: 0; margin-left: 5px; vertical-align: -3px; background: none; border: none;
   color: var(--green); cursor: pointer; position: relative; flex: none; -webkit-tap-highlight-color: transparent; }
 .badge-verif svg { width: 16px; height: 16px; display: block; }
-.badge-verif-tip { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%) translateY(4px);
+.badge-verif-tip { position: absolute; left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(calc(-50% + var(--decalage, 0px))) translateY(4px);
   background: var(--navy); color: #fff; font-size: 12px; font-weight: 500; line-height: 1.42;
   padding: 8px 10px; border-radius: 8px; white-space: normal; width: max-content; max-width: 230px;
   box-shadow: 0 8px 20px rgba(15,34,64,.24); opacity: 0; visibility: hidden;
   transition: opacity .12s ease, transform .12s ease; pointer-events: none; z-index: 1400; text-align: left; }
-.badge-verif-tip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+.badge-verif-tip::after { content: ""; position: absolute; top: 100%; left: calc(50% - var(--decalage, 0px)); transform: translateX(-50%);
   border: 5px solid transparent; border-top-color: var(--navy); }
 .badge-verif:hover .badge-verif-tip, .badge-verif:focus-visible .badge-verif-tip,
-.badge-verif.show .badge-verif-tip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-@media (max-width: 480px) { .badge-verif-tip { max-width: 190px; font-size: 11.5px; left: auto; right: -6px;
-    transform: translateY(4px); } .badge-verif.show .badge-verif-tip, .badge-verif:hover .badge-verif-tip,
-    .badge-verif:focus-visible .badge-verif-tip { transform: translateY(0); } .badge-verif-tip::after { left: auto; right: 10px; transform: none; } }
+.badge-verif.show .badge-verif-tip { opacity: 1; visibility: visible; transform: translateX(calc(-50% + var(--decalage, 0px))) translateY(0); }
+@media (max-width: 480px) { .badge-verif-tip { max-width: 190px; font-size: 11.5px; } }
+/* L'infobulle reste entière (signalé le 8 nov. 2026 : le panneau, en overflow: hidden, la coupait
+   au-dessus du nom). Elle s'ouvre vers le bas dans l'en-tête de la fiche et partout où la place
+   manque au-dessus (classe .bas), et se décale quand elle déborderait sur un côté (--decalage) :
+   voir placerInfobulle. */
+.dp-head .badge-verif-tip, .badge-verif.bas .badge-verif-tip { bottom: auto; top: calc(100% + 8px); }
+.dp-head .badge-verif-tip::after, .badge-verif.bas .badge-verif-tip::after { top: auto; bottom: 100%;
+  border-top-color: transparent; border-bottom-color: var(--navy); }
 
 /* DISPLAY SECTIONS */
 .vw-sec { padding: 14px 18px 0; }
@@ -2797,11 +2803,34 @@ function badgeVerifHtml(g) {
 document.addEventListener('click', (e) => {
   const btn = e.target.closest && e.target.closest('.badge-verif');
   document.querySelectorAll('.badge-verif.show').forEach(b => { if (b !== btn) b.classList.remove('show'); });
-  if (btn) { e.stopPropagation(); btn.classList.toggle('show'); }
+  if (btn) { e.stopPropagation(); placerInfobulle(btn); btn.classList.toggle('show'); }
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') document.querySelectorAll('.badge-verif.show').forEach(b => b.classList.remove('show'));
 });
+// Place l'infobulle dans la zone qui la coupe (liste qui défile, panneau) ou dans la fenêtre :
+// vers le bas quand la place manque au-dessus, décalée quand elle déborderait sur un côté.
+// Appelée au clic, au survol et au focus.
+function placerInfobulle(btn) {
+  const tip = btn.querySelector('.badge-verif-tip');
+  if (!tip) return;
+  let zone = btn.parentElement;
+  while (zone && zone !== document.body && getComputedStyle(zone).overflow === 'visible') zone = zone.parentElement;
+  const largeur = document.documentElement.clientWidth;
+  const z = zone && zone !== document.body ? zone.getBoundingClientRect() : { top: 0, left: 0, right: largeur };
+  const r = btn.getBoundingClientRect();
+  btn.classList.toggle('bas', r.top - Math.max(z.top, 0) < tip.offsetHeight + 12);
+  const demi = tip.offsetWidth / 2, centre = r.left + r.width / 2;
+  const min = Math.max(z.left, 0) + 8, max = Math.min(z.right, largeur) - 8;
+  let decalage = 0;
+  if (centre + demi > max) decalage = max - (centre + demi);
+  else if (centre - demi < min) decalage = min - (centre - demi);
+  tip.style.setProperty('--decalage', `${decalage}px`);
+}
+['mouseover', 'focusin'].forEach(type => document.addEventListener(type, (e) => {
+  const btn = e.target.closest && e.target.closest('.badge-verif');
+  if (btn) placerInfobulle(btn);
+}));
 
 function makeIcon(active, rank, couleur, id) {
   const c = fondChiffre(couleur);
