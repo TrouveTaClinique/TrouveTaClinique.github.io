@@ -597,9 +597,12 @@ ul.liste + .grpt{margin-top:clamp(2.2rem,4.5vw,3rem)}
 .compte{display:inline-block;background:var(--teal-pale);color:var(--teal-texte);border:1px solid rgba(6,156,156,.35);border-radius:999px;font-size:.8rem;font-weight:800;padding:.08rem .58rem;vertical-align:middle}
 .badge-verif{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;padding:0;margin-left:.32em;vertical-align:-3px;background:none;border:none;color:var(--success);cursor:pointer;position:relative;flex:none;font-size:inherit}
 .badge-verif svg{width:17px;height:17px;display:block}
-.badge-verif-tip{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%) translateY(4px);background:var(--navy);color:#fff;font-size:.76rem;font-weight:500;line-height:1.42;padding:.5rem .62rem;border-radius:8px;white-space:normal;width:max-content;max-width:230px;box-shadow:0 8px 20px rgba(18,6,114,.24);opacity:0;visibility:hidden;transition:opacity .12s ease,transform .12s ease;pointer-events:none;z-index:60;text-align:left}
-.badge-verif-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy)}
-.badge-verif:hover .badge-verif-tip,.badge-verif:focus-visible .badge-verif-tip,.badge-verif.show .badge-verif-tip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.badge-verif-tip{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(calc(-50% + var(--decalage,0px))) translateY(4px);background:var(--navy);color:#fff;font-size:.76rem;font-weight:500;line-height:1.42;padding:.5rem .62rem;border-radius:8px;white-space:normal;width:max-content;max-width:230px;box-shadow:0 8px 20px rgba(18,6,114,.24);opacity:0;visibility:hidden;transition:opacity .12s ease,transform .12s ease;pointer-events:none;z-index:60;text-align:left}
+.badge-verif-tip::after{content:"";position:absolute;top:100%;left:calc(50% - var(--decalage,0px));transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy)}
+.badge-verif:hover .badge-verif-tip,.badge-verif:focus-visible .badge-verif-tip,.badge-verif.show .badge-verif-tip{opacity:1;visibility:visible;transform:translateX(calc(-50% + var(--decalage,0px))) translateY(0)}
+/* Infobulle entière : vers le bas quand la place manque au-dessus (.bas), décalée sur un côté (--decalage). */
+.badge-verif.bas .badge-verif-tip{bottom:auto;top:calc(100% + 8px)}
+.badge-verif.bas .badge-verif-tip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--navy)}
 h1 .badge-verif{width:.62em;height:.62em;margin-left:.16em}h1 .badge-verif svg{width:100%;height:100%}
 .resident-note{margin:2rem 0 0;padding:1rem 1.15rem;background:var(--teal-pale);border:1px solid rgba(6,156,156,.28);border-left:4px solid var(--teal);border-radius:12px}
 .resident-note strong{display:block;color:var(--navy);margin-bottom:.3rem}
