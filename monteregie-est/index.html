@@ -2693,24 +2693,11 @@ function appliquerCouleurEnteteFiche(c) {
    validation manuelle explicite le fait. */
 function estValide(g) { return !!(g && g.validation && g.validation.statut === 'valide'); }
 
-// Réutilise MOIS_FR déjà défini plus bas (voir dateDuTexte) — un seul tableau des mois pour
-// tout le fichier, pas de doublon.
-function dateLisibleFr(iso) {
-  if (typeof iso !== 'string') return '';
-  const m = iso.trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!m) return '';
-  const mois = MOIS_FR[parseInt(m[2], 10) - 1];
-  if (!mois) return '';
-  return `${parseInt(m[3], 10)} ${mois} ${m[1]}`;
-}
-
 const SVG_BADGE_VERIF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>';
 
 function badgeVerifHtml(g) {
   if (!estValide(g)) return '';
-  const date = dateLisibleFr(g.validation.date);
-  const msg = 'Informations confirmées par la clinique via le formulaire.'
-    + (date ? ' Dernière validation : ' + date + '.' : '');
+  const msg = 'Informations confirmées par la clinique.';
   return `<button type="button" class="badge-verif" title="${esc(msg)}" aria-label="${esc(msg)}"><span class="badge-verif-tip" aria-hidden="true">${esc(msg)}</span>${SVG_BADGE_VERIF}</button>`;
 }
 // Un seul écouteur délégué : bascule l'infobulle au toucher/clic (le survol et le focus clavier

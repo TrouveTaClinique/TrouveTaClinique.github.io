@@ -151,6 +151,8 @@ dates du sitemap selon le contenu réel des pages).
   d'établissement d'un GMF-U montre le badge de sa clinique liée. Infobulle placée par `placerInfobulle` (gabarits
   des cartes, version autonome et `BADGE_VERIF_SCRIPT` du site) : vers le bas quand la place manque au-dessus,
   décalée sur un côté au besoin, dans la zone qui la coupe (panneau, liste).
+  Texte de l'infobulle : « Informations confirmées par la clinique. », sans « via le formulaire » ni date
+  (demande du propriétaire, 8 nov. 2026) ; la date reste dans les données.
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
 - Pages `/a-propos/` et `/confidentialite/` : liens seulement dans le pied de page ; ni le nom

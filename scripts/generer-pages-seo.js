@@ -493,7 +493,7 @@ const CHAMPS_PUBLICS = [
   /* medecinsRecherches → « Postes visés » sur les fiches (déjà « Postes disponibles » sur la carte). */
   'medecinsRecherches',
   /* validation → ajouté le 26 août 2026. N'est PAS affiché comme ligne de fiche ; sert
-     uniquement à décider si le badge « Vérifié » apparaît et à afficher sa date (voir
+     uniquement à décider si le badge « Vérifié » apparaît (voir
      estValide()/badgeVerif() plus bas). Le sous-champ "source" n'est jamais publié. */
   'validation',
   /* responsableNom → nom du médecin responsable du recrutement. */
@@ -853,9 +853,7 @@ function estValide(c) { return !!(c && c.validation && c.validation.statut === '
 const SVG_BADGE_VERIF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>';
 function badgeVerif(c) {
   if (!estValide(c)) return '';
-  const date = dateLisibleFr(c.validation.date);
-  const msg = 'Informations confirmées par la clinique via le formulaire.'
-    + (date ? ' Dernière validation : ' + date + '.' : '');
+  const msg = 'Informations confirmées par la clinique.';
   return `<button type="button" class="badge-verif" title="${esc(msg)}" aria-label="${esc(msg)}"><span class="badge-verif-tip" aria-hidden="true">${esc(msg)}</span>${SVG_BADGE_VERIF}</button>`;
 }
 
