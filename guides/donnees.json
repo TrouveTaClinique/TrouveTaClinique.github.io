@@ -11194,6 +11194,50 @@
     "format": "algorithme"
   },
   {
+    "title": "Syndrome de douleur régionale complexe (SDRC) : algorithme d’évaluation, de prise en charge et de suivi",
+    "org": "INESSS",
+    "cat": "Os, articulations et douleur",
+    "tags": "SDRC syndrome douloureux régional complexe syndrome de douleur régionale complexe algodystrophie algoneurodystrophie dystrophie sympathique réflexe Sudeck causalgie CRPS critères de Budapest douleur chronique algorithme",
+    "url": "https://inesss.algorithmes-douleur-chronique.info/fr/algorithme-d-evaluation-de-prise-en-charge-et-de-suivi-d-un-SDRC",
+    "desc": "Algorithme Web de l’INESSS (décembre 2025) pour l’adulte en première ligne : critères de Budapest, diagnostics différentiels, prise en charge collaborative, suivi et orientation en milieu spécialisé. Remplace l’algorithme du MSSS de 2015.",
+    "verifie": "2026-11-09",
+    "ajoute": "2026-11-09",
+    "format": "algorithme"
+  },
+  {
+    "title": "Syndrome de douleur régionale complexe (SDRC) : rapport en soutien à l’algorithme",
+    "org": "INESSS",
+    "cat": "Os, articulations et douleur",
+    "tags": "SDRC syndrome douloureux régional complexe syndrome de douleur régionale complexe algodystrophie algoneurodystrophie dystrophie sympathique réflexe Sudeck causalgie CRPS critères de Budapest grille d’évaluation recommandations douleur chronique",
+    "url": "https://www.inesss.qc.ca/fileadmin/doc/INESSS/Rapports/Usage_optimal/Douleur_chronique_SDRC_GN_INESSS.pdf",
+    "desc": "Version PDF de l’algorithme de l’INESSS (décembre 2025, 68 pages) : fenêtres cliniques, boîtes à outils (dont la grille des critères de Budapest) et recommandations pour la pratique.",
+    "verifie": "2026-11-09",
+    "ajoute": "2026-11-09",
+    "format": "guide"
+  },
+  {
+    "title": "Syndrome douloureux régional complexe (SDRC) chez l’enfant : présentation de physiatrie",
+    "org": "CHU Sainte-Justine",
+    "cat": "Os, articulations et douleur",
+    "tags": "SDRC syndrome douloureux régional complexe syndrome de douleur régionale complexe algodystrophie algoneurodystrophie dystrophie sympathique réflexe Sudeck causalgie CRPS enfant adolescent pédiatrie critères de Budapest physiatrie physiothérapie TENS",
+    "url": "https://www.urgencehsj.ca/wp-content/uploads/02-Syndrome-Douloureux-Regional-Complexe-Dre-Dziubinska-16-janvier-15.01-1.pdf",
+    "desc": "Présentation d’une physiatre du CHU Sainte-Justine (janvier 2020, 79 diapositives) : critères de Budapest, tableau clinique de l’enfant, diagnostic différentiel, examens, imagerie, traitements et cas cliniques.",
+    "verifie": "2026-11-09",
+    "ajoute": "2026-11-09",
+    "format": "guide"
+  },
+  {
+    "title": "Syndrome douloureux régional complexe (SDRC) : guide pour les patients et les familles",
+    "org": "Santé Nouvelle-Écosse",
+    "cat": "Documents pour les patients",
+    "tags": "SDRC syndrome douloureux régional complexe syndrome de douleur régionale complexe algodystrophie algoneurodystrophie dystrophie sympathique réflexe Sudeck causalgie CRPS patient famille physiothérapie désensibilisation thérapie du miroir",
+    "url": "https://www.nshealth.ca/sites/default/files/documents/1788-2026.05.21.pdf",
+    "desc": "Guide de 8 pages (2026) : ce qu’est le SDRC, causes, signes et symptômes, médicaments, physiothérapie (désensibilisation, thérapie du miroir) et conseils pour le rétablissement.",
+    "verifie": "2026-11-09",
+    "ajoute": "2026-11-09",
+    "format": "patient"
+  },
+  {
     "title": "Vestibulodynie provoquée : algorithme de prise en charge",
     "org": "MSSS",
     "cat": "Santé des femmes et grossesse",
