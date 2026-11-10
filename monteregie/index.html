@@ -3616,6 +3616,48 @@ function siteLink(url) {
   const pretty = esc(String(url).trim().replace(/^https?:\/\//i,'').replace(/\/$/,''));
   return href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${pretty}</a>` : esc(String(url).trim());
 }
+// Courriel de correction prérempli avec les renseignements de la fiche, comme le bouton
+// « Contactez-nous » des fiches du site (lienMiseAJour, scripts/generer-pages-seo.js) : le milieu
+// corrige directement dans le courriel. Texte brut seulement (un lien « mailto: » ne porte ni gras
+// ni lien) ; « (à compléter) » signale ce qui manque.
+function corpsCorrection(g, phrase) {
+  const rempli = v => v != null && String(v).trim() !== '';
+  const val = v => (rempli(v) ? String(v).replace(/\s+/g, ' ').trim() : '(à compléter)');
+  const ligne = (etiquette, v) => etiquette + ' : ' + val(v);
+  const section = (titre, lignes) => titre + '\n━━━━━━━━━━━━\n' + lignes.join('\n') + '\n';
+  const h = g.horaire || {};
+  const jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  const horaire = jours.some(j => rempli(h[j])) ? jours.map(j => ligne(j, h[j])) : ['(à compléter : jours et heures d’ouverture)'];
+  const p = g.personnel || {};
+  const postes = staffDefs.filter(s => rempli(p[s.key])).map(s => ligne(s.lbl, p[s.key]));
+  const equipe = postes.length ? postes : ['(à compléter : nombre de médecins, IPS, infirmières, professionnels…)'];
+  const pratiques = (Array.isArray(g.pratiques) ? g.pratiques : [])
+    .map(c => { const t = PRATIQUES.find(x => x.code === c); return t ? t.label : c; }).join(', ');
+  return [
+    'Bonjour,',
+    '',
+    phrase,
+    '',
+    'Corrigez directement les renseignements ci-dessous et complétez ceux qui manquent.',
+    'Ce qui est exact peut rester tel quel.',
+    '',
+    section('📍 COORDONNÉES', [ligne('Adresse', g.adresse), ligne('Site web', g.site)]),
+    section('🕒 HEURES D’OUVERTURE', horaire),
+    section('👥 ÉQUIPE', equipe),
+    section('🩺 PRATIQUE', [ligne('DMÉ', g.dme), ligne('Pratiques offertes', pratiques), ligne('Bureau', g.bureau), ligne('Frais de bureau', g.frais)]),
+    section('📣 RECRUTEMENT', [
+      ligne('Recrute actuellement', recruteActuellement(g) ? 'Oui' : 'Non'),
+      ligne('Postes visés', g.medecinsRecherches),
+      ligne('Médecin responsable', g.responsableNom),
+      ligne('Courriel de recrutement', g.personneRessource),
+      ligne('Portes ouvertes', g.porteOuverte)
+    ]),
+    section('✍️ PRÉSENTATION DU MILIEU', [rempli(g.presentation) ? val(g.presentation) : '(à compléter : quelques phrases pour présenter le milieu aux résidents)']),
+    section('🙋 PERSONNE QUI ÉCRIT', ['Nom : ', 'Rôle : ', 'Téléphone (facultatif) : ']),
+    'Merci !'
+  ].join('\n');
+}
+
 function contactLink(c) {
   if (!c) return 'À venir';
   c = c.trim();
@@ -4476,8 +4518,8 @@ function openDetail(id) {
   ]);
 
   const reportHref = 'mailto:contact@trouvetaclinique.ca?subject='
-    + encodeURIComponent('Correction \u2013 ' + g.nom + ' (Trouve ta clinique, carte interactive)')
-    + '&body=' + encodeURIComponent('Bonjour,\n\nJe souhaite signaler une correction concernant ce milieu : ' + g.nom + '.\n\nCorrection propos\u00e9e :\n');
+    + encodeURIComponent('Mise à jour de la fiche : ' + g.nom)
+    + '&body=' + encodeURIComponent(corpsCorrection(g, 'Je souhaite mettre à jour la fiche de ' + g.nom + ' sur la carte interactive de Trouve ta clinique.'));
 
   document.getElementById('dp-body').innerHTML = `
     <div class="dp-actions"><button type="button" class="dp-fav-btn${favoris.has(g.id) ? ' fav' : ''}" id="dp-fav-btn">${favoris.has(g.id) ? '★ Retirer des favoris' : '☆ Ajouter aux favoris'}</button><button type="button" class="dp-ic dp-ic-share" id="dp-share-btn" title="Partager cette fiche" aria-label="Partager cette fiche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg></button><button type="button" class="dp-ic dp-ic-pdf" id="export-pdf-btn" title="Exporter la fiche en PDF" aria-label="Exporter la fiche en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg></button></div>
