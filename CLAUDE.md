@@ -160,6 +160,11 @@ dates du sitemap selon le contenu réel des pages).
   décalée sur un côté au besoin, dans la zone qui la coupe (panneau, liste).
   Texte de l'infobulle : « Informations confirmées par la clinique. », sans « via le formulaire » ni date
   (demande du propriétaire, 8 nov. 2026) ; la date reste dans les données.
+- « Signaler une correction » des cartes (10 nov. 2026, demande du propriétaire) : le lien ouvre le même courriel
+  prérempli que le bouton « Contactez-nous » des fiches du site (renseignements actuels de la fiche à corriger,
+  `corpsCorrection` dans les deux gabarits et la version autonome, calqué sur `lienMiseAJour`). Sans adresse de page
+  dans le corps (carte hermétique). Version autonome : même courriel, envoyé à l'adresse du recrutement, sans le nom
+  du site.
 - DNS de `trouvetaclinique.ca` chez easyDNS (serveurs de noms et MX) : Cloudflare Email
   Routing et les 301 Cloudflare supposent d'abord de déplacer la zone.
 - Pages `/a-propos/` et `/confidentialite/` : liens seulement dans le pied de page ; ni le nom
